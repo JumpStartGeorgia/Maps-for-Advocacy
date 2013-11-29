@@ -10,7 +10,7 @@ BootstrapStarter::Application.routes.draw do
 
 		namespace :admin do
 			resources :users
-      resources :question_pairings
+      resources :question_categories
       resources :questions
       resources :venues
       resources :venue_categories
