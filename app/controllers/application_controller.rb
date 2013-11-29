@@ -37,8 +37,8 @@ class ApplicationController < ActionController::Base
 logger.debug "////////////////////////// BROWSER = #{user_agent}"
 		if SUPPORTED_BROWSERS.any? { |browser| user_agent < browser }
 			# browser not supported
-logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
-			render "layouts/unsupported_browser", :layout => false
+#logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
+#			render "layouts/unsupported_browser", :layout => false
 		end
 	end
 
@@ -67,6 +67,24 @@ logger.debug "////////////////////////// BROWSER NOT SUPPORTED"
   def valid_role?(role)
     redirect_to root_path, :notice => t('app.msgs.not_authorized') if !current_user || !current_user.role?(role)
   end
+
+
+  # add in required content for translations if none provided
+  # - only do this if default locale trans record has data
+  def add_missing_translation_content(ary_trans)
+    if ary_trans.present?
+      default_trans = ary_trans.select{|x| x.locale == I18n.default_locale.to_s}.first
+      if default_trans.present? && default_trans.required_data_provided?
+        ary_trans.each do |trans|
+          if trans.locale != I18n.default_locale.to_s && !trans.required_data_provided?
+            # add required content from default locale trans
+            trans.add_required_data(default_trans)
+          end
+        end
+      end
+    end
+  end
+
 
 
   #######################

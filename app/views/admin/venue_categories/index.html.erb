@@ -1,0 +1,35 @@
+<%- model_class = VenueCategory -%>
+<%- model_class_trans = VenueCategoryTranslation -%>
+<% title t '.title', :default => model_class.model_name.human.pluralize %>
+
+<div class="form-actions">
+  <%= link_to t('.new', :default => t("helpers.links.new")),
+              new_admin_venue_category_path,
+              :class => 'btn btn-primary' %>
+</div>
+
+<table class="table table-striped display">
+  <thead>
+    <tr>
+      <th><%= model_class_trans.human_attribute_name(:name) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @venue_categories.each do |venue_category| %>
+      <tr>
+        <td><%= venue_category.name %></td>
+        <td>
+          <%= link_to t('app.buttons.edit'),
+                      admin_edit_venue_category_path(venue_category), :class => 'btn btn-mini' %>
+          <%= link_to t('app.buttons.delete'),
+                      admin_venue_category_path(venue_category),
+                      :method => :delete,
+                      :confirm => t('app.buttons.confirm'),
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

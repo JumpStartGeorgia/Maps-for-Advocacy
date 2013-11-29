@@ -3,6 +3,10 @@ en:
   activerecord:
     models:
       user: User
+      question: Question
+      question_category: QuestionCategory
+      venue: Venue
+      venue_category: Venue Category
     attributes:
       user:
         email: Email Address
@@ -10,6 +14,26 @@ en:
         password_confirmation: Password Confirmation
         role: Role
         remember_me: Remeber Me
+      question:
+        is_common: Is Common to All Venues
+      question_translation:
+        name: Name      
+      question_category:
+      question_category_translation:
+        name: Name      
+      venue:
+        venue_category_id: Venue Category
+        question_category_id: Question Category
+      venue_translation:
+        name: Name      
+      venue_category:
+      venue_category_translation:
+        name: Name      
+      question_pairing:
+        quetion_id: Question
+        question_category_id: Question Category
+      question_pairing_translation:
+        evidence: Evidence  
     errors:
       messages:
         required_field: "is a required field."
@@ -50,7 +74,7 @@ en:
       confirm: Are you sure?
       new: New
     common:
-      app_name: Bootstrap Starter Project
+      app_name: Mapping for Advocacy
       added_on: "Added on: %{date}" 
     msgs:
       does_not_exist: You tried to access a page that does not exist.
@@ -61,7 +85,7 @@ en:
     application:
       admin: Admin
       sign_out: Sign Out
-      js_link_title: "Visit JumpStart Georgia's website"
+      js_link_title: JumpStart Georgia - We communicate data better!
       js_link_text: Built by
     unsupported_browser:
       title: Unsupported Browser
@@ -74,7 +98,7 @@ en:
       Safari: Safari
       admin: Admin
       sign_out: Sign Out
-      js_link_title: "Visit JumpStart Georgia's website"
+      js_link_title: JumpStart Georgia - We communicate data better!
       js_link_text: Built by
   admin:
     index:

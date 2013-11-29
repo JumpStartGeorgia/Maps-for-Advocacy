@@ -167,7 +167,7 @@ footer div#left {
   padding-top: 3px;
 }
 footer a:hover {
-	background-color: #D4D4D4;
+	background-color: transparent;
 }
 
 footer #middle {

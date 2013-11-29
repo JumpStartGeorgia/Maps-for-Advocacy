@@ -24,6 +24,26 @@ module ApplicationHelper
 		text.html_safe
 	end
 
+	# put the default locale first and then sort the remaining locales
+	def create_sorted_translation_objects(trans)
+	  if trans.present?
+      # sort
+      trans.sort!{|x,y| x.locale <=> y.locale}
+
+      # move default locale to first position
+      default = trans.index{|x| x.locale == I18n.default_locale.to_s}
+Rails.logger.debug "***************** position of default locale = #{default}"      
+      if default.present? && default > 0
+Rails.logger.debug "***************** moving to first position"      
+        trans.unshift(trans[default])
+        trans.delete_at(default+1)
+      end
+	  end
+    return trans
+	end
+	
+
+
 
 	# Based on https://gist.github.com/1182136
   class BootstrapLinkRenderer < ::WillPaginate::ActionView::LinkRenderer
