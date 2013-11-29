@@ -24,7 +24,7 @@
         <td><%= venue.question_category_id.present? ? venue.question_category.name : nil %></td>
         <td>
           <%= link_to t('app.buttons.edit'),
-                      admin_edit_venue_path(venue), :class => 'btn btn-mini' %>
+                      edit_admin_venue_path(venue), :class => 'btn btn-mini' %>
           <%= link_to t('app.buttons.delete'),
                       admin_venue_path(venue),
                       :method => :delete,

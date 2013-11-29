@@ -15,10 +15,11 @@ en:
         role: Role
         remember_me: Remeber Me
       question:
-        is_common: Is Common to All Venues
+        question_categories: Question Categories
       question_translation:
         name: Name      
       question_category:
+        is_common: Is Common to All Venues
       question_category_translation:
         name: Name      
       venue:
@@ -104,6 +105,10 @@ en:
     index:
       title: Administration Section
       users: Users
+      question_categories: Question Categories
+      questions: Question
+      venue_categories: Venue Categories
+      venues: Venues
     users:
       edit:
         title: Editing User

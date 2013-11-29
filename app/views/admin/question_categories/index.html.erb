@@ -23,7 +23,7 @@
         <td><%= question_category.is_common %></td>
         <td>
           <%= link_to t('app.buttons.edit'),
-                      admin_edit_question_category_path(question_category), :class => 'btn btn-mini' %>
+                      edit_admin_question_category_path(question_category), :class => 'btn btn-mini' %>
           <%= link_to t('app.buttons.delete'),
                       admin_question_category_path(question_category),
                       :method => :delete,

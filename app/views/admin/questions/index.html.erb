@@ -12,6 +12,7 @@
   <thead>
     <tr>
       <th><%= model_class_trans.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:question_categories) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -19,9 +20,10 @@
     <% @questions.each do |question| %>
       <tr>
         <td><%= question.name %></td>
+        <td><%= question.question_category_names %></td>
         <td>
           <%= link_to t('app.buttons.edit'),
-                      admin_edit_question_path(question), :class => 'btn btn-mini' %>
+                      edit_admin_question_path(question), :class => 'btn btn-mini' %>
           <%= link_to t('app.buttons.delete'),
                       admin_question_path(question),
                       :method => :delete,

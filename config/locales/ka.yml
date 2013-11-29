@@ -15,10 +15,11 @@ ka:
         role: როლი
         remember_me: დამიმახსოვრე
       question:
-        is_common: Is Common to All Venues
+        question_categories: Question Categories
       question_translation:
         name: Name      
       question_category:
+        is_common: Is Common to All Venues
       question_category_translation:
         name: Name      
       venue:
@@ -105,6 +106,10 @@ ka:
     index:
       title: ადმინისტრატორის განყოფილება
       users: მომხმარებლები
+      question_categories: Question Categories
+      questions: Question
+      venue_categories: Venue Categories
+      venues: Venues
     users:
       edit:
         title: ცვლილებების შეტანა მომხმარებლის გვერდზე
