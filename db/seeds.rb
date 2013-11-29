@@ -5,3 +5,411 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+##################################
+## Questions
+##################################
+puts "deleting all question records"
+QuestionCategory.delete_all
+QuestionCategoryTranslation.delete_all
+Question.delete_all
+QuestionTranslation.delete_all
+QuestionPairing.delete_all
+QuestionPairingTranslation.delete_all
+
+puts "creating question records"
+
+# parking
+qc = QuestionCategory.create(:id => 1, :is_common => true)
+qc.question_category_translations.create(:locale => 'en', :name => 'Parking')
+qc.question_category_translations.create(:locale => 'ka', :name => 'Parking')
+q = Question.create(:id => 1)
+q.question_translations.create(:locale => 'en', :name => 'Designated parking or drop off area')
+q.question_translations.create(:locale => 'ka', :name => 'Designated parking or drop off area')
+QuestionPairing.create(:id => 1, :question_category_id => qc.id, :question_id => q.id)
+q = Question.create(:id => 2)
+q.question_translations.create(:locale => 'en', :name => 'Obstructions')
+q.question_translations.create(:locale => 'ka', :name => 'Obstructions')
+QuestionPairing.create(:id => 2, :question_category_id => qc.id, :question_id => q.id)
+q = Question.create(:id => 3)
+q.question_translations.create(:locale => 'en', :name => 'Accessible route from parking to entrance')
+q.question_translations.create(:locale => 'ka', :name => 'Accessible route from parking to entrance')
+QuestionPairing.create(:id => 3, :question_category_id => qc.id, :question_id => q.id)
+
+# entrace
+qc = QuestionCategory.create(:id => 2, :is_common => true)
+qc.question_category_translations.create(:locale => 'en', :name => 'Entrance')
+qc.question_category_translations.create(:locale => 'ka', :name => 'Entrance')
+q = Question.create(:id => 4)
+q.question_translations.create(:locale => 'en', :name => 'Doorways with ramps')
+q.question_translations.create(:locale => 'ka', :name => 'Doorways with ramps')
+qp = QuestionPairing.create(:id => 4, :question_category_id => qc.id, :question_id => q.id)
+qp.question_pairing_translations.create(:locale => 'en', :evidence => 'Angle')
+qp.question_pairing_translations.create(:locale => 'ka', :evidence => 'Angle')
+q = Question.create(:id => 5)
+q.question_translations.create(:locale => 'en', :name => 'Doors should be able to be opened with one hand')
+q.question_translations.create(:locale => 'ka', :name => 'Doors should be able to be opened with one hand')
+QuestionPairing.create(:id => 5, :question_category_id => qc.id, :question_id => q.id)
+q = Question.create(:id => 6)
+q.question_translations.create(:locale => 'en', :name => 'Flat doorway')
+q.question_translations.create(:locale => 'ka', :name => 'Flat doorway')
+QuestionPairing.create(:id => 6, :question_category_id => qc.id, :question_id => q.id)
+q = Question.create(:id => 7)
+q.question_translations.create(:locale => 'en', :name => 'Wide doors')
+q.question_translations.create(:locale => 'ka', :name => 'Wide doors')
+QuestionPairing.create(:id => 7, :question_category_id => qc.id, :question_id => q.id)
+qp.question_pairing_translations.create(:locale => 'en', :evidence => 'Width (m)')
+qp.question_pairing_translations.create(:locale => 'ka', :evidence => 'Width (m)')
+q = Question.create(:id => 8)
+q.question_translations.create(:locale => 'en', :name => 'Tactile map of building')
+q.question_translations.create(:locale => 'ka', :name => 'Tactile map of building')
+QuestionPairing.create(:id => 8, :question_category_id => qc.id, :question_id => q.id)
+
+#restroom
+qc = QuestionCategory.create(:id => 3, :is_common => true)
+qc.question_category_translations.create(:locale => 'en', :name => 'Restroom')
+qc.question_category_translations.create(:locale => 'ka', :name => 'Restroom')
+q = Question.create(:id => 9)
+q.question_translations.create(:locale => 'en', :name => 'Adapted restroom with wide door and grab bar')
+q.question_translations.create(:locale => 'ka', :name => 'Adapted restroom with wide door and grab bar')
+QuestionPairing.create(:id => 9, :question_category_id => qc.id, :question_id => q.id)
+q = Question.create(:id => 10)
+q.question_translations.create(:locale => 'en', :name => 'Designated as accessible')
+q.question_translations.create(:locale => 'ka', :name => 'Designated as accessible')
+QuestionPairing.create(:id => 10, :question_category_id => qc.id, :question_id => q.id)
+q = Question.create(:id => 26)
+q.question_translations.create(:locale => 'en', :name => 'Sufficient space in the interior')
+q.question_translations.create(:locale => 'ka', :name => 'Sufficient space in the interior')
+QuestionPairing.create(:id => 26, :question_category_id => qc.id, :question_id => q.id)
+
+# elevators
+qc = QuestionCategory.create(:id => 4, :is_common => true)
+qc.question_category_translations.create(:locale => 'en', :name => 'Elevators')
+qc.question_category_translations.create(:locale => 'ka', :name => 'Elevators')
+q = Question.create(:id => 11)
+q.question_translations.create(:locale => 'en', :name => 'Exists')
+q.question_translations.create(:locale => 'ka', :name => 'Exists')
+QuestionPairing.create(:id => 11, :question_category_id => qc.id, :question_id => q.id)
+q = Question.create(:id => 12)
+q.question_translations.create(:locale => 'en', :name => 'Accessible')
+q.question_translations.create(:locale => 'ka', :name => 'Accessible')
+QuestionPairing.create(:id => 12, :question_category_id => qc.id, :question_id => q.id)
+q = Question.create(:id => 13)
+q.question_translations.create(:locale => 'en', :name => 'Wide doors')
+q.question_translations.create(:locale => 'ka', :name => 'Wide doors')
+QuestionPairing.create(:id => 13, :question_category_id => qc.id, :question_id => q.id)
+qp.question_pairing_translations.create(:locale => 'en', :evidence => 'Width (m)')
+qp.question_pairing_translations.create(:locale => 'ka', :evidence => 'Width (m)')
+q = Question.create(:id => 14)
+q.question_translations.create(:locale => 'en', :name => 'Flat doorway')
+q.question_translations.create(:locale => 'ka', :name => 'Flat doorway')
+QuestionPairing.create(:id => 14, :question_category_id => qc.id, :question_id => q.id)
+q = Question.create(:id => 15)
+q.question_translations.create(:locale => 'en', :name => 'No obstructions')
+q.question_translations.create(:locale => 'ka', :name => 'No obstructions')
+QuestionPairing.create(:id => 15, :question_category_id => qc.id, :question_id => q.id)
+q = Question.create(:id => 16)
+q.question_translations.create(:locale => 'en', :name => 'Braille buttons')
+q.question_translations.create(:locale => 'ka', :name => 'Braille buttons')
+QuestionPairing.create(:id => 16, :question_category_id => qc.id, :question_id => q.id)
+q = Question.create(:id => 17)
+q.question_translations.create(:locale => 'en', :name => 'High contrast markings')
+q.question_translations.create(:locale => 'ka', :name => 'High contrast markings')
+QuestionPairing.create(:id => 17, :question_category_id => qc.id, :question_id => q.id)
+q = Question.create(:id => 18)
+q.question_translations.create(:locale => 'en', :name => 'Audio indicator of floor and direction of elevator')
+q.question_translations.create(:locale => 'ka', :name => 'Audio indicator of floor and direction of elevator')
+QuestionPairing.create(:id => 18, :question_category_id => qc.id, :question_id => q.id)
+
+# stairs
+qc = QuestionCategory.create(:id => 5, :is_common => true)
+qc.question_category_translations.create(:locale => 'en', :name => 'Stairs')
+qc.question_category_translations.create(:locale => 'ka', :name => 'Stairs')
+q = Question.create(:id => 19)
+q.question_translations.create(:locale => 'en', :name => 'Markings on every first and last step on staircases')
+q.question_translations.create(:locale => 'ka', :name => 'Markings on every first and last step on staircases')
+QuestionPairing.create(:id => 19, :question_category_id => qc.id, :question_id => q.id)
+q = Question.create(:id => 20)
+q.question_translations.create(:locale => 'en', :name => 'Handrails different color from staircases')
+q.question_translations.create(:locale => 'ka', :name => 'Handrails different color from staircases')
+QuestionPairing.create(:id => 20, :question_category_id => qc.id, :question_id => q.id)
+
+
+# escalators
+qc = QuestionCategory.create(:id => 6, :is_common => true)
+qc.question_category_translations.create(:locale => 'en', :name => 'Escalators')
+qc.question_category_translations.create(:locale => 'ka', :name => 'Escalators')
+
+#seating area
+qc = QuestionCategory.create(:id => 7, :is_common => true)
+qc.question_category_translations.create(:locale => 'en', :name => 'Stairs')
+qc.question_category_translations.create(:locale => 'ka', :name => 'Stairs')
+q = Question.create(:id => 21)
+q.question_translations.create(:locale => 'en', :name => 'Appropriate width and height that is accessible for wheelchairs')
+q.question_translations.create(:locale => 'ka', :name => 'Appropriate width and height that is accessible for wheelchairs')
+QuestionPairing.create(:id => 21, :question_category_id => qc.id, :question_id => q.id)
+
+#in print
+qc = QuestionCategory.create(:id => 8, :is_common => true)
+qc.question_category_translations.create(:locale => 'en', :name => 'In Print')
+qc.question_category_translations.create(:locale => 'ka', :name => 'In Print')
+q = Question.create(:id => 22)
+q.question_translations.create(:locale => 'en', :name => 'Available in large print')
+q.question_translations.create(:locale => 'ka', :name => 'Available in large print')
+QuestionPairing.create(:id => 22, :question_category_id => qc.id, :question_id => q.id)
+qp.question_pairing_translations.create(:locale => 'en', :evidence => 'Font size')
+qp.question_pairing_translations.create(:locale => 'ka', :evidence => 'Font size')
+q = Question.create(:id => 23)
+q.question_translations.create(:locale => 'en', :name => 'In Braille')
+q.question_translations.create(:locale => 'ka', :name => 'In Braille')
+QuestionPairing.create(:id => 23, :question_category_id => qc.id, :question_id => q.id)
+
+
+# service provider
+qc = QuestionCategory.create(:id => 9, :is_common => true)
+qc.question_category_translations.create(:locale => 'en', :name => 'Service Provider')
+qc.question_category_translations.create(:locale => 'ka', :name => 'Service Provider')
+q = Question.create(:id => 24)
+q.question_translations.create(:locale => 'en', :name => 'At least one desk with wheelchair adapted (low) height')
+q.question_translations.create(:locale => 'ka', :name => 'At least one desk with wheelchair adapted (low) height')
+QuestionPairing.create(:id => 24, :question_category_id => qc.id, :question_id => q.id)
+
+# other
+qc = QuestionCategory.create(:id => 10, :is_common => true)
+qc.question_category_translations.create(:locale => 'en', :name => 'Other')
+qc.question_category_translations.create(:locale => 'ka', :name => 'Other')
+q = Question.create(:id => 25)
+q.question_translations.create(:locale => 'en', :name => 'Special services available for disabled persons')
+q.question_translations.create(:locale => 'ka', :name => 'Special services available for disabled persons')
+QuestionPairing.create(:id => 25, :question_category_id => qc.id, :question_id => q.id)
+
+
+puts "done question records"
+
+
+##################################
+## Venues
+##################################
+puts "deleting all venue records"
+VenueCategory.delete_all
+VenueCategoryTranslation.delete_all
+Venue.delete_all
+VenueTranslation.delete_all
+
+puts "creating venue records"
+
+# food and drink
+vc = VenueCategory.create(:id => 1)
+vc.venue_category_translations.create(:locale => 'en', :name => 'Food and Drink')
+vc.venue_category_translations.create(:locale => 'en', :name => 'Food and Drink')
+v = Venue.create(:id => 1, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Cafe / Bars')
+v.venue_translations.create(:locale => 'en', :name => 'Cafe / Bars')
+v = Venue.create(:id => 2, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Restaurants')
+v.venue_translations.create(:locale => 'en', :name => 'Restaurants')
+v = Venue.create(:id => 3, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Fast Food')
+v.venue_translations.create(:locale => 'en', :name => 'Fast Food')
+v = Venue.create(:id => 4, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Market')
+v.venue_translations.create(:locale => 'en', :name => 'Market')
+v = Venue.create(:id => 5, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Grocerty Store')
+v.venue_translations.create(:locale => 'en', :name => 'Grocerty Store')
+
+# Financial Institutions and services
+vc = VenueCategory.create(:id => 2)
+vc.venue_category_translations.create(:locale => 'en', :name => 'Financial Institutions and Services')
+vc.venue_category_translations.create(:locale => 'en', :name => 'Financial Institutions and Services')
+v = Venue.create(:id => 6, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Banks')
+v.venue_translations.create(:locale => 'en', :name => 'Banks')
+v = Venue.create(:id => 7, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'ATMs and Pay Boxes')
+v.venue_translations.create(:locale => 'en', :name => 'ATMs and Pay Boxes')
+v = Venue.create(:id => 8, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Currency Exchange')
+v.venue_translations.create(:locale => 'en', :name => 'Currency Exchange')
+
+#Sports and Entertainment
+vc = VenueCategory.create(:id => 3)
+vc.venue_category_translations.create(:locale => 'en', :name => 'Sports and Entertainment')
+vc.venue_category_translations.create(:locale => 'en', :name => 'Sports and Entertainment')
+v = Venue.create(:id => 9, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Cinema / Theaters')
+v.venue_translations.create(:locale => 'en', :name => 'Cinema / Theaters')
+v = Venue.create(:id => 10, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Casinos')
+v.venue_translations.create(:locale => 'en', :name => 'Casinos')
+v = Venue.create(:id => 11, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Galleries')
+v.venue_translations.create(:locale => 'en', :name => 'Galleries')
+v = Venue.create(:id => 12, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Clubs')
+v.venue_translations.create(:locale => 'en', :name => 'Clubs')
+v = Venue.create(:id => 13, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Museums')
+v.venue_translations.create(:locale => 'en', :name => 'Museums')
+v = Venue.create(:id => 14, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Stadiums')
+v.venue_translations.create(:locale => 'en', :name => 'Stadiums')
+
+#Healthcare
+vc = VenueCategory.create(:id => 4)
+vc.venue_category_translations.create(:locale => 'en', :name => 'Healthcare')
+vc.venue_category_translations.create(:locale => 'en', :name => 'Healthcare')
+v = Venue.create(:id => 15, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Pharmacy')
+v.venue_translations.create(:locale => 'en', :name => 'Pharmacy')
+v = Venue.create(:id => 16, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Dentist')
+v.venue_translations.create(:locale => 'en', :name => 'Dentist')
+v = Venue.create(:id => 17, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Hospital')
+v.venue_translations.create(:locale => 'en', :name => 'Hospital')
+
+
+#emergency
+vc = VenueCategory.create(:id => 5)
+vc.venue_category_translations.create(:locale => 'en', :name => 'Emergency')
+vc.venue_category_translations.create(:locale => 'en', :name => 'Emergency')
+v = Venue.create(:id => 18, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => '112')
+v.venue_translations.create(:locale => 'en', :name => '112')
+
+
+#Government
+vc = VenueCategory.create(:id => 6)
+vc.venue_category_translations.create(:locale => 'en', :name => 'Government')
+vc.venue_category_translations.create(:locale => 'en', :name => 'Government')
+v = Venue.create(:id => 19, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Courthouses')
+v.venue_translations.create(:locale => 'en', :name => 'Courthouses')
+v = Venue.create(:id => 20, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Embassies')
+v.venue_translations.create(:locale => 'en', :name => 'Embassies')
+v = Venue.create(:id => 21, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'City Halls')
+v.venue_translations.create(:locale => 'en', :name => 'City Halls')
+v = Venue.create(:id => 22, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Prisons')
+v.venue_translations.create(:locale => 'en', :name => 'Prisons')
+v = Venue.create(:id => 23, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Police Stations')
+v.venue_translations.create(:locale => 'en', :name => 'Police Stations')
+
+
+#Lodging
+vc = VenueCategory.create(:id => 7)
+vc.venue_category_translations.create(:locale => 'en', :name => 'Lodging')
+vc.venue_category_translations.create(:locale => 'en', :name => 'Lodging')
+v = Venue.create(:id => 24, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Hotels')
+v.venue_translations.create(:locale => 'en', :name => 'Hotels')
+v = Venue.create(:id => 25, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Hostels')
+v.venue_translations.create(:locale => 'en', :name => 'Hostels')
+
+
+#Public Services
+vc = VenueCategory.create(:id => 8)
+vc.venue_category_translations.create(:locale => 'en', :name => 'Public Services')
+vc.venue_category_translations.create(:locale => 'en', :name => 'Public Services')
+v = Venue.create(:id => 26, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Libraries')
+v.venue_translations.create(:locale => 'en', :name => 'Libraries')
+v = Venue.create(:id => 27, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Post-offices')
+v.venue_translations.create(:locale => 'en', :name => 'Post-offices')
+v = Venue.create(:id => 28, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Revenue Services')
+v.venue_translations.create(:locale => 'en', :name => 'Revenue Services')
+v = Venue.create(:id => 29, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Justice House')
+v.venue_translations.create(:locale => 'en', :name => 'Justice House')
+v = Venue.create(:id => 30, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Legal Aid Offices')
+v.venue_translations.create(:locale => 'en', :name => 'Legal Aid Offices')
+
+
+#Place of Worship
+vc = VenueCategory.create(:id => 9)
+vc.venue_category_translations.create(:locale => 'en', :name => 'Places of Worship')
+vc.venue_category_translations.create(:locale => 'en', :name => 'Places of Worship')
+
+
+#Education
+vc = VenueCategory.create(:id => 10)
+vc.venue_category_translations.create(:locale => 'en', :name => 'Public Services')
+vc.venue_category_translations.create(:locale => 'en', :name => 'Public Services')
+v = Venue.create(:id => 31, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Kindergartens')
+v.venue_translations.create(:locale => 'en', :name => 'Kindergartens')
+v = Venue.create(:id => 32, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Schools')
+v.venue_translations.create(:locale => 'en', :name => 'Schools')
+v = Venue.create(:id => 33, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Colleges')
+v.venue_translations.create(:locale => 'en', :name => 'Colleges')
+v = Venue.create(:id => 34, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Universities')
+v.venue_translations.create(:locale => 'en', :name => 'Universities')
+
+
+#General Business
+vc = VenueCategory.create(:id => 11)
+vc.venue_category_translations.create(:locale => 'en', :name => 'General Business')
+vc.venue_category_translations.create(:locale => 'en', :name => 'General Business')
+
+
+#Recreational Area
+vc = VenueCategory.create(:id => 12)
+vc.venue_category_translations.create(:locale => 'en', :name => 'Recreational Area')
+vc.venue_category_translations.create(:locale => 'en', :name => 'Recreational Area')
+v = Venue.create(:id => 35, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Beach')
+v.venue_translations.create(:locale => 'en', :name => 'Beach')
+v = Venue.create(:id => 36, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Gardens / Parks')
+v.venue_translations.create(:locale => 'en', :name => 'Gardens / Parks')
+v = Venue.create(:id => 37, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Amusement Parks')
+v.venue_translations.create(:locale => 'en', :name => 'Amusement Parks')
+v = Venue.create(:id => 38, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Zoo')
+v.venue_translations.create(:locale => 'en', :name => 'Zoo')
+v = Venue.create(:id => 39, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Museums')
+v.venue_translations.create(:locale => 'en', :name => 'Museums')
+v = Venue.create(:id => 40, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Historical Landmarks (not places of worship)')
+v.venue_translations.create(:locale => 'en', :name => 'Historical Landmarks (not places of worship)')
+
+
+#Transportation
+vc = VenueCategory.create(:id => 13)
+vc.venue_category_translations.create(:locale => 'en', :name => 'Transportation')
+vc.venue_category_translations.create(:locale => 'en', :name => 'Transportation')
+v = Venue.create(:id => 41, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Crosswalks')
+v.venue_translations.create(:locale => 'en', :name => 'Crosswalks')
+v = Venue.create(:id => 42, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Sidewalks')
+v.venue_translations.create(:locale => 'en', :name => 'Sidewalks')
+v = Venue.create(:id => 43, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Public Buses')
+v.venue_translations.create(:locale => 'en', :name => 'Public Buses')
+v = Venue.create(:id => 44, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Metro')
+v.venue_translations.create(:locale => 'en', :name => 'Metro')
+v = Venue.create(:id => 45, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Train Station')
+v.venue_translations.create(:locale => 'en', :name => 'Train Station')
+v = Venue.create(:id => 46, :venue_category_id => vc.id)
+v.venue_translations.create(:locale => 'en', :name => 'Airport')
+v.venue_translations.create(:locale => 'en', :name => 'Airport')
+
+
+
+puts "done venue records"
+
