@@ -84,6 +84,10 @@ en:
       not_authorized: You are not authorized to view that page.
       success_created: "%{obj} was successfully created."
       success_updated: "%{obj} was successfully updated."
+      updated_sort_order: The Sort Order has been updated.
+      added_existing_question: The existing question has been added to this Question Category.
+      added_new_question: The new question has been added to this Question Category.
+      missing_required: Please supply all required information.
   layouts:
     application:
       admin: Admin
@@ -125,3 +129,11 @@ en:
         edit_question_category: Edit Question Category
         delete_question_category: Delete Question Category
         edit_questions: Edit Questions
+      questions: 
+        title: "'%{category}' Questions"
+        submit_sort_order: Update Sort Order
+        add_existing_question: Add Existing Question
+        add_new_question: Add New Question
+        no_existing_questions: Sorry, but there are no questions on file that are already not assigned to this Question Category.
+        submit_existing_question: Add Existing Question
+        submit_new_question: Add New Question        

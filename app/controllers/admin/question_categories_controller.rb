@@ -26,6 +26,47 @@ class Admin::QuestionCategoriesController < ApplicationController
     end
   end
 
+  
+  def questions
+    if request.post?
+      if params[:type] == "sort-order"
+        # go through each sort item and if find one that changed, update the value
+        QuestionPairing.update_sort_order(params[:sort_order_orig], params[:sort_order])
+        flash[:notice] = t('app.msgs.updated_sort_order')
+      elsif params[:type] == "existing-question"
+        # and an existing question to this category
+        if params[:existing_question].present? && params[:existing_question][:id].present?
+          QuestionPairing.add_existing_question(params[:id], params[:existing_question][:id], params[:existing_question][:sort_order], params[:existing_question][:evidence]) 
+          flash[:notice] = t('app.msgs.added_existing_question')
+        else
+          flash[:warning] = t('app.msgs.missing_required')
+        end
+      elsif params[:type] == "new-question"
+        # create a new category and add it to this category
+Rails.logger.debug "************* values uniq length = #{params[:new_question][:name].values.uniq.length}; length > 1 = #{params[:new_question][:name].values.uniq.length > 1}; length=1 && value present = #{params[:new_question][:name].values.uniq.length == 1 && params[:new_question][:name].values.uniq.first.present?}"
+Rails.logger.debug "************* id = #{params[:id].present?}; name present = #{params[:new_question][:name].present?}"
+        if params[:new_question].present? && params[:id].present? && params[:new_question][:name].present? &&
+            (params[:new_question][:name].values.uniq.length > 1 || 
+            (params[:new_question][:name].values.uniq.length == 1 && params[:new_question][:name].values.uniq.first.present?))
+
+          Question.add_and_assign_new_question(params[:new_question][:name], params[:id], params[:new_question][:sort_order], params[:new_question][:evidence])
+
+          flash[:notice] = t('app.msgs.added_new_question')
+        else
+          flash[:warning] = t('app.msgs.missing_required')
+        end
+      end
+    end
+
+    @question_category = QuestionCategory.with_questions(params[:id])
+    @existing_questions = Question.all_questions_not_in_category(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @question_category }
+    end
+  end
+
   # GET /question_categories/new
   # GET /question_categories/new.json
   def new

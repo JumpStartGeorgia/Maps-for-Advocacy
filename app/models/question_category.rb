@@ -11,7 +11,7 @@ class QuestionCategory < ActiveRecord::Base
 
 
   def self.with_questions(question_category_id=nil)
-    sql = "SELECT qc.id, qc.is_common, qc.sort_order, qct.name as question_category,q.id as question_id, qt.name as question, qpt.evidence "
+    sql = "SELECT qc.id, qc.is_common, qc.sort_order, qct.name as question_category, qp.sort_order as question_sort_order, q.id as question_id, qt.name as question, qpt.evidence, qp.id as question_pairing_id "
     sql << "FROM `question_categories` as qc "
     sql << "LEFT OUTER JOIN `question_category_translations` as qct ON qct.`question_category_id` = qc.`id` and qct.`locale` = :locale "
     sql << "LEFT OUTER JOIN `question_pairings` as qp ON qp.`question_category_id` = qc.`id` "

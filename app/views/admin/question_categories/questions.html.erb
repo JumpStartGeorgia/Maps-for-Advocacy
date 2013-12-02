@@ -1,0 +1,169 @@
+<%- model_class = QuestionCategory -%>
+<%- model_class_trans = QuestionPairingTranslation -%>
+<% title @question_category.present? ? t('.title', :category => @question_category.first[:question_category]).html_safe : 
+      t('helpers.titles.edit', :model => model_class.model_name.human.pluralize, :default => "Edit #{model_class.model_name.human.pluralize}") %>
+
+
+<div class="form-actions">
+	<%= link_to t('helpers.links.list'), admin_question_categories_path,
+  :class => 'btn' %>
+	<%= link_to t('helpers.links.admin'), admin_path,
+  :class => 'btn' %>
+</div>
+
+<%= form_tag(request.fullpath) do %>
+  <%= hidden_field_tag "type", "sort-order" %>
+  <table id="question-category-questions" class="table table-striped display">
+    <thead>
+      <tr>
+        <th><%= model_class.human_attribute_name(:sort_order) %></th>
+        <th><%= model_class.human_attribute_name(:question) %></th>
+        <th><%= model_class_trans.human_attribute_name(:evidence) %></th>
+        <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @question_category.each do |record| %>
+        <% if record[:question].present? %>
+          <tr>
+            <td>
+              <%= hidden_field_tag "sort_order_orig[#{record[:question_pairing_id]}]", record[:question_sort_order] %>
+              <%= text_field_tag "sort_order[#{record[:question_pairing_id]}]", record[:question_sort_order], :class => "input-mini" %>
+            </td>
+            <td>
+              <%= record[:question] %>
+            </td>
+            <td>
+              <%= record[:evidence] %>
+            </td>
+            <td>
+              actions
+            </td>
+          </tr>
+        <% end %>    
+      <% end %>
+    </tbody>
+  </table>
+
+  <div id="submit_sort_order" style="display: none;">
+    <%= submit_tag t('.submit_sort_order'), :class => 'btn btn-mini' %>
+  </div>
+
+<% end %>
+
+<hr />
+
+<div id="add_questions" class="row">
+  <div class="span6">
+    <h2>
+      <%= t('.add_existing_question') %>
+    </h2>
+
+    <% if @existing_questions.present? %>
+      <%= form_tag(request.fullpath) do %>
+        <%= hidden_field_tag "type", "existing-question" %>
+        <table id="existing-questions" class="table table-striped display">
+          <thead>
+            <tr>
+              <th></th>
+              <th><%= model_class.human_attribute_name(:question) %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @existing_questions.each do |record| %>
+              <% if record[:question].present? %>
+                <tr>
+                  <td>
+                    <%= radio_button_tag "existing_question[id]", record[:id], false, :name => "existing_question[id]" %>
+                  </td>
+                  <td>
+                    <%= record[:question] %>
+                  </td>
+                </tr>
+              <% end %>    
+            <% end %>
+          </tbody>
+        </table>
+        
+        <% create_sorted_locales.each do |locale| %>
+          <div id="<%= "form-#{locale}"%>" class="multilanguage_nested">
+			      <h3><%= t("app.language.#{locale}") %></h3>
+
+            <div class="string control-group optional stringish">
+              <label class=" control-label" for="<%= "existing_question_evidence_#{locale}" %>">
+                <%= model_class_trans.human_attribute_name(:evidence) %>
+              </label>
+              <div class="controls">
+                <input id="<%= "existing_question_evidence_#{locale}" %>" name="<%= "existing_question[evidence][#{locale}]" %>" type="text" value="">
+              </div>
+            </div>
+		      </div>
+        <% end %>
+
+
+        <div class="string control-group optional stringish">
+          <label class=" control-label" for="existing_question_sort_order"><%= model_class.human_attribute_name(:sort_order) %></label>
+          <div class="controls">
+            <input id="existing_question_sort_order" maxlength="4" name="existing_question[sort_order]" type="text" value=""  class="input-mini" >
+          </div>
+        </div>
+
+
+        <%= submit_tag t('.submit_existing_question'), :class => 'btn btn-mini' %>
+
+        
+      <% end %>
+    <% else %>
+      <p>
+        <%= t('.no_existing_questions') %>
+      </p>
+    <% end %>
+  </div>
+  <div class="span6">
+    <h2>
+      <%= t('.add_new_question') %>
+    </h2>
+
+    <%= form_tag(request.fullpath) do %>
+      <%= hidden_field_tag "type", "new-question" %>
+
+      <% create_sorted_locales.each do |locale| %>
+        <div id="<%= "form-#{locale}"%>" class="multilanguage_nested">
+			    <h3><%= t("app.language.#{locale}") %></h3>
+
+			    <div class="string control-group required stringish">
+			      <label class=" control-label" for="<%= "new_question_name_#{locale}" %>">
+			        <%= model_class.human_attribute_name(:question) %>
+			        <abbr title="required">*</abbr>
+			      </label>
+			      <div class="controls">
+			        <input id="<%= "new_question_name_#{locale}" %>" maxlength="255" name="<%= "new_question[name][#{locale}]" %>" type="text" class="input-xxlarge">
+            </div>
+          </div>
+
+          <div class="string control-group optional stringish">
+            <label class=" control-label" for="<%= "new_question_evidence_#{locale}" %>">
+              <%= model_class_trans.human_attribute_name(:evidence) %>
+            </label>
+            <div class="controls">
+              <input id="<%= "new_question_evidence_#{locale}" %>" name="<%= "new_question[evidence][#{locale}]" %>" type="text" value="">
+            </div>
+          </div>
+		    </div>
+      <% end %>
+
+      <div class="string control-group optional stringish">
+        <label class=" control-label" for="new_question_sort_order"><%= model_class.human_attribute_name(:sort_order) %></label>
+        <div class="controls">
+          <input id="new_question_sort_order" maxlength="4" name="new_question[sort_order]" type="text" value=""  class="input-mini" >
+        </div>
+      </div>
+
+      <%= submit_tag t('.submit_new_question'), :class => 'btn btn-mini' %>
+
+      
+    <% end %>
+
+  </div>
+</div>
+

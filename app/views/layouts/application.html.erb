@@ -34,11 +34,6 @@
           </a>
           <%= link_to(t('app.common.app_name'), root_path(:locale => I18n.locale),:class=>"brand font")%>
           <div class="container nav-collapse">
-            <ul class="nav">
-              <li><%= link_to "Link1", "/path1"  %></li>
-              <li><%= link_to "Link2", "/path2"  %></li>
-              <li><%= link_to "Link3", "/path3"  %></li>
-            </ul>
 
 	          <ul class="nav pull-right">
 		          <% if user_signed_in? %>

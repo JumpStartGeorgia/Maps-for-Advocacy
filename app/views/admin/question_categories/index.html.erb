@@ -26,12 +26,12 @@
             </ul></td>
             <td>
               <%= link_to t('.edit_questions'),
-                          admin_questions_path(:question_category_id => @question_categories[index].id), :class => 'btn btn-mini' %>
+                          questions_admin_question_category_path(:id => @question_categories[index-1].id), :class => 'btn btn-mini' %>
               <%= link_to t('.edit_question_category'),
-                          edit_admin_question_category_path(@question_categories[index]), :class => 'btn btn-mini' %>
+                          edit_admin_question_category_path(@question_categories[index-1].id), :class => 'btn btn-mini' %>
               <br />
               <%= link_to t('.delete_question_category'),
-                          admin_question_category_path(@question_categories[index]),
+                          admin_question_category_path(@question_categories[index-1].id),
                           :method => :delete,
                           :confirm => t('app.buttons.confirm'),
                           :class => 'btn btn-mini btn-danger' %>
@@ -60,12 +60,12 @@
       </ul></td>
       <td>
         <%= link_to t('.edit_questions'),
-                    admin_questions_path(:question_category_id => @question_categories[@question_categories.length-1].id), :class => 'btn btn-mini' %>
+                    questions_admin_question_category_path(:id => @question_categories[@question_categories.length-1].id), :class => 'btn btn-mini' %>
         <%= link_to t('.edit_question_category'),
-                    edit_admin_question_category_path(@question_categories[@question_categories.length-1]), :class => 'btn btn-mini' %>
+                    edit_admin_question_category_path(@question_categories[@question_categories.length-1].id), :class => 'btn btn-mini' %>
         <br />
         <%= link_to t('.delete_question_category'),
-                    admin_question_category_path(@question_categories[@question_categories.length-1]),
+                    admin_question_category_path(@question_categories[@question_categories.length-1].id),
                     :method => :delete,
                     :confirm => t('app.buttons.confirm'),
                     :class => 'btn btn-mini btn-danger' %>
