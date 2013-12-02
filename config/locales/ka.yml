@@ -121,3 +121,8 @@ ka:
         title: ახალი მომხმარებელი
       show:
         title: მომხმარებლის დეტალები
+    question_categories:
+      index:
+        edit_question_category: Edit Question Category
+        delete_question_category: Delete Question Category
+        edit_questions: Edit Questions

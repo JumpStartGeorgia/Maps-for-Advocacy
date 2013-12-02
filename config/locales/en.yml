@@ -120,3 +120,8 @@ en:
         title: New User
       show:
         title: User Details
+    question_categories:
+      index:
+        edit_question_category: Edit Question Category
+        delete_question_category: Delete Question Category
+        edit_questions: Edit Questions

@@ -18,7 +18,7 @@ class Admin::QuestionCategoriesController < ApplicationController
   # GET /question_categories/1
   # GET /question_categories/1.json
   def show
-    @question_category = QuestionCategory.find(params[:id])
+    @question_category = QuestionCategory.with_questions(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb

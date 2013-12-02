@@ -25,9 +25,12 @@
         <% if qc_id.present? %>
             </ul></td>
             <td>
-              <%= link_to t('app.buttons.edit'),
+              <%= link_to t('.edit_questions'),
+                          admin_questions_path(:question_category_id => @question_categories[index].id), :class => 'btn btn-mini' %>
+              <%= link_to t('.edit_question_category'),
                           edit_admin_question_category_path(@question_categories[index]), :class => 'btn btn-mini' %>
-              <%= link_to t('app.buttons.delete'),
+              <br />
+              <%= link_to t('.delete_question_category'),
                           admin_question_category_path(@question_categories[index]),
                           :method => :delete,
                           :confirm => t('app.buttons.confirm'),
@@ -49,16 +52,19 @@
         <li>
           <%= @question_categories[index][:question] %>
           <% if @question_categories[index][:evidence].present? %>
-            <%= "(#{@question_categories[index][:evidence]})" %>
+            <%= " (#{@question_categories[index][:evidence]})" %>
           <% end %>
         </li>
       <% end %>      
     <% end %>
       </ul></td>
       <td>
-        <%= link_to t('app.buttons.edit'),
+        <%= link_to t('.edit_questions'),
+                    admin_questions_path(:question_category_id => @question_categories[@question_categories.length-1].id), :class => 'btn btn-mini' %>
+        <%= link_to t('.edit_question_category'),
                     edit_admin_question_category_path(@question_categories[@question_categories.length-1]), :class => 'btn btn-mini' %>
-        <%= link_to t('app.buttons.delete'),
+        <br />
+        <%= link_to t('.delete_question_category'),
                     admin_question_category_path(@question_categories[@question_categories.length-1]),
                     :method => :delete,
                     :confirm => t('app.buttons.confirm'),
