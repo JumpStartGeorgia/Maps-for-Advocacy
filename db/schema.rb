@@ -11,15 +11,17 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131129082420) do
+ActiveRecord::Schema.define(:version => 20131202062816) do
 
   create_table "question_categories", :force => true do |t|
     t.boolean  "is_common",  :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "sort_order", :default => 99
   end
 
   add_index "question_categories", ["is_common"], :name => "index_question_categories_on_is_common"
+  add_index "question_categories", ["sort_order"], :name => "index_question_categories_on_sort_order"
 
   create_table "question_category_translations", :force => true do |t|
     t.integer  "question_category_id"
@@ -48,9 +50,11 @@ ActiveRecord::Schema.define(:version => 20131129082420) do
     t.integer  "question_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "sort_order",           :default => 99
   end
 
   add_index "question_pairings", ["question_category_id", "question_id"], :name => "idx_pairings_ids"
+  add_index "question_pairings", ["sort_order"], :name => "index_question_pairings_on_sort_order"
 
   create_table "question_translations", :force => true do |t|
     t.integer  "question_id"
@@ -64,12 +68,9 @@ ActiveRecord::Schema.define(:version => 20131129082420) do
   add_index "question_translations", ["question_id"], :name => "index_question_translations_on_question_id"
 
   create_table "questions", :force => true do |t|
-    t.integer  "question_category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
-
-  add_index "questions", ["question_category_id"], :name => "index_questions_on_question_category_id"
 
   create_table "users", :force => true do |t|
     t.string   "email",                  :default => "", :null => false

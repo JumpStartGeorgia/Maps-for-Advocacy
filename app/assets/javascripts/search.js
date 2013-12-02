@@ -20,5 +20,15 @@ $(document).ready(function(){
     "aaSorting": [[2, 'desc']]
   });
 
+  $('#question-categories').dataTable({
+    "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",    
+    "sPaginationType": "bootstrap",
+    "bJQueryUI": true,
+    "bAutoWidth": false,
+    "oLanguage": {
+      "sUrl": gon.datatable_i18n_url
+    }
+  });
+
 
 });

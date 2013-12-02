@@ -20,6 +20,8 @@ ka:
         name: Name      
       question_category:
         is_common: Is Common to All Venues
+        sort_order: Sort Order
+        question: Question
       question_category_translation:
         name: Name      
       venue:

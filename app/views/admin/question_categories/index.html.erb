@@ -8,30 +8,63 @@
               :class => 'btn btn-primary' %>
 </div>
 
-<table class="table table-striped display">
+<table id="question-categories" class="table table-striped display">
   <thead>
     <tr>
-      <th><%= model_class_trans.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:sort_order) %></th>
       <th><%= model_class.human_attribute_name(:is_common) %></th>
+      <th><%= model_class_trans.human_attribute_name(:name) %></th>
+      <th><%= model_class_trans.human_attribute_name(:questions) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
   <tbody>
-    <% @question_categories.each do |question_category| %>
-      <tr>
-        <td><%= question_category.name %></td>
-        <td><%= question_category.is_common %></td>
-        <td>
-          <%= link_to t('app.buttons.edit'),
-                      edit_admin_question_category_path(question_category), :class => 'btn btn-mini' %>
-          <%= link_to t('app.buttons.delete'),
-                      admin_question_category_path(question_category),
-                      :method => :delete,
-                      :confirm => t('app.buttons.confirm'),
-                      :class => 'btn btn-mini btn-danger' %>
-        </td>
-      </tr>
+    <% qc_id = nil %>
+    <% (0..@question_categories.length-1).each do |index| %>
+      <% if @question_categories[index][:id] != qc_id %>
+        <% if qc_id.present? %>
+            </ul></td>
+            <td>
+              <%= link_to t('app.buttons.edit'),
+                          edit_admin_question_category_path(@question_categories[index]), :class => 'btn btn-mini' %>
+              <%= link_to t('app.buttons.delete'),
+                          admin_question_category_path(@question_categories[index]),
+                          :method => :delete,
+                          :confirm => t('app.buttons.confirm'),
+                          :class => 'btn btn-mini btn-danger' %>
+            </td>
+          </tr>
+        <% end %>
+
+        <% qc_id = @question_categories[index][:id] %>
+
+        <tr>
+          <td><%= @question_categories[index][:sort_order] %></td>
+          <td><%= @question_categories[index][:is_common] %></td>
+          <td><%= @question_categories[index][:question_category] %></td>
+          <td><ul class="standard">
+      <% end %>
+      
+      <% if @question_categories[index][:question].present? %>
+        <li>
+          <%= @question_categories[index][:question] %>
+          <% if @question_categories[index][:evidence].present? %>
+            <%= "(#{@question_categories[index][:evidence]})" %>
+          <% end %>
+        </li>
+      <% end %>      
     <% end %>
+      </ul></td>
+      <td>
+        <%= link_to t('app.buttons.edit'),
+                    edit_admin_question_category_path(@question_categories[@question_categories.length-1]), :class => 'btn btn-mini' %>
+        <%= link_to t('app.buttons.delete'),
+                    admin_question_category_path(@question_categories[@question_categories.length-1]),
+                    :method => :delete,
+                    :confirm => t('app.buttons.confirm'),
+                    :class => 'btn btn-mini btn-danger' %>
+      </td>
+    </tr>
   </tbody>
 </table>
 
