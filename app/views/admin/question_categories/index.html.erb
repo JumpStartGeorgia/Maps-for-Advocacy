@@ -13,9 +13,9 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:sort_order) %></th>
-      <th><%= model_class.human_attribute_name(:is_common) %></th>
       <th><%= model_class_trans.human_attribute_name(:name) %></th>
       <th><%= model_class_trans.human_attribute_name(:questions) %></th>
+      <th><%= model_class.human_attribute_name(:is_common) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -26,6 +26,7 @@
         <% if @question_categories[index][:id] != qc_id %>
           <% if qc_id.present? %>
               </ul></td>
+              <td><%= @question_categories[index-1][:is_common] %></td>
               <td>
                 <%= link_to t('.edit_questions'),
                             questions_admin_question_category_path(:id => @question_categories[index-1].id), :class => 'btn btn-mini' %>
@@ -45,7 +46,6 @@
 
           <tr>
             <td><%= @question_categories[index][:sort_order] %></td>
-            <td><%= @question_categories[index][:is_common] %></td>
             <td><%= @question_categories[index][:question_category] %></td>
             <td><ul class="standard">
         <% end %>
@@ -60,6 +60,7 @@
         <% end %>      
       <% end %>
         </ul></td>
+        <td><%= @question_categories[@question_categories.length-1][:is_common] %></td>
         <td>
           <%= link_to t('.edit_questions'),
                       questions_admin_question_category_path(:id => @question_categories[@question_categories.length-1].id), :class => 'btn btn-mini' %>

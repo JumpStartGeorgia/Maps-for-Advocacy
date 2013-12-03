@@ -118,7 +118,7 @@ en:
       title: Administration Section
       users: Users
       question_categories: Question Categories
-      questions: Question
+      questions: Questions
       venue_categories: Venue Categories
       venues: Venues
     users:
