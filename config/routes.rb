@@ -1,5 +1,6 @@
 BootstrapStarter::Application.routes.draw do
 
+
 	#--------------------------------
 	# all resources should be within the scope block below
 	#--------------------------------
@@ -24,6 +25,7 @@ BootstrapStarter::Application.routes.draw do
           post 'venues'
         end
       end
+      resources :places
 		end
 
 

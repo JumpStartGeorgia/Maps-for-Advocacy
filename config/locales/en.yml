@@ -7,6 +7,7 @@ en:
       question_category: QuestionCategory
       venue: Venue
       venue_category: Venue Category
+      place: Place
     attributes:
       user:
         email: Email Address
@@ -41,6 +42,13 @@ en:
         question_category_id: Question Category
       question_pairing_translation:
         evidence: Evidence  
+      place:
+        district_id: District
+        venue_id: Venue
+        lat: Latitude
+        lon: Longitude
+      place_translation:
+        name: Name
     errors:
       messages:
         required_field: "is a required field."
@@ -121,6 +129,7 @@ en:
       questions: Questions
       venue_categories: Venue Categories
       venues: Venues
+      places: Places
     users:
       edit:
         title: Editing User

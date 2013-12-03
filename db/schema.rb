@@ -11,7 +11,30 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131203102543) do
+ActiveRecord::Schema.define(:version => 20131203131907) do
+
+  create_table "place_translations", :force => true do |t|
+    t.integer  "place_id"
+    t.string   "locale"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "place_translations", ["locale"], :name => "index_place_translations_on_locale"
+  add_index "place_translations", ["place_id"], :name => "index_place_translations_on_place_id"
+
+  create_table "places", :force => true do |t|
+    t.integer  "venue_id"
+    t.integer  "district_id"
+    t.decimal  "lat",         :precision => 15, :scale => 12
+    t.decimal  "lon",         :precision => 15, :scale => 12
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "places", ["district_id"], :name => "index_places_on_district_id"
+  add_index "places", ["venue_id"], :name => "index_places_on_venue_id"
 
   create_table "question_categories", :force => true do |t|
     t.boolean  "is_common",  :default => false
