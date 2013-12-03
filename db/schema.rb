@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131202062816) do
+ActiveRecord::Schema.define(:version => 20131203102543) do
 
   create_table "question_categories", :force => true do |t|
     t.boolean  "is_common",  :default => false
@@ -94,7 +94,10 @@ ActiveRecord::Schema.define(:version => 20131202062816) do
   create_table "venue_categories", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "sort_order", :default => 99
   end
+
+  add_index "venue_categories", ["sort_order"], :name => "index_venue_categories_on_sort_order"
 
   create_table "venue_category_translations", :force => true do |t|
     t.integer  "venue_category_id"
@@ -123,9 +126,11 @@ ActiveRecord::Schema.define(:version => 20131202062816) do
     t.integer  "question_category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "sort_order",           :default => 99
   end
 
   add_index "venues", ["question_category_id"], :name => "index_venues_on_question_category_id"
+  add_index "venues", ["sort_order"], :name => "index_venues_on_sort_order"
   add_index "venues", ["venue_category_id"], :name => "index_venues_on_venue_category_id"
 
 end

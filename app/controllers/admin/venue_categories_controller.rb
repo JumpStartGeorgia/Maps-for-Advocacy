@@ -7,7 +7,7 @@ class Admin::VenueCategoriesController < ApplicationController
   # GET /venue_categories
   # GET /venue_categories.json
   def index
-    @venue_categories = VenueCategory.all
+    @venue_categories = VenueCategory.with_venues
 
     respond_to do |format|
       format.html # index.html.erb
@@ -18,12 +18,42 @@ class Admin::VenueCategoriesController < ApplicationController
   # GET /venue_categories/1
   # GET /venue_categories/1.json
   def show
-    @venue_category = VenueCategory.find(params[:id])
+    @venue_category = VenueCategory.with_venues(params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @venue_category }
     end
+  end
+  
+  def venues
+    if request.post?
+      if params[:type] == "sort-order"
+        # go through each sort item and if find one that changed, update the value
+        Venue.update_sort_order(params[:sort_order_orig], params[:sort_order])
+        flash[:notice] = t('app.msgs.updated_sort_order')
+      elsif params[:type] == "new-venue"
+        # create a new venue and add it to this category
+        if params[:new_venue].present? && params[:id].present? && params[:new_venue][:name].present? &&
+            (params[:new_venue][:name].values.uniq.length > 1 || 
+            (params[:new_venue][:name].values.uniq.length == 1 && params[:new_venue][:name].values.uniq.first.present?))
+
+          Venue.add_and_assign_new_venue(params[:new_venue][:name], params[:id], params[:new_venue][:sort_order])
+
+          flash[:notice] = t('app.msgs.added_new_venue')
+        else
+          flash[:warning] = t('app.msgs.missing_required')
+        end
+      end
+    end  
+
+    @venue_category = VenueCategory.with_venues(params[:id])
+
+    respond_to do |format|
+      format.html # show.html.erb
+      format.json { render json: @venue_category }
+    end
+  
   end
 
   # GET /venue_categories/new

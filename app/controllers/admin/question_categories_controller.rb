@@ -42,9 +42,7 @@ class Admin::QuestionCategoriesController < ApplicationController
           flash[:warning] = t('app.msgs.missing_required')
         end
       elsif params[:type] == "new-question"
-        # create a new category and add it to this category
-Rails.logger.debug "************* values uniq length = #{params[:new_question][:name].values.uniq.length}; length > 1 = #{params[:new_question][:name].values.uniq.length > 1}; length=1 && value present = #{params[:new_question][:name].values.uniq.length == 1 && params[:new_question][:name].values.uniq.first.present?}"
-Rails.logger.debug "************* id = #{params[:id].present?}; name present = #{params[:new_question][:name].present?}"
+        # create a new question and add it to this category
         if params[:new_question].present? && params[:id].present? && params[:new_question][:name].present? &&
             (params[:new_question][:name].values.uniq.length > 1 || 
             (params[:new_question][:name].values.uniq.length == 1 && params[:new_question][:name].values.uniq.first.present?))

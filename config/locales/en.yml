@@ -17,21 +17,25 @@ en:
       question:
         question_categories: Question Categories
       question_translation:
-        name: Name      
+        name: Question      
       question_category:
         is_common: Is Common to All Venues
         sort_order: Sort Order
-        question: Question
+        questions: Questions
       question_category_translation:
-        name: Name      
+        name: Category
       venue:
         venue_category_id: Venue Category
-        question_category_id: Question Category
+        question_category_id: Custom Questions
+        sort_order: Sort Order
       venue_translation:
-        name: Name      
+        name: Venue
       venue_category:
+        sort_order: Sort Order
+        venues: Venues
+        question_category_id: Custom Questions
       venue_category_translation:
-        name: Name      
+        name: Category
       question_pairing:
         quetion_id: Question
         question_category_id: Question Category
@@ -79,6 +83,7 @@ en:
     common:
       app_name: Mapping for Advocacy
       added_on: "Added on: %{date}" 
+      venue_has_questions: custom questions
     msgs:
       does_not_exist: You tried to access a page that does not exist.
       not_authorized: You are not authorized to view that page.
@@ -86,7 +91,8 @@ en:
       success_updated: "%{obj} was successfully updated."
       updated_sort_order: The Sort Order has been updated.
       added_existing_question: The existing question has been added to this Question Category.
-      added_new_question: The new question has been added to this Question Category.
+      added_new_question: The new Question has been added to this Question Category.
+      added_new_question: The new Venue has been added to this Venue Category.
       missing_required: Please supply all required information.
   layouts:
     application:
@@ -128,7 +134,7 @@ en:
       index:
         edit_question_category: Edit Question Category
         delete_question_category: Delete Question Category
-        edit_questions: Edit Questions
+        edit_questions: Manage Questions
       questions: 
         title: "'%{category}' Questions"
         submit_sort_order: Update Sort Order
@@ -137,3 +143,17 @@ en:
         no_existing_questions: Sorry, but there are no questions on file that are already not assigned to this Question Category.
         submit_existing_question: Add Existing Question
         submit_new_question: Add New Question        
+    venue_categories:
+      index:
+        edit_venue_category: Edit Venue Category
+        delete_venue_category: Delete Venue Category
+        edit_venues: Manage Venues
+      venues: 
+        title: "'%{category}' Venues"
+        submit_sort_order: Update Sort Order
+        add_existing_venue: Add Existing Venue
+        add_new_venue: Add New Venue
+        no_existing_venue: Sorry, but there are no venues on file that are already not assigned to this Venue Category.
+        submit_existing_venue: Add Existing Venue
+        submit_new_venue: Add New Venue        
+

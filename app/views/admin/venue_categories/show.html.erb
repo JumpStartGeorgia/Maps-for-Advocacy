@@ -7,9 +7,9 @@
   <%= link_to t('.back', :default => t("helpers.links.back")),
               admin_venue_categories_path, :class => 'btn'  %>
   <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_admin_venue_category_path(@venue_category), :class => 'btn' %>
+              edit_admin_venue_category_path(@venue_category.first.id), :class => 'btn' %>
   <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              admin_venue_category_path(@venue_category),
+              admin_venue_category_path(@venue_category.first.id),
               :method => 'delete',
               :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm")) },
               :class => 'btn btn-danger' %>
@@ -17,6 +17,25 @@
 </div>
 
 <p><strong><%= model_class_trans.human_attribute_name(:name) %>:</strong>
-<%= @venue_category.name %></p>
+<%= @venue_category.first[:venue_category] %></p>
+
+<p><strong><%= model_class.human_attribute_name(:sort_order) %>:</strong>
+<%= @venue_category.first[:sort_order] %></p>
+
+<p><strong><%= model_class.human_attribute_name(:venues) %>:</strong></p>
+<ul class="standard">
+  <% @venue_category.each do |record| %>
+    <% if record[:venue].present? %>
+      <li>
+        <%= record[:venue] %>
+        <% if record[:question_category_id].present? %>
+          <span class="venue_has_questions">
+            <%= " (#{t('app.common.venue_has_questions')})" %>
+          </span>
+        <% end %>
+      </li>
+    <% end %>    
+  <% end %>
+</ul>
 
 

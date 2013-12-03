@@ -1,0 +1,91 @@
+<%- model_class = VenueCategory -%>
+<%- model_class_trans = VenueTranslation -%>
+<% title @venue_category.present? ? t('.title', :category => @venue_category.first[:venue_category]).html_safe : 
+      t('helpers.titles.edit', :model => model_class.model_name.human.pluralize, :default => "Edit #{model_class.model_name.human.pluralize}") %>
+
+
+<div class="form-actions">
+	<%= link_to t('helpers.links.list'), admin_venue_categories_path,
+  :class => 'btn' %>
+	<%= link_to t('helpers.links.admin'), admin_path,
+  :class => 'btn' %>
+</div>
+
+<%= form_tag(request.fullpath) do %>
+  <%= hidden_field_tag "type", "sort-order" %>
+  <table id="venue-category-venues" class="table table-striped display">
+    <thead>
+      <tr>
+        <th><%= model_class.human_attribute_name(:sort_order) %></th>
+        <th><%= model_class.human_attribute_name(:venue) %></th>
+        <th><%= model_class.human_attribute_name(:question_category_id) %></th>
+        <th><%=t '.actions', :default => t("helpers.actions") %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @venue_category.each do |record| %>
+        <% if record[:venue].present? %>
+          <tr>
+            <td>
+              <%= hidden_field_tag "sort_order_orig[#{record[:venue_id]}]", record[:venue_sort_order] %>
+              <%= text_field_tag "sort_order[#{record[:venue_id]}]", record[:venue_sort_order], :class => "input-mini" %>
+            </td>
+            <td>
+              <%= record[:venue] %>
+            </td>
+            <td>
+              <%= link_to record[:question_category], questions_admin_question_category_path(:id => record[:question_category_id])  if record[:question_category].present? && record[:question_category].present? %>
+            </td>
+            <td>
+              actions
+            </td>
+          </tr>
+        <% end %>    
+      <% end %>
+    </tbody>
+  </table>
+
+  <div id="submit_sort_order" style="display: none;">
+    <%= submit_tag t('.submit_sort_order'), :class => 'btn btn-mini' %>
+  </div>
+
+<% end %>
+
+<hr />
+
+<h2>
+  <%= t('.add_new_venue') %>
+</h2>
+
+<%= form_tag(request.fullpath) do %>
+  <%= hidden_field_tag "type", "new-venue" %>
+
+  <% create_sorted_locales.each do |locale| %>
+    <div id="<%= "form-#{locale}"%>" class="multilanguage_nested">
+	    <h3><%= t("app.language.#{locale}") %></h3>
+
+	    <div class="string control-group required stringish">
+	      <label class=" control-label" for="<%= "new_venue_name_#{locale}" %>">
+	        <%= model_class.human_attribute_name(:venue) %>
+	        <abbr title="required">*</abbr>
+	      </label>
+	      <div class="controls">
+	        <input id="<%= "new_venue_name_#{locale}" %>" maxlength="255" name="<%= "new_venue[name][#{locale}]" %>" type="text" class="input-xxlarge">
+        </div>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="string control-group optional stringish">
+    <label class=" control-label" for="new_venue_sort_order"><%= model_class.human_attribute_name(:sort_order) %></label>
+    <div class="controls">
+      <input id="new_venue_sort_order" maxlength="4" name="new_venue[sort_order]" type="text" value=""  class="input-mini" >
+    </div>
+  </div>
+
+  <%= submit_tag t('.submit_new_venue'), :class => 'btn btn-mini' %>
+
+  
+<% end %>
+
+

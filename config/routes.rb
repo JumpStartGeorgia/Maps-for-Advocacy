@@ -18,7 +18,12 @@ BootstrapStarter::Application.routes.draw do
       end
       resources :questions
       resources :venues
-      resources :venue_categories
+      resources :venue_categories do
+        member do
+          get 'venues'
+          post 'venues'
+        end
+      end
 		end
 
 
