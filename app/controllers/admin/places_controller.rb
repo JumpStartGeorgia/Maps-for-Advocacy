@@ -20,6 +20,19 @@ class Admin::PlacesController < ApplicationController
   def show
     @place = Place.find(params[:id])
 
+    # get venue
+    @venue = Venue.with_translations(I18n.locale).find_by_id(@place.venue_id)
+	  # get list of questions
+	  @question_categories = QuestionCategory.questions_for_venue(@venue.question_category_id)
+
+    if @place.lat.present? && @place.lon.present?
+      @show_map = true
+      gon.show_place_map = true
+
+      gon.lat = @place.lat
+      gon.lon = @place.lon
+    end    
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @place }
@@ -39,7 +52,7 @@ class Admin::PlacesController < ApplicationController
       @venue_categories = VenueCategory.with_venues
     elsif params[:stage] == '2' # map
       @show_map = true
-      gon.show_map = true
+      gon.show_place_form_map = true
     elsif params[:stage] == '3' # evaluation
       @place.venue_id = params[:venue_id]
       @place.lat = params[:lat]
@@ -54,6 +67,13 @@ class Admin::PlacesController < ApplicationController
 		
 		  # get list of questions
 		  @question_categories = QuestionCategory.questions_for_venue(@venue.question_category_id)
+		  
+		  # create the evaluation object for however many questions there are
+		  if @question_categories.present?
+        (0..@question_categories.length-1).each do |index|
+  		    @place.place_evaluations.build(:user_id => current_user.id, :answer => 0)
+		    end
+		  end
     end
 
     respond_to do |format|
@@ -73,6 +93,13 @@ class Admin::PlacesController < ApplicationController
 
 	  # get list of questions
 	  @question_categories = QuestionCategory.questions_for_venue(@venue.question_category_id)
+
+	  # create the evaluation object for however many questions there are
+	  if @question_categories.present?
+      (0..@question_categories.length-1).each do |index|
+		    @place.place_evaluations.build(:user_id => current_user.id, :answer => 0)
+	    end
+	  end
   end
 
   # POST /places
@@ -136,4 +163,5 @@ class Admin::PlacesController < ApplicationController
       format.json { head :ok }
     end
   end
+
 end

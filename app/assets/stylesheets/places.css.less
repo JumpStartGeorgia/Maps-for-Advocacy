@@ -1,28 +1,35 @@
+#map { 
+  height: 300px; 
+}  
+
 form.place{
 
   h2{
     margin-top: 25px;
   }
-  #map { 
-    height: 300px; 
-  }  
   a#place_map_next{
     display: none;
   }
-  #venue_evalautions{
-    h3{
-      margin-top: 10px;
-      border-bottom: solid 2px #555;
-    }
-    table.venue_evaluation {
-      thead tr th:nth-child(1){
-        width: 35%;
-      }
-      tr.question-with-evidence td input.question-evidence{
-        display: none;
-      }
-    }
-  }  
 }
+
+#venue_evalautions{
+  h3{
+    margin-top: 10px;
+    border-bottom: solid 2px #555;
+  }
+  table.venue_evaluation {
+    thead tr th:nth-child(1){
+      width: 35%;
+    }
+    tr.question-with-evidence td input.question-evidence{
+      display: none;
+    }
+    div.selected-answer{
+      background-color: #555;
+      color: #555;
+      width: 30px;
+    }
+  }
+}  
 
 

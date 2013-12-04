@@ -53,6 +53,9 @@ class QuestionCategory < ActiveRecord::Base
     
     questions.flatten!    
     
+    # remove any items that do not have a question
+    questions = questions.select{|x| x[:question].present?}
+    
     return questions
   end
 end

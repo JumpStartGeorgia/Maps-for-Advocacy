@@ -87,8 +87,6 @@
 
             <% qc_id = @question_categories[index][:id] %>
 
-            <% if @question_categories[index][:question].present? %>
-
             <h3><%= @question_categories[index][:question_category] %></h3>
 
             <table class="table table-striped display venue_evaluation">
@@ -102,39 +100,50 @@
                 </tr>
               </thead>
               <tbody>
-            <% end %>
           <% end %>
           
-          <% if @question_categories[index][:question].present? %>
-            <% 
-              evidence_class = ''
-              if @question_categories[index][:evidence].present?
-                evidence_class = "class=question-with-evidence"
-              end
-            %> 
-            <tr <%= evidence_class %>>
+          <% 
+            evidence_class = ''
+            if @question_categories[index][:evidence].present?
+              evidence_class = "class=question-with-evidence"
+            end
+          %> 
+          <tr <%= evidence_class %>>
+
+	          <%= f.fields_for :place_evaluations, @place.place_evaluations[index] do |evaluation| %>
+
+		          <%= evaluation.hidden_field :user_id , :value => @place.place_evaluations[index].user_id %>
+		          <%= evaluation.hidden_field :question_pairing_id , :value => @question_categories[index][:question_pairing_id] %>
+
               <td><%= @question_categories[index][:question] %></td>
-              <% name = "evaluation[#{@question_categories[index][:question_pairing_id]}]" %>
+              <% 
+                name_answer = "place[place_evaluations_attributes][#{index}][answer]" 
+                name_evidence1 = "place[place_evaluations_attributes][#{index}][evidence1]" 
+                name_evidence2 = "place[place_evaluations_attributes][#{index}][evidence2]" 
+              %>
               <td>
-                <%= radio_button_tag name, 3, false, :name => name %>          
+                <%= radio_button_tag name_answer, 3, @place.place_evaluations[index].answer.to_s == '3', :name => name_answer %>          
                 <% if evidence_class.present? %>
-                  <%= text_field_tag "#{name}[evidence]", nil, :class => "input-small question-evidence", :placeholder => @question_categories[index][:evidence] %>    
+                  <%= text_field_tag name_evidence1, @place.place_evaluations[index].evidence1, 
+                      :class => "input-small question-evidence", :placeholder => @question_categories[index][:evidence] %>    
                 <% end %>
               </td>
               <td>
-                <%= radio_button_tag name, 2, false, :name => name %>          
+                <%= radio_button_tag name_answer, 2, @place.place_evaluations[index].answer.to_s == '2', :name => name_answer %>          
                 <% if evidence_class.present? %>
-                  <%= text_field_tag "#{name}[evidence]", nil, :class => "input-small question-evidence", :placeholder => @question_categories[index][:evidence] %>    
+                  <%= text_field_tag name_evidence2, @place.place_evaluations[index].evidence2, 
+                      :class => "input-small question-evidence", :placeholder => @question_categories[index][:evidence] %>    
                 <% end %>
               </td>
               <td>
-                <%= radio_button_tag name, 1, false, :name => name %>          
+                <%= radio_button_tag name_answer, 1, @place.place_evaluations[index].answer.to_s == '1', :name => name_answer %>          
               </td>
               <td>
-                <%= radio_button_tag name, 0, true, :name => name %>          
+                <%= radio_button_tag name_answer, 0, @place.place_evaluations[index].answer.to_s == '0' || @place.place_evaluations[index].answer.blank?, :name => name_answer %>          
               </td>
-            </tr>
-          <% end %>
+
+	          <% end %>
+          </tr>
 
           <% if index == @question_categories.length-1 %>
               </tbody>

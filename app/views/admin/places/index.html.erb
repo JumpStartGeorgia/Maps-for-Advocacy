@@ -24,7 +24,7 @@
   <tbody>
     <% @places.each do |place| %>
       <tr>
-        <td><%= place.name %></td>
+        <td><%= link_to place.name, admin_place_path(place) %></td>
         <td><%= place.venue_id %></td>
         <td><%= place.district_id %></td>
         <td><%= place.lat %></td>

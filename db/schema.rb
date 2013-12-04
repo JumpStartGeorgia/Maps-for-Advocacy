@@ -11,7 +11,21 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131203131907) do
+ActiveRecord::Schema.define(:version => 20131204110351) do
+
+  create_table "place_evaluations", :force => true do |t|
+    t.integer  "place_id"
+    t.integer  "user_id"
+    t.integer  "question_pairing_id"
+    t.integer  "answer"
+    t.string   "evidence"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "place_evaluations", ["place_id"], :name => "index_place_evaluations_on_place_id"
+  add_index "place_evaluations", ["question_pairing_id"], :name => "index_place_evaluations_on_question_pairing_id"
+  add_index "place_evaluations", ["user_id"], :name => "index_place_evaluations_on_user_id"
 
   create_table "place_translations", :force => true do |t|
     t.integer  "place_id"

@@ -21,7 +21,8 @@ $(document).ready(function(){
     $('form.place #place_map_next').attr('href', url).css('display', 'inline');
   }
   
-  if (gon.show_map){
+  /* show map for place form */
+  if (gon.show_place_form_map){
       var map = L.map(gon.map_id).setView([gon.lat, gon.lon], gon.zoom);
       L.tileLayer(gon.tile_url, {maxZoom: gon.max_zoom}).addTo(map);
 		  map.attributionControl = false;
@@ -42,16 +43,36 @@ $(document).ready(function(){
       map.on('click', onMapClick);  
   }
   
-  if (gon.show_evaluation_form){
-    $('form.place table.venue_evaluation tr.question-with-evidence td input[type="radio"]').change(function(){
-      if ($(this).is(':checked') && ($(this).val() == '3' || $(this).val() == '2') ) {
-        $(this).parent().parent().find('input[type="text"]').css('display', 'none');
-        $(this).parent().find('input[type="text"]').css('display', 'inline');
-      } else{
-        $(this).parent().parent().find('input[type="text"]').css('display', 'none');
-      }
-    });
+  /* show map for place show */
+  if (gon.show_place_map){
+      var map = L.map(gon.map_id).setView([gon.lat, gon.lon], gon.zoom);
+      L.tileLayer(gon.tile_url, {maxZoom: gon.max_zoom}).addTo(map);
+		  map.attributionControl = false;
+		  map.zoomControl = true;
+		
+      var marker = L.marker([gon.lat, gon.lon]).addTo(map);
+  }
   
+  if (gon.show_evaluation_form){
+    /* show the evidence text fields as need */
+  
+    function show_question_evidence(ths){
+      if ($(ths).is(':checked') && ($(ths).val() == '3' || $(ths).val() == '2') ) {
+        $(ths).parent().parent().find('input[type="text"]').css('display', 'none');
+        $(ths).parent().find('input[type="text"]').css('display', 'inline');
+      } else{
+        $(ths).parent().parent().find('input[type="text"]').css('display', 'none');
+      }
+    }
+  
+    $('form.place table.venue_evaluation tr.question-with-evidence td input[type="radio"]').change(function(){
+      show_question_evidence(this);
+    });
+
+    /* if any vields are already marked, show evidence if necessary */  
+    $('form.place table.venue_evaluation tr.question-with-evidence td input[type="radio"]:checked').each(function(){
+      show_question_evidence(this);
+    });
   }
 
 });
