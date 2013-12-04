@@ -64,9 +64,13 @@ class Admin::PlacesController < ApplicationController
   # GET /places/1/edit
   def edit
     @place = Place.find(params[:id])
+    params[:stage] = '3' if params[:stage].blank?
 
-		# get list of questions
-		@question_categories = QuestionCategory.questions_for_venue
+	  # get venue
+	  @venue = Venue.with_translations(I18n.locale).find_by_id(@place.venue_id)
+
+	  # get list of questions
+	  @question_categories = QuestionCategory.questions_for_venue(@venue.question_category_id)
   end
 
   # POST /places
