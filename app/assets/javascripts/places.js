@@ -40,6 +40,18 @@ $(document).ready(function(){
       }
 
       map.on('click', onMapClick);  
+  }
+  
+  if (gon.show_evaluation_form){
+    $('form.place table.venue_evaluation tr.question-with-evidence td input[type="radio"]').change(function(){
+      if ($(this).is(':checked') && ($(this).val() == '3' || $(this).val() == '2') ) {
+        $(this).parent().parent().find('input[type="text"]').css('display', 'none');
+        $(this).parent().find('input[type="text"]').css('display', 'inline');
+      } else{
+        $(this).parent().parent().find('input[type="text"]').css('display', 'none');
+      }
+    });
   
   }
+
 });

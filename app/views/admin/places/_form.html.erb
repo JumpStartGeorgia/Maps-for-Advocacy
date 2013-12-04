@@ -106,14 +106,26 @@
           <% end %>
           
           <% if @question_categories[index][:question].present? %>
-            <tr>
+            <% 
+              evidence_class = ''
+              if @question_categories[index][:evidence].present?
+                evidence_class = "class=question-with-evidence"
+              end
+            %> 
+            <tr <%= evidence_class %>>
               <td><%= @question_categories[index][:question] %></td>
               <% name = "evaluation[#{@question_categories[index][:question_pairing_id]}]" %>
               <td>
                 <%= radio_button_tag name, 3, false, :name => name %>          
+                <% if evidence_class.present? %>
+                  <%= text_field_tag "#{name}[evidence]", nil, :class => "input-small question-evidence", :placeholder => @question_categories[index][:evidence] %>    
+                <% end %>
               </td>
               <td>
                 <%= radio_button_tag name, 2, false, :name => name %>          
+                <% if evidence_class.present? %>
+                  <%= text_field_tag "#{name}[evidence]", nil, :class => "input-small question-evidence", :placeholder => @question_categories[index][:evidence] %>    
+                <% end %>
               </td>
               <td>
                 <%= radio_button_tag name, 1, false, :name => name %>          

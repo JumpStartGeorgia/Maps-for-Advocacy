@@ -44,6 +44,7 @@ class Admin::PlacesController < ApplicationController
       @place.venue_id = params[:venue_id]
       @place.lat = params[:lat]
       @place.lon = params[:lon]
+      gon.show_evaluation_form = true
       
       # create the translation object for however many locales there are
       # so the form will properly create all of the nested form fields
@@ -65,6 +66,7 @@ class Admin::PlacesController < ApplicationController
   def edit
     @place = Place.find(params[:id])
     params[:stage] = '3' if params[:stage].blank?
+    gon.show_evaluation_form = true
 
 	  # get venue
 	  @venue = Venue.with_translations(I18n.locale).find_by_id(@place.venue_id)
@@ -85,6 +87,12 @@ class Admin::PlacesController < ApplicationController
         format.html { redirect_to admin_place_path(@place), notice: t('app.msgs.success_created', :obj => t('activerecord.models.place')) }
         format.json { render json: @place, status: :created, location: @place }
       else
+        gon.show_evaluation_form = true
+        params[:stage] = '3'
+	      # get venue
+	      @venue = Venue.with_translations(I18n.locale).find_by_id(@place.venue_id)
+		    # get list of questions
+		    @question_categories = QuestionCategory.questions_for_venue(@venue.question_category_id)
         format.html { render action: "new" }
         format.json { render json: @place.errors, status: :unprocessable_entity }
       end
@@ -105,6 +113,12 @@ class Admin::PlacesController < ApplicationController
         format.html { redirect_to admin_place_path(@place), notice: t('app.msgs.success_updated', :obj => t('activerecord.models.place')) }
         format.json { head :ok }
       else
+        gon.show_evaluation_form = true
+        params[:stage] = '3'
+	      # get venue
+	      @venue = Venue.with_translations(I18n.locale).find_by_id(@place.venue_id)
+		    # get list of questions
+		    @question_categories = QuestionCategory.questions_for_venue(@venue.question_category_id)
         format.html { render action: "edit" }
         format.json { render json: @place.errors, status: :unprocessable_entity }
       end
