@@ -48,7 +48,7 @@ en:
         lat: Latitude
         lon: Longitude
       place_translation:
-        name: Name
+        name: Name of Place
     errors:
       messages:
         required_field: "is a required field."
@@ -165,4 +165,10 @@ en:
         no_existing_venue: Sorry, but there are no venues on file that are already not assigned to this Venue Category.
         submit_existing_venue: Add Existing Venue
         submit_new_venue: Add New Venue        
-
+    places:
+      form:
+        header_venue: What is the Venue?
+        header_location: Where is '%{name}' located?  
+        header_place: "'%{name}' Information"
+        header_evaluation: Evaluation of '%{name}'
+        next: Next

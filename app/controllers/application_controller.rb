@@ -58,6 +58,13 @@ logger.debug "////////////////////////// BROWSER = #{user_agent}"
 	def initialize_gon
 		gon.set = true
 		gon.highlight_first_form_field = true
+
+		gon.tile_url = "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+    gon.map_id = 'map'
+    gon.zoom = 16
+    gon.max_zoom = 18
+    gon.lat = 41.69337
+    gon.lon = 44.80149
 	end
 
 	def after_sign_in_path_for(resource)

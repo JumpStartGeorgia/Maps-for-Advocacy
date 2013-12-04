@@ -18,7 +18,7 @@ class Admin::QuestionCategoriesController < ApplicationController
   # GET /question_categories/1
   # GET /question_categories/1.json
   def show
-    @question_category = QuestionCategory.with_questions(params[:id])
+    @question_category = QuestionCategory.with_questions(question_category_id: params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -56,7 +56,7 @@ class Admin::QuestionCategoriesController < ApplicationController
       end
     end
 
-    @question_category = QuestionCategory.with_questions(params[:id])
+    @question_category = QuestionCategory.with_questions(question_category_id: params[:id])
     @existing_questions = Question.all_questions_not_in_category(params[:id])
 
     respond_to do |format|

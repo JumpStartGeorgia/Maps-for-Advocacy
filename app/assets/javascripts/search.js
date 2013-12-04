@@ -40,7 +40,13 @@ $(document).ready(function(){
     "bAutoWidth": false,
     "oLanguage": {
       "sUrl": gon.datatable_i18n_url
-    }
+    },
+    "aoColumnDefs": [
+      {
+        "bSortable": false,
+        "aTargets": [ -1 ]
+      }
+    ]
   });
 
 
@@ -60,7 +66,13 @@ $(document).ready(function(){
 		],
 		"fnInitComplete": function(oSettings, json) {
       $('.sort_order_button').html($('#submit_sort_order').html());
-    }
+    },
+    "aoColumnDefs": [
+      {
+        "bSortable": false,
+        "aTargets": [ -1 ]
+      }
+    ]
   });
   
   $('#existing-questions').dataTable({
@@ -87,7 +99,13 @@ $(document).ready(function(){
     "bAutoWidth": false,
     "oLanguage": {
       "sUrl": gon.datatable_i18n_url
-    }
+    },
+    "aoColumnDefs": [
+      {
+        "bSortable": false,
+        "aTargets": [ -1 ]
+      }
+    ]
   });
 
   $('#venue-category-venues').dataTable({
@@ -106,9 +124,34 @@ $(document).ready(function(){
 		],
 		"fnInitComplete": function(oSettings, json) {
       $('.sort_order_button').html($('#submit_sort_order').html());
-    }
+    },
+    "aoColumnDefs": [
+      {
+        "bSortable": false,
+        "aTargets": [ -1 ]
+      }
+    ]
   });
   
+  /*************************************************/
+  /* places */
+  
+  $('#place-venue-categories').dataTable({
+    "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",    
+    "sPaginationType": "bootstrap",
+    "bJQueryUI": true,
+    "bAutoWidth": false,
+    "oLanguage": {
+      "sUrl": gon.datatable_i18n_url
+    },
+    "aoColumnDefs": [
+      {
+        "bSortable": false,
+        "aTargets": [ -1 ]
+      }
+    ]
+  });
+
 
 
 

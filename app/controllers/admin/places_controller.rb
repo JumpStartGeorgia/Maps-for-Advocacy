@@ -30,11 +30,30 @@ class Admin::PlacesController < ApplicationController
   # GET /places/new.json
   def new
     @place = Place.new
-    # create the translation object for however many locales there are
-    # so the form will properly create all of the nested form fields
-    I18n.available_locales.each do |locale|
-			@place.place_translations.build(:locale => locale.to_s)
-		end
+    params[:stage] = '1' if params[:stage].blank?
+
+	  # get venue
+	  @venue = Venue.with_translations(I18n.locale).find_by_id(params[:venue_id]) if params[:venue_id].present?
+
+    if params[:stage] == '1' # venues
+      @venue_categories = VenueCategory.with_venues
+    elsif params[:stage] == '2' # map
+      @show_map = true
+      gon.show_map = true
+    elsif params[:stage] == '3' # evaluation
+      @place.venue_id = params[:venue_id]
+      @place.lat = params[:lat]
+      @place.lon = params[:lon]
+      
+      # create the translation object for however many locales there are
+      # so the form will properly create all of the nested form fields
+      I18n.available_locales.each do |locale|
+			  @place.place_translations.build(:locale => locale.to_s)
+		  end
+		
+		  # get list of questions
+		  @question_categories = QuestionCategory.questions_for_venue(@venue.question_category_id)
+    end
 
     respond_to do |format|
       format.html # new.html.erb
@@ -45,6 +64,9 @@ class Admin::PlacesController < ApplicationController
   # GET /places/1/edit
   def edit
     @place = Place.find(params[:id])
+
+		# get list of questions
+		@question_categories = QuestionCategory.questions_for_venue
   end
 
   # POST /places

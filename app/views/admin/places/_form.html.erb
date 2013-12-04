@@ -1,31 +1,143 @@
+<%- model_class = Place -%>
+<%- model_class_v = VenueCategory -%>
+<%- model_class_vt = VenueCategoryTranslation -%>
+
 <%= semantic_form_for([:admin, @place], :html => { :class => 'form-horizontal' }) do |f| %>
 	<%= f.error_messages %>
 
-  <% create_sorted_translation_objects(@place.place_translations).each do |trans| %>
-		<%= f.fields_for :place_translations, trans do |translation| %>
+  <% if params[:stage] == '1' %>
+    <h2><%= t('.header_venue') %></h2>
+    
+    <table id="place-venue-categories" class="table table-striped display">
+      <thead>
+        <tr>
+          <th><%= model_class_vt.human_attribute_name(:name) %></th>
+          <th><%= model_class_v.human_attribute_name(:venues) %></th>
+          <th><%=t '.actions', :default => t("helpers.actions") %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @venue_categories.each do |venue| %>
+          <% if venue[:venue].present? %>
+            <tr>
+              <td>
+                <%= venue[:venue_category] %>
+              </td>
+              <td>
+                <%= venue[:venue] %>
+              </td>
+              <td>
+                <%= link_to t('.next'), new_admin_place_path(:stage => '2', :venue_id => venue[:venue_id]), :class => 'btn btn-mini' %>
+              </td>
+            </tr>
+          <% end %>      
+        <% end %>
+      </tbody>
+    </table>
 
-			<div id="form-<%= trans.locale %>" class="multilanguage_nested">
-				<h3><%= t("app.language.#{trans.locale}") %></h3>
-
-				<%= translation.input :name %>
-				<%= translation.hidden_field :locale , :value => trans.locale %>
-			</div>
-
-		<% end %>
-	<% end %>
-
-	<%= f.inputs do %>
-	  <%= f.input :district_id, :as => :string, :input_html => {:size => 10} %>
-	  <%= f.input :venue_id %>
-	  <%= f.input :lat, :as => :string, :input_html => {:size => 20} %>
-	  <%= f.input :lon, :as => :string, :input_html => {:size => 20} %>
-	<% end %>
 
 
-  <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary' %>
-	  <%= f.submit nil, :class => 'btn btn-warning', :type => :reset, :value => t('app.buttons.reset'), :name => :reset %>
-	  <%= link_to t('app.buttons.cancel'), admin_places_path, :class => 'btn btn-mini btn-warning' %>
-  </div>
+
+  <% elsif params[:stage] == '2' %>
+
+    <h2><%= t('.header_location', :name => @venue.name) %></h2>
+    
+
+    <div id="map"></div>
+    
+    <%= link_to t('.next'), new_admin_place_path(:stage => '3', :venue_id => params[:venue_id], :lat => '', :lon => ''), :class => 'btn btn-mini', :id => 'place_map_next' %>
+
+  
+  <% elsif params[:stage] == '3' %>
+
+    <h2><%= t('.header_place', :name => @venue.name) %></h2>
+
+    <% create_sorted_translation_objects(@place.place_translations).each do |trans| %>
+		  <%= f.fields_for :place_translations, trans do |translation| %>
+
+			  <div id="form-<%= trans.locale %>" class="multilanguage_nested">
+				  <h3><%= t("app.language.#{trans.locale}") %></h3>
+
+				  <%= translation.input :name %>
+				  <%= translation.hidden_field :locale , :value => trans.locale %>
+			  </div>
+
+		  <% end %>
+	  <% end %>
+
+	  <%= f.inputs do %>
+	    <%= f.hidden_field :lat %>
+	    <%= f.hidden_field :lon %>
+	    <%= f.hidden_field :venue_id %>
+	  <% end %>
+	
+	  <% if @question_categories.present? %>
+	    <div id="venue_evalautions">
+        <h2><%= t('.header_evaluation', :name => @venue.name) %></h2>
+
+        <% 
+          qc_id = nil 
+        %>
+        <% (0..@question_categories.length-1).each do |index| %>
+          <% if @question_categories[index][:id] != qc_id %>
+            <% if qc_id.present? %>
+                </tbody>
+              </table>
+            <% end %>
+
+            <% qc_id = @question_categories[index][:id] %>
+
+            <% if @question_categories[index][:question].present? %>
+
+            <h3><%= @question_categories[index][:question_category] %></h3>
+
+            <table class="table table-striped display venue_evaluation">
+              <thead>
+                <tr>
+                  <th>Question</th>
+                  <th>Has and good</th>
+                  <th>Has, but not good</th>
+                  <th>Not have and needs</th>
+                  <th>N/A</th>
+                </tr>
+              </thead>
+              <tbody>
+            <% end %>
+          <% end %>
+          
+          <% if @question_categories[index][:question].present? %>
+            <tr>
+              <td><%= @question_categories[index][:question] %></td>
+              <% name = "evaluation[#{@question_categories[index][:question_pairing_id]}]" %>
+              <td>
+                <%= radio_button_tag name, 3, false, :name => name %>          
+              </td>
+              <td>
+                <%= radio_button_tag name, 2, false, :name => name %>          
+              </td>
+              <td>
+                <%= radio_button_tag name, 1, false, :name => name %>          
+              </td>
+              <td>
+                <%= radio_button_tag name, 0, true, :name => name %>          
+              </td>
+            </tr>
+          <% end %>
+
+          <% if index == @question_categories.length-1 %>
+              </tbody>
+            </table>
+          <% end %>        
+        <% end %>
+	    </div>
+	  <% end %>
+
+
+    <div class="form-actions">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+	    <%= f.submit nil, :class => 'btn btn-warning', :type => :reset, :value => t('app.buttons.reset'), :name => :reset %>
+	    <%= link_to t('app.buttons.cancel'), admin_places_path, :class => 'btn btn-mini btn-warning' %>
+    </div>
+  <% end %>
 <% end %>
 
