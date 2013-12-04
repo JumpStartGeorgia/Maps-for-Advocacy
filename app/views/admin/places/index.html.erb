@@ -16,8 +16,6 @@
       <th><%= model_class_trans.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:venue_id) %></th>
       <th><%= model_class.human_attribute_name(:district_id) %></th>
-      <th><%= model_class.human_attribute_name(:lat) %></th>
-      <th><%= model_class.human_attribute_name(:lon) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -25,10 +23,8 @@
     <% @places.each do |place| %>
       <tr>
         <td><%= link_to place.name, admin_place_path(place) %></td>
-        <td><%= place.venue_id %></td>
+        <td><%= place.venue.name if place.venue_id.present? %></td>
         <td><%= place.district_id %></td>
-        <td><%= place.lat %></td>
-        <td><%= place.lon %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_admin_place_path(place), :class => 'btn btn-mini' %>
