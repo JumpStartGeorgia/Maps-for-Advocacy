@@ -53,7 +53,7 @@
                     <ul class="dropdown-menu">
                       <% @venue_categories.each do |cat| %>
                         <li>
-                          <%= link_to cat[:venue_category], root_path(:venue_category_id => cat.id) %>
+                          <%= link_to "#{cat[:venue_category]} (#{cat[:count]})", root_path(:venue_category_id => cat.id) %>
                         </li>
                       <% end %>
                     </ul>

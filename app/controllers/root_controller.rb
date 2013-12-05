@@ -1,7 +1,7 @@
 class RootController < ApplicationController
 
   def index
-    @venue_categories = VenueCategory.with_names
+    @venue_categories = VenueCategory.names_with_count
     
     @places = Place.places_by_category(params[:venue_category_id])
 
