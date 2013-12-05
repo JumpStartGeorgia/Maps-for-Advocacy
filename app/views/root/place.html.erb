@@ -7,66 +7,52 @@
 <p><strong><%= model_class_trans.human_attribute_name(:venue_id) %>:</strong>
 <%= @place.venue.name if @place.venue_id.present? %></p>
 
-<div id="map"></div>
-
-
+<div class="row-fluid">
+  <div class="span6" id="venue_evalautions">
 	  <% if @question_categories.present? %>
-	    <div id="venue_evalautions">
-        <% 
-          qc_id = nil 
-        %>
-        <% (0..@question_categories.length-1).each do |index| %>
-          <% if @question_categories[index][:id] != qc_id %>
-            <% if qc_id.present? %>
-                </tbody>
-              </table>
-            <% end %>
-
-            <% qc_id = @question_categories[index][:id] %>
-
-            <h3><%= @question_categories[index][:question_category] %></h3>
-
-            <table class="table table-striped display venue_evaluation">
-              <thead>
-                <tr>
-                  <th>Question</th>
-                  <th>Has and good</th>
-                  <th>Has, but not good</th>
-                  <th>Not have and needs</th>
-                  <th>N/A</th>
-                </tr>
-              </thead>
-              <tbody>
+      <% 
+        qc_id = nil 
+        text = Hash.new
+        text['3'] = 'Has and good'
+        text['2'] = 'Has, but not good'
+        text['1'] = 'Not have and needs'
+        text['0'] = 'N/A'
+        
+        css_class = Hash.new 
+        css_class['3'] = 'has-good'
+        css_class['2'] = 'has-not-good'
+        css_class['1'] = 'not-have'
+        css_class['0'] = ''
+      %>
+      <% (0..@question_categories.length-1).each do |index| %>
+        <% if @question_categories[index][:id] != qc_id %>
+          <% if qc_id.present? %>
+              </ul>
           <% end %>
-          
-          <tr>
-            <td><%= @question_categories[index][:question] %></td>
-            <td>
-              <% if @place.place_evaluations[index].answer.to_s == '3' %>
-                <div class="selected-answer has-good">X</div>
-              <% end %>
-            </td>
-            <td>
-              <% if @place.place_evaluations[index].answer.to_s == '2' %>
-                <div class="selected-answer has-not-good">X</div>
-              <% end %>
-            </td>
-            <td>
-              <% if @place.place_evaluations[index].answer.to_s == '1' %>
-                <div class="selected-answer not-have">X</div>
-              <% end %>
-            </td>
-            <td>
-              <% if @place.place_evaluations[index].answer.to_s == '0' %>
-                <div class="selected-answer">X</div>
-              <% end %>
-            </td>
-          </tr>
 
-          <% if index == @question_categories.length-1 %>
-              </tbody>
-            </table>
-          <% end %>        
+          <% qc_id = @question_categories[index][:id] %>
+
+          <h3><%= @question_categories[index][:question_category] %></h3>
+
+          <ul class="question-results">
         <% end %>
-	    </div>
-	  <% end %>
+        
+          <li>
+            <div>
+              <%= @question_categories[index][:question] %>
+            </div>
+            <div class="<%= "selected-answer #{css_class[@place.place_evaluations[index].answer.to_s]}"%>">
+              <%= text[@place.place_evaluations[index].answer.to_s] %>
+            </div>
+          </li>
+
+        <% if index == @question_categories.length-1 %>
+            </ul>
+        <% end %>        
+      <% end %>
+    <% end %>
+  </div>
+  <div class="span6">
+    <div id="map"></div>
+  </div>
+</div>

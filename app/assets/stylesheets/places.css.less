@@ -17,29 +17,34 @@ form.place{
     margin-top: 10px;
     border-bottom: solid 2px #555;
   }
-  table.venue_evaluation {
-    thead tr th:nth-child(1){
-      width: 35%;
+  ul.question-results li {
+    border-bottom: solid 1px #ccc;
+    padding: 10px 0;
+    & > div{
+      vertical-align: top;
+      padding: 10px;
+      display: inline-block;
+      width: 200px;
     }
-    tr.question-with-evidence td input.question-evidence{
-      display: none;
+    &:last-of-type{
+      border-bottom: none;
     }
-    div.selected-answer{
-      background-color: #555;
-      color: #555;
-      width: 30px;
-      &.has-good{
-        background-color: #a8d2b8;
-        color: #a8d2b8;
-      }
-      &.has-not-good{
-        background-color: #eedea0;
-        color: #eedea0;
-      }
-      &.not-have{
-        background-color: #e1919f;
-        color: #e1919f;
-      }
+  }
+  div.selected-answer{
+    background-color: #555;
+    color: #fff;
+    width: 30px;
+    &.has-good{
+      background-color: #a8d2b8;
+      color: #000;
+    }
+    &.has-not-good{
+      background-color: #eedea0;
+      color: #000;
+    }
+    &.not-have{
+      background-color: #e1919f;
+      color: #000;
     }
   }
 }  
