@@ -6,6 +6,15 @@ class VenueCategory < ActiveRecord::Base
   accepts_nested_attributes_for :venue_category_translations
   attr_accessible :id, :venue_category_translations_attributes, :sort_order
   
+  def self.with_names
+    sql = "select vc.id, vct.name as venue_category "
+    sql << "from venue_categories as vc "
+    sql << "inner join venue_category_translations as vct on vct.venue_category_id = vc.id "
+    sql << "where vct.locale = :locale "
+    sql << "order by vc.sort_order, vct.name "
+    find_by_sql([sql, :locale => I18n.locale])
+  end
+  
   
   def self.with_venues(venue_category_id=nil)
     sql = "select vc.id, vct.name as venue_category, vc.sort_order, v.id as venue_id, vt.name as venue, v.sort_order as venue_sort_order, v.question_category_id, qct.name as question_category "

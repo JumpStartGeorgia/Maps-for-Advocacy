@@ -1,22 +1,7 @@
 <%- model_class = Place -%>
 <%- model_class_trans = PlaceTranslation -%>
-<% title t '.title', :default => model_class.model_name.human %>
+<% title @place.name %>
 
-<div class="form-actions">
-  <%= link_to t('.back', :default => t("helpers.links.back")),
-              admin_places_path, :class => 'btn'  %>
-  <%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_admin_place_path(@place), :class => 'btn' %>
-  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              admin_place_path(@place),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm")) },
-              :class => 'btn btn-danger' %>
-	<%= link_to t('helpers.links.admin'), admin_path, :class => 'btn' %>
-</div>
-
-<p><strong><%= model_class_trans.human_attribute_name(:name) %>:</strong>
-<%= @place.name %></p>
 <p><strong><%= model_class_trans.human_attribute_name(:district_id) %>:</strong>
 <%= @place.district_id %></p>
 <p><strong><%= model_class_trans.human_attribute_name(:venue_id) %>:</strong>

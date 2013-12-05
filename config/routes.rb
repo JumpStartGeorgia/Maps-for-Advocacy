@@ -28,6 +28,8 @@ BootstrapStarter::Application.routes.draw do
       resources :places
 		end
 
+    #place profile page
+		match '/places/:id', :to => 'root#place', :as => :place, :via => :get
 
 		root :to => 'root#index'
 	  match "*path", :to => redirect("/#{I18n.default_locale}") # handles /en/fake/path/whatever

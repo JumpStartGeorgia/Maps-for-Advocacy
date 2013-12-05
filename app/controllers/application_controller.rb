@@ -65,6 +65,10 @@ logger.debug "////////////////////////// BROWSER = #{user_agent}"
     gon.max_zoom = 18
     gon.lat = 41.69337
     gon.lon = 44.80149
+
+    gon.zoom_front_page = 7
+    gon.lat_front_page = 41.69337
+    gon.lon_front_page = 44.80149
 	end
 
 	def after_sign_in_path_for(resource)
