@@ -42,8 +42,54 @@
 
     <h2><%= t('.header_location', :name => @venue.name) %></h2>
     
-
-    <div id="map"></div>
+    <div id="place-form-address-search" class="row-fluid">
+      <div class="span9">
+        <a href="#address-search" class="hidenav"><%= t('.skip_map') %></a>
+        <p>
+          <%= t('.map_instructions', :name => @venue.name) %>
+        </p>
+        <div id="map"></div>
+      </div>
+      <div class="span3" id="address-search">
+        <p>
+          <%= t('.address_instructions') %>
+        </p>
+      
+        <p>
+          <%= t('.address_instructions2', :name => @venue.name) %>
+        </p>
+        
+        <p>
+          <%= text_field_tag 'address-search', nil, :class => "span10" %>
+        </p>
+        
+        <p>
+          <%= link_to t('.submit_address_search'), '#', :id => 'submit-address-search', :class => 'btn btn-mini', :role => 'button' %>
+        </p>
+        
+        <div id="address-search-results">
+          <div id="address-search-1-match" class="alert alert-info">
+            <p>
+              <%= t('.address_search_success') %>
+            </p>
+            <div class="placeholder"></div>
+          </div>
+        
+          <div id="address-search-multiple-match" class="alert alert-info">
+            <p>
+              <%= t('.address_search_multiple_success') %>
+            </p>
+            <div class="placeholder"></div>
+          </div>
+          
+          <div id="address-search-fail" class="alert alert-danger">
+            <p>
+              <%= t('.address_search_fail') %>
+            </p>
+          </div>
+        </div>      
+      </div>
+    </div>
     
     <%= link_to t('.next'), new_admin_place_path(:stage => '3', :venue_id => params[:venue_id], :lat => '', :lon => ''), :class => 'btn btn-mini', :id => 'place_map_next' %>
 

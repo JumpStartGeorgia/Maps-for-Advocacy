@@ -92,6 +92,7 @@ GEM
     ffi (1.9.0)
     formtastic (2.1.1)
       actionpack (~> 3.0)
+    geocoder (1.1.8)
     globalize3 (0.2.0)
       activemodel (>= 3.0.0)
       activerecord (>= 3.0.0)
@@ -223,6 +224,7 @@ DEPENDENCIES
   exception_notification (~> 2.5.2)
   formtastic (~> 2.1.1)
   formtastic-bootstrap!
+  geocoder (~> 1.1.8)
   globalize3 (~> 0.2.0)
   gon (~> 2.2.2)
   i18n-js (~> 2.1.2)

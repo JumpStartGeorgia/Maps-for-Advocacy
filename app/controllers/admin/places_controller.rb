@@ -53,6 +53,7 @@ class Admin::PlacesController < ApplicationController
     elsif params[:stage] == '2' # map
       @show_map = true
       gon.show_place_form_map = true
+      gon.address_search_path = address_search_admin_places_path
     elsif params[:stage] == '3' # evaluation
       @place.venue_id = params[:venue_id]
       @place.lat = params[:lat]
@@ -87,6 +88,7 @@ class Admin::PlacesController < ApplicationController
     @place = Place.find(params[:id])
     params[:stage] = '3' if params[:stage].blank?
     gon.show_evaluation_form = true
+    gon.address_search_path = address_search_admin_places_path
 
 	  # get venue
 	  @venue = Venue.with_translations(I18n.locale).find_by_id(@place.venue_id)
@@ -115,6 +117,7 @@ class Admin::PlacesController < ApplicationController
         format.json { render json: @place, status: :created, location: @place }
       else
         gon.show_evaluation_form = true
+        gon.address_search_path = address_search_admin_places_path
         params[:stage] = '3'
 	      # get venue
 	      @venue = Venue.with_translations(I18n.locale).find_by_id(@place.venue_id)
@@ -141,6 +144,7 @@ class Admin::PlacesController < ApplicationController
         format.json { head :ok }
       else
         gon.show_evaluation_form = true
+        gon.address_search_path = address_search_admin_places_path
         params[:stage] = '3'
 	      # get venue
 	      @venue = Venue.with_translations(I18n.locale).find_by_id(@place.venue_id)
@@ -164,4 +168,46 @@ class Admin::PlacesController < ApplicationController
     end
   end
 
+
+  # use geocoder gem to get coords of address
+  def address_search
+    coords = []
+    if params[:address].present?
+		  begin
+			  locations = Geocoder.search("#{params[:address]}")
+Rails.logger.debug "/////////////////// results = #{locations.inspect}"
+        if locations.present?
+          locations.each do |l|
+            x = Hash.new
+            x[:coordinates] = l.coordinates
+            x[:address] = l.address
+            coords << x
+          end
+        end
+		  rescue
+			  coords = []
+		  end
+    elsif params[:lat].present? && params[:lon].present?
+		  begin
+			  locations = Geocoder.search("#{params[:lat]}, #{params[:lon]}")
+Rails.logger.debug "/////////////////// results = #{locations.inspect}"
+        if locations.present?
+          locations.each do |l|
+            x = Hash.new
+            x[:coordinates] = l.coordinates
+            x[:address] = l.address
+            coords << x
+          end
+        end
+		  rescue
+			  coords = []
+		  end
+    end
+
+Rails.logger.debug "/////////////////// returning: #{coords}"
+
+    respond_to do |format|
+      format.json { render json: coords.to_json }
+    end
+  end
 end

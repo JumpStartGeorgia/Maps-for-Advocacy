@@ -25,7 +25,11 @@ BootstrapStarter::Application.routes.draw do
           post 'venues'
         end
       end
-      resources :places
+      resources :places do 
+        collection do
+          post 'address_search', :defaults => {:format => 'json'}
+        end
+      end
 		end
 
     #place profile page
