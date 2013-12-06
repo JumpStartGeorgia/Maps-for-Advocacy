@@ -22,8 +22,16 @@
     <%= favicon_link_tag '/favicon.ico', :rel => 'shortcut icon' %>
   </head>
   <body>
+    <!-- Navigation start -->
+    <ul id="hidenav">
+      <li><a href="#main"><%= t('.jump.main') %></a></li>
+      <li><a href="#menu"><%= t('.jump.menu') %></a></li>
+      <li><a href="#language_switcher"><%= t('.jump.language') %></a></li>
+    </ul>
+    <!-- Navigation end -->
 
-    <div class="navbar navbar-fixed-top">
+    <!-- Main Menu start -->
+    <div id="#menu" class="navbar navbar-fixed-top" role="menubar">
       <div class="navbar-inner">
         <div class="container">
           <%= link_to(t('app.common.app_name'), root_path(:locale => I18n.locale),:class=>"brand")%>
@@ -31,7 +39,7 @@
             <ul class="nav pull-right">
   						<% I18n.available_locales.each do |locale| %>
   							<% if locale != I18n.locale %>
-  								<li><%= link_to t("app.language.#{locale}"), params.merge(:locale => locale) %></li>
+  								<li id="language_switcher" role="menuitem"><%= link_to t("app.language.#{locale}"), params.merge(:locale => locale) %></li>
   							<% end %>
   						<% end %>
             </ul>
@@ -39,12 +47,15 @@
         </div>
       </div>
     </div>
+    <!-- Main Menu end -->
 
+
+    <!-- Main content start -->
 		<div id="wrapper">
 		  <div class="container">
 		    <div class="content">
 		      <div class="row">
-		       <div class="span12">
+		       <div id="main" class="span12">
 
 		          <div class="page-header">
 		            <h1>
@@ -77,13 +88,7 @@
 		  </div> <!-- /container -->
       <div class="push"><!--//--></div>
     </div><!--/wrapper-->
-
-
-	<% if Rails.env.production? %>
-		<!-- google analytics -->
-	<% elsif Rails.env.staging? %>
-		<!-- google analytics -->
-	<% end %>
+    <!-- Main content end -->
 
   </body>
 </html>

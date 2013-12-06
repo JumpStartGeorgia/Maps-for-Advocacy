@@ -30,8 +30,24 @@
     <%= favicon_link_tag '/favicon.ico', :rel => 'shortcut icon' %>
   </head>
   <body>
-
-    <div class="navbar navbar-fixed-top">
+    <!-- Navigation start -->
+    <ul class="hidenav">
+      <li><a href="#main"><%= t('.jump.main') %></a></li>
+      <% if params[:controller] == 'root' && params[:action] == 'index' %>
+        <li><a href="#search"><%= t('.jump.search') %></a></li>
+        <li><a href="#search_results"><%= t('.jump.search_results') %></a></li>
+      <% end %>
+      <li><a href="#menu"><%= t('.jump.menu') %></a></li>
+      <% if user_signed_in? %>
+        <li><a href="#admin_menu"><%= t('jump.admin_menu') %></a></li>
+      <% end %>
+      <li><a href="#language_switcher"><%= t('.jump.language') %></a></li>
+      <li><a href="#footer"><%= t('jump.footer') %></a></li>
+    </ul>
+    <!-- Navigation end -->
+    
+    <!-- Main menu start -->
+    <div id="#menu" class="navbar navbar-fixed-top" role="menubar">
       <div class="navbar-inner">
         <div class="container-fluid">
           <a class="btn btn-navbar" data-target=".nav-collapse" data-toggle="collapse">
@@ -41,48 +57,26 @@
           </a>
           <%= link_to(t('app.common.app_name'), root_path(:locale => I18n.locale),:class=>"brand font")%>
           <div class="container-fluid nav-collapse">
-
-            <% if params[:controller] == 'root' && params[:action] == 'index' && @venue_categories.present? %>
-              <div class="nav-collapse collapse navbar-responsive-collapse">
-                <ul class="nav">
-                  <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown"> 
-                      <%= t('.categories') %>
-                      <b class="caret"></b>
-                    </a>
-                    <ul class="dropdown-menu">
-                      <% @venue_categories.each do |cat| %>
-                        <li>
-                          <%= link_to "#{cat[:venue_category]} (#{cat[:count]})", root_path(:venue_category_id => cat.id) %>
-                        </li>
-                      <% end %>
-                    </ul>
-                  </li>
-                </ul>
-                </ul>
-              </div>
-            <% end %>                  
-
 	          <ul class="nav pull-right">
 		          <% if user_signed_in? %>
-				        <li class="dropdown">
+				        <li id="admin_menu" class="dropdown" role="menu">
 				          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 				                <%= current_user.nickname %>
 				                <b class="caret"></b>
 				          </a>
 				          <ul class="dropdown-menu">
 						        <li>
-				 		         <%= link_to t('.admin'), admin_path %>
+				 		         <%= link_to t('.admin'), admin_path, :role => "menuitem" %>
 										</li>
 						        <li>
-				 		         <%= link_to t('.sign_out'), destroy_user_session_path, :method => :delete %>
+				 		         <%= link_to t('.sign_out'), destroy_user_session_path, :method => :delete, :role => "menuitem" %>
 										</li>
 				          </ul>
 				        </li>
 		          <% end %>
 							<% I18n.available_locales.each do |locale| %>
 								<% if locale != I18n.locale %>
-									<li><%= link_to t("app.language.#{locale}"), params.merge(:locale => locale) %></li>
+									<li id="language_switcher" role="menuitem"><%= link_to t("app.language.#{locale}"), params.merge(:locale => locale) %></li>
 								<% end %>
 							<% end %>
 	          </ul>
@@ -90,12 +84,14 @@
         </div>
       </div>
     </div>
+    <!-- Main menu end -->
 
+    <!-- Main content start -->
 		<div id="wrapper">
 		  <div class="container-fluid">
 		    <div class="content">
 		      <div class="row-fluid">
-		         <div class="span12">
+		         <div id="main" class="span12">
 							<% flash.each do |key, msg| %>
 								<div class="alert <%= flash_translation(key) %> fade in">
 									<a href="#" data-dismiss="alert" class="close">×</a>
@@ -120,10 +116,12 @@
 		    </div><!--/content-->
 		   </div> <!-- /container -->
 		</div><!--/wrapper-->
+    <!-- Main content end -->
 
     <div class="push"><!--//--></div>
 
-    <footer class="clear">
+    <!-- Footer start -->
+    <footer id="footer" class="clear">
 			<div id="left">&copy; <%= Time.now.year %></div>
 		  <div id="middle">
 				&nbsp;
@@ -133,6 +131,7 @@
 						:title => t(".js_link_title")	) %>
 			</div>
     </footer>
+    <!-- Footer end -->
 
     <!-- Javascripts
     ================================================== -->

@@ -13,6 +13,11 @@
  *= require_self
 */
 
+/* hide screen read navigation */
+.hidenav{
+  display: none;
+}
+
 /* clear floats */
 .clearfix:after, .clear:after {
     visibility: hidden;

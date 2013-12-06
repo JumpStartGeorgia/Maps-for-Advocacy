@@ -89,7 +89,7 @@ en:
       confirm: Are you sure?
       new: New
     common:
-      app_name: Mapping for Advocacy
+      app_name: Accessing Georgia
       added_on: "Added on: %{date}" 
       venue_has_questions: custom questions
     msgs:
@@ -108,6 +108,15 @@ en:
       sign_out: Sign Out
       js_link_title: JumpStart Georgia - We communicate data better!
       js_link_text: Built by
+      jump:
+        main: Main content (jump)
+        menu: Main navigation (jump)
+        admin_menu: Administration menu (jump)
+        language: Language switcher (jump)
+        footer: Contact information (jump)
+        skip_map: Skip the map (jump)
+        search: Search for places (jump)
+        search_results: Search results (jump)
     unsupported_browser:
       title: Unsupported Browser
       p1: We are sorry to report that your browser is out of date and will not properly render the content from this website.
@@ -121,6 +130,12 @@ en:
       sign_out: Sign Out
       js_link_title: JumpStart Georgia - We communicate data better!
       js_link_text: Built by
+      jump:
+        main: Main content (jump)
+        menu: Main navigation (jump)
+        admin_menu: Administration menu (jump)
+        language: Language switcher (jump)
+        footer: Contact information (jump)
   admin:
     index:
       title: Administration Section
@@ -172,3 +187,12 @@ en:
         header_place: "'%{name}' Information"
         header_evaluation: Evaluation of '%{name}'
         next: Next
+  root:
+    index:
+      header_filter: Select Places
+      clear_filter: Clear Selections
+      header_selections: Current Selections
+      select_all: All places selected
+      header_table: Selection Results
+      no_places: There are no Places on record that matches your search request.
+      view_place: View Details
