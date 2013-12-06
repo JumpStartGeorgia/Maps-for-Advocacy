@@ -53,15 +53,14 @@ $(document).ready(function(){
       var marker = L.marker([gon.lat, gon.lon]).addTo(map);
   }
   
+  /* show the evidence text fields as need */
   if (gon.show_evaluation_form){
-    /* show the evidence text fields as need */
-  
     function show_question_evidence(ths){
       if ($(ths).is(':checked') && ($(ths).val() == '3' || $(ths).val() == '2') ) {
-        $(ths).parent().parent().find('input[type="text"]').css('display', 'none');
-        $(ths).parent().find('input[type="text"]').css('display', 'inline');
+        $(ths).closest('tr').find('input[type="text"]').css('display', 'none');
+        $(ths).closest('td').find('input[type="text"]').css('display', 'inline');
       } else{
-        $(ths).parent().parent().find('input[type="text"]').css('display', 'none');
+        $(ths).closest('tr').find('input[type="text"]').css('display', 'none');
       }
     }
   

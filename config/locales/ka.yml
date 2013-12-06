@@ -92,6 +92,11 @@ ka:
       app_name: Accessing Georgia
       added_on: "დამატებულია: %{date}" 
       venue_has_questions: custom questions
+      answers:
+        has: Has and good
+        has_bad: Has, but not good
+        needs: Not have and needs
+        na: Not relavent
     msgs:
       does_not_exist: თქვენ ცდილობთ იხილოთ გვერდი, რომელიც არ არსებობს.
       not_authorized: თქვენ არ გაქვთ უფლება იხილოთ ეს გვერდი.

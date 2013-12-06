@@ -92,6 +92,11 @@ en:
       app_name: Accessing Georgia
       added_on: "Added on: %{date}" 
       venue_has_questions: custom questions
+      answers:
+        has: Has and good
+        has_bad: Has, but not good
+        needs: Not have and needs
+        na: Not relavent
     msgs:
       does_not_exist: You tried to access a page that does not exist.
       not_authorized: You are not authorized to view that page.

@@ -92,11 +92,11 @@
             <table class="table table-striped display venue_evaluation">
               <thead>
                 <tr>
-                  <th>Question</th>
-                  <th>Has and good</th>
-                  <th>Has, but not good</th>
-                  <th>Not have and needs</th>
-                  <th>N/A</th>
+                  <th>Questions</th>
+                  <th><%= t('app.common.answers.has') %></th>
+                  <th><%= t('app.common.answers.has_bad') %></th>
+                  <th><%= t('app.common.answers.needs') %></th>
+                  <th><%= t('app.common.answers.na') %></th>
                 </tr>
               </thead>
               <tbody>
@@ -122,24 +122,28 @@
                 name_evidence2 = "place[place_evaluations_attributes][#{index}][evidence2]" 
               %>
               <td>
-                <%= radio_button_tag name_answer, 3, @place.place_evaluations[index].answer.to_s == '3', :name => name_answer %>          
+                <%= evaluation.input :answer, :as => :radio, :label => false, :collection => [[t('app.common.answers.has'), 3]] %>
                 <% if evidence_class.present? %>
-                  <%= text_field_tag name_evidence1, @place.place_evaluations[index].evidence1, 
+                  <%= evaluation.input :evidence1, :label => false, :placeholder => @question_categories[index][:evidence], 
+                    :input_html => {:class => 'question-evidence', :size => 10} %>
+                  <%#= text_field_tag name_evidence1, @place.place_evaluations[index].evidence1, 
                       :class => "input-small question-evidence", :placeholder => @question_categories[index][:evidence] %>    
                 <% end %>
               </td>
               <td>
-                <%= radio_button_tag name_answer, 2, @place.place_evaluations[index].answer.to_s == '2', :name => name_answer %>          
+                <%= evaluation.input :answer, :as => :radio, :label => false, :collection => [[t('app.common.answers.has_bad'), 2]] %>
                 <% if evidence_class.present? %>
-                  <%= text_field_tag name_evidence2, @place.place_evaluations[index].evidence2, 
+                  <%= evaluation.input :evidence2, :label => false, :placeholder => @question_categories[index][:evidence], 
+                    :input_html => {:class => 'question-evidence', :size => 10} %>
+                  <%#= text_field_tag name_evidence2, @place.place_evaluations[index].evidence2, 
                       :class => "input-small question-evidence", :placeholder => @question_categories[index][:evidence] %>    
                 <% end %>
               </td>
               <td>
-                <%= radio_button_tag name_answer, 1, @place.place_evaluations[index].answer.to_s == '1', :name => name_answer %>          
+                <%= evaluation.input :answer, :as => :radio, :label => false, :collection => [[t('app.common.answers.needs'), 1]] %>
               </td>
               <td>
-                <%= radio_button_tag name_answer, 0, @place.place_evaluations[index].answer.to_s == '0' || @place.place_evaluations[index].answer.blank?, :name => name_answer %>          
+                <%= evaluation.input :answer, :as => :radio, :label => false, :collection => [[t('app.common.answers.na'), 0]] %>
               </td>
 
 	          <% end %>
