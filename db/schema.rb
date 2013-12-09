@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131204110351) do
+ActiveRecord::Schema.define(:version => 20131209090026) do
 
   create_table "place_evaluations", :force => true do |t|
     t.integer  "place_id"
@@ -33,6 +33,7 @@ ActiveRecord::Schema.define(:version => 20131204110351) do
     t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "address"
   end
 
   add_index "place_translations", ["locale"], :name => "index_place_translations_on_locale"

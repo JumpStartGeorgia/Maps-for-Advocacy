@@ -27,7 +27,8 @@
                 <%= venue[:venue] %>
               </td>
               <td>
-                <%= link_to t('.next'), new_admin_place_path(:stage => '2', :venue_id => venue[:venue_id]), :class => 'btn btn-mini' %>
+                <%= link_to t('.next'), new_admin_place_path(:stage => '2', :venue_id => venue[:venue_id]), 
+                  :class => 'btn btn-mini', :role => 'button', :title => t('.venue_link_title', :category => venue[:venue_category], :venue => venue[:venue]) %>
               </td>
             </tr>
           <% end %>      
@@ -67,31 +68,36 @@
           <%= link_to t('.submit_address_search'), '#', :id => 'submit-address-search', :class => 'btn btn-mini', :role => 'button' %>
         </p>
         
-        <div id="address-search-results">
-          <div id="address-search-1-match" class="alert alert-info">
+        <div id="address-search-results" aria-live="polite" aria-relevant="additions" aria-busy="false">
+          <div id="address-search-1-match" class="alert alert-info" aria-hidden="true">
             <p>
               <%= t('.address_search_success') %>
             </p>
             <div class="placeholder"></div>
           </div>
         
-          <div id="address-search-multiple-match" class="alert alert-info">
+          <div id="address-search-multiple-match" class="alert alert-info" aria-hidden="true">
             <p>
               <%= t('.address_search_multiple_success') %>
             </p>
             <div class="placeholder"></div>
           </div>
           
-          <div id="address-search-fail" class="alert alert-danger">
+          <div id="address-search-fail" class="alert alert-danger" aria-hidden="true">
             <p>
               <%= t('.address_search_fail') %>
             </p>
           </div>
+
+          <p>
+            <%= link_to t('.next'), new_admin_place_path(:stage => '3', :venue_id => params[:venue_id], :lat => '', :lon => '', :address => ''), 
+                  :class => 'btn btn-mini', :id => 'place_map_next', :role => 'button', :'aria-hidden' => true,
+                  :title => t('.map_link_title') %>
+          </p>
         </div>      
       </div>
     </div>
     
-    <%= link_to t('.next'), new_admin_place_path(:stage => '3', :venue_id => params[:venue_id], :lat => '', :lon => ''), :class => 'btn btn-mini', :id => 'place_map_next' %>
 
   
   <% elsif params[:stage] == '3' %>
@@ -100,12 +106,15 @@
 
     <% create_sorted_translation_objects(@place.place_translations).each do |trans| %>
 		  <%= f.fields_for :place_translations, trans do |translation| %>
+        <% 
+          style=nil
+          style = "style=display:none;" if trans.locale != I18n.locale.to_s
+        %>
 
-			  <div id="form-<%= trans.locale %>" class="multilanguage_nested">
-				  <h3><%= t("app.language.#{trans.locale}") %></h3>
-
+			  <div <%= style %>>
 				  <%= translation.input :name %>
 				  <%= translation.hidden_field :locale , :value => trans.locale %>
+				  <%= translation.hidden_field :address , :value => trans.address %>
 			  </div>
 
 		  <% end %>

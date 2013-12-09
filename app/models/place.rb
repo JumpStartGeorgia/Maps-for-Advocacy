@@ -1,5 +1,5 @@
 class Place < ActiveRecord::Base
-	translates :name
+	translates :name, :address
 
   belongs_to :venue
 	has_many :place_translations, :dependent => :destroy
@@ -13,7 +13,7 @@ class Place < ActiveRecord::Base
 
 
   def self.places_by_category(venue_category_id=nil)
-    sql = "select p.id, pt.name as place, p.lat, p.lon, v.venue_category_id, vt.name as venue "
+    sql = "select p.id, pt.name as place, pt.address, p.lat, p.lon, v.venue_category_id, vt.name as venue "
     sql << "from places as p inner join place_translations as pt on pt.place_id = p.id "
     sql << "inner join venues as v on v.id = p.venue_id "
     sql << "inner join venue_translations as vt on vt.venue_id = v.id "

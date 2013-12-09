@@ -17,6 +17,8 @@
 
 <p><strong><%= model_class_trans.human_attribute_name(:name) %>:</strong>
 <%= @place.name %></p>
+<p><strong><%= model_class_trans.human_attribute_name(:address) %>:</strong>
+<%= @place.address %></p>
 <p><strong><%= model_class_trans.human_attribute_name(:district_id) %>:</strong>
 <%= @place.district_id %></p>
 <p><strong><%= model_class_trans.human_attribute_name(:venue_id) %>:</strong>
@@ -68,6 +70,7 @@
     <% end %>
   </div>
   <div class="span6">
+    <a href="#footer" class="hidenav"><%= t('.jump.skip_map') %></a>
     <div id="map"></div>
   </div>
 </div>

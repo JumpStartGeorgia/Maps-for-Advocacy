@@ -1,3 +1,5 @@
+[aria-hidden="true"] { display: none; }
+
 #map { 
   height: 300px; 
 }  
@@ -7,8 +9,8 @@ form.place{
   h2{
     margin-top: 25px;
   }
-  a#place_map_next{
-    display: none;
+  a#place_map_next[aria-hidden="false"]{
+    display: inline;
   }
 
   #place-form-address-search #address-search {
@@ -17,7 +19,9 @@ form.place{
     }
     #address-search-1-match, #address-search-multiple-match, #address-search-fail{
       margin-top: 20px;
-      display: none;
+      &[aria-hidden="false"]{
+        display: block;
+      }
     }
   }
 }

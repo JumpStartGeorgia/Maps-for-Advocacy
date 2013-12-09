@@ -63,7 +63,7 @@ class Admin::PlacesController < ApplicationController
       # create the translation object for however many locales there are
       # so the form will properly create all of the nested form fields
       I18n.available_locales.each do |locale|
-			  @place.place_translations.build(:locale => locale.to_s)
+			  @place.place_translations.build(:locale => locale.to_s, :address => params[:address])
 		  end
 		
 		  # get list of questions
@@ -175,7 +175,6 @@ class Admin::PlacesController < ApplicationController
     if params[:address].present?
 		  begin
 			  locations = Geocoder.search("#{params[:address]}")
-Rails.logger.debug "/////////////////// results = #{locations.inspect}"
         if locations.present?
           locations.each do |l|
             x = Hash.new
@@ -190,7 +189,6 @@ Rails.logger.debug "/////////////////// results = #{locations.inspect}"
     elsif params[:lat].present? && params[:lon].present?
 		  begin
 			  locations = Geocoder.search("#{params[:lat]}, #{params[:lon]}")
-Rails.logger.debug "/////////////////// results = #{locations.inspect}"
         if locations.present?
           locations.each do |l|
             x = Hash.new
@@ -203,8 +201,6 @@ Rails.logger.debug "/////////////////// results = #{locations.inspect}"
 			  coords = []
 		  end
     end
-
-Rails.logger.debug "/////////////////// returning: #{coords}"
 
     respond_to do |format|
       format.json { render json: coords.to_json }

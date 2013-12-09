@@ -49,6 +49,7 @@ en:
         lon: Longitude
       place_translation:
         name: Name of Place
+        address: Address
     errors:
       messages:
         required_field: "is a required field."
@@ -200,6 +201,8 @@ en:
         header_place: "'%{name}' Information"
         header_evaluation: Evaluation of '%{name}'
         next: Next
+        venue_link_title: "Select %{category} - %{venue}"
+        map_link_title: Select this location
   root:
     index:
       header_filter: Select Places
@@ -209,3 +212,4 @@ en:
       header_table: Selection Results
       no_places: There are no Places on record that matches your search request.
       view_place: View Details
+      view_place_title: "View the details on '%{place}'"
