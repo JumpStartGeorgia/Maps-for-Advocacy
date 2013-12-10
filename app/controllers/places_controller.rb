@@ -17,6 +17,8 @@ class PlacesController < ApplicationController
 
       gon.lat = @place.lat
       gon.lon = @place.lon
+      gon.marker_popup = "<h3>#{@place.name}</h3><h4>#{@venue.name}</h4><p>#{@place.address}</p>"
+      
     end    
 
     respond_to do |format|

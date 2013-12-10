@@ -66,6 +66,12 @@ $(document).ready(function(){
 		  map.zoomControl = true;
 		
       marker = L.marker([gon.lat, gon.lon]).addTo(map);
+
+      // show popup
+      if (gon.marker_popup){
+        marker.bindPopup(gon.marker_popup).openPopup();
+      }
+
   }
   
 
