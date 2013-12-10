@@ -39,7 +39,7 @@ class PlacesController < ApplicationController
     elsif params[:stage] == '2' # map
       @show_map = true
       gon.show_place_form_map = true
-      gon.address_search_path = address_search_admin_places_path
+      gon.address_search_path = address_search_places_path
     elsif params[:stage] == '3' # evaluation
       @place.venue_id = params[:venue_id]
       @place.lat = params[:lat]
@@ -74,7 +74,7 @@ class PlacesController < ApplicationController
     @place = Place.find(params[:id])
     params[:stage] = '3' if params[:stage].blank?
     gon.show_evaluation_form = true
-    gon.address_search_path = address_search_admin_places_path
+    gon.address_search_path = address_search_places_path
 
 	  # get venue
 	  @venue = Venue.with_translations(I18n.locale).find_by_id(@place.venue_id)
@@ -100,11 +100,11 @@ class PlacesController < ApplicationController
 
     respond_to do |format|
       if @place.save
-        format.html { redirect_to admin_place_path(@place), notice: t('app.msgs.success_created', :obj => t('activerecord.models.place')) }
+        format.html { redirect_to place_path(@place), notice: t('app.msgs.success_created', :obj => t('activerecord.models.place')) }
         format.json { render json: @place, status: :created, location: @place }
       else
         gon.show_evaluation_form = true
-        gon.address_search_path = address_search_admin_places_path
+        gon.address_search_path = address_search_places_path
         params[:stage] = '3'
 	      # get venue
 	      @venue = Venue.with_translations(I18n.locale).find_by_id(@place.venue_id)
@@ -127,11 +127,11 @@ class PlacesController < ApplicationController
 
     respond_to do |format|
       if @place.save
-        format.html { redirect_to admin_place_path(@place), notice: t('app.msgs.success_updated', :obj => t('activerecord.models.place')) }
+        format.html { redirect_to place_path(@place), notice: t('app.msgs.success_updated', :obj => t('activerecord.models.place')) }
         format.json { head :ok }
       else
         gon.show_evaluation_form = true
-        gon.address_search_path = address_search_admin_places_path
+        gon.address_search_path = address_search_places_path
         params[:stage] = '3'
 	      # get venue
 	      @venue = Venue.with_translations(I18n.locale).find_by_id(@place.venue_id)
@@ -150,7 +150,7 @@ class PlacesController < ApplicationController
     @place.destroy
 
     respond_to do |format|
-      format.html { redirect_to admin_places_url }
+      format.html { redirect_to root_url }
       format.json { head :ok }
     end
   end
