@@ -5,6 +5,7 @@ class ApplicationController < ActionController::Base
 	before_filter :set_locale
 	before_filter :is_browser_supported?
 	before_filter :initialize_gon
+	after_filter :store_location
 
 	unless Rails.application.config.consider_all_requests_local
 		rescue_from Exception,
@@ -71,13 +72,29 @@ logger.debug "////////////////////////// BROWSER = #{user_agent}"
     gon.lon_front_page = 44.80149
 	end
 
+	# after user logs in go back to the last page or go to root page
 	def after_sign_in_path_for(resource)
-		root_path
+		request.env['omniauth.origin'] || session[:previous_urls].last || root_path(:locale => I18n.locale)
 	end
 
   def valid_role?(role)
     redirect_to root_path, :notice => t('app.msgs.not_authorized') if !current_user || !current_user.role?(role)
   end
+
+	# store the current path so after login, can go back
+	def store_location
+		session[:previous_urls] ||= []
+		# only record path if page is not for users (sign in, sign up, etc) and not for reporting problems
+		if session[:previous_urls].first != request.fullpath && 
+        params[:format] != 'js' && params[:format] != 'json' && 
+        request.fullpath.index("/users/").nil?
+
+			session[:previous_urls].unshift request.fullpath
+		end
+		session[:previous_urls].pop if session[:previous_urls].count > 1
+	end
+
+
 
 =begin
   # add in required content for translations if none provided

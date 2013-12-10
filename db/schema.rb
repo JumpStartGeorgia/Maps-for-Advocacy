@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131209090026) do
+ActiveRecord::Schema.define(:version => 20131209120424) do
 
   create_table "place_evaluations", :force => true do |t|
     t.integer  "place_id"
@@ -124,6 +124,10 @@ ActiveRecord::Schema.define(:version => 20131209090026) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "provider"
+    t.string   "uid"
+    t.string   "nickname"
+    t.string   "avatar"
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

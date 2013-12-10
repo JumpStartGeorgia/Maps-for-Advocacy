@@ -34,7 +34,7 @@
     <div id="#menu" class="navbar navbar-fixed-top" role="menubar">
       <div class="navbar-inner">
         <div class="container">
-          <%= link_to(t('app.common.app_name'), root_path(:locale => I18n.locale),:class=>"brand")%>
+          <%= link_to(t('app.common.app_name'), root_path(:locale => I18n.locale), :class=>"brand", :role => 'menuitem')%>
           <div class="container nav-collapse">
             <ul class="nav pull-right">
   						<% I18n.available_locales.each do |locale| %>
