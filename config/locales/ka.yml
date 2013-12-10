@@ -232,4 +232,18 @@ ka:
       next: Next
       venue_link_title: "Select %{category} - %{venue}"
       map_link_title: Select this location
-    
+  settings:
+    index:
+      title: "Settings for '%{name}'"
+      header_location: Default Location
+      map_instructions: "Click on the map to place a marker of where you want the map to start when adding a place.  Then click on the 'Save the Location' button to the right to save your changes."
+      skip_map: Skip the map and go to the address form (jump)
+      address_instructions: You can also do an address search if you do not want to use the map.
+      address_instructions2: Please enter the address and city of where you want the map to start when adding a place.
+      submit_address_search: Lookup Address
+      address_search_success: The address search found the following match.  Please confirm that it is correct.
+      address_search_multiple_success: The address search found the following matches.  Please select the correct one.
+      address_search_fail: Sorry, but your search did not return any results.  Please try again.
+      next: Save the Location
+    location:
+      success: Your default map location has been saved.

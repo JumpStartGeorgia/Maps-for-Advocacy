@@ -70,8 +70,13 @@
 		                <b class="caret"></b>
 				          </a>
 				          <ul class="dropdown-menu" role="menu">
+                    <% if current_user.role?(User::ROLES[:admin]) %>
+						          <li role="menuitem">
+				   		         <%= link_to t('.admin'), admin_path %>
+										  </li>
+                    <% end %>
 						        <li role="menuitem">
-				 		         <%= link_to t('.admin'), admin_path %>
+				 		         <%= link_to t('.settings'), settings_path %>
 										</li>
 						        <li role="menuitem">
 				 		         <%= link_to t('.sign_out'), destroy_user_session_path, :method => :delete %>

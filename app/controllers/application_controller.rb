@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
 
 	before_filter :set_locale
 	before_filter :is_browser_supported?
+	before_filter :initialize_global_variables
 	before_filter :initialize_gon
 	after_filter :store_location
 
@@ -56,6 +57,16 @@ logger.debug "////////////////////////// BROWSER = #{user_agent}"
     { :locale => I18n.locale }
   end
 
+  def initialize_global_variables
+    @lat = 41.69337
+    @lon = 44.80149
+
+    if user_signed_in? && current_user.lat.present? && current_user.lon.present?
+      @lat = current_user.lat
+      @lon = current_user.lon
+    end
+  end
+
 	def initialize_gon
 		gon.set = true
 		gon.highlight_first_form_field = true
@@ -64,12 +75,12 @@ logger.debug "////////////////////////// BROWSER = #{user_agent}"
     gon.map_id = 'map'
     gon.zoom = 16
     gon.max_zoom = 18
-    gon.lat = 41.69337
-    gon.lon = 44.80149
+    gon.lat = @lat
+    gon.lon = @lon
 
     gon.zoom_front_page = 7
-    gon.lat_front_page = 41.69337
-    gon.lon_front_page = 44.80149
+    gon.lat_front_page = @lat
+    gon.lon_front_page = @lon
 	end
 
 	# after user logs in go back to the last page or go to root page

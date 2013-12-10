@@ -33,14 +33,16 @@ BootstrapStarter::Application.routes.draw do
       end
 		end
 
-    #place profile page
-#		match '/places/:id', :to => 'root#place', :as => :place, :via => :get
+    # add/view places
     resources :places, :only => [:show, :new, :create] do
       collection do
         post 'address_search', :defaults => {:format => 'json'}
       end
     end
 
+    # user settings
+		match '/settings', :to => 'settings#index', :as => :settings, :via => :get
+    
 
 		root :to => 'root#index'
 	  match "*path", :to => redirect("/#{I18n.default_locale}") # handles /en/fake/path/whatever

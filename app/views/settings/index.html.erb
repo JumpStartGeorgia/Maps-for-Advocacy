@@ -1,0 +1,57 @@
+<% title t('.title', :name => current_user.nickname).html_safe %>
+
+
+<h2><%= t('.header_location') %></h2>
+<div id="place-form-address-search" class="row-fluid">
+  <div class="span9">
+    <a href="#address-search" class="hidenav"><%= t('.skip_map') %></a>
+    <p>
+      <%= t('.map_instructions') %>
+    </p>
+    <div id="map"></div>
+  </div>
+  <div class="span3" id="address-search">
+    <p>
+      <%= t('.address_instructions') %>
+    </p>
+  
+    <p>
+      <%= t('.address_instructions2') %>
+    </p>
+    
+    <p>
+      <%= text_field_tag 'address-search', nil, :class => "span10" %>
+    </p>
+    
+    <p>
+      <%= link_to t('.submit_address_search'), '#', :id => 'submit-address-search', :class => 'btn btn-mini', :role => 'button' %>
+    </p>
+    
+    <div id="address-search-results" aria-live="polite" aria-relevant="additions" aria-busy="false">
+      <div id="address-search-1-match" class="alert alert-info" aria-hidden="true">
+        <p>
+          <%= t('.address_search_success') %>
+        </p>
+        <div class="placeholder"></div>
+      </div>
+    
+      <div id="address-search-multiple-match" class="alert alert-info" aria-hidden="true">
+        <p>
+          <%= t('.address_search_multiple_success') %>
+        </p>
+        <div class="placeholder"></div>
+      </div>
+      
+      <div id="address-search-fail" class="alert alert-danger" aria-hidden="true">
+        <p>
+          <%= t('.address_search_fail') %>
+        </p>
+      </div>
+
+      <p>
+        <%= link_to t('.next'), settings_path(:lat => '', :lon => '', :address => ''), 
+              :class => 'btn btn-mini', :id => 'place_map_next', :role => 'button', :'aria-hidden' => true %>
+      </p>
+    </div>      
+  </div>
+</div>

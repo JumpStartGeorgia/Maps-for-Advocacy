@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
          :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :role, :provider, :uid, :nickname, :avatar
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :role, :provider, :uid, :nickname, :avatar, :lat, :lon
 
   validates :role, :presence => true
 
@@ -22,7 +22,6 @@ class User < ActiveRecord::Base
 	def check_for_role
 		self.role = ROLES[:user] if !self.role.present?
 	end
-
 
   def self.no_admins
     where("role != ?", ROLES[:admin])

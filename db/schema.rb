@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131209120424) do
+ActiveRecord::Schema.define(:version => 20131210080001) do
 
   create_table "place_evaluations", :force => true do |t|
     t.integer  "place_id"
@@ -111,13 +111,13 @@ ActiveRecord::Schema.define(:version => 20131209120424) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                  :default => "", :null => false
-    t.string   "encrypted_password",     :default => "", :null => false
-    t.integer  "role",                   :default => 0,  :null => false
+    t.string   "email",                                                  :default => "", :null => false
+    t.string   "encrypted_password",                                     :default => "", :null => false
+    t.integer  "role",                                                   :default => 0,  :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
-    t.integer  "sign_in_count",          :default => 0
+    t.integer  "sign_in_count",                                          :default => 0
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string   "current_sign_in_ip"
@@ -128,6 +128,8 @@ ActiveRecord::Schema.define(:version => 20131209120424) do
     t.string   "uid"
     t.string   "nickname"
     t.string   "avatar"
+    t.decimal  "lat",                    :precision => 15, :scale => 12
+    t.decimal  "lon",                    :precision => 15, :scale => 12
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true
