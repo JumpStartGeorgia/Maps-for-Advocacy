@@ -1,0 +1,223 @@
+<%- model_class = Place -%>
+<%- model_class_v = VenueCategory -%>
+<%- model_class_vt = VenueCategoryTranslation -%>
+
+<%= semantic_form_for([:admin, @place], :html => { :class => 'form-horizontal' }) do |f| %>
+	<%= f.error_messages %>
+
+  <% if params[:stage] == '1' %>
+    <h2><%= t('.header_venue') %></h2>
+    
+    <table id="place-venue-categories" class="table table-striped display">
+      <thead>
+        <tr>
+          <th><%= model_class_vt.human_attribute_name(:name) %></th>
+          <th><%= model_class_v.human_attribute_name(:venues) %></th>
+          <th><%=t '.actions', :default => t("helpers.actions") %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @venue_categories.each do |venue| %>
+          <% if venue[:venue].present? %>
+            <tr>
+              <td>
+                <%= venue[:venue_category] %>
+              </td>
+              <td>
+                <%= venue[:venue] %>
+              </td>
+              <td>
+                <%= link_to t('.next'), new_admin_place_path(:stage => '2', :venue_id => venue[:venue_id]), 
+                  :class => 'btn btn-mini', :role => 'button', :title => t('.venue_link_title', :category => venue[:venue_category], :venue => venue[:venue]) %>
+              </td>
+            </tr>
+          <% end %>      
+        <% end %>
+      </tbody>
+    </table>
+
+
+
+
+  <% elsif params[:stage] == '2' %>
+
+    <h2><%= t('.header_location', :name => @venue.name) %></h2>
+    
+    <div id="place-form-address-search" class="row-fluid">
+      <div class="span9">
+        <a href="#address-search" class="hidenav"><%= t('.skip_map') %></a>
+        <p>
+          <%= t('.map_instructions', :name => @venue.name) %>
+        </p>
+        <div id="map"></div>
+      </div>
+      <div class="span3" id="address-search">
+        <p>
+          <%= t('.address_instructions') %>
+        </p>
+      
+        <p>
+          <%= t('.address_instructions2', :name => @venue.name) %>
+        </p>
+        
+        <p>
+          <%= text_field_tag 'address-search', nil, :class => "span10" %>
+        </p>
+        
+        <p>
+          <%= link_to t('.submit_address_search'), '#', :id => 'submit-address-search', :class => 'btn btn-mini', :role => 'button' %>
+        </p>
+        
+        <div id="address-search-results" aria-live="polite" aria-relevant="additions" aria-busy="false">
+          <div id="address-search-1-match" class="alert alert-info" aria-hidden="true">
+            <p>
+              <%= t('.address_search_success') %>
+            </p>
+            <div class="placeholder"></div>
+          </div>
+        
+          <div id="address-search-multiple-match" class="alert alert-info" aria-hidden="true">
+            <p>
+              <%= t('.address_search_multiple_success') %>
+            </p>
+            <div class="placeholder"></div>
+          </div>
+          
+          <div id="address-search-fail" class="alert alert-danger" aria-hidden="true">
+            <p>
+              <%= t('.address_search_fail') %>
+            </p>
+          </div>
+
+          <p>
+            <%= link_to t('.next'), new_admin_place_path(:stage => '3', :venue_id => params[:venue_id], :lat => '', :lon => '', :address => ''), 
+                  :class => 'btn btn-mini', :id => 'place_map_next', :role => 'button', :'aria-hidden' => true,
+                  :title => t('.map_link_title') %>
+          </p>
+        </div>      
+      </div>
+    </div>
+    
+
+  
+  <% elsif params[:stage] == '3' %>
+
+    <h2><%= t('.header_place', :name => @venue.name) %></h2>
+
+    <% create_sorted_translation_objects(@place.place_translations).each do |trans| %>
+		  <%= f.fields_for :place_translations, trans do |translation| %>
+        <% 
+          style=nil
+          style = "style=display:none;" if trans.locale != I18n.locale.to_s
+        %>
+
+			  <div <%= style %>>
+				  <%= translation.input :name %>
+				  <%= translation.hidden_field :locale , :value => trans.locale %>
+				  <%= translation.hidden_field :address , :value => trans.address %>
+			  </div>
+
+		  <% end %>
+	  <% end %>
+
+	  <%= f.inputs do %>
+	    <%= f.hidden_field :lat %>
+	    <%= f.hidden_field :lon %>
+	    <%= f.hidden_field :venue_id %>
+	  <% end %>
+	
+	  <% if @question_categories.present? %>
+	    <div id="venue_evalautions">
+        <h2><%= t('.header_evaluation', :name => @venue.name) %></h2>
+
+        <% 
+          qc_id = nil 
+        %>
+        <% (0..@question_categories.length-1).each do |index| %>
+          <% if @question_categories[index][:id] != qc_id %>
+            <% if qc_id.present? %>
+                </tbody>
+              </table>
+            <% end %>
+
+            <% qc_id = @question_categories[index][:id] %>
+
+            <h3><%= @question_categories[index][:question_category] %></h3>
+
+            <table class="table table-striped display venue_evaluation">
+              <thead>
+                <tr>
+                  <th>Questions</th>
+                  <th><%= t('app.common.answers.has') %></th>
+                  <th><%= t('app.common.answers.has_bad') %></th>
+                  <th><%= t('app.common.answers.needs') %></th>
+                  <th><%= t('app.common.answers.na') %></th>
+                </tr>
+              </thead>
+              <tbody>
+          <% end %>
+          
+          <% 
+            evidence_class = ''
+            if @question_categories[index][:evidence].present?
+              evidence_class = "class=question-with-evidence"
+            end
+          %> 
+          <tr <%= evidence_class %>>
+
+	          <%= f.fields_for :place_evaluations, @place.place_evaluations[index] do |evaluation| %>
+
+		          <%= evaluation.hidden_field :user_id , :value => @place.place_evaluations[index].user_id %>
+		          <%= evaluation.hidden_field :question_pairing_id , :value => @question_categories[index][:question_pairing_id] %>
+
+              <td><%= @question_categories[index][:question] %></td>
+              <% 
+                name_answer = "place[place_evaluations_attributes][#{index}][answer]" 
+                name_evidence1 = "place[place_evaluations_attributes][#{index}][evidence1]" 
+                name_evidence2 = "place[place_evaluations_attributes][#{index}][evidence2]" 
+              %>
+              <td>
+                <%= evaluation.input :answer, :as => :radio, :label => false, :collection => [[t('app.common.answers.has'), 3]] %>
+                <% if evidence_class.present? %>
+                  <%= evaluation.input :evidence1, :label => false, :placeholder => @question_categories[index][:evidence], 
+                    :input_html => {:class => 'question-evidence', :size => 10} %>
+                  <%#= text_field_tag name_evidence1, @place.place_evaluations[index].evidence1, 
+                      :class => "input-small question-evidence", :placeholder => @question_categories[index][:evidence] %>    
+                <% end %>
+              </td>
+              <td>
+                <%= evaluation.input :answer, :as => :radio, :label => false, :collection => [[t('app.common.answers.has_bad'), 2]] %>
+                <% if evidence_class.present? %>
+                  <%= evaluation.input :evidence2, :label => false, :placeholder => @question_categories[index][:evidence], 
+                    :input_html => {:class => 'question-evidence', :size => 10} %>
+                  <%#= text_field_tag name_evidence2, @place.place_evaluations[index].evidence2, 
+                      :class => "input-small question-evidence", :placeholder => @question_categories[index][:evidence] %>    
+                <% end %>
+              </td>
+              <td>
+                <%= evaluation.input :answer, :as => :radio, :label => false, :collection => [[t('app.common.answers.needs'), 1]] %>
+              </td>
+              <td>
+                <%= evaluation.input :answer, :as => :radio, :label => false, :collection => [[t('app.common.answers.na'), 0]] %>
+              </td>
+
+	          <% end %>
+          </tr>
+
+          <% if index == @question_categories.length-1 %>
+              </tbody>
+            </table>
+          <% end %>        
+        <% end %>
+	    </div>
+	  <% end %>
+
+
+    <div class="form-actions">
+      <%= f.submit nil, :class => 'btn btn-primary' %>
+	    <%= f.submit nil, :class => 'btn btn-warning', :type => :reset, :value => t('app.buttons.reset'), :name => :reset %>
+	    <%= link_to t('app.buttons.cancel'), admin_places_path, :class => 'btn btn-mini btn-warning' %>
+    </div>
+  <% end %>
+<% end %>
+

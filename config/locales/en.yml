@@ -111,6 +111,7 @@ en:
       missing_required: Please supply all required information.
   layouts:
     application:
+      add_place: Add a Place
       admin: Admin
       sign_out: Sign Out
       js_link_title: JumpStart Georgia - We communicate data better!

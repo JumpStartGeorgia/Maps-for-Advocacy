@@ -27,26 +27,4 @@ class RootController < ApplicationController
     end
   end
 
-  def place
-    @place = Place.find(params[:id])
-
-    # get venue
-    @venue = Venue.with_translations(I18n.locale).find_by_id(@place.venue_id)
-	  # get list of questions
-	  @question_categories = QuestionCategory.questions_for_venue(@venue.question_category_id)
-
-    if @place.lat.present? && @place.lon.present?
-      @show_map = true
-      gon.show_place_map = true
-
-      gon.lat = @place.lat
-      gon.lon = @place.lon
-    end    
-  
-    respond_to do |format|
-      format.html # index.html.erb
-      format.json { render json: @place }
-    end
-  end
-
 end

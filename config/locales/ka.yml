@@ -111,6 +111,7 @@ ka:
       missing_required: Please supply all required information.
   layouts:
     application:
+      add_place: Add a Place
       admin: ადმინისტრატო
       sign_out: გასვლა
       js_link_title: ჯამპსტარტ ჯორჯიას - ჩვენ გაწვდით ინფორმაციას უკეთ!
