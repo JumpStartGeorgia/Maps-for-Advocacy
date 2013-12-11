@@ -16,6 +16,9 @@
       <% questions = @question_categories.map{|x| [x[:id], x[:question_category]]}.uniq %>
       <% if questions.present? %>
         <h2><%= t('.header_summary') %></h2>
+        <p><strong><%= t('.summary_result') %>:</strong>
+          <%= number_with_precision(@summaries['overall']['overall']) %>
+        </p>
         <ul class="evaluation_summary">
         <% questions.each do |question| %>
           <li>
@@ -59,6 +62,9 @@
 
 	      <% if questions.present? && summary.present? %>
           <h4><%= t('.header_user_summary') %></h4>
+          <p><strong><%= t('.summary_result') %>:</strong>
+            <%= number_with_precision(summary['overall']) %>
+          </p>
           <ul class="evaluation_summary">
           <% questions.each do |question| %>
             <li>
@@ -70,41 +76,57 @@
         <% end %>
 
 
-        <h4><%= t('.header_user_details') %></h4>
-        <% (0..@question_categories.length-1).each do |index| %>
-          <% if @question_categories[index][:id] != qc_id %>
-            <% if qc_id.present? %>
-                </ul>
-            <% end %>
+        <div class="accordion" id="<%= "accordion_#{user.id}" %>">
+          <div class="accordion-group">
+            <div class="accordion-heading">
+              <h4 class="panel-title">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="<%= "#accordion_#{user.id}" %>" 
+                  href="<%= "#collapse_#{user.id}" %>" title="<%= t('.details_link_title') %>">
+                  <%= t('.header_user_details') %>
+                </a>
+              </h4>
+            </div>
+            <div id="<%= "collapse_#{user.id}" %>" class="accordion-body collapse">
+              <div class="accordion-inner">
+                <% (0..@question_categories.length-1).each do |index| %>
+                  <% if @question_categories[index][:id] != qc_id %>
+                    <% if qc_id.present? %>
+                        </ul>
+                    <% end %>
 
-            <% qc_id = @question_categories[index][:id] %>
+                    <% qc_id = @question_categories[index][:id] %>
 
-            <h5><%= @question_categories[index][:question_category] %></h5>
+                    <h5><%= @question_categories[index][:question_category] %></h5>
 
-            <ul class="question-results">
-          <% end %>
-          
-            <li>
-              <div>
-                <%= @question_categories[index][:question] %>
+                    <ul class="question-results">
+                  <% end %>
+                  
+                    <li>
+                      <div>
+                        <%= @question_categories[index][:question] %>
+                      </div>
+                      <% 
+                        answer = nil
+                        q = evals.select{|x| x.question_pairing_id == @question_categories[index][:question_pairing_id]}
+                        answer = q.first.answer if q.present?
+
+                        if answer.present?
+                      %>
+                        <div class="<%= "selected-answer #{PlaceEvaluation.answer_key_name(answer)}"%>">
+                          <%= t("app.common.answers.#{PlaceEvaluation.answer_key_name(answer)}") %>
+                        </div>
+                      <% end %>
+                    </li>
+
+                  <% if index == @question_categories.length-1 %>
+                      </ul>
+                  <% end %>        
+                <% end %>
               </div>
-              <% 
-                answer = nil
-                q = evals.select{|x| x.question_pairing_id == @question_categories[index][:question_pairing_id]}
-                answer = q.first.answer if q.present?
+            </div>
+          </div>
+        </div>
 
-                if answer.present?
-              %>
-                <div class="<%= "selected-answer #{PlaceEvaluation.answer_key_name(answer)}"%>">
-                  <%= t("app.common.answers.#{PlaceEvaluation.answer_key_name(answer)}") %>
-                </div>
-              <% end %>
-            </li>
-
-          <% if index == @question_categories.length-1 %>
-              </ul>
-          <% end %>        
-        <% end %>
       <% end %>
     <% end %>
   </div>

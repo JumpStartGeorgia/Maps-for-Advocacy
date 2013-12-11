@@ -83,6 +83,11 @@ class PlaceEvaluation < ActiveRecord::Base
 
           records = evaluations.select{|x| x.user_id == user_id}
 
+          # - overall of all answers for this user
+          answers = records.map{|x| x.answer}
+          avg = answers.sum / answers.size.to_f
+          user_summary['overall'] = avg
+
           # for each category, get answers            
           category_ids.each do |category_id|
             question_pairing_ids = questions.select{|x| x.id == category_id}.map{|x| x['question_pairing_id']}
@@ -106,6 +111,12 @@ class PlaceEvaluation < ActiveRecord::Base
         end      
 
         # create overall summary
+        # - overall of all answers
+        answers = evaluations.map{|x| x.answer}
+        avg = answers.sum / answers.size.to_f
+        summary['overall']['overall'] = avg
+        
+        # - by category
         category_ids.each do |category_id|
           question_pairing_ids = questions.select{|x| x.id == category_id}.map{|x| x['question_pairing_id']}
           if question_pairing_ids.present?

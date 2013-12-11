@@ -221,9 +221,11 @@ en:
   places:
     show:
       header_summary: Overall Summary
+      summary_result: Overall Result
       header_overall_results: Evaluation Results
       header_user_summary: Summary
       header_user_details: Details
+      details_link_title: View the details of this evaluation
     form:
       header_venue: What is the Venue?
       header_location: Where is '%{name}' located?  
