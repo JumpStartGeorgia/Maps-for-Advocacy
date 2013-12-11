@@ -8,6 +8,7 @@ ka:
       venue: ადგილმდებარეობა
       venue_category: ადგილმდებარეობის კატეგორია
       place: ადგილი
+      evaluation: შეფასება
     attributes:
       user:
         email: ელ.ფოსტა
@@ -239,10 +240,14 @@ ka:
       address_search_fail: არ მოიძებნა. კიდევ სცადეთ.
       header_place: "'%{name}' ინფორმაიცა"
       header_evaluation: "'%{name}'-ის შეფასება"
-      evaluation_instructions: თუ არ გაქვთ პასუხი, დატოვეთ ცარიელი. 
+      questions: კითხვები
       next: შემდეგი
       venue_link_title: "შეარჩიეთ %{category} - %{venue}"
       map_link_title: შეარჩიეთ ეს მდებარეობა
+    eval_form:
+      evaluation_instructions: თუ არ გაქვთ პასუხი, დატოვეთ ცარიელი. 
+    evaluation:
+      title: "Evaluation for: '%{place}'"
   settings:
     index:
       title: "'%{name}'-ის პარამეტრები"

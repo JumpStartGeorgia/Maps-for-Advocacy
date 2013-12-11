@@ -12,12 +12,12 @@ class PlacesController < ApplicationController
 	    @question_categories = QuestionCategory.questions_for_venue(@place.question_category_id)
 
       # get evaluation results
-      @evaluations = PlaceEvaluation.where(:place_id => params[:id]).sorted
+      @evaluations = PlaceEvaluation.with_answers(params[:id]).sorted
       
       # create summaries of evaluations
       @summaries = PlaceEvaluation.summarize(@evaluations, @question_categories)
       
-      # get users that submitted evaluations
+      # get user info that submitted evaluations
       @users = User.for_evaluations(@evaluations.map{|x| x.user_id}.uniq)
       
 
@@ -36,8 +36,9 @@ class PlacesController < ApplicationController
         format.json { render json: @place }
       end
     else
-      redirect_to root_path
-      return
+			flash[:info] =  t('app.msgs.does_not_exist')
+			redirect_to root_path(:locale => I18n.locale)
+			return
     end
   end
 
@@ -73,8 +74,9 @@ class PlacesController < ApplicationController
 		  
 		  # create the evaluation object for however many questions there are
 		  if @question_categories.present?
+		    @place_evaluation = @place.place_evaluations.build(:user_id => current_user.id)
         (0..@question_categories.length-1).each do |index|
-  		    @place.place_evaluations.build(:user_id => current_user.id, :answer => PlaceEvaluation::ANSWERS['no_answer'])
+  		    @place_evaluation.place_evaluation_answers.build(:answer => PlaceEvaluation::ANSWERS['no_answer'])
 		    end
 		  end
     end
@@ -84,6 +86,7 @@ class PlacesController < ApplicationController
       format.json { render json: @place }
     end
   end
+  
 =begin
   # GET /places/1/edit
   def edit
@@ -209,4 +212,54 @@ class PlacesController < ApplicationController
       format.json { render json: coords.to_json }
     end
   end
+  
+  
+  
+  # let user submit evaluation for an existing place
+  def evaluation
+    @place = Place.with_translation(params[:id]).first
+    success = false
+    
+    if @place.present?
+      if request.put?
+        # save the evaluation
+        @place.assign_attributes(params[:place])
+
+        add_missing_translation_content(@place.place_translations)
+            
+        success = @place.save
+
+      end
+
+      if success
+		    redirect_to place_path(@place), notice: t('app.msgs.success_created', :obj => t('activerecord.models.evaluation')) 
+		    return
+      else
+        # load the evaluation form
+        gon.show_evaluation_form = true
+
+	      # get list of questions
+	      @question_categories = QuestionCategory.questions_for_venue(@place.question_category_id)
+        
+		    # create the evaluation object for however many questions there are
+		    if @question_categories.present?
+		      @place_evaluation = @place.place_evaluations.build(:user_id => current_user.id)
+          (0..@question_categories.length-1).each do |index|
+    		    @place_evaluation.place_evaluation_answers.build(:answer => PlaceEvaluation::ANSWERS['no_answer'])
+		      end
+		    end
+
+        respond_to do |format|
+          format.html # show.html.erb
+          format.json { render json: @place }
+        end
+      end
+    else
+		  flash[:info] =  t('app.msgs.does_not_exist')
+		  redirect_to root_path(:locale => I18n.locale)
+		  return
+    end
+  end
+  
+  
 end

@@ -8,6 +8,7 @@ en:
       venue: Venue
       venue_category: Venue Category
       place: Place
+      evaluation: Evaluation
     attributes:
       user:
         email: Email Address
@@ -240,9 +241,12 @@ en:
       header_place: "'%{name}' Information"
       header_evaluation: Evaluation of '%{name}'
       evaluation_instructions: If you do not know the answer, please leave it blank.
+      questions: Questions
       next: Next
       venue_link_title: "Select %{category} - %{venue}"
       map_link_title: Select this location
+    eval_form:
+      evaluation_instructions: If you do not know the answer, please leave it blank.
   settings:
     index:
       title: "Settings for '%{name}'"

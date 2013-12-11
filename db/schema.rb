@@ -11,20 +11,32 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131211063925) do
+ActiveRecord::Schema.define(:version => 20131211120332) do
 
-  create_table "place_evaluations", :force => true do |t|
-    t.integer  "place_id"
-    t.integer  "user_id"
+  create_table "place_evaluation_answers", :force => true do |t|
+    t.integer  "old_place_id"
+    t.integer  "old_user_id"
     t.integer  "question_pairing_id"
     t.integer  "answer",              :default => 0
     t.string   "evidence"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "place_evaluation_id"
   end
 
+  add_index "place_evaluation_answers", ["created_at"], :name => "index_place_evaluations_on_created_at"
+  add_index "place_evaluation_answers", ["place_evaluation_id"], :name => "index_place_evaluation_answers_on_place_evaluation_id"
+  add_index "place_evaluation_answers", ["question_pairing_id"], :name => "index_place_evaluation_answers_on_question_pairing_id"
+
+  create_table "place_evaluations", :force => true do |t|
+    t.integer  "place_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "place_evaluations", ["created_at"], :name => "index_place_evaluations_on_created_at"
   add_index "place_evaluations", ["place_id"], :name => "index_place_evaluations_on_place_id"
-  add_index "place_evaluations", ["question_pairing_id"], :name => "index_place_evaluations_on_question_pairing_id"
   add_index "place_evaluations", ["user_id"], :name => "index_place_evaluations_on_user_id"
 
   create_table "place_translations", :force => true do |t|

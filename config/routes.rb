@@ -35,6 +35,10 @@ BootstrapStarter::Application.routes.draw do
 
     # add/view places
     resources :places, :only => [:show, :new, :create] do
+      member do 
+        get 'evaluation'
+        put 'evaluation'
+      end
       collection do
         post 'address_search', :defaults => {:format => 'json'}
       end

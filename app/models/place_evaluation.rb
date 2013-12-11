@@ -1,15 +1,12 @@
 class PlaceEvaluation < ActiveRecord::Base
 
   belongs_to :place
-  belongs_to :question_pairing
+  belongs_to :user
+  has_many :place_evaluation_answers, :dependent => :destroy
+  accepts_nested_attributes_for :place_evaluation_answers
+  attr_accessible :place_id, :user_id, :place_evaluation_answers_attributes, :created_at
+  validates :user_id, :presence => true
 
-  attr_accessible :place_id, :user_id, :question_pairing_id, :answer, :evidence, :evidence1, :evidence2
-  attr_accessor :evidence1, :evidence2
-  
-  validates :user_id, :question_pairing_id, :answer, :presence => true
-
-  before_save :populate_evidence
-  before_save :populate_answer
   
   ANSWERS = {'no_answer' => 0, 'not_relevant' => 1, 'needs' => 2, 'has_bad' => 3, 'has_good' => 4}
   
@@ -17,102 +14,64 @@ class PlaceEvaluation < ActiveRecord::Base
     ANSWERS.keys[ANSWERS.values.index(value)]
   end
   
-  # evaluation form has two evidence textboxes
-  # if one has value, set evidence to this value
-  def populate_evidence
-    self.evidence = read_attribute(:evidence1) if read_attribute(:evidence1).present?
-    self.evidence = read_attribute(:evidence2) if read_attribute(:evidence2).present?
-  end
-
-  # if there is no answer, default it to no-answer
-  def populate_answer
-    self.answer = ANSWERS['no_answer'] if read_attribute(:answer).blank?
-  end
-
-  def evidence1=(text)
-    write_attribute(:evidence1, text)
+  def self.with_answers(place_id)
+    includes(:place_evaluation_answers)
+    .where(:place_id => place_id)  
   end
   
-  def evidence2=(text)
-    write_attribute(:evidence2, text)
-  end
-  
-  def evidence1
-    if read_attribute(:evidence1).present?
-      read_attribute(:evidence1)
-    else
-      read_attribute(:evidence)
-    end
-  end
-    
-  def evidence2
-    if read_attribute(:evidence2).present?
-      read_attribute(:evidence2)
-    else
-      read_attribute(:evidence)
-    end
-  end
-
-
   def self.sorted
-    order('created_at desc, user_id asc, question_pairing_id asc')
+    order('place_evaluations.created_at desc, place_evaluations.user_id asc')
   end
   
 
   # create a summary of the evaluation results
-  # create summary for each user and then an overall summary
+  # create summary for each evaluation and then an overall summary
   def self.summarize(evaluations, questions)
     summary = Hash.new
     summary['overall'] = Hash.new
-    summary['users'] = []
+    summary['evaluations'] = []
   
     if evaluations.present? && questions.present?
-      # get unique user ids
-      user_ids = evaluations.map{|x| x.user_id}.uniq
       # get unique question category ids
       category_ids = questions.map{|x| x.id}.uniq
       
-      if user_ids.present?
-        # create user summaries
-        user_ids.each do |user_id|
+      evaluations.each do |evaluation|
+        # create evaluation summaries
+        evaluation_summary = Hash.new
+        summary['evaluations'] << evaluation_summary
 
-          user_summary = Hash.new
-          summary['users'] << user_summary
+        evaluation_summary['id'] = evaluation.id
 
-          user_summary['id'] = user_id
+        records = evaluation.place_evaluation_answers
 
-          records = evaluations.select{|x| x.user_id == user_id}
+        # - overall of all answers for this evaluation
+        answers = records.map{|x| x.answer}
+        avg = answers.sum / answers.size.to_f
+        evaluation_summary['overall'] = avg
 
-          # - overall of all answers for this user
-          answers = records.map{|x| x.answer}
-          avg = answers.sum / answers.size.to_f
-          user_summary['overall'] = avg
-
-          # for each category, get answers            
-          category_ids.each do |category_id|
-            question_pairing_ids = questions.select{|x| x.id == category_id}.map{|x| x['question_pairing_id']}
-            if question_pairing_ids.present?
-              evals = []
-              # get evaluation records that match
-              question_pairing_ids.each do |qp_id|
-                evals << records.select{|x| x.question_pairing_id == qp_id}
-              end
-              evals.flatten!
-              
-              # average the answers
-              answers = evals.map{|x| x.answer}
-              avg = answers.sum / answers.size.to_f
-              
-              # add to user record
-              user_summary[category_id.to_s] = avg
+        # for each category, get answers            
+        category_ids.each do |category_id|
+          question_pairing_ids = questions.select{|x| x.id == category_id}.map{|x| x['question_pairing_id']}
+          if question_pairing_ids.present?
+            evals = []
+            # get evaluation records that match
+            question_pairing_ids.each do |qp_id|
+              evals << records.select{|x| x.question_pairing_id == qp_id}
             end
+            evals.flatten!
+            
+            # average the answers
+            answers = evals.map{|x| x.answer}
+            avg = answers.sum / answers.size.to_f
+            
+            # add to evaluation record
+            evaluation_summary[category_id.to_s] = avg
           end
-
         end      
 
         # create overall summary
         # - overall of all answers
-        answers = evaluations.map{|x| x.answer}
+        answers = evaluations.map{|x| x.place_evaluation_answers.map{|x| x.answer}}.flatten
         avg = answers.sum / answers.size.to_f
         summary['overall']['overall'] = avg
         
@@ -123,7 +82,7 @@ class PlaceEvaluation < ActiveRecord::Base
             evals = []
             # get evaluation records that match
             question_pairing_ids.each do |qp_id|
-              evals << evaluations.select{|x| x.question_pairing_id == qp_id}
+              evals << evaluations.map{|x| x.place_evaluation_answers.select{|x| x.question_pairing_id == qp_id}}
             end
             evals.flatten!
             
@@ -131,7 +90,7 @@ class PlaceEvaluation < ActiveRecord::Base
             answers = evals.map{|x| x.answer}
             avg = answers.sum / answers.size.to_f
             
-            # add to user record
+            # add to overall record
             summary['overall'][category_id.to_s] = avg
           end
         end

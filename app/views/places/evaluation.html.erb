@@ -1,0 +1,17 @@
+<%- model_class = Place -%>
+<%- model_class_trans = PlaceTranslation -%>
+<% title t('.title', :place => @place[:name]).html_safe %>
+
+<%= semantic_form_for(@place, :url => evaluation_place_path(params[:id]), :html => { :class => 'form-horizontal' }) do |f| %>
+
+  <div id="venue_evalautions">
+    <%= render :partial => 'eval_form', :locals => {:f => f} %>
+  </div>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= link_to t('app.buttons.cancel'), root_path, :class => 'btn btn-mini btn-warning' %>
+  </div>
+  
+<% end %>
+

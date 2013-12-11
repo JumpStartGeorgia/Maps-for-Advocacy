@@ -35,20 +35,17 @@
       <h2><%= t('.header_overall_results') %></h2>
       <% 
         qc_id = nil 
-        
-        uniq_evals = @evaluations.map{|x| [x.created_at, x.user_id]}.uniq
       %>
 
-      <% uniq_evals.each do |uniq_eval| %>
+      <% @evaluations.each do |evaluation| %>
         <% 
-          evals = @evaluations.select{|x| x.user_id == uniq_eval[1]}
-          user = @users.select{|x| x.id == uniq_eval[1]}.first
-          summary = @summaries['users'].select{|x| x['id'] == uniq_eval[1]}.first
+          user = @users.select{|x| x.id == evaluation.user_id}.first
+          summary = @summaries['evaluations'].select{|x| x['id'] == evaluation.id}.first
         %>
 
         <h3 class="clear">
           <span class="evaluation_date">
-            <%= l uniq_eval[0], :format => :no_time %>
+            <%= l evaluation.created_at, :format => :no_time %>
           </span>
           <% if user.present? %>
             <span class="user_name">      
@@ -76,17 +73,17 @@
         <% end %>
 
 
-        <div class="accordion" id="<%= "accordion_#{user.id}" %>">
+        <div class="accordion" id="<%= "accordion_#{evaluation.id}" %>">
           <div class="accordion-group">
             <div class="accordion-heading">
               <h4 class="panel-title">
-                <a class="accordion-toggle" data-toggle="collapse" data-parent="<%= "#accordion_#{user.id}" %>" 
-                  href="<%= "#collapse_#{user.id}" %>" title="<%= t('.details_link_title') %>">
+                <a class="accordion-toggle" data-toggle="collapse" data-parent="<%= "#accordion_#{evaluation.id}" %>" 
+                  href="<%= "#collapse_#{evaluation.id}" %>" title="<%= t('.details_link_title') %>">
                   <%= t('.header_user_details') %>
                 </a>
               </h4>
             </div>
-            <div id="<%= "collapse_#{user.id}" %>" class="accordion-body collapse">
+            <div id="<%= "collapse_#{evaluation.id}" %>" class="accordion-body collapse">
               <div class="accordion-inner">
                 <% (0..@question_categories.length-1).each do |index| %>
                   <% if @question_categories[index][:id] != qc_id %>
@@ -107,7 +104,7 @@
                       </div>
                       <% 
                         answer = nil
-                        q = evals.select{|x| x.question_pairing_id == @question_categories[index][:question_pairing_id]}
+                        q = evaluation.place_evaluation_answers.select{|x| x.question_pairing_id == @question_categories[index][:question_pairing_id]}
                         answer = q.first.answer if q.present?
 
                         if answer.present?

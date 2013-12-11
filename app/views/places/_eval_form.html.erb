@@ -1,0 +1,77 @@
+        <p>
+          <%= t('.evaluation_instructions') %>
+        </p>
+
+        <% 
+          qc_id = nil 
+        %>
+        <%= f.fields_for :place_evaluations, @place_evaluation do |evaluation| %>
+          <%= evaluation.hidden_field :user_id , :value => @place_evaluation.user_id %>
+
+          <% (0..@question_categories.length-1).each do |index| %>
+            <% if @question_categories[index][:id] != qc_id %>
+              <% if qc_id.present? %>
+                  </tbody>
+                </table>
+              <% end %>
+
+              <% qc_id = @question_categories[index][:id] %>
+
+              <h3><%= @question_categories[index][:question_category] %></h3>
+
+              <table class="table table-striped display venue_evaluation">
+                <thead>
+                  <tr>
+                    <th><%= t('.questions') %></th>
+                    <th><%= t('app.common.answers.has_good') %></th>
+                    <th><%= t('app.common.answers.has_bad') %></th>
+                    <th><%= t('app.common.answers.needs') %></th>
+                    <th><%= t('app.common.answers.not_relevant') %></th>
+                  </tr>
+                </thead>
+                <tbody>
+            <% end %>
+            
+            <% 
+              evidence_class = ''
+              if @question_categories[index][:evidence].present?
+                evidence_class = "class=question-with-evidence"
+              end
+            %> 
+            <tr <%= evidence_class %>>
+
+              <%= evaluation.fields_for :place_evaluation_answers, @place_evaluation.place_evaluation_answers[index] do |answer| %>
+
+	              <%= answer.hidden_field :question_pairing_id , :value => @question_categories[index][:question_pairing_id] %>
+
+                <td><%= @question_categories[index][:question] %></td>
+                <td>
+                  <%= answer.input :answer, :as => :radio, :label => false, :collection => [[t('app.common.answers.has_good'), PlaceEvaluation::ANSWERS['has_good']]] %>
+                  <% if evidence_class.present? %>
+                    <%= answer.input :evidence1, :label => false, :placeholder => @question_categories[index][:evidence], 
+                      :input_html => {:class => 'question-evidence', :size => 10} %>
+                  <% end %>
+                </td>
+                <td>
+                  <%= answer.input :answer, :as => :radio, :label => false, :collection => [[t('app.common.answers.has_bad'), PlaceEvaluation::ANSWERS['has_bad']]] %>
+                  <% if evidence_class.present? %>
+                    <%= answer.input :evidence2, :label => false, :placeholder => @question_categories[index][:evidence], 
+                      :input_html => {:class => 'question-evidence', :size => 10} %>
+                  <% end %>
+                </td>
+                <td>
+                  <%= answer.input :answer, :as => :radio, :label => false, :collection => [[t('app.common.answers.needs'), PlaceEvaluation::ANSWERS['needs']]] %>
+                </td>
+                <td>
+                  <%= answer.input :answer, :as => :radio, :label => false, :collection => [[t('app.common.answers.not_relevant'), PlaceEvaluation::ANSWERS['not_relevant']]] %>
+                </td>
+
+              <% end %>
+            </tr>
+
+            <% if index == @question_categories.length-1 %>
+                </tbody>
+              </table>
+            <% end %>        
+          <% end %>
+        <% end %>
