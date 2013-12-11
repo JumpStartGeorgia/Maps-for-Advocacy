@@ -4,7 +4,7 @@ en:
     models:
       user: User
       question: Question
-      question_category: QuestionCategory
+      question_category: Question Category
       venue: Venue
       venue_category: Venue Category
       place: Place
@@ -108,7 +108,7 @@ en:
       updated_sort_order: The Sort Order has been updated.
       added_existing_question: The existing question has been added to this Question Category.
       added_new_question: The new Question has been added to this Question Category.
-      added_new_question: The new Venue has been added to this Venue Category.
+      added_new_venue: The new Venue has been added to this Venue Category.
       missing_required: Please supply all required information.
   layouts:
     application:
@@ -121,7 +121,7 @@ en:
       jump:
         main: Main content (jump)
         menu: Main navigation (jump)
-        admin_menu: Administration menu (jump)
+        admin_menu: User menu (jump)
         language: Language switcher (jump)
         footer: Contact information (jump)
         skip_map: Skip the map (jump)

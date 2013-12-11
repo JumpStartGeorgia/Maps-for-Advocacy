@@ -3,11 +3,11 @@ ka:
   activerecord:
     models:
       user: მომხმარებელი
-      question: Question
-      question_category: QuestionCategory
-      venue: Venue
-      venue_category: Venue Category
-      place: Place
+      question: კითხვა
+      question_category: კითხვის კატეგორია
+      venue: ადგილმდებარეობა
+      venue_category: ადგილმდებარეობის კატეგორია
+      place: ადგილი
     attributes:
       user:
         email: ელ.ფოსტა
@@ -16,40 +16,40 @@ ka:
         role: როლი
         remember_me: დამიმახსოვრე
       question:
-        question_categories: Question Categories
+        question_categories: კითხვის კატეგორიები
       question_translation:
-        name: Question      
+        name: კითხვა      
       question_category:
-        is_common: Is Common to All Venues
-        sort_order: Sort Order
-        questions: Questions
+        is_common: საერთოა ყველა ადგილმდებარეობისთვის
+        sort_order: თანმიმდევრობის დახარისხება
+        questions: კითხვები
       question_category_translation:
-        name: Category
+        name: კატეგორია
       venue:
-        venue_category_id: Venue Category
-        question_category_id: Custom Questions
-        sort_order: Sort Order
+        venue_category_id: ადგილმდებარეობის კატეგორია
+        question_category_id: მორგებული კითხვები
+        sort_order: თანმიმდევრობის დახარისხება
       venue_translation:
-        name: Venue
+        name: ადგილმდებარეობა
       venue_category:
-        sort_order: Sort Order
-        venues: Venues
-        question_category_id: Custom Questions
+        sort_order: თანმიმდევრობის დახარისხება
+        venues: ადგილმდებარეობა
+        question_category_id: მორგებული კითხვები
       venue_category_translation:
-        name: Category
+        name: კატეგორია
       question_pairing:
-        quetion_id: Question
-        question_category_id: Question Category
+        quetion_id: კითხვა
+        question_category_id: კითხვის კატეგორია
       question_pairing_translation:
-        evidence: Evidence  
+        evidence: მტკიცებულება
       place:
-        district_id: District
-        venue_id: Venue
-        lat: Latitude
-        lon: Longitude
+        district_id: უბანი
+        venue_id: ადგილმდებარეობა
+        lat: განედი
+        lon: გრძედი
       place_translation:
-        name: Name of Place
-        address: Address
+        name: ადგილის სახელი
+        address: მისამართი
     errors:
       messages:
         required_field: "სავალდებულოა"
@@ -93,40 +93,40 @@ ka:
     common:
       app_name: Accessing Georgia
       added_on: "დამატებულია: %{date}" 
-      venue_has_questions: custom questions
+      venue_has_questions: მორგებული კითხვები
       answers:
-        has_good: Has and good
-        has_bad: Has, but not good
-        needs: Not have and needs
-        not_relevant: Not relavent
-        no_answer: No answer
+        has_good: აქვს და კარგია
+        has_bad: აქვს, მაგრამ არ არის კარგი
+        needs: არ აქვს და სჭირდება
+        not_relevant: არარელევანტურია
+        no_answer: არაა პასუხი
     msgs:
       does_not_exist: თქვენ ცდილობთ იხილოთ გვერდი, რომელიც არ არსებობს.
       not_authorized: თქვენ არ გაქვთ უფლება იხილოთ ეს გვერდი.
       success_created: "%{obj} შექმნილია."
       success_updated: "%{obj} განახლებულია."
-      updated_sort_order: The Sort Order has been updated.
-      added_existing_question: The existing question has been added to this Question Category.
-      added_new_question: The new Question has been added to this Question Category.
-      added_new_question: The new Venue has been added to this Venue Category.
-      missing_required: Please supply all required information.
+      updated_sort_order: თანმიმდევრობის დახარისხება განახლებულია
+      added_existing_question: არსებული კითხვა დაემატა  კითხვის ამ კატეგორიას
+      added_new_question: ახალი კითხვა დაემატა კითხვის ამ კატეგორიას
+      added_new_venue: ახალი ადგილმდებარეობა დაემატა ადგილმდებარეობის ამ კატეგორიას
+      missing_required: გთხოვთ მოგვაწოდეთ ყველა საჭირო ინფორმაცია
   layouts:
     application:
-      add_place: Add a Place
-      settings: Settings
+      add_place: ადგილის დამატება
+      settings: პარამეტრები
       admin: ადმინისტრატო
       sign_out: გასვლა
       js_link_title: ჯამპსტარტ ჯორჯიას - ჩვენ გაწვდით ინფორმაციას უკეთ!
       js_link_text: აგებულია
       jump:
-        main: Main content (jump)
-        menu: Main navigation (jump)
-        admin_menu: Administration menu (jump)
-        language: Language switcher (jump)
-        footer: Contact information (jump)
-        skip_map: Skip the map (jump)
-        search: Search for places (jump)
-        search_results: Search results (jump)
+        main: ძირითადი შემადგენლობა (გადახტომა)
+        menu: ძირითადი ნავიგაცია (გადახტომა)
+        admin_menu: მომხმარების მენიუა (გადახტომა)
+        language: ენის გადამრთავი (გადახტომა)
+        footer: საკონტაქტო ინფორმაცია (გადახტომა)
+        skip_map: რუკის გამოტოვება (გადახტომა)
+        search: ადგილების ძიება (გადახტომა)
+        search_results: შედეგების ძიება (გადახტომა)
     unsupported_browser:
       title: არასათანადო ბრაუზერი
       p1: სამწუხაროდ თქვენი ინტერნეტ ბრაუზერის მოხმარების ვადა გასულია და ვერ მოხდება ვებ-გვერდთან სრულად დაკავშირება.
@@ -141,20 +141,20 @@ ka:
       js_link_title: ჯამპსტარტ ჯორჯიას - ჩვენ გაწვდით ინფორმაციას უკეთ!
       js_link_text: აგებულია
       jump:
-        main: Main content (jump)
-        menu: Main navigation (jump)
-        admin_menu: Administration menu (jump)
-        language: Language switcher (jump)
-        footer: Contact information (jump)
+        main: ძირითადი შემადგენლობა (გადახტომა)
+        menu: ძირითადი ნავიგაცია (გადახტომა)
+        admin_menu: მომხმარების მენიუა (გადახტომა)
+        language: ენის გადამრთავი (გადახტომა)
+        footer: საკონტაქტო ინფორმაცია (გადახტომა)
   admin:
     index:
       title: ადმინისტრატორის განყოფილება
       users: მომხმარებლები
-      question_categories: Question Categories
-      questions: Questions
-      venue_categories: Venue Categories
-      venues: Venues
-      places: Places
+      question_categories: კითხვის კატეგორიები
+      questions: კითხვები
+      venue_categories: ადგილმდებარეობის კატეგორიები
+      venues: ადგილმდებარეობები
+      places: ადგილები
     users:
       edit:
         title: ცვლილებების შეტანა მომხმარებლის გვერდზე
@@ -166,94 +166,95 @@ ka:
         title: მომხმარებლის დეტალები
     question_categories:
       index:
-        edit_question_category: Edit Question Category
-        delete_question_category: Delete Question Category
-        edit_questions: Manage Questions
+        edit_question_category: კითხვის კატეგორიის რედაქტირება
+        delete_question_category: კითხვის კატეგორიის წაშლა
+        edit_questions: კითხვების მართვა
       questions: 
-        title: "'%{category}' Questions"        
-        submit_sort_order: Update Sort Order        
-        add_existing_question: Add Existing Question
-        add_new_question: Add New Question
-        no_existing_questions: Sorry, but there are no questions on file that are already not assigned to this Question Category.        
-        submit_existing_question: Add Existing Question
-        submit_new_question: Add New Question                
+        title: "'%{category}' კითხვები"
+        submit_sort_order: თანმიმდევრობის დახარისხების განახლება
+        add_existing_question: არსებული კითხვის დამატება
+        add_new_question: ახალი კითხვის დამატება
+        no_existing_questions: ბოდიშს გიხდით, არ მოიძებნება კითხვები, რომლებიც უკვე არ არის დაკავშირებული კითხვის ამ კატეგორიასთან
+        submit_existing_question: არსებული კითხვის დამატება
+        submit_new_question: ახალი კითხვის დამატება              
     venue_categories:
       index:
-        edit_venue_category: Edit Venue Category
-        delete_venue_category: Delete Venue Category
-        edit_venues: Manage Venues
+        edit_venue_category: ადგილმდებარობის კატეგორიის რედაქტირება
+        delete_venue_category: ადგილმდებარეობის კატეგორიის წაშლა
+        edit_venues: ადგილმდებარეობების მართვა
       venues: 
-        title: "'%{category}' Venues"
-        submit_sort_order: Update Sort Order
-        add_existing_venue: Add Existing Venue
-        add_new_venue: Add New Venue
-        no_existing_venue: Sorry, but there are no venues on file that are already not assigned to this Venue Category.
-        submit_existing_venue: Add Existing Venue
-        submit_new_venue: Add New Venue      
+        title: "'%{category}' ადგილმდებარეობები"
+        submit_sort_order: თანმიმდევრობის დახარისხების განახლება
+        add_existing_venue: არსებული ადგილმდებარეობის დამატება
+        add_new_venue: ახალი ადგილმდებარეობის დამატება
+        no_existing_venue: ბოდიშს გიხდით, არ მოიძებნა ადგილმდებარეობა, რომელიც უკვე არ არის დაკავსირებული ადგილმდებარეობის ამ კატეგორიასთან
+        submit_existing_venue: არსებული ადგილმდებარეობის დამატება
+        submit_new_venue: ახალი ადგილმდებარეობის დამატება
     places:
       form:
-        header_venue: What is the Venue?
-        header_location: Where is '%{name}' located?  
-        map_instructions: Click on the map to place a marker of where '%{name}' is located.  
-        skip_map: Skip the map and go to the address form (jump)
-        address_instructions: You can also do an address search if you do not want to use the map.
-        address_instructions2: Please enter the address and city of where '%{name}' is located.  
-        submit_address_search: Lookup Address
-        address_search_success: The address search found the following match.  Please confirm that it is correct.
-        address_search_multiple_success: The address search found the following matches.  Please select the correct one.
-        address_search_fail: Sorry, but your search did not return any results.  Please try again.
-        header_place: "'%{name}' Information"
-        header_evaluation: Evaluation of '%{name}'
-        evaluation_instructions: If you do not know the answer, please leave it blank.
-        next: Next
-        venue_link_title: "Select %{category} - %{venue}"
-        map_link_title: Select this location
+        header_venue: რა არის ადგილმდებარეობა?
+        header_location: სად მდებარეობს '%{name}'?
+        map_instructions: დააკლიკეთ რუკაზე, რათა მონიშნოთ სად მდებარეობს '%{name}'.
+        skip_map: რუკის გამოტოვება და მისამართის ფორმაში გადასვლა (გადახტომა)
+        address_instructions: შეგიძლიათ მოიძიოთ მისამართი თუ არ გსურთ რუკის გამოყენება
+        address_instructions2: გთხოვთ შეიყვანეთ მისამართი და ქალაქი, სადაც მდებარეობს '%{name}'.
+        submit_address_search: მისამართის მოძებნა
+        address_search_success: მისამართის ძიებამ იპოვა შემდეგი წყვილები. გთხოვთ დაადასტუროთ, რომ შედეგები სწორია.
+        address_search_multiple_success: მისამართის ძიებამ იპოვა შემდეგი წყვილები. გთხოვთ შეარჩიოთ სწორი შედეგი.
+        address_search_fail: არ მოიძებნა. კიდევ სცადეთ.
+        header_place: "'%{name}' ინფორმაცია"
+        header_evaluation: '%{name}'-ის შეფასება
+        evaluation_instructions: თუ არ გაქვთ პასუხი, დატოვეთ ცარიელი.
+        next: შემდეგი        
+        venue_link_title: "შეარჩიეთ %{category} - %{venue}"
+        map_link_title: შეარჩიეთ ეს მდებარეობა
   root:
     index:
-      header_filter: Select Places
-      clear_filter: Clear Selections
-      header_selections: Current Selections
-      select_all: All places selected
-      header_table: Selection Results
-      no_places: There are no Places on record that matches your search request.
-      view_place: View Details
-      view_place_title: "View the details on '%{place}'"      
+      header_filter: შეარჩიეთ ადგილები
+      clear_filter: შერჩეულის წაშლა
+      header_selections: შერჩეულები
+      select_all: ყველა ადგილი შერჩეულია
+      header_table: შერჩევის შედეგები
+      no_places: არ მოიძებნა ადგილები, რომელიც შეესაბამება თქვენს საძიებო მოთხოვნას.
+      view_place: დეტალებსი ნახვა
+      view_place_title: "'%{place}'-ის დეტალების ნახვა"
   places:
     show:
-      header_summary: Overall Summary
-      summary_result: Overall Result
-      header_overall_results: Evaluation Results
-      header_user_summary: Summary
-      header_user_details: Details
-      details_link_title: View the details of this evaluation
+      header_summary: საერთო შეჯამება
+      summary_result: საერთო შედეგები
+      header_overall_results: შეფასების შედეგები
+      header_user_summary: შეჯამება
+      header_user_details: დეტალები
+      details_link_title: იხილეთ ამ შეფასების დეტალები
     form:
-      header_venue: What is the Venue?
-      header_location: Where is '%{name}' located?  
-      map_instructions: Click on the map to place a marker of where '%{name}' is located.  
-      skip_map: Skip the map and go to the address form (jump)
-      address_instructions: You can also do an address search if you do not want to use the map.
-      address_instructions2: Please enter the address and city of where '%{name}' is located.  
-      submit_address_search: Lookup Address
-      address_search_success: The address search found the following match.  Please confirm that it is correct.
-      address_search_multiple_success: The address search found the following matches.  Please select the correct one.
-      address_search_fail: Sorry, but your search did not return any results.  Please try again.
-      header_place: "'%{name}' Information"
-      header_evaluation: Evaluation of '%{name}'
-      next: Next
-      venue_link_title: "Select %{category} - %{venue}"
-      map_link_title: Select this location
+      header_venue: რა არის ადგილმდებარეობა?
+      header_location: სად მდებარეობს '%{name}'?
+      map_instructions: დააკლიკეთ რუკას, რომ მონიშნოთ სად მდებარეობს '%{name}'.
+      skip_map: გამოტოვეთ რუკა და გადადით მისამართების ფორმასი (გადახტომა)
+      address_instructions: შეგიძლიათ მოიძიოთ მისამართი თუ არ გსურთ რუკის გამოყენება
+      address_instructions2: გთხოვთ შეიყვანეთ მისამართი და ქალაქი, სადაც მდებარეობს '%{name}'.
+      submit_address_search: მისამართის მოძებნა
+      address_search_success: მისამართის ძიებამ იპოვა შემდეგი წყვილები. გთხოვთ დაადასტუროთ, რომ შედეგები სწორია.
+      address_search_multiple_success: მისამართის ძიებამ იპოვა შემდეგი წყვილები. გთხოვთ შეარჩიოთ სწორი შედეგი.
+      address_search_fail: არ მოიძებნა. კიდევ სცადეთ.
+      header_place: "'%{name}' ინფორმაიცა"
+      header_evaluation: "'%{name}'-ის შეფასება"
+      evaluation_instructions: თუ არ გაქვთ პასუხი, დატოვეთ ცარიელი. 
+      next: შემდეგი
+      venue_link_title: "შეარჩიეთ %{category} - %{venue}"
+      map_link_title: შეარჩიეთ ეს მდებარეობა
   settings:
     index:
-      title: "Settings for '%{name}'"
-      header_location: Default Location
-      map_instructions: "Click on the map to place a marker of where you want the map to start when adding a place.  Then click on the 'Save the Location' button to the right to save your changes."
-      skip_map: Skip the map and go to the address form (jump)
-      address_instructions: You can also do an address search if you do not want to use the map.
-      address_instructions2: Please enter the address and city of where you want the map to start when adding a place.
-      submit_address_search: Lookup Address
-      address_search_success: The address search found the following match.  Please confirm that it is correct.
-      address_search_multiple_success: The address search found the following matches.  Please select the correct one.
-      address_search_fail: Sorry, but your search did not return any results.  Please try again.
-      next: Save the Location
+      title: "'%{name}'-ის პარამეტრები"
+      header_location: ავტომატური ადგილმდებარეობა
+      map_instructions: დააკლიკეთ რუკას, რომ მონიშნოთ საიდან გინდათ დაიწყოს რუკა, როდესაც ამატებთ ადგილს. შემდეგ დააკლიკეთ „ადგილმდებარეობის შენახვა“ ღილაკს მარჯვნივ ცვლილებების შესანახად.
+      skip_map: რუკის გამოტოვება და მისამართის ფორმაში გადასვლა (გადახტომა)
+      address_instructions: შეგიძლიათ მოიძიოთ მისამართი თუ არ გსურთ რუკის გამოყენება.
+      address_instructions2: გთხოვთ შეიყვანეთ მისამართი და ქალაქი, საიდანაც გსურთ რომ დაიწყოს რუკა როდესაც ამატებთ ადგილებს.
+      submit_address_search: მისამართის მოძებნა
+      address_search_success: მისამართის ძიებამ იპოვა შემდეგი წყვილები. გთხოვთ დაადასტუროთ, რომ შედეგები სწორია.
+      address_search_multiple_success: მისამართის ძიებამ იპოვა შემდეგი წყვილები. გთხოვთ შეარჩიოთ სწორი შედეგი.
+      address_search_fail: არ მოიძებნა. კიდევ სცადეთ.
+      next: ადგილმდებარეობის შენახვა
     location:
-      success: Your default map location has been saved.
+      success: თქვენი რუკის ავტომატური ადგილმდებარეობა შენახულია
