@@ -95,10 +95,11 @@ ka:
       added_on: "დამატებულია: %{date}" 
       venue_has_questions: custom questions
       answers:
-        has: Has and good
+        has_good: Has and good
         has_bad: Has, but not good
         needs: Not have and needs
-        na: Not relavent
+        not_relevant: Not relavent
+        no_answer: No answer
     msgs:
       does_not_exist: თქვენ ცდილობთ იხილოთ გვერდი, რომელიც არ არსებობს.
       not_authorized: თქვენ არ გაქვთ უფლება იხილოთ ეს გვერდი.
@@ -112,6 +113,7 @@ ka:
   layouts:
     application:
       add_place: Add a Place
+      settings: Settings
       admin: ადმინისტრატო
       sign_out: გასვლა
       js_link_title: ჯამპსტარტ ჯორჯიას - ჩვენ გაწვდით ინფორმაციას უკეთ!
@@ -202,6 +204,7 @@ ka:
         address_search_fail: Sorry, but your search did not return any results.  Please try again.
         header_place: "'%{name}' Information"
         header_evaluation: Evaluation of '%{name}'
+        evaluation_instructions: If you do not know the answer, please leave it blank.
         next: Next
         venue_link_title: "Select %{category} - %{venue}"
         map_link_title: Select this location
@@ -216,6 +219,11 @@ ka:
       view_place: View Details
       view_place_title: "View the details on '%{place}'"      
   places:
+    show:
+      header_summary: Overall Summary
+      header_overall_results: Evaluation Results
+      header_user_summary: Summary
+      header_user_details: Details
     form:
       header_venue: What is the Venue?
       header_location: Where is '%{name}' located?  

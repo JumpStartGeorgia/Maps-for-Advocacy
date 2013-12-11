@@ -1,56 +1,110 @@
 <%- model_class = Place -%>
 <%- model_class_trans = PlaceTranslation -%>
-<% title @place.name %>
-
-<p><strong><%= model_class_trans.human_attribute_name(:address) %>:</strong>
-<%= @place.address %></p>
-<p><strong><%= model_class_trans.human_attribute_name(:district_id) %>:</strong>
-<%= @place.district_id %></p>
-<p><strong><%= model_class_trans.human_attribute_name(:venue_id) %>:</strong>
-<%= @place.venue.name if @place.venue_id.present? %></p>
+<% title @place[:name].html_safe %>
 
 <div class="row-fluid">
   <div class="span6" id="venue_evalautions">
-	  <% if @question_categories.present? %>
+
+    <p><strong><%= model_class_trans.human_attribute_name(:address) %>:</strong>
+    <%= @place[:address] %></p>
+    <p><strong><%= model_class_trans.human_attribute_name(:district_id) %>:</strong>
+    <%= @place[:district_id] %></p>
+    <p><strong><%= model_class_trans.human_attribute_name(:venue_id) %>:</strong>
+    <%= @place[:venue] %></p>
+
+	  <% if @question_categories.present? && @summaries.present? %>
+      <% questions = @question_categories.map{|x| [x[:id], x[:question_category]]}.uniq %>
+      <% if questions.present? %>
+        <h2><%= t('.header_summary') %></h2>
+        <ul class="evaluation_summary">
+        <% questions.each do |question| %>
+          <li>
+            <strong><%= question[1] %>:</strong>
+            <%= number_with_precision(@summaries['overall'][question[0].to_s]) %>
+          </li>          
+        <% end %>
+        </ul>
+      <% end %>
+    <% end %>
+
+
+	  <% if @question_categories.present? && @evaluations.present? && @users.present? %>
+      <h2><%= t('.header_overall_results') %></h2>
       <% 
         qc_id = nil 
-        text = Hash.new
-        text['3'] = 'Has and good'
-        text['2'] = 'Has, but not good'
-        text['1'] = 'Not have and needs'
-        text['0'] = 'N/A'
         
-        css_class = Hash.new 
-        css_class['3'] = 'has-good'
-        css_class['2'] = 'has-not-good'
-        css_class['1'] = 'not-have'
-        css_class['0'] = ''
+        uniq_evals = @evaluations.map{|x| [x.created_at, x.user_id]}.uniq
       %>
-      <% (0..@question_categories.length-1).each do |index| %>
-        <% if @question_categories[index][:id] != qc_id %>
-          <% if qc_id.present? %>
-              </ul>
+
+      <% uniq_evals.each do |uniq_eval| %>
+        <% 
+          evals = @evaluations.select{|x| x.user_id == uniq_eval[1]}
+          user = @users.select{|x| x.id == uniq_eval[1]}.first
+          summary = @summaries['users'].select{|x| x['id'] == uniq_eval[1]}.first
+        %>
+
+        <h3 class="clear">
+          <span class="evaluation_date">
+            <%= l uniq_eval[0], :format => :no_time %>
+          </span>
+          <% if user.present? %>
+            <span class="user_name">      
+              <%= user.nickname %>
+              <% if user.avatar.present? %>
+                <%#= image_tag user.avatar, :title => user.nickname %>
+              <% end %>
+            </span>
           <% end %>
+        </h3>
 
-          <% qc_id = @question_categories[index][:id] %>
-
-          <h3><%= @question_categories[index][:question_category] %></h3>
-
-          <ul class="question-results">
+	      <% if questions.present? && summary.present? %>
+          <h4><%= t('.header_user_summary') %></h4>
+          <ul class="evaluation_summary">
+          <% questions.each do |question| %>
+            <li>
+              <strong><%= question[1] %>:</strong>
+              <%= number_with_precision(summary[question[0].to_s]) %>
+            </li>          
+          <% end %>
+          </ul>
         <% end %>
-        
-          <li>
-            <div>
-              <%= @question_categories[index][:question] %>
-            </div>
-            <div class="<%= "selected-answer #{css_class[@place.place_evaluations[index].answer.to_s]}"%>">
-              <%= text[@place.place_evaluations[index].answer.to_s] %>
-            </div>
-          </li>
 
-        <% if index == @question_categories.length-1 %>
-            </ul>
-        <% end %>        
+
+        <h4><%= t('.header_user_details') %></h4>
+        <% (0..@question_categories.length-1).each do |index| %>
+          <% if @question_categories[index][:id] != qc_id %>
+            <% if qc_id.present? %>
+                </ul>
+            <% end %>
+
+            <% qc_id = @question_categories[index][:id] %>
+
+            <h5><%= @question_categories[index][:question_category] %></h5>
+
+            <ul class="question-results">
+          <% end %>
+          
+            <li>
+              <div>
+                <%= @question_categories[index][:question] %>
+              </div>
+              <% 
+                answer = nil
+                q = evals.select{|x| x.question_pairing_id == @question_categories[index][:question_pairing_id]}
+                answer = q.first.answer if q.present?
+
+                if answer.present?
+              %>
+                <div class="<%= "selected-answer #{PlaceEvaluation.answer_key_name(answer)}"%>">
+                  <%= t("app.common.answers.#{PlaceEvaluation.answer_key_name(answer)}") %>
+                </div>
+              <% end %>
+            </li>
+
+          <% if index == @question_categories.length-1 %>
+              </ul>
+          <% end %>        
+        <% end %>
       <% end %>
     <% end %>
   </div>

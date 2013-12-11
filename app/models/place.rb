@@ -10,7 +10,18 @@ class Place < ActiveRecord::Base
   
   validates :venue_id, :lat, :lon, :presence => true
   
-
+  def self.with_translation(id=nil)
+    sql = "select p.id, p.district_id, p.venue_id, vt.name as venue, v.question_category_id, p.lat, p.lon, pt.name as place, pt.address "
+    sql << "from places as p "
+    sql << "inner join place_translations as pt on pt.place_id = p.id and pt.locale = :locale "
+    sql << "left join venues as v on v.id = p.venue_id "
+    sql << "left join venue_translations as vt on vt.venue_id = v.id and vt.locale = :locale "
+    if id.present?
+      sql << "where p.id = :place_id "
+    end
+    find_by_sql([sql, :locale => I18n.locale, :place_id => id])
+  end
+  
 
   def self.places_by_category(venue_category_id=nil)
     sql = "select p.id, pt.name as place, pt.address, p.lat, p.lon, v.venue_category_id, vt.name as venue "

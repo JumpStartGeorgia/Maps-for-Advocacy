@@ -35,9 +35,24 @@ form.place{
   }
 }
 #venue_evalautions{
+  h2{
+    margin: 20px 0;
+  }
   h3{
     margin-top: 10px;
     border-bottom: solid 2px #555;
+    .user_name{
+      float: right;
+      display: inline-block;
+      img{
+        vertical-align: middle;
+      }
+    }
+    .evaluation_date{
+      float: left;
+      display: inline-block;
+      vertical-align: middle;
+    }
   }
   table.venue_evaluation {
     thead tr th:nth-child(1){
@@ -66,22 +81,29 @@ form.place{
     }
   }
   div.selected-answer{
-    background-color: #555;
-    color: #fff;
+    background-color: #ccc;
+    color: #000;
     width: 30px;
-    &.has-good{
+    &.has_good{
       background-color: #a8d2b8;
-      color: #000;
     }
-    &.has-not-good{
+    &.has_bad{
       background-color: #eedea0;
-      color: #000;
     }
-    &.not-have{
+    &.needs{
       background-color: #e1919f;
-      color: #000;
+    }
+    &.not_relevant{
+      background-color: #555;
+      color: #fff;
     }
   }
+
+  ul.evaluation_summary li{
+    display: inline-block;
+    width: 24%;
+  }
 }  
+
 
 

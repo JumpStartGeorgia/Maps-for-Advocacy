@@ -78,4 +78,13 @@ class User < ActiveRecord::Base
 	end
 
 
+
+	##############################
+
+
+  def self.for_evaluations(user_ids)
+    select('id, nickname, avatar').where(:id => user_ids) if user_ids.present?
+  end
+
+
 end

@@ -95,10 +95,11 @@ en:
       added_on: "Added on: %{date}" 
       venue_has_questions: custom questions
       answers:
-        has: Has and good
+        has_good: Has and good
         has_bad: Has, but not good
         needs: Not have and needs
-        na: Not relavent
+        not_relevant: Not relavent
+        no_answer: No answer
     msgs:
       does_not_exist: You tried to access a page that does not exist.
       not_authorized: You are not authorized to view that page.
@@ -113,6 +114,7 @@ en:
     application:
       add_place: Add a Place
       admin: Admin
+      settings: Settings
       sign_out: Sign Out
       js_link_title: JumpStart Georgia - We communicate data better!
       js_link_text: Built by
@@ -202,6 +204,7 @@ en:
         address_search_fail: Sorry, but your search did not return any results.  Please try again.
         header_place: "'%{name}' Information"
         header_evaluation: Evaluation of '%{name}'
+        evaluation_instructions: If you do not know the answer, please leave it blank.
         next: Next
         venue_link_title: "Select %{category} - %{venue}"
         map_link_title: Select this location
@@ -216,6 +219,11 @@ en:
       view_place: View Details
       view_place_title: "View the details on '%{place}'"
   places:
+    show:
+      header_summary: Overall Summary
+      header_overall_results: Evaluation Results
+      header_user_summary: Summary
+      header_user_details: Details
     form:
       header_venue: What is the Venue?
       header_location: Where is '%{name}' located?  
@@ -229,6 +237,7 @@ en:
       address_search_fail: Sorry, but your search did not return any results.  Please try again.
       header_place: "'%{name}' Information"
       header_evaluation: Evaluation of '%{name}'
+      evaluation_instructions: If you do not know the answer, please leave it blank.
       next: Next
       venue_link_title: "Select %{category} - %{venue}"
       map_link_title: Select this location

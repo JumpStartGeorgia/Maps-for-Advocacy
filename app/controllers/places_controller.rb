@@ -4,26 +4,40 @@ class PlacesController < ApplicationController
   # GET /places/1
   # GET /places/1.json
   def show
-    @place = Place.find(params[:id])
+    @place = Place.with_translation(params[:id]).first
 
-    # get venue
-    @venue = Venue.with_translations(I18n.locale).find_by_id(@place.venue_id)
-	  # get list of questions
-	  @question_categories = QuestionCategory.questions_for_venue(@venue.question_category_id)
+    if @place.present?
 
-    if @place.lat.present? && @place.lon.present?
-      @show_map = true
-      gon.show_place_map = true
+	    # get list of questions
+	    @question_categories = QuestionCategory.questions_for_venue(@place.question_category_id)
 
-      gon.lat = @place.lat
-      gon.lon = @place.lon
-      gon.marker_popup = "<h3>#{@place.name}</h3><h4>#{@venue.name}</h4><p>#{@place.address}</p>"
+      # get evaluation results
+      @evaluations = PlaceEvaluation.where(:place_id => params[:id]).sorted
       
-    end    
+      # create summaries of evaluations
+      @summaries = PlaceEvaluation.summarize(@evaluations, @question_categories)
+      
+      # get users that submitted evaluations
+      @users = User.for_evaluations(@evaluations.map{|x| x.user_id}.uniq)
+      
 
-    respond_to do |format|
-      format.html # show.html.erb
-      format.json { render json: @place }
+      if @place.lat.present? && @place.lon.present?
+        @show_map = true
+        gon.show_place_map = true
+
+        gon.lat = @place.lat
+        gon.lon = @place.lon
+        gon.marker_popup = "<h3>#{@place[:place]}</h3><h4>#{@place[:venue]}</h4><p>#{@place[:address]}</p>"
+        
+      end    
+
+      respond_to do |format|
+        format.html # show.html.erb
+        format.json { render json: @place }
+      end
+    else
+      redirect_to root_path
+      return
     end
   end
 
@@ -60,7 +74,7 @@ class PlacesController < ApplicationController
 		  # create the evaluation object for however many questions there are
 		  if @question_categories.present?
         (0..@question_categories.length-1).each do |index|
-  		    @place.place_evaluations.build(:user_id => current_user.id, :answer => 0)
+  		    @place.place_evaluations.build(:user_id => current_user.id, :answer => PlaceEvaluation::ANSWERS['no_answer'])
 		    end
 		  end
     end

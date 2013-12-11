@@ -130,6 +130,11 @@
 	    <div id="venue_evalautions">
         <h2><%= t('.header_evaluation', :name => @venue.name) %></h2>
 
+        <p>
+          <%= t('.evaluation_instructions') %>
+        </p>
+
+
         <% 
           qc_id = nil 
         %>
@@ -148,10 +153,10 @@
               <thead>
                 <tr>
                   <th>Questions</th>
-                  <th><%= t('app.common.answers.has') %></th>
+                  <th><%= t('app.common.answers.has_good') %></th>
                   <th><%= t('app.common.answers.has_bad') %></th>
                   <th><%= t('app.common.answers.needs') %></th>
-                  <th><%= t('app.common.answers.na') %></th>
+                  <th><%= t('app.common.answers.not_relevant') %></th>
                 </tr>
               </thead>
               <tbody>
@@ -177,28 +182,24 @@
                 name_evidence2 = "place[place_evaluations_attributes][#{index}][evidence2]" 
               %>
               <td>
-                <%= evaluation.input :answer, :as => :radio, :label => false, :collection => [[t('app.common.answers.has'), 3]] %>
+                <%= evaluation.input :answer, :as => :radio, :label => false, :collection => [[t('app.common.answers.has_good'), PlaceEvaluation::ANSWERS['has_good']]] %>
                 <% if evidence_class.present? %>
                   <%= evaluation.input :evidence1, :label => false, :placeholder => @question_categories[index][:evidence], 
                     :input_html => {:class => 'question-evidence', :size => 10} %>
-                  <%#= text_field_tag name_evidence1, @place.place_evaluations[index].evidence1, 
-                      :class => "input-small question-evidence", :placeholder => @question_categories[index][:evidence] %>    
                 <% end %>
               </td>
               <td>
-                <%= evaluation.input :answer, :as => :radio, :label => false, :collection => [[t('app.common.answers.has_bad'), 2]] %>
+                <%= evaluation.input :answer, :as => :radio, :label => false, :collection => [[t('app.common.answers.has_bad'), PlaceEvaluation::ANSWERS['has_bad']]] %>
                 <% if evidence_class.present? %>
                   <%= evaluation.input :evidence2, :label => false, :placeholder => @question_categories[index][:evidence], 
                     :input_html => {:class => 'question-evidence', :size => 10} %>
-                  <%#= text_field_tag name_evidence2, @place.place_evaluations[index].evidence2, 
-                      :class => "input-small question-evidence", :placeholder => @question_categories[index][:evidence] %>    
                 <% end %>
               </td>
               <td>
-                <%= evaluation.input :answer, :as => :radio, :label => false, :collection => [[t('app.common.answers.needs'), 1]] %>
+                <%= evaluation.input :answer, :as => :radio, :label => false, :collection => [[t('app.common.answers.needs'), PlaceEvaluation::ANSWERS['needs']]] %>
               </td>
               <td>
-                <%= evaluation.input :answer, :as => :radio, :label => false, :collection => [[t('app.common.answers.na'), 0]] %>
+                <%= evaluation.input :answer, :as => :radio, :label => false, :collection => [[t('app.common.answers.not_relevant'), PlaceEvaluation::ANSWERS['not_relevant']]] %>
               </td>
 
 	          <% end %>

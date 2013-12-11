@@ -30,16 +30,6 @@
       <% 
         qc_id = nil 
         text = Hash.new
-        text['3'] = 'Has and good'
-        text['2'] = 'Has, but not good'
-        text['1'] = 'Not have and needs'
-        text['0'] = 'N/A'
-        
-        css_class = Hash.new 
-        css_class['3'] = 'has-good'
-        css_class['2'] = 'has-not-good'
-        css_class['1'] = 'not-have'
-        css_class['0'] = ''
       %>
       <% (0..@question_categories.length-1).each do |index| %>
         <% if @question_categories[index][:id] != qc_id %>
@@ -58,9 +48,17 @@
             <div>
               <%= @question_categories[index][:question] %>
             </div>
-            <div class="<%= "selected-answer #{css_class[@place.place_evaluations[index].answer.to_s]}"%>">
-              <%= text[@place.place_evaluations[index].answer.to_s] %>
-            </div>
+            <% 
+              answer = nil
+              q = evals.select{|x| x.question_pairing_id == @question_categories[index][:question_pairing_id]}
+              answer = q.first.answer if q.present?
+
+              if answer.present?
+            %>
+              <div class="<%= "selected-answer #{PlaceEvaluation.answer_key_name(answer)}"%>">
+                <%= t("app.common.answers.#{PlaceEvaluation.answer_key_name(answer)}") %>
+              </div>
+            <% end %>
           </li>
 
         <% if index == @question_categories.length-1 %>

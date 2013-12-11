@@ -72,7 +72,7 @@ class Admin::PlacesController < ApplicationController
 		  # create the evaluation object for however many questions there are
 		  if @question_categories.present?
         (0..@question_categories.length-1).each do |index|
-  		    @place.place_evaluations.build(:user_id => current_user.id, :answer => 0)
+  		    @place.place_evaluations.build(:user_id => current_user.id, :answer => PlaceEvaluation::ANSWERS['no_answer'])
 		    end
 		  end
     end
@@ -99,7 +99,7 @@ class Admin::PlacesController < ApplicationController
 	  # create the evaluation object for however many questions there are
 	  if @question_categories.present?
       (0..@question_categories.length-1).each do |index|
-		    @place.place_evaluations.build(:user_id => current_user.id, :answer => 0)
+		    @place.place_evaluations.build(:user_id => current_user.id, :answer => PlaceEvaluation::ANSWERS['no_answer'])
 	    end
 	  end
   end

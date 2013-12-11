@@ -11,13 +11,13 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131210080001) do
+ActiveRecord::Schema.define(:version => 20131211063925) do
 
   create_table "place_evaluations", :force => true do |t|
     t.integer  "place_id"
     t.integer  "user_id"
     t.integer  "question_pairing_id"
-    t.integer  "answer"
+    t.integer  "answer",              :default => 0
     t.string   "evidence"
     t.datetime "created_at"
     t.datetime "updated_at"
