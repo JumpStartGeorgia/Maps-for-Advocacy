@@ -203,7 +203,7 @@ ka:
         address_search_multiple_success: მისამართის ძიებამ იპოვა შემდეგი წყვილები. გთხოვთ შეარჩიოთ სწორი შედეგი.
         address_search_fail: არ მოიძებნა. კიდევ სცადეთ.
         header_place: "'%{name}' ინფორმაცია"
-        header_evaluation: '%{name}'-ის შეფასება
+        header_evaluation: "'%{name}'-ის შეფასება"
         evaluation_instructions: თუ არ გაქვთ პასუხი, დატოვეთ ცარიელი.
         next: შემდეგი        
         venue_link_title: "შეარჩიეთ %{category} - %{venue}"
