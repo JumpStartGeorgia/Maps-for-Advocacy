@@ -247,6 +247,7 @@ footer, footer ul li, footer div#right ul li {
   padding: 5px 15px 5px;
   text-decoration: none;
   text-align: center;
+  display: inline-block;
 }
 .navbar .nav > li > a.add_evaluation{
   margin-left: 40px;
