@@ -24,7 +24,6 @@ ActiveRecord::Schema.define(:version => 20131211120332) do
     t.integer  "place_evaluation_id"
   end
 
-  add_index "place_evaluation_answers", ["created_at"], :name => "index_place_evaluations_on_created_at"
   add_index "place_evaluation_answers", ["place_evaluation_id"], :name => "index_place_evaluation_answers_on_place_evaluation_id"
   add_index "place_evaluation_answers", ["question_pairing_id"], :name => "index_place_evaluation_answers_on_question_pairing_id"
 

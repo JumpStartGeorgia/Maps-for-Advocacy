@@ -118,6 +118,9 @@
                       %>
                         <div class="<%= "selected-answer #{PlaceEvaluation.answer_key_name(answer)}"%>">
                           <%= t("app.common.answers.#{PlaceEvaluation.answer_key_name(answer)}") %>
+                          <% if @question_categories[index][:evidence].present? && q.first.evidence.present? %>
+                            <%= " (#{@question_categories[index][:evidence]}: #{q.first.evidence})" %>
+                          <% end %>
                         </div>
                       <% end %>
                     </li>
