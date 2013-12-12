@@ -101,6 +101,10 @@ en:
         needs: Not have and needs
         not_relevant: Not relavent
         no_answer: No answer
+      add_evaluation: Add an Evaluation
+      add_evaluation_title: "Add an Evaluation for '%{place}'"
+      view_place: View Details
+      view_place_title: "View the details of '%{place}'"
     msgs:
       does_not_exist: You tried to access a page that does not exist.
       not_authorized: You are not authorized to view that page.
@@ -217,8 +221,6 @@ en:
       select_all: All places selected
       header_table: Selection Results
       no_places: There are no Places on record that matches your search request.
-      view_place: View Details
-      view_place_title: "View the details on '%{place}'"
   places:
     show:
       header_summary: Overall Summary
@@ -247,6 +249,8 @@ en:
       map_link_title: Select this location
     eval_form:
       evaluation_instructions: If you do not know the answer, please leave it blank.
+    evaluation:
+      title: "Evaluation for '%{place}'"
   settings:
     index:
       title: "Settings for '%{name}'"

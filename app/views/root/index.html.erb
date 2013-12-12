@@ -33,7 +33,7 @@
         <% @places.each do |place| %>
           <div class="place-item">
             <h3>
-              <%= link_to place[:place], place_path(:id => place.id) %>
+              <%= link_to place[:place], place_path(place) %>
             </h3>
             <h4><%= place[:venue] %></h4>
             <% if place[:address].present? %>
@@ -41,8 +41,10 @@
                 <%= place[:address] %>
               </p>
             <% end %>
-            <%= link_to t('.view_place'), place_path(:id => place.id), :class => 'view-more', 
-              :title => t('.view_place_title', :place => place[:place]) %>
+            <%= link_to t('app.common.view_place'), place_path(place), :class => 'view_more', 
+              :title => t('app.common.view_place_title', :place => place[:place]) %>
+            <%= link_to t('app.common.add_evaluation'), evaluation_place_path(place), :class => 'add_evaluation',
+              :title => t('app.common.add_evaluation_title', :place => place[:place]) %>
           </div>
         <% end %>
       <% else %>

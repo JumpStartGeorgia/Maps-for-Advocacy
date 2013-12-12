@@ -239,15 +239,26 @@ footer, footer ul li, footer div#right ul li {
 
 
 
-/* add place button in header */
-.navbar .nav > li > a#add_place{
+/* add place/evaluation button */
+.navbar .nav > li > a.add_evaluation, a.add_evaluation, a.view_more{
   background-color: #3287CC;
-  color: #fff;
+  color: #fff !important;
   text-shadow: 0 1px 0 #555;
   padding: 5px 15px 5px;
-  margin-top: 5px;
-  margin-left: 40px;
+  text-decoration: none;
+  text-align: center;
 }
-.navbar .nav > li > a#add_place:hover{
+.navbar .nav > li > a.add_evaluation{
+  margin-left: 40px;
+  margin-top: 5px;
+}
+.navbar .nav > li > a.add_evaluation:hover, a.add_evaluation:hover{
   background-color: #1267ac;
+}
+a.view_more{
+  background-color: #666;
+  color: #fff !important;
+}
+a.view_more:hover{
+  background-color: #444;
 }

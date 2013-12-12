@@ -16,7 +16,7 @@ class RootController < ApplicationController
         marker = Hash.new
         marker['lat'] = place.lat
         marker['lon'] = place.lon
-        marker['popup'] = "<h3>#{place[:place]}</h3><h4>#{place[:venue]}</h4><p>#{place[:address]}</p>#{view_context.link_to('view more', place_path(:id => place.id))}"
+        marker['popup'] = create_popup_text(place)
         gon.markers << marker
       end
     end
@@ -27,4 +27,20 @@ class RootController < ApplicationController
     end
   end
 
+
+  private
+  
+  def create_popup_text(place)
+    popup = ''
+    popup << "<h3>#{place[:place]}</h3>"
+    popup << "<h4>#{place[:venue]}</h4>"
+    popup << "<p>#{place[:address]}</p>"
+    popup << "<p>"
+    popup << view_context.link_to(t('app.common.view_place'), place_path(place.id), :title => t('app.common.view_place_title', :place => place[:place]), :class => 'view_more')
+    popup << " "
+    popup << view_context.link_to(t('app.common.add_evaluation'), place_path(place), :title => t('app.common.add_evaluation_title', :place => place[:place]), :class => 'add_evaluation')
+    popup << "</p>"
+    
+    return popup
+  end
 end

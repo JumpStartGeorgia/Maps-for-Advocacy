@@ -101,6 +101,10 @@ ka:
         needs: არ აქვს და სჭირდება
         not_relevant: არარელევანტურია
         no_answer: არაა პასუხი
+      add_evaluation: Add an Evaluation
+      add_evaluation_title: "Add an Evaluation for '%{place}'"
+      view_place: დეტალებსი ნახვა
+      view_place_title: "'%{place}'-ის დეტალების ნახვა"
     msgs:
       does_not_exist: თქვენ ცდილობთ იხილოთ გვერდი, რომელიც არ არსებობს.
       not_authorized: თქვენ არ გაქვთ უფლება იხილოთ ეს გვერდი.
@@ -217,8 +221,6 @@ ka:
       select_all: ყველა ადგილი შერჩეულია
       header_table: შერჩევის შედეგები
       no_places: არ მოიძებნა ადგილები, რომელიც შეესაბამება თქვენს საძიებო მოთხოვნას.
-      view_place: დეტალებსი ნახვა
-      view_place_title: "'%{place}'-ის დეტალების ნახვა"
   places:
     show:
       header_summary: საერთო შეჯამება
@@ -247,7 +249,7 @@ ka:
     eval_form:
       evaluation_instructions: თუ არ გაქვთ პასუხი, დატოვეთ ცარიელი. 
     evaluation:
-      title: "Evaluation for: '%{place}'"
+      title: "Evaluation for '%{place}'"
   settings:
     index:
       title: "'%{name}'-ის პარამეტრები"

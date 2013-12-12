@@ -4,13 +4,20 @@
 
 <div class="row-fluid">
   <div class="span6" id="venue_evalautions">
-
-    <p><strong><%= model_class_trans.human_attribute_name(:address) %>:</strong>
-    <%= @place[:address] %></p>
-    <p><strong><%= model_class_trans.human_attribute_name(:district_id) %>:</strong>
-    <%= @place[:district_id] %></p>
-    <p><strong><%= model_class_trans.human_attribute_name(:venue_id) %>:</strong>
-    <%= @place[:venue] %></p>
+    <div class="row-fluid top">
+      <div class="span9">
+        <p><strong><%= model_class_trans.human_attribute_name(:address) %>:</strong>
+        <%= @place[:address] %></p>
+        <p><strong><%= model_class_trans.human_attribute_name(:district_id) %>:</strong>
+        <%= @place[:district_id] %></p>
+        <p><strong><%= model_class_trans.human_attribute_name(:venue_id) %>:</strong>
+        <%= @place[:venue] %></p>
+      </div>
+      <div class="span3">
+        <%= link_to t('app.common.add_evaluation'), evaluation_place_path(@place), 
+          :class => 'add_evaluation', :title => t('app.common.add_evaluation_title', :place => @place[:name]) %>
+      </div>
+    </div>
 
 	  <% if @question_categories.present? && @summaries.present? %>
       <% questions = @question_categories.map{|x| [x[:id], x[:question_category]]}.uniq %>

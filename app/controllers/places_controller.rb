@@ -1,5 +1,5 @@
 class PlacesController < ApplicationController
-  before_filter :authenticate_user!
+  before_filter :authenticate_user!, :except => :show
 
   # GET /places/1
   # GET /places/1.json
