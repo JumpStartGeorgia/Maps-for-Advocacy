@@ -13,10 +13,15 @@
  *= require_self
 */
 
-/* hide screen read navigation */
+/* 
+  hide screen read navigation 
+  - cannot use display none for the screen reader does not read it
+*/
 .hidenav{
-  display: none;
-}
+  position: absolute !important;
+  top: -9999px !important;
+  left: -9999px !important;
+ }
 
 /* clear floats */
 .clearfix:after, .clear:after {

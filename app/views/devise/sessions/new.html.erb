@@ -5,7 +5,8 @@
 
   <%- if devise_mapping.omniauthable? %>
     <div class="providers">
-	    <%= link_to image_tag('connect_fb.png'), omniauth_authorize_path(resource_name, :facebook), :class => '' %>
+	    <%= link_to image_tag('connect_fb.png', :alt => t('helpers.links.sign_in_facebook')), 
+	        omniauth_authorize_path(resource_name, :facebook), :title => t('helpers.links.sign_in_facebook') %>
     </div>
   <% end -%>
 
