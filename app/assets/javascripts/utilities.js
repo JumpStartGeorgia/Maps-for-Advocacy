@@ -116,12 +116,12 @@ var map, marker;
         }
         address = data[i].address;
 
-        html += '<li><label for="address_' + i + '"><input type="radio" name="address" value="' + i + '" id="address_' + i + '" ';
+        html += '<li><input type="radio" name="address" value="' + i + '" id="address_' + i + '" ';
         // select the first one by default
         if (i == 0){
           html += 'checked="checked"';
         }
-        html += 'data-lat="' + lat + '" data-lon="' + lon + '" data-address="' + address + '">' + address + '</label></li>';
+        html += 'data-lat="' + lat + '" data-lon="' + lon + '" data-address="' + address + '"><label for="address_' + i + '">' + address + '</label></li>';
       }
       html += '</ul>';
       $('#address-search-results #address-search-multiple-match .placeholder').html(html);
