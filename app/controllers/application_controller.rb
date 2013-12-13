@@ -69,7 +69,7 @@ logger.debug "////////////////////////// BROWSER = #{user_agent}"
 
 	def initialize_gon
 		gon.set = true
-		gon.highlight_first_form_field = true
+		gon.highlight_first_form_field = false
 
 		gon.tile_url = "http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
     gon.map_id = 'map'
