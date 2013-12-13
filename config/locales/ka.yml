@@ -101,8 +101,8 @@ ka:
         needs: არ აქვს და სჭირდება
         not_relevant: არარელევანტურია
         no_answer: არაა პასუხი
-      add_evaluation: Add an Evaluation
-      add_evaluation_title: "Add an Evaluation for '%{place}'"
+      add_evaluation: შეფასების დამატება
+      add_evaluation_title: "'%{place}'-ის სეფასების დამატება"
       view_place: დეტალებსი ნახვა
       view_place_title: "'%{place}'-ის დეტალების ნახვა"
     msgs:
@@ -249,7 +249,7 @@ ka:
     eval_form:
       evaluation_instructions: თუ არ გაქვთ პასუხი, დატოვეთ ცარიელი. 
     evaluation:
-      title: "Evaluation for '%{place}'"
+      title: "'%{place}'-ის შეფასება"
   settings:
     index:
       title: "'%{name}'-ის პარამეტრები"
