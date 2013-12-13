@@ -21,8 +21,8 @@ form.place{
       &[aria-hidden="false"]{
         display: block;
       }
-      label{
-        display: inline-block;
+      label, input[type="radio"]{
+        display: inline;
       }
     }
   }
@@ -73,6 +73,11 @@ form.place{
     thead tr th:nth-child(1){
       width: 35%;
     }
+    tr td{
+      label, input[type="radio"]{
+        display: inline;
+      }
+    }
     tr.question-with-evidence td {
       .radio .choices{
         margin-left: 0;
@@ -80,6 +85,19 @@ form.place{
       input.question-evidence{
         display: none;
       }
+    }
+  }
+  div.venue_evaluation {
+    & > .row-fluid {
+      padding: 5px 0 0 5px;
+      &:nth-child(even) {background: #ddd}
+      &:nth-child(odd) {background: #FFF}
+      [class*="span"]{
+        min-height: 25px;
+      }
+    }
+    label, input[type="radio"]{
+      display: inline;
     }
   }
   ul.question-results li {

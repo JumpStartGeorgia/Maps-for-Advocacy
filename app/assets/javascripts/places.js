@@ -39,19 +39,19 @@ $(document).ready(function(){
     /* show the evidence text fields as need */
     function show_question_evidence(ths){
       if ($(ths).is(':checked') && ($(ths).val() == '4' || $(ths).val() == '3') ) {
-        $(ths).closest('tr').find('input[type="text"]').css('display', 'none');
-        $(ths).closest('td').find('input[type="text"]').css('display', 'inline');
+        $(ths).closest('div.venue_evaluation_question').find('input[type="text"]').attr('aria-hidden', 'true');
+        $(ths).closest('div').find('input[type="text"]').attr('aria-hidden', 'false');
       } else{
-        $(ths).closest('tr').find('input[type="text"]').css('display', 'none');
+        $(ths).closest('div.venue_evaluation_question').find('input[type="text"]').attr('aria-hidden', 'true');
       }
     }
   
-    $('form.place table.venue_evaluation tr.question-with-evidence td input[type="radio"]').change(function(){
+    $('form.place div.venue_evaluation div.question-with-evidence input[type="radio"]').change(function(){
       show_question_evidence(this);
     });
 
     /* if any vields are already marked, show evidence if necessary */  
-    $('form.place table.venue_evaluation tr.question-with-evidence td input[type="radio"]:checked').each(function(){
+    $('form.place div.venue_evaluation div.question-with-evidence input[type="radio"]:checked').each(function(){
       show_question_evidence(this);
     });
   }
