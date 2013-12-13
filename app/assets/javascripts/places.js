@@ -38,7 +38,7 @@ $(document).ready(function(){
   if (gon.show_evaluation_form){
     /* show the evidence text fields as need */
     function show_question_evidence(ths){
-      if ($(ths).is(':checked') && ($(ths).val() == '3' || $(ths).val() == '2') ) {
+      if ($(ths).is(':checked') && ($(ths).val() == '4' || $(ths).val() == '3') ) {
         $(ths).closest('tr').find('input[type="text"]').css('display', 'none');
         $(ths).closest('td').find('input[type="text"]').css('display', 'inline');
       } else{

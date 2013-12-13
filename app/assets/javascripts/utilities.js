@@ -27,7 +27,7 @@ var map, marker;
     }
   
     // hide previous messages
-    $('#address-search-results > div').fadeOut(100);
+    $('#address-search-results > div').attr('aria-hidden', 'true');
   }
 
   /* update button coordinates */
@@ -96,10 +96,12 @@ var map, marker;
     reset_map();
     
     if (data.length == 0){
-      $('#address-search-results #address-search-fail').fadeIn();
+//      $('#address-search-results #address-search-fail').fadeIn();
+      $('#address-search-results #address-search-fail').attr('aria-hidden', 'false');
     }else if (data.length == 1){
       $('#address-search-results #address-search-1-match .placeholder').html(address);
-      $('#address-search-results #address-search-1-match').fadeIn();
+//      $('#address-search-results #address-search-1-match').fadeIn();
+      $('#address-search-results #address-search-1-match').attr('aria-hidden', 'false');
 
       create_map_marker(lat, lon, address);
 
@@ -123,7 +125,8 @@ var map, marker;
       }
       html += '</ul>';
       $('#address-search-results #address-search-multiple-match .placeholder').html(html);
-      $('#address-search-results #address-search-multiple-match').fadeIn();
+//      $('#address-search-results #address-search-multiple-match').fadeIn();
+      $('#address-search-results #address-search-multiple-match').attr('aria-hidden', 'false');
 
       // create marker for item that is selected by default
       var first_marker = $('#address-search-results div input[type="radio"]:checked');
@@ -152,7 +155,8 @@ var map, marker;
     var address = $('input#address-search').val();
     if (address.length == 0){
       // show msg
-      $('#address-search-results #address-search-fail').fadeIn();        
+//      $('#address-search-results #address-search-fail').fadeIn();        
+      $('#address-search-results #address-search-fail').attr('aria-hidden', 'false');
     }else
     {
       $.post(gon.address_search_path,{address:address},function(data){								
