@@ -25,16 +25,17 @@
       <% (0..@question_categories.length-1).each do |index| %>
         <% if @question_categories[index][:id] != qc_id %>
           <% if qc_id.present? %>
+              <% last_index = index - 1 %>
               </ul></td>
-              <td><%= @question_categories[index-1][:is_common] %></td>
+              <td><%= @question_categories[last_index][:is_common] %></td>
               <td>
                 <%= link_to t('.edit_questions'),
-                            questions_admin_question_category_path(:id => @question_categories[index-1].id), :class => 'btn btn-mini' %>
+                            questions_admin_question_category_path(:id => @question_categories[last_index].id), :class => 'btn btn-mini' %>
                 <%= link_to t('.edit_question_category'),
-                            edit_admin_question_category_path(@question_categories[index-1].id), :class => 'btn btn-mini' %>
+                            edit_admin_question_category_path(@question_categories[last_index].id), :class => 'btn btn-mini' %>
                 <br />
                 <%= link_to t('.delete_question_category'),
-                            admin_question_category_path(@question_categories[index-1].id),
+                            admin_question_category_path(@question_categories[last_index].id),
                             :method => :delete,
                             :confirm => t('app.buttons.confirm'),
                             :class => 'btn btn-mini btn-danger' %>

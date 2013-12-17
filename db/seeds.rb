@@ -5,6 +5,8 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+=begin
 ##################################
 ## Questions
 ##################################
@@ -18,64 +20,6 @@ QuestionPairingTranslation.delete_all
 
 puts "creating question records"
 
-#parking
-qc = QuestionCategory.create(:id => 1, :is_common => true, :sort_order => 1)
-qc.question_category_translations.create(:locale => 'en', :name => 'Parking')
-qc.question_category_translations.create(:locale => 'ka', :name => 'Parking')
-q = Question.create(:id => 1)
-q.question_translations.create(:locale => 'en', :name => 'Designated parking or drop off area')
-q.question_translations.create(:locale => 'ka', :name => 'Designated parking or drop off area')
-QuestionPairing.create(:id => 1, :question_category_id => qc.id, :question_id => q.id, :sort_order => 1)
-q = Question.create(:id => 2)
-q.question_translations.create(:locale => 'en', :name => 'Barrier free parking or drop off area')
-q.question_translations.create(:locale => 'ka', :name => 'Barrier free parking or drop off area')
-QuestionPairing.create(:id => 2, :question_category_id => qc.id, :question_id => q.id, :sort_order => 2)
-q = Question.create(:id => 3)
-q.question_translations.create(:locale => 'en', :name => 'Firm, level, slip-resistant surface')
-q.question_translations.create(:locale => 'ka', :name => 'Firm, level, slip-resistant surface')
-QuestionPairing.create(:id => 3, :question_category_id => qc.id, :question_id => q.id, :sort_order => 3)
-q = Question.create(:id => 4)
-q.question_translations.create(:locale => 'en', :name => 'Free of abrupt changes in surface level')
-q.question_translations.create(:locale => 'ka', :name => 'Free of abrupt changes in surface level')
-qp = QuestionPairing.create(:id => 4, :question_category_id => qc.id, :question_id => q.id, :sort_order => 4)
-qp.question_pairing_translations.create(:locale => 'en', :evidence => 'Height (m)')
-qp.question_pairing_translations.create(:locale => 'ka', :evidence => 'Height (m)')
-q = Question.create(:id => 5)
-q.question_translations.create(:locale => 'en', :name => 'Accessible route in and out of parking or drop off area')
-q.question_translations.create(:locale => 'ka', :name => 'Accessible route in and out of parking or drop off area')
-QuestionPairing.create(:id => 5, :question_category_id => qc.id, :question_id => q.id, :sort_order => 5)
-q = Question.create(:id => 6)
-q.question_translations.create(:locale => 'en', :name => 'Designated parking or drop off area is shortest possible route to an accessible entrance')
-q.question_translations.create(:locale => 'ka', :name => 'Designated parking or drop off area is shortest possible route to an accessible entrance')
-QuestionPairing.create(:id => 6, :question_category_id => qc.id, :question_id => q.id, :sort_order => 6)
-
-
-#outside pathways
-qc = QuestionCategory.create(:id => 2, :is_common => true, :sort_order => 2)
-qc.question_category_translations.create(:locale => 'en', :name => 'Outside Pathways')
-qc.question_category_translations.create(:locale => 'ka', :name => 'Outside Pathways')
-q = Question.create(:id => 7)
-q.question_translations.create(:locale => 'en', :name => 'Barrier free pathway')
-q.question_translations.create(:locale => 'ka', :name => 'Barrier free pathway')
-QuestionPairing.create(:id => 7, :question_category_id => qc.id, :question_id => q.id, :sort_order => 1)
-qp = QuestionPairing.create(:id => 9, :question_category_id => qc.id, :question_id => 4, :sort_order => 3)
-qp.question_pairing_translations.create(:locale => 'en', :evidence => 'Height (m)')
-qp.question_pairing_translations.create(:locale => 'ka', :evidence => 'Height (m)')
-q = Question.create(:id => 10)
-q.question_translations.create(:locale => 'en', :name => 'Gratings in pathway have small openings')
-q.question_translations.create(:locale => 'ka', :name => 'Gratings in pathway have small openings')
-QuestionPairing.create(:id => 10, :question_category_id => qc.id, :question_id => q.id, :sort_order => 4)
-q = Question.create(:id => 11)
-q.question_translations.create(:locale => 'en', :name => 'Pathway width is adequate')
-q.question_translations.create(:locale => 'ka', :name => 'Pathway width is adequate')
-qp = QuestionPairing.create(:id => 11, :question_category_id => qc.id, :question_id => q.id, :sort_order => 5)
-qp.question_pairing_translations.create(:locale => 'en', :evidence => 'Width (m)')
-qp.question_pairing_translations.create(:locale => 'ka', :evidence => 'Width (m)')
-
-
-
-
-=begin
 # parking
 qc = QuestionCategory.create(:id => 1, :is_common => true, :sort_order => 1)
 qc.question_category_translations.create(:locale => 'en', :name => 'Parking')
@@ -227,7 +171,7 @@ q.question_translations.create(:locale => 'en', :name => 'Special services avail
 q.question_translations.create(:locale => 'ka', :name => 'Special services available for disabled persons')
 QuestionPairing.create(:id => 25, :question_category_id => qc.id, :question_id => q.id, :sort_order => 1)
 
-=end
+
 puts "done question records"
 
 
@@ -619,4 +563,4 @@ v.venue_translations.create(:locale => 'ka', :name => 'Airport')
 
 
 puts "done venue records"
-
+=end

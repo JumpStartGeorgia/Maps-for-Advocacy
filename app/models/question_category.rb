@@ -10,32 +10,38 @@ class QuestionCategory < ActiveRecord::Base
   accepts_nested_attributes_for :question_pairings
   attr_accessible :id, :is_common, :question_category_translations_attributes, :question_pairings_attributes, :sort_order
 
+  before_save :set_sort_order
+  DEFAULT_SORT_ORDER = 99
+  
+  def set_sort_order
+    self.sort_order = DEFAULT_SORT_ORDER if read_attribute(:sort_order).blank?
+  end
+
 
   def self.with_questions(options = {})
-#    question_category_id=nil, common_only=false
     options[:common_only] = false if options[:common_only].nil?
     
     sql = "SELECT qc.id, qc.is_common, qc.sort_order, qct.name as question_category, qp.sort_order as question_sort_order, q.id as question_id, qt.name as question, qpt.evidence, qp.id as question_pairing_id "
-    sql << "FROM `question_categories` as qc "
-    sql << "LEFT OUTER JOIN `question_category_translations` as qct ON qct.`question_category_id` = qc.`id` and qct.`locale` = :locale "
-    sql << "LEFT OUTER JOIN `question_pairings` as qp ON qp.`question_category_id` = qc.`id` "
-    sql << "LEFT OUTER JOIN `question_pairing_translations` as qpt ON qpt.`question_pairing_id` = qp.`id`  and qpt.`locale` = :locale "
-    sql << "LEFT OUTER JOIN `questions` as q ON q.`id` = qp.`question_id` " 
-    sql << "LEFT OUTER JOIN `question_translations` as qt ON qt.`question_id` = q.`id` and qt.`locale` = :locale "
+    sql << "FROM question_categories as qc "
+    sql << "LEFT OUTER JOIN question_category_translations as qct ON qct.question_category_id = qc.id and qct.locale = :locale "
+    sql << "LEFT OUTER JOIN question_pairings as qp ON qp.question_category_id = qc.id "
+    sql << "LEFT OUTER JOIN question_pairing_translations as qpt ON qpt.question_pairing_id = qp.id  and qpt.locale = :locale "
+    sql << "LEFT OUTER JOIN questions as q ON q.id = qp.question_id " 
+    sql << "LEFT OUTER JOIN question_translations as qt ON qt.question_id = q.id and qt.locale = :locale "
+    sql << "where qc.ancestry is null "
     if options[:question_category_id].present? || options[:common_only]
       and_required = options[:question_category_id].present? && options[:common_only]
-      sql << "where "
       if options[:question_category_id].present?
-        sql << "qc.id = :question_category_id "
+        sql << "and qc.id = :question_category_id "
       end
       if and_required
-        sql << "and "
+#        sql << "and "
       end
       if options[:common_only]
-        sql << "qc.is_common = 1 "
+        sql << "and qc.is_common = 1 "
       end
     end
-    sql << "order by qc.is_common desc, qc.sort_order asc, qct.name asc, qp.sort_order asc, qt.name asc "
+#    sql << "order by qc.is_common desc, qc.sort_order asc, qct.name asc, qp.sort_order asc, qt.name asc "
     find_by_sql([sql, :locale => I18n.locale, :question_category_id => options[:question_category_id]])
   end
   
@@ -74,10 +80,11 @@ class QuestionCategory < ActiveRecord::Base
     idx_parent_is_common = 2
     idx_child_name = 3
     idx_child_sort = 4
-    idx_question = 5
-    idx_question_sort = 6
-    idx_question_evidence = 7
-    idx_venue_name = 8
+    idx_child_is_common = 5
+    idx_question = 6
+    idx_question_sort = 7
+    idx_question_evidence = 8
+    idx_venue_name = 9
     current_parent, current_child, current_venue = nil
     
 		original_locale = I18n.locale
@@ -139,7 +146,7 @@ class QuestionCategory < ActiveRecord::Base
 
             	puts "******** - having to get child: #{row[idx_child_name]}"
               # need to create new question category or get it from db if already exists
-              current_child = get_category(row[idx_child_name], row[idx_child_sort], nil, current_parent.id)
+              current_child = get_category(row[idx_child_name], row[idx_child_sort], row[idx_child_is_common], current_parent.id)
 
               if current_child.blank? || current_child.id.blank?
           		  msg = "Row #{n}: Could not find/create child"
