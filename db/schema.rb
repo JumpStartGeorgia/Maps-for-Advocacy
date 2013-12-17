@@ -67,8 +67,10 @@ ActiveRecord::Schema.define(:version => 20131217073810) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "sort_order", :default => 99
+    t.string   "ancestry"
   end
 
+  add_index "question_categories", ["ancestry"], :name => "index_question_categories_on_ancestry"
   add_index "question_categories", ["is_common"], :name => "index_question_categories_on_is_common"
   add_index "question_categories", ["sort_order"], :name => "index_question_categories_on_sort_order"
 
@@ -119,10 +121,7 @@ ActiveRecord::Schema.define(:version => 20131217073810) do
   create_table "questions", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "ancestry"
   end
-
-  add_index "questions", ["ancestry"], :name => "index_questions_on_ancestry"
 
   create_table "users", :force => true do |t|
     t.string   "email",                                                  :default => "", :null => false

@@ -43,4 +43,121 @@ class VenueCategory < ActiveRecord::Base
     find_by_sql([sql, :locale => I18n.locale, :venue_category_id => venue_category_id])
   end
   
+  
+  #######################################
+  ## load venue categories and venues
+  ## from csv file
+  #######################################
+  def self.process_csv_upload(file, delete_first=false)
+		start = Time.now
+    infile = file.read
+    n, msg = 0, ""
+    idx_category_name = 0
+    idx_category_sort = 1
+    idx_venue_name = 2
+    idx_venue_sort = 3
+    current_category = nil
+    
+		original_locale = I18n.locale
+    I18n.locale = :en
+
+		VenueCategory.transaction do
+		  if delete_first
+        puts "******** deleting all venues on record first"
+        # quicker to do delete all instead of destroy        
+        VenueCategory.delete_all
+        VenueCategoryTranslation.delete_all
+        Venue.delete_all
+        VenueTranslation.delete_all
+        Place.delete_all
+        PlaceTranslation.delete_all
+        PlaceEvaluation.delete_all
+        PlaceEvaluationAnswer.delete_all
+		  end
+		
+		
+		  CSV.parse(infile) do |row|
+        question = nil
+        startRow = Time.now
+		    n += 1
+        puts "@@@@@@@@@@@@@@@@@@ processing row #{n}"
+
+        if n > 1
+          # get venue category
+          # if the name does not match the last rows, create it if necessary
+          if current_category.nil? || current_category[:name] != row[idx_category_name].strip
+            if row[idx_category_name].blank?
+	      		  msg = "Row #{n}: Category name is not provided"
+			        raise ActiveRecord::Rollback
+	      		  return msg
+            end
+
+          	puts "******** having to get parent: #{row[idx_category_name]}"
+            # need to create new question category or get it from db if already exists
+            current_category = get_category(row[idx_category_name], row[idx_category_sort])
+          end
+
+          if current_category.blank? || current_category.id.blank?
+	    		  msg = "Row #{n}: Could not find/create category"
+			      raise ActiveRecord::Rollback
+	    		  return msg
+          end
+
+        	puts "******** - category: #{current_category.id}; #{current_category[:name]}"
+          
+          # create venue
+          if row[idx_venue_name].present?
+          	puts "******** creating venue"
+            v = Venue.create(:venue_category_id => current_category.id, :sort_order => row[idx_venue_sort])
+            I18n.available_locales.each do |locale|
+              v.venue_translations.create(:locale => locale, :name => row[idx_venue_name])
+            end
+          else
+	    		  msg = "Row #{n}: Venue name is not provided"
+			      raise ActiveRecord::Rollback
+	    		  return msg
+          end         
+          
+        	puts "******** time to process row: #{Time.now-startRow} seconds"
+          puts "************************ total time so far : #{Time.now-start} seconds"
+        end
+      end  
+  
+		end
+  	puts "****************** time to build_from_csv: #{Time.now-start} seconds"
+
+		# reset the locale
+		I18n.locale = original_locale
+
+    return msg
+  end
+
+
+  ######################################
+  ######################################
+  ######################################
+private
+  # get venue category and if not exist, create it
+  def self.get_category(name, sort)
+    vc = nil
+    name.strip! if name.present?
+    sort.strip! if sort.present?
+    
+
+    x = select('venue_categories.id, venue_category_translations.name').includes(:venue_category_translations)
+          .where(:venue_categories => {:sort_order => sort}, :venue_category_translations => {:locale => I18n.locale, :name => name})
+          
+    vc = x.first if x.present?
+    
+    if vc.nil?
+      vc = VenueCategory.create(:sort_order => sort)
+      I18n.available_locales.each do |locale|
+        vc.venue_category_translations.create(:locale => locale, :name => name)
+      end
+      vc[:name] = name
+    end
+    
+    return vc
+  end
+    
 end
