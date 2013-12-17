@@ -7,7 +7,7 @@ class Admin::QuestionCategoriesController < ApplicationController
   # GET /question_categories
   # GET /question_categories.json
   def index
-    @question_categories = QuestionCategory.with_questions
+    @question_categories = QuestionCategory.with_questions()
 
     respond_to do |format|
       format.html # index.html.erb

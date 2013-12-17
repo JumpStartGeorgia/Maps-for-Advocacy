@@ -19,6 +19,39 @@ class QuestionCategory < ActiveRecord::Base
 
 
   def self.with_questions(options = {})
+    categories = nil
+    options[:common_only] = false if options[:common_only].nil?
+
+    categories = with_translations(I18n.locale).order('question_categories.sort_order asc')
+    if options[:child_of].present?
+      categories = categories.where('question_categories.ancestry = ?', options[:child_of]) 
+    else
+      categories = categories.where('question_categories.ancestry is null') 
+    end
+    categories = categories.where('question_categories.is_common = 1') if options[:common_only].present?
+    categories = categories.where('question_categories.id = ?', options[:question_category_id]) if options[:question_category_id].present?
+    
+    if categories.present?
+    
+      categories.each do |cat|
+        # get the questions for this category
+        cat[:questions] = Question.in_category(cat.id)
+
+        # if this category has sub_categories, get them too
+        if cat.has_children?
+          new_options = {:child_of => cat.path_ids.join('/'), :common_only => options[:common_only]}
+
+          cat[:sub_categories] = with_questions(new_options)
+        end
+      
+      end
+    
+    end
+  
+    return categories
+  end
+
+  def self.with_questions_old(options = {})
     options[:common_only] = false if options[:common_only].nil?
     
     sql = "SELECT qc.id, qc.is_common, qc.sort_order, qct.name as question_category, qp.sort_order as question_sort_order, q.id as question_id, qt.name as question, qpt.evidence, qp.id as question_pairing_id "
@@ -61,7 +94,7 @@ class QuestionCategory < ActiveRecord::Base
     questions.flatten!    
     
     # remove any items that do not have a question
-    questions = questions.select{|x| x[:question].present?}
+#    questions = questions.select{|x| x[:question].present?}
     
     return questions
   end

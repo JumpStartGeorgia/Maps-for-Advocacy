@@ -20,56 +20,57 @@
     </tr>
   </thead>
   <tbody>
-    <% qc_id = nil %>
-    <% if @question_categories.present? %>
-      <% (0..@question_categories.length-1).each do |index| %>
-        <% if @question_categories[index][:id] != qc_id %>
-          <% if qc_id.present? %>
-              <% last_index = index - 1 %>
-              </ul></td>
-              <td><%= @question_categories[last_index][:is_common] %></td>
-              <td>
-                <%= link_to t('.edit_questions'),
-                            questions_admin_question_category_path(:id => @question_categories[last_index].id), :class => 'btn btn-mini' %>
-                <%= link_to t('.edit_question_category'),
-                            edit_admin_question_category_path(@question_categories[last_index].id), :class => 'btn btn-mini' %>
-                <br />
-                <%= link_to t('.delete_question_category'),
-                            admin_question_category_path(@question_categories[last_index].id),
-                            :method => :delete,
-                            :confirm => t('app.buttons.confirm'),
-                            :class => 'btn btn-mini btn-danger' %>
-              </td>
-            </tr>
-          <% end %>
-
-          <% qc_id = @question_categories[index][:id] %>
-
-          <tr>
-            <td><%= @question_categories[index][:sort_order] %></td>
-            <td><%= @question_categories[index][:question_category] %></td>
-            <td><ul class="standard">
-        <% end %>
-        
-        <% if @question_categories[index][:question].present? %>
-          <li>
-            <%= @question_categories[index][:question] %>
-            <% if @question_categories[index][:evidence].present? %>
-              <%= " (#{@question_categories[index][:evidence]})" %>
+    <% @question_categories.each do |cat| %>
+      <tr>
+        <td>
+          <%= cat.sort_order %>
+        </td>
+        <td>
+          <%= cat.name %>
+        </td>
+        <td>
+          <ul class="standard">
+            <% cat[:questions].each do |question| %>
+              <li>
+                <%= question[:question] %>
+                <% if question[:evidence].present? %>
+                  <%= " (#{question[:evidence]})" %>
+                <% end %>
+              </li>
             <% end %>
-          </li>
-        <% end %>      
-      <% end %>
-        </ul></td>
-        <td><%= @question_categories[@question_categories.length-1][:is_common] %></td>
+            <% if cat[:sub_categories].present? %>
+              <% cat[:sub_categories].each do |sub| %>
+                <li>
+                  <%= sub.name %>
+                  <% if sub[:questions].present? %>
+                    <ul class="standard">
+                      <% sub[:questions].each do |sub_question| %>
+                        <li>
+                          <%= sub_question[:question] %>
+                          <% if sub_question[:evidence].present? %>
+                            <%= " (#{sub_question[:evidence]})" %>
+                          <% end %>
+                        </li>
+                      <% end %>
+                    </ul>
+                  <% end %>
+                </li>
+              <% end %>
+            <% end %>
+
+          </ul>
+        </td>
+        <td>
+          <%= cat.is_common %>
+        </td>
         <td>
           <%= link_to t('.edit_questions'),
-                      questions_admin_question_category_path(:id => @question_categories[@question_categories.length-1].id), :class => 'btn btn-mini' %>
+                      questions_admin_question_category_path(cat), :class => 'btn btn-mini' %>
           <%= link_to t('.edit_question_category'),
-                      edit_admin_question_category_path(@question_categories[@question_categories.length-1].id), :class => 'btn btn-mini' %>
+                      edit_admin_question_category_path(cat), :class => 'btn btn-mini' %>
           <br />
           <%= link_to t('.delete_question_category'),
-                      admin_question_category_path(@question_categories[@question_categories.length-1].id),
+                      admin_question_category_path(cat),
                       :method => :delete,
                       :confirm => t('app.buttons.confirm'),
                       :class => 'btn btn-mini btn-danger' %>
@@ -78,6 +79,8 @@
     <% end %>
   </tbody>
 </table>
+
+
 
 
 
