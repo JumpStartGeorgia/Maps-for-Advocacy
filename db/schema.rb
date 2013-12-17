@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131211120332) do
+ActiveRecord::Schema.define(:version => 20131217073810) do
 
   create_table "place_evaluation_answers", :force => true do |t|
     t.integer  "old_place_id"
@@ -119,7 +119,10 @@ ActiveRecord::Schema.define(:version => 20131211120332) do
   create_table "questions", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "ancestry"
   end
+
+  add_index "questions", ["ancestry"], :name => "index_questions_on_ancestry"
 
   create_table "users", :force => true do |t|
     t.string   "email",                                                  :default => "", :null => false
