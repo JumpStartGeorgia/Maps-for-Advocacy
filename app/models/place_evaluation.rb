@@ -26,14 +26,17 @@ class PlaceEvaluation < ActiveRecord::Base
 
   # create a summary of the evaluation results
   # create summary for each evaluation and then an overall summary
-  def self.summarize(evaluations, questions)
+  def self.summarize(evaluations, question_categories)
     summary = Hash.new
     summary['overall'] = Hash.new
     summary['evaluations'] = []
   
+    questions = organize_questions(question_categories)
+  
     if evaluations.present? && questions.present?
+      
       # get unique question category ids
-      category_ids = questions.map{|x| x.id}.uniq
+      category_ids = questions.map{|x| x[:category_id]}.uniq
       
       evaluations.each do |evaluation|
         # create evaluation summaries
@@ -51,7 +54,7 @@ class PlaceEvaluation < ActiveRecord::Base
 
         # for each category, get answers            
         category_ids.each do |category_id|
-          question_pairing_ids = questions.select{|x| x.id == category_id}.map{|x| x['question_pairing_id']}
+          question_pairing_ids = questions.select{|x| x[:category_id] == category_id}.map{|x| x[:question_pairing_id]}
           if question_pairing_ids.present?
             evals = []
             # get evaluation records that match
@@ -77,7 +80,7 @@ class PlaceEvaluation < ActiveRecord::Base
         
         # - by category
         category_ids.each do |category_id|
-          question_pairing_ids = questions.select{|x| x.id == category_id}.map{|x| x['question_pairing_id']}
+          question_pairing_ids = questions.select{|x| x[:category_id] == category_id}.map{|x| x[:question_pairing_id]}
           if question_pairing_ids.present?
             evals = []
             # get evaluation records that match
@@ -101,4 +104,22 @@ Rails.logger.debug "*************** summary = #{summary}"
   end
 
     
+    
+private
+  ## return 1-d array of all questions with their category and pairing id
+  ## [{:category_id, :question_pairing_id}]
+  def self.organize_questions(question_categories, category_id=nil)
+    categories = []
+    if question_categories.present?
+      question_categories.each do |cat|
+        cat_id = category_id.present? ? category_id : cat.id
+        categories << cat[:questions].map{|x| {:category_id => cat_id, :question_pairing_id => x['question_pairing_id']} }
+        # if there are subcategories get the questions from those too
+        if cat[:sub_categories].present?
+          categories << organize_questions(cat[:sub_categories], cat_id)
+        end
+      end
+    end
+    return categories.flatten!
+  end    
 end

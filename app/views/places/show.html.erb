@@ -20,7 +20,7 @@
     </div>
 
 	  <% if @question_categories.present? && @summaries.present? %>
-      <% questions = @question_categories.map{|x| [x[:id], x[:question_category]]}.uniq %>
+      <% questions = @question_categories.map{|x| [x[:id], x.name]}.uniq %>
       <% if questions.present? %>
         <h2><%= t('.header_summary') %></h2>
         <p><strong><%= t('.summary_result') %>:</strong>
@@ -65,7 +65,6 @@
         </h3>
 
 	      <% if questions.present? && summary.present? %>
-          <h4><%= t('.header_user_summary') %></h4>
           <p><strong><%= t('.summary_result') %>:</strong>
             <%= number_with_precision(summary['overall']) %>
           </p>
@@ -83,52 +82,20 @@
         <div class="accordion" id="<%= "accordion_#{evaluation.id}" %>">
           <div class="accordion-group">
             <div class="accordion-heading">
-              <h4 class="panel-title">
+              <div class="panel-title">
                 <a class="accordion-toggle" data-toggle="collapse" data-parent="<%= "#accordion_#{evaluation.id}" %>" 
                   href="<%= "#collapse_#{evaluation.id}" %>" title="<%= t('.details_link_title') %>">
                   <%= t('.header_user_details') %>
                 </a>
-              </h4>
+              </div>
             </div>
             <div id="<%= "collapse_#{evaluation.id}" %>" class="accordion-body collapse">
               <div class="accordion-inner">
-                <% (0..@question_categories.length-1).each do |index| %>
-                  <% if @question_categories[index][:id] != qc_id %>
-                    <% if qc_id.present? %>
-                        </ul>
-                    <% end %>
 
-                    <% qc_id = @question_categories[index][:id] %>
-
-                    <h5><%= @question_categories[index][:question_category] %></h5>
-
-                    <ul class="question-results">
-                  <% end %>
-                  
-                    <li>
-                      <div>
-                        <%= @question_categories[index][:question] %>
-                      </div>
-                      <% 
-                        answer = nil
-                        q = evaluation.place_evaluation_answers.select{|x| x.question_pairing_id == @question_categories[index][:question_pairing_id]}
-                        answer = q.first.answer if q.present?
-
-                        if answer.present?
-                      %>
-                        <div class="<%= "selected-answer #{PlaceEvaluation.answer_key_name(answer)}"%>">
-                          <%= t("app.common.answers.#{PlaceEvaluation.answer_key_name(answer)}") %>
-                          <% if @question_categories[index][:evidence].present? && q.first.evidence.present? %>
-                            <%= " (#{@question_categories[index][:evidence]}: #{q.first.evidence})" %>
-                          <% end %>
-                        </div>
-                      <% end %>
-                    </li>
-
-                  <% if index == @question_categories.length-1 %>
-                      </ul>
-                  <% end %>        
+                <% @question_categories.each do |cat| %>
+                  <%= render :partial => 'show_answers', :locals => {:evaluation => evaluation, :cat => cat, :is_sub_category => false} %>
                 <% end %>
+
               </div>
             </div>
           </div>

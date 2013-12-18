@@ -29,36 +29,7 @@
           <%= cat.name %>
         </td>
         <td>
-          <ul class="standard">
-            <% cat[:questions].each do |question| %>
-              <li>
-                <%= question[:question] %>
-                <% if question[:evidence].present? %>
-                  <%= " (#{question[:evidence]})" %>
-                <% end %>
-              </li>
-            <% end %>
-            <% if cat[:sub_categories].present? %>
-              <% cat[:sub_categories].each do |sub| %>
-                <li>
-                  <%= sub.name %>
-                  <% if sub[:questions].present? %>
-                    <ul class="standard">
-                      <% sub[:questions].each do |sub_question| %>
-                        <li>
-                          <%= sub_question[:question] %>
-                          <% if sub_question[:evidence].present? %>
-                            <%= " (#{sub_question[:evidence]})" %>
-                          <% end %>
-                        </li>
-                      <% end %>
-                    </ul>
-                  <% end %>
-                </li>
-              <% end %>
-            <% end %>
-
-          </ul>
+          <%= render :partial => 'question_list', :locals => {:cat => cat} %>
         </td>
         <td>
           <%= cat.is_common %>

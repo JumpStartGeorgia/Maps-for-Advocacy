@@ -1,0 +1,21 @@
+          <ul class="standard">
+            <% cat[:questions].each do |question| %>
+              <li>
+                <%= question[:question] %>
+                <% if question[:evidence].present? %>
+                  <%= " (#{question[:evidence]})" %>
+                <% end %>
+              </li>
+            <% end %>
+            <% if cat[:sub_categories].present? %>
+              <% cat[:sub_categories].each do |sub| %>
+                <li>
+                  <%= sub.name %>
+                  <% if sub[:questions].present? %>
+                    <%= render :partial => 'question_list', :locals => {:cat => sub} %>
+                  <% end %>
+                </li>
+              <% end %>
+            <% end %>
+          </ul>
+

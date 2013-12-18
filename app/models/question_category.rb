@@ -99,6 +99,26 @@ class QuestionCategory < ActiveRecord::Base
     return questions
   end
   
+
+  #######################################
+  ## calculate how many questions are in this array of question categories
+  ## - have to look for sub categories in each category
+  #######################################
+  def self.number_questions(question_categories)
+    num = 0
+    if question_categories.present?
+      question_categories.each do |qc|
+        num += qc[:questions].length
+      
+        num += number_questions(qc[:sub_categories]) if qc[:sub_categories].present?
+      end
+    end
+    return num
+  end
+
+
+  
+  
   
   #######################################
   ## load question categories, quetsions and pairings 

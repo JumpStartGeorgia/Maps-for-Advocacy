@@ -75,9 +75,12 @@ class PlacesController < ApplicationController
 		  # create the evaluation object for however many questions there are
 		  if @question_categories.present?
 		    @place_evaluation = @place.place_evaluations.build(:user_id => current_user.id)
-        (0..@question_categories.length-1).each do |index|
-  		    @place_evaluation.place_evaluation_answers.build(:answer => PlaceEvaluation::ANSWERS['no_answer'])
-		    end
+		    num_questions = QuestionCategory.number_questions(@question_categories)
+		    if num_questions > 0
+          (0..num_questions-1).each do |index|
+    		    @place_evaluation.place_evaluation_answers.build(:answer => PlaceEvaluation::ANSWERS['no_answer'])
+		      end
+        end
 		  end
     end
 
@@ -123,12 +126,12 @@ class PlacesController < ApplicationController
         format.json { render json: @place, status: :created, location: @place }
       else
         gon.show_evaluation_form = true
-        gon.address_search_path = address_search_places_path
         params[:stage] = '3'
 	      # get venue
 	      @venue = Venue.with_translations(I18n.locale).find_by_id(@place.venue_id)
 		    # get list of questions
 		    @question_categories = QuestionCategory.questions_for_venue(@venue.question_category_id)
+        @place_evaluation = @place.place_evaluations.first
         format.html { render action: "new" }
         format.json { render json: @place.errors, status: :unprocessable_entity }
       end
@@ -244,9 +247,12 @@ class PlacesController < ApplicationController
 		    # create the evaluation object for however many questions there are
 		    if @question_categories.present?
 		      @place_evaluation = @place.place_evaluations.build(:user_id => current_user.id)
-          (0..@question_categories.length-1).each do |index|
-    		    @place_evaluation.place_evaluation_answers.build(:answer => PlaceEvaluation::ANSWERS['no_answer'])
-		      end
+		      num_questions = QuestionCategory.number_questions(@question_categories)
+		      if num_questions > 0
+            (0..num_questions-1).each do |index|
+      		    @place_evaluation.place_evaluation_answers.build(:answer => PlaceEvaluation::ANSWERS['no_answer'])
+		        end
+          end
 		    end
 
         respond_to do |format|

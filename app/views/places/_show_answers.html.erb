@@ -1,0 +1,38 @@
+                  <% if is_sub_category %>
+                    <h5><%= cat.name %></h5>
+                  <% else %>
+                    <h4><%= cat.name %></h4>
+                  <% end %>
+
+                  <ul class="question-results">
+                    <% cat[:questions].each do |question| %>
+                      <li>
+                        <div>
+                          <%= question[:question] %>
+                        </div>
+                        <% 
+                          answer = nil
+                          q = evaluation.place_evaluation_answers.select{|x| x.question_pairing_id == question[:question_pairing_id]}
+                          answer = q.first.answer if q.present?
+
+                          if answer.present?
+                        %>
+                          <div class="<%= "selected-answer #{PlaceEvaluation.answer_key_name(answer)}"%>">
+                            <%= t("app.common.answers.#{PlaceEvaluation.answer_key_name(answer)}") %>
+                            <% if question[:evidence].present? && q.first.evidence.present? %>
+                              <%= " (#{question[:evidence]}: #{q.first.evidence})" %>
+                            <% end %>
+                          </div>
+                        <% end %>
+                      </li>
+                    <% end %>
+                  </ul>
+
+                  <% if cat[:sub_categories].present? %>
+                    <% cat[:sub_categories].each do |sub| %>
+                      <%= render :partial => 'show_answers', :locals => {:evaluation => evaluation, :cat => sub, :is_sub_category => true} %>
+                    <% end %>
+                  <% end %>
+
+
+

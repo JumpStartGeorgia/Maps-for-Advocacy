@@ -3,85 +3,15 @@
         </p>
 
         <% 
-          qc_id = nil 
+          @question_index = -1
         %>
         <%= f.fields_for :place_evaluations, @place_evaluation do |evaluation| %>
           <%= evaluation.hidden_field :user_id , :value => @place_evaluation.user_id %>
 
-          <% (0..@question_categories.length-1).each do |index| %>
-            <% if @question_categories[index][:id] != qc_id %>
-              <% if qc_id.present? %>
-                  </div>
-              <% end %>
+          <% @question_categories.each do |cat| %>
 
-              <% qc_id = @question_categories[index][:id] %>
+            <%= render :partial => 'eval_form_questions', :locals => {:evaluation => evaluation, :cat => cat, :is_sub_category => false} %>
 
-              <h3><%= @question_categories[index][:question_category] %></h3>
-
-              <div class="venue_evaluation">
-
-            <% end %>
-            
-            <% 
-              evidence_class = ''
-              if @question_categories[index][:evidence].present?
-                evidence_class = "question-with-evidence"
-              end
-            %> 
-            <div class="<%= "venue_evaluation_question row-fluid #{evidence_class}" %>">
-              <%= evaluation.fields_for :place_evaluation_answers, @place_evaluation.place_evaluation_answers[index] do |answer| %>
-
-                <%= answer.hidden_field :question_pairing_id , :value => @question_categories[index][:question_pairing_id] %>
-
-                <% 
-                  input_id = "place_place_evaluations_attributes_0_place_evaluation_answers_attributes_#{index}_answer_" 
-                  input_name = "place[place_evaluations_attributes][0][place_evaluation_answers_attributes][#{index}][answer]" 
-                %>
-                <fieldset>
-                  <div class="span4">
-                    <legend><%= @question_categories[index][:question] %></legend>
-                  </div>
-                  <div class="span8">
-                    <div class="row-fluid">
-                      <div class="span3">
-                        <input id="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['has_good']}" %>" 
-                              name="<%= input_name %>" type="radio" value="<%= PlaceEvaluation::ANSWERS['has_good'] %>">
-                        <label for="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['has_good']}" %>"><%= t('app.common.answers.has_good') %></label>
-
-                        <% if evidence_class.present? %>
-                          <%= answer.input :evidence1, :label => false, :placeholder => @question_categories[index][:evidence], 
-                            :input_html => {:class => 'question-evidence', :size => 10, :'aria-hidden' => "true"} %>
-                        <% end %>
-                      </div>
-                      <div class="span3">
-                        <input id="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['has_bad']}" %>" 
-                              name="<%= input_name %>" type="radio" value="<%= PlaceEvaluation::ANSWERS['has_bad'] %>">
-                        <label for="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['has_bad']}" %>"><%= t('app.common.answers.has_bad') %></label>
-
-                        <% if evidence_class.present? %>
-                          <%= answer.input :evidence2, :label => false, :placeholder => @question_categories[index][:evidence], 
-                            :input_html => {:class => 'question-evidence', :size => 10, :'aria-hidden' => "true"} %>
-                        <% end %>
-                      </div>
-                      <div class="span3">
-                        <input id="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['needs']}" %>" 
-                              name="<%= input_name %>" type="radio" value="<%= PlaceEvaluation::ANSWERS['needs'] %>">
-                        <label for="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['needs']}" %>"><%= t('app.common.answers.needs') %></label>
-                      </div>
-                      <div class="span3">
-                        <input id="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['not_relevant']}" %>" 
-                              name="<%= input_name %>" type="radio" value="<%= PlaceEvaluation::ANSWERS['not_relevant'] %>">
-                        <label for="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['not_relevant']}" %>"><%= t('app.common.answers.not_relevant') %></label>
-                      </div>
-                    </div>                  
-                  </div>
-                </fieldset>
-              <% end %>
-            </div>
-
-
-            <% if index == @question_categories.length-1 %>
-                </div>
-            <% end %>        
           <% end %>
         <% end %>
+
