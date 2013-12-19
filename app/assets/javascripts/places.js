@@ -7,7 +7,7 @@ $(document).ready(function(){
       $('#venue_category_lists .venue_category').addClass('accessibly-hidden');
       
       // turn on the correct list
-      $('#venue_category_lists .venue_category[data-id="' + $(this).data('id') + '"]').removeClass('accessibly-hidden');
+      $('#venue_category_lists .venue_category[data-id="' + $(this).data('id') + '"]').removeClass('accessibly-hidden').focus();
       
     });
 

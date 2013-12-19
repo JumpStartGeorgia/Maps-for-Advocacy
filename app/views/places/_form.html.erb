@@ -29,7 +29,7 @@
           venues = @venue_categories.select{|x| x.id == category[0]}
           if venues.present?
       %>
-        <div id="venue_category_#{category[0]}" class="venue_category accessibly-hidden" data-id="<%= category[0] %>">
+        <div id="venue_category_#{category[0]}" class="venue_category accessibly-hidden" data-id="<%= category[0] %>" tabindex="0">
           <h3><%= category[1] %></h3>
           <ul>
             <% venues.each do |venue| %>
