@@ -35,7 +35,7 @@
             <% venues.each do |venue| %>
               <li>
                 <%= link_to venue[:venue], new_place_path(:stage => '2', :venue_id => venue[:venue_id]), 
-                  :role => 'button', :title => t('.venue_link_title', :category => category[1], :venue => venue[:venue]) %>
+                  :role => 'button' %>
               </li>
             <% end %>            
           </ul>
