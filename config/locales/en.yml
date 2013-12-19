@@ -232,9 +232,17 @@ en:
       details_link_title: View the details of this evaluation
     form:
       header_venue: What is the Venue?
+      venue_instructions: Select a venue category to view a list of venues.
+      venue_category_link_title: View venues in '%{name}'
+      skip_venue_search: Go to select venue category (jump)
+      venue_filter_num_match: venue matches found.
+      venue_category_title: View the venues in '%{name}'
+      venue_link_title: "Select %{category} - %{venue}"
       header_location: Where is '%{name}' located?  
       map_instructions: Click on the map to place a marker of where '%{name}' is located.  
-      skip_map: Skip the map and go to the address form (jump)
+      skip_map: Skip the map and go to the address search form (jump)
+      skip_to_address_search: Go to the address search form (jump)
+      address_search_results: Results of the address search
       address_instructions: You can also do an address search if you do not want to use the map.
       address_instructions2: Please enter the address and city of where '%{name}' is located.  
       submit_address_search: Lookup Address
@@ -246,7 +254,6 @@ en:
       evaluation_instructions: If you do not know the answer, please leave it blank.
       questions: Questions
       next: Next
-      venue_link_title: "Select %{category} - %{venue}"
       map_link_title: Select this location
     eval_form:
       evaluation_instructions: If you do not know the answer, please leave it blank.

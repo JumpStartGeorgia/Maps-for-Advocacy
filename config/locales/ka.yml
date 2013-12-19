@@ -232,9 +232,17 @@ ka:
       details_link_title: იხილეთ ამ შეფასების დეტალები
     form:
       header_venue: რა არის ადგილმდებარეობა?
+      venue_instructions: Select a venue category to view a list of venues.
+      venue_category_link_title: View venues in '%{name}'
+      skip_venue_search: Go to select venue category (jump)
+      venue_filter_num_match: venue matches found.
+      venue_category_title: View the venues in '%{name}'
+      venue_link_title: "შეარჩიეთ %{category} - %{venue}"
       header_location: სად მდებარეობს '%{name}'?
       map_instructions: დააკლიკეთ რუკას, რომ მონიშნოთ სად მდებარეობს '%{name}'.
-      skip_map: გამოტოვეთ რუკა და გადადით მისამართების ფორმასი (გადახტომა)
+      skip_map: Skip the map and go to the address search form (jump)
+      skip_to_address_search: Go to the address search form (jump)
+      address_search_results: Results of the address search
       address_instructions: შეგიძლიათ მოიძიოთ მისამართი თუ არ გსურთ რუკის გამოყენება
       address_instructions2: გთხოვთ შეიყვანეთ მისამართი და ქალაქი, სადაც მდებარეობს '%{name}'.
       submit_address_search: მისამართის მოძებნა
@@ -245,7 +253,6 @@ ka:
       header_evaluation: "'%{name}'-ის შეფასება"
       questions: კითხვები
       next: შემდეგი
-      venue_link_title: "შეარჩიეთ %{category} - %{venue}"
       map_link_title: შეარჩიეთ ეს მდებარეობა
     eval_form:
       evaluation_instructions: თუ არ გაქვთ პასუხი, დატოვეთ ცარიელი. 

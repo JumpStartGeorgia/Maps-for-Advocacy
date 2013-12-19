@@ -7,35 +7,43 @@
 
   <% if params[:stage] == '1' %>
     <h2><%= t('.header_venue') %></h2>
-    
-    <table id="place-venue-categories" class="table table-striped display">
-      <thead>
-        <tr>
-          <th><%= model_class_vt.human_attribute_name(:name) %></th>
-          <th><%= model_class_v.human_attribute_name(:venues) %></th>
-          <th><%=t '.actions', :default => t("helpers.actions") %></th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @venue_categories.each do |venue| %>
-          <% if venue[:venue].present? %>
-            <tr>
-              <td>
-                <%= venue[:venue_category] %>
-              </td>
-              <td>
-                <%= venue[:venue] %>
-              </td>
-              <td>
-                <%= link_to t('.next'), new_place_path(:stage => '2', :venue_id => venue[:venue_id]), 
-                  :class => 'btn btn-mini', :role => 'button', :title => t('.venue_link_title', :category => venue[:venue_category], :venue => venue[:venue]) %>
-              </td>
-            </tr>
-          <% end %>      
-        <% end %>
-      </tbody>
-    </table>
+    <p><%= t('.venue_instructions') %></p>
+    <ul id="venue_categories">
+      <%
+        categories = @venue_categories.map{|x| [x.id, x.venue_category]}.uniq
+        categories.each do |category|
+      %>
+        <li>
+          <%= link_to category[1], "##{category[0]}", :title => t('.venue_category_link_title', :name => category[1]), :'data-id' => category[0] %>
+        </li>
+      <% end %>      
+    </ul>
 
+    <hr />
+
+    <div id="venue_category_lists">
+      <%
+        categories = @venue_categories.map{|x| [x.id, x.venue_category]}.uniq
+        categories.each do |category|
+
+          venues = @venue_categories.select{|x| x.id == category[0]}
+          if venues.present?
+      %>
+        <div id="venue_category_#{category[0]}" class="venue_category accessibly-hidden" data-id="<%= category[0] %>">
+          <h3><%= category[1] %></h3>
+          <ul>
+            <% venues.each do |venue| %>
+              <li>
+                <%= link_to venue[:venue], new_place_path(:stage => '2', :venue_id => venue[:venue_id]), 
+                  :role => 'button', :title => t('.venue_link_title', :category => category[1], :venue => venue[:venue]) %>
+              </li>
+            <% end %>            
+          </ul>
+          <a href="#venue_categories" class="accessibly-hidden"><%= t('.skip_venue_search') %></a>
+        </div>
+        <% end %>
+      <% end %>
+    </div>
 
 
 
@@ -69,6 +77,7 @@
         </p>
         
         <div id="address-search-results" aria-live="polite" aria-relevant="additions" aria-busy="false">
+          <a href="#address-search-results" id="address-search-results" class="accessibly-hidden"><%= t('.address_search_results') %></a>
           <div id="address-search-1-match" class="alert alert-info" aria-hidden="true">
             <p>
               <%= t('.address_search_success') %>
@@ -94,6 +103,7 @@
                   :class => 'btn btn-mini', :id => 'place_map_next', :role => 'button', :'aria-hidden' => true,
                   :title => t('.map_link_title') %>
           </p>
+          <a href="#address-search" class="accessibly-hidden"><%= t('.skip_to_address_search') %></a>
         </div>      
       </div>
     </div>

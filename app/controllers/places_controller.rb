@@ -52,6 +52,8 @@ class PlacesController < ApplicationController
 	  @venue = Venue.with_translations(I18n.locale).find_by_id(params[:venue_id]) if params[:venue_id].present?
 
     if params[:stage] == '1' # venues
+      gon.place_form_venue_filter = true
+      gon.place_form_venue_num_match = t('places.form.venue_filter_num_match')
       @venue_categories = VenueCategory.with_venues
     elsif params[:stage] == '2' # map
       @show_map = true

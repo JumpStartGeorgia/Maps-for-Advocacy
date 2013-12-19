@@ -1,5 +1,63 @@
 $(document).ready(function(){
   /*************************************************/
+  /* venue filter on place form */
+  if (gon.place_form_venue_filter){
+    $('ul#venue_categories li a').click(function(){
+      // turn off all lists
+      $('#venue_category_lists .venue_category').addClass('accessibly-hidden');
+      
+      // turn on the correct list
+      $('#venue_category_lists .venue_category[data-id="' + $(this).data('id') + '"]').removeClass('accessibly-hidden');
+      
+    });
+
+/*
+    // custom css expression for a case-insensitive contains()
+    jQuery.expr[':'].Contains = function(a,i,m){
+      return (a.textContent || a.innerText || "").toUpperCase().indexOf(m[3].toUpperCase())>=0;
+    };
+
+
+    $('#filter-input').change( function () {
+      var filter = $(this).val();
+      var list = '.venue-category ul';
+      if(filter) {
+        // this finds all links in a list that contain the input,
+        // and hide the ones not containing the input while showing the ones that do
+        $(list).find("a:not(:Contains(" + filter + "))").parent().slideUp().addClass('hidden').removeClass('visible');
+        $(list).find("a:Contains(" + filter + ")").parent().slideDown().addClass('visible').removeClass('hidden');
+        
+      } else {
+        $(list).find("li").slideDown().addClass('visible').removeClass('hidden');
+      }
+
+      // show number of matches
+      $('.venue-filter-num-match').html($(list).find('li.visible').length + ' ' + gon.place_form_venue_num_match);
+
+      // if no matches, hide everything
+      // else, only show sections that have match in list
+      if ($(list).find('li.visible').length == 0){
+        $('.venue-category').slideUp();
+      } else {
+        // only category if have results
+        $('.venue-category').each(function(){
+          if ($(this).find('li.visible').length == 0){
+            $(this).slideUp();
+          }else{
+            $(this).slideDown();
+          }
+        });
+      }
+      return false;
+    })
+    .keyup( function () {
+      // fire the above change event after every letter
+      $(this).change();
+    });
+*/
+  }
+  
+  
   /* show map for place form */
   if (gon.show_place_form_map){
       map = L.map(gon.map_id).setView([gon.lat, gon.lon], gon.zoom);
