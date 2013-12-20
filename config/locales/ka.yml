@@ -249,6 +249,9 @@ ka:
       address_search_success: მისამართის ძიებამ იპოვა შემდეგი წყვილები. გთხოვთ დაადასტუროთ, რომ შედეგები სწორია.
       address_search_multiple_success: მისამართის ძიებამ იპოვა შემდეგი წყვილები. გთხოვთ შეარჩიოთ სწორი შედეგი.
       address_search_fail: არ მოიძებნა. კიდევ სცადეთ.
+      header_name: What is the name of the '%{name}'?
+      label_name: "'%{name}' Name"
+      name_link_title: Save this name
       header_place: "'%{name}' ინფორმაიცა"
       header_evaluation: "'%{name}'-ის შეფასება"
       questions: კითხვები

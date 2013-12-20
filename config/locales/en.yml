@@ -249,6 +249,9 @@ en:
       address_search_success: The address search found the following match.  Please confirm that it is correct.
       address_search_multiple_success: The address search found the following matches.  Please select the correct one.
       address_search_fail: Sorry, but your search did not return any results.  Please try again.
+      header_name: What is the name of the '%{name}'?
+      label_name: "'%{name}' Name"
+      name_link_title: Save this name
       header_place: "'%{name}' Information"
       header_evaluation: Evaluation of '%{name}'
       evaluation_instructions: If you do not know the answer, please leave it blank.

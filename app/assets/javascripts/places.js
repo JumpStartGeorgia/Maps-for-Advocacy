@@ -57,6 +57,28 @@ $(document).ready(function(){
 */
   }
   
+  /* show name for place form */
+  if (gon.show_place_name_form){
+    $('form.place #place_name').change(function(){
+      var name = $(this).val();
+      var url = updateQueryStringParameter($('#place_name_next').attr('href'), 'name', name);
+
+      if (name.length == 0){
+        // hide the next button
+        $('#place_name_next').attr('href', url).attr('aria-hidden', 'true');
+      }else {
+        // show the next button
+        $('#place_name_next').attr('href', url).attr('aria-hidden', 'false');
+
+      }
+    })
+    .keyup( function () {
+      // fire the above change event after every letter
+      $(this).change();
+    });
+
+  }  
+  
   
   /* show map for place form */
   if (gon.show_place_form_map){

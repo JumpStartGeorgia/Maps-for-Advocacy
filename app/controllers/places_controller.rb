@@ -55,11 +55,13 @@ class PlacesController < ApplicationController
       gon.place_form_venue_filter = true
       gon.place_form_venue_num_match = t('places.form.venue_filter_num_match')
       @venue_categories = VenueCategory.with_venues
-    elsif params[:stage] == '2' # map
+    elsif params[:stage] == '2' # name
+      gon.show_place_name_form = true
+    elsif params[:stage] == '3' # map
       @show_map = true
       gon.show_place_form_map = true
       gon.address_search_path = address_search_places_path
-    elsif params[:stage] == '3' # evaluation
+    elsif params[:stage] == '4' # evaluation
       @place.venue_id = params[:venue_id]
       @place.lat = params[:lat]
       @place.lon = params[:lon]
@@ -68,7 +70,7 @@ class PlacesController < ApplicationController
       # create the translation object for however many locales there are
       # so the form will properly create all of the nested form fields
       I18n.available_locales.each do |locale|
-			  @place.place_translations.build(:locale => locale.to_s, :address => params[:address])
+			  @place.place_translations.build(:locale => locale.to_s, :address => params[:address], :name => params[:name])
 		  end
 		
 		  # get list of questions
@@ -128,7 +130,7 @@ class PlacesController < ApplicationController
         format.json { render json: @place, status: :created, location: @place }
       else
         gon.show_evaluation_form = true
-        params[:stage] = '3'
+        params[:stage] = '4'
 	      # get venue
 	      @venue = Venue.with_translations(I18n.locale).find_by_id(@place.venue_id)
 		    # get list of questions
@@ -156,7 +158,7 @@ class PlacesController < ApplicationController
       else
         gon.show_evaluation_form = true
         gon.address_search_path = address_search_places_path
-        params[:stage] = '3'
+        params[:stage] = '4'
 	      # get venue
 	      @venue = Venue.with_translations(I18n.locale).find_by_id(@place.venue_id)
 		    # get list of questions

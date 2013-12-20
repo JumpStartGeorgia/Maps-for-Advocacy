@@ -45,17 +45,31 @@
       <% end %>
     </div>
 
-
-
   <% elsif params[:stage] == '2' %>
+    <h2><%= t('.header_name', :name => @venue.name) %></h2>
 
-    <h2><%= t('.header_location', :name => @venue.name) %></h2>
+    <div class="string control-group required stringish">
+      <label class=" control-label" for="place_name"><%= t('.label_name', :name => @venue.name) %></label>
+      <div class="controls">
+        <%= text_field_tag 'place_name', params[:name] %>
+      </div>
+    </div>
+
+    <p>
+      <%= link_to t('.next'), new_place_path(:stage => '3', :venue_id => params[:venue_id], :name => ''), 
+            :class => 'btn btn-mini', :id => 'place_name_next', :role => 'button', :'aria-hidden' => true,
+            :title => t('.name_link_title') %>
+    </p>
+
+  <% elsif params[:stage] == '3' %>
+
+    <h2><%= t('.header_location', :name => params[:name]) %></h2>
     
     <div id="place-form-address-search" class="row-fluid">
       <div class="span9">
         <a href="#address-search" class="accessibly-hidden"><%= t('.skip_map') %></a>
         <p>
-          <%= t('.map_instructions', :name => @venue.name) %>
+          <%= t('.map_instructions', :name => params[:name]) %>
         </p>
         <div id="map"></div>
       </div>
@@ -65,7 +79,7 @@
         </p>
       
         <p>
-          <%= t('.address_instructions2', :name => @venue.name) %>
+          <%= t('.address_instructions2', :name => params[:name]) %>
         </p>
         
         <p>
@@ -99,7 +113,7 @@
           </div>
 
           <p>
-            <%= link_to t('.next'), new_place_path(:stage => '3', :venue_id => params[:venue_id], :lat => '', :lon => '', :address => ''), 
+            <%= link_to t('.next'), new_place_path(:stage => '4', :venue_id => params[:venue_id], :name => params[:name], :lat => '', :lon => '', :address => ''), 
                   :class => 'btn btn-mini', :id => 'place_map_next', :role => 'button', :'aria-hidden' => true,
                   :title => t('.map_link_title') %>
           </p>
@@ -110,23 +124,13 @@
     
 
   
-  <% elsif params[:stage] == '3' %>
-
-    <h2><%= t('.header_place', :name => @venue.name) %></h2>
+  <% elsif params[:stage] == '4' %>
 
     <% create_sorted_translation_objects(@place.place_translations).each do |trans| %>
 		  <%= f.fields_for :place_translations, trans do |translation| %>
-        <% 
-          style=nil
-          style = "style=display:none;" if trans.locale != I18n.locale.to_s
-        %>
-
-			  <div <%= style %>>
-				  <%= translation.input :name %>
-				  <%= translation.hidden_field :locale , :value => trans.locale %>
-				  <%= translation.hidden_field :address , :value => trans.address %>
-			  </div>
-
+			  <%= translation.hidden_field :name %>
+			  <%= translation.hidden_field :locale %>
+			  <%= translation.hidden_field :address %>
 		  <% end %>
 	  <% end %>
 
@@ -138,7 +142,7 @@
 	
 	  <% if @question_categories.present? %>
 	    <div id="venue_evalautions">
-        <h2><%= t('.header_evaluation', :name => @venue.name) %></h2>
+        <h2><%= t('.header_evaluation', :name => params[:name]) %></h2>
 
         <%= render :partial => 'eval_form', :locals => {:f => f} %>
         
