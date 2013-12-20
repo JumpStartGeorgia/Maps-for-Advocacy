@@ -8,10 +8,48 @@
         <%= f.fields_for :place_evaluations, @place_evaluation do |evaluation| %>
           <%= evaluation.hidden_field :user_id , :value => @place_evaluation.user_id %>
 
-          <% @question_categories.each do |cat| %>
+          <ul class="question_categories">
+            <% @question_categories.each_with_index do |cat, index| %>
+              <%
+                css = index == 0 ? 'active' : ''
+              %>
+              <li>
+                <%= link_to cat.name, "#question_#{cat.id}", :title => t('.question_category_link_title', :name => cat.name), :'data-id' => cat.id, :class => css %>
+              </li>
+            <% end %>      
+          </ul>
 
-            <%= render :partial => 'eval_form_questions', :locals => {:evaluation => evaluation, :cat => cat, :is_sub_category => false} %>
+          <hr />
 
-          <% end %>
+
+          <div id="question_category_lists">
+            <% @question_categories.each_with_index do |cat, index| %>
+              <%
+                css = index == 0 ? '' : 'accessibly-hidden'
+              %>
+              <div id="<%= "question_#{cat.id}"%> " class="question_category <%= css %>" data-id="<%= cat.id %>" tabindex="0">
+                <p>
+                  <%= t('.question_instructions') %>
+                </p>
+
+                <%= render :partial => 'eval_form_questions', :locals => {:evaluation => evaluation, :cat => cat, :is_sub_category => false} %>
+              </div>
+            <% end %>
+          </div>
+
+          <hr />
+
+          <ul class="question_categories">
+            <% @question_categories.each_with_index do |cat, index| %>
+              <%
+                css = index == 0 ? 'active' : ''
+              %>
+              <li>
+                <%= link_to cat.name, "#question_#{cat.id}", :title => t('.question_category_link_title', :name => cat.name), :'data-id' => cat.id, :class => css %>
+              </li>
+            <% end %>      
+          </ul>
+
+
         <% end %>
 

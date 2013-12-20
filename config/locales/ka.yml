@@ -257,10 +257,14 @@ ka:
       questions: კითხვები
       next: შემდეგი
       map_link_title: შეარჩიეთ ეს მდებარეობა
+      submit: Submit the Evaluation
     eval_form:
-      evaluation_instructions: თუ არ გაქვთ პასუხი, დატოვეთ ცარიელი. 
+      evaluation_instructions: Fill out the evaluation by selecting a category and answering the statements.
+      question_category_link_title: View questions in '%{name}'
+      question_instructions: თუ არ გაქვთ პასუხი, დატოვეთ ცარიელი. 
     evaluation:
       title: "'%{place}'-ის შეფასება"
+      submit: Submit the Evaluation
   settings:
     index:
       title: "'%{name}'-ის პარამეტრები"

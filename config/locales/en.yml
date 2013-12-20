@@ -254,14 +254,17 @@ en:
       name_link_title: Save this name
       header_place: "'%{name}' Information"
       header_evaluation: Evaluation of '%{name}'
-      evaluation_instructions: If you do not know the answer, please leave it blank.
       questions: Questions
       next: Next
       map_link_title: Select this location
+      submit: Submit the Evaluation
     eval_form:
-      evaluation_instructions: If you do not know the answer, please leave it blank.
+      evaluation_instructions: Fill out the evaluation by selecting a category and answering the statements.
+      question_category_link_title: View questions in '%{name}'
+      question_instructions: If you do not know the answer, please leave it blank.
     evaluation:
       title: "Evaluation for '%{place}'"
+      submit: Submit the Evaluation
   settings:
     index:
       title: "Settings for '%{name}'"

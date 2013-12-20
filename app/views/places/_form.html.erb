@@ -14,7 +14,7 @@
         categories.each do |category|
       %>
         <li>
-          <%= link_to category[1], "##{category[0]}", :title => t('.venue_category_link_title', :name => category[1]), :'data-id' => category[0] %>
+          <%= link_to category[1], "#venue_#{category[0]}", :title => t('.venue_category_link_title', :name => category[1]), :'data-id' => category[0] %>
         </li>
       <% end %>      
     </ul>
@@ -29,7 +29,7 @@
           venues = @venue_categories.select{|x| x.id == category[0]}
           if venues.present?
       %>
-        <div id="venue_category_#{category[0]}" class="venue_category accessibly-hidden" data-id="<%= category[0] %>" tabindex="0">
+        <div id="<%= "venue_#{category[0]}" %>" class="venue_category accessibly-hidden" data-id="<%= category[0] %>" tabindex="0">
           <h3><%= category[1] %></h3>
           <ul>
             <% venues.each do |venue| %>
@@ -150,9 +150,8 @@
 	  <% end %>
 
 
-    <div class="form-actions">
-      <%= f.submit nil, :class => 'btn btn-primary' %>
-	    <%= link_to t('app.buttons.cancel'), root_path, :class => 'btn btn-mini btn-warning' %>
+    <div id="submit-button" class="accessibly-hidden">
+      <%= f.submit t('.submit') %>
     </div>
   <% end %>
 <% end %>

@@ -8,9 +8,8 @@
     <%= render :partial => 'eval_form', :locals => {:f => f} %>
   </div>
 
-  <div class="form-actions">
-    <%= f.submit nil, :class => 'btn btn-primary' %>
-    <%= link_to t('app.buttons.cancel'), root_path, :class => 'btn btn-mini btn-warning' %>
+  <div id="submit-button" class="accessibly-hidden">
+    <%= f.submit t('.submit') %>
   </div>
   
 <% end %>

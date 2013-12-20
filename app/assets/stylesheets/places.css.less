@@ -9,7 +9,7 @@ form.place{
     margin-top: 25px;
   }
   
-  ul#venue_categories{
+  ul#venue_categories, ul.question_categories{
     li{
       display: inline-block;
       margin: 5px;
@@ -17,10 +17,11 @@ form.place{
       a{
         display: block;
         padding: 5px;
-        &:hover{
+        &:hover, &.active{
           background-color: #555;
           color: #fff;
         }
+        
       }
     }
   }
@@ -59,6 +60,14 @@ form.place{
         display: inline;
       }
     }
+  }
+  
+  #submit-button{
+    margin: 25px 0;
+    input{
+      border: none;
+    }
+    
   }
 }
 
@@ -122,17 +131,22 @@ form.place{
       }
     }
   }
-  div.venue_evaluation {
-    & > .row-fluid {
-      padding: 5px 0 0 5px;
-      &:nth-child(even) {background: #ddd}
-      &:nth-child(odd) {background: #FFF}
-      [class*="span"]{
-        min-height: 25px;
-      }
+  div.question_category{
+    &:focus {
+      outline: none;
     }
-    label, input[type="radio"]{
-      display: inline;
+    div.venue_evaluation {
+      & > .row-fluid {
+        padding: 5px 0 0 5px;
+        &:nth-child(even) {background: #ddd}
+        &:nth-child(odd) {background: #FFF}
+        [class*="span"]{
+          min-height: 25px;
+        }
+      }
+      label, input[type="radio"]{
+        display: inline;
+      }
     }
   }
   ul.question-results li {
