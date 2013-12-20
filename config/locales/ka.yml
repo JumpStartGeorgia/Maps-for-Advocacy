@@ -97,11 +97,11 @@ ka:
       added_on: "დამატებულია: %{date}" 
       venue_has_questions: მორგებული კითხვები
       answers:
-        has_good: აქვს და კარგია
-        has_bad: აქვს, მაგრამ არ არის კარგი
-        needs: არ აქვს და სჭირდება
-        not_relevant: არარელევანტურია
-        no_answer: არაა პასუხი
+        has_good: Has and adequate
+        has_bad: Has, but not adequate
+        needs: Not have and needs
+        not_relevant: Not relavent
+        no_answer: No answer
       add_evaluation: შეფასების დამატება
       add_evaluation_title: "'%{place}'-ის სეფასების დამატება"
       view_place: დეტალებსი ნახვა
