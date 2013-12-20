@@ -9,6 +9,7 @@ ka:
       venue_category: ადგილმდებარეობის კატეგორია
       place: ადგილი
       evaluation: შეფასება
+      disability: Disability
     attributes:
       user:
         email: ელ.ფოსტა
@@ -51,6 +52,10 @@ ka:
       place_translation:
         name: ადგილის სახელი
         address: მისამართი
+      disability:
+        code: One-letter Code
+      disability_translation:
+        name: Disability
     errors:
       messages:
         required_field: "სავალდებულოა"
@@ -161,6 +166,7 @@ ka:
       venue_categories: ადგილმდებარეობის კატეგორიები
       venues: ადგილმდებარეობები
       places: ადგილები
+      disabilities: Disabilities
     users:
       edit:
         title: ცვლილებების შეტანა მომხმარებლის გვერდზე

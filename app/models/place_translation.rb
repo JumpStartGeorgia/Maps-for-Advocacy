@@ -1,5 +1,5 @@
 class PlaceTranslation < ActiveRecord::Base
-	belongs_to :place_category
+	belongs_to :place
 
   attr_accessible :place_category_id, :name, :locale, :address
 

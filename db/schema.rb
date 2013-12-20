@@ -11,7 +11,33 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131217073810) do
+ActiveRecord::Schema.define(:version => 20131220121052) do
+
+  create_table "disabilities", :force => true do |t|
+    t.string   "code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "disabilities_questions", :id => false, :force => true do |t|
+    t.integer "disability_id"
+    t.integer "question_id"
+  end
+
+  add_index "disabilities_questions", ["disability_id"], :name => "index_disabilities_questions_on_disability_id"
+  add_index "disabilities_questions", ["question_id"], :name => "index_disabilities_questions_on_question_id"
+
+  create_table "disability_translations", :force => true do |t|
+    t.integer  "disability_id"
+    t.string   "locale"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "disability_translations", ["disability_id"], :name => "index_disability_translations_on_disability_id"
+  add_index "disability_translations", ["locale"], :name => "index_disability_translations_on_locale"
+  add_index "disability_translations", ["name"], :name => "index_disability_translations_on_name"
 
   create_table "place_evaluation_answers", :force => true do |t|
     t.integer  "old_place_id"
@@ -32,9 +58,11 @@ ActiveRecord::Schema.define(:version => 20131217073810) do
     t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "disability_id"
   end
 
   add_index "place_evaluations", ["created_at"], :name => "index_place_evaluations_on_created_at"
+  add_index "place_evaluations", ["disability_id"], :name => "index_place_evaluations_on_disability_id"
   add_index "place_evaluations", ["place_id"], :name => "index_place_evaluations_on_place_id"
   add_index "place_evaluations", ["user_id"], :name => "index_place_evaluations_on_user_id"
 

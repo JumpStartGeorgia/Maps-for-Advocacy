@@ -9,6 +9,7 @@ en:
       venue_category: Venue Category
       place: Place
       evaluation: Evaluation
+      disability: Disability
     attributes:
       user:
         email: Email Address
@@ -51,6 +52,10 @@ en:
       place_translation:
         name: Name of Place
         address: Address
+      disability:
+        code: One-letter Code
+      disability_translation:
+        name: Disability
     errors:
       messages:
         required_field: "is a required field."
@@ -161,6 +166,7 @@ en:
       venue_categories: Venue Categories
       venues: Venues
       places: Places
+      disabilities: Disabilities
     users:
       edit:
         title: Editing User
