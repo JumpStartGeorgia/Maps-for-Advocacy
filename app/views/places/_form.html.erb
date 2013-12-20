@@ -57,7 +57,7 @@
 
     <p>
       <%= link_to t('.next'), new_place_path(:stage => '3', :venue_id => params[:venue_id], :name => ''), 
-            :class => 'btn btn-mini', :id => 'place_name_next', :role => 'button', :'aria-hidden' => true,
+            :id => 'place_name_next', :role => 'button', :'aria-hidden' => true,
             :title => t('.name_link_title') %>
     </p>
 
@@ -114,7 +114,7 @@
 
           <p>
             <%= link_to t('.next'), new_place_path(:stage => '4', :venue_id => params[:venue_id], :name => params[:name], :lat => '', :lon => '', :address => ''), 
-                  :class => 'btn btn-mini', :id => 'place_map_next', :role => 'button', :'aria-hidden' => true,
+                  :id => 'place_map_next', :role => 'button', :'aria-hidden' => true,
                   :title => t('.map_link_title') %>
           </p>
           <a href="#address-search" class="accessibly-hidden"><%= t('.skip_to_address_search') %></a>

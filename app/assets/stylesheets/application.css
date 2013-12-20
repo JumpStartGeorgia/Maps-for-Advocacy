@@ -246,7 +246,7 @@ footer, footer ul li, footer div#right ul li {
 
 
 /* add place/evaluation button */
-.navbar .nav > li > a.add_evaluation, a.add_evaluation, a.view_more, #submit-button input{
+.navbar .nav > li > a.add_evaluation, a.add_evaluation, a.view_more, #submit-button input, a#place_name_next, a#place_map_next{
   background-color: #3287CC;
   color: #fff !important;
   text-shadow: 0 1px 0 #555;
@@ -259,7 +259,7 @@ footer, footer ul li, footer div#right ul li {
   margin-left: 40px;
   margin-top: 5px;
 }
-.navbar .nav > li > a.add_evaluation:hover, a.add_evaluation:hover, #submit-button input:hover{
+.navbar .nav > li > a.add_evaluation:hover, a.add_evaluation:hover, #submit-button input:hover, a#place_name_next:hover, a#place_map_next:hover{
   background-color: #1267ac;
 }
 a.view_more{
