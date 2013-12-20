@@ -38,7 +38,7 @@ class RootController < ApplicationController
     popup << "<p>"
     popup << view_context.link_to(t('app.common.view_place'), place_path(place.id), :title => t('app.common.view_place_title', :place => place[:place]), :class => 'view_more')
     popup << " "
-    popup << view_context.link_to(t('app.common.add_evaluation'), place_path(place), :title => t('app.common.add_evaluation_title', :place => place[:place]), :class => 'add_evaluation')
+    popup << view_context.link_to(t('app.common.add_evaluation'), evaluation_place_path(place), :title => t('app.common.add_evaluation_title', :place => place[:place]), :class => 'add_evaluation')
     popup << "</p>"
     
     return popup
