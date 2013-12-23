@@ -57,7 +57,7 @@ class Admin::DisabilitiesController < ApplicationController
 
     respond_to do |format|
       if @disability.save
-        format.html { redirect_to admin_disabilities_path, notice: t('app.msgs.success_created', :obj => t('activerecord.models.disability')) }
+        format.html { redirect_to admin_disability_path(@disability), notice: t('app.msgs.success_created', :obj => t('activerecord.models.disability')) }
         format.json { render json: @disability, status: :created, location: @disability }
       else
         format.html { render action: "new" }
@@ -77,7 +77,7 @@ class Admin::DisabilitiesController < ApplicationController
 
     respond_to do |format|
       if @disability.save
-        format.html { redirect_to admin_disabilities_path, notice: t('app.msgs.success_updated', :obj => t('activerecord.models.disability')) }
+        format.html { redirect_to admin_disability_path(@disability), notice: t('app.msgs.success_updated', :obj => t('activerecord.models.disability')) }
         format.json { head :ok }
       else
         format.html { render action: "edit" }

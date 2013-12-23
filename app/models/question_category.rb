@@ -134,14 +134,18 @@ class QuestionCategory < ActiveRecord::Base
     idx_child_name = 3
     idx_child_sort = 4
     idx_child_is_common = 5
-    idx_question = 6
-    idx_question_sort = 7
-    idx_question_evidence = 8
-    idx_venue_name = 9
+    idx_type = 6
+    idx_question = 7
+    idx_question_sort = 8
+    idx_question_evidence = 9
+    idx_venue_name = 10
     current_parent, current_child, current_venue = nil
-    
+
 		original_locale = I18n.locale
     I18n.locale = :en
+
+    disabilities = Disability.with_translations(I18n.locale)
+
 
 		QuestionCategory.transaction do
 		  if delete_first
@@ -155,6 +159,7 @@ class QuestionCategory < ActiveRecord::Base
         QuestionPairingTranslation.delete_all
         PlaceEvaluation.delete_all
         PlaceEvaluationAnswer.delete_all
+        
 		  end
 		
 		
@@ -226,6 +231,25 @@ class QuestionCategory < ActiveRecord::Base
       		  msg = "Row #{n}: Could not find/create question"
 	          raise ActiveRecord::Rollback
       		  return msg
+          end
+          
+          # add disability types if needed
+        	puts "******** question already has disability types: '#{question.disabilities.map{|x| x.code}}'"
+          types = row[idx_type].present? ? row[idx_type].split(',') : nil
+          if types.blank?
+      		  msg = "Row #{n}: Could not find disability type"
+	          raise ActiveRecord::Rollback
+      		  return msg
+          else
+            types.each do |type|
+            	puts "******** - checking question for disability type: #{type}"
+              # find match and then add if not already assigned to question
+              dis_index = disabilities.index{|x| x.code == type}
+              if dis_index.present? && question.disabilities.index{|x| disabilities[dis_index].id == x.id}.blank?
+              	puts "******** -- adding"
+                question.disabilities << disabilities[dis_index]
+              end
+            end
           end
           
           # create pairing
