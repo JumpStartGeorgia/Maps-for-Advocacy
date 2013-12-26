@@ -32,6 +32,7 @@ gem "useragent", :git => "https://github.com/jilion/useragent.git" # browser det
 #gem "paper_trail", "~> 2.6.3" # keep audit log of all transactions
 gem "geocoder", "~> 1.1.8" # look up lat/lon by address
 gem "ancestry", "~> 2.0.0" # create parent child relationship
+gem "georuby" # manage geo spatial data with ruby
 
 # Gems used only for assets and not required
 # in production environments by default.
