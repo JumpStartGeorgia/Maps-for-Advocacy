@@ -14,25 +14,25 @@ class CreateDisabilities < ActiveRecord::Migration
     add_column :place_evaluations, :disability_id, :integer
     add_index :place_evaluations, :disability_id
 
-    # create question disability habtm table
-    create_table :disabilities_questions, :id => false do |t|
+    # create question pairing/disability habtm table
+    create_table :disabilities_question_pairings, :id => false do |t|
       t.integer :disability_id
-      t.integer :question_id
+      t.integer :question_pairing_id
     end    
-    add_index :disabilities_questions, :disability_id
-    add_index :disabilities_questions, :question_id
+    add_index :disabilities_question_pairings, :disability_id
+    add_index :disabilities_question_pairings, :question_pairing_id
 
 
   end
   
   def down
-    drop_table :disability
+    drop_table :disabilities
     Disability.drop_translation_table!
 
     remove_index :place_evaluations, :disability_id
     remove_column :place_evaluations, :disability_id
    
-    drop_table :disabilities_questions 
+    drop_table :disabilities_question_pairings
   end
 
 end

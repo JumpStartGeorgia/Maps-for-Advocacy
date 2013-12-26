@@ -1,34 +1,62 @@
 <div id="front-page" class="row-fluid">
   <div class="span2" id="search">
-    <h2><%= t('.header_filter') %></h2>
-    <ul>
-      <% @venue_categories.each do |cat| %>
-        <li>
-          <%= link_to "#{cat[:venue_category]} (#{cat[:count]})", root_path(:venue_category_id => cat.id) %>
-        </li>
-      <% end %>
-    </ul>
-   
-  </div>
-  <div class="span2"  id="search_results">
-    <div id="current_selections">
-      <h2><%= t('.header_selections') %></h2>
-      <% vc = @venue_categories.select{|x| x.id.to_s == params[:venue_category_id].to_s} if params[:venue_category_id].present? %>
-      <% if vc.present? %>
+    <h2><%= t('.header_filter') %>:</h2>
+
+    <div class="filter_box">    
+      <h3><%= t('.header_filter_disability') %></h3>
+      <% if params[:eval_type_id].blank? %>
+        <ul>
+          <% @disabilities.each do |disability| %>
+            <li>
+              <%= link_to "#{disability[:disability]} (#{disability[:count]})", params.merge(:eval_type_id => disability.id) %>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <% 
+          dis = @disabilities.select{|x| x.id.to_s == params[:eval_type_id].to_s} if params[:eval_type_id].present? 
+        %>
+        <p>
+          <%= dis.first[:disability] %>
+        </p>
+        <p>
+          <%= link_to t('.clear_filter'), params.merge(:eval_type_id => nil), :class => 'btn btn-mini' %>
+        </p>
+      <% end %>   
+    </div>
+    
+    <div class="filter_box">
+      <h3><%= t('.header_filter_venue') %></h3>
+      <% if params[:venue_category_id].blank? %>
+        <ul>
+          <% @venue_categories.each do |cat| %>
+            <li>
+              <%= link_to "#{cat[:venue_category]} (#{cat[:count]})", params.merge(:venue_category_id => cat.id) %>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <% 
+          vc = @venue_categories.select{|x| x.id.to_s == params[:venue_category_id].to_s} if params[:venue_category_id].present? 
+        %>
         <p>
           <%= vc.first[:venue_category] %>
         </p>
         <p>
-          <%= link_to t('.clear_filter'), root_path(:venue_category_id => nil), :class => 'btn btn-mini' %>
-        </p>
-      <% else %>
-        <p>
-          <%= t('.select_all') %>
+          <%= link_to t('.clear_filter'), params.merge(:venue_category_id => nil), :class => 'btn btn-mini' %>
         </p>
       <% end %>
     </div>
+    
+    <% if params[:venue_category_id].present? || params[:eval_type_id].present? %>
+      <p>
+        <%= link_to t('.clear_filters'), root_path, :class => 'btn btn-mini' %>
+      </p>
+    <% end %>
+  </div>
+  <div class="span2"  id="search_results">
     <div id="selection_results">
-      <h2><%= t('.header_table') %></h2>
+      <h2><%= t('.header_table') %>:</h2>
       <% if @places.present? %>
         <% @places.each do |place| %>
           <div class="place-item">

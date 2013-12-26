@@ -15,9 +15,10 @@ class PlaceEvaluation < ActiveRecord::Base
     ANSWERS.keys[ANSWERS.values.index(value)]
   end
   
-  def self.with_answers(place_id)
+  def self.with_answers(place_id, disability_id=nil)
     includes(:place_evaluation_answers)
     .where(:place_id => place_id)  
+    .where(:disability_id => disability_id) if disability_id.present?
   end
   
   def self.sorted

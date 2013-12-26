@@ -56,7 +56,7 @@
     </div>
 
     <p>
-      <%= link_to t('.next'), new_place_path(:stage => '3', :venue_id => params[:venue_id], :name => ''), 
+      <%= link_to t('.next'), params.merge(:stage => '3', :name => ''), 
             :id => 'place_name_next', :role => 'button', :'aria-hidden' => true,
             :title => t('.name_link_title') %>
     </p>
@@ -113,7 +113,7 @@
           </div>
 
           <p>
-            <%= link_to t('.next'), new_place_path(:stage => '4', :venue_id => params[:venue_id], :name => params[:name], :lat => '', :lon => '', :address => ''), 
+            <%= link_to t('.next'), params.merge(:stage => '4', :lat => '', :lon => '', :address => ''), 
                   :id => 'place_map_next', :role => 'button', :'aria-hidden' => true,
                   :title => t('.map_link_title') %>
           </p>
@@ -125,6 +125,24 @@
 
   
   <% elsif params[:stage] == '4' %>
+    <h2><%= t('.header_disability', :name => params[:name]) %></h2>
+
+    <% if @disabilities.present? %>
+      <div id="disabilities">
+        <ul>
+          <% @disabilities.each do |disability| %>
+            <li>
+              <%= link_to disability.name, params.merge(:stage => '5', :eval_type_id => disability.id), 
+                  :title => t('.disability_link_title', :name => disability.name),
+                  :role => 'button' %>
+            </li>
+          <% end %>            
+        </ul>
+      </div>
+    <% end %>
+
+  <% elsif params[:stage] == '5' %>
+
 
     <% create_sorted_translation_objects(@place.place_translations).each do |trans| %>
 		  <%= f.fields_for :place_translations, trans do |translation| %>
@@ -142,7 +160,7 @@
 	
 	  <% if @question_categories.present? %>
 	    <div id="venue_evalautions">
-        <h2><%= t('.header_evaluation', :name => params[:name]) %></h2>
+        <h2><%= t('.header_evaluation', :name => params[:name], :disability => @disability.name) %></h2>
 
         <%= render :partial => 'eval_form', :locals => {:f => f} %>
         

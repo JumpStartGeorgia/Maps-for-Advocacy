@@ -109,6 +109,7 @@ en:
         no_answer: No answer
       add_evaluation: Add an Evaluation
       add_evaluation_title: "Add an Evaluation for '%{place}'"
+      add_evaluation_title2: "Add a %{disability} Evaluation for '%{place}'"
       view_place: View Details
       view_place_title: "View the details of '%{place}'"
     msgs:
@@ -222,15 +223,19 @@ en:
         map_link_title: Select this location
   root:
     index:
-      header_filter: Select Places
-      clear_filter: Clear Selections
-      header_selections: Current Selections
+      header_filter: Filter
+      header_filter_venue: By Venue
+      header_filter_disability: By Evaluation Type
+      clear_filter: Remove Filter
+      clear_filters: Remove All Filters
+      header_selections: Current Filters
       select_all: All places selected
-      header_table: Selection Results
+      header_table: Filter Results
       no_places: There are no Places on record that matches your search request.
   places:
     show:
       header_summary: Overall Summary
+      no_evaluations: At this time no '%{name}' evaluations have been submitted.
       summary_result: Overall Result
       header_overall_results: Evaluation Results
       header_user_summary: Summary
@@ -244,6 +249,9 @@ en:
       venue_filter_num_match: venue matches found.
       venue_category_title: View the venues in '%{name}'
       venue_link_title: "Select %{category} - %{venue}"
+      header_name: What is the name of the '%{name}'?
+      label_name: "'%{name}' Name"
+      name_link_title: Save this name
       header_location: Where is '%{name}' located?  
       map_instructions: Click on the map to place a marker of where '%{name}' is located.  
       skip_map: Skip the map and go to the address search form (jump)
@@ -255,11 +263,9 @@ en:
       address_search_success: The address search found the following match.  Please confirm that it is correct.
       address_search_multiple_success: The address search found the following matches.  Please select the correct one.
       address_search_fail: Sorry, but your search did not return any results.  Please try again.
-      header_name: What is the name of the '%{name}'?
-      label_name: "'%{name}' Name"
-      name_link_title: Save this name
-      header_place: "'%{name}' Information"
-      header_evaluation: Evaluation of '%{name}'
+      header_disability: Which evaluation do you want to complete?
+      disability_link_title: "'%{name}' evaluation"
+      header_evaluation: "%{disability} Evaluation of '%{name}'"
       questions: Questions
       next: Next
       map_link_title: Select this location
@@ -269,7 +275,10 @@ en:
       question_category_link_title: View questions in '%{name}'
       question_instructions: If you do not know the answer, please leave it blank.
     evaluation:
-      title: "Evaluation for '%{place}'"
+      title1: "Evaluation of '%{name}'"
+      title2: "%{disability} Evaluation of '%{name}'"
+      header_disability: Which evaluation do you want to complete?
+      disability_link_title: "'%{name}' evaluation"
       submit: Submit the Evaluation
   settings:
     index:

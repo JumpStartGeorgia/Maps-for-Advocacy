@@ -69,7 +69,9 @@
               
               <% if cat[:sub_categories].present? %>
                 <% cat[:sub_categories].each do |sub| %>
-                  <%= render :partial => 'eval_form_questions', :locals => {:evaluation => evaluation, :cat => sub, :is_sub_category => true} %>
+                  <% if sub[:questions].present? %>
+                    <%= render :partial => 'eval_form_questions', :locals => {:evaluation => evaluation, :cat => sub, :is_sub_category => true} %>
+                  <% end %>
                 <% end %>
               <% end %>
             </div>

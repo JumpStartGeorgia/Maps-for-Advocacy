@@ -19,13 +19,13 @@ ActiveRecord::Schema.define(:version => 20131220121052) do
     t.datetime "updated_at"
   end
 
-  create_table "disabilities_questions", :id => false, :force => true do |t|
+  create_table "disabilities_question_pairings", :id => false, :force => true do |t|
     t.integer "disability_id"
-    t.integer "question_id"
+    t.integer "question_pairing_id"
   end
 
-  add_index "disabilities_questions", ["disability_id"], :name => "index_disabilities_questions_on_disability_id"
-  add_index "disabilities_questions", ["question_id"], :name => "index_disabilities_questions_on_question_id"
+  add_index "disabilities_question_pairings", ["disability_id"], :name => "index_disabilities_question_pairings_on_disability_id"
+  add_index "disabilities_question_pairings", ["question_pairing_id"], :name => "index_disabilities_question_pairings_on_question_pairing_id"
 
   create_table "disability_translations", :force => true do |t|
     t.integer  "disability_id"

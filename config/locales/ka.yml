@@ -109,6 +109,7 @@ ka:
         no_answer: არაა პასუხი
       add_evaluation: შეფასების დამატება
       add_evaluation_title: "'%{place}'-ის სეფასების დამატება"
+      add_evaluation_title2: "Add a %{disability} Evaluation for '%{place}'"
       view_place: დეტალებსი ნახვა
       view_place_title: "'%{place}'-ის დეტალების ნახვა"
     msgs:
@@ -222,15 +223,19 @@ ka:
         map_link_title: შეარჩიეთ ეს მდებარეობა
   root:
     index:
-      header_filter: შეარჩიეთ ადგილები
-      clear_filter: შერჩეულის წაშლა
-      header_selections: შერჩეულები
-      select_all: ყველა ადგილი შერჩეულია
-      header_table: შერჩევის შედეგები
-      no_places: არ მოიძებნა ადგილები, რომელიც შეესაბამება თქვენს საძიებო მოთხოვნას.
+      header_filter: Filter
+      header_filter_venue: By Venue
+      header_filter_disability: By Evaluation Type
+      clear_filter: Remove Filter
+      clear_filters: Remove All Filters
+      header_selections: Current Filters
+      select_all: All places selected
+      header_table: Filter Results
+      no_places: There are no Places on record that matches your search request.
   places:
     show:
       header_summary: საერთო შეჯამება
+      no_evaluations: At this time no '%{name}' evaluations have been submitted.
       summary_result: საერთო შედეგები
       header_overall_results: შეფასების შედეგები
       header_user_summary: შეჯამება
@@ -244,6 +249,9 @@ ka:
       venue_filter_num_match: venue matches found.
       venue_category_title: View the venues in '%{name}'
       venue_link_title: "შეარჩიეთ %{category} - %{venue}"
+      header_name: What is the name of the '%{name}'?
+      label_name: "'%{name}' Name"
+      name_link_title: Save this name
       header_location: სად მდებარეობს '%{name}'?
       map_instructions: დააკლიკეთ რუკას, რომ მონიშნოთ სად მდებარეობს '%{name}'.
       skip_map: Skip the map and go to the address search form (jump)
@@ -255,11 +263,9 @@ ka:
       address_search_success: მისამართის ძიებამ იპოვა შემდეგი წყვილები. გთხოვთ დაადასტუროთ, რომ შედეგები სწორია.
       address_search_multiple_success: მისამართის ძიებამ იპოვა შემდეგი წყვილები. გთხოვთ შეარჩიოთ სწორი შედეგი.
       address_search_fail: არ მოიძებნა. კიდევ სცადეთ.
-      header_name: What is the name of the '%{name}'?
-      label_name: "'%{name}' Name"
-      name_link_title: Save this name
-      header_place: "'%{name}' ინფორმაიცა"
-      header_evaluation: "'%{name}'-ის შეფასება"
+      header_disability: Which evaluation do you want to complete?
+      disability_link_title: "'%{name}' evaluation"
+      header_evaluation: "%{disability} Evaluation of '%{name}'"
       questions: კითხვები
       next: შემდეგი
       map_link_title: შეარჩიეთ ეს მდებარეობა
@@ -269,7 +275,10 @@ ka:
       question_category_link_title: View questions in '%{name}'
       question_instructions: თუ არ გაქვთ პასუხი, დატოვეთ ცარიელი. 
     evaluation:
-      title: "'%{place}'-ის შეფასება"
+      title1: "Evaluation of '%{name}'"
+      title2: "%{disability} Evaluation of '%{name}'"
+      header_disability: Which evaluation do you want to complete?
+      disability_link_title: "'%{name}' evaluation"
       submit: Submit the Evaluation
   settings:
     index:

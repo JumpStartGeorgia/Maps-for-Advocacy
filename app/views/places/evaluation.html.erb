@@ -1,16 +1,43 @@
 <%- model_class = Place -%>
 <%- model_class_trans = PlaceTranslation -%>
-<% title t('.title', :place => @place[:name]).html_safe %>
+<% 
+  if @disability.blank?
+    title t('.title1', :name => @place[:name]).html_safe 
+  else
+    title t('.title2', :name => @place[:name], :disability => @disability.name).html_safe 
+  end
+  
+%>
 
 <%= semantic_form_for(@place, :url => evaluation_place_path(params[:id]), :html => { :class => 'form-horizontal' }) do |f| %>
 
-  <div id="venue_evalautions">
-    <%= render :partial => 'eval_form', :locals => {:f => f} %>
-  </div>
+  <% if params[:eval_type_id].blank? %>
+    <h2><%= t('.header_disability', :name => params[:name]) %></h2>
 
-  <div id="submit-button" class="accessibly-hidden">
-    <%= f.submit t('.submit') %>
-  </div>
-  
+    <% if @disabilities.present? %>
+      <div id="disabilities">
+        <ul>
+          <% @disabilities.each do |disability| %>
+            <li>
+              <%= link_to disability.name, params.merge(:eval_type_id => disability.id), 
+                  :title => t('.disability_link_title', :name => disability.name),
+                  :role => 'button' %>
+            </li>
+          <% end %>            
+        </ul>
+      </div>
+    <% end %>
+
+  <% else %>
+
+    <div id="venue_evalautions">
+      <%= render :partial => 'eval_form', :locals => {:f => f} %>
+    </div>
+
+    <div id="submit-button" class="accessibly-hidden">
+      <%= f.submit t('.submit') %>
+    </div>
+  <% end %>
+    
 <% end %>
 
