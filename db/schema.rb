@@ -51,7 +51,7 @@ ActiveRecord::Schema.define(:version => 20131227061622) do
   add_index "district_translations", ["locale"], :name => "index_district_translations_on_locale"
 
   create_table "districts", :force => true do |t|
-    t.text     "json"
+    t.text     "json",       :limit => 2147483647
     t.datetime "created_at"
     t.datetime "updated_at"
   end

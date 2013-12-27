@@ -1,7 +1,7 @@
 class CreateDistricts < ActiveRecord::Migration
   def up
     create_table :districts do |t|
-      t.text :json
+      t.text :json, :limit => 2147483647
 
       t.timestamps
     end

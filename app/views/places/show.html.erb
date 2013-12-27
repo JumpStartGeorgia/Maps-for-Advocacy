@@ -9,7 +9,7 @@
         <p><strong><%= model_class_trans.human_attribute_name(:address) %>:</strong>
         <%= @place[:address] %></p>
         <p><strong><%= model_class_trans.human_attribute_name(:district_id) %>:</strong>
-        <%= @place[:district_id] %></p>
+        <%= @place[:district] %></p>
         <p><strong><%= model_class_trans.human_attribute_name(:venue_id) %>:</strong>
         <%= link_to @place[:venue], root_path(:venue_category_id => @place[:venue_category_id]) %></p>
       </div>

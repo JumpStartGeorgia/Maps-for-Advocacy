@@ -15,6 +15,62 @@ class District < ActiveRecord::Base
     .order('districts.id')
   end
   
+
+  #######################################
+  ## load districts from json file
+  #######################################
+  def self.process_json_upload(file, delete_first=false)
+		start = Time.now
+    json = file.read
+    n, msg = 0, ""
+    idx_id = 0
+    idx_name = 1
+    idx_json = 2
+
+		original_locale = I18n.locale
+    I18n.locale = :en
+
+		District.transaction do
+		  if delete_first
+        puts "******** deleting all districts on record first"
+        # quicker to do delete all instead of destroy        
+        District.delete_all
+        DistrictTranslation.delete_all
+		  end
+		
+      # convert json to hash
+      hash = JSON.parse(json)
+      
+      hash['features'].each_with_index do |feature, index|
+        puts "@@@@@@@@@@@@@@@@@@ processing item #{index}"
+        id = feature['properties']['District_c']
+        name = feature['properties']['District_n']
+        geo = feature['geometry']
+        if id.present? && name.present? && geo.present?
+          # only add if district has id
+          if id.to_i > 0
+            d = District.create(:id => id.to_i, :json => geo.to_json)
+            I18n.available_locales.each do |locale|
+              d.district_translations.create(:locale => locale, :name => name.strip)
+            end
+          end
+        else
+    		  msg = "Item #{index}: Required data is missing"
+	        raise ActiveRecord::Rollback
+    		  return msg
+        end
+      end
+
+    end
+  	puts "****************** time to build_from_csv: #{Time.now-start} seconds"
+
+		# reset the locale
+		I18n.locale = original_locale
+
+    return msg
+
+  end
+  
   #######################################
   ## load districts from csv file
   #######################################

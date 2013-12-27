@@ -9,13 +9,18 @@ class Place < ActiveRecord::Base
   attr_accessible :venue_id, :district_id, :lat, :lon, :place_translations_attributes, :place_evaluations_attributes
   
   validates :venue_id, :lat, :lon, :presence => true
+
+  include GeoRuby::SimpleFeatures
+
+  after_create :assign_district
   
   def self.with_translation(id=nil)
-    sql = "select p.id, p.district_id, p.venue_id, vt.name as venue, v.question_category_id, v.venue_category_id, p.lat, p.lon, pt.name as place, pt.address "
+    sql = "select p.id, p.district_id, dt.name as district, p.venue_id, vt.name as venue, v.question_category_id, v.venue_category_id, p.lat, p.lon, pt.name as place, pt.address "
     sql << "from places as p "
     sql << "inner join place_translations as pt on pt.place_id = p.id and pt.locale = :locale "
     sql << "left join venues as v on v.id = p.venue_id "
     sql << "left join venue_translations as vt on vt.venue_id = v.id and vt.locale = :locale "
+    sql << "left join district_translations as dt on dt.district_id = p.district_id and dt.locale = :locale "
     if id.present?
       sql << "where p.id = :place_id "
     end
@@ -41,4 +46,21 @@ class Place < ActiveRecord::Base
     
   end
 
+
+  def assign_district
+    require 'geo_ruby/geojson'
+    
+    point = Point.from_lon_lat(self.lon, self.lat)
+    
+    districts = District.order('id')
+    districts.each do |district|
+      geo = Geometry.from_geojson(district.json)
+      if geo.contains_point?(point)
+        self.district_id = district.id
+        self.save
+        break
+      end
+    end
+    return nil
+  end
 end

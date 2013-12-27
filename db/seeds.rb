@@ -31,15 +31,42 @@ d.disability_translations.create(:locale => 'ka', :name => 'Physical (wheelchair
 ##################################
 ## Districts
 ##################################
+puts "loading districts from json file"
+f = File.open("#{Rails.root}/db/spreadsheets/districts.json", 'r')
+msg = District.process_json_upload(f, true)
+puts msg if msg.present?
+
+=begin
 puts "loading districts from csv file"
 f = File.open("#{Rails.root}/db/spreadsheets/districts.csv", 'r')
 msg = District.process_csv_upload(f, true)
 puts msg if msg.present?
+=end
 
 puts "loading georgian district names from csv file"
 f = File.open("#{Rails.root}/db/spreadsheets/district_ka_names.csv", 'r')
 msg = District.process_georgian_name_csv_upload(f)
 puts msg if msg.present?
+
+
+##################################
+## Venues
+##################################
+puts "loading venues from csv file"
+f = File.open("#{Rails.root}/db/spreadsheets/Accessibility Upload - Venues.csv", 'r')
+msg = VenueCategory.process_csv_upload(f, true)
+puts msg if msg.present?
+
+
+
+##################################
+## Questions
+##################################
+puts "loading questions from csv file"
+f = File.open("#{Rails.root}/db/spreadsheets/Accessibility Upload - Questions.csv", 'r')
+msg = QuestionCategory.process_csv_upload(f, true)
+puts msg if msg.present?
+
 
 
 
