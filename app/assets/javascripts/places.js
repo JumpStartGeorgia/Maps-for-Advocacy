@@ -31,12 +31,17 @@ $(document).ready(function(){
       }else {
         // show the next button
         $('#place_name_next').attr('href', url).attr('aria-hidden', 'false');
-
       }
     })
     .keyup( function () {
       // fire the above change event after every letter
       $(this).change();
+    })
+    .keypress(function(event){
+	    var keycode = (event.keyCode ? event.keyCode : event.which);
+	    if(keycode == '13'){
+        return false;
+	    }
     });
 
   }  
