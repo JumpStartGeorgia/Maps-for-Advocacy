@@ -6,6 +6,28 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+##################################
+## Disabilities
+##################################
+puts "deleting all disability records"
+Disability.delete_all
+DisabilityTranslation.delete_all
+
+puts "creating disability records"
+d = Disability.create(:id => 1, :code => 'b')
+d.disability_translations.create(:locale => 'en', :name => 'Blind')
+d.disability_translations.create(:locale => 'ka', :name => 'Blind')
+d = Disability.create(:id => 2, :code => 's')
+d.disability_translations.create(:locale => 'en', :name => 'Partially Sighted')
+d.disability_translations.create(:locale => 'ka', :name => 'Partially Sighted')
+d = Disability.create(:id => 3, :code => 'd')
+d.disability_translations.create(:locale => 'en', :name => 'Deaf / Hard of Hearing')
+d.disability_translations.create(:locale => 'ka', :name => 'Deaf / Hard of Hearing')
+d = Disability.create(:id => 4, :code => 'p')
+d.disability_translations.create(:locale => 'en', :name => 'Physical (wheelchair)')
+d.disability_translations.create(:locale => 'ka', :name => 'Physical (wheelchair)')
+
+
 =begin
 ##################################
 ## Questions

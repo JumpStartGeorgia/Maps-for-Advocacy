@@ -18,6 +18,7 @@ class QuestionCategory < ActiveRecord::Base
   end
 
 
+  # possible options: common_only, child_of, question_category_id, disability_id
   def self.with_questions(options = {})
     categories = nil
     options[:common_only] = false if options[:common_only].nil?
@@ -35,11 +36,11 @@ class QuestionCategory < ActiveRecord::Base
     
       categories.each do |cat|
         # get the questions for this category
-        cat[:questions] = Question.in_category(cat.id)
+        cat[:questions] = Question.in_category(cat.id, options[:disability_id])
 
         # if this category has sub_categories, get them too
         if cat.has_children?
-          new_options = {:child_of => cat.path_ids.join('/'), :common_only => options[:common_only]}
+          new_options = {:child_of => cat.path_ids.join('/'), :common_only => options[:common_only], :disability_id => options[:disability_id]}
 
           cat[:sub_categories] = with_questions(new_options)
         end
@@ -80,16 +81,19 @@ class QuestionCategory < ActiveRecord::Base
   
 
   # get all common questions and any special questions if a question category id is provided  
-  def self.questions_for_venue(question_category_id=nil)
+  # possible options: question_category_id, disability_id
+  def self.questions_for_venue(options = {})
     questions = []
 
     # get custom questions
-    if question_category_id.present?
-      questions << with_questions(question_category_id: question_category_id)      
+    if options[:question_category_id].present?
+      questions << with_questions(options)      
     end
     
     # get common questions
-    questions << with_questions(common_only: true)
+    ops = {:common_only => true}
+    ops[:disability_id] = options[:disability_id] if options[:disability_id].present?
+    questions << with_questions(ops)
     
     questions.flatten!    
     
@@ -134,14 +138,18 @@ class QuestionCategory < ActiveRecord::Base
     idx_child_name = 3
     idx_child_sort = 4
     idx_child_is_common = 5
-    idx_question = 6
-    idx_question_sort = 7
-    idx_question_evidence = 8
-    idx_venue_name = 9
+    idx_type = 6
+    idx_question = 7
+    idx_question_sort = 8
+    idx_question_evidence = 9
+    idx_venue_name = 10
     current_parent, current_child, current_venue = nil
-    
+
 		original_locale = I18n.locale
     I18n.locale = :en
+
+    disabilities = Disability.all
+
 
 		QuestionCategory.transaction do
 		  if delete_first
@@ -155,6 +163,10 @@ class QuestionCategory < ActiveRecord::Base
         QuestionPairingTranslation.delete_all
         PlaceEvaluation.delete_all
         PlaceEvaluationAnswer.delete_all
+
+        connection = ActiveRecord::Base.connection
+        ActiveRecord::Base.connection.execute("truncate disabilities_question_pairings;")        
+        
 		  end
 		
 		
@@ -242,6 +254,25 @@ class QuestionCategory < ActiveRecord::Base
             qp.question_pairing_translations.create(:locale => locale, :evidence => evidence)
           end
          
+          # add disability types if needed
+          types = row[idx_type].present? ? row[idx_type].split(',') : nil
+        	puts "******** question pairing already has disability types: '#{qp.disabilities.map{|x| x.code}}'"
+          if types.blank?
+      		  msg = "Row #{n}: Could not find disability type"
+	          raise ActiveRecord::Rollback
+      		  return msg
+          else
+            types.each do |type|
+            	puts "******** - checking question pairing for disability type: #{type}"
+              # find match and then add if not already assigned to question pairing
+              dis_index = disabilities.index{|x| x.code == type}
+              if dis_index.present? && qp.disabilities.index{|x| disabilities[dis_index].id == x.id}.blank?
+              	puts "******** -- adding"
+                qp.disabilities << disabilities[dis_index]
+              end
+            end
+          end
+          
          
           # if venue provided, add question category id to venue
           if (current_venue.blank? && row[idx_venue_name].present?) || (current_venue.present? && current_venue[:name] != row[idx_venue_name].strip)

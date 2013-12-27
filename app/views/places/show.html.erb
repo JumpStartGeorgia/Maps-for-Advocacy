@@ -11,7 +11,7 @@
         <p><strong><%= model_class_trans.human_attribute_name(:district_id) %>:</strong>
         <%= @place[:district_id] %></p>
         <p><strong><%= model_class_trans.human_attribute_name(:venue_id) %>:</strong>
-        <%= @place[:venue] %></p>
+        <%= link_to @place[:venue], root_path(:venue_category_id => @place[:venue_category_id]) %></p>
       </div>
       <div class="span3">
         <%= link_to t('app.common.add_evaluation'), evaluation_place_path(@place), 
@@ -19,93 +19,147 @@
       </div>
     </div>
 
-	  <% if @question_categories.present? && @summaries.present? %>
-      <% questions = @question_categories.map{|x| [x[:id], x.name]}.uniq %>
-      <% if questions.present? %>
-        <h2><%= t('.header_summary') %></h2>
-        <p><strong><%= t('.summary_result') %>:</strong>
-          <%= number_with_precision(@summaries['overall']['overall']) %>
-        </p>
-        <ul class="evaluation_summary">
-        <% questions.each do |question| %>
-          <li>
-            <strong><%= question[1] %>:</strong>
-            <%= number_with_precision(@summaries['overall'][question[0].to_s]) %>
-          </li>          
-        <% end %>
-        </ul>
-      <% end %>
-    <% end %>
-
-
-	  <% if @question_categories.present? && @evaluations.present? && @users.present? %>
-      <h2><%= t('.header_overall_results') %></h2>
-      <% 
-        qc_id = nil 
-      %>
-
-      <% @evaluations.each do |evaluation| %>
+    <% if @disability_evaluations.present? %>
+      <ul id="evaluation-disability-tabs" class="nav nav-tabs" data-tabs="evaluation-disability-tabs">
         <% 
-          user = @users.select{|x| x.id == evaluation.user_id}.first
-          summary = @summaries['evaluations'].select{|x| x['id'] == evaluation.id}.first
+          made_active = false 
+          active_index = 0
         %>
-
-        <h3 class="clear">
-          <span class="evaluation_date">
-            <%= l evaluation.created_at, :format => :no_time %>
-          </span>
-          <% if user.present? %>
-            <span class="user_name">      
-              <%= user.nickname %>
-              <% if user.avatar.present? %>
-                <%#= image_tag user.avatar, :title => user.nickname %>
-              <% end %>
-            </span>
-          <% end %>
-        </h3>
-
-	      <% if questions.present? && summary.present? %>
-          <p><strong><%= t('.summary_result') %>:</strong>
-            <%= number_with_precision(summary['overall']) %>
-          </p>
-          <ul class="evaluation_summary">
-          <% questions.each do |question| %>
-            <li>
-              <strong><%= question[1] %>:</strong>
-              <%= number_with_precision(summary[question[0].to_s]) %>
-            </li>          
-          <% end %>
-          </ul>
+        <% @disability_evaluations.each_with_index do |disability, i| %>
+          <% 
+            li_class = ''
+            if disability[:evaluation_count] > 0 && !made_active
+              li_class = "class=active" 
+              made_active = true
+              active_index = i
+            end
+          %>
+          <li <%= li_class %>><a href="<%= "##{disability[:code]}" %>" data-toggle="tab"><%= "#{disability[:name]} (#{disability[:evaluation_count]})" %></a></li>
         <% end %>
+      </ul>
+      <div id="my-tab-content" class="tab-content">
+        <% @disability_evaluations.each_with_index do |disability,i| %>
+          <% 
+            div_class = ''
+            div_class = "active" if i == active_index
+          %>
+          <div class="tab-pane <%= div_class %>" id="<%= disability[:code] %>">
+            <h2 class="clear">
+              <%= disability[:name] %>
+              <span>
+                <%= link_to t('app.common.add_evaluation'), evaluation_place_path(:id => @place.id, :eval_type_id => disability[:id]), 
+                  :class => 'add_evaluation', :title => t('app.common.add_evaluation_title2', :place => @place[:name], :disability => disability[:name]) %>
+              </span>
+            </h2>
 
+            <% if disability[:evaluation_count] == 0 %>
+              <p>
+                <%= t('.no_evaluations', :name => disability[:name]) %>
+              </p>
+              <p>
+                <%= link_to t('app.common.add_evaluation'), evaluation_place_path(:id => @place.id, :eval_type_id => disability[:id]), 
+                  :class => 'add_evaluation', :title => t('app.common.add_evaluation_title', :place => @place[:name]) %>
 
-        <div class="accordion" id="<%= "accordion_#{evaluation.id}" %>">
-          <div class="accordion-group">
-            <div class="accordion-heading">
-              <div class="panel-title">
-                <a class="accordion-toggle" data-toggle="collapse" data-parent="<%= "#accordion_#{evaluation.id}" %>" 
-                  href="<%= "#collapse_#{evaluation.id}" %>" title="<%= t('.details_link_title') %>">
-                  <%= t('.header_user_details') %>
-                </a>
-              </div>
-            </div>
-            <div id="<%= "collapse_#{evaluation.id}" %>" class="accordion-body collapse">
-              <div class="accordion-inner">
-
-                <% @question_categories.each do |cat| %>
-                  <%= render :partial => 'show_answers', :locals => {:evaluation => evaluation, :cat => cat, :is_sub_category => false} %>
+              </p>
+            <% else %>
+	            <% if disability[:question_categories].present? && disability[:summaries].present? %>
+                <% questions = disability[:question_categories].map{|x| [x[:id], x.name]}.uniq %>
+                <% if questions.present? %>
+                  <h2><%= t('.header_summary') %></h2>
+                  <p><strong><%= t('.summary_result') %>:</strong>
+                    <%= number_with_precision(disability[:summaries]['overall']['overall']) %>
+                  </p>
+                  <ul class="evaluation_summary">
+                  <% questions.each do |question| %>
+                    <li>
+                      <strong><%= question[1] %>:</strong>
+                      <%= number_with_precision(disability[:summaries]['overall'][question[0].to_s]) %>
+                    </li>          
+                  <% end %>
+                  </ul>
                 <% end %>
+              <% end %>
 
-              </div>
-            </div>
+
+	            <% if disability[:question_categories].present? && disability[:evaluations].present? && disability[:users].present? %>
+                <h2><%= t('.header_overall_results') %></h2>
+                <% 
+                  qc_id = nil 
+                %>
+
+                <% disability[:evaluations].each do |evaluation| %>
+                  <% 
+                    user = disability[:users].select{|x| x.id == evaluation.user_id}.first
+                    summary = disability[:summaries]['evaluations'].select{|x| x['id'] == evaluation.id}.first
+                  %>
+
+                  <h3 class="clear">
+                    <span class="evaluation_date">
+                      <%= l evaluation.created_at, :format => :no_time %>
+                    </span>
+                    <% if user.present? %>
+                      <span class="user_name">      
+                        <%= user.nickname %>
+                        <% if user.avatar.present? %>
+                          <%#= image_tag user.avatar, :title => user.nickname %>
+                        <% end %>
+                      </span>
+                    <% end %>
+                  </h3>
+
+	                <% if questions.present? && summary.present? %>
+                    <p><strong><%= t('.summary_result') %>:</strong>
+                      <%= number_with_precision(summary['overall']) %>
+                    </p>
+                    <ul class="evaluation_summary">
+                    <% questions.each do |question| %>
+                      <li>
+                        <strong><%= question[1] %>:</strong>
+                        <%= number_with_precision(summary[question[0].to_s]) %>
+                      </li>          
+                    <% end %>
+                    </ul>
+                  <% end %>
+
+
+                  <div class="accordion" id="<%= "accordion_#{evaluation.id}" %>">
+                    <div class="accordion-group">
+                      <div class="accordion-heading">
+                        <div class="panel-title">
+                          <a class="accordion-toggle" data-toggle="collapse" data-parent="<%= "#accordion_#{evaluation.id}" %>" 
+                            href="<%= "#collapse_#{evaluation.id}" %>" title="<%= t('.details_link_title') %>">
+                            <%= t('.header_user_details') %>
+                          </a>
+                        </div>
+                      </div>
+                      <div id="<%= "collapse_#{evaluation.id}" %>" class="accordion-body collapse">
+                        <div class="accordion-inner">
+
+                          <% disability[:question_categories].each do |cat| %>
+                            <%= render :partial => 'show_answers', :locals => {:evaluation => evaluation, :cat => cat, :is_sub_category => false} %>
+                          <% end %>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                <% end %>
+              <% end %>
+            <% end %>
           </div>
-        </div>
-
-      <% end %>
+        <% end %>
+      </div>
     <% end %>
+
+
+
   </div>
   <div class="span6">
     <a href="#footer" class="accessibly-hidden"><%= t('.jump.skip_map') %></a>
     <div id="map"></div>
   </div>
 </div>
+
+
+

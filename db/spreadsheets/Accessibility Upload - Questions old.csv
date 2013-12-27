@@ -1,0 +1,255 @@
+Parent Category Name,Parent Category Sort Order,Parent Category Is Common,Child Category Name,Child Category Sort Order,Child Category Is Common,Question,Question Sort Order,Question Evidence,Venue
+Parking,1,1,,,,Designated parking or drop off area,1,,
+Parking,1,1,,,,Barrier free parking or drop off area,2,,
+Parking,1,1,,,,"Firm, level, slip-resistant surface",3,,
+Parking,1,1,,,,Free of abrupt changes in surface level,4,Height (m),
+Parking,1,1,,,,Accessible route in and out of parking or drop off area,5,,
+Parking,1,1,,,,Designated parking or drop off area is shortest possible route to an accessible entrance,6,,
+Outside Pathways,2,1,,,,Barrier free pathway,1,,
+Outside Pathways,2,1,,,,"Firm, level, slip-resistant surface",2,,
+Outside Pathways,2,1,,,,Free of abrupt changes in surface level,3,Height (m),
+Outside Pathways,2,1,,,,Gratings in pathway have small openings,4,Width (m),
+Outside Pathways,2,1,,,,Pathway width is adequate,5,Width (m),
+Outside Pathways,2,1,Stairs,1,1,Barrier free accessible path to stairs,1,,
+Outside Pathways,2,1,Stairs,1,1,Barrier free stairs,2,,
+Outside Pathways,2,1,Stairs,1,1,"Firm, level, slip-resistant surface",3,,
+Outside Pathways,2,1,Stairs,1,1,Continuous handrails on both sides,4,,
+Outside Pathways,2,1,Stairs,1,1,Handrail colors are different from steps,5,,
+Outside Pathways,2,1,Stairs,1,1,Height of all steps are the same ,6,Height (m),
+Outside Pathways,2,1,Stairs,1,1,Width of step is adequate ,7,Width (m),
+Outside Pathways,2,1,Stairs,1,1,Depth of step is adequate ,8,Depth (m),
+Outside Pathways,2,1,Stairs,1,1,Stripes on steps to provide clear indicator of where each step starts ,9,,
+Outside Pathways,2,1,Ramp,2,1,Mobile ramp available when permanent ramp is not available,1,,
+Outside Pathways,2,1,Ramp,2,1,Barrier free accessible path to ramp,2,,
+Outside Pathways,2,1,Ramp,2,1,Barrier free ramp,3,,
+Outside Pathways,2,1,Ramp,2,1,Adequate ramp slope,4,Ratio of Height:Width (m),
+Outside Pathways,2,1,Ramp,2,1,"Firm, level, slip-resistant surface",5,,
+Outside Pathways,2,1,Ramp,2,1,Adequate ramp width ,6,Width (m),
+Outside Pathways,2,1,Ramp,2,1,Continuous handrails on both sides,7,,
+Outside Pathways,2,1,Ramp,2,1,Ramp sheltered from weather,8,,
+Outside Pathways,2,1,Ramp,2,1,Flat pathway at the top and bottom of ramp large enough to allow for turning,9,,
+Entrances,3,1,,,, Barrier free accessible path to entrance,1,,
+Entrances,3,1,,,, Tactile map of place,2,,
+Entrances,3,1,Doorway,1,1, Barrier free accessible path to door,1,,
+Entrances,3,1,Doorway,1,1, Barrier free door,2,,
+Entrances,3,1,Doorway,1,1, Wide opening when door is open ,3,Width (m),
+Entrances,3,1,Doorway,1,1, Flat doorway ,4,Height (m),
+Entrances,3,1,Doorway,1,1, Open door with one hand,5,,
+Entrances,3,1,Doorway,1,1, Automatic door opener,6,,
+Entrances,3,1,Doorway,1,1, Adjacent door next to revolving door or turnstile,7,,
+Entrances,3,1,Stairs,2,1, Barrier free accessible path to stairs,1,,
+Entrances,3,1,Stairs,2,1, Barrier free stairs,2,,
+Entrances,3,1,Stairs,2,1," Firm, level, slip-resistant surface",3,,
+Entrances,3,1,Stairs,2,1, Continuous handrails on both sides,4,,
+Entrances,3,1,Stairs,2,1, Handrail colors are different from steps,5,,
+Entrances,3,1,Stairs,2,1, Height of all steps are the same ,6,Height (m),
+Entrances,3,1,Stairs,2,1, Width of step is adequate ,7,Width (m),
+Entrances,3,1,Stairs,2,1, Depth of step is adequate ,8,Depth (m),
+Entrances,3,1,Stairs,2,1, Stripes on steps to provide clear indicator of where each step starts ,9,,
+Entrances,3,1,Ramps,3,1, Mobile ramp available when permanent ramp is not available,1,,
+Entrances,3,1,Ramps,3,1, Barrier free accessible path to ramp,2,,
+Entrances,3,1,Ramps,3,1, Barrier free ramp,3,,
+Entrances,3,1,Ramps,3,1, Adequate ramp slope ,4,Ratio of Height:Width (m),
+Entrances,3,1,Ramps,3,1," Firm, level, slip-resistant surface",5,,
+Entrances,3,1,Ramps,3,1, Adequate ramp width ,6,Width (m),
+Entrances,3,1,Ramps,3,1, Continuous handrails on both sides,7,,
+Entrances,3,1,Ramps,3,1, Ramp sheltered from weather,8,,
+Entrances,3,1,Ramps,3,1, Flat pathway at the top and bottom of ramp large enough to allow for turning,9,,
+Entrances,3,1,Elevators,4,1, Barrier free accessible path to elevator,1,,
+Entrances,3,1,Elevators,4,1, Barrier free elevator,2,,
+Entrances,3,1,Elevators,4,1, Adequate height of call buttons  ,3,Height (m),
+Entrances,3,1,Elevators,4,1, Braille on call buttons,4,,
+Entrances,3,1,Elevators,4,1, Wide opening when door is open ,5,Width (m),
+Entrances,3,1,Elevators,4,1, Doors remain open for adequate time ,6,Time (s),
+Entrances,3,1,Elevators,4,1, Doors re-open automatically if they are obstructed,7,,
+Entrances,3,1,Elevators,4,1, Flat entrance to elevator ,8,Height (m),
+Entrances,3,1,Elevators,4,1, Adequate minimum gap between elevator and floor landing ,9,Width (m),
+Entrances,3,1,Elevators,4,1," Firm, level, slip-resistant surface",10,,
+Entrances,3,1,Elevators,4,1, Handrails on elevator walls,11,,
+Entrances,3,1,Elevators,4,1, Adequate space in the interior  ,12,,
+Entrances,3,1,Elevators,4,1, Visual signals to identify direction of travel and floor,13,,
+Entrances,3,1,Elevators,4,1, Audio signals to identify direction of travel and floor,14,,
+Entrances,3,1,Elevators,4,1, Adequate height of buttons in elevator  ,15,Height (m),
+Entrances,3,1,Elevators,4,1, Braille buttons in elevator,16,,
+Entrances,3,1,Elevators,4,1, Working emergency communication system,17,,
+"Interior Corridors, Doorways and Passageways",4,1,,,, Barrier free accessible path,1,,
+"Interior Corridors, Doorways and Passageways",4,1,,,, Free of abrupt changes in surface level ,2,Height (m),
+"Interior Corridors, Doorways and Passageways",4,1,,,, Pathway width is adequate ,3,Width (m),
+"Interior Corridors, Doorways and Passageways",4,1,,,," Firm, level, slip-resistant surface",4,,
+"Interior Corridors, Doorways and Passageways",4,1,Doorway,1,1, Barrier free accessible path to doorway,1,,
+"Interior Corridors, Doorways and Passageways",4,1,Doorway,1,1, Barrier free doorway,2,,
+"Interior Corridors, Doorways and Passageways",4,1,Doorway,1,1, Wide opening when door is open ,3,Width (m),
+"Interior Corridors, Doorways and Passageways",4,1,Doorway,1,1, Flat doorway ,4,Height (m),
+"Interior Corridors, Doorways and Passageways",4,1,Doorway,1,1, Open door with one hand,5,,
+"Interior Corridors, Doorways and Passageways",4,1,Doorway,1,1, Automatic door opener,6,,
+"Interior Corridors, Doorways and Passageways",4,1,Doorway,1,1, Adjacent door next to revolving door or turnstile,7,,
+"Interior Corridors, Doorways and Passageways",4,1,Stairs,2,1, Barrier free accessible path to stairs,1,,
+"Interior Corridors, Doorways and Passageways",4,1,Stairs,2,1, Barrier free stairs,2,,
+"Interior Corridors, Doorways and Passageways",4,1,Stairs,2,1," Firm, level, slip-resistant surface",3,,
+"Interior Corridors, Doorways and Passageways",4,1,Stairs,2,1, Continuous handrails on both sides,4,,
+"Interior Corridors, Doorways and Passageways",4,1,Stairs,2,1, Handrail colors are different from steps,5,,
+"Interior Corridors, Doorways and Passageways",4,1,Stairs,2,1, Height of all steps are the same ,6,Height (m),
+"Interior Corridors, Doorways and Passageways",4,1,Stairs,2,1, Width of step is adequate ,7,Width (m),
+"Interior Corridors, Doorways and Passageways",4,1,Stairs,2,1, Depth of step is adequate ,8,Depth (m),
+"Interior Corridors, Doorways and Passageways",4,1,Stairs,2,1, Stripes on steps to provide clear indicator of where each step starts,9,,
+"Interior Corridors, Doorways and Passageways",4,1,Ramps,3,1, Mobile ramp available when permanent ramp is not available,1,,
+"Interior Corridors, Doorways and Passageways",4,1,Ramps,3,1, Barrier free accessible path to ramp,2,,
+"Interior Corridors, Doorways and Passageways",4,1,Ramps,3,1, Barrier free ramp,3,,
+"Interior Corridors, Doorways and Passageways",4,1,Ramps,3,1, Adequate ramp slope ,4,Ratio of Height:Width (m),
+"Interior Corridors, Doorways and Passageways",4,1,Ramps,3,1," Firm, level, slip-resistant surface",5,,
+"Interior Corridors, Doorways and Passageways",4,1,Ramps,3,1, Adequate ramp width ,6,Width (m),
+"Interior Corridors, Doorways and Passageways",4,1,Ramps,3,1, Continuous handrails on both sides,7,,
+"Interior Corridors, Doorways and Passageways",4,1,Ramps,3,1, Flat pathway at the top and bottom of ramp large enough to allow for turning,8,,
+"Interior Corridors, Doorways and Passageways",4,1,Elevators,4,1, Barrier free accessible path to elevator,1,,
+"Interior Corridors, Doorways and Passageways",4,1,Elevators,4,1, Barrier free elevator,2,,
+"Interior Corridors, Doorways and Passageways",4,1,Elevators,4,1, Adequate height of call buttons  ,3,Height (m),
+"Interior Corridors, Doorways and Passageways",4,1,Elevators,4,1, Braille on call buttons,4,,
+"Interior Corridors, Doorways and Passageways",4,1,Elevators,4,1, Wide opening when door is open ,5,Width (m),
+"Interior Corridors, Doorways and Passageways",4,1,Elevators,4,1, Doors remain open for adequate time ,6,Time (s),
+"Interior Corridors, Doorways and Passageways",4,1,Elevators,4,1, Doors re-open automatically if they are obstructed,7,,
+"Interior Corridors, Doorways and Passageways",4,1,Elevators,4,1, Flat entrance to elevator ,8,Height (m),
+"Interior Corridors, Doorways and Passageways",4,1,Elevators,4,1, Adequate minimum gap between elevator and floor landing ,9,Width (m),
+"Interior Corridors, Doorways and Passageways",4,1,Elevators,4,1," Firm, level, slip-resistant surface",10,,
+"Interior Corridors, Doorways and Passageways",4,1,Elevators,4,1, Handrails on elevator walls,11,,
+"Interior Corridors, Doorways and Passageways",4,1,Elevators,4,1, Adequate space in the interior  ,12,Width x Depth (m),
+"Interior Corridors, Doorways and Passageways",4,1,Elevators,4,1, Visual signals to identify direction of travel and floor,13,,
+"Interior Corridors, Doorways and Passageways",4,1,Elevators,4,1, Audio signals to identify direction of travel and floor,14,,
+"Interior Corridors, Doorways and Passageways",4,1,Elevators,4,1, Adequate height of buttons in elevator  ,15,Height (m),
+"Interior Corridors, Doorways and Passageways",4,1,Elevators,4,1, Braille buttons in elevator,16,,
+"Interior Corridors, Doorways and Passageways",4,1,Elevators,4,1, Working emergency communication system,17,,
+Interior Rooms,5,1,,,, Free of abrupt changes in surface level ,1,Height (m),
+Interior Rooms,5,1,,,," Firm, level, slip-resistant surface",2,,
+Interior Rooms,5,1,,,, Barrier free aisles,3,,
+Interior Rooms,5,1,,,, Adequate aisle width ,4,Width (m),
+Public Restrooms,6,1,,,, Barrier free accessible path to restroom,1,,
+Public Restrooms,6,1,,,, Wide opening when entrance door is open ,2,Width (m),
+Public Restrooms,6,1,,,, Door opens outward for small restroom,3,,
+Public Restrooms,6,1,,,, Automatic entrance door opener,4,,
+Public Restrooms,6,1,,,, Flat entrance doorway ,5,Height (m),
+Public Restrooms,6,1,,,, Open door with one hand,6,,
+Public Restrooms,6,1,,,, Adequate height of light switch ,7,Height (m),
+Public Restrooms,6,1,,,, Adequate space in the interior ,8,Width x Depth (m),
+Public Restrooms,6,1,,,, Adequate height of sink ,9,Height (m),
+Public Restrooms,6,1,,,, Can use sink controls with one hand,10,,
+Public Restrooms,6,1,,,, Sitting toilet (not a squat toilet),11,,
+Public Restrooms,6,1,,,, Grab bar to assist getting on toilet,12,,
+Public Restrooms,6,1,,,, Can flush toilet with one hand,13,,
+Accessibility Services,7,1,,,, Special services available for people with disabilities,1,,
+Accessibility Services,7,1,,,, Guide dog permitted to assist blind people,2,,
+Accessibility Services,7,1,,,, Adequate seating space area for wheelchairs ,3,Width x Depth (m),
+Accessibility Services,7,1,,,, Adequate height of tables for wheelchairs ,4,Height (m),
+Accessibility Services,7,1,,,, Signs presented in adequate text size ,5,Text Size (pt),
+Accessibility Services,7,1,,,, Documents presented in adequate text size ,6,Text Size (pt),
+Accessibility Services,7,1,,,, Signs presented in Braille,7,,
+Accessibility Services,7,1,,,, Documents presented in Braille,8,,
+Banks,,0,,,, Adequate height of at least one table for wheelchairs,1,Height (m),Banks
+Banks,,0,,,, Queue number monitors have adequate text size,2,,Banks
+Banks,,0,,,, Queue number monitors use high contrast,3,,Banks
+Banks,,0,,,, Ability to complete withdrawals independently,4,,Banks
+Banks,,0,,,, Ability to complete deposits independently,5,,Banks
+Banks,,0,,,, Ability to open an account independently,6,,Banks
+Banks,,0,,,, Ability to obtain official documents independently,7,,Banks
+Banks,,0,,,, Ability to complete other transactions independently,8,,Banks
+ATMs and pay boxes,,0,,,, Barrier free path to the machine,1,,ATMs and pay boxes
+ATMs and pay boxes,,0,,,, Area in front of machine is barrier free,2,,ATMs and pay boxes
+ATMs and pay boxes,,0,,,, Adequate height of buttons and screens for wheelchair accessibility,3,Height (m),ATMs and pay boxes
+ATMs and pay boxes,,0,,,, Screen positioned to minimize glare,4,,ATMs and pay boxes
+ATMs and pay boxes,,0,,,, Screen uses adequate text size,5,,ATMs and pay boxes
+ATMs and pay boxes,,0,,,, Screen uses high contrast,6,,ATMs and pay boxes
+ATMs and pay boxes,,0,,,, Talking ATM with headphone jack for audio,7,,ATMs and pay boxes
+112,,0,,,, SMS service for deaf people,1,,112
+Hotels,,0,,,, Barrier free accessible path to room,1,,Hotels
+Hotels,,0,,,, Adequate clearance on at least one side of bed ,2,Widht (m),Hotels
+Hotels,,0,,,, Adequate height of light switches ,3,Height (m),Hotels
+Hotels,,0,,,, Adequate height of electrical receptacles ,4,Height (m),Hotels
+Hotels,,0,Bathroom,1,, Barrier free accessible path to Bathroom,1,,Hotels
+Hotels,,0,Bathroom,1,, Wide opening when entrance door is open ,2,Width (m),Hotels
+Hotels,,0,Bathroom,1,, Door opens outward for small bathroom,3,,Hotels
+Hotels,,0,Bathroom,1,, Flat entrance doorway ,4,Height (m),Hotels
+Hotels,,0,Bathroom,1,, Open door with one hand,5,,Hotels
+Hotels,,0,Bathroom,1,, Adequate height of light switch ,6,Height (m),Hotels
+Hotels,,0,Bathroom,1,, Adequate space in the interior ,7,Width x Depth (m),Hotels
+Hotels,,0,Bathroom,1,, Adequate height of sink ,8,Height (m),Hotels
+Hotels,,0,Bathroom,1,, Can use sink controls with one hand,9,,Hotels
+Hotels,,0,Bathroom,1,, Sitting toilet (not a squat toilet),10,,Hotels
+Hotels,,0,Bathroom,1,, Grab bar to assist getting on toilet,11,,Hotels
+Hotels,,0,Bathroom,1,, Can flush toilet with one hand,12,,Hotels
+Hotels,,0,Bathroom,1,, Adequate height of towel rack ,13,Height (m),Hotels
+Hotels,,0,Bathroom,1,, Grab bar to assist getting into shower/bathtub,14,,Hotels
+Hotels,,0,Bathroom,1,, Shower/bathtub head on flexible hose,15,,Hotels
+Hotels,,0,Bathroom,1,, Can use shower/bathtub controls with one hand,16,,Hotels
+Hostels,,0,,,, Barrier free accessible path to room,1,,Hostels
+Hostels,,0,,,, Adequate clearance on at least one side of bed ,2,Widht (m),Hostels
+Hostels,,0,,,, Adequate height of light switches ,3,Height (m),Hostels
+Hostels,,0,,,, Adequate height of electrical receptacles ,4,Height (m),Hostels
+Hostels,,0,Bathroom,1,, Barrier free accessible path to bathroom,1,,Hostels
+Hostels,,0,Bathroom,1,, Wide opening when entrance door is open ,2,Width (m),Hostels
+Hostels,,0,Bathroom,1,, Door opens outward for small bathroom,3,,Hostels
+Hostels,,0,Bathroom,1,, Flat entrance doorway ,4,Height (m),Hostels
+Hostels,,0,Bathroom,1,, Open door with one hand,5,,Hostels
+Hostels,,0,Bathroom,1,, Adequate height of light switch ,6,Height (m),Hostels
+Hostels,,0,Bathroom,1,, Adequate space in the interior ,7,Width x Depth (m),Hostels
+Hostels,,0,Bathroom,1,, Adequate height of sink ,8,Height (m),Hostels
+Hostels,,0,Bathroom,1,, Can use sink controls with one hand,9,,Hostels
+Hostels,,0,Bathroom,1,, Sitting toilet (not a squat toilet),10,,Hostels
+Hostels,,0,Bathroom,1,, Grab bar to assist getting on toilet,11,,Hostels
+Hostels,,0,Bathroom,1,, Can flush toilet with one hand,12,,Hostels
+Hostels,,0,Bathroom,1,, Adequate height of towel rack ,13,Height (m),Hostels
+Hostels,,0,Bathroom,1,, Grab bar to assist getting into shower/bathtub,14,,Hostels
+Hostels,,0,Bathroom,1,, Shower/bathtub head on flexible hose,15,,Hostels
+Hostels,,0,Bathroom,1,, Can use shower/bathtub controls with one hand,16,,Hostels
+Cinema / theaters,,0,,,, Reserved area for wheelchairs,1,,Cinema / theaters
+Stadiums,,0,,,, Reserved area for wheelchairs,1,,Stadiums
+Kindergartens,,0,,,, Adequate desk height ,1,Height (m),Kindergartens
+Schools,,0,,,, Adequate desk height ,1,Height (m),Schools
+Colleges,,0,,,, Adequate desk height ,1,Height (m),Colleges
+Universities,,0,,,, Adequate desk height ,1,Height (m),Universities
+Public Buses,,0,,,, Barrier free accessible path to bus stop,1,,Public Buses
+Public Buses,,0,,,, Bus stop board listing upcoming buses,2,,Public Buses
+Public Buses,,0,,,, Bus stop board positioned to minimize glare,3,,Public Buses
+Public Buses,,0,,,, Bus stop board uses adequate text size,4,,Public Buses
+Public Buses,,0,,,, Bus stop board uses high contrast ,5,,Public Buses
+Public Buses,,0,,,, Sign listing upcoming buses has audio component,6,,Public Buses
+Public Buses,,0,,,, Bus announces the bus number outside the bus at bus stop,7,,Public Buses
+Public Buses,,0,,,, Bus announces the upcoming stop inside the bus,8,,Public Buses
+Public Buses,,0,,,, The bus stops with entrance to bus in front of person with disabilities,9,,Public Buses
+Public Buses,,0,,,, Bus with wheelchair accessible ramp,10,,Public Buses
+Public Buses,,0,,,, Bus with wheelchair designated area,11,,Public Buses
+Metro,,0,,,, Ability to bypass ticket turnstile,1,,Metro
+Metro,,0,,,,"(b, p) Elevator to reach metro platform",2,,Metro
+Metro,,0,,,, Platform has stops listed in Braille,3,,Metro
+Metro,,0,,,, Tactile lines on the floor leading to the metro car,4,,Metro
+Metro,,0,,,, Tactile line parallel to the edge of the platform,5,,Metro
+Metro,,0,,,, Bright yellow line parallel to the edge of the platform,6,,Metro
+Metro,,0,,,, Platform announces the approaching metro ,7,,Metro
+Metro,,0,,,, Metro car announces the upcoming stop inside,8,,Metro
+Metro,,0,,,, Wide opening when door is open ,9,Width (m),Metro
+Metro,,0,,,, Doors remain open for adequate time ,10,Time (s),Metro
+Metro,,0,,,, Doors re-open automatically if they are obstructed,11,,Metro
+Metro,,0,,,, Flat entrance to metro car ,12,Height (m),Metro
+Metro,,0,,,, Adequate minimum gap between metro car and floor landing ,13,Width (m),Metro
+Metro,,0,,,," Firm, level, slip-resistant surface",14,,Metro
+Metro,,0,,,, Designated wheelchair area in metro car,15,,Metro
+Trains,,0,,,, Train stations has stops listed in Braille,1,,Trains
+Trains,,0,,,, Tactile lines on the floor leading to the train car,2,,Trains
+Trains,,0,,,, Tactile line parallel to the edge of the platform,3,,Trains
+Trains,,0,,,, Bright yellow line parallel to the edge of the platform,4,,Trains
+Trains,,0,,,, Train station announces the approaching metro ,5,,Trains
+Trains,,0,,,, Train car announces the upcoming stop inside,6,,Trains
+Trains,,0,,,, Flat entrance to train car ,7,Height (m),Trains
+Trains,,0,,,, Adequate minimum gap between train car and floor landing ,8,Width (m),Trains
+Trains,,0,,,," Firm, level, slip-resistant surface",9,,Trains
+Trains,,0,,,, Designated wheelchair area,10,,Trains
+Crosswalks,,0,,,, Barrier free accessible path to crosswalk,1,,Crosswalks
+Crosswalks,,0,,,, Ramp from pathway to crosswalk,2,,Crosswalks
+Crosswalks,,0,,,, Adequate width of curb ramp ,3,Width (m),Crosswalks
+Crosswalks,,0,,,," Ramp with firm, level, slip-resistant surface",4,,Crosswalks
+Crosswalks,,0,,,, Barrier free accessible crosswalk,5,,Crosswalks
+Crosswalks,,0,,,, Crosswalk free of abrupt changes in surface level ,6,Height (m),Crosswalks
+Crosswalks,,0,,,," Crosswalk with firm, level, slip-resistant surface",7,,Crosswalks
+Crosswalks,,0,,,, Adequate time to use crosswalk ,8,Time (s),Crosswalks
+Crosswalks,,0,,,, Visual signal to indicate when person can use crosswalk,9,,Crosswalks
+Crosswalks,,0,,,, Audio signal to indicate when person can use crosswalk,10,,Crosswalks
+Crosswalks,,0,,,," Audio signal is different for green, flashing green/yellow and red lights",11,,Crosswalks
+Crosswalks,,0,,,, Audio signal loudness adequate to hear over traffic noise,12,,Crosswalks
+Crosswalks,,0,,,, Streetlights with covers to reduce glare,13,,Crosswalks

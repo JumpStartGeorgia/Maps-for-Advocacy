@@ -2,10 +2,11 @@ class PlaceEvaluation < ActiveRecord::Base
 
   belongs_to :place
   belongs_to :user
+  belongs_to :disability
   has_many :place_evaluation_answers, :dependent => :destroy
   accepts_nested_attributes_for :place_evaluation_answers
-  attr_accessible :place_id, :user_id, :place_evaluation_answers_attributes, :created_at
-  validates :user_id, :presence => true
+  attr_accessible :place_id, :user_id, :place_evaluation_answers_attributes, :created_at, :disability_id
+  validates :user_id, :disability_id, :presence => true
 
   
   ANSWERS = {'no_answer' => 0, 'not_relevant' => 1, 'needs' => 2, 'has_bad' => 3, 'has_good' => 4}
@@ -14,9 +15,10 @@ class PlaceEvaluation < ActiveRecord::Base
     ANSWERS.keys[ANSWERS.values.index(value)]
   end
   
-  def self.with_answers(place_id)
+  def self.with_answers(place_id, disability_id=nil)
     includes(:place_evaluation_answers)
     .where(:place_id => place_id)  
+    .where(:disability_id => disability_id) if disability_id.present?
   end
   
   def self.sorted

@@ -1,0 +1,28 @@
+<%= semantic_form_for([:admin, @disability], :html => { :class => 'form-horizontal' }) do |f| %>
+	<%= f.error_messages %>
+
+  <% create_sorted_translation_objects(@disability.disability_translations).each do |trans| %>
+		<%= f.fields_for :disability_translations, trans do |translation| %>
+
+			<div id="form-<%= trans.locale %>" class="multilanguage_nested">
+				<h3><%= t("app.language.#{trans.locale}") %></h3>
+
+				<%= translation.input :name %>
+				<%= translation.hidden_field :locale , :value => trans.locale %>
+			</div>
+
+		<% end %>
+	<% end %>
+
+	<%= f.inputs do %>
+	  <%= f.input :code, :input_html => {:size => 5, :maxlength => 1} %>
+	<% end %>
+
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+	  <%= f.submit nil, :class => 'btn btn-warning', :type => :reset, :value => t('app.buttons.reset'), :name => :reset %>
+	  <%= link_to t('app.buttons.cancel'), admin_disabilities_path, :class => 'btn btn-mini btn-warning' %>
+  </div>
+<% end %>
+

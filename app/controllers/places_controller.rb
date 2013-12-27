@@ -5,21 +5,40 @@ class PlacesController < ApplicationController
   # GET /places/1.json
   def show
     @place = Place.with_translation(params[:id]).first
-
+    @disability_evaluations = []
+    
     if @place.present?
 
-	    # get list of questions
-	    @question_categories = QuestionCategory.questions_for_venue(@place.question_category_id)
+      @disabilities = Disability.sorted
+      if @disabilities.present?
+        @disabilities.each do |disability|
+          x = Hash.new
+          @disability_evaluations << x
+          
+          # record the disability
+          x[:id] = disability.id
+          x[:code] = disability.code
+          x[:name] = disability.name
 
-      # get evaluation results
-      @evaluations = PlaceEvaluation.with_answers(params[:id]).sorted
-      
-      # create summaries of evaluations
-      @summaries = PlaceEvaluation.summarize(@evaluations, @question_categories)
-      
-      # get user info that submitted evaluations
-      @users = User.for_evaluations(@evaluations.map{|x| x.user_id}.uniq)
-      
+	        # get list of questions
+		      x[:question_categories] = QuestionCategory.questions_for_venue(question_category_id: @place.question_category_id, disability_id: disability.id)
+
+          # get evaluation results
+          x[:evaluations] = PlaceEvaluation.with_answers(params[:id], disability.id).sorted
+          x[:evaluation_count] = 0
+          
+          if x[:evaluations].present?
+            x[:evaluation_count] = x[:evaluations].length
+   
+            # create summaries of evaluations
+            x[:summaries] = PlaceEvaluation.summarize(x[:evaluations], x[:question_categories])
+            
+            # get user info that submitted evaluations
+            x[:users] = User.for_evaluations(x[:evaluations].map{|x| x.user_id}.uniq)
+          end        
+        end
+      end
+     
 
       if @place.lat.present? && @place.lon.present?
         @show_map = true
@@ -61,11 +80,15 @@ class PlacesController < ApplicationController
       @show_map = true
       gon.show_place_form_map = true
       gon.address_search_path = address_search_places_path
-    elsif params[:stage] == '4' # evaluation
+    elsif params[:stage] == '4' # disability type
+      @disabilities = Disability.sorted
+    elsif params[:stage] == '5' # evaluation
       @place.venue_id = params[:venue_id]
       @place.lat = params[:lat]
       @place.lon = params[:lon]
       gon.show_evaluation_form = true
+      
+      @disability = Disability.with_name(params[:eval_type_id])
       
       # create the translation object for however many locales there are
       # so the form will properly create all of the nested form fields
@@ -74,11 +97,11 @@ class PlacesController < ApplicationController
 		  end
 		
 		  # get list of questions
-		  @question_categories = QuestionCategory.questions_for_venue(@venue.question_category_id)
+		  @question_categories = QuestionCategory.questions_for_venue(question_category_id: @venue.question_category_id, disability_id: params[:eval_type_id])
 		  
 		  # create the evaluation object for however many questions there are
 		  if @question_categories.present?
-		    @place_evaluation = @place.place_evaluations.build(:user_id => current_user.id)
+		    @place_evaluation = @place.place_evaluations.build(user_id: current_user.id, disability_id: params[:eval_type_id])
 		    num_questions = QuestionCategory.number_questions(@question_categories)
 		    if num_questions > 0
           (0..num_questions-1).each do |index|
@@ -98,7 +121,7 @@ class PlacesController < ApplicationController
   # GET /places/1/edit
   def edit
     @place = Place.find(params[:id])
-    params[:stage] = '3' if params[:stage].blank?
+    params[:stage] = '5' if params[:stage].blank?
     gon.show_evaluation_form = true
     gon.address_search_path = address_search_places_path
 
@@ -130,11 +153,13 @@ class PlacesController < ApplicationController
         format.json { render json: @place, status: :created, location: @place }
       else
         gon.show_evaluation_form = true
-        params[:stage] = '4'
+        params[:stage] = '5'
 	      # get venue
 	      @venue = Venue.with_translations(I18n.locale).find_by_id(@place.venue_id)
 		    # get list of questions
-		    @question_categories = QuestionCategory.questions_for_venue(@venue.question_category_id)
+  		  @question_categories = QuestionCategory.questions_for_venue(question_category_id: @venue.question_category_id, disability_id: params[:eval_type_id])
+        # get disability
+        @disability = Disability.with_name(params[:eval_type_id])
         @place_evaluation = @place.place_evaluations.first
         format.html { render action: "new" }
         format.json { render json: @place.errors, status: :unprocessable_entity }
@@ -158,7 +183,7 @@ class PlacesController < ApplicationController
       else
         gon.show_evaluation_form = true
         gon.address_search_path = address_search_places_path
-        params[:stage] = '4'
+        params[:stage] = '5'
 	      # get venue
 	      @venue = Venue.with_translations(I18n.locale).find_by_id(@place.venue_id)
 		    # get list of questions
@@ -225,6 +250,7 @@ class PlacesController < ApplicationController
   # let user submit evaluation for an existing place
   def evaluation
     @place = Place.with_translation(params[:id]).first
+    
     success = false
     
     if @place.present?
@@ -241,16 +267,20 @@ class PlacesController < ApplicationController
       if success
 		    redirect_to place_path(@place), notice: t('app.msgs.success_created', :obj => t('activerecord.models.evaluation')) 
 		    return
+      elsif params[:eval_type_id].blank?
+        @disabilities = Disability.sorted
       else
         # load the evaluation form
         gon.show_evaluation_form = true
 
+        @disability = Disability.with_name(params[:eval_type_id])
+        
 	      # get list of questions
-	      @question_categories = QuestionCategory.questions_for_venue(@place.question_category_id)
+	      @question_categories = QuestionCategory.questions_for_venue(question_category_id: @place.question_category_id, disability_id: params[:eval_type_id])
         
 		    # create the evaluation object for however many questions there are
 		    if @question_categories.present?
-		      @place_evaluation = @place.place_evaluations.build(:user_id => current_user.id)
+		      @place_evaluation = @place.place_evaluations.build(user_id: current_user.id, disability_id: params[:eval_type_id])
 		      num_questions = QuestionCategory.number_questions(@question_categories)
 		      if num_questions > 0
             (0..num_questions-1).each do |index|
