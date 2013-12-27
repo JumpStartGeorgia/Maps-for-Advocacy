@@ -1,0 +1,37 @@
+<%- model_class = District -%>
+<%- model_class_trans = DistrictTranslation -%>
+<% title t '.title', :default => model_class.model_name.human.pluralize %>
+
+<div class="form-actions">
+  <%= link_to t('.new', :default => t("helpers.links.new")),
+              new_admin_district_path,
+              :class => 'btn btn-primary' %>
+</div>
+
+<table class="table table-striped display">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class_trans.human_attribute_name(:name) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @districts.each do |district| %>
+      <tr>
+        <td><%= link_to district.id, admin_district_path(district) %></td>
+        <td><%= district.name %></td>
+        <td>
+          <%= link_to t('app.buttons.edit'),
+                      edit_admin_district_path(district), :class => 'btn btn-mini' %>
+          <%= link_to t('app.buttons.delete'),
+                      admin_district_path(district),
+                      :method => :delete,
+                      :confirm => t('app.buttons.confirm'),
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

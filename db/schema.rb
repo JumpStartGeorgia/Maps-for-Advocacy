@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131220121052) do
+ActiveRecord::Schema.define(:version => 20131227061622) do
 
   create_table "disabilities", :force => true do |t|
     t.string   "code"
@@ -38,6 +38,23 @@ ActiveRecord::Schema.define(:version => 20131220121052) do
   add_index "disability_translations", ["disability_id"], :name => "index_disability_translations_on_disability_id"
   add_index "disability_translations", ["locale"], :name => "index_disability_translations_on_locale"
   add_index "disability_translations", ["name"], :name => "index_disability_translations_on_name"
+
+  create_table "district_translations", :force => true do |t|
+    t.integer  "district_id"
+    t.string   "locale"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "district_translations", ["district_id"], :name => "index_district_translations_on_district_id"
+  add_index "district_translations", ["locale"], :name => "index_district_translations_on_locale"
+
+  create_table "districts", :force => true do |t|
+    t.text     "json"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "place_evaluation_answers", :force => true do |t|
     t.integer  "old_place_id"

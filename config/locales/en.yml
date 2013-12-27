@@ -10,6 +10,7 @@ en:
       place: Place
       evaluation: Evaluation
       disability: Disability
+      district: District
     attributes:
       user:
         email: Email Address
@@ -56,6 +57,11 @@ en:
         code: One-letter Code
       disability_translation:
         name: Disability
+      district:
+        json: GeoJSON
+        id: District ID
+      district_translation:
+        name: District
     errors:
       messages:
         required_field: "is a required field."
@@ -168,6 +174,7 @@ en:
       venues: Venues
       places: Places
       disabilities: Disabilities
+      districts: Districts
     users:
       edit:
         title: Editing User
