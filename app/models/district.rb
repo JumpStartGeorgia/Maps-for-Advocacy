@@ -5,9 +5,15 @@ class District < ActiveRecord::Base
 	has_many :places
   accepts_nested_attributes_for :district_translations
   attr_accessible :id, :json, :district_translations_attributes
-  
   validates :json, :presence => true
   
+  
+  def self.no_json
+    select('districts.id, district_translations.name as district_name')
+    .joins(:district_translations)
+    .where('district_translations.locale = ?', I18n.locale)
+    .order('districts.id')
+  end
   
   #######################################
   ## load districts from csv file

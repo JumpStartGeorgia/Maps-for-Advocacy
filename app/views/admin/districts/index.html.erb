@@ -20,7 +20,7 @@
     <% @districts.each do |district| %>
       <tr>
         <td><%= link_to district.id, admin_district_path(district) %></td>
-        <td><%= district.name %></td>
+        <td><%= district[:district_name] %></td>
         <td>
           <%= link_to t('app.buttons.edit'),
                       edit_admin_district_path(district), :class => 'btn btn-mini' %>

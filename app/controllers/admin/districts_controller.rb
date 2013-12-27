@@ -7,7 +7,7 @@ class Admin::DistrictsController < ApplicationController
   # GET /districts
   # GET /districts.json
   def index
-    @districts = District.all
+    @districts = District.no_json
 
     respond_to do |format|
       format.html # index.html.erb
