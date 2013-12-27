@@ -28,6 +28,21 @@ d.disability_translations.create(:locale => 'en', :name => 'Physical (wheelchair
 d.disability_translations.create(:locale => 'ka', :name => 'Physical (wheelchair)')
 
 
+##################################
+## Districts
+##################################
+puts "loading districts from csv file"
+f = File.open("#{Rails.root}/db/spreadsheets/districts.csv", 'r')
+msg = District.process_csv_upload(f, true)
+puts msg if msg.present?
+
+puts "loading georgian district names from csv file"
+f = File.open("#{Rails.root}/db/spreadsheets/district_ka_names.csv", 'r')
+msg = District.process_georgian_name_csv_upload(f)
+puts msg if msg.present?
+
+
+
 =begin
 ##################################
 ## Questions
