@@ -6,12 +6,20 @@
   <div class="span6" id="venue_evalautions">
     <div class="row-fluid top">
       <div class="span9">
-        <p><strong><%= model_class_trans.human_attribute_name(:address) %>:</strong>
-        <%= @place[:address] %></p>
-        <p><strong><%= model_class_trans.human_attribute_name(:district_id) %>:</strong>
-        <%= @place[:district] %></p>
-        <p><strong><%= model_class_trans.human_attribute_name(:venue_id) %>:</strong>
-        <%= link_to @place[:venue], root_path(:venue_category_id => @place[:venue_category_id]) %></p>
+        <p>
+          <strong><%= model_class_trans.human_attribute_name(:address) %>:</strong>
+          <%= @place[:address] %>
+        </p>
+        <p>
+          <strong><%= model_class_trans.human_attribute_name(:district_id) %>:</strong>
+          <%= link_to @place[:district], root_path(:district_id => @place[:district_id]),
+            :title => t('.district_link_title', :name => @place[:district]) %>
+        </p>
+        <p>
+          <strong><%= model_class_trans.human_attribute_name(:venue_id) %>:</strong>
+          <%= link_to @place[:venue], root_path(:venue_category_id => @place[:venue_category_id]),
+            :title => t('.venue_link_title', :name => @place[:venue]) %>
+        </p>
       </div>
       <div class="span3">
         <%= link_to t('app.common.add_evaluation'), evaluation_place_path(@place), 

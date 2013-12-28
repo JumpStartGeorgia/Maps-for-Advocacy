@@ -233,6 +233,7 @@ ka:
       header_filter: Filter
       header_filter_venue: By Venue
       header_filter_disability: By Evaluation Type
+      header_filter_district: By District
       clear_filter: Remove Filter
       clear_filters: Remove All Filters
       header_selections: Current Filters
@@ -241,6 +242,8 @@ ka:
       no_places: There are no Places on record that matches your search request.
   places:
     show:
+      district_link_title: View all places that are in '%{name}'
+      venue_link_title: View all places that are '%{name}'
       header_summary: საერთო შეჯამება
       no_evaluations: At this time no '%{name}' evaluations have been submitted.
       summary_result: საერთო შედეგები

@@ -4,9 +4,11 @@ class RootController < ApplicationController
     options = {}
     options[:venue_category_id] = params[:venue_category_id] if params[:venue_category_id].present?
     options[:disability_id] = params[:eval_type_id] if params[:eval_type_id].present?
+    options[:district_id] = params[:district_id] if params[:district_id].present?
 
     @venue_categories = VenueCategory.names_with_count(options)
     @disabilities = Disability.names_with_count(options)
+    @districts = District.names_with_count(options)
     
     @places = Place.filtered(options)
 

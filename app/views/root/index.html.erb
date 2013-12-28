@@ -48,6 +48,29 @@
       <% end %>
     </div>
     
+    <div class="filter_box">
+      <h3><%= t('.header_filter_district') %></h3>
+      <% if params[:district_id].blank? %>
+        <ul>
+          <% @districts.each do |district| %>
+            <li>
+              <%= link_to "#{district[:district]} (#{district[:count]})", params.merge(:district_id => district.id) %>
+            </li>
+          <% end %>
+        </ul>
+      <% else %>
+        <% 
+          d = @districts.select{|x| x.id.to_s == params[:district_id].to_s} if params[:district_id].present? 
+        %>
+        <p>
+          <%= d.first[:district] %>
+        </p>
+        <p>
+          <%= link_to t('.clear_filter'), params.merge(:district_id => nil), :class => 'btn btn-mini' %>
+        </p>
+      <% end %>
+    </div>
+    
     <% if params[:venue_category_id].present? || params[:eval_type_id].present? %>
       <p>
         <%= link_to t('.clear_filters'), root_path, :class => 'btn btn-mini' %>

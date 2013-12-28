@@ -17,12 +17,15 @@ class VenueCategory < ActiveRecord::Base
     if options[:disability_id].present?
       sql << " inner join place_evaluations as pe on pe.place_id = p.id and pe.disability_id = :disability_id "
     end
+    if options[:district_id].present?
+    sql << " where p.district_id = :district_id "
+    end
     sql << " group by v.venue_category_id, p.id "
     sql << ") as x on x.venue_category_id = vc.id "
     sql << "where vct.locale = :locale "
     sql << "group by vc.id, vct.name "
     sql << "order by vc.sort_order, vct.name "
-    find_by_sql([sql, :locale => I18n.locale, :disability_id => options[:disability_id]])
+    find_by_sql([sql, :locale => I18n.locale, :disability_id => options[:disability_id], :district_id => options[:district_id]])
   end
   
   

@@ -14,6 +14,31 @@ class District < ActiveRecord::Base
     .where('district_translations.locale = ?', I18n.locale)
     .order('districts.id')
   end
+
+
+  # get number of places with evaluations for each district
+  def self.names_with_count(options={})
+    sql = "select d.id, dt.name as district, count(x.id) as `count`  "
+    sql << "from districts as d  "
+    sql << "inner join district_translations as dt on dt.district_id = d.id " 
+    sql << "left join (  "
+    sql << " select d.id, p.id as place_id "
+    sql << " from districts as d inner join places as p on p.district_id = d.id  "
+    if options[:disability_id].present?
+      sql << " inner join place_evaluations as pe on pe.place_id = p.id and pe.disability_id = :disability_id "
+    end
+    if options[:venue_category_id].present?
+      sql << " inner join venues as v on v.id = p.venue_id and v.venue_category_id = :venue_category_id "
+    end
+    sql << " group by d.id, p.id  "
+    sql << ") as x on x.id = d.id " 
+    sql << "where dt.locale = :locale "
+    sql << "group by d.id, dt.name "
+    sql << "order by dt.name "
+    find_by_sql([sql, :locale => I18n.locale, :venue_category_id => options[:venue_category_id], :disability_id => options[:disability_id]])
+  end
+  
+
   
 
   #######################################

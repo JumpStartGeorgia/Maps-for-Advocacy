@@ -40,9 +40,13 @@ class Place < ActiveRecord::Base
     if options[:venue_category_id].present?
       sql << "and v.venue_category_id = :venue_category_id "
     end
+    if options[:district_id].present?
+      sql << " and p.district_id = :district_id "
+    end
     sql << "order by pt.name  "
     
-    find_by_sql([sql, :locale => I18n.locale, :venue_category_id => options[:venue_category_id], :disability_id => options[:disability_id]])
+    find_by_sql([sql, :locale => I18n.locale, :venue_category_id => options[:venue_category_id], 
+      :disability_id => options[:disability_id], :district_id => options[:district_id]])
     
   end
 

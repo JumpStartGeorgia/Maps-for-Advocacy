@@ -28,16 +28,21 @@ class Disability < ActiveRecord::Base
     sql << "left join (  "
     sql << " select d.id, pe.place_id "
     sql << " from disabilities as d inner join place_evaluations as pe on pe.disability_id = d.id  "
-    if options[:venue_category_id].present?
+    if options[:venue_category_id].present? || options[:district_id].present?
       sql << " inner join places as p on p.id = pe.place_id "
+    end
+    if options[:venue_category_id].present?
       sql << " inner join venues as v on v.id = p.venue_id and v.venue_category_id = :venue_category_id "
+    end
+    if options[:district_id].present?
+      sql << " where p.district_id = :district_id "
     end
     sql << " group by d.id, pe.place_id  "
     sql << ") as x on x.id = d.id " 
     sql << "where dt.locale = :locale "
     sql << "group by d.id, dt.name "
     sql << "order by dt.name "
-    find_by_sql([sql, :locale => I18n.locale, :venue_category_id => options[:venue_category_id]])
+    find_by_sql([sql, :locale => I18n.locale, :venue_category_id => options[:venue_category_id], :district_id => options[:district_id]])
   end
   
 
