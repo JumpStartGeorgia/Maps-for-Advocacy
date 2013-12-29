@@ -13,6 +13,7 @@ class RootController < ApplicationController
     @places = Place.filtered(options)
 
     gon.show_frontpage_map = true
+    gon.frontpage_filters = true
     @show_map = true
   
     # if places found, then save info to gon so can show markers/popups

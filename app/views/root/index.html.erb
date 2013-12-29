@@ -5,6 +5,11 @@
     <div class="filter_box">    
       <h3><%= t('.header_filter_disability') %></h3>
       <% if params[:eval_type_id].blank? %>
+        <% if params[:list] == 'true' %>
+        <%= select_tag(:filter_disability, 
+            options_for_select(@disabilities.map{|x| ["#{x[:disability]} (#{x[:count]})", x.id]}, params[:evel_type_id]),
+            :include_blank => true) %>
+        <% end %>
         <ul>
           <% @disabilities.each do |disability| %>
             <li>
@@ -28,6 +33,11 @@
     <div class="filter_box">
       <h3><%= t('.header_filter_venue') %></h3>
       <% if params[:venue_category_id].blank? %>
+        <% if params[:list] == 'true' %>
+        <%= select_tag(:filter_venue, 
+            options_for_select(@venue_categories.map{|x| ["#{x[:venue_category]} (#{x[:count]})", x.id]}, params[:venue_category_id]),
+            :include_blank => true) %>
+        <% end %>
         <ul>
           <% @venue_categories.each do |cat| %>
             <li>
@@ -51,6 +61,11 @@
     <div class="filter_box">
       <h3><%= t('.header_filter_district') %></h3>
       <% if params[:district_id].blank? %>
+        <% if params[:list] == 'true' %>
+        <%= select_tag(:filter_district, 
+            options_for_select(@districts.map{|x| ["#{x[:district]} (#{x[:count]})", x.id]}, params[:district_id]),
+            :include_blank => true) %>
+        <% end %>
         <ul>
           <% @districts.each do |district| %>
             <li>

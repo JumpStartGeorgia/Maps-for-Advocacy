@@ -1,5 +1,13 @@
 $(document).ready(function(){
 
+  /* use the select2 library on the frontpage */
+  if (gon.frontpage_filters){
+    $('#filter_disability').select2({width:'element'});
+    $('#filter_venue').select2({width:'element'});
+    $('#filter_district').select2({width:'element'});
+  
+  }
+
   /* show map for front place form */
   if (gon.show_frontpage_map){
 

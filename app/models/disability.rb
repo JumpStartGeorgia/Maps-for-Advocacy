@@ -5,7 +5,7 @@ class Disability < ActiveRecord::Base
 	has_many :place_evalations
   has_and_belongs_to_many :question_pairings
   accepts_nested_attributes_for :disability_translations
-  attr_accessible :code, :disability_translations_attributes
+  attr_accessible :id, :code, :disability_translations_attributes
   
   validates :code, :presence => true
 
