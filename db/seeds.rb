@@ -24,8 +24,8 @@ d = Disability.create(:id => 3, :code => 'd')
 d.disability_translations.create(:locale => 'en', :name => 'Deaf / Hard of Hearing')
 d.disability_translations.create(:locale => 'ka', :name => 'Deaf / Hard of Hearing')
 d = Disability.create(:id => 4, :code => 'p')
-d.disability_translations.create(:locale => 'en', :name => 'Physical (wheelchair)')
-d.disability_translations.create(:locale => 'ka', :name => 'Physical (wheelchair)')
+d.disability_translations.create(:locale => 'en', :name => 'Wheelchair')
+d.disability_translations.create(:locale => 'ka', :name => 'Wheelchair')
 
 
 ##################################
