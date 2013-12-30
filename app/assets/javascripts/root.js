@@ -1,3 +1,4 @@
+var map;
 $(document).ready(function(){
 
   /* use the select2 library on the frontpage */
@@ -21,12 +22,14 @@ $(document).ready(function(){
 		$(window).bind('resize', resize_frontpage_map);
     
     // load map
-    var map = L.map(gon.map_id).setView([gon.lat_front_page, gon.lon_front_page], gon.zoom_front_page);
+    map = L.map(gon.map_id, {center: [gon.lat_front_page, gon.lon_front_page]});
     L.tileLayer(gon.tile_url, {maxZoom: gon.max_zoom}).addTo(map);
 	  map.attributionControl = false;
 	  map.zoomControl = true;
 	
     // show all markers
+    // if markers are present, the fitBounds will determine the zoom level
+    // otherwise, set initial zoom level
     if (gon.markers && gon.markers.length > 0){
       var marker;
       var coords = [];
@@ -38,6 +41,8 @@ $(document).ready(function(){
       
 			// set bounds on markers
 			map.fitBounds(new L.LatLngBounds(coords));
+    }else{
+      map.setZoom(gon.zoom_front_page);
     }
   }
   
