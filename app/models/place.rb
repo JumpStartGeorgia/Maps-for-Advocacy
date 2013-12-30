@@ -36,12 +36,21 @@ class Place < ActiveRecord::Base
     if options[:disability_id].present?
       sql << "inner join place_evaluations as pe on pe.place_id = p.id and pe.disability_id = :disability_id "
     end
+    # if this is tbilisi, use all districts in tbilisi
+    if options[:district_id].present? && options[:district_id].to_s == District::TBILISI_ID.to_s
+      sql << " inner join districts as d on d.id = p.district_id "
+    end
     sql << "where pt.locale = :locale and vt.locale = :locale "
     if options[:venue_category_id].present?
       sql << "and v.venue_category_id = :venue_category_id "
     end
     if options[:district_id].present?
-      sql << " and p.district_id = :district_id "
+      # if this is tbilisi, use all districts in tbilisi
+      if options[:district_id].to_s == District::TBILISI_ID.to_s
+        sql << " and d.in_tbilisi = 1 "
+      else
+        sql << " and p.district_id = :district_id "
+      end
     end
     sql << "order by pt.name  "
     

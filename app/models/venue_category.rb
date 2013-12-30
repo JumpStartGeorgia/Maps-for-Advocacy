@@ -18,7 +18,13 @@ class VenueCategory < ActiveRecord::Base
       sql << " inner join place_evaluations as pe on pe.place_id = p.id and pe.disability_id = :disability_id "
     end
     if options[:district_id].present?
-    sql << " where p.district_id = :district_id "
+      # if this is tbilisi, use all districts in tbilisi
+      if options[:district_id].to_s == District::TBILISI_ID.to_s
+        sql << " inner join districts as d on d.id = p.district_id "
+        sql << " where d.in_tbilisi = 1 "
+      else
+        sql << " where p.district_id = :district_id "
+      end
     end
     sql << " group by v.venue_category_id, p.id "
     sql << ") as x on x.venue_category_id = vc.id "

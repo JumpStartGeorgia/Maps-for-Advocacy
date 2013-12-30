@@ -4,9 +4,10 @@ class District < ActiveRecord::Base
 	has_many :district_translations, :dependent => :destroy
 	has_many :places
   accepts_nested_attributes_for :district_translations
-  attr_accessible :id, :json, :district_translations_attributes
+  attr_accessible :id, :json, :district_translations_attributes, :in_tbilisi
   validates :json, :presence => true
   
+  TBILISI_ID = 999
   
   def self.no_json
     select('districts.id, district_translations.name as district_name')
@@ -18,7 +19,7 @@ class District < ActiveRecord::Base
 
   # get number of places with evaluations for each district
   def self.names_with_count(options={})
-    sql = "select d.id, dt.name as district, count(x.id) as `count`  "
+    sql = "select d.id, dt.name as district, d.in_tbilisi, count(x.id) as `count`  "
     sql << "from districts as d  "
     sql << "inner join district_translations as dt on dt.district_id = d.id " 
     sql << "left join (  "
@@ -35,7 +36,14 @@ class District < ActiveRecord::Base
     sql << "where dt.locale = :locale "
     sql << "group by d.id, dt.name "
     sql << "order by dt.name "
-    find_by_sql([sql, :locale => I18n.locale, :venue_category_id => options[:venue_category_id], :disability_id => options[:disability_id]])
+    x = find_by_sql([sql, :locale => I18n.locale, :venue_category_id => options[:venue_category_id], :disability_id => options[:disability_id]])
+    
+    # update the custom tbilisi district to include the counts from all districts in tbilisi 
+    tbilisi = x.select{|x| x.id == TBILISI_ID}
+    if tbilisi.present?
+      tbilisi.first['count'] += x.select{|x| x.in_tbilisi == true}.map{|x| x['count']}.sum
+    end
+    return x
   end
   
 

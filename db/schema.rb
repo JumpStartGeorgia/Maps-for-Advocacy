@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131230054918) do
+ActiveRecord::Schema.define(:version => 20131230072542) do
 
   create_table "disabilities", :force => true do |t|
     t.string   "code"
@@ -54,7 +54,10 @@ ActiveRecord::Schema.define(:version => 20131230054918) do
     t.text     "json",       :limit => 2147483647
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "in_tbilisi",                       :default => false
   end
+
+  add_index "districts", ["in_tbilisi"], :name => "index_districts_on_in_tbilisi"
 
   create_table "place_evaluation_answers", :force => true do |t|
     t.integer  "old_place_id"
