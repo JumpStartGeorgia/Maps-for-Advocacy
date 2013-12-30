@@ -294,7 +294,7 @@ en:
     index:
       title: "Settings for '%{name}'"
       header_location: Default Location
-      map_instructions: "Click on the map to place a marker of where you want the map to start when adding a place.  Then click on the 'Save the Location' button to the right to save your changes."
+      map_instructions: "Click on the map to place a marker of where you want the map to start when the home page loads or when you are adding a place.  Then click on the 'Save the Location' button to the right to save your changes."
       skip_map: Skip the map and go to the address form (jump)
       address_instructions: You can also do an address search if you do not want to use the map.
       address_instructions2: Please enter the address and city of where you want the map to start when adding a place.

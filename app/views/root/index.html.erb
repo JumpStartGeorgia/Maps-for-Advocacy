@@ -60,7 +60,7 @@
     
     <div class="filter_box">
       <h3><%= t('.header_filter_district') %></h3>
-      <% if params[:district_id].blank? %>
+      <% if params[:district_id].blank? || params[:district_id] == '0' %>
         <% if params[:list] == 'true' %>
         <%= select_tag(:filter_district, 
             options_for_select(@districts.map{|x| ["#{x[:district]} (#{x[:count]})", x.id]}, params[:district_id]),
@@ -81,7 +81,7 @@
           <%= d.first[:district] %>
         </p>
         <p>
-          <%= link_to t('.clear_filter'), params.merge(:district_id => nil), :class => 'btn btn-mini' %>
+          <%= link_to t('.clear_filter'), params.merge(:district_id => 0), :class => 'btn btn-mini' %>
         </p>
       <% end %>
     </div>

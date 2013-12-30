@@ -60,10 +60,12 @@ logger.debug "////////////////////////// BROWSER = #{user_agent}"
   def initialize_global_variables
     @lat = 41.69337
     @lon = 44.80149
+    @district_id = 1
 
     if user_signed_in? && current_user.lat.present? && current_user.lon.present?
       @lat = current_user.lat
       @lon = current_user.lon
+      @district_id = current_user.district_id
     end
   end
 

@@ -294,7 +294,7 @@ ka:
     index:
       title: "'%{name}'-ის პარამეტრები"
       header_location: ავტომატური ადგილმდებარეობა
-      map_instructions: დააკლიკეთ რუკას, რომ მონიშნოთ საიდან გინდათ დაიწყოს რუკა, როდესაც ამატებთ ადგილს. შემდეგ დააკლიკეთ „ადგილმდებარეობის შენახვა“ ღილაკს მარჯვნივ ცვლილებების შესანახად.
+      map_instructions: "Click on the map to place a marker of where you want the map to start when the home page loads or when you are adding a place.  Then click on the 'Save the Location' button to the right to save your changes."
       skip_map: რუკის გამოტოვება და მისამართის ფორმაში გადასვლა (გადახტომა)
       address_instructions: შეგიძლიათ მოიძიოთ მისამართი თუ არ გსურთ რუკის გამოყენება.
       address_instructions2: გთხოვთ შეიყვანეთ მისამართი და ქალაქი, საიდანაც გსურთ რომ დაიწყოს რუკა როდესაც ამატებთ ადგილებს.
