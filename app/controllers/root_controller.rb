@@ -6,7 +6,8 @@ class RootController < ApplicationController
     options[:disability_id] = params[:eval_type_id] if params[:eval_type_id].present?
     params[:district_id] = @district_id if params[:district_id].blank?
     options[:district_id] = params[:district_id].present? && params[:district_id] != '0' ? params[:district_id] : nil
-
+    options[:with_numbers_only] = true
+    
     @venue_categories = VenueCategory.names_with_count(options)
     @disabilities = Disability.names_with_count(options)
     @districts = District.names_with_count(options)
