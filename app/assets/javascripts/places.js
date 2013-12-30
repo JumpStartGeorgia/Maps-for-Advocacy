@@ -101,6 +101,20 @@ $(document).ready(function(){
         $('form.place #submit-button').removeClass('accessibly-hidden');
       }
     });
+    
+    // if exists question is marked as has, show the rest of the questions
+    $('form.place div.venue_evaluation div.exists-question input[type="radio"]').change(function(){
+      if (gon.questions_exists_has == $(this).val()){
+        // show the questions
+        $(this).closest('.venue_evaluation').find('.non-exists-question').attr('aria-hidden', 'false');
+      }else{
+        // hide the questions
+        $(this).closest('.venue_evaluation').find('.non-exists-question').attr('aria-hidden', 'true');
+      }
+      // reset the values
+      $(this).closest('.venue_evaluation').find('.non-exists-question input[type="radio"]').prop('checked', false);
+      $(this).closest('.venue_evaluation').find('.non-exists-question input[type="text"]').val('').attr('aria-hidden', 'true');
+    });
 
     // if radio button with evidence is selected, show the text box to get the evidence
     $('form.place div.venue_evaluation div.question-with-evidence input[type="radio"]').change(function(){

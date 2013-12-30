@@ -79,6 +79,8 @@ logger.debug "////////////////////////// BROWSER = #{user_agent}"
     gon.max_zoom = 18
     gon.lat = @lat
     gon.lon = @lon
+    
+    gon.questions_exists_has = PlaceEvaluation::ANSWERS['has'].to_s
 
     gon.zoom_front_page = 7
     gon.lat_front_page = @lat

@@ -108,6 +108,7 @@ en:
       added_on: "Added on: %{date}" 
       venue_has_questions: custom questions
       answers:
+        has: Has
         has_good: Has and adequate
         has_bad: Has, but not adequate
         needs: Not have and needs

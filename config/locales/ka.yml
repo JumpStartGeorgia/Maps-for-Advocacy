@@ -108,6 +108,7 @@ ka:
       added_on: "დამატებულია: %{date}" 
       venue_has_questions: მორგებული კითხვები
       answers:
+        has: Has
         has_good: Has and adequate
         has_bad: Has, but not adequate
         needs: Not have and needs

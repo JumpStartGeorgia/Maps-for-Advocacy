@@ -24,7 +24,7 @@ class Question < ActiveRecord::Base
   def self.in_category(question_category_id, disability_id=nil)
     if question_category_id.present?
 
-      sql = "SELECT qp.sort_order as question_sort_order, q.id as question_id, qt.name as question, qpt.evidence, qp.id as question_pairing_id "
+      sql = "SELECT qp.sort_order as question_sort_order, qp.is_exists, q.id as question_id, qt.name as question, qpt.evidence, qp.id as question_pairing_id "
       sql << "FROM question_pairings as qp "
       if disability_id.present?
         sql << "inner JOIN disabilities_question_pairings as dqp ON dqp.question_pairing_id = qp.id and dqp.disability_id = :disability_id "

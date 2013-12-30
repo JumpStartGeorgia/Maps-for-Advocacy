@@ -9,7 +9,7 @@ class PlaceEvaluation < ActiveRecord::Base
   validates :user_id, :disability_id, :presence => true
 
   
-  ANSWERS = {'no_answer' => 0, 'not_relevant' => 1, 'needs' => 2, 'has_bad' => 3, 'has_good' => 4}
+  ANSWERS = {'no_answer' => 0, 'not_relevant' => 1, 'needs' => 2, 'has_bad' => 3, 'has_good' => 4, 'has' => 5}
   
   def self.answer_key_name(value)
     ANSWERS.keys[ANSWERS.values.index(value)]

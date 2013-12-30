@@ -139,10 +139,11 @@ class QuestionCategory < ActiveRecord::Base
     idx_child_sort = 4
     idx_child_is_common = 5
     idx_type = 6
-    idx_question = 7
-    idx_question_sort = 8
-    idx_question_evidence = 9
-    idx_venue_name = 10
+    idx_exists = 7
+    idx_question = 8
+    idx_question_sort = 9
+    idx_question_evidence = 10
+    idx_venue_name = 11
     current_parent, current_child, current_venue = nil
 
 		original_locale = I18n.locale
@@ -247,7 +248,8 @@ class QuestionCategory < ActiveRecord::Base
           qp = QuestionPairing.create(
                 :question_category_id => qc_id, 
                 :question_id => question.id, 
-                :sort_order => row[idx_question_sort]
+                :sort_order => row[idx_question_sort], 
+                :is_exists => row[idx_exists].present? && row[idx_exists].to_s == '1' ? true : false
               )
           
           I18n.available_locales.each do |locale|

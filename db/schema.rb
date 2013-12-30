@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131230072542) do
+ActiveRecord::Schema.define(:version => 20131230131052) do
 
   create_table "disabilities", :force => true do |t|
     t.string   "code"
@@ -150,6 +150,7 @@ ActiveRecord::Schema.define(:version => 20131230072542) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "sort_order",           :default => 99
+    t.boolean  "is_exists",            :default => false
   end
 
   add_index "question_pairings", ["question_category_id", "question_id"], :name => "idx_pairings_ids"
