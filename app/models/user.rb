@@ -6,12 +6,44 @@ class User < ActiveRecord::Base
          :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :role, :provider, :uid, :nickname, :avatar, :lat, :lon
-
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :role, :provider, :uid, :nickname, :avatar, :lat, :lon, :district_id
+  attr_accessor :lat_orig, :lon_orig
+  
   validates :role, :presence => true
 
 	before_save :check_for_nickname
 	before_save :check_for_role
+
+  include GeoRuby::SimpleFeatures
+
+	after_find :populate_orig_coordinates
+  before_save :assign_district
+
+	# have to check if lat/lon coordinates change on save and if so, update the district id
+	def populate_orig_coordinates
+		self.lat_orig = read_attribute(:lat)
+		self.lon_orig = read_attribute(:lon)
+	end
+
+  # if the lat/lon has changed, update the district id
+  def assign_district(override=false)
+    if (self.lat_orig != self.lat || self.lon_orig != self.lon) || override
+      require 'geo_ruby/geojson'
+      
+      point = Point.from_lon_lat(self.lon, self.lat)
+      
+      districts = District.order('id')
+      districts.each do |district|
+        geo = Geometry.from_geojson(district.json)
+        if geo.contains_point?(point)
+          self.district_id = district.id
+          break
+        end
+      end
+    end
+    return nil
+  end
+
 
   # if no nickname supplied, default to name in email before '@'
   def check_for_nickname
@@ -80,11 +112,14 @@ class User < ActiveRecord::Base
 
 
 	##############################
-
-
+	##############################
+	##############################
   def self.for_evaluations(user_ids)
     select('id, nickname, avatar').where(:id => user_ids) if user_ids.present?
   end
+
+
+
 
 
 end
