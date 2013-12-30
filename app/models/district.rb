@@ -44,7 +44,7 @@ class District < ActiveRecord::Base
       tbilisi.first['count'] += x.select{|x| x.in_tbilisi == true}.map{|x| x['count']}.sum
     end
     
-    # rreturn only records with counts > 0
+    # return only records with counts > 0
     if options[:with_numbers_only].present?
       return x.select{|x| x['count'] > 0}
     else
