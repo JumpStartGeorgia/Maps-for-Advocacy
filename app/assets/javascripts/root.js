@@ -21,16 +21,17 @@ $(document).ready(function(){
     resize_frontpage_map();
 		$(window).bind('resize', resize_frontpage_map);
     
-    // load map
-    map = L.map(gon.map_id, {center: [gon.lat_front_page, gon.lon_front_page]});
-    L.tileLayer(gon.tile_url, {maxZoom: gon.max_zoom}).addTo(map);
-	  map.attributionControl = false;
-	  map.zoomControl = true;
 	
     // show all markers
     // if markers are present, the fitBounds will determine the zoom level
     // otherwise, set initial zoom level
     if (gon.markers && gon.markers.length > 0){
+      // load map
+      map = L.map(gon.map_id, {center: [gon.lat_front_page, gon.lon_front_page]});
+      L.tileLayer(gon.tile_url, {maxZoom: gon.max_zoom}).addTo(map);
+	    map.attributionControl = false;
+	    map.zoomControl = true;
+
       var marker;
       var coords = [];
       for (var i=0;i < gon.markers.length;i++){
@@ -42,7 +43,11 @@ $(document).ready(function(){
 			// set bounds on markers
 			map.fitBounds(new L.LatLngBounds(coords));
     }else{
-      map.setZoom(gon.zoom_front_page);
+      // load map
+      map = L.map(gon.map_id, {center: [gon.lat_front_page, gon.lon_front_page], zoom: gon.zoom_front_page});
+      L.tileLayer(gon.tile_url, {maxZoom: gon.max_zoom}).addTo(map);
+	    map.attributionControl = false;
+	    map.zoomControl = true;
     }
   }
   

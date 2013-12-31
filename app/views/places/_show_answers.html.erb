@@ -1,3 +1,4 @@
+<% if cat[:questions].present? %>
                   <% if is_sub_category %>
                     <h5><%= cat.name %></h5>
                   <% else %>
@@ -5,26 +6,48 @@
                   <% end %>
 
                   <ul class="question-results">
-                    <% cat[:questions].each do |question| %>
-                      <li>
-                        <div>
-                          <%= question[:question] %>
-                        </div>
-                        <% 
-                          answer = nil
-                          q = evaluation.place_evaluation_answers.select{|x| x.question_pairing_id == question[:question_pairing_id]}
-                          answer = q.first.answer if q.present?
-
-                          if answer.present?
-                        %>
-                          <div class="<%= "selected-answer #{PlaceEvaluation.answer_key_name(answer)}"%>">
-                            <%= t("app.common.answers.#{PlaceEvaluation.answer_key_name(answer)}") %>
-                            <% if question[:evidence].present? && q.first.evidence.present? %>
-                              <%= " (#{question[:evidence]}: #{q.first.evidence})" %>
-                            <% end %>
+                    <%
+                      item_exists = true
+                      exists_index = nil
+                    %>
+                    <% cat[:questions].each_with_index do |question, qidx| %>
+                      <%
+                        # if there is an exists question and the answer is not yes, hide all other questions
+                        if qidx == 0
+                          exists_index = cat[:questions].index{|x| x['is_exists'] == 1}
+                          if exists_index.present?
+                            # get answer for this question
+                            answer = nil
+                            q = evaluation.place_evaluation_answers.select{|x| x.question_pairing_id == cat[:questions][exists_index][:question_pairing_id]}
+                            answer = q.first.answer if q.present?
+                            if answer != PlaceEvaluation::ANSWERS['has']
+                              item_exists = false
+                            end
+                          end
+                        end
+                      %>
+                      
+                      <% if qidx == exists_index || item_exists %>
+                        <li>
+                          <div>
+                            <%= question[:question] %>
                           </div>
-                        <% end %>
-                      </li>
+                          <% 
+                            answer = nil
+                            q = evaluation.place_evaluation_answers.select{|x| x.question_pairing_id == question[:question_pairing_id]}
+                            answer = q.first.answer if q.present?
+
+                            if answer.present?
+                          %>
+                            <div class="<%= "selected-answer #{PlaceEvaluation.answer_key_name(answer)}"%>">
+                              <%= t("app.common.answers.#{PlaceEvaluation.answer_key_name(answer)}") %>
+                              <% if question[:evidence].present? && q.first.evidence.present? %>
+                                <%= " (#{question[:evidence]}: #{q.first.evidence})" %>
+                              <% end %>
+                            </div>
+                          <% end %>
+                        </li>
+                      <% end %>
                     <% end %>
                   </ul>
 
@@ -33,6 +56,4 @@
                       <%= render :partial => 'show_answers', :locals => {:evaluation => evaluation, :cat => sub, :is_sub_category => true} %>
                     <% end %>
                   <% end %>
-
-
-
+<% end %>
