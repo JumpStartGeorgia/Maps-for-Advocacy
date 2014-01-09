@@ -112,12 +112,12 @@ ka:
         has_good: Has and adequate
         has_bad: Has, but not adequate
         needs: Not have and needs
-        not_relevant: Not relavent
+        not_relevant: Not relevant
         no_answer: No answer
       add_evaluation: შეფასების დამატება
-      add_evaluation_title: "'%{place}'-ის სეფასების დამატება"
+      add_evaluation_title: "'%{place}'-ის შეფასების დამატება"
       add_evaluation_title2: "Add a %{disability} Evaluation for '%{place}'"
-      view_place: დეტალებსი ნახვა
+      view_place: ვრცლად
       view_place_title: "'%{place}'-ის დეტალების ნახვა"
     msgs:
       does_not_exist: თქვენ ცდილობთ იხილოთ გვერდი, რომელიც არ არსებობს.
