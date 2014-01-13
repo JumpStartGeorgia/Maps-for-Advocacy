@@ -9,8 +9,8 @@ ka:
       venue_category: ადგილმდებარეობის კატეგორია
       place: ადგილი
       evaluation: შეფასება
-      disability: Disability
-      district: District
+      disability: შეზღუდული შესაძლებლობება
+      district: რაიონი
     attributes:
       user:
         email: ელ.ფოსტა
@@ -54,15 +54,15 @@ ka:
         name: ადგილის სახელი
         address: მისამართი
       disability:
-        code: One-letter Code
+        code: ერთ-ასოიანი კოდი
         active: მოქმედი
       disability_translation:
-        name: Disability
+        name: შეზღუდული შესაძლებლობები
       district:
         json: GeoJSON
-        id: District ID
+        id: რაიონის ID
       district_translation:
-        name: District
+        name: რაიონი
     errors:
       messages:
         required_field: "სავალდებულოა"
@@ -109,15 +109,15 @@ ka:
       added_on: "დამატებულია: %{date}" 
       venue_has_questions: მორგებული კითხვები
       answers:
-        has: Has
-        has_good: Has and adequate
-        has_bad: Has, but not adequate
-        needs: Not have and needs
-        not_relevant: Not relevant
-        no_answer: No answer
+        has: აქვს
+        has_good: აქვს და ადეკვატურია
+        has_bad: აქვს, მაგრამ არა არის ადეკვატური
+        needs: არ აქვს და ესაჭიროება
+        not_relevant: არ არის შესაბამისი
+        no_answer: არ არის პასუხი
       add_evaluation: შეფასების დამატება
       add_evaluation_title: "'%{place}'-ის შეფასების დამატება"
-      add_evaluation_title2: "Add a %{disability} Evaluation for '%{place}'"
+      add_evaluation_title2: "დაამატეთ '%{place}'-ის %{disability} შეფასება"
       view_place: ვრცლად
       view_place_title: "'%{place}'-ის დეტალების ნახვა"
     msgs:
@@ -175,8 +175,8 @@ ka:
       venue_categories: ადგილმდებარეობის კატეგორიები
       venues: ადგილმდებარეობები
       places: ადგილები
-      disabilities: Disabilities
-      districts: Districts
+      disabilities: შეზღუდული შესაძლებლობები
+      districts: რაიონი
     users:
       edit:
         title: ცვლილებების შეტანა მომხმარებლის გვერდზე
@@ -232,22 +232,22 @@ ka:
         map_link_title: შეარჩიეთ ეს მდებარეობა
   root:
     index:
-      header_filter: Filter
-      header_filter_venue: By Venue
-      header_filter_disability: By Evaluation Type
-      header_filter_district: By District
-      clear_filter: Remove Filter
-      clear_filters: Remove All Filters
-      header_selections: Current Filters
-      select_all: All places selected
-      header_table: Filter Results
-      no_places: There are no Places on record that matches your search request.
+      header_filter: ფილტრი
+      header_filter_venue: ობიექტის მიხედვით
+      header_filter_disability: შეფასების ტიპის მიხედვით
+      header_filter_district: რაიონის მიხედვით
+      clear_filter: ფილტრის მოშორება
+      clear_filters: ყველა ფილტრის მოშორება
+      header_selections: მიმდინარე ფილტრები
+      select_all: ყველა არჩეული ადგილი
+      header_table: ფილტრის შედეგი
+      no_places: არ მოიძებნა თქვენი ძიების შესაბამისი ადგილი.
   places:
     show:
-      district_link_title: View all places that are in '%{name}'
-      venue_link_title: View all places that are '%{name}'
+      district_link_title: "'%{name}'-ის ყველა ადგილის ნახვა"
+      venue_link_title: "'%{name}'-ის ყველა ადგილის ნახვა"
       header_summary: საერთო შეჯამება
-      no_evaluations: At this time no '%{name}' evaluations have been submitted.
+      no_evaluations: ამ დრომდე '%{name}'-ის შეფასებები არ არის წარმოდგენილი
       summary_result: საერთო შედეგები
       header_overall_results: შეფასების შედეგები
       header_user_summary: შეჯამება
@@ -255,48 +255,48 @@ ka:
       details_link_title: იხილეთ ამ შეფასების დეტალები
     form:
       header_venue: რა არის ადგილმდებარეობა?
-      venue_instructions: Select a venue category to view a list of venues.
-      venue_category_link_title: View venues in '%{name}'
-      skip_venue_search: Go to select venue category (jump)
-      venue_filter_num_match: venue matches found.
-      venue_category_title: View the venues in '%{name}'
+      venue_instructions: აირჩიეთ კატეგორია, რომ იხილოთ ობიექტების ჩამონათვალი.
+      venue_category_link_title: "'%{name}'-ის ობიექტების ნახვა"
+      skip_venue_search: აირჩიეთ ობიექტის კატეგორია (გადახტომა)
+      venue_filter_num_match: შესაბამისი ობიექტი ნაპოვნია.
+      venue_category_title: "'%{name}'-ის ობიექტების ნახვა"
       venue_link_title: "შეარჩიეთ %{category} - %{venue}"
-      header_name: What is the name of the '%{name}'?
-      label_name: "'%{name}' Name"
-      name_link_title: Save this name
+      header_name: რა ქვია '%{name}'-ს?
+      label_name: "'%{name}'-ის სახელწოდება"
+      name_link_title: სახელწოდების შენახვა
       header_location: სად მდებარეობს '%{name}'?
       map_instructions: დააკლიკეთ რუკას, რომ მონიშნოთ სად მდებარეობს '%{name}'.
-      skip_map: Skip the map and go to the address search form (jump)
-      skip_to_address_search: Go to the address search form (jump)
-      address_search_results: Results of the address search
+      skip_map: დააკლიკეთ რუკას და გადადით მისამართის საძიებო ფორმაზე (გადახტომა)
+      skip_to_address_search: გადადით მისამართის საძიებო ფორმაზე (გადახტომა)
+      address_search_results: მისამართის ძიების შედეგი
       address_instructions: შეგიძლიათ მოიძიოთ მისამართი თუ არ გსურთ რუკის გამოყენება
       address_instructions2: გთხოვთ შეიყვანეთ მისამართი და ქალაქი, სადაც მდებარეობს '%{name}'.
       submit_address_search: მისამართის მოძებნა
       address_search_success: მისამართის ძიებამ იპოვა შემდეგი წყვილები. გთხოვთ დაადასტუროთ, რომ შედეგები სწორია.
       address_search_multiple_success: მისამართის ძიებამ იპოვა შემდეგი წყვილები. გთხოვთ შეარჩიოთ სწორი შედეგი.
       address_search_fail: არ მოიძებნა. კიდევ სცადეთ.
-      header_disability: Which evaluation do you want to complete?
-      disability_link_title: "'%{name}' evaluation"
-      header_evaluation: "%{disability} Evaluation of '%{name}'"
+      header_disability: რომელი შეფასების შევსება გსურთ?
+      disability_link_title: "'%{name}'-ის შეფასება"
+      header_evaluation: "'%{name}'-ის %{disability} შეფასება"
       questions: კითხვები
       next: შემდეგი
       map_link_title: შეარჩიეთ ეს მდებარეობა
-      submit: Submit the Evaluation
+      submit: შეავსეთ შეფასება
     eval_form:
-      evaluation_instructions: Fill out the evaluation by selecting a category and answering the statements.
-      question_category_link_title: View questions in '%{name}'
+      evaluation_instructions: შეარჩიეთ კატეგორია და შეავსეთ შეფასება.
+      question_category_link_title: იხილეთ კითხვები '%{name}'
       question_instructions: თუ არ გაქვთ პასუხი, დატოვეთ ცარიელი. 
     evaluation:
-      title1: "Evaluation of '%{name}'"
-      title2: "%{disability} Evaluation of '%{name}'"
-      header_disability: Which evaluation do you want to complete?
-      disability_link_title: "'%{name}' evaluation"
-      submit: Submit the Evaluation
+      title1: "'%{name}'-ის შეფასება"
+      title2: "'%{name}'-ის %{disability} შეფასება"
+      header_disability: რომელი შეფასების შევსება გსურთ?
+      disability_link_title: "'%{name}'-ის შეფასება"
+      submit: შეფასების შევსება
   settings:
     index:
       title: "'%{name}'-ის პარამეტრები"
       header_location: ავტომატური ადგილმდებარეობა
-      map_instructions: "Click on the map to place a marker of where you want the map to start when the home page loads or when you are adding a place.  Then click on the 'Save the Location' button to the right to save your changes."
+      map_instructions: "დააკლიკეთ რუკაზე, რათა განათავსოთ მარკერი იმ ადგილას, რომელიც გსურთ რომ გაჩნდეს გვერდის ჩატვირთვისას, ან ახალი ადგილის დამატებისას. შემდეგ დააჭირეთ 'მდებარეობის შენახვა'-ის ღილაკს, რათა შეინახოთ ცვლილებები."
       skip_map: რუკის გამოტოვება და მისამართის ფორმაში გადასვლა (გადახტომა)
       address_instructions: შეგიძლიათ მოიძიოთ მისამართი თუ არ გსურთ რუკის გამოყენება.
       address_instructions2: გთხოვთ შეიყვანეთ მისამართი და ქალაქი, საიდანაც გსურთ რომ დაიწყოს რუკა როდესაც ამატებთ ადგილებს.
