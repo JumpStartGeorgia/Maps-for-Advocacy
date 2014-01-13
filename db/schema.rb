@@ -11,13 +11,16 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20131230131052) do
+ActiveRecord::Schema.define(:version => 20140113120233) do
 
   create_table "disabilities", :force => true do |t|
     t.string   "code"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "active",     :default => true
   end
+
+  add_index "disabilities", ["active"], :name => "index_disabilities_on_active"
 
   create_table "disabilities_question_pairings", :id => false, :force => true do |t|
     t.integer "disability_id"

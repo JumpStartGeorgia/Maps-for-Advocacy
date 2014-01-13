@@ -13,6 +13,7 @@
     <tr>
       <th><%= model_class_trans.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:code) %></th>
+      <th><%= model_class.human_attribute_name(:active) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -21,6 +22,7 @@
       <tr>
         <td><%= disability.name %></td>
         <td><%= disability.code %></td>
+        <td><%= disability.active %></td>
         <td>
           <%= link_to t('app.buttons.edit'),
                       edit_admin_disability_path(disability), :class => 'btn btn-mini' %>

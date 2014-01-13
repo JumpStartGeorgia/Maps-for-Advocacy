@@ -55,6 +55,7 @@ en:
         address: Address
       disability:
         code: One-letter Code
+        active: Active
       disability_translation:
         name: Disability
       district:

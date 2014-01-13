@@ -59,9 +59,11 @@ class VenueCategory < ActiveRecord::Base
     infile = file.read
     n, msg = 0, ""
     idx_category_name = 0
-    idx_category_sort = 1
-    idx_venue_name = 2
-    idx_venue_sort = 3
+    idx_category_name_ka = 1
+    idx_category_sort = 2
+    idx_venue_name = 3
+    idx_venue_name_ka = 4
+    idx_venue_sort = 5
     current_category = nil
     
 		original_locale = I18n.locale
@@ -100,7 +102,7 @@ class VenueCategory < ActiveRecord::Base
 
           	puts "******** having to get parent: #{row[idx_category_name]}"
             # need to create new question category or get it from db if already exists
-            current_category = get_category(row[idx_category_name], row[idx_category_sort])
+            current_category = get_category(row[idx_category_name], row[idx_category_name_ka], row[idx_category_sort])
           end
 
           if current_category.blank? || current_category.id.blank?
@@ -116,7 +118,9 @@ class VenueCategory < ActiveRecord::Base
           	puts "******** creating venue"
             v = Venue.create(:venue_category_id => current_category.id, :sort_order => row[idx_venue_sort])
             I18n.available_locales.each do |locale|
-              v.venue_translations.create(:locale => locale, :name => row[idx_venue_name])
+              name = row[idx_venue_name]
+              name = row[idx_venue_name_ka] if locale == :ka
+              v.venue_translations.create(:locale => locale, :name => name)
             end
           else
 	    		  msg = "Row #{n}: Venue name is not provided"
@@ -144,9 +148,10 @@ class VenueCategory < ActiveRecord::Base
   ######################################
 private
   # get venue category and if not exist, create it
-  def self.get_category(name, sort)
+  def self.get_category(name, name_ka, sort)
     vc = nil
     name.strip! if name.present?
+    name_ka.strip! if name_ka.present?
     sort.strip! if sort.present?
     
 
@@ -158,7 +163,9 @@ private
     if vc.nil?
       vc = VenueCategory.create(:sort_order => sort)
       I18n.available_locales.each do |locale|
-        vc.venue_category_translations.create(:locale => locale, :name => name)
+        x = name
+        x = name_ka if locale == :ka
+        vc.venue_category_translations.create(:locale => locale, :name => x)
       end
       vc[:name] = name
     end

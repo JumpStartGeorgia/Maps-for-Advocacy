@@ -9,7 +9,7 @@ class PlacesController < ApplicationController
     
     if @place.present?
 
-      @disabilities = Disability.sorted
+      @disabilities = Disability.sorted.is_active
       if @disabilities.present?
         @disabilities.each do |disability|
           x = Hash.new
@@ -81,7 +81,7 @@ class PlacesController < ApplicationController
       gon.show_place_form_map = true
       gon.address_search_path = address_search_places_path
     elsif params[:stage] == '4' # disability type
-      @disabilities = Disability.sorted
+      @disabilities = Disability.sorted.is_active
     elsif params[:stage] == '5' # evaluation
       @place.venue_id = params[:venue_id]
       @place.lat = params[:lat]
@@ -268,7 +268,7 @@ class PlacesController < ApplicationController
 		    redirect_to place_path(@place), notice: t('app.msgs.success_created', :obj => t('activerecord.models.evaluation')) 
 		    return
       elsif params[:eval_type_id].blank?
-        @disabilities = Disability.sorted
+        @disabilities = Disability.sorted.is_active
       else
         # load the evaluation form
         gon.show_evaluation_form = true

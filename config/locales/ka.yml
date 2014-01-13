@@ -55,6 +55,7 @@ ka:
         address: მისამართი
       disability:
         code: One-letter Code
+        active: მოქმედი
       disability_translation:
         name: Disability
       district:

@@ -133,17 +133,21 @@ class QuestionCategory < ActiveRecord::Base
     infile = file.read
     n, msg = 0, ""
     idx_parent_name = 0
-    idx_parent_sort = 1
-    idx_parent_is_common = 2
-    idx_child_name = 3
-    idx_child_sort = 4
-    idx_child_is_common = 5
-    idx_type = 6
-    idx_exists = 7
-    idx_question = 8
-    idx_question_sort = 9
-    idx_question_evidence = 10
-    idx_venue_name = 11
+    idx_parent_name_ka = 1
+    idx_parent_sort = 2
+    idx_parent_is_common = 3
+    idx_child_name = 4
+    idx_child_name_ka = 5
+    idx_child_sort = 6
+    idx_child_is_common = 7
+    idx_type = 8
+    idx_exists = 9
+    idx_question = 10
+    idx_question_ka = 11
+    idx_question_sort = 12
+    idx_question_evidence = 13
+    idx_question_evidence_ka = 14
+    idx_venue_name = 15
     current_parent, current_child, current_venue = nil
 
 		original_locale = I18n.locale
@@ -189,7 +193,7 @@ class QuestionCategory < ActiveRecord::Base
 
           	puts "******** having to get parent: #{row[idx_parent_name]}"
             # need to create new question category or get it from db if already exists
-            current_parent = get_category(row[idx_parent_name], row[idx_parent_sort], row[idx_parent_is_common])
+            current_parent = get_category(row[idx_parent_name], row[idx_parent_name_ka], row[idx_parent_sort], row[idx_parent_is_common])
           end
 
           if current_parent.blank? || current_parent.id.blank?
@@ -212,7 +216,7 @@ class QuestionCategory < ActiveRecord::Base
 
             	puts "******** - having to get child: #{row[idx_child_name]}"
               # need to create new question category or get it from db if already exists
-              current_child = get_category(row[idx_child_name], row[idx_child_sort], row[idx_child_is_common], current_parent.id)
+              current_child = get_category(row[idx_child_name], row[idx_child_name_ka], row[idx_child_sort], row[idx_child_is_common], current_parent.id)
 
               if current_child.blank? || current_child.id.blank?
           		  msg = "Row #{n}: Could not find/create child"
@@ -233,7 +237,7 @@ class QuestionCategory < ActiveRecord::Base
           end 
           
         	puts "******** geting question: #{row[idx_question]}"
-          question = get_question(row[idx_question])
+          question = get_question(row[idx_question], row[idx_question_ka])
 
           if question.blank? || question.id.blank?
       		  msg = "Row #{n}: Could not find/create question"
@@ -253,7 +257,9 @@ class QuestionCategory < ActiveRecord::Base
               )
           
           I18n.available_locales.each do |locale|
-            qp.question_pairing_translations.create(:locale => locale, :evidence => evidence)
+            ev = row[idx_question_evidence]
+            ev = row[idx_question_evidence_ka] if locale == :ka
+            qp.question_pairing_translations.create(:locale => locale, :evidence => ev)
           end
          
           # add disability types if needed
@@ -319,9 +325,10 @@ class QuestionCategory < ActiveRecord::Base
   ######################################
 private
   # get question category and if not exist, create it
-  def self.get_category(name, sort, is_common, parent_id=nil)
+  def self.get_category(name, name_ka, sort, is_common, parent_id=nil)
     qc = nil
     name.strip! if name.present?
+    name_ka.strip! if name_ka.present?
     sort.strip! if sort.present?
     is_common.strip! if is_common.present?
     
@@ -334,7 +341,9 @@ private
     if qc.nil?
       qc = QuestionCategory.create(:is_common => is_common, :sort_order => sort)
       I18n.available_locales.each do |locale|
-        qc.question_category_translations.create(:locale => locale, :name => name)
+        x = name
+        x = name_ka if locale == :ka
+        qc.question_category_translations.create(:locale => locale, :name => x)
       end
       if parent_id.present?
         qc.parent_id = parent_id
@@ -347,9 +356,10 @@ private
   end
 
   # get question and if not exist, create it
-  def self.get_question(name)
+  def self.get_question(name, name_ka)
     q = nil
     name.strip! if name.present?
+    name_ka.strip! if name_ka.present?
 
     x = Question.select('questions.id').includes(:question_translations)
           .where(:question_translations => {:locale => I18n.locale, :name => name})
@@ -359,7 +369,10 @@ private
     if q.nil?
       q = Question.create
       I18n.available_locales.each do |locale|
-        q.question_translations.create(:locale => locale, :name => name)
+        x = name
+## questions are not translated yet
+#        x = name_ka if locale == :ka
+        q.question_translations.create(:locale => locale, :name => x)
       end
     end
     
