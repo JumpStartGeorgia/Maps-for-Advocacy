@@ -39,9 +39,15 @@ $(document).ready(function(){
         marker.bindPopup(gon.markers[i].popup);
         coords.push([gon.markers[i].lat, gon.markers[i].lon]);
       }
-      
+
 			// set bounds on markers
 			map.fitBounds(new L.LatLngBounds(coords));
+
+      // turn on the carousel if needed
+      if (gon.map_carousel_id_text && gon.map_carousel_ids.length > 0){
+        $('#' + map_carousel_id_text + map_carousel_id_text).carousel();
+      }
+
     }else{
       // load map
       map = L.map(gon.map_id, {center: [gon.lat_front_page, gon.lon_front_page], zoom: gon.zoom_front_page});
@@ -49,6 +55,7 @@ $(document).ready(function(){
 	    map.attributionControl = false;
 	    map.zoomControl = true;
     }
+    
   }
   
 

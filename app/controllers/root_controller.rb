@@ -51,6 +51,26 @@ class RootController < ApplicationController
     popup << view_context.link_to(t('app.common.add_evaluation'), evaluation_place_path(place), :title => t('app.common.add_evaluation_title', :place => place[:place]), :class => 'add_evaluation')
     popup << "</p>"
     
+    # add image slide if exists
+    gon.map_carousel_ids = []
+    gon.map_carousel_id_text = "map_carousel_"
+    if place.place_images.present?
+      gon.map_carousel_ids << place.id
+      
+      popup << "<div id='map_carousel_#{place.id}' class='carousel slide'>"
+        popup << '<div class="carousel-inner">'
+          place.place_images.each_with_index do |img, index|
+            popup << "<div class='#{'active' if index == 0} item'>"
+              popup << view_context.image_tag(img.image.url(:thumb))
+            popup << '</div>'
+          end
+        popup << '</div>'
+        popup << "<a class='carousel-control left' href='#map_carousel_#{place.id}' data-slide='prev'>&lsaquo;</a>"
+        popup << "<a class='carousel-control right' href='#map_carousel_#{place.id}' data-slide='next'>&rsaquo;</a>"
+      popup << '</div>' 
+    end
+    
+    
     return popup
   end
 end

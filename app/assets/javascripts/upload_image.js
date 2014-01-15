@@ -1,4 +1,5 @@
   $(function () {
+    if (gon.load_place_photos_path){
       // Initialize the jQuery File Upload widget:
       $('#fileupload').fileupload();
       // 
@@ -16,5 +17,6 @@
         template.addClass('in');
         $('#loading').remove();
       });
+    }
   });
 

@@ -9,7 +9,7 @@ class PlaceImage < ActiveRecord::Base
   has_attached_file :image, 
     :url => "/system/places/:place_id/images/:id_:style.:extension",
 		:styles => {
-					:thumb => {:geometry => "100x100>"},
+					:thumb => {:geometry => "200x200>"},
 					:medium => {:geometry => "450x450>"},
 					:large => {:geometry => "900x900>"}
 				}
