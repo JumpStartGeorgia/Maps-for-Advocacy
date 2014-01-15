@@ -8,7 +8,10 @@ class PlacesController < ApplicationController
     @disability_evaluations = []
     
     if @place.present?
+      # get imgaes
+      @place_images = PlaceImage.by_place(params[:id])
 
+      # get evaluations
       @disabilities = Disability.sorted.is_active
       if @disabilities.present?
         @disabilities.each do |disability|
@@ -301,5 +304,63 @@ class PlacesController < ApplicationController
     end
   end
   
+  ################################################
+  ###### image processing ###################
+  ################################################
+  # upload images for a place
+  def upload_photos
+    @place = Place.with_translation(params[:id]).first
+    gon.load_place_photos_path = upload_photos_place_url(:id => @place.id, :format => :json)
+    @place_image_count = @place.place_images.count
+
+    Rails.logger.debug "///////////////////// #{place_destroy_photo_path(:id => 16, :place_id => 3)}"
+
+    if @place.present?
+      respond_to do |format|
+        format.html # show.html.erb
+        format.json { render json: @place.place_images.map{|upload| upload.to_jq_upload } }
+      end
+    else
+		  flash[:info] =  t('app.msgs.does_not_exist')
+		  redirect_to root_path(:locale => I18n.locale)
+		  return
+    end
+  
+  end
+  
+  # upload images for a place
+  def upload_photos_post
+    @place = Place.with_translation(params[:id]).first
+
+    if @place.present? 
+      @place_image = @place.place_images.create(:image => params[:place_image][:image])
+
+      respond_to do |format|
+        format.html {
+          render :json => [@place_image.to_jq_upload].to_json,
+          :content_type => 'text/html',
+          :layout => false
+        }
+        format.json { render json: {files: [@place_image.to_jq_upload]}, status: :created, location: upload_photos_place_path(@place) }
+      end
+    else
+		  flash[:info] =  t('app.msgs.does_not_exist')
+		  redirect_to root_path(:locale => I18n.locale)
+		  return
+    end
+  
+  end
+
+  # DELETE /places/1
+  # DELETE /places/1.json
+  def destroy_photo
+    @place_image = PlaceImage.find(params[:id])
+    @place_image.destroy
+
+    respond_to do |format|
+      format.html { redirect_to place_url(params[:place_id]) }
+      format.json { head :no_content }
+    end
+  end
   
 end

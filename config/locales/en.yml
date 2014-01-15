@@ -104,6 +104,7 @@ en:
       remove: Remove
       confirm: Are you sure?
       new: New
+      start: Start
     common:
       app_name: Accessing Georgia
       added_on: "Added on: %{date}" 
@@ -115,6 +116,8 @@ en:
         needs: Not have and needs
         not_relevant: Not relavent
         no_answer: No answer
+      add_photos: Add Photos
+      add_photos_title: "Add Photos for '%{place}'"
       add_evaluation: Add an Evaluation
       add_evaluation_title: "Add an Evaluation for '%{place}'"
       add_evaluation_title2: "Add a %{disability} Evaluation for '%{place}'"
@@ -292,6 +295,12 @@ en:
       header_disability: Which evaluation do you want to complete?
       disability_link_title: "'%{name}' evaluation"
       submit: Submit the Evaluation
+    upload_photos:
+      title: Upload Photos for '%{name}'
+      add_files: Add photos...
+      start_upload: Upload Photos
+      cancel_upload: Cancel Upload
+      return_place: Return to '%{name}'
   settings:
     index:
       title: "Settings for '%{name}'"

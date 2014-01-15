@@ -104,6 +104,7 @@ ka:
       remove: მოშორება
       confirm: დარწმუნებული ხართ?
       new: ახალი
+      start: Start
     common:
       app_name: Accessing Georgia
       added_on: "დამატებულია: %{date}" 
@@ -115,6 +116,8 @@ ka:
         needs: არ აქვს და ესაჭიროება
         not_relevant: არ არის შესაბამისი
         no_answer: არ არის პასუხი
+      add_photos: Add Photos
+      add_photos_title: "Add Photos for '%{place}'"
       add_evaluation: შეფასების დამატება
       add_evaluation_title: "'%{place}'-ის შეფასების დამატება"
       add_evaluation_title2: "დაამატეთ '%{place}'-ის %{disability} შეფასება"
@@ -292,6 +295,12 @@ ka:
       header_disability: რომელი შეფასების შევსება გსურთ?
       disability_link_title: "'%{name}'-ის შეფასება"
       submit: შეფასების შევსება
+    upload_photos:
+      title: Upload Photos for '%{name}'
+      add_files: Add photos...
+      start_upload: Upload Photos
+      cancel_upload: Cancel Upload
+      return_place: Return to '%{name}'
   settings:
     index:
       title: "'%{name}'-ის პარამეტრები"

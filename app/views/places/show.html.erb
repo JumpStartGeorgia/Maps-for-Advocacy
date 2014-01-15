@@ -24,6 +24,8 @@
       <div class="span3">
         <%= link_to t('app.common.add_evaluation'), evaluation_place_path(@place), 
           :class => 'add_evaluation', :title => t('app.common.add_evaluation_title', :place => @place[:name]) %>
+        <%= link_to t('app.common.add_photos'), upload_photos_place_path(@place), 
+          :class => 'add_photos', :title => t('app.common.add_photos_title', :place => @place[:name]) %>
       </div>
     </div>
 
@@ -166,6 +168,22 @@
   <div class="span6">
     <a href="#footer" class="accessibly-hidden"><%= t('.jump.skip_map') %></a>
     <div id="map"></div>
+    
+    <% if @place_images.present? %>
+      <div id="place_carousel" class="carousel slide">
+        <!-- Carousel items -->
+        <div class="carousel-inner">
+          <% @place_images.each_with_index do |img, index| %>
+            <div class="<%= 'active' if index == 0 %> item">
+              <%= image_tag img.image.url(:medium) %>
+            </div>
+          <% end %>
+        </div>
+        <!-- Carousel nav -->
+        <a class="carousel-control left" href="#place_carousel" data-slide="prev">&lsaquo;</a>
+        <a class="carousel-control right" href="#place_carousel" data-slide="next">&rsaquo;</a>
+      </div>    
+    <% end %>
   </div>
 </div>
 

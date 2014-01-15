@@ -1,0 +1,77 @@
+<%- model_class = Place -%>
+<% title t('.title', :name => @place[:name]).html_safe %>
+
+  <%= semantic_form_for(PlaceImage.new, :url => upload_photos_post_place_path(params[:id]), :html => { :class => 'form-horizontal', :multipart => true, :id => "fileupload" }) do |f| %>
+    <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+    <div class="row-fluid fileupload-buttonbar">
+      <div class="span6">
+        <!-- The fileinput-button span is used to style the file input field as button -->
+        <span class="btn btn-success fileinput-button">
+          <i class="icon-plus icon-white"></i>
+          <span><%= t('.add_files') %></span>
+          <input id="place_image_image" name="place_image[image]" type="file" multiple>
+        </span>
+        <button type="submit" class="btn btn-primary start">
+          <i class="icon-upload icon-white"></i>
+          <span><%= t('.start_upload') %></span>
+        </button>
+        <button type="reset" class="btn btn-warning cancel">
+          <i class="icon-ban-circle icon-white"></i>
+          <span><%= t('.cancel_upload') %></span>
+        </button>
+      </div>
+      <div class="span3">
+        <%= link_to t('.return_place', :name => @place[:name]), place_path(@place), :class => 'return_place' %>
+      </div>
+      <!-- The global progress state -->
+      <div class="span3 fileupload-progress fade">
+        <!-- The global progress bar -->
+        <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+          <div class="bar bar-success" style="width: 0%;"></div>
+        </div>
+        <!-- The extended global progress state -->
+        <div class="progress-extended">&nbsp;</div>
+      </div>
+    </div>
+    <!-- The loading indicator is shown during image processing -->
+    <div class="fileupload-loading"></div>
+    <br>
+    <!-- The table listing the files available for upload/download -->
+    <table class="table table-striped"><tbody class="files" data-toggle="modal-gallery" data-target="#modal-gallery"></tbody>
+    </table>
+    <% if @place_image_count > 0 %>
+      <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
+      <div class="row-fluid fileupload-buttonbar">
+        <div class="span6">
+          <!-- The fileinput-button span is used to style the file input field as button -->
+          <span class="btn btn-success fileinput-button">
+            <i class="icon-plus icon-white"></i>
+            <span><%= t('.add_files') %></span>
+            <input id="place_image_image" name="place_image[image]" type="file" multiple>
+          </span>
+          <button type="submit" class="btn btn-primary start">
+            <i class="icon-upload icon-white"></i>
+            <span><%= t('.start_upload') %></span>
+          </button>
+          <button type="reset" class="btn btn-warning cancel">
+            <i class="icon-ban-circle icon-white"></i>
+            <span><%= t('.cancel_upload') %></span>
+          </button>
+        </div>
+        <div class="span3">
+          <%= link_to t('.return_place', :name => @place[:name]), place_path(@place), :class => 'return_place' %>
+        </div>
+        <div class="span3 fileupload-progress fade">
+          <!-- The global progress bar -->
+          <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
+            <div class="bar bar-success" style="width: 0%;"></div>
+          </div>
+          <!-- The extended global progress state -->
+          <div class="progress-extended">&nbsp;</div>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
+
+

@@ -42,10 +42,13 @@ BootstrapStarter::Application.routes.draw do
       member do 
         get 'evaluation'
         put 'evaluation'
+        get 'upload_photos'
+        post 'upload_photos_post'
       end
       collection do
         post 'address_search', :defaults => {:format => 'json'}
       end
+      match '/destroy_photo/:id', :to => 'places#destroy_photo', :as => :destroy_photo, :via => :delete
     end
 
     # user settings

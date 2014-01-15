@@ -8,6 +8,7 @@
  *= require jquery.ui.core
  *= require jquery.ui.theme
  *= require dataTables/jquery.dataTables.bootstrap
+ *= require jquery.fileupload-ui
  *= require_tree .
  *= require vendor
  *= require_self
@@ -246,7 +247,7 @@ footer, footer ul li, footer div#right ul li {
 
 
 /* add place/evaluation button */
-.navbar .nav > li > a.add_evaluation, a.add_evaluation, a.view_more, #submit-button input, a#place_name_next, a#place_map_next{
+.navbar .nav > li > a.add_evaluation, a.add_evaluation, a.view_more, #submit-button input, a#place_name_next, a#place_map_next, a.add_photos, a.return_place{
   background-color: #3287CC;
   color: #fff !important;
   text-shadow: 0 1px 0 #555;
@@ -262,10 +263,18 @@ footer, footer ul li, footer div#right ul li {
 .navbar .nav > li > a.add_evaluation:hover, a.add_evaluation:hover, #submit-button input:hover, a#place_name_next:hover, a#place_map_next:hover{
   background-color: #1267ac;
 }
-a.view_more{
+a.view_more, a.return_place{
   background-color: #666;
   color: #fff !important;
 }
-a.view_more:hover{
+a.view_more:hover, a.return_place:hover{
   background-color: #444;
 }
+a.add_photos{
+  background-color: #5bb75b;
+  color: #fff !important;
+}
+a.add_photos:hover{
+  background-color: #3b973b;
+}
+

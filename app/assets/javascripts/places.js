@@ -160,6 +160,7 @@ $(document).ready(function(){
         marker.bindPopup(gon.marker_popup).openPopup();
       }
 
+      $('#place_carousel').carousel();
   }
   
 
