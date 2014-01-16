@@ -51,6 +51,14 @@ class VenueCategory < ActiveRecord::Base
   
   
   #######################################
+  ## load all question categories, quetsions and pairings from the main spreadsheet
+  #######################################
+  def self.process_complete_csv_upload()
+    path = "#{Rails.root}/db/spreadsheets/Accessibility Upload - Venues.csv"
+    process_csv_upload(File.open(path, 'r'), true)
+  end  
+  
+  #######################################
   ## load venue categories and venues
   ## from csv file
   #######################################

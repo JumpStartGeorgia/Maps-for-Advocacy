@@ -8,7 +8,6 @@
         var fu = $('#fileupload').data('blueimpFileupload'), 
           template;
         fu._adjustMaxNumberOfFiles(-files.length);
-        console.log(files);
         template = fu._renderDownload(files)
           .appendTo($('#fileupload .files'));
         // Force reflow:

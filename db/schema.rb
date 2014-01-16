@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140115080230) do
+ActiveRecord::Schema.define(:version => 20140116093758) do
 
   create_table "disabilities", :force => true do |t|
     t.string   "code"
@@ -97,9 +97,13 @@ ActiveRecord::Schema.define(:version => 20140115080230) do
     t.string   "image_content_type"
     t.integer  "image_file_size"
     t.datetime "image_updated_at"
+    t.integer  "user_id"
+    t.datetime "taken_at"
   end
 
   add_index "place_images", ["place_id"], :name => "index_place_images_on_place_id"
+  add_index "place_images", ["taken_at"], :name => "index_place_images_on_taken_at"
+  add_index "place_images", ["user_id"], :name => "index_place_images_on_user_id"
 
   create_table "place_translations", :force => true do |t|
     t.integer  "place_id"

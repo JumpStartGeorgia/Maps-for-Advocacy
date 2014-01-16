@@ -9,7 +9,7 @@ class PlacesController < ApplicationController
     
     if @place.present?
       # get imgaes
-      @place_images = PlaceImage.by_place(params[:id])
+      @place_images = PlaceImage.by_place(params[:id]).with_user
 
       # get evaluations
       @disabilities = Disability.sorted.is_active
@@ -333,7 +333,7 @@ class PlacesController < ApplicationController
     @place = Place.with_translation(params[:id]).first
 
     if @place.present? 
-      @place_image = @place.place_images.create(:image => params[:place_image][:image])
+      @place_image = @place.place_images.create(:image => params[:place_image][:image], :user_id => current_user.id)
 
       respond_to do |format|
         format.html {

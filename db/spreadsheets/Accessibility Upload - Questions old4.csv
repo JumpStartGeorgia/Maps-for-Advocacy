@@ -46,9 +46,8 @@ Outside Pathways,გარე ბილიკები,3,1,Ramp,პანდუ�
 Outside Pathways,გარე ბილიკები,3,1,Ramp,პანდუსი,2,1,p,, Ramp sheltered from weather,,8,,,
 Outside Pathways,გარე ბილიკები,3,1,Ramp,პანდუსი,2,1,p,, Flat pathway at the top and bottom of ramp large enough to allow for turning,,9,,,
 Outside Pathways,გარე ბილიკები,3,1,Ramp,პანდუსი,2,1,s,, Stripes at beginning and end of ramp,,10,,,
-Entrances,შესასვლელები,4,1,,,,,"b,d,p,s",, Barrier free accessible path to primary entrance,,1,,,
-Entrances,შესასვლელები,4,1,,,,,"b,d,p,s",, Barrier free accessible path to secondary entrance,,2,,,
-Entrances,შესასვლელები,4,1,,,,,b,, Tactile map of place,,3,,,
+Entrances,შესასვლელები,4,1,,,,,"b,d,p,s",, Barrier free accessible path to entrance,,1,,,
+Entrances,შესასვლელები,4,1,,,,,b,, Tactile map of place,,2,,,
 Entrances,შესასვლელები,4,1,Doorway,კარები,1,1,"b,d,p,s",, Barrier free accessible path to door,,1,,,
 Entrances,შესასვლელები,4,1,Doorway,კარები,1,1,"b,d,p,s",, Barrier free doorway,,2,,,
 Entrances,შესასვლელები,4,1,Doorway,კარები,1,1,p,, Wide opening when door is open ,,3,Width (m),,
@@ -194,8 +193,8 @@ ATMs and pay boxes,ბანკომატები და სწრაფი �
 ATMs and pay boxes,ბანკომატები და სწრაფი ჩარიცხვის აპარატები,,0,,,,,"p,s",, Screen positioned to minimize glare,,4,,,ATMs and pay boxes
 ATMs and pay boxes,ბანკომატები და სწრაფი ჩარიცხვის აპარატები,,0,,,,,s,, Screen uses adequate text size,,5,,,ATMs and pay boxes
 ATMs and pay boxes,ბანკომატები და სწრაფი ჩარიცხვის აპარატები,,0,,,,,s,, Screen uses high contrast,,6,,,ATMs and pay boxes
-ATMs and pay boxes,ბანკომატები და სწრაფი ჩარიცხვის აპარატები,,0,,,,,b,, Talking machine with headphone jack for audio,,7,,,ATMs and pay boxes
-ATMs and pay boxes,ბანკომატები და სწრაფი ჩარიცხვის აპარატები,,0,,,,,b,,Braille on buttons,,8,,,ATMs and pay boxes
+ATMs and pay boxes,ბანკომატები და სწრაფი ჩარიცხვის აპარატები,,0,,,,,b,, Talking ATM with headphone jack for audio,,7,,,ATMs and pay boxes
+ATMs and pay boxes,ბანკომატები და სწრაფი ჩარიცხვის აპარატები,,0,,,,,b,,Braille on ATM buttons,,8,,,ATMs and pay boxes
 Currency Exchange,სავალუტო ჯიხურები,,0,,,,,s,, Adequate lighting to be able to count money,,1,,,Currency Exchange
 Currency Exchange,სავალუტო ჯიხურები,,0,,,,,p,, Adequate height of desk/window ,,2,Height (m),,Currency Exchange
 112,,,0,,,,,d,, SMS service for deaf people,,1,,,112

@@ -256,6 +256,9 @@ en:
       header_user_summary: Summary
       header_user_details: Details
       details_link_title: View the details of this evaluation
+      taken_at: "Photo taken on: %{date}"
+      uploaded_at: "Uploaded on: %{date}"
+      uploaded_by: "Uploaded by: %{user}"
     form:
       header_venue: What is the Venue?
       venue_instructions: Select a venue category to view a list of venues.

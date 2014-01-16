@@ -176,6 +176,25 @@
           <% @place_images.each_with_index do |img, index| %>
             <div class="<%= 'active' if index == 0 %> item">
               <%= image_tag img.image.url(:medium) %>
+              <div class="carousel-caption">
+                <ul class="carousel-caption-photo-info">
+                  <% if img.taken_at.present? %>
+                    <li>
+                      <%= t('.taken_at', :date => l(img.taken_at, :format => :no_time)) %>
+                    </li>
+                  <% end %>
+                  <% if img.created_at.present? %>
+                    <li>
+                      <%= t('.uploaded_at', :date => l(img.created_at, :format => :no_time)) %>
+                    </li>
+                  <% end %>
+                  <% if img.user_id.present? %>
+                    <li>
+                      <%= t('.uploaded_by', :user => img.user.nickname) %>
+                    </li>
+                  <% end %>
+                </ul>                
+              </div>
             </div>
           <% end %>
         </div>

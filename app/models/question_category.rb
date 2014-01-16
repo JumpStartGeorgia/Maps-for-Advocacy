@@ -122,7 +122,13 @@ class QuestionCategory < ActiveRecord::Base
 
 
   
-  
+  #######################################
+  ## load all question categories, quetsions and pairings from the main spreadsheet
+  #######################################
+  def self.process_complete_csv_upload()
+    path = "#{Rails.root}/db/spreadsheets/Accessibility Upload - Questions.csv"
+    process_csv_upload(File.open(path, 'r'), true)
+  end  
   
   #######################################
   ## load question categories, quetsions and pairings 
