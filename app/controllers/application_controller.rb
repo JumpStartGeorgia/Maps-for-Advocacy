@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
 	before_filter :is_browser_supported?
 	before_filter :initialize_global_variables
 	before_filter :initialize_gon
-	after_filter :store_location
+	before_filter :store_location
 
 	unless Rails.application.config.consider_all_requests_local
 		rescue_from Exception,
@@ -89,7 +89,7 @@ logger.debug "////////////////////////// BROWSER = #{user_agent}"
 
 	# after user logs in go back to the last page or go to root page
 	def after_sign_in_path_for(resource)
-		request.env['omniauth.origin'] || session[:previous_urls].last || root_path(:locale => I18n.locale)
+		session[:previous_urls].last || request.env['omniauth.origin'] || root_path(:locale => I18n.locale)
 	end
 
   def valid_role?(role)
@@ -107,6 +107,9 @@ logger.debug "////////////////////////// BROWSER = #{user_agent}"
 			session[:previous_urls].unshift request.fullpath
 		end
 		session[:previous_urls].pop if session[:previous_urls].count > 1
+
+
+#    Rails.logger.debug "****************** prev urls session = #{session[:previous_urls]}"
 	end
 
 
