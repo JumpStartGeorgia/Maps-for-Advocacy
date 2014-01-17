@@ -198,7 +198,7 @@ ATMs and pay boxes,ბანკომატები და სწრაფი �
 ATMs and pay boxes,ბანკომატები და სწრაფი ჩარიცხვის აპარატები,,0,,,,,b,,Braille on buttons,,8,,,ATMs and pay boxes
 Currency Exchange,სავალუტო ჯიხურები,,0,,,,,s,, Adequate lighting to be able to count money,,1,,,Currency Exchange
 Currency Exchange,სავალუტო ჯიხურები,,0,,,,,p,, Adequate height of desk/window ,,2,Height (m),,Currency Exchange
-112,112,,0,,,,,d,, SMS service for deaf people,,1,,,112
+112,,,0,,,,,d,, SMS service for deaf people,,1,,,112
 Hotels,სასტუმროები,,0,,,,,"b,d,p,s",, Barrier free accessible path to room,,1,,,Hotels
 Hotels,სასტუმროები,,0,,,,,"b,p",, Adequate clearance on at least one side of bed ,,2,Widht (m),,Hotels
 Hotels,სასტუმროები,,0,,,,,"b,p,s",, Adequate height of light switch ,,3,Height (m),,Hotels
@@ -206,35 +206,35 @@ Hotels,სასტუმროები,,0,,,,,"b,p,s",, Light switch in consis
 Hotels,სასტუმროები,,0,,,,,"d,p,s",, Light switch illuminated when the lights are off,,5,,,Hotels
 Hotels,სასტუმროები,,0,,,,,p,, Adequate height of electrical receptacles ,,6,Height (m),,Hotels
 Hotels,სასტუმროები,,0,,,,,"b,p,s",, Electrical receptacles in consistent location throughout all rooms in this place,,7,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,"b,d,p,s",, Barrier free accessible path to bathroom,,1,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,p,, Wide opening when entrance door is open ,,2,Width (m),,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,p,, Door opens outward for small bathroom,,3,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,s,, Restroom gender indicator sign uses high contrast,,4,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,b,, Restroom gender indicator sign in Braille,,5,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,p,, Automatic entrance door opener,,6,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,s,, Automatic door opener button in frame with contrasting color,,7,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,b,, Automatic door opener button in Braille,,8,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,"b,d,p,s",," Flat, level path through doorway ",,9,Height (m),,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,"b,d,p,s",, Open door with one hand,,10,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,"b,d,p,s",, Open door with minimum adequate force,,11,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,"b,p,s",, Adequate height of light switch ,,12,Height (m),,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,"b,p,s",, Light switch in consistent location throughout all bathrooms for this place,,13,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,"d,p,s",, Light switch illuminated when the lights are off,,14,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,"b,d,p,s",, Adequate space in the interior ,,15,Area (sq m),,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,p,, Adequate height of sink ,,16,Height (m),,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,"b,p",, Can use sink controls with one hand,,17,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,"b,p,s",, Adequate height of soap dispenser ,,18,Height (m),,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,s,, Soap dispenser color contrasts from wall,,19,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,"b,p,s",, Soap dispenser in consistent location throughout all bathrooms for this place,,20,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,p,, Adequate height of towel rack ,,21,Height (m),,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,s,, Towel rack color contrasts from wall,,22,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,"b,p,s",, Towel rack in consistent location throughout all bathrooms for this place,,23,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,p,, Sitting toilet (not a squat toilet),,24,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,p,, Grab bar to assist getting on toilet,,25,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,"b,p",, Can flush toilet with one hand,,26,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,p,, Grab bar to assist getting into shower/bathtub,,27,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,p,, Shower/bathtub head on flexible hose,,28,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,p,, Can use shower/bathtub controls with one hand,,29,,,Hotels
+Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,,"b,d,p,s",, Barrier free accessible path to bathroom,,1,,,Hotels
+Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,,p,, Wide opening when entrance door is open ,,2,Width (m),,Hotels
+Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,,p,, Door opens outward for small bathroom,,3,,,Hotels
+Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,,s,, Restroom gender indicator sign uses high contrast,,4,,,Hotels
+Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,,b,, Restroom gender indicator sign in Braille,,5,,,Hotels
+Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,,p,, Automatic entrance door opener,,6,,,Hotels
+Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,,s,, Automatic door opener button in frame with contrasting color,,7,,,Hotels
+Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,,b,, Automatic door opener button in Braille,,8,,,Hotels
+Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,,"b,d,p,s",," Flat, level path through doorway ",,9,Height (m),,Hotels
+Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,,"b,d,p,s",, Open door with one hand,,10,,,Hotels
+Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,,"b,d,p,s",, Open door with minimum adequate force,,11,,,Hotels
+Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,,"b,p,s",, Adequate height of light switch ,,12,Height (m),,Hotels
+Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,,"b,p,s",, Light switch in consistent location throughout all bathrooms for this place,,13,,,Hotels
+Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,,"d,p,s",, Light switch illuminated when the lights are off,,14,,,Hotels
+Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,,"b,d,p,s",, Adequate space in the interior ,,15,Area (sq m),,Hotels
+Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,,p,, Adequate height of sink ,,16,Height (m),,Hotels
+Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,,"b,p",, Can use sink controls with one hand,,17,,,Hotels
+Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,,"b,p,s",, Adequate height of soap dispenser ,,18,Height (m),,Hotels
+Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,,s,, Soap dispenser color contrasts from wall,,19,,,Hotels
+Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,,"b,p,s",, Soap dispenser in consistent location throughout all bathrooms for this place,,20,,,Hotels
+Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,,p,, Adequate height of towel rack ,,21,Height (m),,Hotels
+Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,,s,, Towel rack color contrasts from wall,,22,,,Hotels
+Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,,"b,p,s",, Towel rack in consistent location throughout all bathrooms for this place,,23,,,Hotels
+Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,,p,, Sitting toilet (not a squat toilet),,24,,,Hotels
+Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,,p,, Grab bar to assist getting on toilet,,25,,,Hotels
+Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,,"b,p",, Can flush toilet with one hand,,26,,,Hotels
+Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,,p,, Grab bar to assist getting into shower/bathtub,,27,,,Hotels
+Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,,p,, Shower/bathtub head on flexible hose,,28,,,Hotels
+Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,,p,, Can use shower/bathtub controls with one hand,,29,,,Hotels
 Hostels,ჰოსტელები,,0,,,,,"b,d,p,s",, Barrier free accessible path to room,,1,,,Hostels
 Hostels,ჰოსტელები,,0,,,,,"b,p",, Adequate clearance on at least one side of bed ,,2,Widht (m),,Hostels
 Hostels,ჰოსტელები,,0,,,,,"b,p,s",, Adequate height of light switch ,,3,Height (m),,Hostels
@@ -242,35 +242,35 @@ Hostels,ჰოსტელები,,0,,,,,"b,p,s",, Light switch in consistent 
 Hostels,ჰოსტელები,,0,,,,,"d,p,s",, Light switch illuminated when the lights are off,,5,,,Hostels
 Hostels,ჰოსტელები,,0,,,,,p,, Adequate height of electrical receptacles ,,6,Height (m),,Hostels
 Hostels,ჰოსტელები,,0,,,,,"b,p,s",, Electrical receptacles in consistent location throughout all rooms in this place,,7,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,"b,d,p,s",, Barrier free accessible path to bathroom,,1,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,p,, Wide opening when entrance door is open ,,2,Width (m),,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,p,, Door opens outward for small bathroom,,3,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,s,, Restroom gender indicator sign uses high contrast,,4,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,b,, Restroom gender indicator sign in Braille,,5,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,p,, Automatic entrance door opener,,6,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,s,, Automatic door opener button in frame with contrasting color,,7,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,b,, Automatic door opener button in Braille,,8,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,"b,d,p,s",," Flat, level path through doorway ",,9,Height (m),,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,"b,d,p,s",, Open door with one hand,,10,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,"b,d,p,s",, Open door with minimum adequate force,,11,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,"b,p,s",, Adequate height of light switch ,,12,Height (m),,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,"b,p,s",, Light switch in consistent location throughout all bathrooms for this place,,13,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,"d,p,s",, Light switch illuminated when the lights are off,,14,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,"b,d,p,s",, Adequate space in the interior ,,15,Area (sq m),,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,p,, Adequate height of sink ,,16,Height (m),,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,"b,p",, Can use sink controls with one hand,,17,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,"b,p,s",, Adequate height of soap dispenser ,,18,Height (m),,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,s,, Soap dispenser color contrasts from wall,,19,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,"b,p,s",, Soap dispenser in consistent location throughout all bathrooms for this place,,20,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,p,, Adequate height of towel rack ,,21,Height (m),,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,s,, Towel rack color contrasts from wall,,22,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,"b,p,s",, Towel rack in consistent location throughout all bathrooms for this place,,23,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,p,, Sitting toilet (not a squat toilet),,24,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,p,, Grab bar to assist getting on toilet,,25,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,"b,p",, Can flush toilet with one hand,,26,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,p,, Grab bar to assist getting into shower/bathtub,,27,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,p,, Shower/bathtub head on flexible hose,,28,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,p,, Can use shower/bathtub controls with one hand,,29,,,Hostels
+Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,,"b,d,p,s",, Barrier free accessible path to bathroom,,1,,,Hostels
+Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,,p,, Wide opening when entrance door is open ,,2,Width (m),,Hostels
+Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,,p,, Door opens outward for small bathroom,,3,,,Hostels
+Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,,s,, Restroom gender indicator sign uses high contrast,,4,,,Hostels
+Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,,b,, Restroom gender indicator sign in Braille,,5,,,Hostels
+Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,,p,, Automatic entrance door opener,,6,,,Hostels
+Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,,s,, Automatic door opener button in frame with contrasting color,,7,,,Hostels
+Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,,b,, Automatic door opener button in Braille,,8,,,Hostels
+Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,,"b,d,p,s",," Flat, level path through doorway ",,9,Height (m),,Hostels
+Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,,"b,d,p,s",, Open door with one hand,,10,,,Hostels
+Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,,"b,d,p,s",, Open door with minimum adequate force,,11,,,Hostels
+Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,,"b,p,s",, Adequate height of light switch ,,12,Height (m),,Hostels
+Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,,"b,p,s",, Light switch in consistent location throughout all bathrooms for this place,,13,,,Hostels
+Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,,"d,p,s",, Light switch illuminated when the lights are off,,14,,,Hostels
+Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,,"b,d,p,s",, Adequate space in the interior ,,15,Area (sq m),,Hostels
+Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,,p,, Adequate height of sink ,,16,Height (m),,Hostels
+Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,,"b,p",, Can use sink controls with one hand,,17,,,Hostels
+Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,,"b,p,s",, Adequate height of soap dispenser ,,18,Height (m),,Hostels
+Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,,s,, Soap dispenser color contrasts from wall,,19,,,Hostels
+Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,,"b,p,s",, Soap dispenser in consistent location throughout all bathrooms for this place,,20,,,Hostels
+Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,,p,, Adequate height of towel rack ,,21,Height (m),,Hostels
+Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,,s,, Towel rack color contrasts from wall,,22,,,Hostels
+Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,,"b,p,s",, Towel rack in consistent location throughout all bathrooms for this place,,23,,,Hostels
+Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,,p,, Sitting toilet (not a squat toilet),,24,,,Hostels
+Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,,p,, Grab bar to assist getting on toilet,,25,,,Hostels
+Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,,"b,p",, Can flush toilet with one hand,,26,,,Hostels
+Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,,p,, Grab bar to assist getting into shower/bathtub,,27,,,Hostels
+Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,,p,, Shower/bathtub head on flexible hose,,28,,,Hostels
+Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,,p,, Can use shower/bathtub controls with one hand,,29,,,Hostels
 Stadiums,სტადიონები,,0,,,,,p,, Reserved area for wheelchairs,,1,,,Stadiums
 Cinema / theaters,კინო /  თეატრები,,0,,,,,p,, Reserved area for wheelchairs,,1,,,Cinema / theaters
 Museums,მუზეუმები,,0,,,,,"b,s",, Detailed audio guide,,1,,,Museums
