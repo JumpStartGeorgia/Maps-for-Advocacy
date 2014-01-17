@@ -10,9 +10,14 @@ class PlaceEvaluation < ActiveRecord::Base
 
   
   ANSWERS = {'no_answer' => 0, 'not_relevant' => 1, 'needs' => 2, 'has_bad' => 3, 'has_good' => 4, 'has' => 5}
+  SUMMARY_ANSWERS = {'not_accessible' => 0, 'no_answer' => 1, 'not_relevant' => 2}
   
   def self.answer_key_name(value)
     ANSWERS.keys[ANSWERS.values.index(value)]
+  end
+  
+  def self.summary_answer_key_name(value)
+    SUMMARY_ANSWERS.keys[SUMMARY_ANSWERS.values.index(value)]
   end
   
   def self.with_answers(place_id, disability_id=nil)
@@ -28,80 +33,80 @@ class PlaceEvaluation < ActiveRecord::Base
 
   # create a summary of the evaluation results
   # create summary for each evaluation and then an overall summary
+  # return: {
+  #  'overall' => {overall, cat_id1, cat_id2, etc},
+  #  'evaluations' => [{id, overall, overall_flag, cat_id1, cat_id2, etc},etc]  
+  # }
   def self.summarize(evaluations, question_categories)
     summary = Hash.new
     summary['overall'] = Hash.new
+    summary['overall']['overall'] = Hash.new
     summary['evaluations'] = []
   
     questions = organize_questions(question_categories)
-  
+    
     if evaluations.present? && questions.present?
       
-      # get unique question category ids
+      all_answers = evaluations.map{|x| x.place_evaluation_answers}.flatten
       category_ids = questions.map{|x| x[:category_id]}.uniq
+      exists_question_ids = questions.select{|x| x[:is_exists] == 1}.map{|x| x[:question_pairing_id]}
+      req_accessibility_question_ids = questions.select{|x| x[:required_for_accessibility] == 1}.map{|x| x[:question_pairing_id]}
+
+      #############################################
+      # compute overall evaluation
+      #############################################
+      summary['overall']['overall']['score'], summary['overall']['overall']['special_flag'] = summarize_answers(all_answers, exists_question_ids, req_accessibility_question_ids)
       
+      #############################################
+      # process each evaluation
+      #############################################
       evaluations.each do |evaluation|
         # create evaluation summaries
         evaluation_summary = Hash.new
         summary['evaluations'] << evaluation_summary
 
         evaluation_summary['id'] = evaluation.id
+        evaluation_summary['overall'] = Hash.new
 
         records = evaluation.place_evaluation_answers
 
-        # - overall of all answers for this evaluation
-        answers = records.map{|x| x.answer}
-        avg = answers.sum / answers.size.to_f
-        evaluation_summary['overall'] = avg
+        #############################################
+        # overall of all answers for this evaluation
+        #############################################
+        evaluation_summary['overall']['score'], evaluation_summary['overall']['special_flag'] = summarize_answers(records, exists_question_ids, req_accessibility_question_ids)
 
+        #############################################
         # for each category, get answers            
+        #############################################
         category_ids.each do |category_id|
           question_pairing_ids = questions.select{|x| x[:category_id] == category_id}.map{|x| x[:question_pairing_id]}
           if question_pairing_ids.present?
-            evals = []
-            # get evaluation records that match
-            question_pairing_ids.each do |qp_id|
-              evals << records.select{|x| x.question_pairing_id == qp_id}
-            end
-            evals.flatten!
             
-            # average the answers
-            answers = evals.map{|x| x.answer}
-            avg = answers.sum / answers.size.to_f
+            #### for all evaluations
+            # get evaluation records that match
+            evals = all_answers.select{|x| question_pairing_ids.index(x.question_pairing_id).present? }
             
             # add to evaluation record
-            evaluation_summary[category_id.to_s] = avg
+            summary['overall'][category_id.to_s] = Hash.new
+            summary['overall'][category_id.to_s]['score'], summary['overall'][category_id.to_s]['special_flag'] = 
+                summarize_answers(evals, exists_question_ids, req_accessibility_question_ids)
+
+            #### for this evaluation
+            # get evaluation records that match
+            evals = records.select{|x| question_pairing_ids.index(x.question_pairing_id).present? }
+            
+            # add to evaluation record
+            evaluation_summary[category_id.to_s] = Hash.new
+            evaluation_summary[category_id.to_s]['score'], evaluation_summary[category_id.to_s]['special_flag'] = 
+                summarize_answers(evals, exists_question_ids, req_accessibility_question_ids)
           end
         end      
-
-        # create overall summary
-        # - overall of all answers
-        answers = evaluations.map{|x| x.place_evaluation_answers.map{|x| x.answer}}.flatten
-        avg = answers.sum / answers.size.to_f
-        summary['overall']['overall'] = avg
-        
-        # - by category
-        category_ids.each do |category_id|
-          question_pairing_ids = questions.select{|x| x[:category_id] == category_id}.map{|x| x[:question_pairing_id]}
-          if question_pairing_ids.present?
-            evals = []
-            # get evaluation records that match
-            question_pairing_ids.each do |qp_id|
-              evals << evaluations.map{|x| x.place_evaluation_answers.select{|x| x.question_pairing_id == qp_id}}
-            end
-            evals.flatten!
-            
-            # average the answers
-            answers = evals.map{|x| x.answer}
-            avg = answers.sum / answers.size.to_f
-            
-            # add to overall record
-            summary['overall'][category_id.to_s] = avg
-          end
-        end
       end
+      
+      
     end
-Rails.logger.debug "*************** summary = #{summary}"  
+  
+#    Rails.logger.debug "*************** summary = #{summary}"  
     return summary
   end
 
@@ -109,13 +114,16 @@ Rails.logger.debug "*************** summary = #{summary}"
     
 private
   ## return 1-d array of all questions with their category and pairing id
-  ## [{:category_id, :question_pairing_id}]
+  ## [{:category_id, :question_pairing_id, :is_exists, :required_for_accessibility}]
   def self.organize_questions(question_categories, category_id=nil)
     categories = []
     if question_categories.present?
       question_categories.each do |cat|
         cat_id = category_id.present? ? category_id : cat.id
-        categories << cat[:questions].map{|x| {:category_id => cat_id, :question_pairing_id => x['question_pairing_id']} }
+        categories << cat[:questions].map{
+          |x| {:category_id => cat_id, :question_pairing_id => x['question_pairing_id'],
+               :is_exists => x['is_exists'], :required_for_accessibility => x['required_for_accessibility'] } 
+        }
         # if there are subcategories get the questions from those too
         if cat[:sub_categories].present?
           categories << organize_questions(cat[:sub_categories], cat_id)
@@ -124,4 +132,42 @@ private
     end
     return categories.flatten!
   end    
+  
+  # returns: [score, special_flag]
+  # - score = overall average of records passed in unless a special case was found
+  # - special_flag = one of SUMMARY_ANSWERS values or nil; will be nil if score has value
+  def self.summarize_answers(records, exists_question_ids, req_accessibility_question_ids)
+    h = {'score' => nil, 'special_flag' => nil}
+    
+    if records.present?
+      results = records.map{|x| [x.question_pairing_id, x.answer]}
+      # see if any required accessibility questions have 'needs' answer
+      if req_accessibility_question_ids.present? && results.index{|x| req_accessibility_question_ids.index(x[0]).present? && x[1] == ANSWERS['needs']}.present?
+#        Rails.logger.debug "************ found an answer that is 'needs' for a required accessibility question -> not accessible"
+        # found an answer that is 'needs' for a required accessibility question
+        # -> not accessible
+        h['special_flag'] = SUMMARY_ANSWERS['not_accessible']
+      else
+        # get average of answers that are not:
+        # - for exists questions 
+        # - do not have answers of not relevant or not answerd
+        filtered_results = results.select{|x| (exists_question_ids.nil? || exists_question_ids.index(x[0]).nil?) && [ANSWERS['no_answer'], ANSWERS['not_relevant']].index(x[1]).nil?}
+        if filtered_results.present?
+          answers = filtered_results.map{|x| x[1]}
+          avg = answers.sum / answers.size.to_f
+          h['score'] = avg
+        else
+          if results.select{|x| x[1] == ANSWERS['not_relevant']}.present?
+#            Rails.logger.debug "************ has not relevant only answers"
+            h['special_flag'] = SUMMARY_ANSWERS['not_relevant']
+          else
+#            Rails.logger.debug "************ has no answers"
+            h['special_flag'] = SUMMARY_ANSWERS['no_answer']
+          end
+        end        
+      end
+    end
+
+    return h['score'], h['special_flag']
+  end
 end

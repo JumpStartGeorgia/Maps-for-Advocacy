@@ -77,13 +77,13 @@
                 <% if questions.present? %>
                   <h2><%= t('.header_summary') %></h2>
                   <p><strong><%= t('.summary_result') %>:</strong>
-                    <%= number_with_precision(disability[:summaries]['overall']['overall']) %>
+                    <%= format_summary_result(disability[:summaries]['overall']['overall']) %>
                   </p>
                   <ul class="evaluation_summary">
                   <% questions.each do |question| %>
                     <li>
                       <strong><%= question[1] %>:</strong>
-                      <%= number_with_precision(disability[:summaries]['overall'][question[0].to_s]) %>
+                      <%= format_summary_result(disability[:summaries]['overall'][question[0].to_s]) %>
                     </li>          
                   <% end %>
                   </ul>
@@ -119,13 +119,13 @@
 
 	                <% if questions.present? && summary.present? %>
                     <p><strong><%= t('.summary_result') %>:</strong>
-                      <%= number_with_precision(summary['overall']) %>
+                      <%= format_summary_result(summary['overall']) %>
                     </p>
                     <ul class="evaluation_summary">
                     <% questions.each do |question| %>
                       <li>
                         <strong><%= question[1] %>:</strong>
-                        <%= number_with_precision(summary[question[0].to_s]) %>
+                        <%= format_summary_result(summary[question[0].to_s]) %>
                       </li>          
                     <% end %>
                     </ul>

@@ -116,6 +116,10 @@ ka:
         needs: არ აქვს და ესაჭიროება
         not_relevant: არ არის შესაბამისი
         no_answer: არ არის პასუხი
+      summary_answers:
+        not_accessible: Not Accessible
+        no_answer: No Answers
+        not_relevant: Not Relevant
       add_photos: სურათის დამატება 
       add_photos_title: "'%{place}'-ის სურათის დამატება"
       add_evaluation: შეფასების დამატება

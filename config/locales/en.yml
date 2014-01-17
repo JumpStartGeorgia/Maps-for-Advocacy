@@ -114,8 +114,12 @@ en:
         has_good: Has and adequate
         has_bad: Has, but not adequate
         needs: Not have and needs
-        not_relevant: Not relavent
+        not_relevant: Not relevant
         no_answer: No answer
+      summary_answers:
+        not_accessible: Not Accessible
+        no_answer: No Answers
+        not_relevant: Not Relevant
       add_photos: Add Photos
       add_photos_title: "Add Photos for '%{place}'"
       add_evaluation: Add an Evaluation
