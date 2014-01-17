@@ -17,6 +17,7 @@ class MethodologyController < ApplicationController
   end
   
   def venues
+    @venues = VenueCategory.with_venues()
     respond_to do |format|
       format.html # index.html.erb
     end
