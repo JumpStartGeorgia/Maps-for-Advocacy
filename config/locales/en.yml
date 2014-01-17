@@ -335,3 +335,8 @@ en:
       header_venues: Questions Specific to a Venue
     show_questions:
       assigned_to: "Assigned to the following types: "      
+    venues:
+      title: Methodology - Venues
+    calculations:
+      title: Methodology - Calculations
+      

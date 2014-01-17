@@ -57,6 +57,8 @@ BootstrapStarter::Application.routes.draw do
     # methodology
 		match '/methodology', :to => 'methodology#index', :as => :methodology, :via => :get
 		match '/methodology/questions', :to => 'methodology#questions', :as => :methodology_questions, :via => :get
+		match '/methodology/venues', :to => 'methodology#venues', :as => :methodology_venues, :via => :get
+		match '/methodology/calculations', :to => 'methodology#calculations', :as => :methodology_calculations, :via => :get
     
 
 		root :to => 'root#index'

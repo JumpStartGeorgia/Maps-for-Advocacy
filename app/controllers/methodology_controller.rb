@@ -15,5 +15,19 @@ class MethodologyController < ApplicationController
       format.html # index.html.erb
     end
   end
+  
+  def venues
+    respond_to do |format|
+      format.html # index.html.erb
+    end
+  end
+
+  
+  def calculations
+    respond_to do |format|
+      format.html # index.html.erb
+    end
+  end
+
 
 end
