@@ -47,4 +47,8 @@ class PlaceImage < ActiveRecord::Base
   def self.with_user
     includes(:user)
   end
+  
+  def self.sorted
+    order('created_at desc')
+  end
 end

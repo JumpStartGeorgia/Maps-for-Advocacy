@@ -54,12 +54,13 @@ class RootController < ApplicationController
     # add image slide if exists
     gon.map_carousel_ids = []
     gon.map_carousel_id_text = "map_carousel_"
-    if place.place_images.present?
+    place_images = PlaceImage.by_place(place.id).sorted
+    if place_images.present?
       gon.map_carousel_ids << place.id
       
       popup << "<div id='map_carousel_#{place.id}' class='carousel slide'>"
         popup << '<div class="carousel-inner">'
-          place.place_images.each_with_index do |img, index|
+          place_images.each_with_index do |img, index|
             popup << "<div class='#{'active' if index == 0} item'>"
               popup << view_context.image_tag(img.image.url(:thumb))
             popup << '</div>'

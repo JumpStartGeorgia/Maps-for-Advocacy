@@ -9,7 +9,7 @@ class PlacesController < ApplicationController
     
     if @place.present?
       # get imgaes
-      @place_images = PlaceImage.by_place(params[:id]).with_user
+      @place_images = PlaceImage.by_place(params[:id]).with_user.sorted
 
       # get evaluations
       @disabilities = Disability.sorted.is_active
