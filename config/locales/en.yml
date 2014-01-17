@@ -335,10 +335,10 @@ en:
       header_venues: Questions Specific to a Venue
     show_questions:
       assigned_to: "Assigned to the following types: "      
+      required_for_accessiblity: "If answer is 'does not have and needs' then place is not accessible"
     venues:
       title: Methodology - Venues
       no_venues: Sorry, but at this time there are no venues on file.
       explanation1: Venues are places, pathways or objects that have a geographic location and can be evalated on their accessibility.
     calculations:
       title: Methodology - Calculations
-      
