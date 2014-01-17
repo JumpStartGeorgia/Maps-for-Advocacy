@@ -34,21 +34,47 @@ class VenueCategory < ActiveRecord::Base
     find_by_sql([sql, :locale => I18n.locale, :disability_id => options[:disability_id], :district_id => options[:district_id]])
   end
   
-  
-  def self.with_venues(venue_category_id=nil)
+  # possible options:
+  # - venue_category_id: id of venue category to get info for; if not provided then get all venue categories
+  # - with_question_category_id: true if want to only get venues that have custom questions
+  def self.with_venues(options={})
+    with_question_category_id = options[:with_question_category_id].present? && options[:with_question_category_id] == true ? true : false
+    
     sql = "select vc.id, vct.name as venue_category, vc.sort_order, v.id as venue_id, vt.name as venue, v.sort_order as venue_sort_order, v.question_category_id, qct.name as question_category "
     sql << "from venue_categories as vc "
     sql << "left join venue_category_translations as vct on vct.venue_category_id = vc.id and vct.locale = :locale "
     sql << "left join venues as v on v.venue_category_id = vc.id "
     sql << "left join venue_translations as vt on vt.venue_id = v.id and vt.locale = :locale "
     sql << "left join question_category_translations as qct on qct.question_category_id = v.question_category_id and qct.locale = :locale "
-    if venue_category_id.present?
-      sql << "where vc.id = :venue_category_id "
+    if options[:venue_category_id].present? || with_question_category_id
+      sql << "where "
     end
+    if options[:venue_category_id].present?
+      sql << "vc.id = :venue_category_id "
+    end
+    if with_question_category_id
+      sql << "v.question_category_id is not null "
+    end
+    
     sql << "order by vc.sort_order, vct.name, v.sort_order, vt.name "
-    find_by_sql([sql, :locale => I18n.locale, :venue_category_id => venue_category_id])
+    find_by_sql([sql, :locale => I18n.locale, :venue_category_id => options[:venue_category_id]])
   end
   
+  
+  def self.with_venue_custom_questions(options={})
+    venues = []
+
+    ops = {:with_question_category_id => true}
+    venue_categories = with_venues(ops)
+    venue_categories.each do |vc|
+      questions = []
+      questions = QuestionCategory.custom_questions_for_venue(vc[:question_category_id], options)      
+      venue = {:venue_category => vc[:venue_category], :venue => vc[:venue], :questions => questions}
+      venues << venue
+    end
+        
+    return venues
+  end
   
   #######################################
   ## load all question categories, quetsions and pairings from the main spreadsheet

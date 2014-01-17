@@ -1,0 +1,54 @@
+<% title t('.title') %>
+
+<div id="methodology-questions">
+  <% if @common_questions.blank? %>
+    <p>
+      <%= t('.no_questions') %>
+    </p>
+  <% else %>
+    <p>
+      <%= t('.explanation1') %>
+    </p>
+    <p>
+      <%= t('.explanation2') %>
+    </p>
+    <ul class="standard">
+      <% @disabilities.each do |dis| %>
+        <li><%= dis.name %></li>
+      <% end %>
+    </ul>
+
+    <h2><%= t('.header_common') %></h2>
+    <% @common_questions.each do |cat| %>
+      <%= render :partial => 'show_questions', :locals => {:cat => cat, :is_sub_category => false} %>
+    <% end %>
+
+
+    <h2><%= t('.header_venues') %></h2>
+    <% 
+      current_venue_category = '' 
+      skip_venue_cat = false
+    %>
+    <% @venue_questions.each do |venue| %>
+      <% if venue[:venue_category] != current_venue_category %>
+        <% current_venue_category = venue[:venue_category] %>
+        <% 
+          # check if venue category has at least one venue with questions
+          x = @venue_questions.select{|x| x[:venue_category] == current_venue_category}
+          x = x.map{|x| x[:questions]}.flatten!.map{|x| x[:questions]}.flatten! if x.present?
+          skip_venue_cat = x.length == 0
+        %>
+
+        <% if !skip_venue_cat %>
+          <h3><%= current_venue_category %></h3>
+        <% end %>
+      <% end %>
+
+      <% if !skip_venue_cat %>
+        <% venue[:questions].each do |cat| %>
+          <%= render :partial => 'show_questions', :locals => {:cat => cat, :is_sub_category => false} %>
+        <% end %>
+      <% end %>
+    <% end %>
+  <% end %>
+</div>

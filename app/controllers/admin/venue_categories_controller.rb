@@ -18,7 +18,7 @@ class Admin::VenueCategoriesController < ApplicationController
   # GET /venue_categories/1
   # GET /venue_categories/1.json
   def show
-    @venue_category = VenueCategory.with_venues(params[:id])
+    @venue_category = VenueCategory.with_venues(venue_category_id: params[:id])
 
     respond_to do |format|
       format.html # show.html.erb
@@ -47,7 +47,7 @@ class Admin::VenueCategoriesController < ApplicationController
       end
     end  
 
-    @venue_category = VenueCategory.with_venues(params[:id])
+    @venue_category = VenueCategory.with_venues(venue_category_id: params[:id])
 
     respond_to do |format|
       format.html # show.html.erb

@@ -29,18 +29,23 @@ class QuestionCategory < ActiveRecord::Base
     else
       categories = categories.where('question_categories.ancestry is null') 
     end
-    categories = categories.where('question_categories.is_common = 1') if options[:common_only].present?
+    categories = categories.where('question_categories.is_common = ?', options[:common_only])
     categories = categories.where('question_categories.id = ?', options[:question_category_id]) if options[:question_category_id].present?
-    
+
     if categories.present?
     
       categories.each do |cat|
         # get the questions for this category
-        cat[:questions] = Question.in_category(cat.id, options[:disability_id])
+        new_options = {}
+        new_options[:disability_id] = options[:disability_id] if options[:disability_id].present?
+        new_options[:disability_ids] = options[:disability_ids] if options[:disability_ids].present?
+        cat[:questions] = Question.in_category(cat.id, new_options)
 
         # if this category has sub_categories, get them too
         if cat.has_children?
-          new_options = {:child_of => cat.path_ids.join('/'), :common_only => options[:common_only], :disability_id => options[:disability_id]}
+          new_options = {:child_of => cat.path_ids.join('/'), :common_only => options[:common_only]}
+          new_options[:disability_id] = options[:disability_id] if options[:disability_id].present?
+          new_options[:disability_ids] = options[:disability_ids] if options[:disability_ids].present?
 
           cat[:sub_categories] = with_questions(new_options)
         end
@@ -48,37 +53,9 @@ class QuestionCategory < ActiveRecord::Base
       end
     
     end
-  
+
     return categories
   end
-
-  def self.with_questions_old(options = {})
-    options[:common_only] = false if options[:common_only].nil?
-    
-    sql = "SELECT qc.id, qc.is_common, qc.sort_order, qct.name as question_category, qp.sort_order as question_sort_order, q.id as question_id, qt.name as question, qpt.evidence, qp.id as question_pairing_id "
-    sql << "FROM question_categories as qc "
-    sql << "LEFT OUTER JOIN question_category_translations as qct ON qct.question_category_id = qc.id and qct.locale = :locale "
-    sql << "LEFT OUTER JOIN question_pairings as qp ON qp.question_category_id = qc.id "
-    sql << "LEFT OUTER JOIN question_pairing_translations as qpt ON qpt.question_pairing_id = qp.id  and qpt.locale = :locale "
-    sql << "LEFT OUTER JOIN questions as q ON q.id = qp.question_id " 
-    sql << "LEFT OUTER JOIN question_translations as qt ON qt.question_id = q.id and qt.locale = :locale "
-    sql << "where qc.ancestry is null "
-    if options[:question_category_id].present? || options[:common_only]
-      and_required = options[:question_category_id].present? && options[:common_only]
-      if options[:question_category_id].present?
-        sql << "and qc.id = :question_category_id "
-      end
-      if and_required
-#        sql << "and "
-      end
-      if options[:common_only]
-        sql << "and qc.is_common = 1 "
-      end
-    end
-#    sql << "order by qc.is_common desc, qc.sort_order asc, qct.name asc, qp.sort_order asc, qt.name asc "
-    find_by_sql([sql, :locale => I18n.locale, :question_category_id => options[:question_category_id]])
-  end
-  
 
   # get all common questions and any special questions if a question category id is provided  
   # possible options: question_category_id, disability_id
@@ -93,13 +70,26 @@ class QuestionCategory < ActiveRecord::Base
     # get common questions
     ops = {:common_only => true}
     ops[:disability_id] = options[:disability_id] if options[:disability_id].present?
+    ops[:disability_ids] = options[:disability_ids] if options[:disability_ids].present?
     questions << with_questions(ops)
     
     questions.flatten!    
     
-    # remove any items that do not have a question
-#    questions = questions.select{|x| x[:question].present?}
+    return questions
+  end
+  
+
+  # get all questions for a venue that has custom questions
+  # possible options: question_category_id, disability_id
+  def self.custom_questions_for_venue(question_category_id, options = {})
+    questions = []
     
+    ops = {:common_only => false, :question_category_id => question_category_id}
+    ops[:disability_id] = options[:disability_id] if options[:disability_id].present?
+    ops[:disability_ids] = options[:disability_ids] if options[:disability_ids].present?
+    questions << with_questions(ops)
+    questions.flatten!
+
     return questions
   end
   

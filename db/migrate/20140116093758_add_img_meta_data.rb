@@ -6,12 +6,6 @@ class AddImgMetaData < ActiveRecord::Migration
     add_column :place_images, :taken_at, :datetime
     add_index :place_images, :taken_at
     
-    PlaceImage.transaction do 
-      PlaceImage.all.each do |img|
-        img.get_meta_data
-        img.save
-      end
-    end
   end
 
   def down

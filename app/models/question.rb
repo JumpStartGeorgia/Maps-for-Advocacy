@@ -21,12 +21,17 @@ class Question < ActiveRecord::Base
     return names
   end
   
-  def self.in_category(question_category_id, disability_id=nil)
+  def self.in_category(question_category_id, options={})
     if question_category_id.present?
 
       sql = "SELECT qp.sort_order as question_sort_order, qp.is_exists, q.id as question_id, qt.name as question, qpt.evidence, qp.id as question_pairing_id "
+      if options[:disability_ids].present? || options[:disability_id].present?
+        sql << ", dqp.disability_id "
+      end
       sql << "FROM question_pairings as qp "
-      if disability_id.present?
+      if options[:disability_ids].present?
+        sql << "inner JOIN disabilities_question_pairings as dqp ON dqp.question_pairing_id = qp.id and dqp.disability_id in (:disability_ids) "
+      elsif options[:disability_id].present?
         sql << "inner JOIN disabilities_question_pairings as dqp ON dqp.question_pairing_id = qp.id and dqp.disability_id = :disability_id "
       end
       sql << "inner JOIN question_pairing_translations as qpt ON qpt.question_pairing_id = qp.id  and qpt.locale = :locale "
@@ -34,7 +39,8 @@ class Question < ActiveRecord::Base
       sql << "inner JOIN question_translations as qt ON qt.question_id = q.id and qt.locale = :locale "
       sql << "where qp.question_category_id = :question_category_id "
       sql << "order by qp.sort_order asc, qt.name asc "
-      find_by_sql([sql, :locale => I18n.locale, :question_category_id => question_category_id, :disability_id => disability_id])
+      find_by_sql([sql, :locale => I18n.locale, :question_category_id => question_category_id, 
+          :disability_id => options[:disability_id], :disability_ids => options[:disability_ids]])
 
     end
   end

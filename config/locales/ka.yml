@@ -138,6 +138,7 @@ ka:
       add_place: ადგილის დამატება
       settings: პარამეტრები
       admin: ადმინისტრატო
+      methodology: Methodology
       sign_out: გასვლა
       js_link_title: ჯამპსტარტ ჯორჯიას - ჩვენ გაწვდით ინფორმაციას უკეთ!
       js_link_text: აგებულია
@@ -256,9 +257,9 @@ ka:
       header_user_summary: შეჯამება
       header_user_details: დეტალები
       details_link_title: იხილეთ ამ შეფასების დეტალები
-      taken_at: "Photo taken on: %{date}"
-      uploaded_at: "Uploaded on: %{date}"
-      uploaded_by: "Uploaded by: %{user}"
+      taken_at: "გადახებულია: %{date}"
+      uploaded_at: "ატვირთულია: %{date}"
+      uploaded_by: "ატვირთულია: %{user}-ს მიერ"
     form:
       header_venue: რა არის ადგილმდებარეობა?
       venue_instructions: აირჩიეთ კატეგორია, რომ იხილოთ ობიექტების ჩამონათვალი.
@@ -319,3 +320,18 @@ ka:
       next: ადგილმდებარეობის შენახვა
     location:
       success: თქვენი რუკის ავტომატური ადგილმდებარეობა შენახულია
+  methodology:
+    index:
+      title: Methodology
+      questions: Questions
+      venues: Venues
+      calculations: Calculations
+    questions:
+      title: Methodology - Questions
+      no_questions: Sorry, but at this time there are no evaluation questions on file.
+      explanation1: The evaluation questions are split into two areas. The first area are questions that are common to all venues.  The second area is for special questions that are needed for specific venues.
+      explanation2: "Each evaluation question can then be assigned to the following evaluation types:"
+      header_common: Questions Common to All Venues
+      header_venues: Questions Specific to a Venue      
+    show_questions:
+      assigned_to: "Assigned to the following types: "      

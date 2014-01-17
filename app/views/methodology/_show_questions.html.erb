@@ -1,0 +1,53 @@
+<% if cat[:questions].present? %>
+    <% if is_sub_category %>
+      <h5><%= cat.name %></h5>
+    <% else %>
+      <h4><%= cat.name %></h4>
+    <% end %>
+
+    <ul class="questions">
+      <% Rails.logger.debug "++++ total = #{cat[:questions].length-1}" %>
+      <% qidx = 0 %>
+      <% while qidx <= cat[:questions].length-1 %>
+      <% Rails.logger.debug "++++ qidx = #{qidx}, question = #{cat[:questions][qidx][:question]}" %>
+          <li>
+            <div class="row-fluid">
+              <div class="span4">
+                <%= cat[:questions][qidx][:question] %>
+              </div>
+              <div class="span8">
+                <%= t('.assigned_to') %>
+                <% 
+                  disability_ids = []
+                  idx_increment = 0
+                %>
+                <% 
+                  (0..@disabilities.length-1).each do |didx| 
+                    new_index = qidx + didx
+ Rails.logger.debug "++++ new idx = #{new_index}" 
+                    if cat[:questions].length-1 >= new_index && cat[:questions][qidx][:question] == cat[:questions][new_index][:question]
+                      disability_ids << cat[:questions][(qidx+didx)][:disability_id]
+                      idx_increment += 1
+ Rails.logger.debug "++++ idx incr = #{idx_increment}" 
+                    end
+                  end 
+                %>
+                <ul class="assigned_to">
+                <% @disabilities.select{|x| disability_ids.index(x.id).present?}.map{|x| x.name}.each do |name| %>
+                  <li><%= name %></li>
+                <% end %>
+                </ul>
+                <% qidx += idx_increment %>
+              </div>
+            </div>
+          </li>
+      <% Rails.logger.debug "++++ qidx now = #{qidx}" %>
+      <% end %>
+    </ul>
+
+    <% if cat[:sub_categories].present? %>
+      <% cat[:sub_categories].each do |sub| %>
+        <%= render :partial => 'show_questions', :locals => {:cat => sub, :is_sub_category => true} %>
+      <% end %>
+    <% end %>
+<% end %>
