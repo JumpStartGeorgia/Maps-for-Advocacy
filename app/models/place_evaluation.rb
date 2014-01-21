@@ -34,8 +34,8 @@ class PlaceEvaluation < ActiveRecord::Base
   # create a summary of the evaluation results
   # create summary for each evaluation and then an overall summary
   # return: {
-  #  'overall' => {overall, cat_id1, cat_id2, etc},
-  #  'evaluations' => [{id, overall, overall_flag, cat_id1, cat_id2, etc},etc]  
+  #  'overall' => {overall => {score, special_flag}, cat_id1 => {score, special_flag}, cat_id2, etc},
+  #  'evaluations' => [{id, overall => {score, special_flag}, cat_id1 => {score, special_flag}, cat_id2, etc},etc]  
   # }
   def self.summarize(evaluations, question_categories)
     summary = Hash.new
@@ -55,7 +55,7 @@ class PlaceEvaluation < ActiveRecord::Base
       #############################################
       # compute overall evaluation
       #############################################
-      summary['overall']['overall']['score'], summary['overall']['overall']['special_flag'] = summarize_answers(all_answers, exists_question_ids, req_accessibility_question_ids)
+      summary['overall']['overall'] = summarize_answers(all_answers, exists_question_ids, req_accessibility_question_ids)
       
       #############################################
       # process each evaluation
@@ -73,7 +73,7 @@ class PlaceEvaluation < ActiveRecord::Base
         #############################################
         # overall of all answers for this evaluation
         #############################################
-        evaluation_summary['overall']['score'], evaluation_summary['overall']['special_flag'] = summarize_answers(records, exists_question_ids, req_accessibility_question_ids)
+        evaluation_summary['overall'] = summarize_answers(records, exists_question_ids, req_accessibility_question_ids)
 
         #############################################
         # for each category, get answers            
@@ -88,8 +88,7 @@ class PlaceEvaluation < ActiveRecord::Base
             
             # add to evaluation record
             summary['overall'][category_id.to_s] = Hash.new
-            summary['overall'][category_id.to_s]['score'], summary['overall'][category_id.to_s]['special_flag'] = 
-                summarize_answers(evals, exists_question_ids, req_accessibility_question_ids)
+            summary['overall'][category_id.to_s] = summarize_answers(evals, exists_question_ids, req_accessibility_question_ids)
 
             #### for this evaluation
             # get evaluation records that match
@@ -97,8 +96,7 @@ class PlaceEvaluation < ActiveRecord::Base
             
             # add to evaluation record
             evaluation_summary[category_id.to_s] = Hash.new
-            evaluation_summary[category_id.to_s]['score'], evaluation_summary[category_id.to_s]['special_flag'] = 
-                summarize_answers(evals, exists_question_ids, req_accessibility_question_ids)
+            evaluation_summary[category_id.to_s] = summarize_answers(evals, exists_question_ids, req_accessibility_question_ids)
           end
         end      
       end
@@ -106,7 +104,7 @@ class PlaceEvaluation < ActiveRecord::Base
       
     end
   
-#    Rails.logger.debug "*************** summary = #{summary}"  
+    Rails.logger.debug "*************** summary = #{summary}"  
     return summary
   end
 
@@ -133,13 +131,19 @@ private
     return categories.flatten!
   end    
   
+  # records: array of place_evaluation_answers
+  # exists_questions_ids: array of ids to questions that have exists flag
+  # req_accessibility_question_ids: array of ids to questions that have required for accessibility flag
   # returns: [score, special_flag]
   # - score = overall average of records passed in unless a special case was found
   # - special_flag = one of SUMMARY_ANSWERS values or nil; will be nil if score has value
   def self.summarize_answers(records, exists_question_ids, req_accessibility_question_ids)
-    h = {'score' => nil, 'special_flag' => nil}
+    h = {'score' => nil, 'special_flag' => nil, 'num_answers' => nil, 'num_evaluations' => nil}
     
     if records.present?
+      h['num_evaluations'] = records.map{|x| x.place_evaluation_id}.uniq.length
+      h['num_answers'] = records.select{|x| x.answer > ANSWERS['no_answer']}.length
+
       results = records.map{|x| [x.question_pairing_id, x.answer]}
       # see if any required accessibility questions have 'needs' answer
       if req_accessibility_question_ids.present? && results.index{|x| req_accessibility_question_ids.index(x[0]).present? && x[1] == ANSWERS['needs']}.present?
@@ -168,6 +172,6 @@ private
       end
     end
 
-    return h['score'], h['special_flag']
+    return h
   end
 end

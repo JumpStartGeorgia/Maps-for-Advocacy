@@ -45,6 +45,12 @@
                                 <%= " (#{question[:evidence]}: #{q.first.evidence})" %>
                               <% end %>
                             </div>
+                            
+                            <% if question[:required_for_accessibility] == 1 && answer == PlaceEvaluation::ANSWERS['needs'] %>
+                              <div class="cause_not_accessible">
+                                <%= t('app.msgs.cause_not_accessible') %>
+                              </div>
+                            <% end %>
                           <% end %>
                         </li>
                       <% end %>

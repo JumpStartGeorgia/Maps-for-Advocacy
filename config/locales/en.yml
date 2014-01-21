@@ -137,6 +137,7 @@ en:
       added_new_question: The new Question has been added to this Question Category.
       added_new_venue: The new Venue has been added to this Venue Category.
       missing_required: Please supply all required information.
+      cause_not_accessible: "This answer makes the overall evaluation result be 'Not Accessible'"
   layouts:
     application:
       add_place: Add a Place
