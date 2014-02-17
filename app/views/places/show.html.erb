@@ -28,8 +28,27 @@
           :class => 'add_photos', :title => t('app.common.add_photos_title', :place => @place[:name]) %>
       </div>
     </div>
-
+    <% if @overall_summary.present? && @overall_summary.has_key?('overall') && @overall_summary['overall'].present? && @overall_summary_questions.present?%>
+      <div>
+        <p><strong><%= t('.summary_result') %>:</strong>
+          <%= format_summary_result(@overall_summary['overall']['overall'], is_summary: true) %>
+        </p>
+        <ul class="evaluation_summary">
+        <% questions = @overall_summary_questions.map{|x| [x[:id], x.name]}.uniq %>
+        <% questions.each do |question| %>
+          <li>
+            <strong><%= question[1] %>:</strong><br />
+            <%= format_summary_result(@overall_summary['overall'][question[0].to_s], is_summary: true) %>
+          </li>          
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    
+    
     <% if @disability_evaluations.present? %>
+      <hr />
+    
       <ul id="evaluation-disability-tabs" class="nav nav-tabs" data-tabs="evaluation-disability-tabs">
         <% 
           made_active = false 

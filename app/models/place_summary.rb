@@ -25,39 +25,52 @@ class PlaceSummary < ActiveRecord::Base
   #  'overall' => {overall => {score, special_flag, num_evaluations, num_answers}, cat_id1 => {score, special_flag, num_evaluations, num_answers}, cat_id2, etc},
   #  'evaluations' => [{id, overall => {score, special_flag, num_evaluations, num_answers}, cat_id1 => {score, special_flag, num_evaluations, num_answers}, cat_id2, etc},etc]  
   # }
-  def self.for_place_disablity(place_id, disability_id)
+  def self.for_place_disablity(place_id, disability_id=nil)
     summary = Hash.new
     summary['overall'] = nil
     summary['evaluations'] = []
     
-    if place_id.present? && disability_id.present?
-      summaries = where(:place_id => place_id, :disability_id => disability_id)
-                  .order('summary_type, data_type')
-
+    if place_id.present?
+      summaries = nil
+      if disability_id.present?
+        summaries = where(:place_id => place_id, :disability_id => disability_id)
+                    .order('summary_type, data_type')
+      else
+        # no disability id so get overall result
+        summaries = where(:place_id => place_id, :summary_type => SUMMARY_TYPES['overall'])
+                    .order('summary_type, data_type')
+      end
 
       if summaries.present?
         summary['overall'] = Hash.new
         
-        ################
-        # add the overall summaries
-        ################
-        summary['overall'] = format_summary_hash(summaries.select{|x| x.summary_type == SUMMARY_TYPES['disability']})
+        if disability_id.present?
+          ################
+          # add the overall summaries
+          ################
+          summary['overall'] = format_summary_hash(summaries.select{|x| x.summary_type == SUMMARY_TYPES['disability']})
       
-        ################
-        # add the instance summaries
-        ################
-        instances = summaries.select{|x| x.summary_type == SUMMARY_TYPES['instance']}
-        if instances.present?
-          instance_ids = instances.map{|x| x.summary_type_identifier}.uniq
-          if instance_ids.present?
-            instance_ids.each do |instance_id|          
-              h = format_summary_hash(instances.select{|x| x.summary_type_identifier == instance_id})
-              if h.length > 0
-                h['id'] = instance_id
-                summary['evaluations'] << h               
-              end          
+          ################
+          # add the instance summaries
+          ################
+          instances = summaries.select{|x| x.summary_type == SUMMARY_TYPES['instance']}
+          if instances.present?
+            instance_ids = instances.map{|x| x.summary_type_identifier}.uniq
+            if instance_ids.present?
+              instance_ids.each do |instance_id|          
+                h = format_summary_hash(instances.select{|x| x.summary_type_identifier == instance_id})
+                if h.length > 0
+                  h['id'] = instance_id
+                  summary['evaluations'] << h               
+                end          
+              end
             end
           end
+        else
+          ################
+          # add the overall summaries
+          ################
+          summary['overall'] = format_summary_hash(summaries)
         end
       end
     end
