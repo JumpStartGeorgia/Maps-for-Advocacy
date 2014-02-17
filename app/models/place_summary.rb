@@ -97,18 +97,27 @@ class PlaceSummary < ActiveRecord::Base
               
         if evaluations.present? && questions.present?
           Rails.logger.debug "************* total evaluations found: #{evaluations.length}; total questions found = #{questions.length}"
-          
+
           exists_question_ids = questions.select{|x| x.is_exists == true}.map{|x| x.id}
           req_accessibility_question_ids = questions.select{|x| x.required_for_accessibility == true}.map{|x| x.id}
           category_ids = questions.map{|x| x[:root_question_category_id]}.uniq
 
+          # get all existing summaries on record
+          existing_summaries = PlaceSummary.where(:place_id => place_id)
+          
           ##############################
-          # compute overall summary
+          # compute and save overall summary
           ##############################
           Rails.logger.debug "************* computing overall summary"
-          summaries['summary']['overall'] = summarize_answers(evaluations, exists_question_ids, req_accessibility_question_ids)
-          summaries['summary']['categories'] = summarize_category_answers(evaluations, questions, category_ids, exists_question_ids, req_accessibility_question_ids)
-          Rails.logger.debug "/////////////////// summaries['summary']: #{summaries['summary']}"
+          save_summary(place_id, 
+                        existing_summaries, 
+                        summarize_answers(evaluations, exists_question_ids, req_accessibility_question_ids), 
+                        SAVE_TYPES['summary_overall'], SUMMARY_TYPES['overall'], DATA_TYPES['overall'])
+          save_category_summary(place_id, 
+                                existing_summaries, 
+                                summarize_category_answers(evaluations, questions, category_ids, exists_question_ids, req_accessibility_question_ids), 
+                                category_ids, 
+                                SAVE_TYPES['summary_category'], SUMMARY_TYPES['overall'], DATA_TYPES['category'])
 
           ##############################
           # compute summary for disability this eval belongs to
@@ -144,22 +153,41 @@ class PlaceSummary < ActiveRecord::Base
               # compute summary for disability 
               ##############################
               Rails.logger.debug "************* computing disability summary"
-              summaries['disability']['overall'] = summarize_answers(filtered_evaluations, filtered_exists_question_ids, filtered_req_accessibility_question_ids)
-              summaries['disability']['categories'] = summarize_category_answers(filtered_evaluations, filtered_questions, filtered_category_ids, filtered_exists_question_ids, filtered_req_accessibility_question_ids)
-              Rails.logger.debug "/////////////////// summaries['disability']: #{summaries['disability']}"
-              
+              save_summary(place_id, 
+                            existing_summaries, 
+                            summarize_answers(filtered_evaluations, filtered_exists_question_ids, filtered_req_accessibility_question_ids), 
+                            SAVE_TYPES['disability_overall'], SUMMARY_TYPES['disability'], DATA_TYPES['overall'], 
+                            {'disability_id' => disability_id, 'summary_type_identifier' => disability_id})
+
+              save_category_summary(place_id, 
+                                    existing_summaries, 
+                                    summarize_category_answers(filtered_evaluations, filtered_questions, filtered_category_ids, filtered_exists_question_ids, filtered_req_accessibility_question_ids), 
+                                    category_ids, 
+                                    SAVE_TYPES['disability_category'], SUMMARY_TYPES['disability'], DATA_TYPES['category'], 
+                                    {'disability_id' => disability_id, 'summary_type_identifier' => disability_id})
+
 
               ##############################
               # compute summary for this evaluation
               ##############################
               Rails.logger.debug "************* computing instance summary"
-              summaries['instance']['overall'] = summarize_answers(record_evaluations, filtered_exists_question_ids, filtered_req_accessibility_question_ids)
-              summaries['instance']['categories'] = summarize_category_answers(record_evaluations, filtered_questions, filtered_category_ids, filtered_exists_question_ids, filtered_req_accessibility_question_ids)
-              Rails.logger.debug "/////////////////// summaries['instance']: #{summaries['instance']}"
+              save_summary(place_id, 
+                            existing_summaries, 
+                            summarize_answers(record_evaluations, filtered_exists_question_ids, filtered_req_accessibility_question_ids), 
+                            SAVE_TYPES['instance_overall'], SUMMARY_TYPES['instance'], DATA_TYPES['overall'], 
+                            {'disability_id' => disability_id, 'summary_type_identifier' => place_evaluation_id})
+              # - category
+              save_category_summary(place_id, 
+                                    existing_summaries, 
+                                    summarize_category_answers(record_evaluations, filtered_questions, filtered_category_ids, filtered_exists_question_ids, filtered_req_accessibility_question_ids), 
+                                    category_ids, 
+                                    SAVE_TYPES['instance_category'], SUMMARY_TYPES['instance'], DATA_TYPES['category'], 
+                                    {'disability_id' => disability_id, 'summary_type_identifier' => place_evaluation_id})
 
             end
           end
         end
+=begin
         
         ##############################
         ##############################
@@ -189,7 +217,7 @@ class PlaceSummary < ActiveRecord::Base
         # - category
         save_category_summary(place_id, existing_summaries, summaries, category_ids, SAVE_TYPES['instance_category'], SUMMARY_TYPES['instance'], DATA_TYPES['category'], 
             {'disability_id' => disability_id, 'summary_type_identifier' => place_evaluation_id})
-
+=end
       end    
     end
   end
@@ -330,14 +358,14 @@ private
       case type
         when 0 # summary overall
           index = existing_summaries.index{|x| x.summary_type == summary_type && x.data_type == data_type}
-          answers = summaries['summary']['overall'] if summaries.has_key?('summary') && summaries['summary'].has_key?('overall')
+          answers = summaries
 
         when 1 # summary category
           if options['data_type_identifier'].present?
             index = existing_summaries.index{|x| x.summary_type == summary_type && 
                                                       x.data_type == data_type && 
                                                       x.data_type_identifier == options['data_type_identifier']}
-            answers = summaries['summary']['categories'][options['data_type_identifier'].to_s] if summaries.has_key?('summary') && summaries['summary'].has_key?('categories') && summaries['summary']['categories'].has_key?(options['data_type_identifier'].to_s)
+            answers = summaries[options['data_type_identifier'].to_s] if summaries.has_key?(options['data_type_identifier'].to_s)
           end
 
         when 2 # disability overall
@@ -345,7 +373,7 @@ private
             index = existing_summaries.index{|x| x.summary_type == summary_type && 
                                                       x.summary_type_identifier == options['disability_id'] && 
                                                       x.data_type == data_type}
-            answers = summaries['disability']['overall'] if summaries.has_key?('disability') && summaries['disability'].has_key?('overall')
+            answers = summaries
           end
 
         when 3 # disability category
@@ -354,7 +382,7 @@ private
                                                       x.summary_type_identifier == options['disability_id'] && 
                                                       x.data_type == data_type && 
                                                       x.data_type_identifier == options['data_type_identifier']}
-            answers = summaries['disability']['categories'][options['data_type_identifier'].to_s] if summaries.has_key?('disability') && summaries['disability'].has_key?('categories') && summaries['disability']['categories'].has_key?(options['data_type_identifier'].to_s)
+            answers = summaries[options['data_type_identifier'].to_s] if summaries.has_key?(options['data_type_identifier'].to_s)
           end
 
         when 4 # instance overall
@@ -362,7 +390,7 @@ private
             index = existing_summaries.index{|x| x.summary_type == summary_type && 
                                                       x.summary_type_identifier == options['disability_id'] && 
                                                       x.data_type == data_type}
-            answers = summaries['instance']['overall'] if summaries.has_key?('instance') && summaries['instance'].has_key?('overall')
+            answers = summaries
           end
 
         when 5 # instance category
@@ -371,7 +399,7 @@ private
                                                       x.summary_type_identifier == options['disability_id'] && 
                                                       x.data_type == data_type && 
                                                       x.data_type_identifier == options['data_type_identifier']}
-            answers = summaries['instance']['categories'][options['data_type_identifier'].to_s] if summaries.has_key?('instance') && summaries['instance'].has_key?('categories') && summaries['instance']['categories'].has_key?(options['data_type_identifier'].to_s)
+            answers = summaries[options['data_type_identifier'].to_s] if summaries.has_key?(options['data_type_identifier'].to_s)
           end        
       end
 
