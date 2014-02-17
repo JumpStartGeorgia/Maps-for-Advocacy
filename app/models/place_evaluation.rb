@@ -8,9 +8,15 @@ class PlaceEvaluation < ActiveRecord::Base
   attr_accessible :place_id, :user_id, :place_evaluation_answers_attributes, :created_at, :disability_id
   validates :user_id, :disability_id, :presence => true
 
-  
+  after_create :update_summaries
+
   ANSWERS = {'no_answer' => 0, 'not_relevant' => 1, 'needs' => 2, 'has_bad' => 3, 'has_good' => 4, 'has' => 5}
   SUMMARY_ANSWERS = {'not_accessible' => 0, 'no_answer' => 1, 'not_relevant' => 2}
+
+  # update the summary for this place
+  def update_summaries
+    PlaceSummary.update_summaries(self.place_id, self.id)
+  end
   
   def self.answer_key_name(value)
     ANSWERS.keys[ANSWERS.values.index(value)]
@@ -30,12 +36,19 @@ class PlaceEvaluation < ActiveRecord::Base
     order('place_evaluations.created_at desc, place_evaluations.user_id asc')
   end
   
+  # get all of the answers for a place
+  # so that a summary can be computed
+  def self.with_answers_for_summary(place_id)
+    select('place_evaluations.id, place_evaluations.disability_id, place_evaluation_answers.question_pairing_id, place_evaluation_answers.answer')
+    .joins(:place_evaluation_answers)
+    .where(:place_id => place_id)  
+  end
 
   # create a summary of the evaluation results
   # create summary for each evaluation and then an overall summary
   # return: {
-  #  'overall' => {overall => {score, special_flag}, cat_id1 => {score, special_flag}, cat_id2, etc},
-  #  'evaluations' => [{id, overall => {score, special_flag}, cat_id1 => {score, special_flag}, cat_id2, etc},etc]  
+  #  'overall' => {overall => {score, special_flag, :num_evaluations, :num_answers}, cat_id1 => {score, special_flag, :num_evaluations, :num_answers}, cat_id2, etc},
+  #  'evaluations' => [{id, overall => {score, special_flag, :num_evaluations, :num_answers}, cat_id1 => {score, special_flag, :num_evaluations, :num_answers}, cat_id2, etc},etc]  
   # }
   def self.summarize(evaluations, question_categories)
     summary = Hash.new

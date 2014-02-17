@@ -111,7 +111,7 @@ ActiveRecord::Schema.define(:version => 20140121131824) do
     t.integer  "summary_type_identifier"
     t.integer  "data_type"
     t.integer  "data_type_identifier"
-    t.integer  "score"
+    t.decimal  "score",                   :precision => 10, :scale => 6
     t.integer  "special_flag"
     t.integer  "num_answers"
     t.integer  "num_evaluations"
