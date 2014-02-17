@@ -3,13 +3,67 @@ class PlaceSummary < ActiveRecord::Base
   belongs_to :place
   
   attr_accessible :place_id, :summary_type, :summary_type_identifier, 
-                  :data_type, :data_type_identifier, 
+                  :data_type, :data_type_identifier, :disability_id,
                   :score, :special_flag, :num_answers, :num_evaluations
   validates :place_id, :summary_type, :data_type, :presence => true
   
   SUMMARY_TYPES = {'overall' => 0, 'disability' => 1, 'instance' => 2}
   DATA_TYPES = {'overall' => 0, 'category' => 1}
   SAVE_TYPES = {'summary_overall' => 0, 'summary_category' => 1, 'disability_overall' => 2, 'disability_category' => 3, 'instance_overall' => 4, 'instance_category' => 5}
+
+  def to_summary_hash
+    {
+      'score' => self.score,
+      'special_flag' => self.special_flag,
+      'num_answers' => self.num_answers,
+      'num_evaluations' => self.num_evaluations    
+    }
+  end
+
+  # get summary data for a place/disability
+  # return: {
+  #  'overall' => {overall => {score, special_flag, num_evaluations, num_answers}, cat_id1 => {score, special_flag, num_evaluations, num_answers}, cat_id2, etc},
+  #  'evaluations' => [{id, overall => {score, special_flag, num_evaluations, num_answers}, cat_id1 => {score, special_flag, num_evaluations, num_answers}, cat_id2, etc},etc]  
+  # }
+  def self.for_place_disablity(place_id, disability_id)
+    summary = Hash.new
+    summary['overall'] = nil
+    summary['evaluations'] = []
+    
+    if place_id.present? && disability_id.present?
+      summaries = where(:place_id => place_id, :disability_id => disability_id)
+                  .order('summary_type, data_type')
+
+
+      if summaries.present?
+        summary['overall'] = Hash.new
+        
+        ################
+        # add the overall summaries
+        ################
+        summary['overall'] = format_summary_hash(summaries.select{|x| x.summary_type == SUMMARY_TYPES['disability']})
+      
+        ################
+        # add the instance summaries
+        ################
+        instances = summaries.select{|x| x.summary_type == SUMMARY_TYPES['instance']}
+        if instances.present?
+          instance_ids = instances.map{|x| x.summary_type_identifier}.uniq
+          if instance_ids.present?
+            instance_ids.each do |instance_id|          
+              h = format_summary_hash(instances.select{|x| x.summary_type_identifier == instance_id})
+              if h.length > 0
+                h['id'] = instance_id
+                summary['evaluations'] << h               
+              end          
+            end
+          end
+        end
+      end
+    end
+
+    return summary
+  end
 
   # for the given place id, update the summary data
   def self.update_summaries(place_id, place_evaluation_id)
@@ -100,6 +154,7 @@ class PlaceSummary < ActiveRecord::Base
         ##############################
         ##############################
         existing_summaries = PlaceSummary.where(:place_id => place_id)
+
         # summary
         # - overall
         save_summary(place_id, existing_summaries, summaries, SAVE_TYPES['summary_overall'], SUMMARY_TYPES['overall'], DATA_TYPES['overall'])
@@ -122,81 +177,40 @@ class PlaceSummary < ActiveRecord::Base
         save_category_summary(place_id, existing_summaries, summaries, category_ids, SAVE_TYPES['instance_category'], SUMMARY_TYPES['instance'], DATA_TYPES['category'], 
             {'disability_id' => disability_id, 'summary_type_identifier' => place_evaluation_id})
 
-=begin
-        if summaries['summary']['overall'].present?
-          index = existing_summaries.index{|x| x.summary_type == SUMMARY_TYPES['overall'] && x.data_type == DATA_TYPES['overall']}
-          x = nil
-          if index.blank? 
-            # create new record
-            # record does not exist, so create it
-            x = PlaceSummary.new
-            x.place_id = place_id
-            x.summary_type = SUMMARY_TYPES['overall'] 
-            x.data_type = DATA_TYPES['overall']
-          else
-            x = existing_summaries[index]
-          end
-          summaries['summary']['overall'].keys.each do |key|
-            x[key] = summaries['summary']['overall'][key]
-          end
-          x.save
-        end
-        
-        # disability
-        # - overall
-        if summaries['disability']['overall'].present? && disability_id.present?
-          index = existing_summaries.index{|x| x.summary_type == SUMMARY_TYPES['disability'] && 
-                                                      x.summary_type_identifier == disability_id && 
-                                                      x.data_type == DATA_TYPES['overall']}
-          x = nil
-          if index.blank? 
-            # create new record
-            # record does not exist, so create it
-            x = PlaceSummary.new
-            x.place_id = place_id
-            x.summary_type = SUMMARY_TYPES['disability'] 
-            x.summary_type_identifier = disability_id
-            x.data_type = DATA_TYPES['overall']
-          else
-            x = existing_summaries[index]
-          end
-          summaries['disability']['overall'].keys.each do |key|
-            x[key] = summaries['disability']['overall'][key]
-          end
-          x.save
-        end
-
-
-        # instance
-        # - overall
-        if summaries['instance']['overall'].present? && place_evaluation_id.present?
-          index = existing_summaries.index{|x| x.summary_type == SUMMARY_TYPES['instance'] && 
-                                                      x.summary_type_identifier == disability_id && 
-                                                      x.data_type == DATA_TYPES['overall']}
-          x = nil
-          if index.blank? 
-            # create new record
-            # record does not exist, so create it
-            x = PlaceSummary.new
-            x.place_id = place_id
-            x.summary_type = SUMMARY_TYPES['instance'] 
-            x.summary_type_identifier = place_evaluation_id
-            x.data_type = DATA_TYPES['overall']
-          else
-            x = existing_summaries[index]
-          end
-          summaries['instance']['overall'].keys.each do |key|
-            x[key] = summaries['instance']['overall'][key]
-          end
-          x.save
-        end
-=end        
       end    
     end
   end
 
 
 private
+
+  # format summary records into a hash format
+  # return: {
+  #  'overall' => {overall => {score, special_flag, num_evaluations, num_answers}, cat_id1 => {score, special_flag, num_evaluations, num_answers}, cat_id2, etc},
+  #  'evaluations' => [{id, overall => {score, special_flag, num_evaluations, num_answers}, cat_id1 => {score, special_flag, num_evaluations, num_answers}, cat_id2, etc},etc]  
+  # }
+  def self.format_summary_hash(summaries)
+    h = Hash.new
+    
+    if summaries.present?
+      # get the overall summary 
+      overall = summaries.select{|x| x.data_type == DATA_TYPES['overall']}
+      h['overall'] = overall.present? ? overall.first.to_summary_hash : nil
+      
+      # get the category summaries
+      categories = summaries.select{|x| x.data_type == DATA_TYPES['category']}
+      if categories.present?
+        categories.each do |category|
+          h[category.data_type_identifier.to_s] = category.to_summary_hash
+        end
+      end
+    end
+    
+    return h
+  end
+
+
+
 
   # records: array of place_evaluation_answers
   # exists_questions_ids: array of ids to questions that have exists flag
@@ -361,6 +375,7 @@ private
           x.summary_type_identifier = options['summary_type_identifier']
           x.data_type = data_type
           x.data_type_identifier = options['data_type_identifier']
+          x.disability_id = options['disability_id']
         else
           x = existing_summaries[index]
         end

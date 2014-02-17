@@ -34,7 +34,7 @@ class PlacesController < ApplicationController
             x[:evaluation_count] = x[:evaluations].length
    
             # create summaries of evaluations
-            x[:summaries] = PlaceEvaluation.summarize(x[:evaluations], x[:question_categories])
+            x[:summaries] = PlaceSummary.for_place_disablity(params[:id], disability.id)
             
             # get user info that submitted evaluations
             x[:users] = User.for_evaluations(x[:evaluations].map{|x| x.user_id}.uniq)

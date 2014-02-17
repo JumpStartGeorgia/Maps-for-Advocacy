@@ -111,6 +111,7 @@ ActiveRecord::Schema.define(:version => 20140121131824) do
     t.integer  "summary_type_identifier"
     t.integer  "data_type"
     t.integer  "data_type_identifier"
+    t.integer  "disability_id"
     t.decimal  "score",                   :precision => 10, :scale => 6
     t.integer  "special_flag"
     t.integer  "num_answers"
@@ -120,6 +121,7 @@ ActiveRecord::Schema.define(:version => 20140121131824) do
   end
 
   add_index "place_summaries", ["data_type", "data_type_identifier"], :name => "idx_place_summary_data_type"
+  add_index "place_summaries", ["disability_id"], :name => "index_place_summaries_on_disability_id"
   add_index "place_summaries", ["place_id"], :name => "index_place_summaries_on_place_id"
   add_index "place_summaries", ["summary_type", "summary_type_identifier"], :name => "idx_place_summary_summary_type"
 
