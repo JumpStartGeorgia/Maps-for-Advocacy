@@ -91,7 +91,7 @@
 
               </p>
             <% else %>
-	            <% if disability[:question_categories].present? && disability[:summaries].present? %>
+	            <% if disability[:question_categories].present? && disability[:summaries].present? && disability[:summaries].has_key?('overall') && disability[:summaries]['overall'].present?%>
                 <% questions = disability[:question_categories].map{|x| [x[:id], x.name]}.uniq %>
                 <% if questions.present? %>
                   <h2><%= t('.header_summary') %></h2>

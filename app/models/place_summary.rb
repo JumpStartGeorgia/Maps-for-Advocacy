@@ -79,12 +79,11 @@ class PlaceSummary < ActiveRecord::Base
   end
 
   # for the given place id, update the summary data
-  def self.update_summaries(place_id, place_evaluation_id)
-    if place_id.present? && place_evaluation_id.present?
-      summaries = {'summary' => {'overall' => nil, 'categories' => nil}, 
-                  'disability' => {'overall' => nil, 'categories' => nil}, 
-                  'instance' => {'overall' => nil, 'categories' => nil}}
-      
+  # place_id: id of place to summarize evaluations for
+  # place_evaluation_id: id of evaluation to focus summary's on
+  # - if place_evaluation_id not provided, then compute instance summary for every evaluation
+  def self.update_summaries(place_id, place_evaluation_id=nil)
+    if place_id.present?
       PlaceSummary.transaction do
 
         # get all evaluations for this place
@@ -120,104 +119,95 @@ class PlaceSummary < ActiveRecord::Base
                                 SAVE_TYPES['summary_category'], SUMMARY_TYPES['overall'], DATA_TYPES['category'])
 
           ##############################
-          # compute summary for disability this eval belongs to
-          # - pull out answers that are tied to for this evaluation
+          # if place_eval_id provided, get disability for that id
+          # else get all disability ids in the evaluations
           ##############################
-          record_evaluations = evaluations.select{|x| x.id == place_evaluation_id}
-          Rails.logger.debug "************* record evaluations found: #{record_evaluations.length}"
-          if record_evaluations.present?
-            # - get the disability type for this evaluation
-            disability_id = record_evaluations.first.disability_id
-            Rails.logger.debug "************* disability id = #{disability_id}"
+          disability_ids = nil
+          if place_evaluation_id.present?
+            disability_ids = evaluations.select{|x| x.id == place_evaluation_id}.map{|x| x.disability_id}.uniq
+          else
+            disability_ids = evaluations.map{|x| x.disability_id}.uniq
+          end
 
-            # disability ids in the questions are surrounded by a separator so that we can test for exact match
-            # - i.e., do not want a test of 1 to return true for 12
-            # - so instead looking for +1+ and this will return false for +12+
-            question_disability_filter = QuestionPairing::DISABILITY_ID_SEPARATOR.clone
-            question_disability_filter << disability_id.to_s
-            question_disability_filter << QuestionPairing::DISABILITY_ID_SEPARATOR
-            # - pull out questions that are for this disability
-            Rails.logger.debug "************* question_disability_filter: #{question_disability_filter}"
-            filtered_questions = questions.select{|x| x[:disability_ids].index(question_disability_filter).present?}
-            # - pull out evaluations that are for this disability
-            filtered_evaluations = evaluations.select{|x| x.disability_id == disability_id}
+          if disability_ids.present?
+            disability_ids.each do |disability_id|
+              Rails.logger.debug "************* disability id = #{disability_id}"
+          
+              # disability ids in the questions are surrounded by a separator so that we can test for exact match
+              # - i.e., do not want a test of 1 to return true for 12
+              # - so instead looking for +1+ and this will return false for +12+
+              question_disability_filter = QuestionPairing::DISABILITY_ID_SEPARATOR.clone
+              question_disability_filter << disability_id.to_s
+              question_disability_filter << QuestionPairing::DISABILITY_ID_SEPARATOR
+              # - pull out questions that are for this disability
+              Rails.logger.debug "************* question_disability_filter: #{question_disability_filter}"
+              filtered_questions = questions.select{|x| x[:disability_ids].index(question_disability_filter).present?}
+              # - pull out evaluations that are for this disability
+              filtered_evaluations = evaluations.select{|x| x.disability_id == disability_id}
 
-            Rails.logger.debug "************* filtered evals found: #{filtered_evaluations.length}; filtered question found: #{filtered_questions.length}"
-            if filtered_evaluations.present? && filtered_questions.present?
+              Rails.logger.debug "************* filtered evals found: #{filtered_evaluations.length}; filtered question found: #{filtered_questions.length}"
+              if filtered_evaluations.present? && filtered_questions.present?
 
-              filtered_exists_question_ids = filtered_questions.select{|x| x.is_exists == true}.map{|x| x.id}
-              filtered_req_accessibility_question_ids = filtered_questions.select{|x| x.required_for_accessibility == true}.map{|x| x.id}
-              filtered_category_ids = filtered_questions.map{|x| x[:root_question_category_id]}.uniq
+                filtered_exists_question_ids = filtered_questions.select{|x| x.is_exists == true}.map{|x| x.id}
+                filtered_req_accessibility_question_ids = filtered_questions.select{|x| x.required_for_accessibility == true}.map{|x| x.id}
+                filtered_category_ids = filtered_questions.map{|x| x[:root_question_category_id]}.uniq
 
-              ##############################
-              # compute summary for disability 
-              ##############################
-              Rails.logger.debug "************* computing disability summary"
-              save_summary(place_id, 
-                            existing_summaries, 
-                            summarize_answers(filtered_evaluations, filtered_exists_question_ids, filtered_req_accessibility_question_ids), 
-                            SAVE_TYPES['disability_overall'], SUMMARY_TYPES['disability'], DATA_TYPES['overall'], 
-                            {'disability_id' => disability_id, 'summary_type_identifier' => disability_id})
+                ##############################
+                # compute summary for disability 
+                ##############################
+                Rails.logger.debug "************* computing disability summary"
+                # - overall
+                save_summary(place_id, 
+                              existing_summaries, 
+                              summarize_answers(filtered_evaluations, filtered_exists_question_ids, filtered_req_accessibility_question_ids), 
+                              SAVE_TYPES['disability_overall'], SUMMARY_TYPES['disability'], DATA_TYPES['overall'], 
+                              {'disability_id' => disability_id, 'summary_type_identifier' => disability_id})
 
-              save_category_summary(place_id, 
+                # - category
+                save_category_summary(place_id, 
+                                      existing_summaries, 
+                                      summarize_category_answers(filtered_evaluations, filtered_questions, filtered_category_ids, filtered_exists_question_ids, filtered_req_accessibility_question_ids), 
+                                      category_ids, 
+                                      SAVE_TYPES['disability_category'], SUMMARY_TYPES['disability'], DATA_TYPES['category'], 
+                                      {'disability_id' => disability_id, 'summary_type_identifier' => disability_id})
+
+
+                ##############################
+                # if place_eval_id provided, compute summary for just that evalaution
+                # else computer summary for every evaluation in this disability
+                ##############################
+                place_evaluation_ids = nil
+                if place_evaluation_id.present?
+                  place_evaluation_ids = [place_evaluation_id]
+                else
+                  place_evaluation_ids = filtered_evaluations.map{|x| x.id}.uniq
+                end
+
+                if place_evaluation_ids.present?
+                  place_evaluation_ids.each do |place_eval_id|
+                    Rails.logger.debug "************* computing instance summary for place eval #{place_eval_id}"
+                    record_evaluations = filtered_evaluations.select{|x| x.id == place_eval_id}
+                    if record_evaluations.present?
+                      # - overall
+                      save_summary(place_id, 
                                     existing_summaries, 
-                                    summarize_category_answers(filtered_evaluations, filtered_questions, filtered_category_ids, filtered_exists_question_ids, filtered_req_accessibility_question_ids), 
-                                    category_ids, 
-                                    SAVE_TYPES['disability_category'], SUMMARY_TYPES['disability'], DATA_TYPES['category'], 
-                                    {'disability_id' => disability_id, 'summary_type_identifier' => disability_id})
-
-
-              ##############################
-              # compute summary for this evaluation
-              ##############################
-              Rails.logger.debug "************* computing instance summary"
-              save_summary(place_id, 
-                            existing_summaries, 
-                            summarize_answers(record_evaluations, filtered_exists_question_ids, filtered_req_accessibility_question_ids), 
-                            SAVE_TYPES['instance_overall'], SUMMARY_TYPES['instance'], DATA_TYPES['overall'], 
-                            {'disability_id' => disability_id, 'summary_type_identifier' => place_evaluation_id})
-              # - category
-              save_category_summary(place_id, 
-                                    existing_summaries, 
-                                    summarize_category_answers(record_evaluations, filtered_questions, filtered_category_ids, filtered_exists_question_ids, filtered_req_accessibility_question_ids), 
-                                    category_ids, 
-                                    SAVE_TYPES['instance_category'], SUMMARY_TYPES['instance'], DATA_TYPES['category'], 
-                                    {'disability_id' => disability_id, 'summary_type_identifier' => place_evaluation_id})
-
+                                    summarize_answers(record_evaluations, filtered_exists_question_ids, filtered_req_accessibility_question_ids), 
+                                    SAVE_TYPES['instance_overall'], SUMMARY_TYPES['instance'], DATA_TYPES['overall'], 
+                                    {'disability_id' => disability_id, 'summary_type_identifier' => place_eval_id})
+                      # - category
+                      save_category_summary(place_id, 
+                                            existing_summaries, 
+                                            summarize_category_answers(record_evaluations, filtered_questions, filtered_category_ids, filtered_exists_question_ids, filtered_req_accessibility_question_ids), 
+                                            category_ids, 
+                                            SAVE_TYPES['instance_category'], SUMMARY_TYPES['instance'], DATA_TYPES['category'], 
+                                            {'disability_id' => disability_id, 'summary_type_identifier' => place_eval_id})
+                    end
+                  end
+                end
+              end          
             end
           end
         end
-=begin
-        
-        ##############################
-        ##############################
-        # save the summaries
-        ##############################
-        ##############################
-        existing_summaries = PlaceSummary.where(:place_id => place_id)
-
-        # summary
-        # - overall
-        save_summary(place_id, existing_summaries, summaries, SAVE_TYPES['summary_overall'], SUMMARY_TYPES['overall'], DATA_TYPES['overall'])
-        # - category
-        save_category_summary(place_id, existing_summaries, summaries, category_ids, SAVE_TYPES['summary_category'], SUMMARY_TYPES['overall'], DATA_TYPES['category'])
-
-        # disability
-        # - overall
-        save_summary(place_id, existing_summaries, summaries, SAVE_TYPES['disability_overall'], SUMMARY_TYPES['disability'], DATA_TYPES['overall'], 
-              {'disability_id' => disability_id, 'summary_type_identifier' => disability_id})
-        # - category
-        save_category_summary(place_id, existing_summaries, summaries, category_ids, SAVE_TYPES['disability_category'], SUMMARY_TYPES['disability'], DATA_TYPES['category'], 
-              {'disability_id' => disability_id, 'summary_type_identifier' => disability_id})
-
-        # instance
-        # - overall
-        save_summary(place_id, existing_summaries, summaries, SAVE_TYPES['instance_overall'], SUMMARY_TYPES['instance'], DATA_TYPES['overall'], 
-            {'disability_id' => disability_id, 'summary_type_identifier' => place_evaluation_id})
-        # - category
-        save_category_summary(place_id, existing_summaries, summaries, category_ids, SAVE_TYPES['instance_category'], SUMMARY_TYPES['instance'], DATA_TYPES['category'], 
-            {'disability_id' => disability_id, 'summary_type_identifier' => place_evaluation_id})
-=end
       end    
     end
   end
