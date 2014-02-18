@@ -116,6 +116,10 @@ ka:
         needs: არ აქვს და ესაჭიროება
         not_relevant: არ არის შესაბამისი
         no_answer: არ არის პასუხი
+      summary_answers:
+        not_accessible: არ არის ხელმისაწვდომი
+        no_answer: არ არის პასუხი
+        not_relevant: არ არის შესაბამისი
       add_photos: სურათის დამატება 
       add_photos_title: "'%{place}'-ის სურათის დამატება"
       add_evaluation: შეფასების დამატება
@@ -133,6 +137,7 @@ ka:
       added_new_question: ახალი კითხვა დაემატა კითხვის ამ კატეგორიას
       added_new_venue: ახალი ადგილმდებარეობა დაემატა ადგილმდებარეობის ამ კატეგორიას
       missing_required: გთხოვთ მოგვაწოდეთ ყველა საჭირო ინფორმაცია
+      cause_not_accessible: "გაცემული პასუხი საერთო შეფასების შედეგს 'მიუწვდომელს' ხდის."
   layouts:
     application:
       add_place: ადგილის დამატება
@@ -335,6 +340,7 @@ ka:
       header_venues: ადგილმდებარეობის დამახასიათებელი სპეციფიკური კითხვები      
     show_questions:
       assigned_to: "მისადაგებული შემდები ტიპისთვის:"      
+      required_for_accessiblity: "If answer is 'does not have and needs' then place is not accessible"
     venues:
       title: მეთოდოლოგია - ადგილმდებარეობა
       no_venues: სამწუხაროდ, ფაილზე არ მოიძებნა ადგილმდებარეობები.

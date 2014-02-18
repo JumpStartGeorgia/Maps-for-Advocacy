@@ -175,7 +175,12 @@ form.place{
       vertical-align: top;
       padding: 10px;
       display: inline-block;
-      width: 200px;
+      width: 25%;
+      &.cause_not_accessible{
+        width: 40%;
+        background-color: #fff;
+        color: #f00;
+      }
     }
     &:last-of-type{
       border-bottom: none;
@@ -184,7 +189,6 @@ form.place{
   div.selected-answer{
     background-color: #ccc;
     color: #000;
-    width: 30px;
     &.has_good, &.has{
       background-color: #a8d2b8;
     }
@@ -205,8 +209,35 @@ form.place{
     width: 24%;
   }
 }  
-
-
+.summary_result_number{
+  display: inline-text;
+  padding: 2px 5px;
+  &.good{
+    background-color: #a8d2b8;
+  }
+  &.middle{
+    background-color: #eedea0;
+  }
+  &.bad{
+    background-color: #e1919f;
+    color: #fff;
+  }
+}
+.summary_result_text{
+  display: inline-text;
+  padding: 2px 5px;
+  &.not_accessible{
+    background-color: #e1919f;
+  }
+  &.no_answer{
+    background-color: #ccc;
+    color: #000;
+  }
+  &.not_relevant{
+    background-color: #555;
+    color: #fff;
+  }
+}
 
 
 .fileupload-buttonbar .btn, table.table tbody.files tr td .btn{

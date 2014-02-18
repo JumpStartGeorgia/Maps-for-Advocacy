@@ -15,7 +15,7 @@
               <div class="span4">
                 <%= cat[:questions][qidx][:question] %>
               </div>
-              <div class="span8">
+              <div class="span5">
                 <%= t('.assigned_to') %>
                 <% 
                   disability_ids = []
@@ -37,8 +37,13 @@
                   <li><%= name %></li>
                 <% end %>
                 </ul>
-                <% qidx += idx_increment %>
               </div>
+              <div class="span3">
+                <% if cat[:questions][qidx][:required_for_accessibility] == 1 %>
+                  <%= t('.required_for_accessiblity') %>
+                <% end %>
+              </div>
+              <% qidx += idx_increment %>
             </div>
           </li>
       <% Rails.logger.debug "++++ qidx now = #{qidx}" %>

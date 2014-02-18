@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140116093758) do
+ActiveRecord::Schema.define(:version => 20140121131824) do
 
   create_table "disabilities", :force => true do |t|
     t.string   "code"
@@ -105,6 +105,26 @@ ActiveRecord::Schema.define(:version => 20140116093758) do
   add_index "place_images", ["taken_at"], :name => "index_place_images_on_taken_at"
   add_index "place_images", ["user_id"], :name => "index_place_images_on_user_id"
 
+  create_table "place_summaries", :force => true do |t|
+    t.integer  "place_id"
+    t.integer  "summary_type"
+    t.integer  "summary_type_identifier"
+    t.integer  "data_type"
+    t.integer  "data_type_identifier"
+    t.integer  "disability_id"
+    t.decimal  "score",                   :precision => 10, :scale => 6
+    t.integer  "special_flag"
+    t.integer  "num_answers"
+    t.integer  "num_evaluations"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "place_summaries", ["data_type", "data_type_identifier"], :name => "idx_place_summary_data_type"
+  add_index "place_summaries", ["disability_id"], :name => "index_place_summaries_on_disability_id"
+  add_index "place_summaries", ["place_id"], :name => "index_place_summaries_on_place_id"
+  add_index "place_summaries", ["summary_type", "summary_type_identifier"], :name => "idx_place_summary_summary_type"
+
   create_table "place_translations", :force => true do |t|
     t.integer  "place_id"
     t.string   "locale"
@@ -168,11 +188,13 @@ ActiveRecord::Schema.define(:version => 20140116093758) do
     t.integer  "question_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "sort_order",           :default => 99
-    t.boolean  "is_exists",            :default => false
+    t.integer  "sort_order",                 :default => 99
+    t.boolean  "is_exists",                  :default => false
+    t.boolean  "required_for_accessibility", :default => false
   end
 
   add_index "question_pairings", ["question_category_id", "question_id"], :name => "idx_pairings_ids"
+  add_index "question_pairings", ["required_for_accessibility"], :name => "index_question_pairings_on_required_for_accessibility"
   add_index "question_pairings", ["sort_order"], :name => "index_question_pairings_on_sort_order"
 
   create_table "question_translations", :force => true do |t|

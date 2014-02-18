@@ -28,8 +28,27 @@
           :class => 'add_photos', :title => t('app.common.add_photos_title', :place => @place[:name]) %>
       </div>
     </div>
-
+    <% if @overall_summary.present? && @overall_summary.has_key?('overall') && @overall_summary['overall'].present? && @overall_summary_questions.present?%>
+      <div>
+        <p><strong><%= t('.summary_result') %>:</strong>
+          <%= format_summary_result(@overall_summary['overall']['overall'], is_summary: true) %>
+        </p>
+        <ul class="evaluation_summary">
+        <% questions = @overall_summary_questions.map{|x| [x[:id], x.name]}.uniq %>
+        <% questions.each do |question| %>
+          <li>
+            <strong><%= question[1] %>:</strong><br />
+            <%= format_summary_result(@overall_summary['overall'][question[0].to_s], is_summary: true) %>
+          </li>          
+        <% end %>
+        </ul>
+      </div>
+    <% end %>
+    
+    
     <% if @disability_evaluations.present? %>
+      <hr />
+    
       <ul id="evaluation-disability-tabs" class="nav nav-tabs" data-tabs="evaluation-disability-tabs">
         <% 
           made_active = false 
@@ -72,18 +91,18 @@
 
               </p>
             <% else %>
-	            <% if disability[:question_categories].present? && disability[:summaries].present? %>
+	            <% if disability[:question_categories].present? && disability[:summaries].present? && disability[:summaries].has_key?('overall') && disability[:summaries]['overall'].present?%>
                 <% questions = disability[:question_categories].map{|x| [x[:id], x.name]}.uniq %>
                 <% if questions.present? %>
                   <h2><%= t('.header_summary') %></h2>
                   <p><strong><%= t('.summary_result') %>:</strong>
-                    <%= number_with_precision(disability[:summaries]['overall']['overall']) %>
+                    <%= format_summary_result(disability[:summaries]['overall']['overall'], is_summary: true) %>
                   </p>
                   <ul class="evaluation_summary">
                   <% questions.each do |question| %>
                     <li>
-                      <strong><%= question[1] %>:</strong>
-                      <%= number_with_precision(disability[:summaries]['overall'][question[0].to_s]) %>
+                      <strong><%= question[1] %>:</strong><br />
+                      <%= format_summary_result(disability[:summaries]['overall'][question[0].to_s], is_summary: true) %>
                     </li>          
                   <% end %>
                   </ul>
@@ -119,13 +138,13 @@
 
 	                <% if questions.present? && summary.present? %>
                     <p><strong><%= t('.summary_result') %>:</strong>
-                      <%= number_with_precision(summary['overall']) %>
+                      <%= format_summary_result(summary['overall']) %>
                     </p>
                     <ul class="evaluation_summary">
                     <% questions.each do |question| %>
                       <li>
-                        <strong><%= question[1] %>:</strong>
-                        <%= number_with_precision(summary[question[0].to_s]) %>
+                        <strong><%= question[1] %>:</strong><br />
+                        <%= format_summary_result(summary[question[0].to_s]) %>
                       </li>          
                     <% end %>
                     </ul>

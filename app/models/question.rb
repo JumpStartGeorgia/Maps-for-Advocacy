@@ -24,7 +24,7 @@ class Question < ActiveRecord::Base
   def self.in_category(question_category_id, options={})
     if question_category_id.present?
 
-      sql = "SELECT qp.sort_order as question_sort_order, qp.is_exists, q.id as question_id, qt.name as question, qpt.evidence, qp.id as question_pairing_id "
+      sql = "SELECT qp.sort_order as question_sort_order, qp.is_exists, qp.required_for_accessibility, q.id as question_id, qt.name as question, qpt.evidence, qp.id as question_pairing_id "
       if options[:disability_ids].present? || options[:disability_id].present?
         sql << ", dqp.disability_id "
       end

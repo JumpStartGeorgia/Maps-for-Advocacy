@@ -138,12 +138,13 @@ class QuestionCategory < ActiveRecord::Base
     idx_child_is_common = 7
     idx_type = 8
     idx_exists = 9
-    idx_question = 10
-    idx_question_ka = 11
-    idx_question_sort = 12
-    idx_question_evidence = 13
-    idx_question_evidence_ka = 14
-    idx_venue_name = 15
+    idx_req_accessibility = 10
+    idx_question = 11
+    idx_question_ka = 12
+    idx_question_sort = 13
+    idx_question_evidence = 14
+    idx_question_evidence_ka = 15
+    idx_venue_name = 16
     current_parent, current_child, current_venue = nil
 
 		original_locale = I18n.locale
@@ -164,6 +165,7 @@ class QuestionCategory < ActiveRecord::Base
         QuestionPairingTranslation.delete_all
         PlaceEvaluation.delete_all
         PlaceEvaluationAnswer.delete_all
+        PlaceSummary.delete_all
 
         connection = ActiveRecord::Base.connection
         ActiveRecord::Base.connection.execute("truncate disabilities_question_pairings;")        
@@ -249,7 +251,8 @@ class QuestionCategory < ActiveRecord::Base
                 :question_category_id => qc_id, 
                 :question_id => question.id, 
                 :sort_order => row[idx_question_sort], 
-                :is_exists => row[idx_exists].present? && row[idx_exists].to_s == '1' ? true : false
+                :is_exists => row[idx_exists].present? && row[idx_exists].to_s == '1' ? true : false,
+                :required_for_accessibility => row[idx_req_accessibility].present? && row[idx_req_accessibility].to_s == '1' ? true : false
               )
           
           I18n.available_locales.each do |locale|

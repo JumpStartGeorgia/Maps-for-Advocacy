@@ -7,7 +7,24 @@ class QuestionPairing < ActiveRecord::Base
 	has_many :place_evaluation_answers, :dependent => :destroy
   has_and_belongs_to_many :disabilities
   accepts_nested_attributes_for :question_pairing_translations
-  attr_accessible :id, :question_category_id, :question_id, :question_pairing_translations_attributes, :sort_order, :is_exists
+  attr_accessible :id, :question_category_id, :question_id, :question_pairing_translations_attributes, :sort_order, :is_exists, :required_for_accessibility
+
+  DISABILITY_ID_SEPARATOR = "+"
+
+  # get the questions in format that is used for computing summaries
+  def self.questions_for_summary
+    
+    sql = "select qp.id, qp.question_category_id, qp.is_exists, qp.required_for_accessibility, if(qc.ancestry is null, qc.id, convert(qc.ancestry, unsigned)) as root_question_category_id, "
+    sql << "group_concat('"
+    sql << DISABILITY_ID_SEPARATOR
+    sql << "', dqp.disability_id, '"
+    sql << DISABILITY_ID_SEPARATOR
+    sql << "') as disability_ids "
+    sql << "from question_pairings as qp inner join disabilities_question_pairings as dqp on dqp.question_pairing_id = qp.id "
+    sql << "inner join question_categories as qc on qp.question_category_id = qc.id "
+    sql << "group by qp.id, qp.question_category_id, qp.is_exists, qp.required_for_accessibility, root_question_category_id "
+    find_by_sql(sql)
+  end
 
 
   # take in hash of {id => sort order} for original and new values and

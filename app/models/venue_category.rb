@@ -115,6 +115,7 @@ class VenueCategory < ActiveRecord::Base
         PlaceTranslation.delete_all
         PlaceEvaluation.delete_all
         PlaceEvaluationAnswer.delete_all
+        PlaceSummary.delete_all
 		  end
 		
 		

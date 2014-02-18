@@ -11,6 +11,10 @@ class PlacesController < ApplicationController
       # get imgaes
       @place_images = PlaceImage.by_place(params[:id]).with_user.sorted
 
+      # get overall summary
+      @overall_summary = PlaceSummary.for_place_disablity(params[:id])
+      @overall_summary_questions = QuestionCategory.questions_for_venue(question_category_id: @place.question_category_id)
+
       # get evaluations
       @disabilities = Disability.sorted.is_active
       if @disabilities.present?
@@ -34,7 +38,7 @@ class PlacesController < ApplicationController
             x[:evaluation_count] = x[:evaluations].length
    
             # create summaries of evaluations
-            x[:summaries] = PlaceEvaluation.summarize(x[:evaluations], x[:question_categories])
+            x[:summaries] = PlaceSummary.for_place_disablity(params[:id], disability.id)
             
             # get user info that submitted evaluations
             x[:users] = User.for_evaluations(x[:evaluations].map{|x| x.user_id}.uniq)
