@@ -340,7 +340,7 @@ ka:
       header_venues: ადგილმდებარეობის დამახასიათებელი სპეციფიკური კითხვები      
     show_questions:
       assigned_to: "მისადაგებული შემდები ტიპისთვის:"      
-      required_for_accessiblity: "If answer is 'does not have and needs' then place is not accessible"
+      required_for_accessiblity: "იმ შემთხვევაში, თუ პასუხია 'არ აქვს და ესაჭიროება' მაშინ ადგილი არ არის ხელმისაწვდომი"
     venues:
       title: მეთოდოლოგია - ადგილმდებარეობა
       no_venues: სამწუხაროდ, ფაილზე არ მოიძებნა ადგილმდებარეობები.
