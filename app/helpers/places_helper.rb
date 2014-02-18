@@ -6,7 +6,7 @@ module PlacesHelper
     x = ''
     if hash.class == Hash
       if hash.has_key?('score') && hash['score'].present?
-        percent = 100*hash['score']/PlaceEvaluation::ANSWERS['has_good'].to_f
+        percent = 100*((hash['score'] - PlaceEvaluation::ANSWERS['needs'])/(PlaceEvaluation::ANSWERS['has_good'].to_f - PlaceEvaluation::ANSWERS['needs']))
         key = case percent
           when 0..25
             'bad'

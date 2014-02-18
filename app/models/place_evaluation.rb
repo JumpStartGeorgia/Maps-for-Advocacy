@@ -15,7 +15,7 @@ class PlaceEvaluation < ActiveRecord::Base
 
   # update the summary for this place
   def update_summaries
-#    PlaceSummary.update_summaries(self.place_id, self.id)
+    PlaceSummary.update_summaries(self.place_id, self.id)
   end
   
   def self.answer_key_name(value)
