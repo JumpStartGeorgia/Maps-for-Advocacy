@@ -65,6 +65,21 @@
 
     <h2><%= t('.header_location', :name => params[:name]) %></h2>
     
+    
+    <% create_sorted_translation_objects(@place.place_translations).each do |trans| %>
+		  <%= f.fields_for :place_translations, trans do |translation| %>
+			  <%= translation.hidden_field :name %>
+			  <%= translation.hidden_field :locale %>
+			  <%= translation.hidden_field :address, :class => 'place_address' %>
+		  <% end %>
+	  <% end %>
+
+	  <%= f.inputs do %>
+	    <%= f.hidden_field :lat %>
+	    <%= f.hidden_field :lon %>
+	    <%= f.hidden_field :venue_id %>
+	  <% end %>
+    
     <div id="place-form-address-search" class="row-fluid">
       <div class="span9">
         <a href="#address-search" class="accessibly-hidden"><%= t('.skip_map') %></a>
@@ -112,65 +127,15 @@
             </p>
           </div>
 
-          <p>
-            <%= link_to t('.next'), params.merge(:stage => '4', :lat => '', :lon => '', :address => ''), 
-                  :id => 'place_map_next', :role => 'button', :'aria-hidden' => true,
-                  :title => t('.map_link_title') %>
-          </p>
+          <div id="submit-button" aria-hidden="true">
+            <%= f.submit t('.submit') %>
+          </div>
+
           <a href="#address-search" class="accessibly-hidden"><%= t('.skip_to_address_search') %></a>
         </div>      
       </div>
     </div>
     
-
-  
-  <% elsif params[:stage] == '4' %>
-    <h2><%= t('.header_disability', :name => params[:name]) %></h2>
-
-    <% if @disabilities.present? %>
-      <div id="disabilities">
-        <ul>
-          <% @disabilities.each do |disability| %>
-            <li>
-              <%= link_to disability.name, params.merge(:stage => '5', :eval_type_id => disability.id), 
-                  :title => t('.disability_link_title', :name => disability.name),
-                  :role => 'button' %>
-            </li>
-          <% end %>            
-        </ul>
-      </div>
-    <% end %>
-
-  <% elsif params[:stage] == '5' %>
-
-
-    <% create_sorted_translation_objects(@place.place_translations).each do |trans| %>
-		  <%= f.fields_for :place_translations, trans do |translation| %>
-			  <%= translation.hidden_field :name %>
-			  <%= translation.hidden_field :locale %>
-			  <%= translation.hidden_field :address %>
-		  <% end %>
-	  <% end %>
-
-	  <%= f.inputs do %>
-	    <%= f.hidden_field :lat %>
-	    <%= f.hidden_field :lon %>
-	    <%= f.hidden_field :venue_id %>
-	  <% end %>
-	
-	  <% if @question_categories.present? %>
-	    <div id="venue_evalautions">
-        <h2><%= t('.header_evaluation', :name => params[:name], :disability => @disability.name) %></h2>
-
-        <%= render :partial => 'eval_form', :locals => {:f => f} %>
-        
-	    </div>
-	  <% end %>
-
-
-    <div id="submit-button" class="accessibly-hidden">
-      <%= f.submit t('.submit') %>
-    </div>
   <% end %>
 <% end %>
 

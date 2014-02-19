@@ -13,36 +13,36 @@ var map, marker;
 
   /* hide the next button, map markers and messages */
   function reset_map(){
-    var url = $('#place_map_next').attr('href');
-    url = updateQueryStringParameter(url, 'lat', '');
-    url = updateQueryStringParameter(url, 'lon', '');
-    url = updateQueryStringParameter(url, 'address', '');
-    
-    // update button url and hide
-    $('#place_map_next').attr('href', url).attr('aria-hidden', 'true');
-    
     // remove map markers
     if (marker != undefined){
       map.removeLayer(marker);  
     }
-  
+
+    // reset form fields
+    $('input#place_lat').val('');
+    $('input#place_lon').val('');
+    $('input.place_address').val('');
+    
     // hide previous messages
     $('#address-search-results > div').attr('aria-hidden', 'true');
+    
+    // hide submit button
+    $('#address-search-results #submit-button').attr('aria-hidden', 'true');
+        
   }
 
   /* update button coordinates */
   function update_link_parameters(coords, address){
-    var url = $('#place_map_next').attr('href');
     var lat = coords.lat;
     var lng = coords.lng;
 
-    url = updateQueryStringParameter(url, 'lat', lat.toString());
-    url = updateQueryStringParameter(url, 'lon', lng.toString());
-    if (address != undefined && address != null){
-      url = updateQueryStringParameter(url, 'address', encodeURIComponent(address));
-    }
+    // set form fields
+    $('input#place_lat').val(lat.toString());
+    $('input#place_lon').val(lng.toString());
+    $('input.place_address').val(address);
     
-    $('#place_map_next').attr('href', url).attr('aria-hidden', 'false');
+    // show submit button
+    $('#address-search-results #submit-button').attr('aria-hidden', 'false');
   }
 
   /* add map marker */
@@ -138,7 +138,6 @@ var map, marker;
         // create marker
         create_map_marker($(this).data('lat'), $(this).data('lon'), $(this).data('address'));
       });
-
     }
 
     // tell screen reader that it is ok to announce changes

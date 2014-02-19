@@ -293,7 +293,7 @@ ka:
       questions: კითხვები
       next: შემდეგი
       map_link_title: შეარჩიეთ ეს მდებარეობა
-      submit: შეავსეთ შეფასება
+      submit: ადგილის შენახვა
     eval_form:
       evaluation_instructions: შეარჩიეთ კატეგორია და შეავსეთ შეფასება.
       question_category_link_title: იხილეთ კითხვები '%{name}'

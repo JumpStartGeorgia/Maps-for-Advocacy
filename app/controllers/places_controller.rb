@@ -87,34 +87,12 @@ class PlacesController < ApplicationController
       @show_map = true
       gon.show_place_form_map = true
       gon.address_search_path = address_search_places_path
-    elsif params[:stage] == '4' # disability type
-      @disabilities = Disability.sorted.is_active
-    elsif params[:stage] == '5' # evaluation
+
       @place.venue_id = params[:venue_id]
-      @place.lat = params[:lat]
-      @place.lon = params[:lon]
-      gon.show_evaluation_form = true
-      
-      @disability = Disability.with_name(params[:eval_type_id])
-      
       # create the translation object for however many locales there are
       # so the form will properly create all of the nested form fields
       I18n.available_locales.each do |locale|
-			  @place.place_translations.build(:locale => locale.to_s, :address => params[:address], :name => params[:name])
-		  end
-		
-		  # get list of questions
-		  @question_categories = QuestionCategory.questions_for_venue(question_category_id: @venue.question_category_id, disability_id: params[:eval_type_id])
-		  
-		  # create the evaluation object for however many questions there are
-		  if @question_categories.present?
-		    @place_evaluation = @place.place_evaluations.build(user_id: current_user.id, disability_id: params[:eval_type_id])
-		    num_questions = QuestionCategory.number_questions(@question_categories)
-		    if num_questions > 0
-          (0..num_questions-1).each do |index|
-    		    @place_evaluation.place_evaluation_answers.build(:answer => PlaceEvaluation::ANSWERS['no_answer'])
-		      end
-        end
+			  @place.place_translations.build(:locale => locale.to_s, :name => params[:name])
 		  end
     end
 

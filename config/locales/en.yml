@@ -293,7 +293,7 @@ en:
       questions: Questions
       next: Next
       map_link_title: Select this location
-      submit: Submit the Evaluation
+      submit: Save the Place
     eval_form:
       evaluation_instructions: Fill out the evaluation by selecting a category and answering the statements.
       question_category_link_title: View questions in '%{name}'
