@@ -111,6 +111,13 @@
               <%= link_to place[:place], place_path(place) %>
             </h3>
             <h4><%= place[:venue] %></h4>
+            
+            <% if place[:address].present? %>
+              <p>
+                <%= place[:address] %>
+              </p>
+            <% end %>
+
             <% if @place_summaries.present? 
                 summary_index = @place_summaries.index{|x| x.place_id == place.id}
                 if summary_index.present? %>
@@ -119,12 +126,7 @@
                   </div>
                 <% end 
                end %>
-            
-            <% if place[:address].present? %>
-              <p>
-                <%= place[:address] %>
-              </p>
-            <% end %>
+
             <%= link_to t('app.common.view_place'), place_path(place), :class => 'view_more', 
               :title => t('app.common.view_place_title', :place => place[:place]) %>
             <%= link_to t('app.common.add_evaluation'), evaluation_place_path(place), :class => 'add_evaluation',
