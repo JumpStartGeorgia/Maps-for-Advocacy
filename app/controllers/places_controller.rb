@@ -254,25 +254,36 @@ class PlacesController < ApplicationController
 		    return
       elsif params[:eval_type_id].blank?
         @disabilities = Disability.sorted.is_active
+        respond_to do |format|
+          format.html # show.html.erb
+          format.json { render json: @place }
+        end
       else
-        # load the evaluation form
-        gon.show_evaluation_form = true
+		    if params[:certification].blank? && current_user.role?(User::ROLES[:certification])
+          # the user can submit certified evals so see if they want to or not
+          @needs_certification_answer = true
+        else      
+          params[:certification] = false if params[:certification].blank?
+          
+          # load the evaluation form
+          gon.show_evaluation_form = true
 
-        @disability = Disability.with_name(params[:eval_type_id])
-        
-	      # get list of questions
-	      @question_categories = QuestionCategory.questions_for_venue(question_category_id: @place.question_category_id, disability_id: params[:eval_type_id])
-        
-		    # create the evaluation object for however many questions there are
-		    if @question_categories.present?
-		      @place_evaluation = @place.place_evaluations.build(user_id: current_user.id, disability_id: params[:eval_type_id])
-		      num_questions = QuestionCategory.number_questions(@question_categories)
-		      if num_questions > 0
-            (0..num_questions-1).each do |index|
-      		    @place_evaluation.place_evaluation_answers.build(:answer => PlaceEvaluation::ANSWERS['no_answer'])
-		        end
-          end
-		    end
+          @disability = Disability.with_name(params[:eval_type_id])
+          
+	        # get list of questions
+	        @question_categories = QuestionCategory.questions_for_venue(question_category_id: @place.question_category_id, disability_id: params[:eval_type_id])
+          
+		      # create the evaluation object for however many questions there are
+		      if @question_categories.present?
+		        @place_evaluation = @place.place_evaluations.build(user_id: current_user.id, disability_id: params[:eval_type_id], is_certified: params[:certification])
+		        num_questions = QuestionCategory.number_questions(@question_categories)
+		        if num_questions > 0
+              (0..num_questions-1).each do |index|
+        		    @place_evaluation.place_evaluation_answers.build(:answer => PlaceEvaluation::ANSWERS['no_answer'])
+		          end
+            end
+		      end
+        end
 
         respond_to do |format|
           format.html # show.html.erb

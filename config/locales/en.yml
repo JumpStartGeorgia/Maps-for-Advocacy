@@ -301,8 +301,14 @@ en:
     evaluation:
       title1: "Evaluation of '%{name}'"
       title2: "%{disability} Evaluation of '%{name}'"
+      title3: "Certified %{disability} Evaluation of '%{name}'"
       header_disability: Which evaluation do you want to complete?
       disability_link_title: "'%{name}' evaluation"
+      header_certification: "Do you want to submit a Certified Evaluation?"
+      certification_yes_link_text: "Certified Evaluation"
+      certification_yes_link_title: "Fill out a certified evaluation"
+      certification_no_link_text: "Regular Public Evaluation"
+      certification_no_link_title: "Fill out a regular public evaluation"
       submit: Submit the Evaluation
     upload_photos:
       title: Upload Photos for '%{name}'

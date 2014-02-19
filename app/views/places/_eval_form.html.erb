@@ -8,6 +8,7 @@
         <%= f.fields_for :place_evaluations, @place_evaluation do |evaluation| %>
           <%= evaluation.hidden_field :user_id , :value => @place_evaluation.user_id %>
           <%= evaluation.hidden_field :disability_id , :value => @place_evaluation.disability_id %>
+          <%= evaluation.hidden_field :is_certified , :value => @place_evaluation.is_certified %>
 
           <ul class="question_categories">
             <% @question_categories.each_with_index do |cat, index| %>

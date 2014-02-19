@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140121131824) do
+ActiveRecord::Schema.define(:version => 20140219131516) do
 
   create_table "disabilities", :force => true do |t|
     t.string   "code"
@@ -82,10 +82,12 @@ ActiveRecord::Schema.define(:version => 20140121131824) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "disability_id"
+    t.boolean  "is_certified",  :default => false
   end
 
   add_index "place_evaluations", ["created_at"], :name => "index_place_evaluations_on_created_at"
   add_index "place_evaluations", ["disability_id"], :name => "index_place_evaluations_on_disability_id"
+  add_index "place_evaluations", ["is_certified"], :name => "index_place_evaluations_on_is_certified"
   add_index "place_evaluations", ["place_id"], :name => "index_place_evaluations_on_place_id"
   add_index "place_evaluations", ["user_id"], :name => "index_place_evaluations_on_user_id"
 

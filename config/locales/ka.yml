@@ -301,8 +301,14 @@ ka:
     evaluation:
       title1: "'%{name}'-ის შეფასება"
       title2: "'%{name}'-ის %{disability} შეფასება"
+      title3: "Certified '%{name}'-ის %{disability} შეფასება"
       header_disability: რომელი შეფასების შევსება გსურთ?
       disability_link_title: "'%{name}'-ის შეფასება"
+      header_certification: "Do you want to submit a Certified Evaluation?"
+      certification_yes_link_text: "Certified Evaluation"
+      certification_yes_link_title: "Fill out a certified evaluation"
+      certification_no_link_text: "Regular Public Evaluation"
+      certification_no_link_title: "Fill out a regular public evaluation"
       submit: შეფასების შევსება
     upload_photos:
       title: "'%{name}'-ის სურათის დამატება"
