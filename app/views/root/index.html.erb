@@ -111,6 +111,15 @@
               <%= link_to place[:place], place_path(place) %>
             </h3>
             <h4><%= place[:venue] %></h4>
+            <% if @place_summaries.present? 
+                summary_index = @place_summaries.index{|x| x.place_id == place.id}
+                if summary_index.present? %>
+                  <div>
+                    <%= format_summary_result(@place_summaries[summary_index].to_summary_hash, is_summary: true) %>
+                  </div>
+                <% end 
+               end %>
+            
             <% if place[:address].present? %>
               <p>
                 <%= place[:address] %>

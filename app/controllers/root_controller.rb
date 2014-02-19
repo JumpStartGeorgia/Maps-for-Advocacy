@@ -20,6 +20,9 @@ class RootController < ApplicationController
   
     # if places found, then save info to gon so can show markers/popups
     if @places.present?
+      # get overall summaries for places
+      @place_summaries = PlaceSummary.overall_summaries_for_places(@places.map{|x| x.id})
+      
       gon.markers = []
       
       @places.each do |place|

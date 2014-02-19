@@ -19,6 +19,13 @@ class PlaceSummary < ActiveRecord::Base
       'num_evaluations' => self.num_evaluations    
     }
   end
+  
+  def self.overall_summaries_for_places(place_ids)
+    if place_ids.present?
+      where(:place_id => place_ids, :summary_type => SUMMARY_TYPES['overall'], :data_type => DATA_TYPES['overall'])
+    end
+  end
+  
 
   # get summary data for a place/disability
   # return: {
