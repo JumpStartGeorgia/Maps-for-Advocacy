@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140219131516) do
+ActiveRecord::Schema.define(:version => 20140220112529) do
 
   create_table "disabilities", :force => true do |t|
     t.string   "code"
@@ -120,10 +120,12 @@ ActiveRecord::Schema.define(:version => 20140219131516) do
     t.integer  "num_evaluations"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "is_certified",                                           :default => false
   end
 
   add_index "place_summaries", ["data_type", "data_type_identifier"], :name => "idx_place_summary_data_type"
   add_index "place_summaries", ["disability_id"], :name => "index_place_summaries_on_disability_id"
+  add_index "place_summaries", ["is_certified"], :name => "index_place_summaries_on_is_certified"
   add_index "place_summaries", ["place_id"], :name => "index_place_summaries_on_place_id"
   add_index "place_summaries", ["summary_type", "summary_type_identifier"], :name => "idx_place_summary_summary_type"
 

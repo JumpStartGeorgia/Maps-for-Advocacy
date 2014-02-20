@@ -15,7 +15,11 @@ class PlaceEvaluation < ActiveRecord::Base
 
   # update the summary for this place
   def update_summaries
-    PlaceSummary.update_summaries(self.place_id, self.id)
+    if self.is_certified?
+      PlaceSummary.update_certified_summaries(self.place_id, self.id)
+    else
+      PlaceSummary.update_summaries(self.place_id, self.id)
+    end
   end
   
   def self.answer_key_name(value)
@@ -26,10 +30,12 @@ class PlaceEvaluation < ActiveRecord::Base
     SUMMARY_ANSWERS.keys[SUMMARY_ANSWERS.values.index(value)]
   end
   
-  def self.with_answers(place_id, disability_id=nil)
+  def self.with_answers(place_id, options={})
+    options[:is_certified] = false if options[:is_certified].nil?
+
     includes(:place_evaluation_answers)
-    .where(:place_id => place_id)  
-    .where(:disability_id => disability_id) if disability_id.present?
+    .where(:place_id => place_id, :is_certified => options[:is_certified])  
+    .where(:disability_id => options[:disability_id]) if options[:disability_id].present?
   end
   
   def self.sorted
@@ -38,10 +44,20 @@ class PlaceEvaluation < ActiveRecord::Base
   
   # get all of the answers for a place
   # so that a summary can be computed
-  def self.with_answers_for_summary(place_id)
-    select('place_evaluations.id, place_evaluations.disability_id, place_evaluation_answers.question_pairing_id, place_evaluation_answers.answer')
+  # place_id: id of place to get answers for
+  # options:
+  # - is_certified: get answers that are certified (default = false)
+  # - place_evaluation_id: get answers for a specific evaluation
+  def self.with_answers_for_summary(place_id, options={})
+    options[:is_certified] = false if options[:is_certified].nil?
+    
+    x = select('place_evaluations.id, place_evaluations.disability_id, place_evaluation_answers.question_pairing_id, place_evaluation_answers.answer')
     .joins(:place_evaluation_answers)
-    .where(:place_id => place_id)  
+    .where(:place_id => place_id, :is_certified => options[:is_certified])  
+    
+    x = x.where('place_evaluations.id = ?', options[:place_evaluationd_id]) if options[:place_evaluationd_id].present?
+    
+    return x
   end
 
 

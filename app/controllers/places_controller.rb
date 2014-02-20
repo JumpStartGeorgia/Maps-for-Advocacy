@@ -31,14 +31,14 @@ class PlacesController < ApplicationController
 		      x[:question_categories] = QuestionCategory.questions_for_venue(question_category_id: @place.question_category_id, disability_id: disability.id)
 
           # get evaluation results
-          x[:evaluations] = PlaceEvaluation.with_answers(params[:id], disability.id).sorted
+          x[:evaluations] = PlaceEvaluation.with_answers(params[:id], disability_id: disability.id).sorted
           x[:evaluation_count] = 0
           
           if x[:evaluations].present?
             x[:evaluation_count] = x[:evaluations].length
    
             # create summaries of evaluations
-            x[:summaries] = PlaceSummary.for_place_disablity(params[:id], disability.id)
+            x[:summaries] = PlaceSummary.for_place_disablity(params[:id], disability_id: disability.id)
             
             # get user info that submitted evaluations
             x[:users] = User.for_evaluations(x[:evaluations].map{|x| x.user_id}.uniq)
