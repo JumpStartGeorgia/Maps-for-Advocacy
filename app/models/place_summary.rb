@@ -367,14 +367,14 @@ class PlaceSummary < ActiveRecord::Base
             # - just use the latest evaluation for each disability
             ##############################
             filtered_evaluations = []
-            disability_ids.each do |disability_id|
+            evaluations.map{|x| x.disability_id}.uniq.each do |disability_id|
               latest_id = evaluations.select{|x| x.disability_id == disability_id}.map{|x| x.id}.max
               filtered_evaluations << evaluations.select{|x| x.disability_id == disability_id && x.id == latest_id} if latest_id.present?
             end
             if filtered_evaluations.present?
               filtered_evaluations.flatten!              
 
-              Rails.logger.debug "************* computing overall summary"
+              Rails.logger.debug "************* computing overall summary using #{filtered_evaluations.map{|x| x.id}.uniq.length} evaluations"
               save_summary(place_id, 
                             existing_summaries, 
                             summarize_answers(filtered_evaluations, exists_question_ids, req_accessibility_question_ids), 
