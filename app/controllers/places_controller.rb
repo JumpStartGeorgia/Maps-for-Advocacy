@@ -5,22 +5,76 @@ class PlacesController < ApplicationController
   # GET /places/1.json
   def show
     @place = Place.with_translation(params[:id]).first
+    @data = {:certified => {:summary => [], :summary_questions => [], :disability_evaluations => []}, 
+             :public => {:summary => [], :summary_questions => [], :disability_evaluations => []}}
     @disability_evaluations = []
     
     if @place.present?
+      if @place.lat.present? && @place.lon.present?
+        @show_map = true
+        gon.show_place_map = true
+
+        gon.lat = @place.lat
+        gon.lon = @place.lon
+        gon.marker_popup = "<h3>#{@place[:place]}</h3><h4>#{@place[:venue]}</h4><p>#{@place[:address]}</p>"
+        
+      end    
+
       # get imgaes
       @place_images = PlaceImage.by_place(params[:id]).with_user.sorted
 
+      @disabilities = Disability.sorted.is_active
+
+      #####################
+      # get certified evals
+      #####################
       # get overall summary
-      @overall_summary = PlaceSummary.for_place_disablity(params[:id])
-      @overall_summary_questions = QuestionCategory.questions_for_venue(question_category_id: @place.question_category_id)
+      @data[:certified][:summary] = PlaceSummary.for_place_disablity(params[:id], is_certified: true)
+      @data[:certified][:summary_questions] = QuestionCategory.questions_for_venue(question_category_id: @place.question_category_id)
 
       # get evaluations
-      @disabilities = Disability.sorted.is_active
       if @disabilities.present?
         @disabilities.each do |disability|
           x = Hash.new
-          @disability_evaluations << x
+          @data[:certified][:disability_evaluations] << x
+          
+          # record the disability
+          x[:id] = disability.id
+          x[:code] = disability.code
+          x[:name] = disability.name
+
+	        # get list of questions
+		      x[:question_categories] = QuestionCategory.questions_for_venue(question_category_id: @place.question_category_id, disability_id: disability.id)
+
+          # get evaluation results
+          x[:evaluations] = PlaceEvaluation.with_answers(params[:id], disability_id: disability.id, is_certified: true).sorted
+          x[:evaluation_count] = 0
+          
+          if x[:evaluations].present?
+            x[:evaluation_count] = x[:evaluations].length
+   
+            # create summaries of evaluations
+            x[:summaries] = PlaceSummary.for_place_disablity(params[:id], disability_id: disability.id, is_certified: true)
+            
+            # get user info that submitted evaluations
+            x[:users] = User.for_evaluations(x[:evaluations].map{|x| x.user_id}.uniq)
+          end        
+        end
+      end
+      
+      
+      #####################
+      # get public evals
+      #####################
+      # get overall summary
+      @data[:public][:summary] = PlaceSummary.for_place_disablity(params[:id])
+      @data[:public][:summary_questions] = QuestionCategory.questions_for_venue(question_category_id: @place.question_category_id)
+
+      # get evaluations
+      if @disabilities.present?
+        @disabilities.each do |disability|
+          x = Hash.new
+          @data[:public][:disability_evaluations] << x
           
           # record the disability
           x[:id] = disability.id
@@ -46,16 +100,6 @@ class PlacesController < ApplicationController
         end
       end
      
-
-      if @place.lat.present? && @place.lon.present?
-        @show_map = true
-        gon.show_place_map = true
-
-        gon.lat = @place.lat
-        gon.lon = @place.lon
-        gon.marker_popup = "<h3>#{@place[:place]}</h3><h4>#{@place[:venue]}</h4><p>#{@place[:address]}</p>"
-        
-      end    
 
       respond_to do |format|
         format.html # show.html.erb

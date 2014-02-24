@@ -255,6 +255,15 @@ en:
     show:
       district_link_title: View all places that are in '%{name}'
       venue_link_title: View all places that are '%{name}'
+      tab_certified: "Certified Evaluations (%{count})"
+      tab_public: "Public Evaluations (%{count})"
+      skip_map: Skip the map and go to the photo slideshow (jump)
+      taken_at: "Photo taken on: %{date}"
+      uploaded_at: "Uploaded on: %{date}"
+      uploaded_by: "Uploaded by: %{user}"
+    show_certified:
+      certified_explanation: Certified Evaluations are completed by people that are trained in how to evaluate a place for accessibility. Only the latest evaluation from each evaluation type is used to compute the overall accessibility score.
+      public_explanation: Public Evaluations can be completed by anyone that wishes to submit an evaluation.  Every evaluation is used to compute the overall accessibility score.
       header_summary: Overall Summary
       no_evaluations: At this time no '%{name}' evaluations have been submitted.
       summary_result: Overall Result
@@ -262,9 +271,6 @@ en:
       header_user_summary: Summary
       header_user_details: Details
       details_link_title: View the details of this evaluation
-      taken_at: "Photo taken on: %{date}"
-      uploaded_at: "Uploaded on: %{date}"
-      uploaded_by: "Uploaded by: %{user}"
     form:
       header_venue: What is the Venue?
       venue_instructions: Select a venue category to view a list of venues.

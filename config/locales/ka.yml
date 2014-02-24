@@ -255,6 +255,15 @@ ka:
     show:
       district_link_title: "'%{name}'-ის ყველა ადგილის ნახვა"
       venue_link_title: "'%{name}'-ის ყველა ადგილის ნახვა"
+      tab_certified: "Certified Evaluations (%{count})"
+      tab_public: "Public Evaluations (%{count})"
+      skip_map: Skip the map and go to the photo slideshow (jump)
+      taken_at: "გადახებულია: %{date}"
+      uploaded_at: "ატვირთულია: %{date}"
+      uploaded_by: "ატვირთულია: %{user}-ს მიერ"
+    show_certified:
+      certified_explanation: Certified Evaluations are completed by staff at NGOs that are trained in how to evaluate a place for accessibility. 
+      public_explanation: Public Evaluations can be completed by anyone that wishes to submit an evaluation.
       header_summary: საერთო შეჯამება
       no_evaluations: ამ დრომდე '%{name}'-ის შეფასებები არ არის წარმოდგენილი
       summary_result: საერთო შედეგები
@@ -262,9 +271,6 @@ ka:
       header_user_summary: შეჯამება
       header_user_details: დეტალები
       details_link_title: იხილეთ ამ შეფასების დეტალები
-      taken_at: "გადახებულია: %{date}"
-      uploaded_at: "ატვირთულია: %{date}"
-      uploaded_by: "ატვირთულია: %{user}-ს მიერ"
     form:
       header_venue: რა არის ადგილმდებარეობა?
       venue_instructions: აირჩიეთ კატეგორია, რომ იხილოთ ობიექტების ჩამონათვალი.

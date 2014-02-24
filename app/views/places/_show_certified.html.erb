@@ -1,0 +1,162 @@
+        <div><p>
+        <% if type == 'certified' %>
+          <%= t('.certified_explanation') %>
+        <% else %>
+          <%= t('.public_explanation') %>
+        <% end %>
+        </p></div>
+
+        <% if data[:summary].present? && data[:summary].has_key?('overall') && data[:summary]['overall'].present? && data[:summary_questions].present?%>
+          <div>
+            <p><strong><%= t('.summary_result') %>:</strong>
+              <%= format_summary_result(data[:summary]['overall']['overall'], is_summary: true) %>
+            </p>
+            <ul class="evaluation_summary">
+            <% questions = data[:summary_questions].map{|x| [x[:id], x.name]}.uniq %>
+            <% questions.each do |question| %>
+              <li>
+                <strong><%= question[1] %>:</strong><br />
+                <%= format_summary_result(data[:summary]['overall'][question[0].to_s], is_summary: true) %>
+              </li>          
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <% if data[:disability_evaluations].present? %>
+          <hr />
+        
+          <ul id="evaluation-disability-tabs-<%= type %>" class="nav nav-tabs" data-tabs="evaluation-disability-tabs-<%= type %>">
+            <% 
+              active_index = data[:disability_evaluations].index{|x| x[:evaluation_count] > 0}
+              active_index = 0 if active_index.nil?
+            %>
+            <% data[:disability_evaluations].each_with_index do |disability, i| %>
+              <% 
+                li_class = ''
+                if i == active_index
+                  li_class = "class=active" 
+                end
+              %>
+              <li <%= li_class %>><a href="<%= "##{type}-#{disability[:code]}" %>" data-toggle="tab"><%= "#{disability[:name]} (#{disability[:evaluation_count]})" %></a></li>
+            <% end %>
+          </ul>
+          <div id="tab-content-<%= type %>" class="tab-content">
+            <% data[:disability_evaluations].each_with_index do |disability,i| %>
+              <% 
+                div_class = ''
+                div_class = "active" if i == active_index
+              %>
+              <div class="tab-pane <%= div_class %>" id="<%= "#{type}-#{disability[:code]}" %>">
+                <h2 class="clear">
+                  <%= disability[:name] %>
+                  <% if type == 'public' || (type == 'certified' && user_signed_in? && current_user.role?(User::ROLES[:certification])) %>
+                    <span>
+                      <%= link_to t('app.common.add_evaluation'), evaluation_place_path(:id => @place.id, :eval_type_id => disability[:id]), 
+                        :class => 'add_evaluation', :title => t('app.common.add_evaluation_title2', :place => @place[:name], :disability => disability[:name]) %>
+                    </span>
+                  <% end %>
+                </h2>
+
+                <% if disability[:evaluation_count] == 0 %>
+                  <p>
+                    <%= t('.no_evaluations', :name => disability[:name]) %>
+                  </p>
+                  <% if type == 'public' || (type == 'certified' && user_signed_in? && current_user.role?(User::ROLES[:certification])) %>
+                    <p>
+                      <%= link_to t('app.common.add_evaluation'), evaluation_place_path(:id => @place.id, :eval_type_id => disability[:id]), 
+                        :class => 'add_evaluation', :title => t('app.common.add_evaluation_title', :place => @place[:name]) %>
+
+                    </p>
+                  <% end %>
+                <% else %>
+	                <% if disability[:question_categories].present? && disability[:summaries].present? && disability[:summaries].has_key?('overall') && disability[:summaries]['overall'].present?%>
+                    <% questions = disability[:question_categories].map{|x| [x[:id], x.name]}.uniq %>
+                    <% if questions.present? %>
+                      <h2><%= t('.header_summary') %></h2>
+                      <p><strong><%= t('.summary_result') %>:</strong>
+                        <%= format_summary_result(disability[:summaries]['overall']['overall'], is_summary: true) %>
+                      </p>
+                      <ul class="evaluation_summary">
+                      <% questions.each do |question| %>
+                        <li>
+                          <strong><%= question[1] %>:</strong><br />
+                          <%= format_summary_result(disability[:summaries]['overall'][question[0].to_s], is_summary: true) %>
+                        </li>          
+                      <% end %>
+                      </ul>
+                    <% end %>
+                  <% end %>
+
+
+	                <% if disability[:question_categories].present? && disability[:evaluations].present? && disability[:users].present? %>
+                    <h2><%= t('.header_overall_results') %></h2>
+                    <% 
+                      qc_id = nil 
+                    %>
+
+                    <% disability[:evaluations].each do |evaluation| %>
+                      <% 
+                        user = disability[:users].select{|x| x.id == evaluation.user_id}.first
+                        summary = disability[:summaries]['evaluations'].select{|x| x['id'] == evaluation.id}.first
+                      %>
+
+                      <h3 class="clear">
+                        <span class="evaluation_date">
+                          <%= l evaluation.created_at, :format => :no_time %>
+                        </span>
+                        <% if user.present? %>
+                          <span class="user_name">      
+                            <%= user.nickname %>
+                            <% if user.avatar.present? %>
+                              <%#= image_tag user.avatar, :title => user.nickname %>
+                            <% end %>
+                          </span>
+                        <% end %>
+                      </h3>
+
+	                    <% if questions.present? && summary.present? %>
+                        <p><strong><%= t('.summary_result') %>:</strong>
+                          <%= format_summary_result(summary['overall']) %>
+                        </p>
+                        <ul class="evaluation_summary">
+                        <% questions.each do |question| %>
+                          <li>
+                            <strong><%= question[1] %>:</strong><br />
+                            <%= format_summary_result(summary[question[0].to_s]) %>
+                          </li>          
+                        <% end %>
+                        </ul>
+                      <% end %>
+
+
+                      <div class="accordion" id="<%= "accordion_#{evaluation.id}" %>">
+                        <div class="accordion-group">
+                          <div class="accordion-heading">
+                            <div class="panel-title">
+                              <a class="accordion-toggle" data-toggle="collapse" data-parent="<%= "#accordion_#{evaluation.id}" %>" 
+                                href="<%= "#collapse_#{evaluation.id}" %>" title="<%= t('.details_link_title') %>">
+                                <%= t('.header_user_details') %>
+                              </a>
+                            </div>
+                          </div>
+                          <div id="<%= "collapse_#{evaluation.id}" %>" class="accordion-body collapse">
+                            <div class="accordion-inner">
+
+                              <% disability[:question_categories].each do |cat| %>
+                                <%= render :partial => 'show_answers', :locals => {:evaluation => evaluation, :cat => cat, :is_sub_category => false} %>
+                              <% end %>
+
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    <% end %>
+                  <% end %>
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+
