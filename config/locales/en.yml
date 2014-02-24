@@ -127,6 +127,8 @@ en:
       add_evaluation_title2: "Add a %{disability} Evaluation for '%{place}'"
       view_place: View Details
       view_place_title: "View the details of '%{place}'"
+      certified: Certified
+      public: Public
     msgs:
       does_not_exist: You tried to access a page that does not exist.
       not_authorized: You are not authorized to view that page.

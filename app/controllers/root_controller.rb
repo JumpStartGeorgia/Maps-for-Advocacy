@@ -49,10 +49,22 @@ class RootController < ApplicationController
     popup << "<h4>#{place[:venue]}</h4>"
     popup << "<p>#{place[:address]}</p>"
     if summaries.present?
-      index = summaries.index{|x| x.place_id == place.id}
+      # certified
+      index = summaries.index{|x| x.place_id == place.id && x.is_certified == true}
       if index.present?
         popup << "<div>"
+        popup << I18n.t('app.common.certified')
+        popup << ': '
         popup << view_context.format_summary_result(summaries[index].to_summary_hash, is_summary: true)
+        popup << "</div>"
+      end
+      # public
+      index = summaries.index{|x| x.place_id == place.id && x.is_certified == false}
+      if index.present?
+        popup << "<div>"
+        popup << I18n.t('app.common.public')
+        popup << ': '
+        popup << view_context.format_summary_result(summaries[index].to_summary_hash, is_summary: false)
         popup << "</div>"
       end
     end

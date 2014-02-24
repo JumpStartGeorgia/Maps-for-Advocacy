@@ -119,13 +119,21 @@
             <% end %>
 
             <% if @place_summaries.present? 
-                summary_index = @place_summaries.index{|x| x.place_id == place.id}
+                summary_index = @place_summaries.index{|x| x.place_id == place.id && x.is_certified == true}
                 if summary_index.present? %>
                   <div>
+                    <%= "#{t('app.common.certified')}:" %>
                     <%= format_summary_result(@place_summaries[summary_index].to_summary_hash, is_summary: true) %>
                   </div>
-                <% end 
-               end %>
+             <% end 
+                summary_index = @place_summaries.index{|x| x.place_id == place.id && x.is_certified == false}
+                if summary_index.present? %>
+                  <div>
+                    <%= "#{t('app.common.public')}:" %>
+                    <%= format_summary_result(@place_summaries[summary_index].to_summary_hash, is_summary: true) %>
+                  </div>
+                <% end %>
+             <% end %>
 
             <%= link_to t('app.common.view_place'), place_path(place), :class => 'view_more', 
               :title => t('app.common.view_place_title', :place => place[:place]) %>

@@ -127,6 +127,8 @@ ka:
       add_evaluation_title2: "დაამატეთ '%{place}'-ის %{disability} შეფასება"
       view_place: ვრცლად
       view_place_title: "'%{place}'-ის დეტალების ნახვა"
+      certified: Certified
+      public: Public
     msgs:
       does_not_exist: თქვენ ცდილობთ იხილოთ გვერდი, რომელიც არ არსებობს.
       not_authorized: თქვენ არ გაქვთ უფლება იხილოთ ეს გვერდი.
