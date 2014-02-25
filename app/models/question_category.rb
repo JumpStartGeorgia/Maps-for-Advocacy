@@ -357,7 +357,7 @@ private
       qc = QuestionCategory.create(:is_common => is_common, :sort_order => sort)
       I18n.available_locales.each do |locale|
         x = name
-        x = name_ka if locale == :ka
+        x = name_ka if locale == :ka && name_ka.present?
         qc.question_category_translations.create(:locale => locale, :name => x)
       end
       if parent_id.present?
@@ -385,8 +385,7 @@ private
       q = Question.create
       I18n.available_locales.each do |locale|
         x = name
-## questions are not translated yet
-#        x = name_ka if locale == :ka
+        x = name_ka if locale == :ka && name_ka.present?
         q.question_translations.create(:locale => locale, :name => x)
       end
     end
