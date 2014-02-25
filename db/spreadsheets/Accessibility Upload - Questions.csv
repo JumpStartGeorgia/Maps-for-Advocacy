@@ -59,7 +59,7 @@ Entrances,შესასვლელები,4,1,,,,,"b,d,p,s",,,Accessible pa
 Entrances,შესასვლელები,4,1,,,,,"b,d,p,s",,,Accessible path to secondary entrance free of temporary barriers,,4,,,
 Entrances,შესასვლელები,4,1,,,,,"b,d,p,s",,,Sign indicating where accessible entrance is located if main entrance is not accessible,"გამოკრულია აბრა იმის შესახებ, თუ სად მდებარეობს სათადარიგო შესასვლელი, იმ შემთხვევაში, თუ მთავარი შესასვლელი არ არის ხელმისაწვდომი",5,,,
 Entrances,შესასვლელები,4,1,,,,,s,,,Accessible entrance sign uses high contrast,ხელმისაწვდომი შესასვლელის აბრაზე გამოყენებულია მაღალი კონტრასტი,6,,,
-Entrances,შესასვლელები,4,1,,,,,b,,,Accessible entrance sign in Braille,ხელმისაწვდომი შესასვლელის აბრაზე გამოყენებულია ბრაილის შრიფტი,4,,,
+Entrances,შესასვლელები,4,1,,,,,b,,,Accessible entrance sign in Braille,ხელმისაწვდომი შესასვლელის აბრაზე გამოყენებულია ბრაილის შრიფტი,7,,,
 Entrances,შესასვლელები,4,1,,,,,b,,,Tactile map of place,ადგილის ტაქტილური რუკა ადგილი,8,,,
 Entrances,შესასვლელები,4,1,Doorway,კარები,1,1,"b,d,p,s",,1,Accessible path to door free of permanent barriers,,1,,,
 Entrances,შესასვლელები,4,1,Doorway,კარები,1,1,"b,d,p,s",,1,Accessible path to door free of temporary barriers,,2,,,
