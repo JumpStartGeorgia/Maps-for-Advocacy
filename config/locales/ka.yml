@@ -315,8 +315,8 @@ ka:
       header_certification: "გსურთ შეავსოთ სერტიფიცირებული შეფასება?"
       certification_yes_link_text: "სერტიფიცირებული შეფასება"
       certification_yes_link_title: "სერტიფიცირებული შეფასების შევსება"
-      certification_no_link_text: "ჩვეულებრივი შეფასება"
-      certification_no_link_title: "ჩვეულებრივი შეფასების შევსება"
+      certification_no_link_text: "საზოგადოებრივი შეფასება"
+      certification_no_link_title: "საზოგადოებრივი შეფასების შვსება"
       submit: შეფასების შევსება
     upload_photos:
       title: "'%{name}'-ის სურათის დამატება"
