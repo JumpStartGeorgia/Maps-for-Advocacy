@@ -127,8 +127,8 @@ ka:
       add_evaluation_title2: "დაამატეთ '%{place}'-ის %{disability} შეფასება"
       view_place: ვრცლად
       view_place_title: "'%{place}'-ის დეტალების ნახვა"
-      certified: Certified
-      public: Public
+      certified: სერტიფიცირებული
+      public: საზოგადოებრივი
     msgs:
       does_not_exist: თქვენ ცდილობთ იხილოთ გვერდი, რომელიც არ არსებობს.
       not_authorized: თქვენ არ გაქვთ უფლება იხილოთ ეს გვერდი.
@@ -257,15 +257,15 @@ ka:
     show:
       district_link_title: "'%{name}'-ის ყველა ადგილის ნახვა"
       venue_link_title: "'%{name}'-ის ყველა ადგილის ნახვა"
-      tab_certified: "Certified Evaluations (%{count})"
-      tab_public: "Public Evaluations (%{count})"
-      skip_map: Skip the map and go to the photo slideshow (jump)
+      tab_certified: "სერტიფიცირებული შეფასება (%{count})"
+      tab_public: "საჯარო შეფასება (%{count})"
+      skip_map: გამოტოვეთ რუკა და გადადით ფოტო სლაიდშოუზე (გადასვლა)
       taken_at: "გადახებულია: %{date}"
       uploaded_at: "ატვირთულია: %{date}"
       uploaded_by: "ატვირთულია: %{user}-ს მიერ"
     show_certified:
-      certified_explanation: Certified Evaluations are completed by staff at NGOs that are trained in how to evaluate a place for accessibility. 
-      public_explanation: Public Evaluations can be completed by anyone that wishes to submit an evaluation.
+      certified_explanation: სერტიფიცირებული შეფასების შვსება შეუძლიათ არასამთავრობო ორგანიზაციების წარმომადგენლებს, რომლებიც დატრენინგებულები არიან ხელმისაწვდომობის შეფასებაში.
+      public_explanation: საზოგადოებრივი შეფასების შევსება შეუძლიან ნებისმიერ მსურველს.
       header_summary: საერთო შეჯამება
       no_evaluations: ამ დრომდე '%{name}'-ის შეფასებები არ არის წარმოდგენილი
       summary_result: საერთო შედეგები
@@ -309,14 +309,14 @@ ka:
     evaluation:
       title1: "'%{name}'-ის შეფასება"
       title2: "'%{name}'-ის %{disability} შეფასება"
-      title3: "Certified '%{name}'-ის %{disability} შეფასება"
+      title3: "'%{name}'-ის სერტიფიცირებული %{disability} შეფასება"
       header_disability: რომელი შეფასების შევსება გსურთ?
       disability_link_title: "'%{name}'-ის შეფასება"
-      header_certification: "Do you want to submit a Certified Evaluation?"
-      certification_yes_link_text: "Certified Evaluation"
-      certification_yes_link_title: "Fill out a certified evaluation"
-      certification_no_link_text: "Regular Public Evaluation"
-      certification_no_link_title: "Fill out a regular public evaluation"
+      header_certification: "გსურთ შეავსოთ სერტიფიცირებული შეფასება?"
+      certification_yes_link_text: "სერტიფიცირებული შეფასება"
+      certification_yes_link_title: "სერტიფიცირებული შეფასების შევსება"
+      certification_no_link_text: "ჩვეულებრივი შეფასება"
+      certification_no_link_title: "ჩვეულებრივი შეფასების შევსება"
       submit: შეფასების შევსება
     upload_photos:
       title: "'%{name}'-ის სურათის დამატება"

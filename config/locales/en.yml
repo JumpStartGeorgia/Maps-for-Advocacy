@@ -314,9 +314,9 @@ en:
       disability_link_title: "'%{name}' evaluation"
       header_certification: "Do you want to submit a Certified Evaluation?"
       certification_yes_link_text: "Certified Evaluation"
-      certification_yes_link_title: "Fill out a certified evaluation"
-      certification_no_link_text: "Regular Public Evaluation"
-      certification_no_link_title: "Fill out a regular public evaluation"
+      certification_yes_link_title: "Fill out a Certified Evaluation"
+      certification_no_link_text: "Public Evaluation"
+      certification_no_link_title: "Fill out a Public Evaluation"
       submit: Submit the Evaluation
     upload_photos:
       title: Upload Photos for '%{name}'
