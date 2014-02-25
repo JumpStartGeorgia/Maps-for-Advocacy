@@ -24,82 +24,78 @@ class PlacesController < ApplicationController
       @place_images = PlaceImage.by_place(params[:id]).with_user.sorted
 
       @disabilities = Disability.sorted.is_active
+      
+      overall_question_categories = QuestionCategory.questions_categories_for_venue(question_category_id: @place.question_category_id)
 
-      #####################
-      # get certified evals
-      #####################
       # get overall summary
       @data[:certified][:summary] = PlaceSummary.for_place_disablity(params[:id], is_certified: true)
-      @data[:certified][:summary_questions] = QuestionCategory.questions_for_venue(question_category_id: @place.question_category_id)
-
-      # get evaluations
-      if @disabilities.present?
-        @disabilities.each do |disability|
-          x = Hash.new
-          @data[:certified][:disability_evaluations] << x
-          
-          # record the disability
-          x[:id] = disability.id
-          x[:code] = disability.code
-          x[:name] = disability.name
-
-	        # get list of questions
-		      x[:question_categories] = QuestionCategory.questions_for_venue(question_category_id: @place.question_category_id, disability_id: disability.id)
-
-          # get evaluation results
-          x[:evaluations] = PlaceEvaluation.with_answers(params[:id], disability_id: disability.id, is_certified: true).sorted
-          x[:evaluation_count] = 0
-          
-          if x[:evaluations].present?
-            x[:evaluation_count] = x[:evaluations].length
-   
-            # create summaries of evaluations
-            x[:summaries] = PlaceSummary.for_place_disablity(params[:id], disability_id: disability.id, is_certified: true)
-            
-            # get user info that submitted evaluations
-            x[:users] = User.for_evaluations(x[:evaluations].map{|x| x.user_id}.uniq)
-          end        
-        end
-      end
-      
-      
-      #####################
-      # get public evals
-      #####################
-      # get overall summary
+      @data[:certified][:summary_questions] = overall_question_categories
       @data[:public][:summary] = PlaceSummary.for_place_disablity(params[:id])
-      @data[:public][:summary_questions] = QuestionCategory.questions_for_venue(question_category_id: @place.question_category_id)
+      @data[:public][:summary_questions] = overall_question_categories
 
       # get evaluations
       if @disabilities.present?
         @disabilities.each do |disability|
-          x = Hash.new
-          @data[:public][:disability_evaluations] << x
-          
-          # record the disability
-          x[:id] = disability.id
-          x[:code] = disability.code
-          x[:name] = disability.name
+          qc = QuestionCategory.questions_for_venue(question_category_id: @place.question_category_id, disability_id: disability.id)
 
-	        # get list of questions
-		      x[:question_categories] = QuestionCategory.questions_for_venue(question_category_id: @place.question_category_id, disability_id: disability.id)
+          #####################
+          # get certified evals
+          #####################
+          c = Hash.new
+          @data[:certified][:disability_evaluations] << c
+
+          # record the disability
+          c[:id] = disability.id
+          c[:code] = disability.code
+          c[:name] = disability.name
+
+          c[:question_categories] = qc
 
           # get evaluation results
-          x[:evaluations] = PlaceEvaluation.with_answers(params[:id], disability_id: disability.id).sorted
-          x[:evaluation_count] = 0
+          c[:evaluations] = PlaceEvaluation.with_answers(params[:id], disability_id: disability.id, is_certified: true).sorted
+          c[:evaluation_count] = 0
           
-          if x[:evaluations].present?
-            x[:evaluation_count] = x[:evaluations].length
+          if c[:evaluations].present?
+            c[:evaluation_count] = c[:evaluations].length
    
             # create summaries of evaluations
-            x[:summaries] = PlaceSummary.for_place_disablity(params[:id], disability_id: disability.id)
+            c[:summaries] = PlaceSummary.for_place_disablity(params[:id], disability_id: disability.id, is_certified: true)
             
             # get user info that submitted evaluations
-            x[:users] = User.for_evaluations(x[:evaluations].map{|x| x.user_id}.uniq)
+            c[:users] = User.for_evaluations(c[:evaluations].map{|x| x.user_id}.uniq)
           end        
+
+
+          #####################
+          # get public evals
+          #####################
+          p = Hash.new
+          @data[:public][:disability_evaluations] << p
+          
+          # record the disability
+          p[:id] = disability.id
+          p[:code] = disability.code
+          p[:name] = disability.name
+
+          p[:question_categories] = qc
+
+          # get evaluation results
+          p[:evaluations] = PlaceEvaluation.with_answers(params[:id], disability_id: disability.id).sorted
+          p[:evaluation_count] = 0
+          
+          if p[:evaluations].present?
+            p[:evaluation_count] = p[:evaluations].length
+   
+            # create summaries of evaluations
+            p[:summaries] = PlaceSummary.for_place_disablity(params[:id], disability_id: disability.id)
+            
+            # get user info that submitted evaluations
+            p[:users] = User.for_evaluations(p[:evaluations].map{|x| x.user_id}.uniq)
+          end        
+
         end
       end
-     
+      
 
       respond_to do |format|
         format.html # show.html.erb

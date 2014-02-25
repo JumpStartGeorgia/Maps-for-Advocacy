@@ -23,14 +23,7 @@ class QuestionCategory < ActiveRecord::Base
     categories = nil
     options[:common_only] = false if options[:common_only].nil?
 
-    categories = with_translations(I18n.locale).order('question_categories.sort_order asc')
-    if options[:child_of].present?
-      categories = categories.where('question_categories.ancestry = ?', options[:child_of]) 
-    else
-      categories = categories.where('question_categories.ancestry is null') 
-    end
-    categories = categories.where('question_categories.is_common = ?', options[:common_only])
-    categories = categories.where('question_categories.id = ?', options[:question_category_id]) if options[:question_category_id].present?
+    categories = get_categories(options)
 
     if categories.present?
     
@@ -56,6 +49,29 @@ class QuestionCategory < ActiveRecord::Base
 
     return categories
   end
+
+  # get all common question main categories and any special questions main categories if a question category id is provided  
+  # possible options: question_category_id, disability_id
+  def self.questions_categories_for_venue(options = {})
+    categories = []
+
+    # get custom questions
+    if options[:question_category_id].present?
+      categories << get_categories(options)      
+    end
+
+    
+    # get common questions
+    ops = {:common_only => true}
+    ops[:disability_id] = options[:disability_id] if options[:disability_id].present?
+    ops[:disability_ids] = options[:disability_ids] if options[:disability_ids].present?
+    categories << get_categories(ops)      
+    
+    categories.flatten!    
+    
+    return categories
+  end
+  
 
   # get all common questions and any special questions if a question category id is provided  
   # possible options: question_category_id, disability_id
@@ -394,4 +410,20 @@ private
     return v
   end
 
+
+  def self.get_categories(options={})
+    categories = nil
+    options[:common_only] = false if options[:common_only].nil?
+
+    categories = with_translations(I18n.locale).order('question_categories.sort_order asc')
+    if options[:child_of].present?
+      categories = categories.where('question_categories.ancestry = ?', options[:child_of]) 
+    else
+      categories = categories.where('question_categories.ancestry is null') 
+    end
+    categories = categories.where('question_categories.is_common = ?', options[:common_only])
+    categories = categories.where('question_categories.id = ?', options[:question_category_id]) if options[:question_category_id].present?
+    
+    return categories
+  end
 end
