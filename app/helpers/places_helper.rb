@@ -28,10 +28,10 @@ module PlacesHelper
         x << ")"
         x << "</span>"
       elsif hash.has_key?('special_flag') && hash['special_flag'].present?
-        key = PlaceEvaluation.summary_answer_key_name(hash['special_flag'])
+        key = PlaceSummary.special_flags_key_name(hash['special_flag'])
         x << "<span class='summary_result_text #{key}'>"
-        x << I18n.t("app.common.summary_answers.#{key}")
-        if hash['special_flag'] != PlaceEvaluation::SUMMARY_ANSWERS['no_answer']
+        x << I18n.t("app.common.special_flags.#{key}")
+        if hash['special_flag'] != PlaceSummary::SPECIAL_FLAGS['no_answer']
           x << " ("
           if options[:is_summary] == true
             x << "<abbr title='Number of Evlauations'>E</abbr>="

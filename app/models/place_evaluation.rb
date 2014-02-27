@@ -11,7 +11,6 @@ class PlaceEvaluation < ActiveRecord::Base
   after_create :update_summaries
 
   ANSWERS = {'no_answer' => 0, 'not_relevant' => 1, 'needs' => 2, 'has_bad' => 3, 'has_good' => 4, 'has' => 5}
-  SUMMARY_ANSWERS = {'not_accessible' => 0, 'no_answer' => 1, 'not_relevant' => 2}
 
   # update the summary for this place
   def update_summaries
@@ -24,10 +23,6 @@ class PlaceEvaluation < ActiveRecord::Base
   
   def self.answer_key_name(value)
     ANSWERS.keys[ANSWERS.values.index(value)]
-  end
-  
-  def self.summary_answer_key_name(value)
-    SUMMARY_ANSWERS.keys[SUMMARY_ANSWERS.values.index(value)]
   end
   
   def self.with_answers(place_id, options={})

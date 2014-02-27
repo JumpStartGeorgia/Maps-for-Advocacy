@@ -11,6 +11,7 @@ class PlaceSummary < ActiveRecord::Base
   SUMMARY_TYPES = {'overall' => 0, 'disability' => 1, 'instance' => 2}
   DATA_TYPES = {'overall' => 0, 'category' => 1}
   SAVE_TYPES = {'summary_overall' => 0, 'summary_category' => 1, 'disability_overall' => 2, 'disability_category' => 3, 'instance_overall' => 4, 'instance_category' => 5}
+  SPECIAL_FLAGS = {'not_accessible' => 0, 'no_answer' => 1, 'not_relevant' => 2}
 
   def to_summary_hash
     {
@@ -19,6 +20,10 @@ class PlaceSummary < ActiveRecord::Base
       'num_answers' => self.num_answers,
       'num_evaluations' => self.num_evaluations    
     }
+  end
+  
+  def self.special_flags_key_name(value)
+    SPECIAL_FLAGS.keys[SPECIAL_FLAGS.values.index(value)]
   end
   
   def self.certified(place_id)
@@ -80,8 +85,8 @@ class PlaceSummary < ActiveRecord::Base
       # not accessible
       stats[:certified][:not_accessible] = data.clone
       stats[:public][:not_accessible] = data.clone
-      stats[:certified][:not_accessible][:total] = summaries.select{|x| x.is_certified == true && x.special_flag == PlaceEvaluation::SUMMARY_ANSWERS['not_accessible']}.length
-      stats[:public][:not_accessible][:total] = summaries.select{|x| x.is_certified == false && x.special_flag == PlaceEvaluation::SUMMARY_ANSWERS['not_accessible']}.length
+      stats[:certified][:not_accessible][:total] = summaries.select{|x| x.is_certified == true && x.special_flag == SPECIAL_FLAGS['not_accessible']}.length
+      stats[:public][:not_accessible][:total] = summaries.select{|x| x.is_certified == false && x.special_flag == SPECIAL_FLAGS['not_accessible']}.length
 
       # - disabilities
       if disabilities.present?
@@ -111,8 +116,8 @@ class PlaceSummary < ActiveRecord::Base
           
           
           # not accessible
-          stats[:certified][:not_accessible][:disabilities][disability_id.to_s] = summaries.select{|x| x.is_certified == true && x.special_flag == PlaceEvaluation::SUMMARY_ANSWERS['not_accessible'] && x.disability_id == disability_id}.length
-          stats[:public][:not_accessible][:disabilities][disability_id.to_s] = summaries.select{|x| x.is_certified == false && x.special_flag == PlaceEvaluation::SUMMARY_ANSWERS['not_accessible'] && x.disability_id == disability_id}.length
+          stats[:certified][:not_accessible][:disabilities][disability_id.to_s] = summaries.select{|x| x.is_certified == true && x.special_flag == SPECIAL_FLAGS['not_accessible'] && x.disability_id == disability_id}.length
+          stats[:public][:not_accessible][:disabilities][disability_id.to_s] = summaries.select{|x| x.is_certified == false && x.special_flag == SPECIAL_FLAGS['not_accessible'] && x.disability_id == disability_id}.length
         end
       end
     end
@@ -159,8 +164,8 @@ class PlaceSummary < ActiveRecord::Base
       # not accessible
       stats[:certified][:not_accessible] = data.clone
       stats[:public][:not_accessible] = data.clone
-      stats[:certified][:not_accessible][:total] = summaries.select{|x| x.is_certified == true && x.special_flag == PlaceEvaluation::SUMMARY_ANSWERS['not_accessible']}.length
-      stats[:public][:not_accessible][:total] = summaries.select{|x| x.is_certified == false && x.special_flag == PlaceEvaluation::SUMMARY_ANSWERS['not_accessible']}.length
+      stats[:certified][:not_accessible][:total] = summaries.select{|x| x.is_certified == true && x.special_flag == SPECIAL_FLAGS['not_accessible']}.length
+      stats[:public][:not_accessible][:total] = summaries.select{|x| x.is_certified == false && x.special_flag == SPECIAL_FLAGS['not_accessible']}.length
 
 
       # - disabilities
@@ -191,8 +196,8 @@ class PlaceSummary < ActiveRecord::Base
           
           
           # not accessible
-          stats[:certified][:not_accessible][:disabilities][disability_id.to_s] = disability_summaries.select{|x| x.is_certified == true && x.special_flag == PlaceEvaluation::SUMMARY_ANSWERS['not_accessible'] && x.summary_type_identifier == disability_id}.length
-          stats[:public][:not_accessible][:disabilities][disability_id.to_s] = disability_summaries.select{|x| x.is_certified == false && x.special_flag == PlaceEvaluation::SUMMARY_ANSWERS['not_accessible'] && x.summary_type_identifier == disability_id}.length
+          stats[:certified][:not_accessible][:disabilities][disability_id.to_s] = disability_summaries.select{|x| x.is_certified == true && x.special_flag == SPECIAL_FLAGS['not_accessible'] && x.summary_type_identifier == disability_id}.length
+          stats[:public][:not_accessible][:disabilities][disability_id.to_s] = disability_summaries.select{|x| x.is_certified == false && x.special_flag == SPECIAL_FLAGS['not_accessible'] && x.summary_type_identifier == disability_id}.length
         end
       end
     end
@@ -598,7 +603,7 @@ private
   # req_accessibility_question_ids: array of ids to questions that have required for accessibility flag
   # returns: {score, special_flag, num_answers, num_evaluations}
   # - score = overall average of records passed in unless a special case was found
-  # - special_flag = one of SUMMARY_ANSWERS values or nil; will be nil if score has value
+  # - special_flag = one of SPECIAL_FLAGS values or nil; will be nil if score has value
   # - num_answers = number of answers that exist
   # - num_evaluations = number of evaluations that exist
   def self.summarize_answers(records, exists_question_ids, req_accessibility_question_ids)
@@ -614,7 +619,7 @@ private
 #        Rails.logger.debug "************ found an answer that is 'needs' for a required accessibility question -> not accessible"
         # found an answer that is 'needs' for a required accessibility question
         # -> not accessible
-        h['special_flag'] = PlaceEvaluation::SUMMARY_ANSWERS['not_accessible']
+        h['special_flag'] = SPECIAL_FLAGS['not_accessible']
       else
         # get average of answers that are not:
         # - for exists questions 
@@ -628,10 +633,10 @@ private
         else
           if records.select{|x| x[:answer] == PlaceEvaluation::ANSWERS['not_relevant']}.present?
 #            Rails.logger.debug "************ has not relevant only answers"
-            h['special_flag'] = PlaceEvaluation::SUMMARY_ANSWERS['not_relevant']
+            h['special_flag'] = SPECIAL_FLAGS['not_relevant']
           else
 #            Rails.logger.debug "************ has no answers"
-            h['special_flag'] = PlaceEvaluation::SUMMARY_ANSWERS['no_answer']
+            h['special_flag'] = SPECIAL_FLAGS['no_answer']
           end
         end        
       end

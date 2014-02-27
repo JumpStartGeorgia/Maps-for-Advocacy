@@ -116,7 +116,7 @@ en:
         needs: Not have and needs
         not_relevant: Not relevant
         no_answer: No answer
-      summary_answers:
+      special_flags:
         not_accessible: Not Accessible
         no_answer: No Answers
         not_relevant: Not Relevant

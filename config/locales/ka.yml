@@ -116,7 +116,7 @@ ka:
         needs: არ აქვს და ესაჭიროება
         not_relevant: არ არის შესაბამისი
         no_answer: არ არის პასუხი
-      summary_answers:
+      special_flags:
         not_accessible: არ არის ხელმისაწვდომი
         no_answer: არ არის პასუხი
         not_relevant: არ არის შესაბამისი
