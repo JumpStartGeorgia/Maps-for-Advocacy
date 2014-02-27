@@ -4,79 +4,66 @@
           <tr>
             <th>
             </th>
-            <% if @disabilities.present? %>
-              <% @disabilities.each do |disability| %>
-                <th>
-                  <%= disability.name %>
-                </th>
-              <% end %>
-            <% end %>
             <th>
+              <%= t('.accessible') %>
+            </th>
+            <th>
+              <%= t('.partial_accessible') %>
+            </th>
+            <th>
+              <%= t('.not_accessible') %>
+            </th>
+            <th class="total">
               <%= t('.total') %>
             </th>
           </tr>
         </thead>
         <tbody>
-          <tr class="accessible">
-            <td>
-              <%= t('.accessible') %>
-            </td>
-            <% if @disabilities.present? %>
-              <% @disabilities.each do |disability| %>
+          <% if @disabilities.present? %>
+            <% @disabilities.each do |disability| %>
+              <tr>
                 <td>
+                  <%= disability.name %>
+                </td>
+                <%
+                  class_accessible = data[:accessible][:disabilities][disability.id.to_s] == 0 ? '' : 'class=accessible' 
+                  class_partial_accessible = data[:partial_accessible][:disabilities][disability.id.to_s] == 0 ? '' : 'class=partial_accessible' 
+                  class_not_accessible = data[:not_accessible][:disabilities][disability.id.to_s] == 0 ? '' : 'class=not_accessible' 
+                %>
+                <td <%= class_accessible %>>
                   <%= data[:accessible][:disabilities][disability.id.to_s] %>
                 </td>
-              <% end %>
-            <% end %>
-            <td>
-              <%= data[:accessible][:total] %>
-            </td> 
-          </tr>
-
-          <tr class="partial_accessible">
-            <td>
-              <%= t('.partial_accessible') %>
-            </td>
-            <% if @disabilities.present? %>
-              <% @disabilities.each do |disability| %>
-                <td>
+                <td <%= class_partial_accessible %>>
                   <%= data[:partial_accessible][:disabilities][disability.id.to_s] %>
                 </td>
-              <% end %>
-            <% end %>
-            <td>
-              <%= data[:partial_accessible][:total] %>
-            </td> 
-          </tr>
-
-          <tr class="not_accessible">
-            <td>
-              <%= t('.not_accessible') %>
-            </td>
-            <% if @disabilities.present? %>
-              <% @disabilities.each do |disability| %>
-                <td>
+                <td <%= class_not_accessible %>>
                   <%= data[:not_accessible][:disabilities][disability.id.to_s] %>
                 </td>
-              <% end %>
+                <td class="total">
+                  <%= data[:total][:disabilities][disability.id.to_s] %>
+                </td>
+              </tr>
             <% end %>
-            <td>
-              <%= data[:not_accessible][:total] %>
-            </td> 
-          </tr>
-
+          <% end %>
           <tr class="total">
             <td>
               <%= t('.total') %>
-            </td>
-            <% if @disabilities.present? %>
-              <% @disabilities.each do |disability| %>
-                <td>
-                  <%= data[:total][:disabilities][disability.id.to_s] %>
-                </td>
-              <% end %>
-            <% end %>
-            <td>
+            </td> 
+            <%
+              class_accessible = data[:accessible][:total] == 0 ? '' : 'class=accessible' 
+              class_partial_accessible = data[:partial_accessible][:total] == 0 ? '' : 'class=partial_accessible' 
+              class_not_accessible = data[:not_accessible][:total] == 0 ? '' : 'class=not_accessible' 
+            %>
+            <td <%= class_accessible %>>
+              <%= data[:accessible][:total] %>
+            </td> 
+            <td <%= class_partial_accessible %>>
+              <%= data[:partial_accessible][:total] %>
+            </td> 
+            <td <%= class_not_accessible %>>
+              <%= data[:not_accessible][:total] %>
+            </td> 
+            <td class="total">
               <%= data[:total][:total] %>
             </td> 
           </tr>

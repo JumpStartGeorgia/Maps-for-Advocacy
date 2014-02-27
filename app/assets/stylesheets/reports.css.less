@@ -1,18 +1,24 @@
 table.overall_stats{
   th{
     text-align: center;
+    &.total{
+      border-left: solid 2px #000;
+    }
   }
   td{
     text-align: center;
-  }
-  tr.accessible{
-    background-color: #a8d2b8;
-  }
-  tr.partial_accessible{
-    background-color: #eedea0;
-  }
-  tr.not_accessible{
-    background-color: #e1919f;
+    &.accessible{
+      background-color: #a8d2b8;
+    }
+    &.partial_accessible{
+      background-color: #eedea0;
+    }
+    &.not_accessible{
+      background-color: #e1919f;
+    }
+    &.total{
+      border-left: solid 2px #000;
+    }
   }
   tr.total td{
     border-top: solid 2px #000;
