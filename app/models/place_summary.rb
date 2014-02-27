@@ -8,10 +8,10 @@ class PlaceSummary < ActiveRecord::Base
                   :is_certified
   validates :place_id, :summary_type, :data_type, :presence => true
   
-  SUMMARY_TYPES = {'overall' => 0, 'disability' => 1, 'instance' => 2}
+  SPECIAL_FLAGS = {'not_accessible' => 0, 'no_answer' => 1, 'not_relevant' => 2}
+  SUMMARY_TYPES = {'overall' => 0, 'disability' => 1, 'instance' => 2, 'venue_category' => 3, 'venue' => 4}
   DATA_TYPES = {'overall' => 0, 'category' => 1}
   SAVE_TYPES = {'summary_overall' => 0, 'summary_category' => 1, 'disability_overall' => 2, 'disability_category' => 3, 'instance_overall' => 4, 'instance_category' => 5}
-  SPECIAL_FLAGS = {'not_accessible' => 0, 'no_answer' => 1, 'not_relevant' => 2}
 
   def to_summary_hash
     {

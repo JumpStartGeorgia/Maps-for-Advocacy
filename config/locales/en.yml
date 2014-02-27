@@ -365,21 +365,25 @@ en:
   reports:
     index:
       title: Reports
-      header_evaluations: All Submitted Evaluations 
+      header_evaluations: Breakdown of All Submitted Evaluations 
+      explain_evaluations: The following tables show the number of evaluations that resulted in each possible accessibility level.
       header_evaluations_certified: Certified Evaluations
       header_evaluations_public: Public Evaluations
-      header_places: Overall Place Evaluations
-      header_places_certified: Certified Evaluations
-      header_places_public: Public Evaluations
+      header_places: Breakdown of Place Accessibility
+      explain_places: The following tables show the number of places that have an overall evaluation result in each possible accessibility level.
+      header_places_certified: Certified Evaluated Places
+      header_places_public: Public Evaluated Places
+      no_evals: No evaluations have been submitted yet.
+      no_places: No places have been evaluated yet.
       general:
         users: Users Submitting Evaluations
         places: Places
         place_images: Images of Places
         certified: Certified Evaluations
         public: Public Evaluations
+        answers: Questions Answered
     table_overall_stats:
       total: Total
       accessible: Accessible
       partial_accessible: Partially Accessible
       not_accessible: Not Accessible
-      

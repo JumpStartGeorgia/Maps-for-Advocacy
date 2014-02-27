@@ -47,5 +47,12 @@ class PlaceEvaluationAnswer < ActiveRecord::Base
     end
   end
 
+
+  # get number of questions that have have been answered
+  def self.answer_count
+    where(['answer > ?', PlaceEvaluation::ANSWERS['no_answer']]).count
+  end
+  
+
     
 end

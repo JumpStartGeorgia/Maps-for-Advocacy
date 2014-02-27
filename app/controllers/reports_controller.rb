@@ -8,6 +8,7 @@ class ReportsController < ApplicationController
     @general_stats << {:name => I18n.t('reports.index.general.places'), :count => Place.count}
     @general_stats << {:name => I18n.t('reports.index.general.certified'), :count => @evals.present? ? @evals[:certified][:total][:total] : 0}
     @general_stats << {:name => I18n.t('reports.index.general.public'), :count => @evals.present? ? @evals[:public][:total][:total] : 0}
+    @general_stats << {:name => I18n.t('reports.index.general.answers'), :count => PlaceEvaluationAnswer.answer_count}
     @general_stats << {:name => I18n.t('reports.index.general.place_images'), :count => PlaceImage.count}
     @general_stats << {:name => I18n.t('reports.index.general.users'), :count => PlaceEvaluation.user_count}
     

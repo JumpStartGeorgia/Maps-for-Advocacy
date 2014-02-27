@@ -4,7 +4,7 @@
   <div id="general_stats" class="row-fluid">
     <dl>
     <% @general_stats.each_with_index do |stat, i| %>
-      <div class="span2 <%= i == 0 ? 'offset1' : ''%>">
+      <div class="span2">
         <dt>
           <%= stat[:name] %>
         </dt>
@@ -19,6 +19,7 @@
 
 
 <h2><%= t('.header_evaluations') %></h2>
+<p><%= t('.explain_evaluations') %></h2>
 <% if @evals.present? %>
   <div class="row-fluid">
     <div class="span6">
@@ -39,6 +40,7 @@
 
 
 <h2><%= t('.header_places') %></h2>
+<p><%= t('.explain_places') %></h2>
 
 <% if @places.present? %>
   <div class="row-fluid">
