@@ -146,6 +146,7 @@ en:
       admin: Admin
       settings: Settings
       methodology: Methodology
+      reports: Reports
       sign_out: Sign Out
       js_link_title: JumpStart Georgia - We communicate data better!
       js_link_text: Built by
@@ -361,3 +362,18 @@ en:
       explanation1: Venues are places, pathways or objects that have a geographic location and can be evalated on their accessibility.
     calculations:
       title: Methodology - Calculations
+  reports:
+    index:
+      title: "Reports"
+      header_evaluations: All Submitted Evaluations 
+      header_evaluations_certified: Certified Evaluations
+      header_evaluations_public: Public Evaluations
+      header_places: Overall Place Evaluations
+      header_places_certified: Certified Evaluations
+      header_places_public: Public Evaluations
+    table_overall_stats:
+      total: Total
+      accessible: Accessible
+      partial_accessible: Partially Accessible
+      not_accessible: Not Accessible
+      

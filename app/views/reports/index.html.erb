@@ -1,0 +1,45 @@
+<% title t('.title') %>
+
+
+
+<h2><%= t('.header_evaluations') %></h2>
+<% if @evals.present? %>
+  <div class="row-fluid">
+    <div class="span6">
+      <h3><%= t('.header_evaluations_certified') %></h3>
+      <%= render :partial => 'table_overall_stats', :locals => {:data => @evals[:certified]} %>
+    </div>
+    <div class="span6">
+      <h3><%= t('.header_evaluations_public') %></h3>
+      <%= render :partial => 'table_overall_stats', :locals => {:data => @evals[:public]} %>
+    </div>
+  </div>
+<% else %>
+
+  <p><%= t('.no_evals') %></p>
+
+<% end %>
+
+
+
+<h2><%= t('.header_places') %></h2>
+
+<% if @places.present? %>
+  <div class="row-fluid">
+    <div class="span6">
+      <h3><%= t('.header_places_certified') %></h3>
+      <%= render :partial => 'table_overall_stats', :locals => {:data => @places[:certified]} %>
+    </div>
+    <div class="span6">
+      <h3><%= t('.header_places_public') %></h3>
+      <%= render :partial => 'table_overall_stats', :locals => {:data => @places[:public]} %>
+    </div>
+  </div>
+
+<% else %>
+
+  <p><%= t('.no_places') %></p>
+
+<% end %>
+
+

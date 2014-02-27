@@ -1,0 +1,85 @@
+<% if data.present? %>
+      <table class="table table-bordered overall_stats">
+        <thead>
+          <tr>
+            <th>
+            </th>
+            <% if @disabilities.present? %>
+              <% @disabilities.each do |disability| %>
+                <th>
+                  <%= disability.name %>
+                </th>
+              <% end %>
+            <% end %>
+            <th>
+              <%= t('.total') %>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr class="accessible">
+            <td>
+              <%= t('.accessible') %>
+            </td>
+            <% if @disabilities.present? %>
+              <% @disabilities.each do |disability| %>
+                <td>
+                  <%= data[:accessible][:disabilities][disability.id.to_s] %>
+                </td>
+              <% end %>
+            <% end %>
+            <td>
+              <%= data[:accessible][:total] %>
+            </td> 
+          </tr>
+
+          <tr class="partial_accessible">
+            <td>
+              <%= t('.partial_accessible') %>
+            </td>
+            <% if @disabilities.present? %>
+              <% @disabilities.each do |disability| %>
+                <td>
+                  <%= data[:partial_accessible][:disabilities][disability.id.to_s] %>
+                </td>
+              <% end %>
+            <% end %>
+            <td>
+              <%= data[:partial_accessible][:total] %>
+            </td> 
+          </tr>
+
+          <tr class="not_accessible">
+            <td>
+              <%= t('.not_accessible') %>
+            </td>
+            <% if @disabilities.present? %>
+              <% @disabilities.each do |disability| %>
+                <td>
+                  <%= data[:not_accessible][:disabilities][disability.id.to_s] %>
+                </td>
+              <% end %>
+            <% end %>
+            <td>
+              <%= data[:not_accessible][:total] %>
+            </td> 
+          </tr>
+
+          <tr class="total">
+            <td>
+              <%= t('.total') %>
+            </td>
+            <% if @disabilities.present? %>
+              <% @disabilities.each do |disability| %>
+                <td>
+                  <%= data[:total][:disabilities][disability.id.to_s] %>
+                </td>
+              <% end %>
+            <% end %>
+            <td>
+              <%= data[:total][:total] %>
+            </td> 
+          </tr>
+        </tbody>
+      </table>
+<% end %>

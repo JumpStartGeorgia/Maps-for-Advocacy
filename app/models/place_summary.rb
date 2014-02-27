@@ -30,12 +30,177 @@ class PlaceSummary < ActiveRecord::Base
   end
   
   
-  
   def self.overall_summaries_for_places(place_ids)
     if place_ids.present?
       where(:place_id => place_ids, :summary_type => SUMMARY_TYPES['overall'], :data_type => DATA_TYPES['overall'])
     end
   end
+
+
+  ##################################
+  ##################################
+  ### summary stats 
+  ##################################
+  ##################################
+
+  # get the overall stats for all evaluations
+  # return: {:certified => {:total => {:total => #, :disabilities => {1 => #, 2 => #, etc}, 
+  #                         :accessible => {:total => #, :disabilities => {1 => #, 2 => #, etc}, 
+  #                         :partial_accessible => ,
+  #                         :not_accessible => },
+  #           :public => {same format as certified}
+  #         }
+  def self.stats_overall_evaluation_results
+    stats = {:certified => Hash.new, :public => Hash.new}
+    data = {:total => 0, :disabilities => nil}
+    summaries = where(:summary_type => SUMMARY_TYPES['instance'], :data_type => DATA_TYPES['overall'])
+    disabilities = Disability.is_active.select('id').map{|x| x.id}
+
+    if summaries.present?
+      # total
+      stats[:certified][:total] = data.clone
+      stats[:public][:total] = data.clone
+      stats[:certified][:total][:total] = summaries.select{|x| x.is_certified == true}.length
+      stats[:public][:total][:total] = summaries.select{|x| x.is_certified == false}.length
+
+      # accessible
+      stats[:certified][:accessible] = data.clone
+      stats[:public][:accessible] = data.clone
+      stats[:certified][:accessible][:total] = summaries.select{|x| x.is_certified == true && x.score == PlaceEvaluation::ANSWERS['has_good']}.length
+      stats[:public][:accessible][:total] = summaries.select{|x| x.is_certified == false && x.score == PlaceEvaluation::ANSWERS['has_good']}.length
+      
+     
+      # partial accessible
+      stats[:certified][:partial_accessible] = data.clone
+      stats[:public][:partial_accessible] = data.clone
+      stats[:certified][:partial_accessible][:total] = summaries.select{|x| x.is_certified == true && x.score.present? && x.score < PlaceEvaluation::ANSWERS['has_good']}.length
+      stats[:public][:partial_accessible][:total] = summaries.select{|x| x.is_certified == false && x.score.present? && x.score < PlaceEvaluation::ANSWERS['has_good']}.length
+      
+      
+      # not accessible
+      stats[:certified][:not_accessible] = data.clone
+      stats[:public][:not_accessible] = data.clone
+      stats[:certified][:not_accessible][:total] = summaries.select{|x| x.is_certified == true && x.special_flag == PlaceEvaluation::SUMMARY_ANSWERS['not_accessible']}.length
+      stats[:public][:not_accessible][:total] = summaries.select{|x| x.is_certified == false && x.special_flag == PlaceEvaluation::SUMMARY_ANSWERS['not_accessible']}.length
+
+      # - disabilities
+      if disabilities.present?
+        # initialize the hash
+        stats[:certified][:total][:disabilities] = Hash.new
+        stats[:public][:total][:disabilities] = Hash.new
+        stats[:certified][:accessible][:disabilities] = Hash.new
+        stats[:public][:accessible][:disabilities] = Hash.new
+        stats[:certified][:partial_accessible][:disabilities] = Hash.new
+        stats[:public][:partial_accessible][:disabilities] = Hash.new
+        stats[:certified][:not_accessible][:disabilities] = Hash.new
+        stats[:public][:not_accessible][:disabilities] = Hash.new
+
+        disabilities.each do |disability_id|
+          # total
+          stats[:certified][:total][:disabilities][disability_id.to_s] = summaries.select{|x| x.is_certified == true && x.disability_id == disability_id}.length
+          stats[:public][:total][:disabilities][disability_id.to_s] = summaries.select{|x| x.is_certified == false && x.disability_id == disability_id}.length
+
+          # accessible
+          stats[:certified][:accessible][:disabilities][disability_id.to_s] = summaries.select{|x| x.is_certified == true && x.score == PlaceEvaluation::ANSWERS['has_good'] && x.disability_id == disability_id}.length
+          stats[:public][:accessible][:disabilities][disability_id.to_s] = summaries.select{|x| x.is_certified == false && x.score == PlaceEvaluation::ANSWERS['has_good'] && x.disability_id == disability_id}.length
+          
+         
+          # partial accessible
+          stats[:certified][:partial_accessible][:disabilities][disability_id.to_s] = summaries.select{|x| x.is_certified == true && x.score.present? && x.score < PlaceEvaluation::ANSWERS['has_good'] && x.disability_id == disability_id}.length
+          stats[:public][:partial_accessible][:disabilities][disability_id.to_s] = summaries.select{|x| x.is_certified == false && x.score.present? && x.score < PlaceEvaluation::ANSWERS['has_good'] && x.disability_id == disability_id}.length
+          
+          
+          # not accessible
+          stats[:certified][:not_accessible][:disabilities][disability_id.to_s] = summaries.select{|x| x.is_certified == true && x.special_flag == PlaceEvaluation::SUMMARY_ANSWERS['not_accessible'] && x.disability_id == disability_id}.length
+          stats[:public][:not_accessible][:disabilities][disability_id.to_s] = summaries.select{|x| x.is_certified == false && x.special_flag == PlaceEvaluation::SUMMARY_ANSWERS['not_accessible'] && x.disability_id == disability_id}.length
+        end
+      end
+    end
+    
+    return stats  
+  end
+
+
+  # get the overall stats for all places
+  # return: {:certified => {:total => {:total => #, :disabilities => {1 => #, 2 => #, etc}, 
+  #                         :accessible => {:total => #, :disabilities => {1 => #, 2 => #, etc}, 
+  #                         :partial_accessible => ,
+  #                         :not_accessible => },
+  #           :public => {same format as certified}
+  #         }
+  def self.stats_overall_place_evaluation_results
+    stats = {:certified => Hash.new, :public => Hash.new}
+    data = {:total => 0, :disabilities => nil}
+    summaries = where(:summary_type => SUMMARY_TYPES['overall'], :data_type => DATA_TYPES['overall'])
+    disability_summaries = where(:summary_type => SUMMARY_TYPES['disability'], :data_type => DATA_TYPES['overall'])
+    disabilities = Disability.is_active.select('id').map{|x| x.id}
+
+    if summaries.present?
+      # total
+      stats[:certified][:total] = data.clone
+      stats[:public][:total] = data.clone
+      stats[:certified][:total][:total] = summaries.select{|x| x.is_certified == true}.length
+      stats[:public][:total][:total] = summaries.select{|x| x.is_certified == false}.length
+
+      # accessible
+      stats[:certified][:accessible] = data.clone
+      stats[:public][:accessible] = data.clone
+      stats[:certified][:accessible][:total] = summaries.select{|x| x.is_certified == true && x.score == PlaceEvaluation::ANSWERS['has_good']}.length
+      stats[:public][:accessible][:total] = summaries.select{|x| x.is_certified == false && x.score == PlaceEvaluation::ANSWERS['has_good']}.length
+      
+     
+      # partial accessible
+      stats[:certified][:partial_accessible] = data.clone
+      stats[:public][:partial_accessible] = data.clone
+      stats[:certified][:partial_accessible][:total] = summaries.select{|x| x.is_certified == true && x.score.present? && x.score < PlaceEvaluation::ANSWERS['has_good']}.length
+      stats[:public][:partial_accessible][:total] = summaries.select{|x| x.is_certified == false && x.score.present? && x.score < PlaceEvaluation::ANSWERS['has_good']}.length
+      
+      
+      # not accessible
+      stats[:certified][:not_accessible] = data.clone
+      stats[:public][:not_accessible] = data.clone
+      stats[:certified][:not_accessible][:total] = summaries.select{|x| x.is_certified == true && x.special_flag == PlaceEvaluation::SUMMARY_ANSWERS['not_accessible']}.length
+      stats[:public][:not_accessible][:total] = summaries.select{|x| x.is_certified == false && x.special_flag == PlaceEvaluation::SUMMARY_ANSWERS['not_accessible']}.length
+
+
+      # - disabilities
+      if disabilities.present? && disability_summaries.present?
+        # initialize the hash
+        stats[:certified][:total][:disabilities] = Hash.new
+        stats[:public][:total][:disabilities] = Hash.new
+        stats[:certified][:accessible][:disabilities] = Hash.new
+        stats[:public][:accessible][:disabilities] = Hash.new
+        stats[:certified][:partial_accessible][:disabilities] = Hash.new
+        stats[:public][:partial_accessible][:disabilities] = Hash.new
+        stats[:certified][:not_accessible][:disabilities] = Hash.new
+        stats[:public][:not_accessible][:disabilities] = Hash.new
+
+        disabilities.each do |disability_id|
+          # total
+          stats[:certified][:total][:disabilities][disability_id.to_s] = disability_summaries.select{|x| x.is_certified == true && x.summary_type_identifier == disability_id}.length
+          stats[:public][:total][:disabilities][disability_id.to_s] = disability_summaries.select{|x| x.is_certified == false && x.summary_type_identifier == disability_id}.length
+
+          # accessible
+          stats[:certified][:accessible][:disabilities][disability_id.to_s] = disability_summaries.select{|x| x.is_certified == true && x.score == PlaceEvaluation::ANSWERS['has_good'] && x.summary_type_identifier == disability_id}.length
+          stats[:public][:accessible][:disabilities][disability_id.to_s] = disability_summaries.select{|x| x.is_certified == false && x.score == PlaceEvaluation::ANSWERS['has_good'] && x.summary_type_identifier == disability_id}.length
+          
+         
+          # partial accessible
+          stats[:certified][:partial_accessible][:disabilities][disability_id.to_s] = disability_summaries.select{|x| x.is_certified == true && x.score.present? && x.score < PlaceEvaluation::ANSWERS['has_good'] && x.summary_type_identifier == disability_id}.length
+          stats[:public][:partial_accessible][:disabilities][disability_id.to_s] = disability_summaries.select{|x| x.is_certified == false && x.score.present? && x.score < PlaceEvaluation::ANSWERS['has_good'] && x.summary_type_identifier == disability_id}.length
+          
+          
+          # not accessible
+          stats[:certified][:not_accessible][:disabilities][disability_id.to_s] = disability_summaries.select{|x| x.is_certified == true && x.special_flag == PlaceEvaluation::SUMMARY_ANSWERS['not_accessible'] && x.summary_type_identifier == disability_id}.length
+          stats[:public][:not_accessible][:disabilities][disability_id.to_s] = disability_summaries.select{|x| x.is_certified == false && x.special_flag == PlaceEvaluation::SUMMARY_ANSWERS['not_accessible'] && x.summary_type_identifier == disability_id}.length
+        end
+      end
+    end
+    
+    return stats
+  end
+
+
   
 
   # get summary data for a place/disability
@@ -396,7 +561,8 @@ class PlaceSummary < ActiveRecord::Base
     Rails.logger.debug "************* update_certified_summaries: end"
     Rails.logger.debug "*****************************************"
   end
-
+  
+  
 private
 
   # format summary records into a hash format

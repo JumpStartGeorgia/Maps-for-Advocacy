@@ -60,6 +60,9 @@ BootstrapStarter::Application.routes.draw do
 		match '/methodology/venues', :to => 'methodology#venues', :as => :methodology_venues, :via => :get
 		match '/methodology/calculations', :to => 'methodology#calculations', :as => :methodology_calculations, :via => :get
     
+    # reports
+		match '/reports', :to => 'reports#index', :as => :reports, :via => :get
+
 
 		root :to => 'root#index'
 	  match "*path", :to => redirect("/#{I18n.default_locale}") # handles /en/fake/path/whatever
