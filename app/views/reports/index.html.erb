@@ -1,5 +1,21 @@
 <% title t('.title') %>
 
+<% if @general_stats.present? %>
+  <div id="general_stats" class="row-fluid">
+    <dl>
+    <% @general_stats.each_with_index do |stat, i| %>
+      <div class="span2 <%= i == 0 ? 'offset1' : ''%>">
+        <dt>
+          <%= stat[:name] %>
+        </dt>
+        <dd>
+          <%= stat[:count] %>
+        </dd>
+      </div>
+    <% end %>
+    </dl>
+  </div>
+<% end %>
 
 
 <h2><%= t('.header_evaluations') %></h2>

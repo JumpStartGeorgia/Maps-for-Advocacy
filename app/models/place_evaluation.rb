@@ -42,6 +42,11 @@ class PlaceEvaluation < ActiveRecord::Base
     order('place_evaluations.created_at desc, place_evaluations.user_id asc')
   end
   
+  # get number of users that have submitted evaluations
+  def self.user_count
+    select('distinct user_id').count
+  end
+  
   # get all of the answers for a place
   # so that a summary can be computed
   # place_id: id of place to get answers for

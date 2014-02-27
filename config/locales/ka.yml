@@ -364,4 +364,22 @@ ka:
       title: მეთოდოლოგიური - გამოთვლები    
   reports:
     index:
-      title: "Reports"      
+      title: Reports
+      header_evaluations: All Submitted Evaluations 
+      header_evaluations_certified: Certified Evaluations
+      header_evaluations_public: Public Evaluations
+      header_places: Overall Place Evaluations
+      header_places_certified: Certified Evaluations
+      header_places_public: Public Evaluations
+      general:
+        users: Users Submit Evaluations
+        places: Places
+        place_images: Images of Places
+        certified: Certified Evaluations
+        public: Public Evaluations
+    table_overall_stats:
+      total: Total
+      accessible: Accessible
+      partial_accessible: Partially Accessible
+      not_accessible: Not Accessible
+            
