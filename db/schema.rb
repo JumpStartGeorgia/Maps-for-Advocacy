@@ -274,6 +274,7 @@ ActiveRecord::Schema.define(:version => 20140227135703) do
     t.integer  "special_flag"
     t.integer  "num_answers"
     t.integer  "num_evaluations"
+    t.integer  "num_places"
     t.boolean  "is_certified"
     t.datetime "created_at"
     t.datetime "updated_at"

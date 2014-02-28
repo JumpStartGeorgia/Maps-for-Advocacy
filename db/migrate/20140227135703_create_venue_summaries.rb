@@ -12,6 +12,7 @@ class CreateVenueSummaries < ActiveRecord::Migration
       t.integer :special_flag
       t.integer :num_answers
       t.integer :num_evaluations
+      t.integer :num_places
       t.boolean :is_certified
 
       t.timestamps

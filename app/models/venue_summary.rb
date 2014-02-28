@@ -3,7 +3,7 @@ class VenueSummary < ActiveRecord::Base
   
   attr_accessible :venue_id, :venue_category_id, :summary_type, :summary_type_identifier, 
                   :data_type, :data_type_identifier, :disability_id,
-                  :score, :special_flag, :num_answers, :num_evaluations, 
+                  :score, :special_flag, :num_answers, :num_evaluations, :num_places,
                   :is_certified
   validates :summary_type, :data_type, :presence => true
   
@@ -17,7 +17,8 @@ class VenueSummary < ActiveRecord::Base
       'score' => self.score,
       'special_flag' => self.special_flag,
       'num_answers' => self.num_answers,
-      'num_evaluations' => self.num_evaluations    
+      'num_evaluations' => self.num_evaluations,
+      'num_places' => self.num_places  
     }
   end
 
@@ -43,7 +44,6 @@ class VenueSummary < ActiveRecord::Base
   ### summary stats 
   ##################################
   ##################################
-
 
   # get the overall stats for all places in a venue
   # - venue_id: id of venue or venue category
@@ -73,28 +73,28 @@ class VenueSummary < ActiveRecord::Base
       # total
       stats[:certified][:total] = data.clone
       stats[:public][:total] = data.clone
-      stats[:certified][:total][:total] = add_num_evaluations(summaries.select{|x| x.is_certified == true})
-      stats[:public][:total][:total] = add_num_evaluations(summaries.select{|x| x.is_certified == false})
+      stats[:certified][:total][:total] = sum_num_places(summaries.select{|x| x.is_certified == true})
+      stats[:public][:total][:total] = sum_num_places(summaries.select{|x| x.is_certified == false})
 
       # accessible
       stats[:certified][:accessible] = data.clone
       stats[:public][:accessible] = data.clone
-      stats[:certified][:accessible][:total] = add_num_evaluations(summaries.select{|x| x.is_certified == true && x.score == PlaceEvaluation::ANSWERS['has_good']})
-      stats[:public][:accessible][:total] = add_num_evaluations(summaries.select{|x| x.is_certified == false && x.score == PlaceEvaluation::ANSWERS['has_good']})
+      stats[:certified][:accessible][:total] = sum_num_places(summaries.select{|x| x.is_certified == true && x.score == PlaceEvaluation::ANSWERS['has_good']})
+      stats[:public][:accessible][:total] = sum_num_places(summaries.select{|x| x.is_certified == false && x.score == PlaceEvaluation::ANSWERS['has_good']})
       
      
       # partial accessible
       stats[:certified][:partial_accessible] = data.clone
       stats[:public][:partial_accessible] = data.clone
-      stats[:certified][:partial_accessible][:total] = add_num_evaluations(summaries.select{|x| x.is_certified == true && x.score.present? && x.score < PlaceEvaluation::ANSWERS['has_good']})
-      stats[:public][:partial_accessible][:total] = add_num_evaluations(summaries.select{|x| x.is_certified == false && x.score.present? && x.score < PlaceEvaluation::ANSWERS['has_good']})
+      stats[:certified][:partial_accessible][:total] = sum_num_places(summaries.select{|x| x.is_certified == true && x.score.present? && x.score < PlaceEvaluation::ANSWERS['has_good']})
+      stats[:public][:partial_accessible][:total] = sum_num_places(summaries.select{|x| x.is_certified == false && x.score.present? && x.score < PlaceEvaluation::ANSWERS['has_good']})
       
       
       # not accessible
       stats[:certified][:not_accessible] = data.clone
       stats[:public][:not_accessible] = data.clone
-      stats[:certified][:not_accessible][:total] = add_num_evaluations(summaries.select{|x| x.is_certified == true && x.special_flag == SPECIAL_FLAGS['not_accessible']})
-      stats[:public][:not_accessible][:total] = add_num_evaluations(summaries.select{|x| x.is_certified == false && x.special_flag == SPECIAL_FLAGS['not_accessible']})
+      stats[:certified][:not_accessible][:total] = sum_num_places(summaries.select{|x| x.is_certified == true && x.special_flag == SPECIAL_FLAGS['not_accessible']})
+      stats[:public][:not_accessible][:total] = sum_num_places(summaries.select{|x| x.is_certified == false && x.special_flag == SPECIAL_FLAGS['not_accessible']})
 
 
       # - disabilities
@@ -111,22 +111,22 @@ class VenueSummary < ActiveRecord::Base
 
         disabilities.each do |disability_id|
           # total
-          stats[:certified][:total][:disabilities][disability_id.to_s] = add_num_evaluations(disability_summaries.select{|x| x.is_certified == true && x.summary_type_identifier == disability_id})
-          stats[:public][:total][:disabilities][disability_id.to_s] = add_num_evaluations(disability_summaries.select{|x| x.is_certified == false && x.summary_type_identifier == disability_id})
+          stats[:certified][:total][:disabilities][disability_id.to_s] = sum_num_places(disability_summaries.select{|x| x.is_certified == true && x.summary_type_identifier == disability_id})
+          stats[:public][:total][:disabilities][disability_id.to_s] = sum_num_places(disability_summaries.select{|x| x.is_certified == false && x.summary_type_identifier == disability_id})
 
           # accessible
-          stats[:certified][:accessible][:disabilities][disability_id.to_s] = add_num_evaluations(disability_summaries.select{|x| x.is_certified == true && x.score == PlaceEvaluation::ANSWERS['has_good'] && x.summary_type_identifier == disability_id})
-          stats[:public][:accessible][:disabilities][disability_id.to_s] = add_num_evaluations(disability_summaries.select{|x| x.is_certified == false && x.score == PlaceEvaluation::ANSWERS['has_good'] && x.summary_type_identifier == disability_id})
+          stats[:certified][:accessible][:disabilities][disability_id.to_s] = sum_num_places(disability_summaries.select{|x| x.is_certified == true && x.score == PlaceEvaluation::ANSWERS['has_good'] && x.summary_type_identifier == disability_id})
+          stats[:public][:accessible][:disabilities][disability_id.to_s] = sum_num_places(disability_summaries.select{|x| x.is_certified == false && x.score == PlaceEvaluation::ANSWERS['has_good'] && x.summary_type_identifier == disability_id})
           
          
           # partial accessible
-          stats[:certified][:partial_accessible][:disabilities][disability_id.to_s] = add_num_evaluations(disability_summaries.select{|x| x.is_certified == true && x.score.present? && x.score < PlaceEvaluation::ANSWERS['has_good'] && x.summary_type_identifier == disability_id})
-          stats[:public][:partial_accessible][:disabilities][disability_id.to_s] = add_num_evaluations(disability_summaries.select{|x| x.is_certified == false && x.score.present? && x.score < PlaceEvaluation::ANSWERS['has_good'] && x.summary_type_identifier == disability_id})
+          stats[:certified][:partial_accessible][:disabilities][disability_id.to_s] = sum_num_places(disability_summaries.select{|x| x.is_certified == true && x.score.present? && x.score < PlaceEvaluation::ANSWERS['has_good'] && x.summary_type_identifier == disability_id})
+          stats[:public][:partial_accessible][:disabilities][disability_id.to_s] = sum_num_places(disability_summaries.select{|x| x.is_certified == false && x.score.present? && x.score < PlaceEvaluation::ANSWERS['has_good'] && x.summary_type_identifier == disability_id})
           
           
           # not accessible
-          stats[:certified][:not_accessible][:disabilities][disability_id.to_s] = add_num_evaluations(disability_summaries.select{|x| x.is_certified == true && x.special_flag == SPECIAL_FLAGS['not_accessible'] && x.summary_type_identifier == disability_id})
-          stats[:public][:not_accessible][:disabilities][disability_id.to_s] = add_num_evaluations(disability_summaries.select{|x| x.is_certified == false && x.special_flag == SPECIAL_FLAGS['not_accessible'] && x.summary_type_identifier == disability_id})
+          stats[:certified][:not_accessible][:disabilities][disability_id.to_s] = sum_num_places(disability_summaries.select{|x| x.is_certified == true && x.special_flag == SPECIAL_FLAGS['not_accessible'] && x.summary_type_identifier == disability_id})
+          stats[:public][:not_accessible][:disabilities][disability_id.to_s] = sum_num_places(disability_summaries.select{|x| x.is_certified == false && x.special_flag == SPECIAL_FLAGS['not_accessible'] && x.summary_type_identifier == disability_id})
         end
       end
     end
@@ -437,11 +437,12 @@ private
   # - num_answers = number of answers that exist
   # - num_evaluations = number of evaluations that exist
   def self.summarize_answers(records, exists_question_ids, req_accessibility_question_ids)
-    h = {'score' => nil, 'special_flag' => nil, 'num_answers' => nil, 'num_evaluations' => nil}
+    h = {'score' => nil, 'special_flag' => nil, 'num_answers' => nil, 'num_evaluations' => nil, 'num_places' => nil}
     
     if records.present?
       h['num_evaluations'] = records.map{|x| x.id}.uniq.length
       h['num_answers'] = records.select{|x| x[:answer] > PlaceEvaluation::ANSWERS['no_answer']}.length
+      h['num_places'] = records.map{|x| x.place_id}.uniq.length
 
       # see if any required accessibility questions have 'needs' answer
       if req_accessibility_question_ids.present? && 
@@ -620,21 +621,15 @@ private
     end
     return summary
   end 
-
-
-  # sum up all of the num_evaluations values in the venue_summary array
-  # - summaries: array of venue_summary objects
-  def self.add_num_evaluations(summaries)
-    num = 0
-    
+  
+  # sum up the num_places fields
+  def self.sum_num_places(summaries)
+    sum = 0
     if summaries.present?
-      num = summaries.map{|x| x.num_evaluations}.sum
+      sum = summaries.map{|x| x.num_places}.sum
     end
-    
-    return num
+    return sum
   end
-
-
 end
 
 
