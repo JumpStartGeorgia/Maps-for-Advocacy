@@ -6,6 +6,10 @@ class VenueCategory < ActiveRecord::Base
   accepts_nested_attributes_for :venue_category_translations
   attr_accessible :id, :venue_category_translations_attributes, :sort_order
   
+  def self.sorted
+    with_translations(I18n.locale)
+    .order('venue_categories.sort_order asc, venue_category_translations.name asc')
+  end
   
   def self.names_with_count(options={})
     sql = "select vc.id, vct.name as venue_category, count(x.venue_category_id) as `count` "

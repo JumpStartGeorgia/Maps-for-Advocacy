@@ -12,6 +12,19 @@ class ReportsController < ApplicationController
     @general_stats << {:name => I18n.t('reports.index.general.place_images'), :count => PlaceImage.count}
     @general_stats << {:name => I18n.t('reports.index.general.users'), :count => PlaceEvaluation.user_count}
     
+    @venue_stats = []
+    venue_categories = VenueCategory.sorted
+    if venue_categories.present?
+      venue_categories.each do |venue_category|
+        x = Hash.new
+        @venue_stats << x
+        
+        x[:id] = venue_category.id
+        x[:name] = venue_category.name
+        x[:stats] = VenueSummary.stats_overall_place_evaluation_results(venue_category.id, true)
+      
+      end
+    end
 
     respond_to do |format|
       format.html 

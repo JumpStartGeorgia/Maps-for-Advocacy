@@ -1,45 +1,58 @@
-#general_stats {
-  margin-bottom: 20px;
-  & div{
-    text-align: center;
-    border: solid 2px #000;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    & dt{
+#report_index{
+  h2{
+    margin-top: 30px;
+  }
+  #general_stats {
+    & div{
+      text-align: center;
+      border: solid 2px #000;
+      -moz-border-radius: 5px;
+      border-radius: 5px;
+      & dt{
+        font-weight: bold;
+        font-size: 17px;
+        border-bottom: 1px solid #666;
+        padding: 5px;
+      }
+      & dd{
+        font-size: 15px;
+        padding: 5px;
+      }
+    }
+  }
+  table.overall_stats{
+    th{
+      text-align: center;
+      &.total{
+        border-left: solid 2px #000;
+      }
+    }
+    td{
+      text-align: center;
+      &.accessible{
+        background-color: #a8d2b8;
+      }
+      &.partial_accessible{
+        background-color: #eedea0;
+      }
+      &.not_accessible{
+        background-color: #e1919f;
+      }
+      &.total{
+        border-left: solid 2px #000;
+      }
+    }
+    tr.total td{
+      border-top: solid 2px #000;
+    }
+  }
+  #venues {
+    h3{
+      margin-top: 20px;
+    }
+    h4{
+      font-size: 10pt;
       font-weight: bold;
-      font-size: 17px;
-      border-bottom: 1px solid #666;
-      padding: 5px;
     }
-    & dd{
-      font-size: 15px;
-      padding: 5px;
-    }
-  }
-}
-table.overall_stats{
-  th{
-    text-align: center;
-    &.total{
-      border-left: solid 2px #000;
-    }
-  }
-  td{
-    text-align: center;
-    &.accessible{
-      background-color: #a8d2b8;
-    }
-    &.partial_accessible{
-      background-color: #eedea0;
-    }
-    &.not_accessible{
-      background-color: #e1919f;
-    }
-    &.total{
-      border-left: solid 2px #000;
-    }
-  }
-  tr.total td{
-    border-top: solid 2px #000;
   }
 }

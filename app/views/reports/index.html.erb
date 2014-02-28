@@ -1,63 +1,93 @@
 <% title t('.title') %>
+<div id="report_index">
+  <% if @general_stats.present? %>
+    <div id="general_stats" class="row-fluid">
+      <dl>
+      <% @general_stats.each_with_index do |stat, i| %>
+        <div class="span2">
+          <dt>
+            <%= stat[:name] %>
+          </dt>
+          <dd>
+            <%= stat[:count] %>
+          </dd>
+        </div>
+      <% end %>
+      </dl>
+    </div>
+  <% end %>
 
-<% if @general_stats.present? %>
-  <div id="general_stats" class="row-fluid">
-    <dl>
-    <% @general_stats.each_with_index do |stat, i| %>
-      <div class="span2">
-        <dt>
-          <%= stat[:name] %>
-        </dt>
-        <dd>
-          <%= stat[:count] %>
-        </dd>
+
+  <h2><%= t('.header_evaluations') %></h2>
+  <p><%= t('.explain_evaluations') %></p>
+  <% if @evals.present? %>
+    <div class="row-fluid">
+      <div class="span6">
+        <h3><%= t('.header_evaluations_certified') %></h3>
+        <%= render :partial => 'table_overall_stats', :locals => {:data => @evals[:certified]} %>
       </div>
+      <div class="span6">
+        <h3><%= t('.header_evaluations_public') %></h3>
+        <%= render :partial => 'table_overall_stats', :locals => {:data => @evals[:public]} %>
+      </div>
+    </div>
+  <% else %>
+
+    <p><%= t('.no_evals') %></p>
+
+  <% end %>
+
+
+
+  <h2><%= t('.header_places') %></h2>
+  <p><%= t('.explain_places') %></p>
+
+  <% if @places.present? %>
+    <div class="row-fluid">
+      <div class="span6">
+        <h3><%= t('.header_places_certified') %></h3>
+        <%= render :partial => 'table_overall_stats', :locals => {:data => @places[:certified]} %>
+      </div>
+      <div class="span6">
+        <h3><%= t('.header_places_public') %></h3>
+        <%= render :partial => 'table_overall_stats', :locals => {:data => @places[:public]} %>
+      </div>
+    </div>
+
+  <% else %>
+
+    <p><%= t('.no_places') %></p>
+
+  <% end %>
+
+  <div id="venues">
+    <h2><%= t('.header_venues') %></h2>
+    <p><%= t('.explain_venues') %></p>
+
+    <% if @venue_stats.present? %>
+      <% @venue_stats.each do |venue| %>
+        <h3><%= venue[:name] %></h3>
+        <% if venue[:stats][:certified].present? || venue[:stats][:public].present? %>
+          <div class="row-fluid">
+            <div class="span6">
+              <h4><%= t('.header_places_certified') %></h4>
+              <%= render :partial => 'table_overall_stats', :locals => {:data => venue[:stats][:certified]} %>
+            </div>
+            <div class="span6">
+              <h4><%= t('.header_places_public') %></h4>
+              <%= render :partial => 'table_overall_stats', :locals => {:data => venue[:stats][:public]} %>
+            </div>
+          </div>
+        <% else %>
+          <p><%= t('.no_venue_data') %></p>
+        <% end %>
+      <% end %>
+    <% else %>
+
+      <p><%= t('.no_venues') %></p>
+
     <% end %>
-    </dl>
   </div>
-<% end %>
-
-
-<h2><%= t('.header_evaluations') %></h2>
-<p><%= t('.explain_evaluations') %></h2>
-<% if @evals.present? %>
-  <div class="row-fluid">
-    <div class="span6">
-      <h3><%= t('.header_evaluations_certified') %></h3>
-      <%= render :partial => 'table_overall_stats', :locals => {:data => @evals[:certified]} %>
-    </div>
-    <div class="span6">
-      <h3><%= t('.header_evaluations_public') %></h3>
-      <%= render :partial => 'table_overall_stats', :locals => {:data => @evals[:public]} %>
-    </div>
-  </div>
-<% else %>
-
-  <p><%= t('.no_evals') %></p>
-
-<% end %>
-
-
-
-<h2><%= t('.header_places') %></h2>
-<p><%= t('.explain_places') %></h2>
-
-<% if @places.present? %>
-  <div class="row-fluid">
-    <div class="span6">
-      <h3><%= t('.header_places_certified') %></h3>
-      <%= render :partial => 'table_overall_stats', :locals => {:data => @places[:certified]} %>
-    </div>
-    <div class="span6">
-      <h3><%= t('.header_places_public') %></h3>
-      <%= render :partial => 'table_overall_stats', :locals => {:data => @places[:public]} %>
-    </div>
-  </div>
-
-<% else %>
-
-  <p><%= t('.no_places') %></p>
-
-<% end %>
+</div>
 
 

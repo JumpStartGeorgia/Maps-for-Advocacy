@@ -721,7 +721,8 @@ private
     Rails.logger.debug "************* save_summary start"
     Rails.logger.debug "*********************************"
 
-    Rails.logger.debug "************* existing_summaries.length = #{existing_summaries.length}; type = #{type}; disability id = #{options['disability_id']}"
+    Rails.logger.debug "************* existing_summaries.length = #{existing_summaries.length}; type = #{type}"
+    Rails.logger.debug "************* is certified = #{options['is_certified']}; disability id = #{options['disability_id']}"
     Rails.logger.debug "************* summary_type = #{summary_type}; summary type id = #{options['summary_type_identifier']} s type id class = #{options['summary_type_identifier'].class}"
     Rails.logger.debug "************* data_type = #{data_type}; data type id = #{options['data_type_identifier']}; d type id class = #{options['data_type_identifier'].class}"
     
@@ -739,7 +740,8 @@ private
           if options['data_type_identifier'].present?
             index = existing_summaries.index{|x| x.summary_type == summary_type && 
                                                       x.data_type == data_type && 
-                                                      x.data_type_identifier == options['data_type_identifier']}
+                                                      x.data_type_identifier == options['data_type_identifier'] &&
+                                                      x.is_certified == options['is_certified']}
             answers = summaries[options['data_type_identifier'].to_s] if summaries.has_key?(options['data_type_identifier'].to_s)
           end
 
@@ -747,7 +749,8 @@ private
           if options['disability_id'].present?
             index = existing_summaries.index{|x| x.summary_type == summary_type && 
                                                       x.summary_type_identifier == options['disability_id'] && 
-                                                      x.data_type == data_type}
+                                                      x.data_type == data_type &&
+                                                      x.is_certified == options['is_certified']}
             answers = summaries
           end
 
@@ -756,7 +759,8 @@ private
             index = existing_summaries.index{|x| x.summary_type == summary_type && 
                                                       x.summary_type_identifier == options['disability_id'] && 
                                                       x.data_type == data_type && 
-                                                      x.data_type_identifier == options['data_type_identifier']}
+                                                      x.data_type_identifier == options['data_type_identifier'] &&
+                                                      x.is_certified == options['is_certified']}
             answers = summaries[options['data_type_identifier'].to_s] if summaries.has_key?(options['data_type_identifier'].to_s)
           end
 
@@ -764,7 +768,8 @@ private
           if options['disability_id'].present?
             index = existing_summaries.index{|x| x.summary_type == summary_type && 
                                                       x.summary_type_identifier == options['disability_id'] && 
-                                                      x.data_type == data_type}
+                                                      x.data_type == data_type &&
+                                                      x.is_certified == options['is_certified']}
             answers = summaries
           end
 
@@ -773,7 +778,8 @@ private
             index = existing_summaries.index{|x| x.summary_type == summary_type && 
                                                       x.summary_type_identifier == options['disability_id'] && 
                                                       x.data_type == data_type && 
-                                                      x.data_type_identifier == options['data_type_identifier']}
+                                                      x.data_type_identifier == options['data_type_identifier'] &&
+                                                      x.is_certified == options['is_certified']}
             answers = summaries[options['data_type_identifier'].to_s] if summaries.has_key?(options['data_type_identifier'].to_s)
           end        
       end

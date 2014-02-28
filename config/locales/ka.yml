@@ -373,8 +373,12 @@ ka:
       explain_places: The following tables show the number of places that have an overall evaluation result in each possible accessibility level.
       header_places_certified: Certified Evaluated Places
       header_places_public: Public Evaluated Places
+      header_venues: Breakdown of Place Accessibility by Venue
+      explain_venues: The following tables show the number of places in each venue that have an overall evaluation result in each possible accessibility level.
       no_evals: No evaluations have been submitted yet.
       no_places: No places have been evaluated yet.
+      no_venues: No places have been evaluated yet.
+      no_venue_data: No places in this venue have been evaluated yet.
       general:
         users: Users Submitting Evaluations
         places: Places
@@ -387,3 +391,4 @@ ka:
       accessible: Accessible
       partial_accessible: Partially Accessible
       not_accessible: Not Accessible
+      overall: Place Accessibilty      

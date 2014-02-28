@@ -38,6 +38,102 @@ class VenueSummary < ActiveRecord::Base
   end
   
 
+  ##################################
+  ##################################
+  ### summary stats 
+  ##################################
+  ##################################
+
+
+  # get the overall stats for all places in a venue
+  # - venue_id: id of venue or venue category
+  # - is_category: is id for venue or venue category
+  # return: {:certified => {:total => {:total => #, :disabilities => {1 => #, 2 => #, etc}, 
+  #                         :accessible => {:total => #, :disabilities => {1 => #, 2 => #, etc}, 
+  #                         :partial_accessible => ,
+  #                         :not_accessible => },
+  #           :public => {same format as certified}
+  #         }
+  def self.stats_overall_place_evaluation_results(venue_id, is_category=false)
+    stats = {:certified => Hash.new, :public => Hash.new}
+    data = {:total => 0, :disabilities => nil}
+    summaries = where(:summary_type => SUMMARY_TYPES['overall'], :data_type => DATA_TYPES['overall'])
+    disability_summaries = where(:summary_type => SUMMARY_TYPES['disability'], :data_type => DATA_TYPES['overall'])
+    if is_category
+      summaries = summaries.where(:venue_category_id => venue_id)
+      disability_summaries = disability_summaries.where(:venue_category_id => venue_id)
+    else
+      summaries = summaries.where(:venue_id => venue_id)
+      disability_summaries = disability_summaries.where(:venue_id => venue_id)
+    end
+
+    disabilities = Disability.is_active.select('id').map{|x| x.id}
+
+    if summaries.present?
+      # total
+      stats[:certified][:total] = data.clone
+      stats[:public][:total] = data.clone
+      stats[:certified][:total][:total] = add_num_evaluations(summaries.select{|x| x.is_certified == true})
+      stats[:public][:total][:total] = add_num_evaluations(summaries.select{|x| x.is_certified == false})
+
+      # accessible
+      stats[:certified][:accessible] = data.clone
+      stats[:public][:accessible] = data.clone
+      stats[:certified][:accessible][:total] = add_num_evaluations(summaries.select{|x| x.is_certified == true && x.score == PlaceEvaluation::ANSWERS['has_good']})
+      stats[:public][:accessible][:total] = add_num_evaluations(summaries.select{|x| x.is_certified == false && x.score == PlaceEvaluation::ANSWERS['has_good']})
+      
+     
+      # partial accessible
+      stats[:certified][:partial_accessible] = data.clone
+      stats[:public][:partial_accessible] = data.clone
+      stats[:certified][:partial_accessible][:total] = add_num_evaluations(summaries.select{|x| x.is_certified == true && x.score.present? && x.score < PlaceEvaluation::ANSWERS['has_good']})
+      stats[:public][:partial_accessible][:total] = add_num_evaluations(summaries.select{|x| x.is_certified == false && x.score.present? && x.score < PlaceEvaluation::ANSWERS['has_good']})
+      
+      
+      # not accessible
+      stats[:certified][:not_accessible] = data.clone
+      stats[:public][:not_accessible] = data.clone
+      stats[:certified][:not_accessible][:total] = add_num_evaluations(summaries.select{|x| x.is_certified == true && x.special_flag == SPECIAL_FLAGS['not_accessible']})
+      stats[:public][:not_accessible][:total] = add_num_evaluations(summaries.select{|x| x.is_certified == false && x.special_flag == SPECIAL_FLAGS['not_accessible']})
+
+
+      # - disabilities
+      if disabilities.present? && disability_summaries.present?
+        # initialize the hash
+        stats[:certified][:total][:disabilities] = Hash.new
+        stats[:public][:total][:disabilities] = Hash.new
+        stats[:certified][:accessible][:disabilities] = Hash.new
+        stats[:public][:accessible][:disabilities] = Hash.new
+        stats[:certified][:partial_accessible][:disabilities] = Hash.new
+        stats[:public][:partial_accessible][:disabilities] = Hash.new
+        stats[:certified][:not_accessible][:disabilities] = Hash.new
+        stats[:public][:not_accessible][:disabilities] = Hash.new
+
+        disabilities.each do |disability_id|
+          # total
+          stats[:certified][:total][:disabilities][disability_id.to_s] = add_num_evaluations(disability_summaries.select{|x| x.is_certified == true && x.summary_type_identifier == disability_id})
+          stats[:public][:total][:disabilities][disability_id.to_s] = add_num_evaluations(disability_summaries.select{|x| x.is_certified == false && x.summary_type_identifier == disability_id})
+
+          # accessible
+          stats[:certified][:accessible][:disabilities][disability_id.to_s] = add_num_evaluations(disability_summaries.select{|x| x.is_certified == true && x.score == PlaceEvaluation::ANSWERS['has_good'] && x.summary_type_identifier == disability_id})
+          stats[:public][:accessible][:disabilities][disability_id.to_s] = add_num_evaluations(disability_summaries.select{|x| x.is_certified == false && x.score == PlaceEvaluation::ANSWERS['has_good'] && x.summary_type_identifier == disability_id})
+          
+         
+          # partial accessible
+          stats[:certified][:partial_accessible][:disabilities][disability_id.to_s] = add_num_evaluations(disability_summaries.select{|x| x.is_certified == true && x.score.present? && x.score < PlaceEvaluation::ANSWERS['has_good'] && x.summary_type_identifier == disability_id})
+          stats[:public][:partial_accessible][:disabilities][disability_id.to_s] = add_num_evaluations(disability_summaries.select{|x| x.is_certified == false && x.score.present? && x.score < PlaceEvaluation::ANSWERS['has_good'] && x.summary_type_identifier == disability_id})
+          
+          
+          # not accessible
+          stats[:certified][:not_accessible][:disabilities][disability_id.to_s] = add_num_evaluations(disability_summaries.select{|x| x.is_certified == true && x.special_flag == SPECIAL_FLAGS['not_accessible'] && x.summary_type_identifier == disability_id})
+          stats[:public][:not_accessible][:disabilities][disability_id.to_s] = add_num_evaluations(disability_summaries.select{|x| x.is_certified == false && x.special_flag == SPECIAL_FLAGS['not_accessible'] && x.summary_type_identifier == disability_id})
+        end
+      end
+    end
+    
+    return stats
+  end
+
 
   ##################################
   ##################################
@@ -85,9 +181,9 @@ class VenueSummary < ActiveRecord::Base
         # get all evaluations for this venue
         evaluations = nil
         if is_category
-          evaluations = PlaceEvaluation.with_answers_for_venue_category_summary(venue_id, is_certified: true)
+          evaluations = PlaceEvaluation.with_answers_for_venue_category_summary(venue_id)
         else
-          evaluations = PlaceEvaluation.with_answers_for_venue_summary(venue_id, is_certified: true)
+          evaluations = PlaceEvaluation.with_answers_for_venue_summary(venue_id)
         end
 
         # get all questions
@@ -429,16 +525,17 @@ private
     options['disability_id'] = nil if !options.has_key?('disability_id')
     options['is_certified'] = false if !options.has_key?('is_certified')
   
-    Rails.logger.debug "*********************************"
-    Rails.logger.debug "************* save_summary start"
-    Rails.logger.debug "*********************************"
+    puts "*********************************"
+    puts "************* save_summary start"
+    puts "*********************************"
 
-    Rails.logger.debug "************* existing_summaries.length = #{existing_summaries.length}; type = #{type}; disability id = #{options['disability_id']}"
-    Rails.logger.debug "************* summary_type = #{summary_type}; summary type id = #{options['summary_type_identifier']} s type id class = #{options['summary_type_identifier'].class}"
-    Rails.logger.debug "************* data_type = #{data_type}; data type id = #{options['data_type_identifier']}; d type id class = #{options['data_type_identifier'].class}"
+    puts "************* existing_summaries.length = #{existing_summaries.length}; type = #{type}"
+    puts "************* is certified = #{options['is_certified']}; disability id = #{options['disability_id']}"
+    puts "************* summary_type = #{summary_type}; summary type id = #{options['summary_type_identifier']}; s type id class = #{options['summary_type_identifier'].class}"
+    puts "************* data_type = #{data_type}; data type id = #{options['data_type_identifier']}; d type id class = #{options['data_type_identifier'].class}"
     
     if summaries.present?
-      Rails.logger.debug "************* - summary answers exist"
+      puts "************* - summary answers exist"
 
       answers = nil
       index = nil
@@ -451,7 +548,8 @@ private
           if options['data_type_identifier'].present?
             index = existing_summaries.index{|x| x.summary_type == summary_type && 
                                                       x.data_type == data_type && 
-                                                      x.data_type_identifier == options['data_type_identifier']}
+                                                      x.data_type_identifier == options['data_type_identifier'] &&
+                                                      x.is_certified == options['is_certified']}
             answers = summaries[options['data_type_identifier'].to_s] if summaries.has_key?(options['data_type_identifier'].to_s)
           end
 
@@ -459,7 +557,8 @@ private
           if options['disability_id'].present?
             index = existing_summaries.index{|x| x.summary_type == summary_type && 
                                                       x.summary_type_identifier == options['disability_id'] && 
-                                                      x.data_type == data_type}
+                                                      x.data_type == data_type &&
+                                                      x.is_certified == options['is_certified']}
             answers = summaries
           end
 
@@ -468,13 +567,14 @@ private
             index = existing_summaries.index{|x| x.summary_type == summary_type && 
                                                       x.summary_type_identifier == options['disability_id'] && 
                                                       x.data_type == data_type && 
-                                                      x.data_type_identifier == options['data_type_identifier']}
+                                                      x.data_type_identifier == options['data_type_identifier'] &&
+                                                      x.is_certified == options['is_certified']}
             answers = summaries[options['data_type_identifier'].to_s] if summaries.has_key?(options['data_type_identifier'].to_s)
           end
 
       end
 
-      Rails.logger.debug "************* - index = #{index}; answers = #{answers}"
+      puts "************* - index = #{index}; answers = #{answers}"
   
       if answers.present?
         if index.blank? 
@@ -503,9 +603,9 @@ private
 
   
     end
-    Rails.logger.debug "*********************************"
-    Rails.logger.debug "************* save_summary end"
-    Rails.logger.debug "*********************************"
+    puts "*********************************"
+    puts "************* save_summary end"
+    puts "*********************************"
     return summary
   end
   
@@ -520,6 +620,21 @@ private
     end
     return summary
   end 
+
+
+  # sum up all of the num_evaluations values in the venue_summary array
+  # - summaries: array of venue_summary objects
+  def self.add_num_evaluations(summaries)
+    num = 0
+    
+    if summaries.present?
+      num = summaries.map{|x| x.num_evaluations}.sum
+    end
+    
+    return num
+  end
+
+
 end
 
 
