@@ -26,11 +26,11 @@ class PlaceSummary < ActiveRecord::Base
     SPECIAL_FLAGS.keys[SPECIAL_FLAGS.values.index(value)]
   end
   
-  def self.certified(place_id)
+  def self.certified_place(place_id)
     where(:place_id => place_id, :is_certified => true)
   end
   
-  def self.not_certified(place_id)
+  def self.not_certified_place(place_id)
     where(:place_id => place_id, :is_certified => false)
   end
   
@@ -206,6 +206,11 @@ class PlaceSummary < ActiveRecord::Base
   end
 
 
+  ##################################
+  ##################################
+  ## get for place
+  ##################################
+  ##################################
   
 
   # get summary data for a place/disability
@@ -269,6 +274,22 @@ class PlaceSummary < ActiveRecord::Base
     return summary
   end
 
+
+  ##################################
+  ##################################
+  ## compute summaries
+  ##################################
+  ##################################
+
+  # create the summaries for all places
+  def self.create_all_summaries
+    PlaceEvaluation.select('distinct place_id').map{|x| x.place_id}.each do |place_id|
+      update_summaries(place_id)
+      update_certified_summaries(place_id)
+    end  
+  end
+
+
   # for the given place id, update the summary data
   # place_id: id of place to summarize evaluations for
   # place_evaluation_id: id of evaluation to focus summary's on
@@ -296,7 +317,7 @@ class PlaceSummary < ActiveRecord::Base
           category_ids = questions.map{|x| x[:root_question_category_id]}.uniq
 
           # get all existing summaries on record
-          existing_summaries = PlaceSummary.not_certified(place_id)
+          existing_summaries = PlaceSummary.not_certified_place(place_id)
           
           ##############################
           # compute and save overall summary
@@ -437,7 +458,7 @@ class PlaceSummary < ActiveRecord::Base
           category_ids = questions.map{|x| x[:root_question_category_id]}.uniq
 
           # get all existing summaries on record
-          existing_summaries = PlaceSummary.certified(place_id)
+          existing_summaries = PlaceSummary.certified_place(place_id)
 
 
           disability_ids = nil
@@ -567,6 +588,8 @@ class PlaceSummary < ActiveRecord::Base
     Rails.logger.debug "*****************************************"
   end
   
+  
+
   
 private
 

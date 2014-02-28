@@ -61,5 +61,37 @@ class PlaceEvaluation < ActiveRecord::Base
   end
 
 
+  # get all of the answers for a venue
+  # so that a summary can be computed
+  # venue_id: id of venue to get answers for
+  # options:
+  # - is_certified: get answers that are certified (default = false)
+  def self.with_answers_for_venue_summary(venue_id, options={})
+    options[:is_certified] = false if options[:is_certified].nil?
+    
+    x = select('place_evaluations.id, place_evaluations.place_id, place_evaluations.disability_id, place_evaluation_answers.question_pairing_id, place_evaluation_answers.answer')
+    .joins(:place_evaluation_answers, :place)
+    .where(['places.venue_id = ? and place_evaluations.is_certified = ?', venue_id, options[:is_certified]])  
+    
+    return x
+  end
+
+
+  # get all of the answers for a venue category
+  # so that a summary can be computed
+  # venue_category_id: id of venue category to get answers for
+  # options:
+  # - is_certified: get answers that are certified (default = false)
+  def self.with_answers_for_venue_category_summary(venue_category_id, options={})
+    options[:is_certified] = false if options[:is_certified].nil?
+    
+    x = select('place_evaluations.id, place_evaluations.place_id, place_evaluations.disability_id, place_evaluation_answers.question_pairing_id, place_evaluation_answers.answer')
+    .joins(:place_evaluation_answers, :place => :venue)
+    .where(['venues.venue_category_id = ? and place_evaluations.is_certified = ?', venue_category_id, options[:is_certified]])  
+    
+    return x
+  end
+
+
 
 end

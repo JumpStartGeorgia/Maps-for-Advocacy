@@ -1,0 +1,27 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  venue_id: 1
+  summary_type: 1
+  summary_type_identifier: 1
+  data_type: 1
+  data_type_identifier: 1
+  disability_id: 1
+  score: 1
+  specialflag: 1
+  num_answers: 1
+  num_evaluations: 1
+  is_certified: false
+
+two:
+  venue_id: 1
+  summary_type: 1
+  summary_type_identifier: 1
+  data_type: 1
+  data_type_identifier: 1
+  disability_id: 1
+  score: 1
+  specialflag: 1
+  num_answers: 1
+  num_evaluations: 1
+  is_certified: false
