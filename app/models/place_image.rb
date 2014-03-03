@@ -51,4 +51,14 @@ class PlaceImage < ActiveRecord::Base
   def self.sorted
     order('created_at desc')
   end
+  
+  # get all images for the provided places
+  # - place_ids: array of place ids
+  def self.in_places(place_ids)
+    if place_ids.present?
+      where(place_id: place_ids)
+    end
+  end
+  
+  
 end

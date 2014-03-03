@@ -15,6 +15,26 @@ class Place < ActiveRecord::Base
   include GeoRuby::SimpleFeatures
 
   after_create :assign_district
+
+  # get the count of places that belong to any of the passed in venue ids
+  # - venue_ids: array of venue ids
+  def self.count_with_venues(venue_ids)
+    count = 0
+    if venue_ids.present?
+      count = where(venue_id: venue_ids).count
+    end
+    return count  
+  end
+  
+  # get all place ids that are assigned to the passed in venue ids
+  # - venue_ids: array of venue ids
+  def self.ids_in_venues(venue_ids)
+    if venue_ids.present?
+      select('id')
+      .where(venue_id: venue_ids)
+      .map{|x| x.id}.uniq
+    end
+  end
   
   def self.with_translation(id=nil)
     sql = "select p.id, p.district_id, dt.name as district, p.venue_id, vt.name as venue, v.question_category_id, v.venue_category_id, p.lat, p.lon, pt.name as place, pt.address "

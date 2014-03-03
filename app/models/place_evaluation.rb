@@ -36,6 +36,14 @@ class PlaceEvaluation < ActiveRecord::Base
   def self.sorted
     order('place_evaluations.created_at desc, place_evaluations.user_id asc')
   end
+
+  # get all evaluations for the provided places
+  # - place_ids: array of place ids
+  def self.in_places(place_ids)
+    if place_ids.present?
+      where(place_id: place_ids)
+    end
+  end
   
   # get number of users that have submitted evaluations
   def self.user_count

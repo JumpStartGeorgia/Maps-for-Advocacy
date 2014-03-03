@@ -10,6 +10,17 @@ class Venue < ActiveRecord::Base
 
   validates :venue_category_id, :presence => true
 
+  def self.sorted
+    with_translations(I18n.locale)
+    .order('venues.sort_order asc, venue_translations.name asc')
+  end
+
+  def self.by_category(venue_category_id)
+    if venue_category_id.present?
+      where(:venue_category_id => venue_category_id)
+    end
+  end
+
 
   # take in hash of {id => sort order} for original and new values and
   # if differences are found, update the sort order for that id

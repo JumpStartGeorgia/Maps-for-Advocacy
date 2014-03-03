@@ -62,6 +62,7 @@ BootstrapStarter::Application.routes.draw do
     
     # reports
 		match '/reports', :to => 'reports#index', :as => :reports, :via => :get
+		match '/reports/venues/:venue_category_id', :to => 'reports#venues', :as => :reports_venue, :via => :get
 
 
 		root :to => 'root#index'

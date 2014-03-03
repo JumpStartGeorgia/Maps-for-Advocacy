@@ -53,6 +53,13 @@ class PlaceEvaluationAnswer < ActiveRecord::Base
     where(['answer > ?', PlaceEvaluation::ANSWERS['no_answer']]).count
   end
   
-
+  # get all answers for the provided places
+  # - place_ids: array of place ids
+  def self.in_places(place_ids)
+    if place_ids.present?
+      includes(:place_evaluation)
+      .where(:place_evaluations => {place_id: place_ids})
+    end
+  end
     
 end

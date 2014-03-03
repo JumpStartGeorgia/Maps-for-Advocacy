@@ -386,6 +386,25 @@ ka:
         certified: Certified Evaluations
         public: Public Evaluations
         answers: Questions Answered
+    venues:
+      title: 'Venue Report: %{name}'
+      header_stats: "Breakdown of Place Accessibility in '%{name}'"
+      explain_stats: The following tables show the number of places that have an overall evaluation result in each possible accessibility level.
+      header_stats_certified: Certified Evaluated Places
+      header_stats_public: Public Evaluated Places
+      header_venues: "Breakdown of Place Accessibility by Venue in '%{name}'"
+      explain_venues: The following tables show the number of places in each venue that have an overall evaluation result in each possible accessibility level.
+      no_evals: No evaluations have been submitted yet.
+      no_places: No places have been evaluated yet.
+      no_venues: No places have been evaluated yet.
+      no_venue_data: No places in this venue have been evaluated yet.
+      general:
+        users: Users Submitting Evaluations
+        places: Places
+        place_images: Images of Places
+        certified: Certified Evaluations
+        public: Public Evaluations
+        answers: Questions Answered
     table_overall_stats:
       total: Total
       accessible: Accessible

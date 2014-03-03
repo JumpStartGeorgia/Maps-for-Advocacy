@@ -1,0 +1,84 @@
+<% if @venue_category.present? %>
+  <% title t('.title', name: @venue_category.name) %>
+  <div id="report_venue">
+
+    <% if @general_stats.present? %>
+      <div id="general_stats" class="row-fluid">
+        <dl>
+        <% @general_stats.each_with_index do |stat, i| %>
+          <div class="span2">
+            <dt>
+              <%= stat[:name] %>
+            </dt>
+            <dd>
+              <%= stat[:count] %>
+            </dd>
+          </div>
+        <% end %>
+        </dl>
+      </div>
+    <% end %>
+
+    <h2><%= t('.header_stats', name: @venue_category.name) %></h2>
+    <p><%= t('.explain_stats') %></p>
+
+    <% if @stats.present? %>
+      <div class="row-fluid">
+        <div class="span6">
+          <h3><%= t('.header_stats_certified') %></h3>
+          <%= render :partial => 'table_overall_stats', :locals => {:data => @stats[:certified]} %>
+        </div>
+        <div class="span6">
+          <h3><%= t('.header_stats_public') %></h3>
+          <%= render :partial => 'table_overall_stats', :locals => {:data => @stats[:public]} %>
+        </div>
+      </div>
+
+    <% else %>
+
+      <p><%= t('.no_places') %></p>
+
+    <% end %>
+
+
+
+    <div id="venues">
+      <h2><%= t('.header_venues', name: @venue_category.name) %></h2>
+      <p><%= t('.explain_venues') %></p>
+
+      <% if @venue_stats.present? %>
+        <% @venue_stats.each do |venue| %>
+          <h3><%= venue[:name] %></h3>
+          <% if venue[:stats][:certified].present? || venue[:stats][:public].present? %>
+            <div class="row-fluid">
+              <div class="span6">
+                <h4><%= t('.header_places_certified') %></h4>
+                <%= render :partial => 'table_overall_stats', :locals => {:data => venue[:stats][:certified]} %>
+              </div>
+              <div class="span6">
+                <h4><%= t('.header_places_public') %></h4>
+                <%= render :partial => 'table_overall_stats', :locals => {:data => venue[:stats][:public]} %>
+              </div>
+            </div>
+          <% else %>
+            <p><%= t('.no_venue_data') %></p>
+          <% end %>
+        <% end %>
+      <% else %>
+
+        <p><%= t('.no_venues') %></p>
+
+      <% end %>
+    </div>
+
+  </div>
+
+<% else %>
+  <% title t('.title2') %>
+  <p>
+    <%= t('.no_venue') %>
+  </p>  
+
+
+<% end %>
+
