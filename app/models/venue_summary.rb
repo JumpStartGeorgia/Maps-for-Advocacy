@@ -47,7 +47,7 @@ class VenueSummary < ActiveRecord::Base
 
   # get the overall stats for all places in a venue
   # - venue_id: id of venue or venue category
-  # - is_category: is id for venue or venue category
+  # - is_category: is id for venue or venue category, default = false
   # return: {:certified => {:total => {:total => #, :disabilities => {1 => #, 2 => #, etc}, 
   #                         :accessible => {:total => #, :disabilities => {1 => #, 2 => #, etc}, 
   #                         :partial_accessible => ,

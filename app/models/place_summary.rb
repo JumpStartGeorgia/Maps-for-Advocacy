@@ -284,8 +284,12 @@ class PlaceSummary < ActiveRecord::Base
   # create the summaries for all places
   def self.create_all_summaries
     PlaceEvaluation.select('distinct place_id').map{|x| x.place_id}.each do |place_id|
+      Rails.logger.debug "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+      Rails.logger.debug "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
       update_summaries(place_id)
       update_certified_summaries(place_id)
+      Rails.logger.debug "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
+      Rails.logger.debug "XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX"
     end  
   end
 
@@ -295,9 +299,9 @@ class PlaceSummary < ActiveRecord::Base
   # place_evaluation_id: id of evaluation to focus summary's on
   # - if place_evaluation_id not provided, then compute instance summary for every evaluation
   def self.update_summaries(place_id, place_evaluation_id=nil)
-    Rails.logger.debug "*****************************************"
-    Rails.logger.debug "************* update_summaries: start"
-    Rails.logger.debug "*****************************************"
+    Rails.logger.debug "//////////////////////////////////////////"
+    Rails.logger.debug "///////////////// update_summaries: start"
+    Rails.logger.debug "//////////////////////////////////////////"
     if place_id.present?
       PlaceSummary.transaction do
 
@@ -310,11 +314,13 @@ class PlaceSummary < ActiveRecord::Base
         disability_id = nil
               
         if evaluations.present? && questions.present?
-          Rails.logger.debug "************* total evaluations found: #{evaluations.length}; total questions found = #{questions.length}"
+          Rails.logger.debug "////////////// total evaluations found: #{evaluations.length}; total questions found = #{questions.length}"
 
           exists_question_ids = questions.select{|x| x.is_exists == true}.map{|x| x.id}
           req_accessibility_question_ids = questions.select{|x| x.required_for_accessibility == true}.map{|x| x.id}
-          category_ids = questions.map{|x| x[:root_question_category_id]}.uniq
+          category_ids = questions.map{|x| x[:root_question_category_id].to_i}.uniq
+
+          Rails.logger.debug "////////////// question category ids: #{category_ids}"
 
           # get all existing summaries on record
           existing_summaries = PlaceSummary.not_certified_place(place_id)
@@ -322,7 +328,7 @@ class PlaceSummary < ActiveRecord::Base
           ##############################
           # compute and save overall summary
           ##############################
-          Rails.logger.debug "************* computing overall summary"
+          Rails.logger.debug "////////////// computing overall summary"
           save_summary(place_id, 
                         existing_summaries, 
                         summarize_answers(evaluations, exists_question_ids, req_accessibility_question_ids), 
@@ -346,7 +352,7 @@ class PlaceSummary < ActiveRecord::Base
 
           if disability_ids.present?
             disability_ids.each do |disability_id|
-              Rails.logger.debug "************* disability id = #{disability_id}"
+              Rails.logger.debug "////////////// disability id = #{disability_id}"
           
               # disability ids in the questions are surrounded by a separator so that we can test for exact match
               # - i.e., do not want a test of 1 to return true for 12
@@ -355,22 +361,22 @@ class PlaceSummary < ActiveRecord::Base
               question_disability_filter << disability_id.to_s
               question_disability_filter << QuestionPairing::DISABILITY_ID_SEPARATOR
               # - pull out questions that are for this disability
-              Rails.logger.debug "************* question_disability_filter: #{question_disability_filter}"
+              Rails.logger.debug "////////////// question_disability_filter: #{question_disability_filter}"
               filtered_questions = questions.select{|x| x[:disability_ids].index(question_disability_filter).present?}
               # - pull out evaluations that are for this disability
               filtered_evaluations = evaluations.select{|x| x.disability_id == disability_id}
 
-              Rails.logger.debug "************* filtered evals found: #{filtered_evaluations.length}; filtered question found: #{filtered_questions.length}"
+              Rails.logger.debug "////////////// filtered evals found: #{filtered_evaluations.length}; filtered question found: #{filtered_questions.length}"
               if filtered_evaluations.present? && filtered_questions.present?
 
                 filtered_exists_question_ids = filtered_questions.select{|x| x.is_exists == true}.map{|x| x.id}
                 filtered_req_accessibility_question_ids = filtered_questions.select{|x| x.required_for_accessibility == true}.map{|x| x.id}
-                filtered_category_ids = filtered_questions.map{|x| x[:root_question_category_id]}.uniq
+                filtered_category_ids = filtered_questions.map{|x| x[:root_question_category_id].to_i}.uniq
 
                 ##############################
                 # compute summary for disability 
                 ##############################
-                Rails.logger.debug "************* computing disability summary"
+                Rails.logger.debug "////////////// computing disability summary"
                 # - overall
                 save_summary(place_id, 
                               existing_summaries, 
@@ -400,7 +406,7 @@ class PlaceSummary < ActiveRecord::Base
 
                 if place_evaluation_ids.present?
                   place_evaluation_ids.each do |place_eval_id|
-                    Rails.logger.debug "************* computing instance summary for place eval #{place_eval_id}"
+                    Rails.logger.debug "////////////// computing instance summary for place eval #{place_eval_id}"
                     record_evaluations = filtered_evaluations.select{|x| x.id == place_eval_id}
                     if record_evaluations.present?
                       # - overall
@@ -425,9 +431,9 @@ class PlaceSummary < ActiveRecord::Base
         end
       end    
     end
-    Rails.logger.debug "*****************************************"
-    Rails.logger.debug "************* update_summaries: end"
-    Rails.logger.debug "*****************************************"
+    Rails.logger.debug "//////////////////////////////////////////"
+    Rails.logger.debug "//////////////////// update_summaries: end"
+    Rails.logger.debug "//////////////////////////////////////////"
   end
 
 
@@ -455,7 +461,7 @@ class PlaceSummary < ActiveRecord::Base
           
           exists_question_ids = questions.select{|x| x.is_exists == true}.map{|x| x.id}
           req_accessibility_question_ids = questions.select{|x| x.required_for_accessibility == true}.map{|x| x.id}
-          category_ids = questions.map{|x| x[:root_question_category_id]}.uniq
+          category_ids = questions.map{|x| x[:root_question_category_id].to_i}.uniq
 
           # get all existing summaries on record
           existing_summaries = PlaceSummary.certified_place(place_id)
@@ -489,7 +495,7 @@ class PlaceSummary < ActiveRecord::Base
 
                 filtered_exists_question_ids = filtered_questions.select{|x| x.is_exists == true}.map{|x| x.id}
                 filtered_req_accessibility_question_ids = filtered_questions.select{|x| x.required_for_accessibility == true}.map{|x| x.id}
-                filtered_category_ids = filtered_questions.map{|x| x[:root_question_category_id]}.uniq
+                filtered_category_ids = filtered_questions.map{|x| x[:root_question_category_id].to_i}.uniq
 
                 ##############################
                 # if place_eval_id provided, compute summary for just that evalaution
@@ -683,7 +689,7 @@ private
     
     if category_ids.present?
       category_ids.each do |category_id|
-        question_pairing_ids = questions.select{|x| x.root_question_category_id == category_id}.map{|x| x.id}
+        question_pairing_ids = questions.select{|x| x.root_question_category_id.to_i == category_id}.map{|x| x.id}
   
         if question_pairing_ids.present?
           category_records = records.select{|x| question_pairing_ids.index(x[:question_pairing_id]).present? }
@@ -723,7 +729,7 @@ private
 
     Rails.logger.debug "************* existing_summaries.length = #{existing_summaries.length}; type = #{type}"
     Rails.logger.debug "************* is certified = #{options['is_certified']}; disability id = #{options['disability_id']}"
-    Rails.logger.debug "************* summary_type = #{summary_type}; summary type id = #{options['summary_type_identifier']} s type id class = #{options['summary_type_identifier'].class}"
+    Rails.logger.debug "************* summary_type = #{summary_type}; summary type id = #{options['summary_type_identifier']}; s type id class = #{options['summary_type_identifier'].class}"
     Rails.logger.debug "************* data_type = #{data_type}; data type id = #{options['data_type_identifier']}; d type id class = #{options['data_type_identifier'].class}"
     
     if summaries.present?
@@ -767,7 +773,7 @@ private
         when 4 # instance overall
           if options['disability_id'].present?
             index = existing_summaries.index{|x| x.summary_type == summary_type && 
-                                                      x.summary_type_identifier == options['disability_id'] && 
+                                                      x.summary_type_identifier == options['summary_type_identifier'] && 
                                                       x.data_type == data_type &&
                                                       x.is_certified == options['is_certified']}
             answers = summaries
@@ -776,7 +782,7 @@ private
         when 5 # instance category
           if options['disability_id'].present? && options['data_type_identifier'].present?
             index = existing_summaries.index{|x| x.summary_type == summary_type && 
-                                                      x.summary_type_identifier == options['disability_id'] && 
+                                                      x.summary_type_identifier == options['summary_type_identifier'] && 
                                                       x.data_type == data_type && 
                                                       x.data_type_identifier == options['data_type_identifier'] &&
                                                       x.is_certified == options['is_certified']}
@@ -788,6 +794,9 @@ private
   
       if answers.present?
         if index.blank? 
+          Rails.logger.debug "======================================="
+          Rails.logger.debug "==== creating new place summary record ==="
+          Rails.logger.debug "======================================="
           # create new record
           # record does not exist, so create it
           summary = PlaceSummary.new
