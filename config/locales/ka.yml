@@ -379,6 +379,7 @@ ka:
       no_places: No places have been evaluated yet.
       no_venues: No places have been evaluated yet.
       no_venue_data: No places in this venue have been evaluated yet.
+      view_details: View Details
       general:
         users: Users Submitting Evaluations
         places: Places

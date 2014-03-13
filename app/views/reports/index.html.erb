@@ -17,7 +17,8 @@
     </div>
   <% end %>
 
-
+<%
+=begin%>
   <h2><%= t('.header_evaluations') %></h2>
   <p><%= t('.explain_evaluations') %></p>
   <% if @evals.present? %>
@@ -36,7 +37,8 @@
     <p><%= t('.no_evals') %></p>
 
   <% end %>
-
+<%
+=end %>
 
 
   <h2><%= t('.header_places') %></h2>
@@ -66,13 +68,16 @@
 
     <% if @venue_stats.present? %>
       <% @venue_stats.each do |venue| %>
+        <% has_data = venue[:stats][:certified].present? || venue[:stats][:public].present? %>
         <h3>
           <%= venue[:name] %>
-          <span>
-            <%= link_to 'view details', reports_venue_path(venue[:id]) %>
-          </span>
+          <% if has_data %>
+            <span>
+              <%= link_to t('.view_details'), reports_venue_path(venue[:id]), :class => 'view_more' %>
+            </span>
+          <% end %>
         </h3>
-        <% if venue[:stats][:certified].present? || venue[:stats][:public].present? %>
+        <% if has_data %>
           <div class="row-fluid">
             <div class="span6">
               <h4><%= t('.header_places_certified') %></h4>
