@@ -34,13 +34,11 @@ class PlaceSummary < ActiveRecord::Base
     where(:place_id => place_id, :is_certified => false)
   end
   
-  
   def self.overall_summaries_for_places(place_ids)
     if place_ids.present?
       where(:place_id => place_ids, :summary_type => SUMMARY_TYPES['overall'], :data_type => DATA_TYPES['overall'])
     end
   end
-
 
   ##################################
   ##################################
@@ -304,6 +302,8 @@ class PlaceSummary < ActiveRecord::Base
     Rails.logger.debug "//////////////////////////////////////////"
     if place_id.present?
       PlaceSummary.transaction do
+        # get venues
+        venue_ids = Place.place_venue_ids(place_id)
 
         # get all evaluations for this place
         evaluations = PlaceEvaluation.with_answers_for_summary(place_id)
@@ -313,7 +313,7 @@ class PlaceSummary < ActiveRecord::Base
         
         disability_id = nil
               
-        if evaluations.present? && questions.present?
+        if venue_ids.present? && evaluations.present? && questions.present?
           Rails.logger.debug "////////////// total evaluations found: #{evaluations.length}; total questions found = #{questions.length}"
 
           exists_question_ids = questions.select{|x| x.is_exists == true}.map{|x| x.id}
@@ -330,10 +330,12 @@ class PlaceSummary < ActiveRecord::Base
           ##############################
           Rails.logger.debug "////////////// computing overall summary"
           save_summary(place_id, 
+                        venue_ids,
                         existing_summaries, 
                         summarize_answers(evaluations, exists_question_ids, req_accessibility_question_ids), 
                         SAVE_TYPES['summary_overall'], SUMMARY_TYPES['overall'], DATA_TYPES['overall'])
           save_category_summary(place_id, 
+                                venue_ids,
                                 existing_summaries, 
                                 summarize_category_answers(evaluations, questions, category_ids, exists_question_ids, req_accessibility_question_ids), 
                                 category_ids, 
@@ -379,6 +381,7 @@ class PlaceSummary < ActiveRecord::Base
                 Rails.logger.debug "////////////// computing disability summary"
                 # - overall
                 save_summary(place_id, 
+                              venue_ids,
                               existing_summaries, 
                               summarize_answers(filtered_evaluations, filtered_exists_question_ids, filtered_req_accessibility_question_ids), 
                               SAVE_TYPES['disability_overall'], SUMMARY_TYPES['disability'], DATA_TYPES['overall'], 
@@ -386,6 +389,7 @@ class PlaceSummary < ActiveRecord::Base
 
                 # - category
                 save_category_summary(place_id, 
+                                      venue_ids,
                                       existing_summaries, 
                                       summarize_category_answers(filtered_evaluations, filtered_questions, filtered_category_ids, filtered_exists_question_ids, filtered_req_accessibility_question_ids), 
                                       category_ids, 
@@ -411,12 +415,14 @@ class PlaceSummary < ActiveRecord::Base
                     if record_evaluations.present?
                       # - overall
                       save_summary(place_id, 
+                                    venue_ids,
                                     existing_summaries, 
                                     summarize_answers(record_evaluations, filtered_exists_question_ids, filtered_req_accessibility_question_ids), 
                                     SAVE_TYPES['instance_overall'], SUMMARY_TYPES['instance'], DATA_TYPES['overall'], 
                                     {'disability_id' => disability_id, 'summary_type_identifier' => place_eval_id})
                       # - category
                       save_category_summary(place_id, 
+                                            venue_ids,
                                             existing_summaries, 
                                             summarize_category_answers(record_evaluations, filtered_questions, filtered_category_ids, filtered_exists_question_ids, filtered_req_accessibility_question_ids), 
                                             category_ids, 
@@ -447,6 +453,8 @@ class PlaceSummary < ActiveRecord::Base
     Rails.logger.debug "*****************************************"
     if place_id.present?
       PlaceSummary.transaction do
+        # get venues
+        venue_ids = Place.place_venue_ids(place_id)
 
         # get all evaluations for this place
         evaluations = PlaceEvaluation.with_answers_for_summary(place_id, is_certified: true, place_evaluation_id: place_evaluation_id)
@@ -456,7 +464,7 @@ class PlaceSummary < ActiveRecord::Base
         
         disability_id = nil
               
-        if evaluations.present? && questions.present?
+        if venue_ids.present? && evaluations.present? && questions.present?
           Rails.logger.debug "************* total evaluations found: #{evaluations.length}; total questions found = #{questions.length}"
           
           exists_question_ids = questions.select{|x| x.is_exists == true}.map{|x| x.id}
@@ -518,12 +526,14 @@ class PlaceSummary < ActiveRecord::Base
                     if record_evaluations.present?
                       # - overall
                       save_summary(place_id, 
+                                    venue_ids,
                                     existing_summaries, 
                                     summarize_answers(record_evaluations, filtered_exists_question_ids, filtered_req_accessibility_question_ids), 
                                     SAVE_TYPES['instance_overall'], SUMMARY_TYPES['instance'], DATA_TYPES['overall'], 
                                     {'disability_id' => disability_id, 'summary_type_identifier' => place_eval_id, 'is_certified' => true})
                       # - category
                       save_category_summary(place_id, 
+                                            venue_ids,
                                             existing_summaries, 
                                             summarize_category_answers(record_evaluations, filtered_questions, filtered_category_ids, filtered_exists_question_ids, filtered_req_accessibility_question_ids), 
                                             category_ids, 
@@ -544,6 +554,7 @@ class PlaceSummary < ActiveRecord::Base
                 if record_evaluations.present?
                   # - overall
                   save_summary(place_id, 
+                                venue_ids,
                                 existing_summaries, 
                                 summarize_answers(record_evaluations, filtered_exists_question_ids, filtered_req_accessibility_question_ids), 
                                 SAVE_TYPES['disability_overall'], SUMMARY_TYPES['disability'], DATA_TYPES['overall'], 
@@ -551,6 +562,7 @@ class PlaceSummary < ActiveRecord::Base
 
                   # - category
                   save_category_summary(place_id, 
+                                        venue_ids,
                                         existing_summaries, 
                                         summarize_category_answers(record_evaluations, filtered_questions, filtered_category_ids, filtered_exists_question_ids, filtered_req_accessibility_question_ids), 
                                         category_ids, 
@@ -573,10 +585,12 @@ class PlaceSummary < ActiveRecord::Base
 
               Rails.logger.debug "************* computing overall summary using #{filtered_evaluations.map{|x| x.id}.uniq.length} evaluations"
               save_summary(place_id, 
+                            venue_ids,
                             existing_summaries, 
                             summarize_answers(filtered_evaluations, exists_question_ids, req_accessibility_question_ids), 
                             SAVE_TYPES['summary_overall'], SUMMARY_TYPES['overall'], DATA_TYPES['overall'], {'is_certified' => true})
               save_category_summary(place_id, 
+                                    venue_ids,
                                     existing_summaries, 
                                     summarize_category_answers(filtered_evaluations, questions, category_ids, exists_question_ids, req_accessibility_question_ids), 
                                     category_ids, 
@@ -706,6 +720,7 @@ private
 
   # create a new summary record, or if it already exists, update it
   # place_id: id of place to add summaries to
+  # venue_ids: hash of venue id and venue category id
   # existing_summaries: all existing summaries on record for this place
   # summaries: hash of summary scores to save to database (see summarize_answers for hash format) 
   # type: SAVE_TYPES value to indicate which type of data to save
@@ -716,7 +731,7 @@ private
   # - summary_type_identifier: id of summary type record
   # - data_type_identifier: id of data type record
   # - disability_id: id of disability summary is for
-  def self.save_summary(place_id, existing_summaries, summaries, type, summary_type, data_type, options={})
+  def self.save_summary(place_id, venue_ids, existing_summaries, summaries, type, summary_type, data_type, options={})
     summary = nil
     options['summary_type_identifier'] = nil if !options.has_key?('summary_type_identifier')
     options['data_type_identifier'] = nil if !options.has_key?('data_type_identifier')
@@ -727,6 +742,7 @@ private
     Rails.logger.debug "************* save_summary start"
     Rails.logger.debug "*********************************"
 
+    Rails.logger.debug "************* venue id = #{venue_ids[:venue_id]}; venue category id = #{venue_ids[:venue_category_id]}"
     Rails.logger.debug "************* existing_summaries.length = #{existing_summaries.length}; type = #{type}"
     Rails.logger.debug "************* is certified = #{options['is_certified']}; disability id = #{options['disability_id']}"
     Rails.logger.debug "************* summary_type = #{summary_type}; summary type id = #{options['summary_type_identifier']}; s type id class = #{options['summary_type_identifier'].class}"
@@ -801,6 +817,8 @@ private
           # record does not exist, so create it
           summary = PlaceSummary.new
           summary.place_id = place_id
+          summary.venue_id = venue_ids[:venue_id]
+          summary.venue_category_id = venue_ids[:venue_category_id]
           summary.summary_type = summary_type
           summary.summary_type_identifier = options['summary_type_identifier']
           summary.data_type = data_type
@@ -825,12 +843,12 @@ private
   end
   
   # save the summary data for each category
-  def self.save_category_summary(place_id, existing_summaries, summaries, category_ids, type, summary_type, data_type, options={})
+  def self.save_category_summary(place_id, venue_ids, existing_summaries, summaries, category_ids, type, summary_type, data_type, options={})
     summary = []
     if category_ids.present?
       category_ids.each do |category_id|
         options['data_type_identifier'] = category_id
-        summary << save_summary(place_id, existing_summaries, summaries, type, summary_type, data_type, options)      
+        summary << save_summary(place_id, venue_ids, existing_summaries, summaries, type, summary_type, data_type, options)      
       end
     end
     return summary

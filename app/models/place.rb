@@ -35,6 +35,29 @@ class Place < ActiveRecord::Base
       .map{|x| x.id}.uniq
     end
   end
+
+
+
+  # get the venue and venue category id for a place
+  # - place_id: id of place
+  # return: {:venue_id, :venue_category_id}
+  def self.place_venue_ids(place_id)
+    ids = nil
+    sql = "select v.venue_category_id, p.venue_id from places as p inner join venues as v on v.id = p.venue_id "
+    sql << "where p.id = "
+    sql << place_id.to_s
+    venue = find_by_sql(sql)
+    
+    if venue.present?
+      ids = Hash.new
+      ids[:venue_id] = venue[0][:venue_id]
+      ids[:venue_category_id] = venue[0][:venue_category_id]
+    end
+    
+    return ids
+  end
+
+
   
   def self.with_translation(id=nil)
     sql = "select p.id, p.district_id, dt.name as district, p.venue_id, vt.name as venue, v.question_category_id, v.venue_category_id, p.lat, p.lon, pt.name as place, pt.address "

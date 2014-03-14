@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140227135703) do
+ActiveRecord::Schema.define(:version => 20140314061802) do
 
   create_table "disabilities", :force => true do |t|
     t.string   "code"
@@ -121,6 +121,8 @@ ActiveRecord::Schema.define(:version => 20140227135703) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "is_certified",                                           :default => false
+    t.integer  "venue_id"
+    t.integer  "venue_category_id"
   end
 
   add_index "place_summaries", ["data_type", "data_type_identifier"], :name => "idx_place_summary_data_type"
@@ -128,6 +130,8 @@ ActiveRecord::Schema.define(:version => 20140227135703) do
   add_index "place_summaries", ["is_certified"], :name => "index_place_summaries_on_is_certified"
   add_index "place_summaries", ["place_id"], :name => "index_place_summaries_on_place_id"
   add_index "place_summaries", ["summary_type", "summary_type_identifier"], :name => "idx_place_summary_summary_type"
+  add_index "place_summaries", ["venue_category_id"], :name => "index_place_summaries_on_venue_category_id"
+  add_index "place_summaries", ["venue_id"], :name => "index_place_summaries_on_venue_id"
 
   create_table "place_translations", :force => true do |t|
     t.integer  "place_id"
@@ -278,8 +282,10 @@ ActiveRecord::Schema.define(:version => 20140227135703) do
     t.boolean  "is_certified"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "accessibility_type"
   end
 
+  add_index "venue_summaries", ["accessibility_type"], :name => "index_venue_summaries_on_accessibility_type"
   add_index "venue_summaries", ["data_type", "data_type_identifier"], :name => "idx_venue_summary_data_type"
   add_index "venue_summaries", ["disability_id"], :name => "index_venue_summaries_on_disability_id"
   add_index "venue_summaries", ["is_certified"], :name => "index_venue_summaries_on_is_certified"

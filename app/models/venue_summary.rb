@@ -4,12 +4,13 @@ class VenueSummary < ActiveRecord::Base
   attr_accessible :venue_id, :venue_category_id, :summary_type, :summary_type_identifier, 
                   :data_type, :data_type_identifier, :disability_id,
                   :score, :special_flag, :num_answers, :num_evaluations, :num_places,
-                  :is_certified
+                  :is_certified, :accessibility_type
   validates :summary_type, :data_type, :presence => true
   
   SPECIAL_FLAGS = {'not_accessible' => 0, 'no_answer' => 1, 'not_relevant' => 2}
   SUMMARY_TYPES = {'overall' => 0, 'disability' => 1}
   DATA_TYPES = {'overall' => 0, 'category' => 1}
+  ACCESSIBILITY_TYPES = {'accessible' => 0, 'partial' => 1, 'not' => 2}
   SAVE_TYPES = {'summary_overall' => 0, 'summary_category' => 1, 'disability_overall' => 2, 'disability_category' => 3}
 
   def to_summary_hash
