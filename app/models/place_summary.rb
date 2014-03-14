@@ -39,6 +39,22 @@ class PlaceSummary < ActiveRecord::Base
       where(:place_id => place_ids, :summary_type => SUMMARY_TYPES['overall'], :data_type => DATA_TYPES['overall'])
     end
   end
+  
+  # get number of places
+  def self.num_places
+    count = 0
+    count = select('distinct place_id').count
+  
+    return count
+  end
+
+  # get the number of places that are in a venue category
+  def self.num_places_in_venue_category(venue_category_id)
+    count = 0
+    count = select('distinct place_id').where(:venue_category_id => venue_category_id).count
+  
+    return count
+  end
 
   ##################################
   ##################################

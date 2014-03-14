@@ -5,7 +5,7 @@ class ReportsController < ApplicationController
     @evals = PlaceSummary.stats_overall_evaluation_results
     @disabilities = Disability.is_active.sorted
     @general_stats = []
-    @general_stats << {:name => I18n.t('reports.index.general.places'), :count => Place.count}
+    @general_stats << {:name => I18n.t('reports.index.general.places'), :count => PlaceSummary.num_places}
         @general_stats << {:name => I18n.t('reports.index.general.certified'), :count => @evals.present? && @evals.has_key?(:certified) && @evals[:certified].has_key?(:total) ? @evals[:certified][:total][:total] : 0}
         @general_stats << {:name => I18n.t('reports.index.general.public'), :count => @evals.present? && @evals.has_key?(:public) && @evals[:public].has_key?(:total) ? @evals[:public][:total][:total] : 0}
     @general_stats << {:name => I18n.t('reports.index.general.answers'), :count => PlaceEvaluationAnswer.answer_count}
@@ -47,7 +47,7 @@ class ReportsController < ApplicationController
 #        @evals = PlaceSummary.stats_overall_evaluation_results
 
         @general_stats = []
-        @general_stats << {:name => I18n.t('reports.index.general.places'), :count => Place.count_with_venues(venue_ids)}
+        @general_stats << {:name => I18n.t('reports.index.general.places'), :count => PlaceSummary.num_places_in_venue_category(params[:venue_category_id])}
         @general_stats << {:name => I18n.t('reports.index.general.certified'), :count => @stats.present? && @stats.has_key?(:certified) && @stats[:certified].has_key?(:total) ? @stats[:certified][:total][:total] : 0}
         @general_stats << {:name => I18n.t('reports.index.general.public'), :count => @stats.present? && @stats.has_key?(:public) && @stats[:public].has_key?(:total) ? @stats[:public][:total][:total] : 0}
         @general_stats << {:name => I18n.t('reports.index.general.answers'), :count => PlaceEvaluationAnswer.in_places(place_ids).answer_count}
