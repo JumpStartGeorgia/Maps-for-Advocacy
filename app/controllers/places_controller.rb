@@ -33,6 +33,9 @@ class PlacesController < ApplicationController
       @data[:public][:summary] = PlaceSummary.for_place_disablity(params[:id])
       @data[:public][:summary_questions] = overall_question_categories
 
+      # store chart data
+      chart_data = []
+
       # get evaluations
       if @disabilities.present?
         @disabilities.each do |disability|
@@ -63,6 +66,9 @@ class PlacesController < ApplicationController
             
             # get user info that submitted evaluations
             c[:users] = User.for_evaluations(c[:evaluations].map{|x| x.user_id}.uniq)
+            
+            # create data for highcharts
+            chart_data << create_chart_data(disability, c[:evaluations], c[:summaries], true)
           end        
 
 
@@ -91,11 +97,20 @@ class PlacesController < ApplicationController
             
             # get user info that submitted evaluations
             p[:users] = User.for_evaluations(p[:evaluations].map{|x| x.user_id}.uniq)
+            
+            # create data for highcharts
+            chart_data << create_chart_data(disability, p[:evaluations], p[:summaries])
           end        
 
         end
       end
       
+      if chart_data.present?
+        gon.place_chart_data = chart_data.compact 
+        gon.place_chart_title = I18n.t('places.show.chart.title', :name => @place.name)
+        gon.place_chart_xaxis = I18n.t('places.show.chart.xaxis')
+        gon.place_chart_yaxis = I18n.t('places.show.chart.yaxis')
+      end
 
       respond_to do |format|
         format.html # show.html.erb
@@ -396,4 +411,67 @@ class PlacesController < ApplicationController
     end
   end
   
+  
+private
+  # create data hash that can be used to load chart
+  def create_chart_data(disability, evaluations, summaries, is_certified=false)
+    data = nil
+    
+    if evaluations.present? && summaries.present? && disability.present?
+      data = Hash.new
+      data[:name] = "#{is_certified ? I18n.t('app.common.certified') : I18n.t('app.common.public')} - #{disability.name}" 
+      data[:disability_id] = disability.id
+      data[:certified] = is_certified
+      data[:color] = chart_color(disability.id, is_certified)
+      data[:data] = []
+      evaluations.each do |evaluation|
+        d = []
+        data[:data] << d
+        # need date in # of milliseconds
+        d << (evaluation.created_at.to_f*1000).to_i
+        # get the summary for this eval
+        eval_summary = summaries['evaluations'].select{|x| x['id'] == evaluation.id}
+        if eval_summary.present?
+          eval_summary = eval_summary.first
+          if eval_summary['overall']['score'].present?
+            percent = 100*((eval_summary['overall']['score'] - PlaceEvaluation::ANSWERS['needs'])/(PlaceEvaluation::ANSWERS['has_good'].to_f - PlaceEvaluation::ANSWERS['needs']))
+            d << percent
+          else
+            d << 0
+          end
+          d << eval_summary['overall']['num_answers']
+        end
+      
+      end 
+    
+    end
+    return data
+  end
+  
+  def chart_color(disability_id, is_certified)
+    if is_certified
+      case disability_id
+        when 1
+          "#8C7E45"
+        when 2
+          "#46728F"
+        when 3
+          "#8C4547"
+        when 4
+          "#8C4583"
+      end
+    else
+      case disability_id
+        when 1
+          "#bCaE75"
+        when 2
+          "#76a2bF"
+        when 3
+          "#bC7577"
+        when 4
+          "#bC75b3"
+      end
+    end
+  
+  end
 end
