@@ -288,7 +288,7 @@ private
         # accessible
         save_summary(venue_id, existing_summaries, 
                       records.select{|x| x.score == PlaceEvaluation::ANSWERS['has_good']}, 
-                      SAVE_TYPES['summary_overall'], summary_type, DATA_TYPES['overall'], 
+                      type_overall, summary_type, DATA_TYPES['overall'], 
                       ACCESSIBILITY_TYPES['accessible'],
                       is_category,
                       options)
@@ -391,6 +391,7 @@ private
     puts "************* summary_type = #{summary_type}; summary type id = #{options['summary_type_identifier']}; s type id class = #{options['summary_type_identifier'].class}"
     puts "************* data_type = #{data_type}; data type id = #{options['data_type_identifier']}; d type id class = #{options['data_type_identifier'].class}"
     
+
     index = nil
     case type
       when 0 # summary overall

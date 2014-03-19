@@ -182,6 +182,7 @@ class QuestionCategory < ActiveRecord::Base
         PlaceEvaluation.delete_all
         PlaceEvaluationAnswer.delete_all
         PlaceSummary.delete_all
+        VenueSummary.delete_all
 
         connection = ActiveRecord::Base.connection
         ActiveRecord::Base.connection.execute("truncate disabilities_question_pairings;")        

@@ -120,6 +120,7 @@ class VenueCategory < ActiveRecord::Base
         PlaceEvaluation.delete_all
         PlaceEvaluationAnswer.delete_all
         PlaceSummary.delete_all
+        VenueSummary.delete_all
 		  end
 		
 		

@@ -398,6 +398,8 @@ ka:
       header_stats_certified: Certified Evaluated Places
       header_stats_public: Public Evaluated Places
       header_venues: "Breakdown of Place Accessibility by Venue in '%{name}'"
+      header_places_certified: Certified Evaluated Places
+      header_places_public: Public Evaluated Places
       explain_venues: The following tables show the number of places in each venue that have an overall evaluation result in each possible accessibility level.
       no_evals: No evaluations have been submitted yet.
       no_places: No places have been evaluated yet.

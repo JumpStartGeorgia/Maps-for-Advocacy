@@ -451,6 +451,10 @@ class PlaceSummary < ActiveRecord::Base
             end
           end
         end
+        
+        # update the venue and venue category summary
+        VenueSummary.update_summaries(venue_ids[:venue_id])
+        VenueSummary.update_summaries(venue_ids[:venue_category_id], true)
       end    
     end
     Rails.logger.debug "//////////////////////////////////////////"
@@ -617,6 +621,10 @@ class PlaceSummary < ActiveRecord::Base
             
           end  
         end
+        
+        # update the venue and venue category summary
+        VenueSummary.update_summaries(venue_ids[:venue_id])
+        VenueSummary.update_summaries(venue_ids[:venue_category_id], true)
       end
     end
     Rails.logger.debug "*****************************************"
