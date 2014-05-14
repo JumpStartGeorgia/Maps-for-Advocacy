@@ -116,6 +116,8 @@ ka:
         needs: არ აქვს და ესაჭიროება
         not_relevant: არ არის შესაბამისი
         no_answer: არ არის პასუხი
+        'yes': 'დიახ'
+        'no': 'არა'
       summary_answers:
         not_accessible: არ არის ხელმისაწვდომი
         no_answer: არ არის პასუხი
@@ -302,7 +304,7 @@ ka:
       next: შემდეგი
       map_link_title: შეარჩიეთ ეს მდებარეობა
       submit: ადგილის შენახვა
-    eval_form:
+    certified_eval_form:
       evaluation_instructions: შეარჩიეთ კატეგორია და შეავსეთ შეფასება.
       question_category_link_title: იხილეთ კითხვები '%{name}'
       question_instructions: თუ არ გაქვთ პასუხი, დატოვეთ ცარიელი. 

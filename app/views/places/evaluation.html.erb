@@ -3,7 +3,7 @@
 <% 
   if @disability.blank?
     title t('.title1', :name => @place[:name]).html_safe 
-  elsif params[:certification].to_s == '1' || params[:certification].to_s == 'true'
+  elsif params[:certification] == true
     title t('.title3', :name => @place[:name], :disability => @disability.name).html_safe 
   else
     title t('.title2', :name => @place[:name], :disability => @disability.name).html_safe 
@@ -50,7 +50,11 @@
   <% else %>
 
     <div id="venue_evalautions">
-      <%= render :partial => 'eval_form', :locals => {:f => f} %>
+      <% if params[:certification] == true %>
+        <%= render :partial => 'certified_eval_form', :locals => {:f => f} %>
+      <% else %>
+        <%= render :partial => 'public_eval_form', :locals => {:f => f} %>
+      <% end %>
     </div>
 
     <div id="submit-button" class="accessibly-hidden">

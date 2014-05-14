@@ -116,6 +116,8 @@ en:
         needs: Not have and needs
         not_relevant: Not relevant
         no_answer: No answer
+        'yes': 'Yes'
+        'no': 'No'
       summary_answers:
         not_accessible: Not Accessible
         no_answer: No Answers
@@ -302,7 +304,7 @@ en:
       next: Next
       map_link_title: Select this location
       submit: Save the Place
-    eval_form:
+    certified_eval_form:
       evaluation_instructions: Fill out the evaluation by selecting a category and answering the statements.
       question_category_link_title: View questions in '%{name}'
       question_instructions: If you do not know the answer, please leave it blank.
