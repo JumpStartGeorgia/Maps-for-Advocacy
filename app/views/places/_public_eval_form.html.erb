@@ -28,19 +28,28 @@
                 <div class="span8">
                   <div class="row-fluid">
                     <div class="span2">
-                      <input id="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['has_good']}" %>" 
+                      <input id="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['yes']}" %>" 
                             name="<%= input_name %>" type="radio" value="<%= PlaceEvaluation::ANSWERS['yes'] %>">
-                      <label for="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['has_good']}" %>"><%= t('app.common.answers.yes') %></label>
+                      <label class="yes" for="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['yes']}" %>">
+                        <i class="icon-white icon-thumbs-up"></i>
+                        <%= t('app.common.answers.yes') %>
+                      </label>
                     </div>
                     <div class="span2">
-                      <input id="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['needs']}" %>" 
+                      <input id="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['no']}" %>" 
                             name="<%= input_name %>" type="radio" value="<%= PlaceEvaluation::ANSWERS['no'] %>">
-                      <label for="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['needs']}" %>"><%= t('app.common.answers.no') %></label>
+                      <label class="no" for="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['no']}" %>">
+                        <i class="icon-thumbs-down icon-white"></i>
+                        <%= t('app.common.answers.no') %>
+                      </label>
                     </div>
                     <div class="span3">
                       <input id="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['not_relevant']}" %>" 
                             name="<%= input_name %>" type="radio" value="<%= PlaceEvaluation::ANSWERS['not_relevant'] %>">
-                      <label for="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['not_relevant']}" %>"><%= t('app.common.answers.not_relevant') %></label>
+                      <label class="not_relevant" for="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['not_relevant']}" %>">
+                        <i class="icon-remove icon-white"></i>
+                        <%= t('app.common.answers.not_relevant') %>
+                      </label>
                     </div>
                   </div>                  
                 </div>

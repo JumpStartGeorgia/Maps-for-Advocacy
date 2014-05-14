@@ -156,15 +156,47 @@ form.place{
     }
     div.venue_evaluation {
       & > .row-fluid {
-        padding: 5px 0 0 5px;
+        padding: 5px 0 5px 5px;
         &:nth-child(even) {background: #ddd}
         &:nth-child(odd) {background: #FFF}
         [class*="span"]{
           min-height: 25px;
         }
       }
+      .question-evidence{
+        margin-top: 5px;
+      }
       label, input[type="radio"]{
         display: inline;
+      }
+      input[type=radio] {
+          display:none; 
+          margin:10px;
+      }      
+      input[type=radio] + label {
+          display:inline-block;
+          margin:-2px;
+          padding: 4px 12px;
+          background-color: #e7e7e7;
+          border-color: #ddd;
+          &.yes, &.has_good, &.has{
+            background-color: #a8d2b8;
+          }
+          &.has_bad{
+            background-color: #eedea0;
+          }
+          &.no, &.needs{
+            background-color: #e1919f;
+          }
+          &.not_relevant{
+            background-color: #555;
+            color: #fff;
+          }
+      }
+      input[type=radio]:checked + label { 
+         background-image: none;
+          background-color:#3287CC;
+          color: #fff;
       }
     }
   }
