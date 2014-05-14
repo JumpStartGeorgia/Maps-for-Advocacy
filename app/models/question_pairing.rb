@@ -12,7 +12,9 @@ class QuestionPairing < ActiveRecord::Base
   DISABILITY_ID_SEPARATOR = "+"
 
   # get the questions in format that is used for computing summaries
-  def self.questions_for_summary
+  def self.questions_for_summary(is_certified = true)
+    types = [QuestionCategory::TYPES['common'], QuestionCategory::TYPES['custom']]
+    types = [QuestionCategory::TYPES['public'], QuestionCategory::TYPES['public_custom']] if !is_certified
     
     sql = "select qp.id, qp.question_category_id, qp.is_exists, qp.required_for_accessibility, if(qc.ancestry is null, qc.id, convert(qc.ancestry, unsigned)) as root_question_category_id, "
     sql << "group_concat('"
@@ -22,6 +24,9 @@ class QuestionPairing < ActiveRecord::Base
     sql << "') as disability_ids "
     sql << "from question_pairings as qp inner join disabilities_question_pairings as dqp on dqp.question_pairing_id = qp.id "
     sql << "inner join question_categories as qc on qp.question_category_id = qc.id "
+    sql << "where qc.category_type in ("
+    sql << types.join(',')
+    sql << ") "
     sql << "group by qp.id, qp.question_category_id, qp.is_exists, qp.required_for_accessibility, root_question_category_id "
     find_by_sql(sql)
   end

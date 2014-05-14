@@ -2,11 +2,17 @@ module PlacesHelper
 
   # hash = {score, special_flag}
   def format_summary_result(hash, options={})
-    options[:is_summary] = false if options[:is_summary].blank?
+    options[:is_summary] = false if options[:is_summary].nil?
+    options[:is_certified] = true if options[:is_certified].nil?
     x = ''
     if hash.class == Hash
       if hash.has_key?('score') && hash['score'].present?
-        percent = 100*((hash['score'] - PlaceEvaluation::ANSWERS['needs'])/(PlaceEvaluation::ANSWERS['has_good'].to_f - PlaceEvaluation::ANSWERS['needs']))
+        percent = nil
+        if options[:is_certified]
+          percent = 100*((hash['score'] - PlaceEvaluation::ANSWERS['needs'])/(PlaceEvaluation::ANSWERS['has_good'].to_f - PlaceEvaluation::ANSWERS['needs']))
+        else
+          percent = 100*((hash['score'] - PlaceEvaluation::ANSWERS['no']))
+        end
         key = case percent
           when 0..25
             'bad'

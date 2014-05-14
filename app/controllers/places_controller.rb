@@ -37,7 +37,8 @@ class PlacesController < ApplicationController
       # get evaluations
       if @disabilities.present?
         @disabilities.each do |disability|
-          qc = QuestionCategory.questions_for_venue(question_category_id: @place.custom_question_category_id, disability_id: disability.id)
+          qc_cert = QuestionCategory.questions_for_venue(question_category_id: @place.custom_question_category_id, disability_id: disability.id, is_certified: true)
+          qc_public = QuestionCategory.questions_for_venue(question_category_id: @place.custom_public_question_category_id, disability_id: disability.id, is_certified: false)
 
           #####################
           # get certified evals
@@ -50,7 +51,7 @@ class PlacesController < ApplicationController
           c[:code] = disability.code
           c[:name] = disability.name
 
-          c[:question_categories] = qc
+          c[:question_categories] = qc_cert
 
           # get evaluation results
           c[:evaluations] = PlaceEvaluation.with_answers(params[:id], disability_id: disability.id, is_certified: true).sorted
@@ -78,17 +79,17 @@ class PlacesController < ApplicationController
           p[:code] = disability.code
           p[:name] = disability.name
 
-          p[:question_categories] = qc
+          p[:question_categories] = qc_public
 
           # get evaluation results
-          p[:evaluations] = PlaceEvaluation.with_answers(params[:id], disability_id: disability.id).sorted
+          p[:evaluations] = PlaceEvaluation.with_answers(params[:id], disability_id: disability.id, is_certified: false).sorted
           p[:evaluation_count] = 0
           
           if p[:evaluations].present?
             p[:evaluation_count] = p[:evaluations].length
    
             # create summaries of evaluations
-            p[:summaries] = PlaceSummary.for_place_disablity(params[:id], disability_id: disability.id)
+            p[:summaries] = PlaceSummary.for_place_disablity(params[:id], disability_id: disability.id, is_certified: false)
             
             # get user info that submitted evaluations
             p[:users] = User.for_evaluations(p[:evaluations].map{|x| x.user_id}.uniq)

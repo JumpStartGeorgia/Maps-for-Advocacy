@@ -111,10 +111,10 @@ class PlaceSummary < ActiveRecord::Base
       PlaceSummary.transaction do
 
         # get all evaluations for this place
-        evaluations = PlaceEvaluation.with_answers_for_summary(place_id)
+        evaluations = PlaceEvaluation.with_answers_for_summary(place_id, is_certified: false, place_evaluation_id: place_evaluation_id)
 
         # get all questions
-        questions = QuestionPairing.questions_for_summary
+        questions = QuestionPairing.questions_for_summary(false)
         
         disability_id = nil
               
@@ -255,7 +255,7 @@ class PlaceSummary < ActiveRecord::Base
         evaluations = PlaceEvaluation.with_answers_for_summary(place_id, is_certified: true, place_evaluation_id: place_evaluation_id)
 
         # get all questions
-        questions = QuestionPairing.questions_for_summary
+        questions = QuestionPairing.questions_for_summary(true)
         
         disability_id = nil
               
