@@ -1,391 +1,437 @@
-Parent Category Name,Georgian Parent Category Name,Parent Category Sort Order,Parent Category Is Common,Child Category Name,Georgian Child Category Name,Child Category Sort Order,Child Category Is Common,Type,Exists Question,Required for Accessibility Flag,Question,Georgian Question,Question Sort Order,Question Evidence,Geogian Question Evidence,Venue
-Accessibility Services,ხელმისაწვდომობის მომსახურება,1,1,,,,,"b,d,p,s",,,Special services available for people with disabilities,სპეციალური მომსახურები შეზღუდული შესაძლებლობი მქონე პირთათვის,1,,,
-Accessibility Services,ხელმისაწვდომობის მომსახურება,1,1,,,,,b,,1,Guide dog permitted to assist blind people,დაშვებულია გზამკვლევი ძაღლის დახმარება უსინათლოთათვის,2,,,
-Accessibility Services,ხელმისაწვდომობის მომსახურება,1,1,,,,,p,,,Adequate seating area for wheelchairs,ეტლისთვის გამოყოფილია შესაბამისი დასაჯდომი ადგილი,3,Area (sq m),ფართი (კვ.მ),
-Accessibility Services,ხელმისაწვდომობის მომსახურება,1,1,,,,,p,,,Adequate height of tables for wheelchairs,მაგიდის სიმაღლე ეტლის შესაბამისია,4,Height (m),სიმაღლე (მ),
-Accessibility Services,ხელმისაწვდომობის მომსახურება,1,1,,,,,s,,,Signs presented in adequate text size,ნიშნები წარმოდგენილია ადეკვატური ტექსტის ზომით,5,Text Size (pt),ტექსტის ზომა,
-Accessibility Services,ხელმისაწვდომობის მომსახურება,1,1,,,,,s,,,Sign text uses high contrast,ტექსტი გამოსახულია მაღალი კონტრასტით,6,Text Size (pt),ტექსტის ზომა,
-Accessibility Services,ხელმისაწვდომობის მომსახურება,1,1,,,,,"b,s",,,Signs on doors located directly above door handle,კარებზე ნიშნები განლაგებულია კარის სახელურის ზემოთ,7,,,
-Accessibility Services,ხელმისაწვდომობის მომსახურება,1,1,,,,,"b,s",,,Signs located at adequate height,ნიშნები განლაგებულია შესაბამის სიმაღლეზე,8,Height (m),სიმაღლე (მ),
-Accessibility Services,ხელმისაწვდომობის მომსახურება,1,1,,,,,s,,,Documents presented in adequate text size,დოკუმენტები წარმოდგენილია შესაბამისი ტექსტის ზომით,9,Text Size (pt),ტექსტის ზომა,
-Accessibility Services,ხელმისაწვდომობის მომსახურება,1,1,,,,,b,,,Signs presented in Braille,ნიშნები წარმოდგენილია ბრაილის შრიფტით,10,,,
-Accessibility Services,ხელმისაწვდომობის მომსახურება,1,1,,,,,b,,,Documents presented in Braille,დოკუმენტები წარმოდგენილია ბრაილის შრიფტით,11,,,
-Accessibility Services,ხელმისაწვდომობის მომსახურება,1,1,,,,,"b,s",,,Documents presented in an audio format,დოკუმენტები წარმოდგენილია აუდიო ფორმატში,12,,,
-Accessibility Services,ხელმისაწვდომობის მომსახურება,1,1,,,,,"b,d,p,s",,,Phone number listed for the place’s emergency services,წარმოდგენილია საგანგებო მდგომარეობის სამსახურების ნომრები,13,,,
-Parking,პარკინგი,2,1,,,,,"b,d,p,s",1,1,Parking area exists,არსებობს ავტოსადგომი,0,,,
-Parking,პარკინგი,2,1,,,,,"b,d,p,s",,,Designated handicapped parking or drop off area,განსაკუთრებული საჭიროებების მქონე პირთათვის განკუთვნილი ავტოსადგომი ან ჩამოსასმელი ტერიტორია,1,,,
-Parking,პარკინგი,2,1,,,,,"b,d,p,s",,1,Parking or drop-off area free of permanent barriers,,2,,,
-Parking,პარკინგი,2,1,,,,,"b,d,p,s",,1,Parking or drop-off area free of temporary barriers,,3,,,
-Parking,პარკინგი,2,1,,,,,p,,,"Firm, level, slip-resistant surface","მყარი, სწორი, მოცურებისგან დაცული ზედაპირი",4,,,
-Parking,პარკინგი,2,1,,,,,"b,p,s",,,Free of abrupt changes in surface level,,5,Height (m),სიმაღლე (მ),
-Parking,პარკინგი,2,1,,,,,"b,d,p,s",,1,Accessible route in and out of parking or drop off area,ხელმისაწვდომი მარშუტი ავტოსადმობიდან და ჩამოსასმელი ტერიტორიიდან,6,,,
-Parking,პარკინგი,2,1,,,,,"b,d,p,s",,,Designated parking or drop off area is shortest possible route to an accessible entrance,,7,,,
-Outside Pathways,გარე ბილიკები,3,1,,,,,"b,d,p,s",,,Pathway free of permanent barriers,,1,,,
-Outside Pathways,გარე ბილიკები,3,1,,,,,"b,d,p,s",,,Pathway free of temporary barriers,,2,,,
-Outside Pathways,გარე ბილიკები,3,1,,,,,p,,,"Firm, level, slip-resistant surface","მყარი, სწორი, მოცურებისგან დაცული ზედაპირი",3,,,
-Outside Pathways,გარე ბილიკები,3,1,,,,,"b,p,s",,,Free of abrupt changes in surface level,,4,Height (m),სიმაღლე (მ),
-Outside Pathways,გარე ბილიკები,3,1,,,,,"b,p,s",,,Gratings in pathway have small openings,გზებზე განლაგებულ ბილიკებს ვიწრო გასასვლელები აქვს,5,Width (m),სიგანე (მ),
-Outside Pathways,გარე ბილიკები,3,1,,,,,"b,p,s",,,Pathway width is adequate,გზის სიგანე ადეკვატურია,6,Width (m),სიგანე (მ),
-Outside Pathways,გარე ბილიკები,3,1,Stairs,კიბეები,1,1,"b,d,s",1,1,Stairs exist,წარმოდგენილია კიბეები,0,,,
-Outside Pathways,გარე ბილიკები,3,1,Stairs,კიბეები,1,1,"b,d,s",,1,Accessible path to stairs free of permanent barriers,,1,,,
-Outside Pathways,გარე ბილიკები,3,1,Stairs,კიბეები,1,1,"b,d,s",,1,Accessible path to stairs free of temporary barriers,,2,,,
-Outside Pathways,გარე ბილიკები,3,1,Stairs,კიბეები,1,1,"b,d,s",,1,Stairs free of permanent barriers,,3,,,
-Outside Pathways,გარე ბილიკები,3,1,Stairs,კიბეები,1,1,"b,d,s",,1,Stairs free of temporary barriers,,4,,,
-Outside Pathways,გარე ბილიკები,3,1,Stairs,კიბეები,1,1,"b,d,s",,,"Firm, level, slip-resistant surface","მყარი, სწორი, მოცურებისგან დაცული ზედაპირი",5,,,
-Outside Pathways,გარე ბილიკები,3,1,Stairs,კიბეები,1,1,"b,d,s",,,Continuous handrails on both sides,ორივე მხარეს წარმოდგენილია უწყვეტი მოაჯირი,6,,,
-Outside Pathways,გარე ბილიკები,3,1,Stairs,კიბეები,1,1,s,,,"Handrail painted in color that contrasts from surroundings (wall, stairs, etc)","მოაჯირის ფერი გამოირჩევა გარემომცველი ელემენტებისგან (კედელი, კიბეები და ა.შ.",7,,,
-Outside Pathways,გარე ბილიკები,3,1,Stairs,კიბეები,1,1,"b,d,s",,,Height of all steps are the same,ყველა კიბის სიმაღლე თანაბარია,8,Height (m),სიმაღლე (მ),
-Outside Pathways,გარე ბილიკები,3,1,Stairs,კიბეები,1,1,"b,d,s",,,Width of step is adequate,კიბის სიგანე შესაბამისია,9,Width (m),სიგანე (მ),
-Outside Pathways,გარე ბილიკები,3,1,Stairs,კიბეები,1,1,"b,d,s",,,Depth of step is adequate,კიბის სიღრმე შესაბამისია,10,Depth (m),სიღრმე (მ),
-Outside Pathways,გარე ბილიკები,3,1,Stairs,კიბეები,1,1,s,,,Stripes at beginning and end of staircase,კიბის დასაწყისი და ბოლო დახაზულია,11,,,
-Outside Pathways,გარე ბილიკები,3,1,Stairs,კიბეები,1,1,b,,,Tactile indicator at beginning and end of staircase,ტაქტილური მაჩვენებელი კიბის დასაწყისა და ბოლოში,12,,,
-Outside Pathways,გარე ბილიკები,3,1,Stairs,კიბეები,1,1,p,,,Stair lift,,13,,,
-Outside Pathways,გარე ბილიკები,3,1,Ramp,პანდუსი,2,1,"p,s",1,1,Ramp exists,წარმოდგენილია პანდუსი,0,,,
-Outside Pathways,გარე ბილიკები,3,1,Ramp,პანდუსი,2,1,p,,,Mobile ramp available when permanent ramp is not available,"წარმოდგენილია მოძრავი პანდუსი, მუდმივის ხელმიუწვდომლობის შემთხვევაში",1,,,
-Outside Pathways,გარე ბილიკები,3,1,Ramp,პანდუსი,2,1,p,,1,Accessible path to ramp free of permanent barriers,,2,,,
-Outside Pathways,გარე ბილიკები,3,1,Ramp,პანდუსი,2,1,p,,1,Accessible path to ramp free of temporary barriers,,3,,,
-Outside Pathways,გარე ბილიკები,3,1,Ramp,პანდუსი,2,1,p,,1,Ramp free of permanent barriers,,4,,,
-Outside Pathways,გარე ბილიკები,3,1,Ramp,პანდუსი,2,1,p,,1,Ramp free of temporary barriers,,5,,,
-Outside Pathways,გარე ბილიკები,3,1,Ramp,პანდუსი,2,1,p,,1,Adequate ramp slope,პანდუსის დაქანება ადეკვატურია,6,Ratio of Height:Width (m),თანაფარდობა სიმაღლე: სიგანე (მ),
-Outside Pathways,გარე ბილიკები,3,1,Ramp,პანდუსი,2,1,p,,,"Firm, level, slip-resistant surface","მყარი, სწორი, მოცურებისგან დაცული ზედაპირი",7,,,
-Outside Pathways,გარე ბილიკები,3,1,Ramp,პანდუსი,2,1,p,,1,Adequate ramp width,პანდუსის სიგანე ადეკვატურია,8,Width (m),სიგანე (მ),
-Outside Pathways,გარე ბილიკები,3,1,Ramp,პანდუსი,2,1,p,,,Continuous handrails on both sides,ორივე მხარეს წარმოდგენილია უწყვეტი მოაჯირი,9,,,
-Outside Pathways,გარე ბილიკები,3,1,Ramp,პანდუსი,2,1,p,,,Ramp sheltered from weather,პანდუსი გადახურულია,10,,,
-Outside Pathways,გარე ბილიკები,3,1,Ramp,პანდუსი,2,1,p,,,Flat pathway at the top and bottom of ramp large enough to allow for turning,"სწორი ბილიკი პანსუსის დასაწყისსა და ბოლოში, რომელიც მოტრიალების საშუალებას იძლევა",11,,,
-Outside Pathways,გარე ბილიკები,3,1,Ramp,პანდუსი,2,1,s,,,Stripes at beginning and end of ramp,პანდუსის დასაწყისი და ბოლო დახაზულია,12,,,
-Entrances,შესასვლელები,4,1,,,,,"b,d,p,s",,,Accessible path to primary entrance free of permanent barriers,,1,,,
-Entrances,შესასვლელები,4,1,,,,,"b,d,p,s",,,Accessible path to primary entrance free of temporary barriers,,2,,,
-Entrances,შესასვლელები,4,1,,,,,"b,d,p,s",,,Accessible path to secondary entrance free of permanent barriers,,3,,,
-Entrances,შესასვლელები,4,1,,,,,"b,d,p,s",,,Accessible path to secondary entrance free of temporary barriers,,4,,,
-Entrances,შესასვლელები,4,1,,,,,"b,d,p,s",,,Sign indicating where accessible entrance is located if main entrance is not accessible,"გამოკრულია აბრა იმის შესახებ, თუ სად მდებარეობს სათადარიგო შესასვლელი, იმ შემთხვევაში, თუ მთავარი შესასვლელი არ არის ხელმისაწვდომი",5,,,
-Entrances,შესასვლელები,4,1,,,,,s,,,Accessible entrance sign uses high contrast,ხელმისაწვდომი შესასვლელის აბრაზე გამოყენებულია მაღალი კონტრასტი,6,,,
-Entrances,შესასვლელები,4,1,,,,,b,,,Accessible entrance sign in Braille,ხელმისაწვდომი შესასვლელის აბრაზე გამოყენებულია ბრაილის შრიფტი,7,,,
-Entrances,შესასვლელები,4,1,,,,,b,,,Tactile map of place,ადგილის ტაქტილური რუკა ადგილი,8,,,
-Entrances,შესასვლელები,4,1,Doorway,კარები,1,1,"b,d,p,s",,1,Accessible path to door free of permanent barriers,,1,,,
-Entrances,შესასვლელები,4,1,Doorway,კარები,1,1,"b,d,p,s",,1,Accessible path to door free of temporary barriers,,2,,,
-Entrances,შესასვლელები,4,1,Doorway,კარები,1,1,"b,d,p,s",,1,Doorway free of permanent barriers,,3,,,
-Entrances,შესასვლელები,4,1,Doorway,კარები,1,1,"b,d,p,s",,1,Doorway free of temporary barriers,,4,,,
-Entrances,შესასვლელები,4,1,Doorway,კარები,1,1,p,,1,Wide opening when door is open,კარები იღება ფართედ,5,Width (m),სიგანე (მ),
-Entrances,შესასვლელები,4,1,Doorway,კარები,1,1,"b,d,p,s",,,"Flat, level path through doorway","სწორი, თანაბარი გზა კარების ტერიტორიაზე",6,Height (m),სიმაღლე (მ),
-Entrances,შესასვლელები,4,1,Doorway,კარები,1,1,"b,d,p,s",,,Open door with one hand,კარების გაღება ერთი ხელით,7,,,
-Entrances,შესასვლელები,4,1,Doorway,კარები,1,1,"b,d,p,s",,,Open door with minimum adequate force,კარების გაღება მინიმალური ძალისხმევით,8,,,
-Entrances,შესასვლელები,4,1,Doorway,კარები,1,1,"b,p,s",,,Automatic door opener,კარების ავტომატური გაღება,9,,,
-Entrances,შესასვლელები,4,1,Doorway,კარები,1,1,s,,,Automatic door opener button in frame with contrasting color,კარების ავტომატური გაღების ღილაკი ჩასმულია კონტრასტული ფერის ჩარჩოში,10,,,
-Entrances,შესასვლელები,4,1,Doorway,კარები,1,1,b,,,Automatic door opener button in Braille,კარების ავტომატური გაღების ღილაკი ბრაილის შრიფტით,11,,,
-Entrances,შესასვლელები,4,1,Doorway,კარები,1,1,"b,p",,,Adjacent door next to revolving door or turnstile,,12,,,
-Entrances,შესასვლელები,4,1,Stairs,კიბეები,2,1,"b,d,s",1,1,Stairs exist,კიბეები წარმოგენილია,0,,,
-Entrances,შესასვლელები,4,1,Stairs,კიბეები,2,1,"b,d,s",,1,Accessible path to stairs free of permanent barriers,,1,,,
-Entrances,შესასვლელები,4,1,Stairs,კიბეები,2,1,"b,d,s",,1,Accessible path to stairs free of temporary barriers,,2,,,
-Entrances,შესასვლელები,4,1,Stairs,კიბეები,2,1,"b,d,s",,1,Stairs free of permanent barriers,,3,,,
-Entrances,შესასვლელები,4,1,Stairs,კიბეები,2,1,"b,d,s",,1,Stairs free of temporary barriers,,4,,,
-Entrances,შესასვლელები,4,1,Stairs,კიბეები,2,1,"b,d,s",,,"Firm, level, slip-resistant surface","მყარი, სწორი, მოცურებისგან დაცული ზედაპირი",5,,,
-Entrances,შესასვლელები,4,1,Stairs,კიბეები,2,1,"b,d,s",,,Continuous handrails on both sides,ორივე მხარეს წარმოდგენილია უწყვეტი მოაჯირი,6,,,
-Entrances,შესასვლელები,4,1,Stairs,კიბეები,2,1,s,,,"Handrail painted in color that contrasts from surroundings (wall, stairs, etc)","მოაჯირის ფერი გამოირჩევა გარემომცველი ელემენტებისგან (კედელი, კიბეები და ა.შ.",7,,,
-Entrances,შესასვლელები,4,1,Stairs,კიბეები,2,1,"b,d,s",,,Height of all steps are the same,ყველა კიბის სიმაღლე თანაბარია,8,Height (m),სიმაღლე (მ),
-Entrances,შესასვლელები,4,1,Stairs,კიბეები,2,1,"b,d,s",,,Width of step is adequate,კიბის სიგანე ადეკვატურია,9,Width (m),სიგანე (მ),
-Entrances,შესასვლელები,4,1,Stairs,კიბეები,2,1,"b,d,s",,,Depth of step is adequate,კიბის სიღრმე ადეკვატურია,10,Depth (m),სიღრმე (მ),
-Entrances,შესასვლელები,4,1,Stairs,კიბეები,2,1,s,,,Stripes at beginning and end of staircase,კიბის დასაწყისი და ბოლო დახაზულია,11,,,
-Entrances,შესასვლელები,4,1,Stairs,კიბეები,2,1,b,,,Tactile indicator at beginning and end of staircase,ტაქტილური მაჩვენებელი კიბის დასაწყისა და ბოლოში,12,,,
-Entrances,შესასვლელები,4,1,Stairs,კიბეები,2,1,p,,,Stair lift,,13,,,
-Entrances,შესასვლელები,4,1,Ramps,პანდუსი,3,1,"p,s",1,1,Ramp exists,"მყარი, სწორი, მოცურებისგან დაცული ზედაპირი",0,,,
-Entrances,შესასვლელები,4,1,Ramps,პანდუსი,3,1,p,,,Mobile ramp available when permanent ramp is not available,"წარმოდგენილია მოძრავი პანდუსი, მუდმივის ხელმიუწვდომლობის შემთხვევაში",1,,,
-Entrances,შესასვლელები,4,1,Ramps,პანდუსი,3,1,p,,1,Accessible path to ramp free of permanent barriers,,2,,,
-Entrances,შესასვლელები,4,1,Ramps,პანდუსი,3,1,p,,1,Accessible path to ramp free of temporary barriers,,3,,,
-Entrances,შესასვლელები,4,1,Ramps,პანდუსი,3,1,p,,1,Ramp free of permanent barriers,,4,,,
-Entrances,შესასვლელები,4,1,Ramps,პანდუსი,3,1,p,,1,Ramp free of temporary barriers,,5,,,
-Entrances,შესასვლელები,4,1,Ramps,პანდუსი,3,1,p,,1,Adequate ramp slope,პანდუსის დაქანება ადეკვატურია,6,Ratio of Height:Width (m),თანაფარდობა სიმაღლე: სიგანე (მ),
-Entrances,შესასვლელები,4,1,Ramps,პანდუსი,3,1,p,,,"Firm, level, slip-resistant surface","მყარი, სწორი, მოცურებისგან დაცული ზედაპირი",7,,,
-Entrances,შესასვლელები,4,1,Ramps,პანდუსი,3,1,p,,1,Adequate ramp width,პანდუსის სიგანე ადეკვატურია,8,Width (m),სიგანე (მ),
-Entrances,შესასვლელები,4,1,Ramps,პანდუსი,3,1,p,,,Continuous handrails on both sides,ორივე მხარეს წარმოდგენილია უწყვეტი მოაჯირი,9,,,
-Entrances,შესასვლელები,4,1,Ramps,პანდუსი,3,1,p,,,Ramp sheltered from weather,პანდუსი გადახურულია,10,,,
-Entrances,შესასვლელები,4,1,Ramps,პანდუსი,3,1,p,,,Flat pathway at the top and bottom of ramp large enough to allow for turning,"სწორი ბილიკი პანსუსის დასაწყისსა და ბოლოში, რომელიც მოტრიალების საშუალებას იძლევა",11,,,
-Entrances,შესასვლელები,4,1,Ramps,პანდუსი,3,1,s,,,Stripes at beginning and end of ramp,პანდუსის დასაწყისი და ბოლო დახაზულია,12,,,
-Entrances,შესასვლელები,4,1,Elevators,ლიფტები,4,1,"b,d,p,s",1,1,Elevator exists,ლიფტი წარმოდგენილია,0,,,
-Entrances,შესასვლელები,4,1,Elevators,ლიფტები,4,1,"b,d,p,s",,1,Accessible path to elevator free of permanent barriers,,1,,,
-Entrances,შესასვლელები,4,1,Elevators,ლიფტები,4,1,"b,d,p,s",,1,Accessible path to elevator free of temporary barriers,,2,,,
-Entrances,შესასვლელები,4,1,Elevators,ლიფტები,4,1,p,,,Adequate height of call buttons,დასარეკი ღილაკის სიმაღლე ადეკვატურია,3,Height (m),სიმაღლე (მ),
-Entrances,შესასვლელები,4,1,Elevators,ლიფტები,4,1,s,,,Call buttons framed with contrasting color,დასარეკი ღილაკი ჩასმულია კონტრასტულ ჩარჩოში,4,,,
-Entrances,შესასვლელები,4,1,Elevators,ლიფტები,4,1,b,,,Braille on call buttons,დასარეკ ღილაკზე ბრაილის შრიფტია წარმოდგენილი,5,,,
-Entrances,შესასვლელები,4,1,Elevators,ლიფტები,4,1,p,,1,Wide opening when door is open,კარები იღება ფართოდ,6,Width (m),სიგანე (მ),
-Entrances,შესასვლელები,4,1,Elevators,ლიფტები,4,1,"b,d,p,s",,,Doors remain open for adequate time,კარები რჩება გაღებული ადეკვატური დროის განმავლობაში,7,Time,დრო,
-Entrances,შესასვლელები,4,1,Elevators,ლიფტები,4,1,"b,d,p,s",,,Doors re-open automatically if they are obstructed,კარები ხელმეორედ იხსნება თუ რაიმე წინაღობა შეხვდა,8,,,
-Entrances,შესასვლელები,4,1,Elevators,ლიფტები,4,1,"b,d,p,s",,,"Flat, level path into elevator","სწორი, თანაბარი გზა ლიფტში შესასვლელად",9,Height (m),სიმაღლე (მ),
-Entrances,შესასვლელები,4,1,Elevators,ლიფტები,4,1,"b,d,p,s",,,Adequate minimum gap between elevator and floor landing,ლიფტსა და სართულს შორის ადეკვატურა დარის შემცირებული სივრცე,10,Width (m),სიგანე (მ),
-Entrances,შესასვლელები,4,1,Elevators,ლიფტები,4,1,"b,d,p,s",,1,Elevator free of permanent barriers,,11,,,
-Entrances,შესასვლელები,4,1,Elevators,ლიფტები,4,1,"b,d,p,s",,1,Elevator free of temporary barriers,,12,,,
-Entrances,შესასვლელები,4,1,Elevators,ლიფტები,4,1,"b,d,p,s",,,"Firm, level, slip-resistant surface","მყარი, სწორი, მოცურებისგან დაცული ზედაპირი",13,,,
-Entrances,შესასვლელები,4,1,Elevators,ლიფტები,4,1,p,,,Handrails on elevator walls,ლიფტში წარმოდგენილია ხელისმოსაკიდებლები,14,,,
-Entrances,შესასვლელები,4,1,Elevators,ლიფტები,4,1,p,,,Adequate space in the interior,ინტერიერში სივცე ადეკვატურად არის განაწილებული,15,Area (sq m),ფართობი (კვ.მ),
-Entrances,შესასვლელები,4,1,Elevators,ლიფტები,4,1,d,,,Visual signals to identify direction of travel and floor,ვიზუალური ნიშნები მიმართულებისა და სართულის იდენტიფიკაციისათვი,16,,,
-Entrances,შესასვლელები,4,1,Elevators,ლიფტები,4,1,"b,s",,,Audio signals to identify direction of travel and floor,აუდიო სიგნალი მიმართულებისა და სურთულის იდენტიფიკაციისათვის,17,,,
-Entrances,შესასვლელები,4,1,Elevators,ლიფტები,4,1,p,,,Adequate height of buttons in elevator,ლიფტში ღილაკების სიმაღლე ადეკვატურია,18,Height (m),სიმაღლე (მ),
-Entrances,შესასვლელები,4,1,Elevators,ლიფტები,4,1,s,,,Elevator buttons framed with contrasting color,ლიფტის ღილაკები ჩასმულია კონტრასტულ ჩარჩოში,19,,,
-Entrances,შესასვლელები,4,1,Elevators,ლიფტები,4,1,b,,,Elevator buttons in Braille,ლიფტის ღილაკები ბრაილის შრიფტით არის წარმოდგენილი,20,,,
-Entrances,შესასვლელები,4,1,Elevators,ლიფტები,4,1,"b,d,p,s",,,Working emergency communication system,საგანგებო სიტუაციების სისტემა გამართულად მუშაობს,21,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,,,,,"b,d,p,s",,1,Accessible path free of permanent barriers,,1,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,,,,,"b,d,p,s",,1,Accessible path free of temporary barriers,,2,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,,,,,"b,d,p,s",,,Free of abrupt changes in surface level,,3,Height (m),სიმაღლე (მ),
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,,,,,"b,d,p,s",,,Pathway width is adequate,გზის სიგანე ადეკვატურია,4,Width (m),სიგანე (მ),
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,,,,,"b,d,p,s",,,"Firm, level, slip-resistant surface","მყარი, სწორი, მოცურებისგან დაცული ზედაპირი",5,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Doorway,კარები,1,1,"b,d,p,s",,1,Accessible path to door free of permanent barriers,,1,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Doorway,კარები,1,1,"b,d,p,s",,1,Accessible path to door free of temporary barriers,,2,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Doorway,კარები,1,1,"b,d,p,s",,1,Doorway free of permanent barriers,,3,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Doorway,კარები,1,1,"b,d,p,s",,1,Doorway free of temporary barriers,,4,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Doorway,კარები,1,1,p,,1,Wide opening when door is open,კარები იღება ფართოდ,5,Width (m),სიგანე (მ),
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Doorway,კარები,1,1,"b,d,p,s",,,"Flat, level path through doorway","სწორი, თანაბარი გზა კარების ტერიტორიაზე",6,Height (m),სიმაღლე (მ),
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Doorway,კარები,1,1,"b,d,p,s",,,Open door with one hand,კარების გაღება ერთი ხელით,7,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Doorway,კარები,1,1,"b,d,p,s",,,Open door with minimum adequate force,კარების გაღება მინიმალური ძალისხმევით,8,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Doorway,კარები,1,1,"b,p,s",,,Automatic door opener,კარების ავტომატური გაღება,9,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Doorway,კარები,1,,s,,,Automatic door opener button in frame with contrasting color,კარების ავტომატური გაღების ღილაკი ჩასმულია კონტრასტული ფერის ჩარჩოში,10,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Doorway,კარები,1,,b,,,Automatic door opener button in Braille,კარების ავტომატური გაღების ღილაკი ბრაილის შრიფტით,11,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Doorway,კარები,1,,"b,p",,,Adjacent door next to revolving door or turnstile,,12,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Stairs,კიბეები,2,1,"b,d,s",1,1,Stairs exist,წარმოდგენილია კიბეები,0,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Stairs,კიბეები,2,1,"b,d,s",,1,Accessible path to stairs free of permanent barriers,,1,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Stairs,კიბეები,2,1,"b,d,s",,1,Accessible path to stairs free of temporary barriers,,2,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Stairs,კიბეები,2,1,"b,d,s",,1,Stairs free of permanent barriers,,3,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Stairs,კიბეები,2,1,"b,d,s",,1,Stairs free of temporary barriers,,4,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Stairs,კიბეები,2,1,"b,d,s",,,"Firm, level, slip-resistant surface","მყარი, სწორი, მოცურებისგან დაცული ზედაპირი",5,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Stairs,კიბეები,2,1,"b,d,s",,,Continuous handrails on both sides,ორივე მხარეს წარმოდგენილია უწყვეტი მოაჯირი,6,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Stairs,კიბეები,2,1,s,,,"Handrail painted in color that contrasts from surroundings (wall, stairs, etc)","მოაჯირები შეღებილია კონტრასტულ ფერებსი გარემოსთნ შედარებით (კედლები, კიბეები და ა.შ.",7,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Stairs,კიბეები,2,1,"b,d,s",,,Height of all steps are the same,ყველა კიბის სიმაღლე თანაბარია,8,Height (m),სიმაღლე (მ),
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Stairs,კიბეები,2,1,"b,d,s",,,Width of step is adequate,კიბის სიგანე ადეკვატურია,9,Width (m),სიგანე (მ),
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Stairs,კიბეები,2,1,"b,d,s",,,Depth of step is adequate,კიბის სიღრმე შესაბამისია,10,Depth (m),სიღრმე (მ),
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Stairs,კიბეები,2,1,s,,,Stripes at beginning and end of staircase,კიბე დასაწყისი და ბოლო დახაზულია,11,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Stairs,კიბეები,2,1,b,,,Tactile indicator at beginning and end of staircase,ტაქტილური მაჩვენებელი კიბის დასაწყისა და ბოლოში,12,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Stairs,კიბეები,2,1,p,,,Stair lift,,13,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Ramps,პანდუსი,3,1,"p,s",1,1,Ramp exists,წარმოდგენილია პანდუსი,0,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Ramps,პანდუსი,3,1,p,,,Mobile ramp available when permanent ramp is not available,"წარმოდგენილია მოძრავი პანდუსი, მუდმივის ხელმიუწვდომლობის შემთხვევაში",1,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Ramps,პანდუსი,3,1,p,,1,Accessible path to ramp free of permanent barriers,,2,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Ramps,პანდუსი,3,1,p,,1,Accessible path to ramp free of temporary barriers,,3,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Ramps,პანდუსი,3,1,p,,1,Ramp free of permanent barriers,,4,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Ramps,პანდუსი,3,1,p,,1,Ramp free of temporary barriers,,5,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Ramps,პანდუსი,3,1,p,,1,Adequate ramp slope,პანდუსის დაქანება ადეკვატურია,6,Ratio of Height:Width (m),თანაფარდობა სიმაღლე: სიგანე (მ),
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Ramps,პანდუსი,3,1,p,,,"Firm, level, slip-resistant surface","მყარი, სწორი, მოცურებისგან დაცული ზედაპირი",7,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Ramps,პანდუსი,3,1,p,,1,Adequate ramp width,პანდუსის სიგანე ადეკვატურია,8,Width (m),სიგანე (მ),
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Ramps,პანდუსი,3,1,p,,,Continuous handrails on both sides,ორივე მხარეს წარმოდგენილია უწყვეტი მოაჯირი,9,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Ramps,პანდუსი,3,1,p,,,Ramp sheltered from weather,,10,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Ramps,პანდუსი,3,1,p,,,Flat pathway at the top and bottom of ramp large enough to allow for turning,,11,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Ramps,პანდუსი,3,1,s,,,Stripes at beginning and end of ramp,,12,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Elevators,ლიფტები,4,1,"b,d,p,s",1,1,Elevator exists,,0,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Elevators,ლიფტები,4,1,"b,d,p,s",,1,Accessible path to elevator free of permanent barriers,,1,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Elevators,ლიფტები,4,1,"b,d,p,s",,1,Accessible path to elevator free of temporary barriers,,2,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Elevators,ლიფტები,4,1,p,,,Adequate height of call buttons,დასარეკი ღილაკის სიმაღლე ადეკვატურია,3,Height (m),სიმაღლე (მ),
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Elevators,ლიფტები,4,1,s,,,Call buttons framed with contrasting color,დასარეკი ღილაკები ჩასმულია კონტრასტულ ჩარჩოში,4,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Elevators,ლიფტები,4,1,b,,,Braille on call buttons,,5,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Elevators,ლიფტები,4,1,p,,1,Wide opening when door is open,კარები იღება ფართოდ,6,Width (m),სიგანე (მ),
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Elevators,ლიფტები,4,1,"b,d,p,s",,,Doors remain open for adequate time,,7,Time,დრო,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Elevators,ლიფტები,4,1,"b,d,p,s",,,Doors re-open automatically if they are obstructed,,8,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Elevators,ლიფტები,4,1,"b,d,p,s",,,"Flat, level path into elevator","სწორი, თანაბარი გზა ლიფტში შესასვლელად",9,Height (m),სიმაღლე (მ),
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Elevators,ლიფტები,4,1,"b,d,p,s",,,Adequate minimum gap between elevator and floor landing,,10,Width (m),სიგანე (მ),
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Elevators,ლიფტები,4,1,"b,d,p,s",,1,Elevator free of permanent barriers,,11,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Elevators,ლიფტები,4,1,"b,d,p,s",,1,Elevator free of temporary barriers,,12,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Elevators,ლიფტები,4,1,"b,d,p,s",,,"Firm, level, slip-resistant surface","მყარი, სწორი, მოცურებისგან დაცული ზედაპირი",13,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Elevators,ლიფტები,4,1,p,,,Handrails on elevator walls,,14,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Elevators,ლიფტები,4,1,p,,,Adequate space in the interior,ინტერიერში სივცე ადეკვატურად არის განაწილებული,15,Area (sq m),ფართობი (კვ.მ),
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Elevators,ლიფტები,4,1,d,,,Visual signals to identify direction of travel and floor,,16,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Elevators,ლიფტები,4,1,"b,s",,,Audio signals to identify direction of travel and floor,,17,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Elevators,ლიფტები,4,1,p,,,Adequate height of buttons in elevator,ლიფტში ღილაკების სიმაღლე ადეკვატურია,18,Height (m),სიმაღლე (მ),
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Elevators,ლიფტები,4,1,s,,,Elevator buttons framed with contrasting color,ლიფტის ღილაკები ჩასმულია კონტრასტულ ჩარჩოში,19,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Elevators,ლიფტები,4,1,b,,,Elevator buttons in Braille,ლიფტის ღილაკები ბრაილის შრიფტით არის წარმოდგენილი,20,,,
-"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,1,Elevators,ლიფტები,4,1,"b,d,p,s",,,Working emergency communication system,საგანგებო სიტუაციების სისტემა გამართულად მუშაობს,21,,,
-Interior Rooms,შიდა ოთახები,6,1,,,,,"b,d,p,s",,,Free of abrupt changes in surface level,,1,Height (m),სიმაღლე (მ),
-Interior Rooms,შიდა ოთახები,6,1,,,,,"b,d,p,s",,,"Firm, level, slip-resistant surface","მყარი, სწორი, მოცურებისგან დაცული ზედაპირი",2,,,
-Interior Rooms,შიდა ოთახები,6,1,,,,,"b,d,p,s",,1,Aisles free of permanent barriers,,3,,,
-Interior Rooms,შიდა ოთახები,6,1,,,,,"b,d,p,s",,1,Aisles free of temporary barriers,,4,,,
-Interior Rooms,შიდა ოთახები,6,1,,,,,"b,d,p,s",,1,Adequate aisle width,,5,Width (m),სიგანე (მ),
-Public Restrooms,საზოგადოებრივი ტუალეტები,7,1,,,,,"b,d,p,s",,1,Accessible path to restroom free of permanent barriers,,1,,,
-Public Restrooms,საზოგადოებრივი ტუალეტები,7,1,,,,,"b,d,p,s",,1,Accessible path to restroom free of temporary barriers,,2,,,
-Public Restrooms,საზოგადოებრივი ტუალეტები,7,1,,,,,p,,1,Wide opening when entrance door is open,,3,Width (m),სიგანე (მ),
-Public Restrooms,საზოგადოებრივი ტუალეტები,7,1,,,,,p,,,Door opens outward for small restroom,,4,,,
-Public Restrooms,საზოგადოებრივი ტუალეტები,7,1,,,,,s,,,Restroom gender indicator sign uses high contrast,,5,,,
-Public Restrooms,საზოგადოებრივი ტუალეტები,7,1,,,,,b,,,Restroom gender indicator sign in Braille,,6,,,
-Public Restrooms,საზოგადოებრივი ტუალეტები,7,1,,,,,p,,,Automatic entrance door opener,კარების ავტომატური გაღება,7,,,
-Public Restrooms,საზოგადოებრივი ტუალეტები,7,1,,,,,s,,,Automatic door opener button in frame with contrasting color,კარების ავტომატური გაღების ღილაკი ჩასმულია კონტრასტული ფერის ჩარჩოში,8,,,
-Public Restrooms,საზოგადოებრივი ტუალეტები,7,1,,,,,b,,,Automatic door opener button in Braille,კარების ავტომატური გაღების ღილაკი ბრაილის შრიფტით,9,,,
-Public Restrooms,საზოგადოებრივი ტუალეტები,7,1,,,,,"b,d,p,s",,,"Flat, level path through doorway","სწორი, თანაბარი გზა კარების ტერიტორიაზე",10,Height (m),სიმაღლე (მ),
-Public Restrooms,საზოგადოებრივი ტუალეტები,7,1,,,,,"b,d,p,s",,,Open door with one hand,კარების გაღება ერთი ხელით,11,,,
-Public Restrooms,საზოგადოებრივი ტუალეტები,7,1,,,,,"b,d,p,s",,,Open door with minimum adequate force,კარების გაღება მინიმალური ძალისხმევით,12,,,
-Public Restrooms,საზოგადოებრივი ტუალეტები,7,1,,,,,"b,p,s",,,Adequate height of light switch,სინათლის ჩამრთველის სიმაღლე ადეკვატურია,13,Height (m),სიმაღლე (მ),
-Public Restrooms,საზოგადოებრივი ტუალეტები,7,1,,,,,"b,p,s",,,Light switch in consistent location throughout all restrooms for this place,,14,,,
-Public Restrooms,საზოგადოებრივი ტუალეტები,7,1,,,,,"d,p,s",,,Light switch illuminated when the lights are off,,15,,,
-Public Restrooms,საზოგადოებრივი ტუალეტები,7,1,,,,,"b,d,p,s",,1,Adequate space in the interior,ინტერიერში სივცე ადეკვატურად არის განაწილებული,16,Area (sq m),ფართობი (კვ.მ),
-Public Restrooms,საზოგადოებრივი ტუალეტები,7,1,,,,,p,,,Adequate height of sink,ხელსაბანის სიმაღლე ადეკვატურია,17,Height (m),სიმაღლე (მ),
-Public Restrooms,საზოგადოებრივი ტუალეტები,7,1,,,,,"b,p",,,Can use sink controls with one hand,,18,,,
-Public Restrooms,საზოგადოებრივი ტუალეტები,7,1,,,,,"b,p,s",,,Adequate height of soap dispenser,სასაპნეს სიმაღლე ადეკვატურია,19,Height (m),სიმაღლე (მ),
-Public Restrooms,საზოგადოებრივი ტუალეტები,7,1,,,,,s,,,Soap dispenser color contrasts from wall,,20,,,
-Public Restrooms,საზოგადოებრივი ტუალეტები,7,1,,,,,"b,p,s",,,Soap dispenser in consistent location throughout all restrooms for this place,,21,,,
-Public Restrooms,საზოგადოებრივი ტუალეტები,7,1,,,,,p,,1,Sitting toilet (not a squat toilet),,22,,,
-Public Restrooms,საზოგადოებრივი ტუალეტები,7,1,,,,,p,,,Grab bar to assist getting on toilet,,23,,,
-Public Restrooms,საზოგადოებრივი ტუალეტები,7,1,,,,,"b,p",,,Can flush toilet with one hand,,24,,,
-Banks,ბანკები,,0,,,,,p,,,Adequate height of at least one table for wheelchairs,ერთი მაგიდის სიმაღლე მაიც არის ადეკვატური,1,Height (m),სიმაღლე (მ),Banks
-Banks,ბანკები,,0,,,,,s,,,Queue number monitors have adequate text size,,2,,,Banks
-Banks,ბანკები,,0,,,,,s,,,Queue number monitors use high contrast,,3,,,Banks
-Banks,ბანკები,,0,,,,,"b,s",,1,Ability to sign independently for bank operations,,4,,,Banks
-ATMs and pay boxes,ბანკომატები და სწრაფი ჩარიცხვის აპარატები,,0,,,,,"b,d,p,s",,1,Path to the machine free of permanent barriers,,1,,,ATMs and pay boxes
-ATMs and pay boxes,ბანკომატები და სწრაფი ჩარიცხვის აპარატები,,0,,,,,"b,d,p,s",,1,Path to the machine free of temporary barriers,,2,,,ATMs and pay boxes
-ATMs and pay boxes,ბანკომატები და სწრაფი ჩარიცხვის აპარატები,,0,,,,,"b,d,p,s",,1,Area in front of machine free of permanent barriers,,3,,,ATMs and pay boxes
-ATMs and pay boxes,ბანკომატები და სწრაფი ჩარიცხვის აპარატები,,0,,,,,"b,d,p,s",,1,Area in front of machine free of temporary barriers,,4,,,ATMs and pay boxes
-ATMs and pay boxes,ბანკომატები და სწრაფი ჩარიცხვის აპარატები,,0,,,,,p,,,Adequate height of buttons and screens for wheelchair accessibility,,5,Height (m),სიმაღლე (მ),ATMs and pay boxes
-ATMs and pay boxes,ბანკომატები და სწრაფი ჩარიცხვის აპარატები,,0,,,,,"p,s",,,Screen positioned to minimize glare,,6,,,ATMs and pay boxes
-ATMs and pay boxes,ბანკომატები და სწრაფი ჩარიცხვის აპარატები,,0,,,,,s,,,Screen uses adequate text size,,7,,,ATMs and pay boxes
-ATMs and pay boxes,ბანკომატები და სწრაფი ჩარიცხვის აპარატები,,0,,,,,s,,,Screen uses high contrast,,8,,,ATMs and pay boxes
-ATMs and pay boxes,ბანკომატები და სწრაფი ჩარიცხვის აპარატები,,0,,,,,b,,1,Talking machine with headphone jack for audio,,9,,,ATMs and pay boxes
-ATMs and pay boxes,ბანკომატები და სწრაფი ჩარიცხვის აპარატები,,0,,,,,b,,1,Braille on buttons,,10,,,ATMs and pay boxes
-Currency Exchange,სავალუტო ჯიხურები,,0,,,,,s,,,Adequate lighting to be able to count money,,1,,,Currency Exchange
-Currency Exchange,სავალუტო ჯიხურები,,0,,,,,p,,,Adequate height of desk/window,,2,Height (m),სიმაღლე (მ),Currency Exchange
-112,112,,0,,,,,d,,1,SMS service for deaf people,,1,,,112
-Hotels,სასტუმროები,,0,,,,,"b,d,p,s",,1,Accessible path to room free of permanent barriers,,1,,,Hotels
-Hotels,სასტუმროები,,0,,,,,"b,d,p,s",,1,Accessible path to room free of temporary barriers,,2,,,Hotels
-Hotels,სასტუმროები,,0,,,,,"b,p",,1,Adequate clearance on at least one side of bed,,3,Widht (m),სიგანე (მ),Hotels
-Hotels,სასტუმროები,,0,,,,,"b,p,s",,,Adequate height of light switch,სინათლის ჩამრთველის სიმაღლე ადეკვატურია,4,Height (m),სიმაღლე (მ),Hotels
-Hotels,სასტუმროები,,0,,,,,"b,p,s",,,Light switch in consistent location throughout all rooms in this place,,5,,,Hotels
-Hotels,სასტუმროები,,0,,,,,"d,p,s",,,Light switch illuminated when the lights are off,,6,,,Hotels
-Hotels,სასტუმროები,,0,,,,,p,,,Adequate height of electrical receptacles,,7,Height (m),სიმაღლე (მ),Hotels
-Hotels,სასტუმროები,,0,,,,,"b,p,s",,,Electrical receptacles in consistent location throughout all rooms in this place,,8,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,"b,d,p,s",,1,Accessible path to bathroom free of permanent barriers,,1,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,"b,d,p,s",,1,Accessible path to bathroom free of temporary barriers,,2,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,p,,1,Wide opening when entrance door is open,,3,Width (m),სიგანე (მ),Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,p,,,Door opens outward for small bathroom,,4,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,s,,,Restroom gender indicator sign uses high contrast,,5,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,b,,,Restroom gender indicator sign in Braille,,6,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,p,,,Automatic entrance door opener,კარების ავტომატური გაღება,7,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,s,,,Automatic door opener button in frame with contrasting color,კარების ავტომატური გაღების ღილაკი ჩასმულია კონტრასტული ფერის ჩარჩოში,8,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,b,,,Automatic door opener button in Braille,კარების ავტომატური გაღების ღილაკი ბრაილის შრიფტით,9,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,"b,d,p,s",,,"Flat, level path through doorway","სწორი, თანაბარი გზა კარების ტერიტორიაზე",10,Height (m),სიმაღლე (მ),Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,"b,d,p,s",,,Open door with one hand,კარების გაღება ერთი ხელით,11,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,"b,d,p,s",,,Open door with minimum adequate force,კარების გაღება მინიმალური ძალისხმევით,12,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,"b,p,s",,,Adequate height of light switch,სინათლის ჩამრთველის სიმაღლე ადეკვატურია,13,Height (m),სიმაღლე (მ),Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,"b,p,s",,,Light switch in consistent location throughout all bathrooms for this place,,14,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,"d,p,s",,,Light switch illuminated when the lights are off,,15,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,"b,d,p,s",,1,Adequate space in the interior,ინტერიერში სივცე ადეკვატურად არის განაწილებული,16,Area (sq m),ფართობი (კვ.მ),Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,p,,,Adequate height of sink,,17,Height (m),სიმაღლე (მ),Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,"b,p",,,Can use sink controls with one hand,,18,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,"b,p,s",,,Adequate height of soap dispenser,,19,Height (m),სიმაღლე (მ),Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,s,,,Soap dispenser color contrasts from wall,,20,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,"b,p,s",,,Soap dispenser in consistent location throughout all bathrooms for this place,,21,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,p,,,Adequate height of towel rack,,22,Height (m),სიმაღლე (მ),Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,s,,,Towel rack color contrasts from wall,,23,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,"b,p,s",,,Towel rack in consistent location throughout all bathrooms for this place,,24,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,p,,1,Sitting toilet (not a squat toilet),,25,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,p,,,Grab bar to assist getting on toilet,,26,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,"b,p",,,Can flush toilet with one hand,,27,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,p,,,Grab bar to assist getting into shower/bathtub,,28,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,p,,,Shower/bathtub head on flexible hose,,29,,,Hotels
-Hotels,სასტუმროები,,0,Bathroom,საპირფარეშო,1,0,p,,,Can use shower/bathtub controls with one hand,,30,,,Hotels
-Hostels,ჰოსტელები,,0,,,,,"b,d,p,s",,1,Accessible path to room free of permanent barriers,,1,,,Hostels
-Hostels,ჰოსტელები,,0,,,,,"b,d,p,s",,1,Accessible path to room free of temporary barriers,,2,,,Hostels
-Hostels,ჰოსტელები,,0,,,,,"b,p",,1,Adequate clearance on at least one side of bed,,3,Widht (m),სიგანე (მ),Hostels
-Hostels,ჰოსტელები,,0,,,,,"b,p,s",,,Adequate height of light switch,სინათლის ჩამრთველის სიმაღლე ადეკვატურია,4,Height (m),სიმაღლე (მ),Hostels
-Hostels,ჰოსტელები,,0,,,,,"b,p,s",,,Light switch in consistent location throughout all rooms in this place,,5,,,Hostels
-Hostels,ჰოსტელები,,0,,,,,"d,p,s",,,Light switch illuminated when the lights are off,,6,,,Hostels
-Hostels,ჰოსტელები,,0,,,,,p,,,Adequate height of electrical receptacles,,7,Height (m),სიმაღლე (მ),Hostels
-Hostels,ჰოსტელები,,0,,,,,"b,p,s",,,Electrical receptacles in consistent location throughout all rooms in this place,,8,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,"b,d,p,s",,1,Accessible path to bathroom free of permanent barriers,,1,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,"b,d,p,s",,1,Accessible path to bathroom free of temporary barriers,,2,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,p,,1,Wide opening when entrance door is open,,3,Width (m),სიგანე (მ),Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,p,,,Door opens outward for small bathroom,,4,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,s,,,Restroom gender indicator sign uses high contrast,,5,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,b,,,Restroom gender indicator sign in Braille,,6,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,p,,,Automatic entrance door opener,კარების ავტომატური გაღება,7,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,s,,,Automatic door opener button in frame with contrasting color,კარების ავტომატური გაღების ღილაკი ჩასმულია კონტრასტული ფერის ჩარჩოში,8,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,b,,,Automatic door opener button in Braille,კარების ავტომატური გაღების ღილაკი ბრაილის შრიფტით,9,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,"b,d,p,s",,,"Flat, level path through doorway","სწორი, თანაბარი გზა კარების ტერიტორიაზე",10,Height (m),სიმაღლე (მ),Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,"b,d,p,s",,,Open door with one hand,კარების გაღება ერთი ხელით,11,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,"b,d,p,s",,,Open door with minimum adequate force,კარების გაღება მინიმალური ძალისხმევით,12,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,"b,p,s",,,Adequate height of light switch,სინათლის ჩამრთველის სიმაღლე ადეკვატურია,13,Height (m),სიმაღლე (მ),Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,"b,p,s",,,Light switch in consistent location throughout all bathrooms for this place,,14,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,"d,p,s",,,Light switch illuminated when the lights are off,,15,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,"b,d,p,s",,1,Adequate space in the interior,ინტერიერში სივცე ადეკვატურად არის განაწილებული,16,Area (sq m),ფართობი (კვ.მ),Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,p,,,Adequate height of sink,,17,Height (m),სიმაღლე (მ),Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,"b,p",,,Can use sink controls with one hand,,18,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,"b,p,s",,,Adequate height of soap dispenser,,19,Height (m),სიმაღლე (მ),Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,s,,,Soap dispenser color contrasts from wall,,20,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,"b,p,s",,,Soap dispenser in consistent location throughout all bathrooms for this place,,21,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,p,,,Adequate height of towel rack,,22,Height (m),სიმაღლე (მ),Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,s,,,Towel rack color contrasts from wall,,23,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,"b,p,s",,,Towel rack in consistent location throughout all bathrooms for this place,,24,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,p,,1,Sitting toilet (not a squat toilet),,25,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,p,,,Grab bar to assist getting on toilet,,26,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,"b,p",,,Can flush toilet with one hand,,27,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,p,,,Grab bar to assist getting into shower/bathtub,,28,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,p,,,Shower/bathtub head on flexible hose,,29,,,Hostels
-Hostels,ჰოსტელები,,0,Bathroom,საპირფარეშო,1,0,p,,,Can use shower/bathtub controls with one hand,,30,,,Hostels
-Stadiums,სტადიონები,,0,,,,,p,,1,Reserved area for wheelchairs,,1,,,Stadiums
-Cinema / theaters,კინო /  თეატრები,,0,,,,,p,,1,Reserved area for wheelchairs,,1,,,Cinema / theaters
-Museums,მუზეუმები,,0,,,,,"b,s",,1,Detailed audio guide,,1,,,Museums
-Historical Landmarks (does not include places of worship),ისტორიული ღირშესანიშნაობები (არ მოიცავს ღვთისმსახურების ადგილებს),,0,,,,,"b,s",,1,Detailed audio guide,,1,,,Historical Landmarks (does not include places of worship)
-Beaches,სანაპიროები,,0,,,,,s,,,Seats and umbrellas in high contrast color from sand and water,,1,,,Beaches
-Zoos,ზოოპარკები,,0,,,,,"b,s",,1,Detailed audio guide,,1,,,Zoos
-Zoos,ზოოპარკები,,0,,,,,p,,,Adequate height of signs on cages,,2,Height (m),სიმაღლე (მ),Zoos
-Zoos,ზოოპარკები,,0,,,,,s,,,Signs on cages in high contrast,,3,,,Zoos
-Zoos,ზოოპარკები,,0,,,,,b,,,Signs on cages in Braille,,4,,,Zoos
-Zoos,ზოოპარკები,,0,,,,,"b,p,s",,,Signs on cages in consistent location throughout zoo,,5,,,Zoos
-Zoos,ზოოპარკები,,0,,,,,"b,s",,,Detailed models of animals available for touching,,6,,,Zoos
-Zoos,ზოოპარკები,,0,,,,,"b,s",,,Samples of animal skin and fur available for touching,,7,,,Zoos
-Pools,აუზები,,0,,,,,"b,s",,1,Raised step located around entire pool,,1,,,Pools
-Pools,აუზები,,0,,,,,p,,1,Swing to get physically disabled into pool,,2,,,Pools
-Kindergartens,საბავშვო ბაღები,,0,,,,,p,,,Adequate desk height,,1,Height (m),სიმაღლე (მ),Kindergartens
-Schools,სკოლები,,0,,,,,p,,,Adequate desk height,,1,Height (m),სიმაღლე (მ),Schools
-Schools,სკოლები,,0,,,,,"b,d,p,s",,1,Inclusive education for people with disabilities,,2,,,Schools
-Schools,სკოლები,,0,,,,,"b,d,p,s",,,Certified teacher in special education,,3,,,Schools
-Colleges,კოლეჯები,,0,,,,,p,,,Adequate desk height,,1,Height (m),სიმაღლე (მ),Colleges
-Colleges,კოლეჯები,,0,,,,,b,,,Braille printer,,2,,,Colleges
-Colleges,კოლეჯები,,0,,,,,"b,d,p,s",,,Disability resource center,,3,,,Colleges
-Universities,უნივერსიტეტები,,0,,,,,p,,,Adequate desk height,,1,Height (m),სიმაღლე (მ),Universities
-Universities,უნივერსიტეტები,,0,,,,,b,,,Braille printer,,2,,,Universities
-Universities,უნივერსიტეტები,,0,,,,,"b,d,p,s",,,Disability resource center,,3,,,Universities
-Public Buses,ავტობუსები,,0,,,,,"b,d,p,s",,1,Accessible path to bus stop free of permanent barriers,,1,,,Public Buses
-Public Buses,ავტობუსები,,0,,,,,"b,d,p,s",,1,Accessible path to bus stop free of temporary barriers,,2,,,Public Buses
-Public Buses,ავტობუსები,,0,,,,,"b,d,p,s",,,Bus stop board listing upcoming buses,,3,,,Public Buses
-Public Buses,ავტობუსები,,0,,,,,"b,p",,,Bus stop board positioned to minimize glare,,4,,,Public Buses
-Public Buses,ავტობუსები,,0,,,,,s,,,Bus stop board uses adequate text size,,5,,,Public Buses
-Public Buses,ავტობუსები,,0,,,,,s,,,Bus stop board uses high contrast,,6,,,Public Buses
-Public Buses,ავტობუსები,,0,,,,,b,,,Bus stop board has SMS numbers in Braille,,7,,,Public Buses
-Public Buses,ავტობუსები,,0,,,,,"b,s",,,Bus stop board has audio component,,8,,,Public Buses
-Public Buses,ავტობუსები,,0,,,,,"b,s",,,Bus announces the bus number outside the bus at bus stop,,9,,,Public Buses
-Public Buses,ავტობუსები,,0,,,,,"b,s",,,Bus announces the upcoming stop inside the bus,,10,,,Public Buses
-Public Buses,ავტობუსები,,0,,,,,"b,p",,,The bus stops with entrance to bus in front of person with disabilities,,11,,,Public Buses
-Public Buses,ავტობუსები,,0,,,,,p,,1,Bus with wheelchair accessible ramp,,12,,,Public Buses
-Public Buses,ავტობუსები,,0,,,,,p,,1,Bus with wheelchair designated area,,13,,,Public Buses
-Metro,მეტროები,,0,,,,,p,,1,Ability to bypass ticket turnstile,,1,,,Metro
-Metro,მეტროები,,0,,,,,"b,p",,1,Elevator to reach metro platform,,2,,,Metro
-Metro,მეტროები,,0,,,,,b,,,Platform has stops listed in Braille,,3,,,Metro
-Metro,მეტროები,,0,,,,,"b,s",,,Tactile map of plan of subway,,4,,,Metro
-Metro,მეტროები,,0,,,,,"b,s",,,Tactile lines on the floor leading to the metro car,,5,,,Metro
-Metro,მეტროები,,0,,,,,"b,s",,,Tactile line parallel to the edge of the platform,,6,,,Metro
-Metro,მეტროები,,0,,,,,s,,,Bright yellow line parallel to the edge of the platform,,7,,,Metro
-Metro,მეტროები,,0,,,,,"b,s",,,Platform announces the approaching metro,,8,,,Metro
-Metro,მეტროები,,0,,,,,"b,s",,,Metro car announces the upcoming stop inside,,9,,,Metro
-Metro,მეტროები,,0,,,,,"b,d,p,s",,1,Wide opening when door is open,კარები იღება ფართოდ,10,Width (m),სიგანე (მ),Metro
-Metro,მეტროები,,0,,,,,"b,d,p,s",,1,Doors remain open for adequate time,,11,Time,დრო,Metro
-Metro,მეტროები,,0,,,,,"b,d,p,s",,,Doors re-open automatically if they are obstructed,,12,,,Metro
-Metro,მეტროები,,0,,,,,"b,d,p,s",,1,Flat entrance to metro car,,13,Height (m),სიმაღლე (მ),Metro
-Metro,მეტროები,,0,,,,,"b,d,p,s",,,Adequate minimum gap between metro car and floor landing,,14,Width (m),სიგანე (მ),Metro
-Metro,მეტროები,,0,,,,,"b,d,p,s",,,"Firm, level, slip-resistant surface","მყარი, სწორი, მოცურებისგან დაცული ზედაპირი",15,,,Metro
-Metro,მეტროები,,0,,,,,p,,1,Designated wheelchair area in metro car,,16,,,Metro
-Trains,მატარებელი,,0,,,,,b,,,Train stations has stops listed in Braille,,1,,,Trains
-Trains,მატარებელი,,0,,,,,"b,s",,,Tactile lines on the floor leading to the train car,,2,,,Trains
-Trains,მატარებელი,,0,,,,,"b,s",,,Tactile line parallel to the edge of the platform,,3,,,Trains
-Trains,მატარებელი,,0,,,,,"b,s",,,Bright yellow line parallel to the edge of the platform,,4,,,Trains
-Trains,მატარებელი,,0,,,,,"b,s",,,Train station announces the approaching metro,,5,,,Trains
-Trains,მატარებელი,,0,,,,,"b,s",,,Train car announces the upcoming stop inside,,6,,,Trains
-Trains,მატარებელი,,0,,,,,"b,d,p,s",,1,Flat entrance to train car,,7,Height (m),სიმაღლე (მ),Trains
-Trains,მატარებელი,,0,,,,,"b,d,p,s",,,Adequate minimum gap between train car and floor landing,,8,Width (m),სიგანე (მ),Trains
-Trains,მატარებელი,,0,,,,,"b,d,p,s",,,"Firm, level, slip-resistant surface","მყარი, სწორი, მოცურებისგან დაცული ზედაპირი",9,,,Trains
-Trains,მატარებელი,,0,,,,,p,,1,Designated wheelchair area,,10,,,Trains
-Trains,მატარებელი,,0,,,,,"b,d,p,s",,,Trained assistants available to help,,11,,,Trains
-Crosswalks,გზაჯვარედინები,,0,,,,,"b,d,p,s",,1,Accessible path to crosswalk free of permanent barriers,,1,,,Crosswalks
-Crosswalks,გზაჯვარედინები,,0,,,,,"b,d,p,s",,1,Accessible path to crosswalk free of temporary barriers,,2,,,Crosswalks
-Crosswalks,გზაჯვარედინები,,0,,,,,"b,d,p,s",,1,Ramp from pathway to crosswalk,,3,,,Crosswalks
-Crosswalks,გზაჯვარედინები,,0,,,,,"b,d,p,s",,1,Adequate width of curb ramp,,4,Width (m),სიგანე (მ),Crosswalks
-Crosswalks,გზაჯვარედინები,,0,,,,,"b,d,p,s",,,"Ramp with firm, level, slip-resistant surface","მყარი, სწორი, მოცურებისგან დაცული ზედაპირი",5,,,Crosswalks
-Crosswalks,გზაჯვარედინები,,0,,,,,"b,d,p,s",,1,Crosswalk free of permanent barriers,,6,,,Crosswalks
-Crosswalks,გზაჯვარედინები,,0,,,,,"b,d,p,s",,1,Crosswalk free of temporary barriers,,7,,,Crosswalks
-Crosswalks,გზაჯვარედინები,,0,,,,,"b,d,p,s",,,Crosswalk free of abrupt changes in surface level,,8,Height (m),სიმაღლე (მ),Crosswalks
-Crosswalks,გზაჯვარედინები,,0,,,,,"b,d,p,s",,,"Crosswalk with firm, level, slip-resistant surface","მყარი, სწორი, მოცურებისგან დაცული ზედაპირი",9,,,Crosswalks
-Crosswalks,გზაჯვარედინები,,0,,,,,"b,d,p,s",,1,Adequate time to use crosswalk,,10,Time,დრო,Crosswalks
-Crosswalks,გზაჯვარედინები,,0,,,,,d,,1,Visual signal to indicate when person can use crosswalk,,11,,,Crosswalks
-Crosswalks,გზაჯვარედინები,,0,,,,,"b,s",,1,Audio signal to indicate when person can use crosswalk,,12,,,Crosswalks
-Crosswalks,გზაჯვარედინები,,0,,,,,"b,s",,,"Audio signal is different for green, flashing green/yellow and red lights",,13,,,Crosswalks
-Crosswalks,გზაჯვარედინები,,0,,,,,"b,s",,1,Audio signal loudness adequate to hear over traffic noise,,14,,,Crosswalks
-Crosswalks,გზაჯვარედინები,,0,,,,,s,,,Streetlights with covers to reduce glare,,15,,,Crosswalks
+Parent Category Name,Georgian Parent Category Name,Parent Category Sort Order,Parent Category Type,Child Category Name,Georgian Child Category Name,Child Category Sort Order,Child Category Type,Type,Exists Question,Required for Accessibility Flag,Question,Georgian Question,Question Sort Order,Question Evidence,Geogian Question Evidence,Venue
+Accessibility Services,ხელმისაწვდომობის მომსახურება,1,common,,,,,"b,d,p,s",,,Special services available for people with disabilities,სპეციალური მომსახურები შეზღუდული შესაძლებლობი მქონე პირთათვის,1,,,
+Accessibility Services,ხელმისაწვდომობის მომსახურება,1,common,,,,,b,,1,Guide dog permitted to assist blind people,დაშვებულია გზამკვლევი ძაღლის დახმარება უსინათლოთათვის,2,,,
+Accessibility Services,ხელმისაწვდომობის მომსახურება,1,common,,,,,p,,,Adequate seating area for wheelchairs,ეტლისთვის გამოყოფილია შესაბამისი დასაჯდომი ადგილი,3,Area (sq m),ფართი (კვ.მ),
+Accessibility Services,ხელმისაწვდომობის მომსახურება,1,common,,,,,p,,,Adequate height of tables for wheelchairs,მაგიდის სიმაღლე ეტლის შესაბამისია,4,Height (m),სიმაღლე (მ),
+Accessibility Services,ხელმისაწვდომობის მომსახურება,1,common,,,,,s,,,Signs presented in adequate text size,ნიშნები წარმოდგენილია ადეკვატური ტექსტის ზომით,5,Text Size (pt),ტექსტის ზომა,
+Accessibility Services,ხელმისაწვდომობის მომსახურება,1,common,,,,,s,,,Sign text uses high contrast,ტექსტი გამოსახულია მაღალი კონტრასტით,6,Text Size (pt),ტექსტის ზომა,
+Accessibility Services,ხელმისაწვდომობის მომსახურება,1,common,,,,,"b,s",,,Signs on doors located directly above door handle,კარებზე ნიშნები განლაგებულია კარის სახელურის ზემოთ,7,,,
+Accessibility Services,ხელმისაწვდომობის მომსახურება,1,common,,,,,"b,s",,,Signs located at adequate height,ნიშნები განლაგებულია შესაბამის სიმაღლეზე,8,Height (m),სიმაღლე (მ),
+Accessibility Services,ხელმისაწვდომობის მომსახურება,1,common,,,,,s,,,Documents presented in adequate text size,დოკუმენტები წარმოდგენილია შესაბამისი ტექსტის ზომით,9,Text Size (pt),ტექსტის ზომა,
+Accessibility Services,ხელმისაწვდომობის მომსახურება,1,common,,,,,b,,,Signs presented in Braille,ნიშნები წარმოდგენილია ბრაილის შრიფტით,10,,,
+Accessibility Services,ხელმისაწვდომობის მომსახურება,1,common,,,,,b,,,Documents presented in Braille,დოკუმენტები წარმოდგენილია ბრაილის შრიფტით,11,,,
+Accessibility Services,ხელმისაწვდომობის მომსახურება,1,common,,,,,"b,s",,,Documents presented in an audio format,დოკუმენტები წარმოდგენილია აუდიო ფორმატში,12,,,
+Accessibility Services,ხელმისაწვდომობის მომსახურება,1,common,,,,,"b,d,p,s",,,Phone number listed for the place’s emergency services,წარმოდგენილია საგანგებო მდგომარეობის სამსახურების ნომრები,13,,,
+Parking,პარკინგი,2,common,,,,,"b,d,p,s",1,1,Parking area exists,არსებობს ავტოსადგომი,0,,,
+Parking,პარკინგი,2,common,,,,,"b,d,p,s",,,Designated handicapped parking or drop off area,განსაკუთრებული საჭიროებების მქონე პირთათვის განკუთვნილი ავტოსადგომი ან ჩამოსასმელი ტერიტორია,1,,,
+Parking,პარკინგი,2,common,,,,,"b,d,p,s",,1,Parking or drop-off area free of permanent barriers,პარკინგი ან გადმოსასვლელი ტერიტორიზე არ არის წარმოდგენილი მუდმივი ბარიერები,2,,,
+Parking,პარკინგი,2,common,,,,,"b,d,p,s",,1,Parking or drop-off area free of temporary barriers,პარკინგი ან გადმოსასვლელი ტერიტორიზე არ არის წარმოდგენილი დროებითი ბარიერები,3,,,
+Parking,პარკინგი,2,common,,,,,p,,,"Firm, level, slip-resistant surface","მყარი, სწორი, მოცურებისგან დაცული ზედაპირი",4,,,
+Parking,პარკინგი,2,common,,,,,"b,p,s",,,Free of abrupt changes in surface level,არ არის წარმოდგენილი მკვეთრი ცვლილებები ზედაპირზე,5,Height (m),სიმაღლე (მ),
+Parking,პარკინგი,2,common,,,,,"b,d,p,s",,1,Accessible route in and out of parking or drop off area,ხელმისაწვდომი მარშუტი ავტოსადმობიდან და ჩამოსასმელი ტერიტორიიდან,6,,,
+Parking,პარკინგი,2,common,,,,,"b,d,p,s",,,Designated parking or drop off area is shortest possible route to an accessible entrance,განკუთვნილი პარკინგი და გადმოსასვლელი ტერიტორია განლაგებულია ყველაზე მოკლე შესაძლო მანძილზე შესასვლელამდე,7,,,
+Outside Pathways,გარე ბილიკები,3,common,,,,,"b,d,p,s",,,Pathway free of permanent barriers,გზაზე არ არის წარმოდგენილი მუდმივი ბარიერები,1,,,
+Outside Pathways,გარე ბილიკები,3,common,,,,,"b,d,p,s",,,Pathway free of temporary barriers,გზაზე არ არის წარმოდგენილი მუდმივი ბარიერები,2,,,
+Outside Pathways,გარე ბილიკები,3,common,,,,,p,,,"Firm, level, slip-resistant surface","მყარი, სწორი, მოცურებისგან დაცული ზედაპირი",3,,,
+Outside Pathways,გარე ბილიკები,3,common,,,,,"b,p,s",,,Free of abrupt changes in surface level,არ არის წარმოდგენილი მკვეთრი ცვლილებები ზედაპირზე,4,Height (m),სიმაღლე (მ),
+Outside Pathways,გარე ბილიკები,3,common,,,,,"b,p,s",,,Gratings in pathway have small openings,გზებზე განლაგებულ ბილიკებს ვიწრო გასასვლელები აქვს,5,Width (m),სიგანე (მ),
+Outside Pathways,გარე ბილიკები,3,common,,,,,"b,p,s",,,Pathway width is adequate,გზის სიგანე ადეკვატურია,6,Width (m),სიგანე (მ),
+Outside Pathways,გარე ბილიკები,3,common,Stairs,კიბეები,1,common,"b,d,s",1,1,Stairs exist,წარმოდგენილია კიბეები,0,,,
+Outside Pathways,გარე ბილიკები,3,common,Stairs,კიბეები,1,common,"b,d,s",,1,Accessible path to stairs free of permanent barriers,კიბეებამდე მისასვლელ გზაზე არ არის წარმოდგენილი მუდმივი ბარიერები,1,,,
+Outside Pathways,გარე ბილიკები,3,common,Stairs,კიბეები,1,common,"b,d,s",,1,Accessible path to stairs free of temporary barriers,კიბეებამდე მისასვლელ გზაზე არ არის წარმოდგენილი დროებითი ბარიერები,2,,,
+Outside Pathways,გარე ბილიკები,3,common,Stairs,კიბეები,1,common,"b,d,s",,1,Stairs free of permanent barriers,კიბეებზე არ არის წარმოდგენილი მუდმივი ბარიერები,3,,,
+Outside Pathways,გარე ბილიკები,3,common,Stairs,კიბეები,1,common,"b,d,s",,1,Stairs free of temporary barriers,კიბეებზე არ არის წარმოდგენილი დროებითი ბარიერები,4,,,
+Outside Pathways,გარე ბილიკები,3,common,Stairs,კიბეები,1,common,"b,d,s",,,"Firm, level, slip-resistant surface","მყარი, სწორი, მოცურებისგან დაცული ზედაპირი",5,,,
+Outside Pathways,გარე ბილიკები,3,common,Stairs,კიბეები,1,common,"b,d,s",,,Continuous handrails on both sides,ორივე მხარეს წარმოდგენილია უწყვეტი მოაჯირი,6,,,
+Outside Pathways,გარე ბილიკები,3,common,Stairs,კიბეები,1,common,s,,,"Handrail painted in color that contrasts from surroundings (wall, stairs, etc)","მოაჯირის ფერი გამოირჩევა გარემომცველი ელემენტებისგან (კედელი, კიბეები და ა.შ.",7,,,
+Outside Pathways,გარე ბილიკები,3,common,Stairs,კიბეები,1,common,"b,d,s",,,Height of all steps are the same,ყველა კიბის სიმაღლე თანაბარია,8,Height (m),სიმაღლე (მ),
+Outside Pathways,გარე ბილიკები,3,common,Stairs,კიბეები,1,common,"b,d,s",,,Width of step is adequate,კიბის სიგანე შესაბამისია,9,Width (m),სიგანე (მ),
+Outside Pathways,გარე ბილიკები,3,common,Stairs,კიბეები,1,common,"b,d,s",,,Depth of step is adequate,კიბის სიღრმე შესაბამისია,10,Depth (m),სიღრმე (მ),
+Outside Pathways,გარე ბილიკები,3,common,Stairs,კიბეები,1,common,s,,,Stripes at beginning and end of staircase,კიბის დასაწყისი და ბოლო დახაზულია,11,,,
+Outside Pathways,გარე ბილიკები,3,common,Stairs,კიბეები,1,common,b,,,Tactile indicator at beginning and end of staircase,ტაქტილური მაჩვენებელი კიბის დასაწყისა და ბოლოში,12,,,
+Outside Pathways,გარე ბილიკები,3,common,Stairs,კიბეები,1,common,p,,,Stair lift,კიბის ამყოლი ლიფტი,13,,,
+Outside Pathways,გარე ბილიკები,3,common,Ramp,პანდუსი,2,common,"p,s",1,1,Ramp exists,წარმოდგენილია პანდუსი,0,,,
+Outside Pathways,გარე ბილიკები,3,common,Ramp,პანდუსი,2,common,p,,,Mobile ramp available when permanent ramp is not available,"წარმოდგენილია მოძრავი პანდუსი, მუდმივის ხელმიუწვდომლობის შემთხვევაში",1,,,
+Outside Pathways,გარე ბილიკები,3,common,Ramp,პანდუსი,2,common,p,,1,Accessible path to ramp free of permanent barriers,პანდუსამდე მისასვლელ გზაზე არ არის წარმოდგენილი მუდმივი ბარიერები,2,,,
+Outside Pathways,გარე ბილიკები,3,common,Ramp,პანდუსი,2,common,p,,1,Accessible path to ramp free of temporary barriers,პანდუსამდე მისასვლელ გზაზე არ არის წარმოდგენილი დროებითი ბარიერები,3,,,
+Outside Pathways,გარე ბილიკები,3,common,Ramp,პანდუსი,2,common,p,,1,Ramp free of permanent barriers,პანდუსი მუდმივი ბარიერების გარეშე,4,,,
+Outside Pathways,გარე ბილიკები,3,common,Ramp,პანდუსი,2,common,p,,1,Ramp free of temporary barriers,პანდუსი დროებითი ბარიერების გარეშე,5,,,
+Outside Pathways,გარე ბილიკები,3,common,Ramp,პანდუსი,2,common,p,,1,Adequate ramp slope,პანდუსის დაქანება ადეკვატურია,6,Ratio of Height:Width (m),თანაფარდობა სიმაღლე: სიგანე (მ),
+Outside Pathways,გარე ბილიკები,3,common,Ramp,პანდუსი,2,common,p,,,"Firm, level, slip-resistant surface","მყარი, სწორი, მოცურებისგან დაცული ზედაპირი",7,,,
+Outside Pathways,გარე ბილიკები,3,common,Ramp,პანდუსი,2,common,p,,1,Adequate ramp width,პანდუსის სიგანე ადეკვატურია,8,Width (m),სიგანე (მ),
+Outside Pathways,გარე ბილიკები,3,common,Ramp,პანდუსი,2,common,p,,,Continuous handrails on both sides,ორივე მხარეს წარმოდგენილია უწყვეტი მოაჯირი,9,,,
+Outside Pathways,გარე ბილიკები,3,common,Ramp,პანდუსი,2,common,p,,,Ramp sheltered from weather,პანდუსი გადახურულია,10,,,
+Outside Pathways,გარე ბილიკები,3,common,Ramp,პანდუსი,2,common,p,,,Flat pathway at the top and bottom of ramp large enough to allow for turning,"სწორი ბილიკი პანსუსის დასაწყისსა და ბოლოში, რომელიც მოტრიალების საშუალებას იძლევა",11,,,
+Outside Pathways,გარე ბილიკები,3,common,Ramp,პანდუსი,2,common,s,,,Stripes at beginning and end of ramp,პანდუსის დასაწყისი და ბოლო დახაზულია,12,,,
+Entrances,შესასვლელები,4,common,,,,,"b,d,p,s",,,Accessible path to primary entrance free of permanent barriers,მთავარ შესასვლელამდე მისასვლელ გზაზე არ არის წარმოდგენილი მუდმივი ბარიერები,1,,,
+Entrances,შესასვლელები,4,common,,,,,"b,d,p,s",,,Accessible path to primary entrance free of temporary barriers,მთავარ შესასვლელამდე მისასვლელ გზაზე არ არის წარმოდგენილი დროებითი ბარიერები,2,,,
+Entrances,შესასვლელები,4,common,,,,,"b,d,p,s",,,Accessible path to secondary entrance free of permanent barriers,სათადარიგო შესასვლელამდე მისასვლელ გზაზე არ არის წარმოდგენილი მუდმივი ბარიერები,3,,,
+Entrances,შესასვლელები,4,common,,,,,"b,d,p,s",,,Accessible path to secondary entrance free of temporary barriers,სათადარიგო შესასვლელამდე მისასვლელ გზაზე არ არის წარმოდგენილი დროებითი ბარიერები,4,,,
+Entrances,შესასვლელები,4,common,,,,,"b,d,p,s",,,Sign indicating where accessible entrance is located if main entrance is not accessible,"გამოკრულია აბრა იმის შესახებ, თუ სად მდებარეობს სათადარიგო შესასვლელი, იმ შემთხვევაში, თუ მთავარი შესასვლელი არ არის ხელმისაწვდომი",5,,,
+Entrances,შესასვლელები,4,common,,,,,s,,,Accessible entrance sign uses high contrast,ხელმისაწვდომი შესასვლელის აბრაზე გამოყენებულია მაღალი კონტრასტი,6,,,
+Entrances,შესასვლელები,4,common,,,,,b,,,Accessible entrance sign in Braille,ხელმისაწვდომი შესასვლელის აბრაზე გამოყენებულია ბრაილის შრიფტი,7,,,
+Entrances,შესასვლელები,4,common,,,,,b,,,Tactile map of place,ადგილის ტაქტილური რუკა ადგილი,8,,,
+Entrances,შესასვლელები,4,common,Doorway,კარები,1,common,"b,d,p,s",,1,Accessible path to door free of permanent barriers,ხელმისაწვდომი ბილიკი კარებამდე მუდმივი ბარიერების გარეშე,1,,,
+Entrances,შესასვლელები,4,common,Doorway,კარები,1,common,"b,d,p,s",,1,Accessible path to door free of temporary barriers,ხელმისაწვდომი ბილიკი კარებამდე დროებითი ბარიერების გარეშე,2,,,
+Entrances,შესასვლელები,4,common,Doorway,კარები,1,common,"b,d,p,s",,1,Doorway free of permanent barriers,კარები მუდმივი ბარიერების გარეშე,3,,,
+Entrances,შესასვლელები,4,common,Doorway,კარები,1,common,"b,d,p,s",,1,Doorway free of temporary barriers,კარები დროებითი ბარიერების გარეშე,4,,,
+Entrances,შესასვლელები,4,common,Doorway,კარები,1,common,p,,1,Wide opening when door is open,კარები იღება ფართედ,5,Width (m),სიგანე (მ),
+Entrances,შესასვლელები,4,common,Doorway,კარები,1,common,"b,d,p,s",,,"Flat, level path through doorway","სწორი, თანაბარი გზა კარების ტერიტორიაზე",6,Height (m),სიმაღლე (მ),
+Entrances,შესასვლელები,4,common,Doorway,კარები,1,common,"b,d,p,s",,,Open door with one hand,კარების გაღება ერთი ხელით,7,,,
+Entrances,შესასვლელები,4,common,Doorway,კარები,1,common,"b,d,p,s",,,Open door with minimum adequate force,კარების გაღება მინიმალური ძალისხმევით,8,,,
+Entrances,შესასვლელები,4,common,Doorway,კარები,1,common,"b,p,s",,,Automatic door opener,კარების ავტომატური გაღება,9,,,
+Entrances,შესასვლელები,4,common,Doorway,კარები,1,common,s,,,Automatic door opener button in frame with contrasting color,კარების ავტომატური გაღების ღილაკი ჩასმულია კონტრასტული ფერის ჩარჩოში,10,,,
+Entrances,შესასვლელები,4,common,Doorway,კარები,1,common,b,,,Automatic door opener button in Braille,კარების ავტომატური გაღების ღილაკი ბრაილის შრიფტით,11,,,
+Entrances,შესასვლელები,4,common,Doorway,კარები,1,common,"b,p",,,Adjacent door next to revolving door or turnstile,მიმდებარე კარი ბრუნვადი კარისა და გამშები პუნქტის გვერდით,12,,,
+Entrances,შესასვლელები,4,common,Stairs,კიბეები,2,common,"b,d,s",1,1,Stairs exist,კიბეები წარმოგენილია,0,,,
+Entrances,შესასვლელები,4,common,Stairs,კიბეები,2,common,"b,d,s",,1,Accessible path to stairs free of permanent barriers,კიბეებამდე მისასვლელ გზაზე არ არის წარმოდგენილი მუდმივი ბარიერები,1,,,
+Entrances,შესასვლელები,4,common,Stairs,კიბეები,2,common,"b,d,s",,1,Accessible path to stairs free of temporary barriers,კიბეებამდე მისასვლელ გზაზე არ არის წარმოდგენილი დროებითი ბარიერები,2,,,
+Entrances,შესასვლელები,4,common,Stairs,კიბეები,2,common,"b,d,s",,1,Stairs free of permanent barriers,კიბეებზე არ არის წარმოდგენილი მუდმივი ბარიერები,3,,,
+Entrances,შესასვლელები,4,common,Stairs,კიბეები,2,common,"b,d,s",,1,Stairs free of temporary barriers,კიბეებზე არ არის წარმოდგენილი დროებითი ბარიერები,4,,,
+Entrances,შესასვლელები,4,common,Stairs,კიბეები,2,common,"b,d,s",,,"Firm, level, slip-resistant surface","მყარი, სწორი, მოცურებისგან დაცული ზედაპირი",5,,,
+Entrances,შესასვლელები,4,common,Stairs,კიბეები,2,common,"b,d,s",,,Continuous handrails on both sides,ორივე მხარეს წარმოდგენილია უწყვეტი მოაჯირი,6,,,
+Entrances,შესასვლელები,4,common,Stairs,კიბეები,2,common,s,,,"Handrail painted in color that contrasts from surroundings (wall, stairs, etc)","მოაჯირის ფერი გამოირჩევა გარემომცველი ელემენტებისგან (კედელი, კიბეები და ა.შ.",7,,,
+Entrances,შესასვლელები,4,common,Stairs,კიბეები,2,common,"b,d,s",,,Height of all steps are the same,ყველა კიბის სიმაღლე თანაბარია,8,Height (m),სიმაღლე (მ),
+Entrances,შესასვლელები,4,common,Stairs,კიბეები,2,common,"b,d,s",,,Width of step is adequate,კიბის სიგანე ადეკვატურია,9,Width (m),სიგანე (მ),
+Entrances,შესასვლელები,4,common,Stairs,კიბეები,2,common,"b,d,s",,,Depth of step is adequate,კიბის სიღრმე ადეკვატურია,10,Depth (m),სიღრმე (მ),
+Entrances,შესასვლელები,4,common,Stairs,კიბეები,2,common,s,,,Stripes at beginning and end of staircase,კიბის დასაწყისი და ბოლო დახაზულია,11,,,
+Entrances,შესასვლელები,4,common,Stairs,კიბეები,2,common,b,,,Tactile indicator at beginning and end of staircase,ტაქტილური მაჩვენებელი კიბის დასაწყისა და ბოლოში,12,,,
+Entrances,შესასვლელები,4,common,Stairs,კიბეები,2,common,p,,,Stair lift,კიბის ამყოლი ლიფტი,13,,,
+Entrances,შესასვლელები,4,common,Ramps,პანდუსი,3,common,"p,s",1,1,Ramp exists,"მყარი, სწორი, მოცურებისგან დაცული ზედაპირი",0,,,
+Entrances,შესასვლელები,4,common,Ramps,პანდუსი,3,common,p,,,Mobile ramp available when permanent ramp is not available,"წარმოდგენილია მოძრავი პანდუსი, მუდმივის ხელმიუწვდომლობის შემთხვევაში",1,,,
+Entrances,შესასვლელები,4,common,Ramps,პანდუსი,3,common,p,,1,Accessible path to ramp free of permanent barriers,პანდუსამდე მისასვლელ გზაზე არ არის წარმოდგენილი მუდმივი ბარიერები,2,,,
+Entrances,შესასვლელები,4,common,Ramps,პანდუსი,3,common,p,,1,Accessible path to ramp free of temporary barriers,პანდუსამდე მისასვლელ გზაზე არ არის წარმოდგენილი დროებითი ბარიერები,3,,,
+Entrances,შესასვლელები,4,common,Ramps,პანდუსი,3,common,p,,1,Ramp free of permanent barriers,პანდუსი მუდმივი ბარიერების გარეშე,4,,,
+Entrances,შესასვლელები,4,common,Ramps,პანდუსი,3,common,p,,1,Ramp free of temporary barriers,პანდუსი დროებითი ბარიერების გარეშე,5,,,
+Entrances,შესასვლელები,4,common,Ramps,პანდუსი,3,common,p,,1,Adequate ramp slope,პანდუსის დაქანება ადეკვატურია,6,Ratio of Height:Width (m),თანაფარდობა სიმაღლე: სიგანე (მ),
+Entrances,შესასვლელები,4,common,Ramps,პანდუსი,3,common,p,,,"Firm, level, slip-resistant surface","მყარი, სწორი, მოცურებისგან დაცული ზედაპირი",7,,,
+Entrances,შესასვლელები,4,common,Ramps,პანდუსი,3,common,p,,1,Adequate ramp width,პანდუსის სიგანე ადეკვატურია,8,Width (m),სიგანე (მ),
+Entrances,შესასვლელები,4,common,Ramps,პანდუსი,3,common,p,,,Continuous handrails on both sides,ორივე მხარეს წარმოდგენილია უწყვეტი მოაჯირი,9,,,
+Entrances,შესასვლელები,4,common,Ramps,პანდუსი,3,common,p,,,Ramp sheltered from weather,პანდუსი გადახურულია,10,,,
+Entrances,შესასვლელები,4,common,Ramps,პანდუსი,3,common,p,,,Flat pathway at the top and bottom of ramp large enough to allow for turning,"სწორი ბილიკი პანსუსის დასაწყისსა და ბოლოში, რომელიც მოტრიალების საშუალებას იძლევა",11,,,
+Entrances,შესასვლელები,4,common,Ramps,პანდუსი,3,common,s,,,Stripes at beginning and end of ramp,პანდუსის დასაწყისი და ბოლო დახაზულია,12,,,
+Entrances,შესასვლელები,4,common,Elevators,ლიფტები,4,common,"b,d,p,s",1,1,Elevator exists,ლიფტი წარმოდგენილია,0,,,
+Entrances,შესასვლელები,4,common,Elevators,ლიფტები,4,common,"b,d,p,s",,1,Accessible path to elevator free of permanent barriers,ლიფტამდე მისასვლელი გზაზე არ არის წარმოდგენილი მუდმივი ბარიერები,1,,,
+Entrances,შესასვლელები,4,common,Elevators,ლიფტები,4,common,"b,d,p,s",,1,Accessible path to elevator free of temporary barriers,ლიფტამდე მისასვლელი გზაზე არ არის წარმოდგენილი დროებითი ბარიერები,2,,,
+Entrances,შესასვლელები,4,common,Elevators,ლიფტები,4,common,p,,,Adequate height of call buttons,დასარეკი ღილაკის სიმაღლე ადეკვატურია,3,Height (m),სიმაღლე (მ),
+Entrances,შესასვლელები,4,common,Elevators,ლიფტები,4,common,s,,,Call buttons framed with contrasting color,დასარეკი ღილაკი ჩასმულია კონტრასტულ ჩარჩოში,4,,,
+Entrances,შესასვლელები,4,common,Elevators,ლიფტები,4,common,b,,,Braille on call buttons,დასარეკ ღილაკზე ბრაილის შრიფტია წარმოდგენილი,5,,,
+Entrances,შესასვლელები,4,common,Elevators,ლიფტები,4,common,p,,1,Wide opening when door is open,კარები იღება ფართოდ,6,Width (m),სიგანე (მ),
+Entrances,შესასვლელები,4,common,Elevators,ლიფტები,4,common,"b,d,p,s",,,Doors remain open for adequate time,კარები რჩება გაღებული ადეკვატური დროის განმავლობაში,7,Time,დრო,
+Entrances,შესასვლელები,4,common,Elevators,ლიფტები,4,common,"b,d,p,s",,,Doors re-open automatically if they are obstructed,კარები ხელმეორედ იხსნება თუ რაიმე წინაღობა შეხვდა,8,,,
+Entrances,შესასვლელები,4,common,Elevators,ლიფტები,4,common,"b,d,p,s",,,"Flat, level path into elevator","სწორი, თანაბარი გზა ლიფტში შესასვლელად",9,Height (m),სიმაღლე (მ),
+Entrances,შესასვლელები,4,common,Elevators,ლიფტები,4,common,"b,d,p,s",,,Adequate minimum gap between elevator and floor landing,ლიფტსა და სართულს შორის სივცე ადეკვატურია,10,Width (m),სიგანე (მ),
+Entrances,შესასვლელები,4,common,Elevators,ლიფტები,4,common,"b,d,p,s",,1,Elevator free of permanent barriers,ლიფტი მუდმივი ბარიერების გარეშე,11,,,
+Entrances,შესასვლელები,4,common,Elevators,ლიფტები,4,common,"b,d,p,s",,1,Elevator free of temporary barriers,ლიფტი დროებითი ბარიერების გარეშე,12,,,
+Entrances,შესასვლელები,4,common,Elevators,ლიფტები,4,common,"b,d,p,s",,,"Firm, level, slip-resistant surface","მყარი, სწორი, მოცურებისგან დაცული ზედაპირი",13,,,
+Entrances,შესასვლელები,4,common,Elevators,ლიფტები,4,common,p,,,Handrails on elevator walls,ლიფტში წარმოდგენილია ხელისმოსაკიდებლები,14,,,
+Entrances,შესასვლელები,4,common,Elevators,ლიფტები,4,common,p,,,Adequate space in the interior,ინტერიერში სივცე ადეკვატურად არის განაწილებული,15,Area (sq m),ფართობი (კვ.მ),
+Entrances,შესასვლელები,4,common,Elevators,ლიფტები,4,common,d,,,Visual signals to identify direction of travel and floor,ვიზუალური ნიშნები მიმართულებისა და სართულის იდენტიფიკაციისათვი,16,,,
+Entrances,შესასვლელები,4,common,Elevators,ლიფტები,4,common,"b,s",,,Audio signals to identify direction of travel and floor,აუდიო სიგნალი მიმართულებისა და სურთულის იდენტიფიკაციისათვის,17,,,
+Entrances,შესასვლელები,4,common,Elevators,ლიფტები,4,common,p,,,Adequate height of buttons in elevator,ლიფტში ღილაკების სიმაღლე ადეკვატურია,18,Height (m),სიმაღლე (მ),
+Entrances,შესასვლელები,4,common,Elevators,ლიფტები,4,common,s,,,Elevator buttons framed with contrasting color,ლიფტის ღილაკები ჩასმულია კონტრასტულ ჩარჩოში,19,,,
+Entrances,შესასვლელები,4,common,Elevators,ლიფტები,4,common,b,,,Elevator buttons in Braille,ლიფტის ღილაკები ბრაილის შრიფტით არის წარმოდგენილი,20,,,
+Entrances,შესასვლელები,4,common,Elevators,ლიფტები,4,common,"b,d,p,s",,,Working emergency communication system,საგანგებო სიტუაციების სისტემა გამართულად მუშაობს,21,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,,,,,"b,d,p,s",,1,Accessible path free of permanent barriers,ხელმისაწვდომი ბილიკი მუდმივი ბარიერების გარეშე,1,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,,,,,"b,d,p,s",,1,Accessible path free of temporary barriers,ხელმისაწვდომი ბილიკი დროებითი ბარიერების გარეშე,2,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,,,,,"b,d,p,s",,,Free of abrupt changes in surface level,არ არის წარმოდგენილი მკვეთრი ცვლილებები ზედაპირზე,3,Height (m),სიმაღლე (მ),
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,,,,,"b,d,p,s",,,Pathway width is adequate,გზის სიგანე ადეკვატურია,4,Width (m),სიგანე (მ),
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,,,,,"b,d,p,s",,,"Firm, level, slip-resistant surface","მყარი, სწორი, მოცურებისგან დაცული ზედაპირი",5,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Doorway,კარები,1,common,"b,d,p,s",,1,Accessible path to door free of permanent barriers,ხელმისაწვდომი ბილიკი კარებამდე მუდმივი ბარიერების გარეშე,1,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Doorway,კარები,1,common,"b,d,p,s",,1,Accessible path to door free of temporary barriers,ხელმისაწვდომი ბილიკი კარებამდე დროებითი ბარიერების გარეშე,2,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Doorway,კარები,1,common,"b,d,p,s",,1,Doorway free of permanent barriers,კარები მუდმივი ბარიერების გარეშე,3,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Doorway,კარები,1,common,"b,d,p,s",,1,Doorway free of temporary barriers,კარები დროებითი ბარიერების გარეშე,4,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Doorway,კარები,1,common,p,,1,Wide opening when door is open,კარები იღება ფართოდ,5,Width (m),სიგანე (მ),
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Doorway,კარები,1,common,"b,d,p,s",,,"Flat, level path through doorway","სწორი, თანაბარი გზა კარების ტერიტორიაზე",6,Height (m),სიმაღლე (მ),
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Doorway,კარები,1,common,"b,d,p,s",,,Open door with one hand,კარების გაღება ერთი ხელით,7,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Doorway,კარები,1,common,"b,d,p,s",,,Open door with minimum adequate force,კარების გაღება მინიმალური ძალისხმევით,8,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Doorway,კარები,1,common,"b,p,s",,,Automatic door opener,კარების ავტომატური გაღება,9,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Doorway,კარები,1,,s,,,Automatic door opener button in frame with contrasting color,კარების ავტომატური გაღების ღილაკი ჩასმულია კონტრასტული ფერის ჩარჩოში,10,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Doorway,კარები,1,,b,,,Automatic door opener button in Braille,კარების ავტომატური გაღების ღილაკი ბრაილის შრიფტით,11,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Doorway,კარები,1,,"b,p",,,Adjacent door next to revolving door or turnstile,მიმდებარე კარი ბრუნვადი კარისა და გამშები პუნქტის გვერდით,12,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Stairs,კიბეები,2,common,"b,d,s",1,1,Stairs exist,წარმოდგენილია კიბეები,0,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Stairs,კიბეები,2,common,"b,d,s",,1,Accessible path to stairs free of permanent barriers,კიბეებამდე მისასვლელ გზაზე არ არის წარმოდგენილი მუდმივი ბარიერები,1,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Stairs,კიბეები,2,common,"b,d,s",,1,Accessible path to stairs free of temporary barriers,კიბეებამდე მისასვლელ გზაზე არ არის წარმოდგენილი დროებითი ბარიერები,2,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Stairs,კიბეები,2,common,"b,d,s",,1,Stairs free of permanent barriers,კიბეებზე არ არის წარმოდგენილი მუდმივი ბარიერები,3,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Stairs,კიბეები,2,common,"b,d,s",,1,Stairs free of temporary barriers,კიბეებზე არ არის წარმოდგენილი დროებითი ბარიერები,4,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Stairs,კიბეები,2,common,"b,d,s",,,"Firm, level, slip-resistant surface","მყარი, სწორი, მოცურებისგან დაცული ზედაპირი",5,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Stairs,კიბეები,2,common,"b,d,s",,,Continuous handrails on both sides,ორივე მხარეს წარმოდგენილია უწყვეტი მოაჯირი,6,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Stairs,კიბეები,2,common,s,,,"Handrail painted in color that contrasts from surroundings (wall, stairs, etc)","მოაჯირები შეღებილია კონტრასტულ ფერებსი გარემოსთნ შედარებით (კედლები, კიბეები და ა.შ.",7,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Stairs,კიბეები,2,common,"b,d,s",,,Height of all steps are the same,ყველა კიბის სიმაღლე თანაბარია,8,Height (m),სიმაღლე (მ),
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Stairs,კიბეები,2,common,"b,d,s",,,Width of step is adequate,კიბის სიგანე ადეკვატურია,9,Width (m),სიგანე (მ),
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Stairs,კიბეები,2,common,"b,d,s",,,Depth of step is adequate,კიბის სიღრმე შესაბამისია,10,Depth (m),სიღრმე (მ),
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Stairs,კიბეები,2,common,s,,,Stripes at beginning and end of staircase,კიბე დასაწყისი და ბოლო დახაზულია,11,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Stairs,კიბეები,2,common,b,,,Tactile indicator at beginning and end of staircase,ტაქტილური მაჩვენებელი კიბის დასაწყისა და ბოლოში,12,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Stairs,კიბეები,2,common,p,,,Stair lift,კიბის ამყოლი ლიფტი,13,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Ramps,პანდუსი,3,common,"p,s",1,1,Ramp exists,წარმოდგენილია პანდუსი,0,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Ramps,პანდუსი,3,common,p,,,Mobile ramp available when permanent ramp is not available,"წარმოდგენილია მოძრავი პანდუსი, მუდმივის ხელმიუწვდომლობის შემთხვევაში",1,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Ramps,პანდუსი,3,common,p,,1,Accessible path to ramp free of permanent barriers,პანდუსამდე მისასვლელ გზაზე არ არის წარმოდგენილი მუდმივი ბარიერები,2,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Ramps,პანდუსი,3,common,p,,1,Accessible path to ramp free of temporary barriers,პანდუსამდე მისასვლელ გზაზე არ არის წარმოდგენილი დროებითი ბარიერები,3,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Ramps,პანდუსი,3,common,p,,1,Ramp free of permanent barriers,პანდუსი მუდმივი ბარიერების გარეშე,4,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Ramps,პანდუსი,3,common,p,,1,Ramp free of temporary barriers,პანდუსი დროებითი ბარიერების გარეშე,5,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Ramps,პანდუსი,3,common,p,,1,Adequate ramp slope,პანდუსის დაქანება ადეკვატურია,6,Ratio of Height:Width (m),თანაფარდობა სიმაღლე: სიგანე (მ),
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Ramps,პანდუსი,3,common,p,,,"Firm, level, slip-resistant surface","მყარი, სწორი, მოცურებისგან დაცული ზედაპირი",7,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Ramps,პანდუსი,3,common,p,,1,Adequate ramp width,პანდუსის სიგანე ადეკვატურია,8,Width (m),სიგანე (მ),
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Ramps,პანდუსი,3,common,p,,,Continuous handrails on both sides,ორივე მხარეს წარმოდგენილია უწყვეტი მოაჯირი,9,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Ramps,პანდუსი,3,common,p,,,Ramp sheltered from weather,პანდუსი გადახურულია,10,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Ramps,პანდუსი,3,common,p,,,Flat pathway at the top and bottom of ramp large enough to allow for turning,"სწორი ბილიკი პანსუსის დასაწყისსა და ბოლოში, რომელიც მოტრიალების საშუალებას იძლევა",11,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Ramps,პანდუსი,3,common,s,,,Stripes at beginning and end of ramp,პანდუსის დასაწყისი და ბოლო დახაზულია,12,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Elevators,ლიფტები,4,common,"b,d,p,s",1,1,Elevator exists,ლიფტი წარმოდგენილია,0,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Elevators,ლიფტები,4,common,"b,d,p,s",,1,Accessible path to elevator free of permanent barriers,ლიფტამდე მისასვლელ გზაზე არ არის წარმოდგენილი მუდმივი ბარიერები,1,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Elevators,ლიფტები,4,common,"b,d,p,s",,1,Accessible path to elevator free of temporary barriers,ლიფტამდე მისასვლელ გზაზე არ არის წარმოდგენილი დროებითი ბარიერები,2,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Elevators,ლიფტები,4,common,p,,,Adequate height of call buttons,დასარეკი ღილაკის სიმაღლე ადეკვატურია,3,Height (m),სიმაღლე (მ),
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Elevators,ლიფტები,4,common,s,,,Call buttons framed with contrasting color,დასარეკი ღილაკები ჩასმულია კონტრასტულ ჩარჩოში,4,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Elevators,ლიფტები,4,common,b,,,Braille on call buttons,დასარეკ ღილაკზე ბრაილის შრიფტია წარმოდგენილი,5,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Elevators,ლიფტები,4,common,p,,1,Wide opening when door is open,კარები იღება ფართოდ,6,Width (m),სიგანე (მ),
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Elevators,ლიფტები,4,common,"b,d,p,s",,,Doors remain open for adequate time,კარები რჩება გაღებული ადეკვატური დროის განმავლობაში,7,Time,დრო,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Elevators,ლიფტები,4,common,"b,d,p,s",,,Doors re-open automatically if they are obstructed,კარები ხელმეორედ იხსნება თუ რაიმე წინაღობა შეხვდა,8,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Elevators,ლიფტები,4,common,"b,d,p,s",,,"Flat, level path into elevator","სწორი, თანაბარი გზა ლიფტში შესასვლელად",9,Height (m),სიმაღლე (მ),
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Elevators,ლიფტები,4,common,"b,d,p,s",,,Adequate minimum gap between elevator and floor landing,ლიფტსა და სართულს შორის სივცე ადეკვატურია,10,Width (m),სიგანე (მ),
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Elevators,ლიფტები,4,common,"b,d,p,s",,1,Elevator free of permanent barriers,ლიფტი მუდმივი ბარიერების გარეშე,11,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Elevators,ლიფტები,4,common,"b,d,p,s",,1,Elevator free of temporary barriers,ლიფტი დროებითი ბარიერების გარეშე,12,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Elevators,ლიფტები,4,common,"b,d,p,s",,,"Firm, level, slip-resistant surface","მყარი, სწორი, მოცურებისგან დაცული ზედაპირი",13,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Elevators,ლიფტები,4,common,p,,,Handrails on elevator walls,ლიფტში წარმოდგენილია ხელისმოსაკიდებლები,14,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Elevators,ლიფტები,4,common,p,,,Adequate space in the interior,ინტერიერში სივცე ადეკვატურად არის განაწილებული,15,Area (sq m),ფართობი (კვ.მ),
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Elevators,ლიფტები,4,common,d,,,Visual signals to identify direction of travel and floor,ვიზუალური ნიშნები მიმართულებისა და სართულის იდენტიფიკაციისათვი,16,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Elevators,ლიფტები,4,common,"b,s",,,Audio signals to identify direction of travel and floor,აუდიო სიგნალი მიმართულებისა და სურთულის იდენტიფიკაციისათვის,17,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Elevators,ლიფტები,4,common,p,,,Adequate height of buttons in elevator,ლიფტში ღილაკების სიმაღლე ადეკვატურია,18,Height (m),სიმაღლე (მ),
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Elevators,ლიფტები,4,common,s,,,Elevator buttons framed with contrasting color,ლიფტის ღილაკები ჩასმულია კონტრასტულ ჩარჩოში,19,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Elevators,ლიფტები,4,common,b,,,Elevator buttons in Braille,ლიფტის ღილაკები ბრაილის შრიფტით არის წარმოდგენილი,20,,,
+"Interior Corridors, Doorways and Passageways",შიდა დერეფნები და კარებები,5,common,Elevators,ლიფტები,4,common,"b,d,p,s",,,Working emergency communication system,საგანგებო სიტუაციების სისტემა გამართულად მუშაობს,21,,,
+Interior Rooms,შიდა ოთახები,6,common,,,,,"b,d,p,s",,,Free of abrupt changes in surface level,არ არის წარმოდგენილი მკვეთრი ცვლილებები ზედაპირზე,1,Height (m),სიმაღლე (მ),
+Interior Rooms,შიდა ოთახები,6,common,,,,,"b,d,p,s",,,"Firm, level, slip-resistant surface","მყარი, სწორი, მოცურებისგან დაცული ზედაპირი",2,,,
+Interior Rooms,შიდა ოთახები,6,common,,,,,"b,d,p,s",,1,Aisles free of permanent barriers,გასასვლელი კორიდორი მუდმივი ბარიერების გარეშე,3,,,
+Interior Rooms,შიდა ოთახები,6,common,,,,,"b,d,p,s",,1,Aisles free of temporary barriers,გასასვლელი კორიდორი დროებითი ბარიერების გარეშე,4,,,
+Interior Rooms,შიდა ოთახები,6,common,,,,,"b,d,p,s",,1,Adequate aisle width,გასასვლელი კორიდორის სიგანე ადეკვატურია,5,Width (m),სიგანე (მ),
+Public Restrooms,საზოგადოებრივი ტუალეტები,7,common,,,,,"b,d,p,s",,1,Accessible path to restroom free of permanent barriers,რესტორნამდე მისასვლელ გზაზე არ არის წარმოდგენილი მუდმივი ბარიერები,1,,,
+Public Restrooms,საზოგადოებრივი ტუალეტები,7,common,,,,,"b,d,p,s",,1,Accessible path to restroom free of temporary barriers,რესტორნამდე მისასვლელ გზაზე არ არის წარმოდგენილი დროებითი ბარიერები,2,,,
+Public Restrooms,საზოგადოებრივი ტუალეტები,7,common,,,,,p,,1,Wide opening when entrance door is open,დაწესებულებაში შესასვლელი კარები იღება ფართოდ,3,Width (m),სიგანე (მ),
+Public Restrooms,საზოგადოებრივი ტუალეტები,7,common,,,,,p,,,Door opens outward for small restroom,მცირე ზომის საპირფარეშოს კარები იხსნება გარეთ,4,,,
+Public Restrooms,საზოგადოებრივი ტუალეტები,7,common,,,,,s,,,Restroom gender indicator sign uses high contrast,საპირფარეშოს სქესის ნიშანი მაღალი კონტრასტისაა,5,,,
+Public Restrooms,საზოგადოებრივი ტუალეტები,7,common,,,,,b,,,Restroom gender indicator sign in Braille,საპირფარეშოს სქესის ნიშანი წარმოდგენილია ბრაილის შრიგფტით,6,,,
+Public Restrooms,საზოგადოებრივი ტუალეტები,7,common,,,,,p,,,Automatic entrance door opener,კარების ავტომატური გაღება,7,,,
+Public Restrooms,საზოგადოებრივი ტუალეტები,7,common,,,,,s,,,Automatic door opener button in frame with contrasting color,კარების ავტომატური გაღების ღილაკი ჩასმულია კონტრასტული ფერის ჩარჩოში,8,,,
+Public Restrooms,საზოგადოებრივი ტუალეტები,7,common,,,,,b,,,Automatic door opener button in Braille,კარების ავტომატური გაღების ღილაკი ბრაილის შრიფტით,9,,,
+Public Restrooms,საზოგადოებრივი ტუალეტები,7,common,,,,,"b,d,p,s",,,"Flat, level path through doorway","სწორი, თანაბარი გზა კარების ტერიტორიაზე",10,Height (m),სიმაღლე (მ),
+Public Restrooms,საზოგადოებრივი ტუალეტები,7,common,,,,,"b,d,p,s",,,Open door with one hand,კარების გაღება ერთი ხელით,11,,,
+Public Restrooms,საზოგადოებრივი ტუალეტები,7,common,,,,,"b,d,p,s",,,Open door with minimum adequate force,კარების გაღება მინიმალური ძალისხმევით,12,,,
+Public Restrooms,საზოგადოებრივი ტუალეტები,7,common,,,,,"b,p,s",,,Adequate height of light switch,სინათლის ჩამრთველის სიმაღლე ადეკვატურია,13,Height (m),სიმაღლე (მ),
+Public Restrooms,საზოგადოებრივი ტუალეტები,7,common,,,,,"b,p,s",,,Light switch in consistent location throughout all restrooms for this place,ყველა საპირფარეშოს სინათლის ჩამრთველი ერთსა და იმავე ადგილას აქვს განლაგებული,14,,,
+Public Restrooms,საზოგადოებრივი ტუალეტები,7,common,,,,,"d,p,s",,,Light switch illuminated when the lights are off,"სინათლის ჩამრთველი ანათებს, როცა სინათლე გამორთულია",15,,,
+Public Restrooms,საზოგადოებრივი ტუალეტები,7,common,,,,,"b,d,p,s",,1,Adequate space in the interior,ინტერიერში სივცე ადეკვატურად არის განაწილებული,16,Area (sq m),ფართობი (კვ.მ),
+Public Restrooms,საზოგადოებრივი ტუალეტები,7,common,,,,,p,,,Adequate height of sink,ხელსაბანის სიმაღლე ადეკვატურია,17,Height (m),სიმაღლე (მ),
+Public Restrooms,საზოგადოებრივი ტუალეტები,7,common,,,,,"b,p",,,Can use sink controls with one hand,ონკანის მოშვება ცალი ხელით არის შესაძლებელი,18,,,
+Public Restrooms,საზოგადოებრივი ტუალეტები,7,common,,,,,"b,p,s",,,Adequate height of soap dispenser,სასაპნე ადეკვატურ სიმაღლეზეა განლაგებული,19,Height (m),სიმაღლე (მ),
+Public Restrooms,საზოგადოებრივი ტუალეტები,7,common,,,,,s,,,Soap dispenser color contrasts from wall,სასაპნის ფერი კონტრასტულია კედლის ფერთან მიმართებაში,20,,,
+Public Restrooms,საზოგადოებრივი ტუალეტები,7,common,,,,,"b,p,s",,,Soap dispenser in consistent location throughout all restrooms for this place,ყველა საპირფარეშოს სასაპნე ერთსა და იმავე ადგილას არის განლაგებული,21,,,
+Public Restrooms,საზოგადოებრივი ტუალეტები,7,common,,,,,p,,1,Sitting toilet (not a squat toilet),დასაჯდომი ტუალეტი (და არა დასადგომი),22,,,
+Public Restrooms,საზოგადოებრივი ტუალეტები,7,common,,,,,p,,,Grab bar to assist getting on toilet,დამხმარე ხელის მოსაკიდი საპირფარეშოში,23,,,
+Public Restrooms,საზოგადოებრივი ტუალეტები,7,common,,,,,"b,p",,,Can flush toilet with one hand,უნიტაზის ჩარეცხვა ერთი ხელით არის შესაძლებელი,24,,,
+Banks,ბანკები,,custom,,,,,p,,,Adequate height of at least one table for wheelchairs,ერთი მაგიდის სიმაღლე მაიც არის ადეკვატური,1,Height (m),სიმაღლე (მ),Banks
+Banks,ბანკები,,custom,,,,,s,,,Queue number monitors have adequate text size,რიგის ნომრის მონიტორებს ადეკვატური სიმაღლე აქვთ,2,,,Banks
+Banks,ბანკები,,custom,,,,,s,,,Queue number monitors use high contrast,რიგის ნომრის მონიტორებს მაღალი კონტრასტულობა აქვთ,3,,,Banks
+Banks,ბანკები,,custom,,,,,"b,s",,1,Ability to sign independently for bank operations,საბანკო ოპერაციების დამოუკიდებლად შესრულების საშუალება,4,,,Banks
+ATMs and pay boxes,ბანკომატები და სწრაფი ჩარიცხვის აპარატები,,custom,,,,,"b,d,p,s",,1,Path to the machine free of permanent barriers,აპარატამდე მისასვლელი გზა მუდმივი ბარიერების გარეშე,1,,,ATMs and pay boxes
+ATMs and pay boxes,ბანკომატები და სწრაფი ჩარიცხვის აპარატები,,custom,,,,,"b,d,p,s",,1,Path to the machine free of temporary barriers,აპარატამდე მისასვლელი გზა დროებითი ბარიერების გარეშე,2,,,ATMs and pay boxes
+ATMs and pay boxes,ბანკომატები და სწრაფი ჩარიცხვის აპარატები,,custom,,,,,"b,d,p,s",,1,Area in front of machine free of permanent barriers,აპარატის წინ არ არის წარმოდგენილი მუდმივი ბარიერები,3,,,ATMs and pay boxes
+ATMs and pay boxes,ბანკომატები და სწრაფი ჩარიცხვის აპარატები,,custom,,,,,"b,d,p,s",,1,Area in front of machine free of temporary barriers,აპარატის წინ არ არის წარმოდგენილი დროებითი ბარიერები,4,,,ATMs and pay boxes
+ATMs and pay boxes,ბანკომატები და სწრაფი ჩარიცხვის აპარატები,,custom,,,,,p,,,Adequate height of buttons and screens for wheelchair accessibility,ღილაკების და მონიტორების სიმაღლე ადეკვატურია ეტლისთვის,5,Height (m),სიმაღლე (მ),ATMs and pay boxes
+ATMs and pay boxes,ბანკომატები და სწრაფი ჩარიცხვის აპარატები,,custom,,,,,"p,s",,,Screen positioned to minimize glare,"მონიტორი ისეა განლაგებული, რომ განათების არეკვლა შემცირებულია",6,,,ATMs and pay boxes
+ATMs and pay boxes,ბანკომატები და სწრაფი ჩარიცხვის აპარატები,,custom,,,,,s,,,Screen uses adequate text size,მონიტორი იყენებს ტექსტის ადეკვატურ ზომას,7,,,ATMs and pay boxes
+ATMs and pay boxes,ბანკომატები და სწრაფი ჩარიცხვის აპარატები,,custom,,,,,s,,,Screen uses high contrast,მონიტორი იყენებს მაღალ კონტრასტულობას,8,,,ATMs and pay boxes
+ATMs and pay boxes,ბანკომატები და სწრაფი ჩარიცხვის აპარატები,,custom,,,,,b,,1,Talking machine with headphone jack for audio,მოლაპარაკე აპარატს გააჩნია ყურსასმენები აუდიო ჩანაწერებისთვის,9,,,ATMs and pay boxes
+ATMs and pay boxes,ბანკომატები და სწრაფი ჩარიცხვის აპარატები,,custom,,,,,b,,1,Braille on buttons,ღილაკებზე წარმოდგენილია ბრაილის შრიფტი,10,,,ATMs and pay boxes
+Currency Exchange,სავალუტო ჯიხურები,,custom,,,,,s,,,Adequate lighting to be able to count money,განათება ადეკვატურია ფულის დასათვლელად,1,,,Currency Exchange
+Currency Exchange,სავალუტო ჯიხურები,,custom,,,,,p,,,Adequate height of desk/window,ფანჯრის/მაგიდის სიმაღლე ადეკვატურია,2,Height (m),სიმაღლე (მ),Currency Exchange
+112,112,,custom,,,,,d,,1,SMS service for deaf people,SMS სერვისი სმენადაქვეითებული ადამიანებისთვის,1,,,112
+Hotels,სასტუმროები,,custom,,,,,"b,d,p,s",,1,Accessible path to room free of permanent barriers,ოთახამდე მისასვლელ გზაზე არ არის წარმოდგენილი მუდმივი ბარიერები,1,,,Hotels
+Hotels,სასტუმროები,,custom,,,,,"b,d,p,s",,1,Accessible path to room free of temporary barriers,ოთახამდე მისასვლელ გზაზე არ არის წარმოდგენილი დროებითი ბარიერები,2,,,Hotels
+Hotels,სასტუმროები,,custom,,,,,"b,p",,1,Adequate clearance on at least one side of bed,საწოლის ერთ მხარეს მაინც არის გამონთავისუფლებული შესაბამისი ფართი,3,Widht (m),სიგანე (მ),Hotels
+Hotels,სასტუმროები,,custom,,,,,"b,p,s",,,Adequate height of light switch,სინათლის ჩამრთველის სიმაღლე ადეკვატურია,4,Height (m),სიმაღლე (მ),Hotels
+Hotels,სასტუმროები,,custom,,,,,"b,p,s",,,Light switch in consistent location throughout all rooms in this place,ყველა ოთახში სინათლის ჩამრთველი ერთსა და იმავე ადგილას აქვს განლაგებული,5,,,Hotels
+Hotels,სასტუმროები,,custom,,,,,"d,p,s",,,Light switch illuminated when the lights are off,"სინათილის ჩამრთველი ანათებს, როცა სინათლე გამორთულია",6,,,Hotels
+Hotels,სასტუმროები,,custom,,,,,p,,,Adequate height of electrical receptacles,ელექტრო მოწყობილობების სიმაღლე ადეკვატურია,7,Height (m),სიმაღლე (მ),Hotels
+Hotels,სასტუმროები,,custom,,,,,"b,p,s",,,Electrical receptacles in consistent location throughout all rooms in this place,ელექტრო მოწყობილობები ყველა ოთახში ერთნაირად არის განლაგებული,8,,,Hotels
+Hotels,სასტუმროები,,custom,Bathroom,საპირფარეშო,1,custom,"b,d,p,s",,1,Accessible path to bathroom free of permanent barriers,საპირფარეშომდე მისასვლელ გზაზე არ არის წარმოდგენილი მუდმივი ბარიერები,1,,,Hotels
+Hotels,სასტუმროები,,custom,Bathroom,საპირფარეშო,1,custom,"b,d,p,s",,1,Accessible path to bathroom free of temporary barriers,საპირფარეშომდე მისასვლელ გზაზე არ არის წარმოდგენილი დროებითი ბარიერები,2,,,Hotels
+Hotels,სასტუმროები,,custom,Bathroom,საპირფარეშო,1,custom,p,,1,Wide opening when entrance door is open,დაწესებულებაში შესასვლელი კარები იღება ფართოდ,3,Width (m),სიგანე (მ),Hotels
+Hotels,სასტუმროები,,custom,Bathroom,საპირფარეშო,1,custom,p,,,Door opens outward for small bathroom,მცირე ზომის საპირფარეშოს კარები იხსნება გარეთ,4,,,Hotels
+Hotels,სასტუმროები,,custom,Bathroom,საპირფარეშო,1,custom,s,,,Restroom gender indicator sign uses high contrast,საპირფარეშოს სქესის ნიშანი მაღალი კონტრასტისაა,5,,,Hotels
+Hotels,სასტუმროები,,custom,Bathroom,საპირფარეშო,1,custom,b,,,Restroom gender indicator sign in Braille,საპირფარეშოს სქესის ნიშანი წარმოდგენილია ბრაილის შრიგფტით,6,,,Hotels
+Hotels,სასტუმროები,,custom,Bathroom,საპირფარეშო,1,custom,p,,,Automatic entrance door opener,კარების ავტომატური გაღება,7,,,Hotels
+Hotels,სასტუმროები,,custom,Bathroom,საპირფარეშო,1,custom,s,,,Automatic door opener button in frame with contrasting color,კარების ავტომატური გაღების ღილაკი ჩასმულია კონტრასტული ფერის ჩარჩოში,8,,,Hotels
+Hotels,სასტუმროები,,custom,Bathroom,საპირფარეშო,1,custom,b,,,Automatic door opener button in Braille,კარების ავტომატური გაღების ღილაკი ბრაილის შრიფტით,9,,,Hotels
+Hotels,სასტუმროები,,custom,Bathroom,საპირფარეშო,1,custom,"b,d,p,s",,,"Flat, level path through doorway","სწორი, თანაბარი გზა კარების ტერიტორიაზე",10,Height (m),სიმაღლე (მ),Hotels
+Hotels,სასტუმროები,,custom,Bathroom,საპირფარეშო,1,custom,"b,d,p,s",,,Open door with one hand,კარების გაღება ერთი ხელით,11,,,Hotels
+Hotels,სასტუმროები,,custom,Bathroom,საპირფარეშო,1,custom,"b,d,p,s",,,Open door with minimum adequate force,კარების გაღება მინიმალური ძალისხმევით,12,,,Hotels
+Hotels,სასტუმროები,,custom,Bathroom,საპირფარეშო,1,custom,"b,p,s",,,Adequate height of light switch,სინათლის ჩამრთველის სიმაღლე ადეკვატურია,13,Height (m),სიმაღლე (მ),Hotels
+Hotels,სასტუმროები,,custom,Bathroom,საპირფარეშო,1,custom,"b,p,s",,,Light switch in consistent location throughout all bathrooms for this place,ყველა საპირფარეშოს სინათლის ჩამრთველი ერთსა და იმავე ადგილას აქვს განლაგებული,14,,,Hotels
+Hotels,სასტუმროები,,custom,Bathroom,საპირფარეშო,1,custom,"d,p,s",,,Light switch illuminated when the lights are off,"სინათილის ჩამრთველი ანათებს, როცა სინათლე გამორთულია",15,,,Hotels
+Hotels,სასტუმროები,,custom,Bathroom,საპირფარეშო,1,custom,"b,d,p,s",,1,Adequate space in the interior,ინტერიერში სივცე ადეკვატურად არის განაწილებული,16,Area (sq m),ფართობი (კვ.მ),Hotels
+Hotels,სასტუმროები,,custom,Bathroom,საპირფარეშო,1,custom,p,,,Adequate height of sink,ხელსაბანის სიმაღლე ადეკვატურია,17,Height (m),სიმაღლე (მ),Hotels
+Hotels,სასტუმროები,,custom,Bathroom,საპირფარეშო,1,custom,"b,p",,,Can use sink controls with one hand,ონკანის მოშვება ცალი ხელით არის შესაძლებელი,18,,,Hotels
+Hotels,სასტუმროები,,custom,Bathroom,საპირფარეშო,1,custom,"b,p,s",,,Adequate height of soap dispenser,სასაპნე ადეკვატურ სიმაღლეზეა განლაგებული,19,Height (m),სიმაღლე (მ),Hotels
+Hotels,სასტუმროები,,custom,Bathroom,საპირფარეშო,1,custom,s,,,Soap dispenser color contrasts from wall,სასაპნის ფერი კონტრასტულია კედლის ფერთან მიმართებაში,20,,,Hotels
+Hotels,სასტუმროები,,custom,Bathroom,საპირფარეშო,1,custom,"b,p,s",,,Soap dispenser in consistent location throughout all bathrooms for this place,ყველა საპირფარეშოში სასაპნეები ერთსა და იმავე ადგილას არის განლაგებული,21,,,Hotels
+Hotels,სასტუმროები,,custom,Bathroom,საპირფარეშო,1,custom,p,,,Adequate height of towel rack,პირსახოცები ადეკვატურ სიმაღლეზეა განთავსებული,22,Height (m),სიმაღლე (მ),Hotels
+Hotels,სასტუმროები,,custom,Bathroom,საპირფარეშო,1,custom,s,,,Towel rack color contrasts from wall,პირსახოცების ჩამოსაკიდი კონტრასტულია კედლის ფერთან მიმართებაში,23,,,Hotels
+Hotels,სასტუმროები,,custom,Bathroom,საპირფარეშო,1,custom,"b,p,s",,,Towel rack in consistent location throughout all bathrooms for this place,ყველა სააბაზანოში პირსახოცების ჩამოსაკიდებელი ერთსა და იმავე ადგილას არის განლაგებული,24,,,Hotels
+Hotels,სასტუმროები,,custom,Bathroom,საპირფარეშო,1,custom,p,,1,Sitting toilet (not a squat toilet),დასაჯდომი ტუალიეტი (და არა დასადგომი),25,,,Hotels
+Hotels,სასტუმროები,,custom,Bathroom,საპირფარეშო,1,custom,p,,,Grab bar to assist getting on toilet,დამხმარე ხელის მოსაკიდი საპირფარეშოში,26,,,Hotels
+Hotels,სასტუმროები,,custom,Bathroom,საპირფარეშო,1,custom,"b,p",,,Can flush toilet with one hand,უნიტაზის ჩარეცხვა ერთი ხელით არის შესაძლებელი,27,,,Hotels
+Hotels,სასტუმროები,,custom,Bathroom,საპირფარეშო,1,custom,p,,,Grab bar to assist getting into shower/bathtub,დამხმარე ხელის მოსაკიდებელი საშხაპეში,28,,,Hotels
+Hotels,სასტუმროები,,custom,Bathroom,საპირფარეშო,1,custom,p,,,Shower/bathtub head on flexible hose,საშხაპის / აბაზანის ონკანს მოქნილი,29,,,Hotels
+Hotels,სასტუმროები,,custom,Bathroom,საპირფარეშო,1,custom,p,,,Can use shower/bathtub controls with one hand,საშხაპის / აბაზანის ონკანის მოშვება ერთი ხელით არის შესაძლებელი,30,,,Hotels
+Hostels,ჰოსტელები,,custom,,,,,"b,d,p,s",,1,Accessible path to room free of permanent barriers,ლიფტამდე მისასვლელ გზაზე არ არის წარმოდგენილი მუდმივი ბარიერები,1,,,Hostels
+Hostels,ჰოსტელები,,custom,,,,,"b,d,p,s",,1,Accessible path to room free of temporary barriers,ოთახამდე მისასვლელ გზაზე არ არის წარმოდგენილი დროებითი ბარიერები,2,,,Hostels
+Hostels,ჰოსტელები,,custom,,,,,"b,p",,1,Adequate clearance on at least one side of bed,საწოლის ერთ მხარეს მაინც არის გამონთავისუფლებული შესაბამისი ფართი,3,Widht (m),სიგანე (მ),Hostels
+Hostels,ჰოსტელები,,custom,,,,,"b,p,s",,,Adequate height of light switch,სინათლის ჩამრთველის სიმაღლე ადეკვატურია,4,Height (m),სიმაღლე (მ),Hostels
+Hostels,ჰოსტელები,,custom,,,,,"b,p,s",,,Light switch in consistent location throughout all rooms in this place,ყველა ოთახში სინათლის ჩამრთველი ერთსა და იმავე ადგილას აქვს განლაგებული,5,,,Hostels
+Hostels,ჰოსტელები,,custom,,,,,"d,p,s",,,Light switch illuminated when the lights are off,"სინათილის ჩამრთველი ანათებს, როცა სინათლე გამორთულია",6,,,Hostels
+Hostels,ჰოსტელები,,custom,,,,,p,,,Adequate height of electrical receptacles,ელექტრო მოწყობილობების სიმაღლე ადეკვატურია,7,Height (m),სიმაღლე (მ),Hostels
+Hostels,ჰოსტელები,,custom,,,,,"b,p,s",,,Electrical receptacles in consistent location throughout all rooms in this place,ელექტრო მოწყობილობები ყველა ოთახში ერთნაირად არის განლაგებული,8,,,Hostels
+Hostels,ჰოსტელები,,custom,Bathroom,საპირფარეშო,1,custom,"b,d,p,s",,1,Accessible path to bathroom free of permanent barriers,საპირფარეშომდე მისასვლელ გზაზე არ არის წარმოდგენილი მუდმივი ბარიერები,1,,,Hostels
+Hostels,ჰოსტელები,,custom,Bathroom,საპირფარეშო,1,custom,"b,d,p,s",,1,Accessible path to bathroom free of temporary barriers,შაპირფარეშომდე მისასვლელ გზაზე არ არის წარმოდგენილი დროებითი ბარიერები,2,,,Hostels
+Hostels,ჰოსტელები,,custom,Bathroom,საპირფარეშო,1,custom,p,,1,Wide opening when entrance door is open,დაწესებულებაში შესასვლელი კარები იღება ფართოდ,3,Width (m),სიგანე (მ),Hostels
+Hostels,ჰოსტელები,,custom,Bathroom,საპირფარეშო,1,custom,p,,,Door opens outward for small bathroom,მცირე ზომის საპირფარეშოს კარები იხსნება გარეთ,4,,,Hostels
+Hostels,ჰოსტელები,,custom,Bathroom,საპირფარეშო,1,custom,s,,,Restroom gender indicator sign uses high contrast,საპირფარეშოს სქესის ნიშანი მაღალი კონტრასტისაა,5,,,Hostels
+Hostels,ჰოსტელები,,custom,Bathroom,საპირფარეშო,1,custom,b,,,Restroom gender indicator sign in Braille,საპირფარეშოს სქესის ნიშანი წარმოდგენილია ბრაილის შრიგფტით,6,,,Hostels
+Hostels,ჰოსტელები,,custom,Bathroom,საპირფარეშო,1,custom,p,,,Automatic entrance door opener,კარების ავტომატური გაღება,7,,,Hostels
+Hostels,ჰოსტელები,,custom,Bathroom,საპირფარეშო,1,custom,s,,,Automatic door opener button in frame with contrasting color,კარების ავტომატური გაღების ღილაკი ჩასმულია კონტრასტული ფერის ჩარჩოში,8,,,Hostels
+Hostels,ჰოსტელები,,custom,Bathroom,საპირფარეშო,1,custom,b,,,Automatic door opener button in Braille,კარების ავტომატური გაღების ღილაკი ბრაილის შრიფტით,9,,,Hostels
+Hostels,ჰოსტელები,,custom,Bathroom,საპირფარეშო,1,custom,"b,d,p,s",,,"Flat, level path through doorway","სწორი, თანაბარი გზა კარების ტერიტორიაზე",10,Height (m),სიმაღლე (მ),Hostels
+Hostels,ჰოსტელები,,custom,Bathroom,საპირფარეშო,1,custom,"b,d,p,s",,,Open door with one hand,კარების გაღება ერთი ხელით,11,,,Hostels
+Hostels,ჰოსტელები,,custom,Bathroom,საპირფარეშო,1,custom,"b,d,p,s",,,Open door with minimum adequate force,კარების გაღება მინიმალური ძალისხმევით,12,,,Hostels
+Hostels,ჰოსტელები,,custom,Bathroom,საპირფარეშო,1,custom,"b,p,s",,,Adequate height of light switch,სინათლის ჩამრთველის სიმაღლე ადეკვატურია,13,Height (m),სიმაღლე (მ),Hostels
+Hostels,ჰოსტელები,,custom,Bathroom,საპირფარეშო,1,custom,"b,p,s",,,Light switch in consistent location throughout all bathrooms for this place,ყველა საპირფარეშოში სინათლის ჩამრთველი ერთსა და იმავე ადგილას აქვს განლაგებული,14,,,Hostels
+Hostels,ჰოსტელები,,custom,Bathroom,საპირფარეშო,1,custom,"d,p,s",,,Light switch illuminated when the lights are off,"სინათილის ჩამრთველი ანათებს, როცა სინათლე გამორთულია",15,,,Hostels
+Hostels,ჰოსტელები,,custom,Bathroom,საპირფარეშო,1,custom,"b,d,p,s",,1,Adequate space in the interior,ინტერიერში სივცე ადეკვატურად არის განაწილებული,16,Area (sq m),ფართობი (კვ.მ),Hostels
+Hostels,ჰოსტელები,,custom,Bathroom,საპირფარეშო,1,custom,p,,,Adequate height of sink,ხელსაბანის სიმაღლე ადეკვატურია,17,Height (m),სიმაღლე (მ),Hostels
+Hostels,ჰოსტელები,,custom,Bathroom,საპირფარეშო,1,custom,"b,p",,,Can use sink controls with one hand,ონკანის მოშვება ცალი ხელით არის შესაძლებელი,18,,,Hostels
+Hostels,ჰოსტელები,,custom,Bathroom,საპირფარეშო,1,custom,"b,p,s",,,Adequate height of soap dispenser,სასაპნე ადეკვატურ სიმაღლეზეა განლაგებული,19,Height (m),სიმაღლე (მ),Hostels
+Hostels,ჰოსტელები,,custom,Bathroom,საპირფარეშო,1,custom,s,,,Soap dispenser color contrasts from wall,სასაპნის ფერი კონტრასტულია კედლის ფერთან მიმართებაში,20,,,Hostels
+Hostels,ჰოსტელები,,custom,Bathroom,საპირფარეშო,1,custom,"b,p,s",,,Soap dispenser in consistent location throughout all bathrooms for this place,ყველა საპირფარეშოში სასაპნეები ერთსა და იმავე ადგილას არის განლაგებული,21,,,Hostels
+Hostels,ჰოსტელები,,custom,Bathroom,საპირფარეშო,1,custom,p,,,Adequate height of towel rack,პირსახოცები ადეკვატურ სიმაღლეზეა განთავსებული,22,Height (m),სიმაღლე (მ),Hostels
+Hostels,ჰოსტელები,,custom,Bathroom,საპირფარეშო,1,custom,s,,,Towel rack color contrasts from wall,პირსახოცების ჩამოსაკიდი კონტრასტულია კედლის ფერთან მიმართებაში,23,,,Hostels
+Hostels,ჰოსტელები,,custom,Bathroom,საპირფარეშო,1,custom,"b,p,s",,,Towel rack in consistent location throughout all bathrooms for this place,ყველა სააბაზანოში პირსახოცების ჩამოსაკიდებელი ერთსა და იმავე ადგილას არის განლაგებული,24,,,Hostels
+Hostels,ჰოსტელები,,custom,Bathroom,საპირფარეშო,1,custom,p,,1,Sitting toilet (not a squat toilet),დასაჯდომი ტუალეტი (და არა დასადგომი),25,,,Hostels
+Hostels,ჰოსტელები,,custom,Bathroom,საპირფარეშო,1,custom,p,,,Grab bar to assist getting on toilet,დამხმარე ხელის მოსაკიდი საპირფარეშოში,26,,,Hostels
+Hostels,ჰოსტელები,,custom,Bathroom,საპირფარეშო,1,custom,"b,p",,,Can flush toilet with one hand,უნიტაზის ჩარეცხვა ერთი ხელით არის შესაძლებელი,27,,,Hostels
+Hostels,ჰოსტელები,,custom,Bathroom,საპირფარეშო,1,custom,p,,,Grab bar to assist getting into shower/bathtub,დამხმარე ხელის მოსაკიდებელი საშხაპეში,28,,,Hostels
+Hostels,ჰოსტელები,,custom,Bathroom,საპირფარეშო,1,custom,p,,,Shower/bathtub head on flexible hose,,29,,,Hostels
+Hostels,ჰოსტელები,,custom,Bathroom,საპირფარეშო,1,custom,p,,,Can use shower/bathtub controls with one hand,საშხაპის / აბაზანის ონკანის მოშვება ერთი ხელით არის შესაძლებელი,30,,,Hostels
+Stadiums,სტადიონები,,custom,,,,,p,,1,Reserved area for wheelchairs,სპეციალური ადგილები ეტლისთვის,1,,,Stadiums
+Cinema / theaters,კინო /  თეატრები,,custom,,,,,p,,1,Reserved area for wheelchairs,სპეციალური ადგილები ეტლისთვის,1,,,Cinema / theaters
+Museums,მუზეუმები,,custom,,,,,"b,s",,1,Detailed audio guide,დეტალური აუდიო გიდი,1,,,Museums
+Historical Landmarks (does not include places of worship),ისტორიული ღირშესანიშნაობები (არ მოიცავს ღვთისმსახურების ადგილებს),,custom,,,,,"b,s",,1,Detailed audio guide,დეტალური აუდიო გიდი,1,,,Historical Landmarks (does not include places of worship)
+Beaches,სანაპიროები,,custom,,,,,s,,,Seats and umbrellas in high contrast color from sand and water,შეზლონგები და ქოლგები მაღალი კონტრასტულობით გამოირჩევა ქვიშისგან და წყლისგან,1,,,Beaches
+Zoos,ზოოპარკები,,custom,,,,,"b,s",,1,Detailed audio guide,დეტალური აუდიო გიდი,1,,,Zoos
+Zoos,ზოოპარკები,,custom,,,,,p,,,Adequate height of signs on cages,ნიშნები გალიებზე ადეკვატურ სიმაღლეზეა წარმოდგენილი,2,Height (m),სიმაღლე (მ),Zoos
+Zoos,ზოოპარკები,,custom,,,,,s,,,Signs on cages in high contrast,ნიშნები გალიებზე მაღალი კონტრასტულობით გამოირჩევა,3,,,Zoos
+Zoos,ზოოპარკები,,custom,,,,,b,,,Signs on cages in Braille,ნიშნები გალიებზე ბრაილის შრიფტით,4,,,Zoos
+Zoos,ზოოპარკები,,custom,,,,,"b,p,s",,,Signs on cages in consistent location throughout zoo,ნიშნები გალიებზე ერთსა და იმავე ადგილას არის განლაგებული მთელს ზოოპარკში,5,,,Zoos
+Zoos,ზოოპარკები,,custom,,,,,"b,s",,,Detailed models of animals available for touching,წარმოდგენილია ცხოველების დეტალური ასლები ხელით აღქმისთვის,6,,,Zoos
+Zoos,ზოოპარკები,,custom,,,,,"b,s",,,Samples of animal skin and fur available for touching,წარმოდგენილია ცხოველთა კანისა და ბეწვის ნიმუშები ხელით აღქმისთვის,7,,,Zoos
+Pools,აუზები,,custom,,,,,"b,s",,1,Raised step located around entire pool,ასამაღლებელი საფეხური განლაგებულია მთელი აუზის გარშემო,1,,,Pools
+Pools,აუზები,,custom,,,,,p,,1,Swing to get physically disabled into pool,მოწყობილობა განსაკუთრებული საჭიროების მქონე პირთა აუზში ჩასასვლელად,2,,,Pools
+Kindergartens,საბავშვო ბაღები,,custom,,,,,p,,,Adequate desk height,მერხის სიმაღლე ადეკვატურია,1,Height (m),სიმაღლე (მ),Kindergartens
+Schools,სკოლები,,custom,,,,,p,,,Adequate desk height,მერხის სიმაღლე ადეკვატურია,1,Height (m),სიმაღლე (მ),Schools
+Schools,სკოლები,,custom,,,,,"b,d,p,s",,1,Inclusive education for people with disabilities,ინკლუზიური განათლება შეზღუდული შესაძლებლობის მქონე პირთათვის,2,,,Schools
+Schools,სკოლები,,custom,,,,,"b,d,p,s",,,Certified teacher in special education,სპეციალურ განათლებაში სერტიფიცირებული მასწავლებელი,3,,,Schools
+Colleges,კოლეჯები,,custom,,,,,p,,,Adequate desk height,მერხის სიმაღლე ადეკვატურია,1,Height (m),სიმაღლე (მ),Colleges
+Colleges,კოლეჯები,,custom,,,,,b,,,Braille printer,ბრაილის პრინტერი,2,,,Colleges
+Colleges,კოლეჯები,,custom,,,,,"b,d,p,s",,,Disability resource center,რესურს ცენტრი განსაკუთრებული საჭიროების მქონე პირთათვის,3,,,Colleges
+Universities,უნივერსიტეტები,,custom,,,,,p,,,Adequate desk height,მერხის სიმაღლე ადეკვატურია,1,Height (m),სიმაღლე (მ),Universities
+Universities,უნივერსიტეტები,,custom,,,,,b,,,Braille printer,ბრაილის პრინტერი,2,,,Universities
+Universities,უნივერსიტეტები,,custom,,,,,"b,d,p,s",,,Disability resource center,რესურს ცენტრი განსაკუთრებული საჭიროების მქონე პირთათვის,3,,,Universities
+Public Buses,ავტობუსები,,custom,,,,,"b,d,p,s",,1,Accessible path to bus stop free of permanent barriers,ავტობუსის გაჩერებამდე მისასვლელ გზაზე არ არის წარმოდგენილი მუდმივი ბარიერები,1,,,Public Buses
+Public Buses,ავტობუსები,,custom,,,,,"b,d,p,s",,1,Accessible path to bus stop free of temporary barriers,ავტობუსის გაჩერებამდე მისასვლელ გზაზე არ არის წარმოდგენილი დროებითი ბარიერები,2,,,Public Buses
+Public Buses,ავტობუსები,,custom,,,,,"b,d,p,s",,,Bus stop board listing upcoming buses,ავტობუსის გაჩერებაზე  წარმოდგენილია ტაბლო ავტობუსების განრიგით,3,,,Public Buses
+Public Buses,ავტობუსები,,custom,,,,,"b,p",,,Bus stop board positioned to minimize glare,"ავტობუსების გაჩერებაზე ტაბლო ისეა განლაგებული,რომ შეამციროს სინათლის არეკვლა",4,,,Public Buses
+Public Buses,ავტობუსები,,custom,,,,,s,,,Bus stop board uses adequate text size,ავტობუსების გაჩერებაზე ტაბლო იყენებს ადეკვატურ ტექსტის ზომას,5,,,Public Buses
+Public Buses,ავტობუსები,,custom,,,,,s,,,Bus stop board uses high contrast,ავტობუსების გაჩერებაზე ტაბლო იყენებს მაღალ კონტრასტულობას,6,,,Public Buses
+Public Buses,ავტობუსები,,custom,,,,,b,,,Bus stop board has SMS numbers in Braille,ავტობუსების გაჩერებაზე ტაბლოს გააჩნია SMS ნომერი ბრაილის შრიფტით,7,,,Public Buses
+Public Buses,ავტობუსები,,custom,,,,,"b,s",,,Bus stop board has audio component,ავტობუსების გაჩერებაზე ტაბლოს გააჩნია აუდიო კომპონენტი,8,,,Public Buses
+Public Buses,ავტობუსები,,custom,,,,,"b,s",,,Bus announces the bus number outside the bus at bus stop,ავტობუსი აცხადებს ავტობუსის ნომერს გაჩერებაზე,9,,,Public Buses
+Public Buses,ავტობუსები,,custom,,,,,"b,s",,,Bus announces the upcoming stop inside the bus,ავტობუსი აცხადებს მომდევნო გაჩერებას,10,,,Public Buses
+Public Buses,ავტობუსები,,custom,,,,,"b,p",,,The bus stops with entrance to bus in front of person with disabilities,ავტობუსი ჩერდება შეზღუდული შესაძლებლობების პირთან მათთვის ხელსაყრელი ამოსასვლელით,11,,,Public Buses
+Public Buses,ავტობუსები,,custom,,,,,p,,1,Bus with wheelchair accessible ramp,ავტობუსის გაჩერება აღჭურვილია პანდუსით,12,,,Public Buses
+Public Buses,ავტობუსები,,custom,,,,,p,,1,Bus with wheelchair designated area,ავტობუსის გაჩერებაზე  ეტლისთვის გამოყოფილია შესაბამისი ადგილი,13,,,Public Buses
+Metro,მეტროები,,custom,,,,,p,,1,Ability to bypass ticket turnstile,,1,,,Metro
+Metro,მეტროები,,custom,,,,,"b,p",,1,Elevator to reach metro platform,სპეციალური ესკალატორი ბაგონამდე მისასვლელად,2,,,Metro
+Metro,მეტროები,,custom,,,,,b,,,Platform has stops listed in Braille,პლათფორმაზე გაჩერებების ჩამონათვალი ბრაილის შრიფტით არის წარმოდგენილი,3,,,Metro
+Metro,მეტროები,,custom,,,,,"b,s",,,Tactile map of plan of subway,მეტროს გეგმის ტაქტილური რუკა,4,,,Metro
+Metro,მეტროები,,custom,,,,,"b,s",,,Tactile lines on the floor leading to the metro car,იატაკზე წარმოდგენილია ტაქტილური ხაზები ვაგონამდე მიმავალი,5,,,Metro
+Metro,მეტროები,,custom,,,,,"b,s",,,Tactile line parallel to the edge of the platform,ტაქტილური ხაზი პლათფორმის კიდის პარალელურად,6,,,Metro
+Metro,მეტროები,,custom,,,,,s,,,Bright yellow line parallel to the edge of the platform,მკვეთრი ყვითელი ხაზი პლათფორმის კიდესთან,7,,,Metro
+Metro,მეტროები,,custom,,,,,"b,s",,,Platform announces the approaching metro,პლათფორმაზე აცხადებემ მოახლოებულ მეტროს,8,,,Metro
+Metro,მეტროები,,custom,,,,,"b,s",,,Metro car announces the upcoming stop inside,ვაგონში აცხადებენ მომდევნო გაჩერებას,9,,,Metro
+Metro,მეტროები,,custom,,,,,"b,d,p,s",,1,Wide opening when door is open,კარები იღება ფართოდ,10,Width (m),სიგანე (მ),Metro
+Metro,მეტროები,,custom,,,,,"b,d,p,s",,1,Doors remain open for adequate time,კარები რჩება გაღებული ადეკვატური დროის განმავლობაში,11,Time,დრო,Metro
+Metro,მეტროები,,custom,,,,,"b,d,p,s",,,Doors re-open automatically if they are obstructed,კარები ხელმეორედ იხსნება თუ რაიმე წინაღობა შეხვდა,12,,,Metro
+Metro,მეტროები,,custom,,,,,"b,d,p,s",,1,Flat entrance to metro car,სწორი შესასვლელი ვაგონში,13,Height (m),სიმაღლე (მ),Metro
+Metro,მეტროები,,custom,,,,,"b,d,p,s",,,Adequate minimum gap between metro car and floor landing,მეტროს ვაგონსა და პლათფორმას შორის სივცე ადეკვატურია,14,Width (m),სიგანე (მ),Metro
+Metro,მეტროები,,custom,,,,,"b,d,p,s",,,"Firm, level, slip-resistant surface","მყარი, სწორი, მოცურებისგან დაცული ზედაპირი",15,,,Metro
+Metro,მეტროები,,custom,,,,,p,,1,Designated wheelchair area in metro car,ვაგონში გამოყოფილია სპეციალური ტერიტორია ეტლისთვის,16,,,Metro
+Trains,მატარებელი,,custom,,,,,b,,,Train stations has stops listed in Braille,მატარებლის სადგურზე გაჩერებები ჩამოთვლილია ბრაილით,1,,,Trains
+Trains,მატარებელი,,custom,,,,,"b,s",,,Tactile lines on the floor leading to the train car,ტაქტილური ხაზები იატაკზე მატარებელთან მიმავალი,2,,,Trains
+Trains,მატარებელი,,custom,,,,,"b,s",,,Tactile line parallel to the edge of the platform,ტაქტილური ხაზი პლათფორმის კიდის პარალელურად,3,,,Trains
+Trains,მატარებელი,,custom,,,,,"b,s",,,Bright yellow line parallel to the edge of the platform,მკვეთრად ყვითელი ხაზი პლათფორმის კიდის პარალელურად,4,,,Trains
+Trains,მატარებელი,,custom,,,,,"b,s",,,Train station announces the approaching metro,სადგურზე აცხადებენ მატარებლის მოახლოებას,5,,,Trains
+Trains,მატარებელი,,custom,,,,,"b,s",,,Train car announces the upcoming stop inside,ვაგონში აცხადებენ მომდევნო გაჩერებას,6,,,Trains
+Trains,მატარებელი,,custom,,,,,"b,d,p,s",,1,Flat entrance to train car,სწორი შესასვლელი ვაგონში,7,Height (m),სიმაღლე (მ),Trains
+Trains,მატარებელი,,custom,,,,,"b,d,p,s",,,Adequate minimum gap between train car and floor landing,მეტროს ვაგონსა და პლათფორმას შორის სივცე ადეკვატურია,8,Width (m),სიგანე (მ),Trains
+Trains,მატარებელი,,custom,,,,,"b,d,p,s",,,"Firm, level, slip-resistant surface","მყარი, სწორი, მოცურებისგან დაცული ზედაპირი",9,,,Trains
+Trains,მატარებელი,,custom,,,,,p,,1,Designated wheelchair area,გამოყოფილია სპეციალური ტერიტორია ეტლისთვის,10,,,Trains
+Trains,მატარებელი,,custom,,,,,"b,d,p,s",,,Trained assistants available to help,სპეციალიზირებული დამხმარე პერსონალი,11,,,Trains
+Crosswalks,გზაჯვარედინები,,custom,,,,,"b,d,p,s",,1,Accessible path to crosswalk free of permanent barriers,გადასასვლელამდე მისასვლელ გზაზე არ არის წარმოდგენილი მუდმივი ბარიერები,1,,,Crosswalks
+Crosswalks,გზაჯვარედინები,,custom,,,,,"b,d,p,s",,1,Accessible path to crosswalk free of temporary barriers,გადასასვლელამდე მისასვლელ გზაზე არ არის წარმოდგენილი დროებითი ბარიერები,2,,,Crosswalks
+Crosswalks,გზაჯვარედინები,,custom,,,,,"b,d,p,s",,1,Ramp from pathway to crosswalk,ბილიკი გადასასვლელს უერთდება პანდუსით,3,,,Crosswalks
+Crosswalks,გზაჯვარედინები,,custom,,,,,"b,d,p,s",,1,Adequate width of curb ramp,პანდუსის სიგანე ადეკვატურია,4,Width (m),სიგანე (მ),Crosswalks
+Crosswalks,გზაჯვარედინები,,custom,,,,,"b,d,p,s",,,"Ramp with firm, level, slip-resistant surface","მყარი, სწორი, მოცურებისგან დაცული ზედაპირი",5,,,Crosswalks
+Crosswalks,გზაჯვარედინები,,custom,,,,,"b,d,p,s",,1,Crosswalk free of permanent barriers,გზაზე გადასასვლელი განთავისუფლებულია მუდმივი ბარიერებისგან,6,,,Crosswalks
+Crosswalks,გზაჯვარედინები,,custom,,,,,"b,d,p,s",,1,Crosswalk free of temporary barriers,გზაზე გადასასვლელი განთავისუფლებულია დროებითი ბარიერებისგან,7,,,Crosswalks
+Crosswalks,გზაჯვარედინები,,custom,,,,,"b,d,p,s",,,Crosswalk free of abrupt changes in surface level,არ არის წარმოდგენილი მკვეთრი ცვლილებები ზედაპირზე,8,Height (m),სიმაღლე (მ),Crosswalks
+Crosswalks,გზაჯვარედინები,,custom,,,,,"b,d,p,s",,,"Crosswalk with firm, level, slip-resistant surface","მყარი, სწორი, მოცურებისგან დაცული ზედაპირი",9,,,Crosswalks
+Crosswalks,გზაჯვარედინები,,custom,,,,,"b,d,p,s",,1,Adequate time to use crosswalk,გზაი გადასაკვეთად გამოყოფილია შესაბამისი დრო,10,Time,დრო,Crosswalks
+Crosswalks,გზაჯვარედინები,,custom,,,,,d,,1,Visual signal to indicate when person can use crosswalk,"ვიზუალური ნიშნები იმის აღსაღნიშნად, თუ როდის არის შესაძლებელი გადასასვლელის გამოყენება",11,,,Crosswalks
+Crosswalks,გზაჯვარედინები,,custom,,,,,"b,s",,1,Audio signal to indicate when person can use crosswalk,"ვიზუალური ნიშნები იმის აღსაღნიშნად, თუ როდის არის შესაძლებელი გადასასვლელის გამოყენება",12,,,Crosswalks
+Crosswalks,გზაჯვარედინები,,custom,,,,,"b,s",,,"Audio signal is different for green, flashing green/yellow and red lights","აუდიო სიგნალები განსხვავდება მწვანე, ყვითელი და წითელი შუქისთვის",13,,,Crosswalks
+Crosswalks,გზაჯვარედინები,,custom,,,,,"b,s",,1,Audio signal loudness adequate to hear over traffic noise,"აუდიო სიგნალის ხმა სათანადოა, რომ ტრანსპორტის ხმაში გასაგები იყოს",14,,,Crosswalks
+Crosswalks,გზაჯვარედინები,,custom,,,,,s,,,Streetlights with covers to reduce glare,"შუქნიშანი წარმოდგენილია ისე, რომ არ აირეკლო სინათლე",15,,,Crosswalks
+Public Questions,,,public,,,,,"b,d,p,s",,,Can you independently get to the entrance of the venue?,,1,,,
+Public Questions,,,public,,,,,"b,d,p,s",,,Can you independently get into the venue?,,2,,,
+Public Questions,,,public,,,,,"b,d,p,s",,,Can you independently move through the doorways and/or corridors inside the venue?,,3,,,
+Public Questions,,,public,,,,,"b,d,p,s",,,Can you independently move through the rooms in the venue?,,4,,,
+Public Questions,,,public,,,,,"b,d,p,s",,,Can you independently reach any floor?,,5,,,
+Public Questions,,,public,,,,,"b,d,p,s",,,Can you independently use the public restroom in the venue?,,6,,,
+Public Questions,,,public,,,,,"b,d,p,s",,,Can you independently get information in an accessible format?,,7,,,
+Public Questions,,,public,,,,,"b,d,p,s",,,Can you independently get special services for people with disabilities?,,8,,,
+Public Questions,,,public,,,,,"b,d,p,s",,,Can you independently complete the task you came to the venue for?,,9,,,
+Banks,,,public_custom,,,,,"b,d,p,s",,,Can you sign independently for bank operations?,,1,,,Banks
+Hotels,,,public_custom,,,,,"b,d,p,s",,,Can you independently get to the room?,,1,,,Hotels
+Hotels,,,public_custom,,,,,"b,d,p,s",,,Can you independently get in the room?,,2,,,Hotels
+Hotels,,,public_custom,,,,,"b,d,p,s",,,Can you independently use the bathroom?,,3,,,Hotels
+Hotels,,,public_custom,,,,,"b,d,p,s",,,Can you independently use the shower?,,4,,,Hotels
+Hostels,,,public_custom,,,,,"b,d,p,s",,,Can you independently get to the room?,,1,,,Hostels
+Hostels,,,public_custom,,,,,"b,d,p,s",,,Can you independently get in the room?,,2,,,Hostels
+Hostels,,,public_custom,,,,,"b,d,p,s",,,Can you independently use the bathroom?,,3,,,Hostels
+Hostels,,,public_custom,,,,,"b,d,p,s",,,Can you independently use the shower?,,4,,,Hostels
+Pools,,,public_custom,,,,,"b,d,p,s",,,Can you independently get in the pool?,,1,,,Pools
+Stadiums,,,public_custom,,,,,"b,d,p,s",,,Is there a reserved section?,,1,,,Stadiums
+Cinema / theaters,,,public_custom,,,,,"b,d,p,s",,,Is there a reserved section?,,1,,,Cinema / theaters
+Schools,,,public_custom,,,,,"b,d,p,s",,,Can you receive inclusive education?,,1,,,Schools
+Schools,,,public_custom,,,,,"b,d,p,s",,,Can you obtain disability resources?,,2,,,Schools
+Colleges,,,public_custom,,,,,"b,d,p,s",,,Can you receive inclusive education?,,1,,,Colleges
+Colleges,,,public_custom,,,,,"b,d,p,s",,,Can you obtain disability resources?,,2,,,Colleges
+Universities,,,public_custom,,,,,"b,d,p,s",,,Can you receive inclusive education?,,1,,,Universities
+Universities,,,public_custom,,,,,"b,d,p,s",,,Can you obtain disability resources?,,2,,,Universities
+Public buses,,,public_custom,,,,,"b,d,p,s",,,Can you independently get to the bus stop?,,1,,,Public buses
+Public buses,,,public_custom,,,,,"b,d,p,s",,,Can you independently get on the bus?,,2,,,Public buses
+Public buses,,,public_custom,,,,,"b,d,p,s",,,Is there a reserved section?,,3,,,Public buses
+Metro,,,public_custom,,,,,"b,d,p,s",,,Can you independently get to the metro station platform?,,1,,,Metro
+Metro,,,public_custom,,,,,"b,d,p,s",,,Can you independently get on the metro?,,2,,,Metro
+Metro,,,public_custom,,,,,"b,d,p,s",,,Is there a reserved section?,,3,,,Metro
+Trains,,,public_custom,,,,,"b,d,p,s",,,Can you independently get to the train station platform?,,1,,,Trains
+Trains,,,public_custom,,,,,"b,d,p,s",,,Can you independently get on the train?,,2,,,Trains
+Trains,,,public_custom,,,,,"b,d,p,s",,,Is there a reserved section?,,3,,,Trains
+Airports,,,public_custom,,,,,"b,d,p,s",,,Can you independently get to the airport terminal?,,1,,,Airports
+Airports,,,public_custom,,,,,"b,d,p,s",,,Can you independently get on the plane?,,2,,,Airports
+Airports,,,public_custom,,,,,"b,d,p,s",,,Is there a reserved section?,,3,,,Airports
+Crosswalks,,,public_custom,,,,,"b,d,p,s",,,Can you independently use the crosswalk?,,1,,,Crosswalks
+Crosswalks,,,public_custom,,,,,"b,d,p,s",,,Can you independently cross the street?,,2,,,Crosswalks
+Overpasses,,,public_custom,,,,,"b,d,p,s",,,Can you independently use the overpass?,,1,,,Overpasses
+Overpasses,,,public_custom,,,,,"b,d,p,s",,,Can you independently cross the street?,,2,,,Overpasses
+Underpasses,,,public_custom,,,,,"b,d,p,s",,,Can you independently use the underpass?,,1,,,Underpasses
+Underpasses,,,public_custom,,,,,"b,d,p,s",,,Can you independently cross the street?,,2,,,Underpasses
+Sidewalks,,,public_custom,,,,,"b,d,p,s",,,Can you independently use the sidewalk?,,1,,,Sidewalks

@@ -25,18 +25,19 @@ class PlacesController < ApplicationController
 
       @disabilities = Disability.sorted.is_active
       
-      overall_question_categories = QuestionCategory.questions_categories_for_venue(question_category_id: @place.question_category_id)
+      certified_overall_question_categories = QuestionCategory.questions_categories_for_venue(question_category_id: @place.custom_question_category_id, is_certified: true)
+      public_overall_question_categories = QuestionCategory.questions_categories_for_venue(question_category_id: @place.custom_public_question_category_id, is_certified: false)
 
       # get overall summary
       @data[:certified][:summary] = PlaceSummary.for_place_disablity(params[:id], is_certified: true)
-      @data[:certified][:summary_questions] = overall_question_categories
-      @data[:public][:summary] = PlaceSummary.for_place_disablity(params[:id])
-      @data[:public][:summary_questions] = overall_question_categories
+      @data[:certified][:summary_questions] = certified_overall_question_categories
+      @data[:public][:summary] = PlaceSummary.for_place_disablity(params[:id], is_certified: false)
+      @data[:public][:summary_questions] = public_overall_question_categories
 
       # get evaluations
       if @disabilities.present?
         @disabilities.each do |disability|
-          qc = QuestionCategory.questions_for_venue(question_category_id: @place.question_category_id, disability_id: disability.id)
+          qc = QuestionCategory.questions_for_venue(question_category_id: @place.custom_question_category_id, disability_id: disability.id)
 
           #####################
           # get certified evals
@@ -303,7 +304,7 @@ class PlacesController < ApplicationController
           # the user can submit certified evals so see if they want to or not
           @needs_certification_answer = true
         else      
-          params[:certification] = false if params[:certification].blank?
+          params[:certification] = !!(params[:certification] =~ (/^(true|t|yes|y|1)$/i))
           
           # load the evaluation form
           gon.show_evaluation_form = true
@@ -311,7 +312,11 @@ class PlacesController < ApplicationController
           @disability = Disability.with_name(params[:eval_type_id])
           
 	        # get list of questions
-	        @question_categories = QuestionCategory.questions_for_venue(question_category_id: @place.question_category_id, disability_id: params[:eval_type_id])
+          qc_id = @place.custom_question_category_id
+          if !params[:certification]
+            qc_id = @place.custom_public_question_category_id
+          end
+	        @question_categories = QuestionCategory.questions_for_venue(question_category_id: qc_id, disability_id: params[:eval_type_id], is_certified: params[:certification])
           
 		      # create the evaluation object for however many questions there are
 		      if @question_categories.present?

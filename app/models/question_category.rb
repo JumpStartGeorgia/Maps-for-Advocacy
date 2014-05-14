@@ -8,20 +8,21 @@ class QuestionCategory < ActiveRecord::Base
 	has_many :questions, :through => :question_pairings
   accepts_nested_attributes_for :question_category_translations
   accepts_nested_attributes_for :question_pairings
-  attr_accessible :id, :is_common, :question_category_translations_attributes, :question_pairings_attributes, :sort_order
+  attr_accessible :id, :is_common, :question_category_translations_attributes, :question_pairings_attributes, :sort_order, :category_type
 
   before_save :set_sort_order
   DEFAULT_SORT_ORDER = 99
+  TYPES = {'common' => 1, 'custom' => 2, 'public' => 3, 'public_custom' => 4}
+
   
   def set_sort_order
     self.sort_order = DEFAULT_SORT_ORDER if read_attribute(:sort_order).blank?
   end
 
 
-  # possible options: common_only, child_of, question_category_id, disability_id
+  # possible options: category_type, child_of, question_category_id, disability_id
   def self.with_questions(options = {})
     categories = nil
-    options[:common_only] = false if options[:common_only].nil?
 
     categories = get_categories(options)
 
@@ -36,7 +37,7 @@ class QuestionCategory < ActiveRecord::Base
 
         # if this category has sub_categories, get them too
         if cat.has_children?
-          new_options = {:child_of => cat.path_ids.join('/'), :common_only => options[:common_only]}
+          new_options = {:child_of => cat.path_ids.join('/'), :category_type => options[:category_type]}
           new_options[:disability_id] = options[:disability_id] if options[:disability_id].present?
           new_options[:disability_ids] = options[:disability_ids] if options[:disability_ids].present?
 
@@ -54,15 +55,17 @@ class QuestionCategory < ActiveRecord::Base
   # possible options: question_category_id, disability_id
   def self.questions_categories_for_venue(options = {})
     categories = []
+    options[:is_certified] = true if options[:is_certified].nil?
 
     # get custom questions
     if options[:question_category_id].present?
+      options[:category_type] = options[:is_certified] == true ? TYPES['custom'] : TYPES['public_custom']
       categories << get_categories(options)      
     end
 
     
-    # get common questions
-    ops = {:common_only => true}
+    # get common/public questions
+    ops = {:category_type => options[:is_certified] == true ? TYPES['common'] : TYPES['public']}
     ops[:disability_id] = options[:disability_id] if options[:disability_id].present?
     ops[:disability_ids] = options[:disability_ids] if options[:disability_ids].present?
     categories << get_categories(ops)      
@@ -76,15 +79,17 @@ class QuestionCategory < ActiveRecord::Base
   # get all common questions and any special questions if a question category id is provided  
   # possible options: question_category_id, disability_id
   def self.questions_for_venue(options = {})
+    options[:is_certified] = true if options[:is_certified].nil?
     questions = []
 
     # get custom questions
     if options[:question_category_id].present?
+      options[:category_type] = options[:is_certified] == true ? TYPES['custom'] : TYPES['public_custom']
       questions << with_questions(options)      
     end
     
-    # get common questions
-    ops = {:common_only => true}
+    # get common/public questions
+    ops = {:category_type => options[:is_certified] == true ? TYPES['common'] : TYPES['public']}
     ops[:disability_id] = options[:disability_id] if options[:disability_id].present?
     ops[:disability_ids] = options[:disability_ids] if options[:disability_ids].present?
     questions << with_questions(ops)
@@ -98,9 +103,10 @@ class QuestionCategory < ActiveRecord::Base
   # get all questions for a venue that has custom questions
   # possible options: question_category_id, disability_id
   def self.custom_questions_for_venue(question_category_id, options = {})
+    options[:is_certified] = true if options[:is_certified].nil?
     questions = []
     
-    ops = {:common_only => false, :question_category_id => question_category_id}
+    ops = {:category_type => options[:is_certified] == true ? TYPES['custom'] : TYPES['public_custom'], :question_category_id => question_category_id}
     ops[:disability_id] = options[:disability_id] if options[:disability_id].present?
     ops[:disability_ids] = options[:disability_ids] if options[:disability_ids].present?
     questions << with_questions(ops)
@@ -147,11 +153,11 @@ class QuestionCategory < ActiveRecord::Base
     idx_parent_name = 0
     idx_parent_name_ka = 1
     idx_parent_sort = 2
-    idx_parent_is_common = 3
+    idx_parent_type = 3
     idx_child_name = 4
     idx_child_name_ka = 5
     idx_child_sort = 6
-    idx_child_is_common = 7
+    idx_child_type = 7
     idx_type = 8
     idx_exists = 9
     idx_req_accessibility = 10
@@ -207,7 +213,7 @@ class QuestionCategory < ActiveRecord::Base
 
           	puts "******** having to get parent: #{row[idx_parent_name]}"
             # need to create new question category or get it from db if already exists
-            current_parent = get_category(row[idx_parent_name], row[idx_parent_name_ka], row[idx_parent_sort], row[idx_parent_is_common])
+            current_parent = get_category(row[idx_parent_name], row[idx_parent_name_ka], row[idx_parent_sort], row[idx_parent_type])
           end
 
           if current_parent.blank? || current_parent.id.blank?
@@ -230,7 +236,7 @@ class QuestionCategory < ActiveRecord::Base
 
             	puts "******** - having to get child: #{row[idx_child_name]}"
               # need to create new question category or get it from db if already exists
-              current_child = get_category(row[idx_child_name], row[idx_child_name_ka], row[idx_child_sort], row[idx_child_is_common], current_parent.id)
+              current_child = get_category(row[idx_child_name], row[idx_child_name_ka], row[idx_child_sort], row[idx_child_type], current_parent.id)
 
               if current_child.blank? || current_child.id.blank?
           		  msg = "Row #{n}: Could not find/create child"
@@ -298,7 +304,7 @@ class QuestionCategory < ActiveRecord::Base
           
          
           # if venue provided, add question category id to venue
-          if (current_venue.blank? && row[idx_venue_name].present?) || (current_venue.present? && current_venue[:name] != row[idx_venue_name].strip)
+          if row[idx_venue_name].present? && ((current_venue.blank? && row[idx_venue_name].present?) || (current_venue.present? && current_venue[:name] != row[idx_venue_name].strip))
           	puts "******** having to get venue: #{row[idx_venue_name]}"
             current_venue = get_venue(row[idx_venue_name])
 
@@ -313,7 +319,8 @@ class QuestionCategory < ActiveRecord::Base
           
           if current_venue.present?
           	puts "******** adding question category id to venue: #{row[idx_venue_name]}; #{current_venue.inspect}"
-            current_venue.question_category_id = current_parent.id
+            current_venue.custom_question_category_id = current_parent.id if current_parent.category_type == TYPES['custom']
+            current_venue.custom_public_question_category_id = current_parent.id if current_parent.category_type == TYPES['public_custom']
             current_venue.save
           end
           
@@ -340,21 +347,22 @@ class QuestionCategory < ActiveRecord::Base
   ######################################
 private
   # get question category and if not exist, create it
-  def self.get_category(name, name_ka, sort, is_common, parent_id=nil)
+  def self.get_category(name, name_ka, sort, category_type, parent_id=nil)
     qc = nil
     name.strip! if name.present?
     name_ka.strip! if name_ka.present?
     sort.strip! if sort.present?
-    is_common.strip! if is_common.present?
+    category_type.strip! if category_type.present?
     
 
     x = select('question_categories.id').includes(:question_category_translations)
-          .where(:question_categories => {:sort_order => sort, :is_common => is_common, :ancestry => nil}, :question_category_translations => {:locale => I18n.locale, :name => name})
+          .where(:question_categories => {:sort_order => sort, :category_type => TYPES[category_type], :ancestry => nil}, 
+                  :question_category_translations => {:locale => I18n.locale, :name => name})
           
     qc = x.first if x.present?
     
     if qc.nil?
-      qc = QuestionCategory.create(:is_common => is_common, :sort_order => sort)
+      qc = QuestionCategory.create(:category_type => TYPES[category_type], :sort_order => sort)
       I18n.available_locales.each do |locale|
         x = name
         x = name_ka if locale == :ka && name_ka.present?
@@ -412,7 +420,6 @@ private
 
   def self.get_categories(options={})
     categories = nil
-    options[:common_only] = false if options[:common_only].nil?
 
     categories = with_translations(I18n.locale).order('question_categories.sort_order asc')
     if options[:child_of].present?
@@ -420,7 +427,7 @@ private
     else
       categories = categories.where('question_categories.ancestry is null') 
     end
-    categories = categories.where('question_categories.is_common = ?', options[:common_only])
+    categories = categories.where('question_categories.category_type = ?', options[:category_type]) if options[:category_type].present?
     categories = categories.where('question_categories.id = ?', options[:question_category_id]) if options[:question_category_id].present?
     
     return categories

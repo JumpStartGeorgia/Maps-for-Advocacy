@@ -17,7 +17,7 @@ class Place < ActiveRecord::Base
   after_create :assign_district
   
   def self.with_translation(id=nil)
-    sql = "select p.id, p.district_id, dt.name as district, p.venue_id, vt.name as venue, v.question_category_id, v.venue_category_id, p.lat, p.lon, pt.name as place, pt.address "
+    sql = "select p.id, p.district_id, dt.name as district, p.venue_id, vt.name as venue, v.custom_question_category_id, v.custom_public_question_category_id, v.venue_category_id, p.lat, p.lon, pt.name as place, pt.address "
     sql << "from places as p "
     sql << "inner join place_translations as pt on pt.place_id = p.id and pt.locale = :locale "
     sql << "left join venues as v on v.id = p.venue_id "

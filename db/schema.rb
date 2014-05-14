@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140220112529) do
+ActiveRecord::Schema.define(:version => 20140514071534) do
 
   create_table "disabilities", :force => true do |t|
     t.string   "code"
@@ -121,6 +121,8 @@ ActiveRecord::Schema.define(:version => 20140220112529) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "is_certified",                                           :default => false
+    t.integer  "venue_id"
+    t.integer  "venue_category_id"
   end
 
   add_index "place_summaries", ["data_type", "data_type_identifier"], :name => "idx_place_summary_data_type"
@@ -128,6 +130,8 @@ ActiveRecord::Schema.define(:version => 20140220112529) do
   add_index "place_summaries", ["is_certified"], :name => "index_place_summaries_on_is_certified"
   add_index "place_summaries", ["place_id"], :name => "index_place_summaries_on_place_id"
   add_index "place_summaries", ["summary_type", "summary_type_identifier"], :name => "idx_place_summary_summary_type"
+  add_index "place_summaries", ["venue_category_id"], :name => "index_place_summaries_on_venue_category_id"
+  add_index "place_summaries", ["venue_id"], :name => "index_place_summaries_on_venue_id"
 
   create_table "place_translations", :force => true do |t|
     t.integer  "place_id"
@@ -154,14 +158,16 @@ ActiveRecord::Schema.define(:version => 20140220112529) do
   add_index "places", ["venue_id"], :name => "index_places_on_venue_id"
 
   create_table "question_categories", :force => true do |t|
-    t.boolean  "is_common",  :default => false
+    t.boolean  "is_common",                  :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "sort_order", :default => 99
+    t.integer  "sort_order",                 :default => 99
     t.string   "ancestry"
+    t.integer  "category_type", :limit => 1, :default => 1
   end
 
   add_index "question_categories", ["ancestry"], :name => "index_question_categories_on_ancestry"
+  add_index "question_categories", ["category_type"], :name => "index_question_categories_on_category_type"
   add_index "question_categories", ["is_common"], :name => "index_question_categories_on_is_common"
   add_index "question_categories", ["sort_order"], :name => "index_question_categories_on_sort_order"
 
@@ -262,6 +268,33 @@ ActiveRecord::Schema.define(:version => 20140220112529) do
   add_index "venue_category_translations", ["locale"], :name => "index_venue_category_translations_on_locale"
   add_index "venue_category_translations", ["venue_category_id"], :name => "index_ebb6287e836f963636058fbf5e5bfbd51e8bdebe"
 
+  create_table "venue_summaries", :force => true do |t|
+    t.integer  "venue_id"
+    t.integer  "venue_category_id"
+    t.integer  "summary_type"
+    t.integer  "summary_type_identifier"
+    t.integer  "data_type"
+    t.integer  "data_type_identifier"
+    t.integer  "disability_id"
+    t.decimal  "score",                   :precision => 10, :scale => 6
+    t.integer  "special_flag"
+    t.integer  "num_answers"
+    t.integer  "num_evaluations"
+    t.integer  "num_places"
+    t.boolean  "is_certified"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "accessibility_type"
+  end
+
+  add_index "venue_summaries", ["accessibility_type"], :name => "index_venue_summaries_on_accessibility_type"
+  add_index "venue_summaries", ["data_type", "data_type_identifier"], :name => "idx_venue_summary_data_type"
+  add_index "venue_summaries", ["disability_id"], :name => "index_venue_summaries_on_disability_id"
+  add_index "venue_summaries", ["is_certified"], :name => "index_venue_summaries_on_is_certified"
+  add_index "venue_summaries", ["summary_type", "summary_type_identifier"], :name => "idx_venue_summary_summary_type"
+  add_index "venue_summaries", ["venue_category_id"], :name => "index_venue_summaries_on_venue_category_id"
+  add_index "venue_summaries", ["venue_id"], :name => "index_venue_summaries_on_venue_id"
+
   create_table "venue_translations", :force => true do |t|
     t.integer  "venue_id"
     t.string   "locale"
@@ -275,13 +308,15 @@ ActiveRecord::Schema.define(:version => 20140220112529) do
 
   create_table "venues", :force => true do |t|
     t.integer  "venue_category_id"
-    t.integer  "question_category_id"
+    t.integer  "custom_question_category_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "sort_order",           :default => 99
+    t.integer  "sort_order",                         :default => 99
+    t.integer  "custom_public_question_category_id"
   end
 
-  add_index "venues", ["question_category_id"], :name => "index_venues_on_question_category_id"
+  add_index "venues", ["custom_public_question_category_id"], :name => "index_venues_on_custom_public_question_category_id"
+  add_index "venues", ["custom_question_category_id"], :name => "index_venues_on_custom_question_category_id"
   add_index "venues", ["sort_order"], :name => "index_venues_on_sort_order"
   add_index "venues", ["venue_category_id"], :name => "index_venues_on_venue_category_id"
 
