@@ -7,7 +7,7 @@
   <div class="question_category">
     <div class="venue_evaluation">
       <% question_index = -1 %>
-      <% @question_categories.reverse_each do |cat| %>
+      <% @question_categories.each do |cat| %>
         <% cat[:questions].each do |question| %>    
           <% question_index += 1 %>
 

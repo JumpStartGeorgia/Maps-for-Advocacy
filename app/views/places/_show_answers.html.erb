@@ -1,10 +1,12 @@
 <% if cat[:questions].present? %>
-                  <% if is_sub_category %>
-                    <h5><%= cat.name %></h5>
-                  <% else %>
-                    <h4><%= cat.name %></h4>
+<% show_heading = true if show_heading.nil? %>
+                  <% if show_heading %>
+                    <% if is_sub_category %>
+                      <h5><%= cat.name %></h5>
+                    <% else %>
+                      <h4><%= cat.name %></h4>
+                    <% end %>
                   <% end %>
-
                   <ul class="question-results">
                     <%
                       item_exists = true

@@ -26,7 +26,8 @@ class PlacesController < ApplicationController
       @disabilities = Disability.sorted.is_active
       
       certified_overall_question_categories = QuestionCategory.questions_categories_for_venue(question_category_id: @place.custom_question_category_id, is_certified: true)
-      public_overall_question_categories = QuestionCategory.questions_categories_for_venue(question_category_id: @place.custom_public_question_category_id, is_certified: false)
+#      public_overall_question_categories = QuestionCategory.questions_categories_for_venue(question_category_id: @place.custom_public_question_category_id, is_certified: false)
+      public_overall_question_categories = QuestionCategory.questions_for_venue(question_category_id: @place.custom_public_question_category_id, is_certified: false)
 
       # get overall summary
       @data[:certified][:summary] = PlaceSummary.for_place_disablity(params[:id], is_certified: true)

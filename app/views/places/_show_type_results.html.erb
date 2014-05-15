@@ -1,5 +1,7 @@
 <%
   is_certified = type == 'certified'
+  summary_key = 'categories'
+  summary_key = 'questions' if !is_certified
 %>
 
         <div><p>
@@ -16,13 +18,20 @@
               <%= format_summary_result(data[:summary]['overall']['overall'], is_summary: true, is_certified: is_certified) %>
             </p>
             <ul class="evaluation_summary">
-            <% questions = data[:summary_questions].map{|x| [x[:id], x.name]}.uniq %>
-            <% questions.each do |question| %>
-              <li>
-                <strong><%= question[1] %>:</strong><br />
-                <%= format_summary_result(data[:summary]['overall'][question[0].to_s], is_summary: true, is_certified: is_certified) %>
-              </li>          
-            <% end %>
+              <% 
+                questions = nil
+                if is_certified
+                  questions = data[:summary_questions].map{|x| [x[:id], x.name]}.uniq 
+                else
+                  questions = data[:summary_questions].map{|x| x[:questions]}.flatten.map{|x| [x[:question_id], x[:question]]}.uniq 
+                end
+              %>
+              <% questions.each do |question| %>
+                <li>
+                  <strong><%= question[1] %></strong><br />
+                  <%= format_summary_result(data[:summary]['overall'][summary_key][question[0].to_s], is_summary: true, is_certified: is_certified) %>
+                </li>          
+              <% end %>
             </ul>
           </div>
         <% end %>
@@ -75,17 +84,24 @@
                   <% end %>
                 <% else %>
 	                <% if disability[:question_categories].present? && disability[:summaries].present? && disability[:summaries].has_key?('overall') && disability[:summaries]['overall'].present?%>
-                    <% questions = disability[:question_categories].map{|x| [x[:id], x.name]}.uniq %>
+                    <% 
+                      questions = nil
+                      if is_certified
+                        questions = disability[:question_categories].map{|x| [x[:id], x.name]}.uniq
+                      else
+                        questions = disability[:question_categories].map{|x| x[:questions]}.flatten.map{|x| [x[:question_id], x[:question]]}.uniq 
+                      end
+                    %>
                     <% if questions.present? %>
                       <h2><%= t('.header_summary') %></h2>
-                      <p><strong><%= t('.summary_result') %>:</strong>
+                      <p><strong><%= t('.summary_result') %></strong>
                         <%= format_summary_result(disability[:summaries]['overall']['overall'], is_summary: true, is_certified: is_certified) %>
                       </p>
                       <ul class="evaluation_summary">
                       <% questions.each do |question| %>
                         <li>
                           <strong><%= question[1] %>:</strong><br />
-                          <%= format_summary_result(disability[:summaries]['overall'][question[0].to_s], is_summary: true, is_certified: is_certified) %>
+                          <%= format_summary_result(disability[:summaries]['overall'][summary_key][question[0].to_s], is_summary: true, is_certified: is_certified) %>
                         </li>          
                       <% end %>
                       </ul>
@@ -121,41 +137,42 @@
 
 	                    <% if questions.present? && summary.present? %>
                         <p><strong><%= t('.summary_result') %>:</strong>
-                          <%= format_summary_result(summary['overall'], is_certified: is_certified) %>
+                          <%= format_summary_result(summary['overall'], is_certified: is_certified, is_summary: !is_certified) %>
                         </p>
                         <ul class="evaluation_summary">
                         <% questions.each do |question| %>
                           <li>
-                            <strong><%= question[1] %>:</strong><br />
-                            <%= format_summary_result(summary[question[0].to_s], is_certified: is_certified) %>
+                            <strong><%= question[1] %></strong><br />
+                            <%= format_summary_result(summary[summary_key][question[0].to_s], is_certified: is_certified) %>
                           </li>          
                         <% end %>
                         </ul>
                       <% end %>
 
-
-                      <div class="accordion" id="<%= "accordion_#{evaluation.id}" %>">
-                        <div class="accordion-group">
-                          <div class="accordion-heading">
-                            <div class="panel-title">
-                              <a class="accordion-toggle" data-toggle="collapse" data-parent="<%= "#accordion_#{evaluation.id}" %>" 
-                                href="<%= "#collapse_#{evaluation.id}" %>" title="<%= t('.details_link_title') %>">
-                                <%= t('.header_user_details') %>
-                              </a>
+                      <% if is_certified %>
+                        <div class="accordion" id="<%= "accordion_#{evaluation.id}" %>">
+                          <div class="accordion-group">
+                            <div class="accordion-heading">
+                              <div class="panel-title">
+                                <a class="accordion-toggle" data-toggle="collapse" data-parent="<%= "#accordion_#{evaluation.id}" %>" 
+                                  href="<%= "#collapse_#{evaluation.id}" %>" title="<%= t('.details_link_title') %>">
+                                  <%= t('.header_user_details') %>
+                                </a>
+                              </div>
                             </div>
-                          </div>
-                          <div id="<%= "collapse_#{evaluation.id}" %>" class="accordion-body collapse">
-                            <div class="accordion-inner">
+                            <div id="<%= "collapse_#{evaluation.id}" %>" class="accordion-body collapse">
+                              <div class="accordion-inner">
 
-                              <% disability[:question_categories].each do |cat| %>
-                                <%= render :partial => 'show_answers', :locals => {:evaluation => evaluation, :cat => cat, :is_sub_category => false} %>
-                              <% end %>
+                                <% disability[:question_categories].each do |cat| %>
+                                  <%= render :partial => 'show_answers', :locals => {:evaluation => evaluation, :cat => cat, :is_sub_category => false, :show_heading => is_certified} %>
+                                <% end %>
 
+                              </div>
                             </div>
                           </div>
                         </div>
-                      </div>
 
+                      <% end %>
                     <% end %>
                   <% end %>
                 <% end %>

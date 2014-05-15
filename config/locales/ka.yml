@@ -118,6 +118,10 @@ ka:
         no_answer: არ არის პასუხი
         'yes': 'დიახ'
         'no': 'არა'
+      yes_vote: "Yes Vote"
+      no_vote: "No Vote"
+      yes_votes: "%{votes} Yes Votes"
+      no_votes: "%{votes} No Votes"
       summary_answers:
         not_accessible: არ არის ხელმისაწვდომი
         no_answer: არ არის პასუხი

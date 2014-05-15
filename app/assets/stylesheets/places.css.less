@@ -270,8 +270,46 @@ form.place{
     background-color: #555;
     color: #fff;
   }
+  &.public_summary{
+    text-align: center; 
+    margin-bottom: 10px;
+  }
 }
 
+.public_summary_container{
+  text-align: center; 
+  margin-bottom: 10px;
+  .yes_votes, .no_votes{
+    display: inline-block; 
+    width: 15%; 
+    text-align: right;
+    i{
+      padding-left: 3px;
+    }
+  }
+  .no_votes{
+    text-align: left;
+    i{
+      padding-right: 3px;
+    }
+  }
+  .progress{
+    width: 67%; 
+    display: inline-block; 
+    height: 10px; 
+    margin-bottom: 0;
+    margin-left: 1.5%; 
+    margin-right: 1.5%;
+    .bar-success{
+      background-color: #a8d2b8;
+      background-image: linear-gradient(to bottom, #a8d2b8, #a8d2b8);
+    }
+    .bar-danger{
+      background-color: #e1919f;
+      background-image: linear-gradient(to bottom, #e1919f, #e1919f);
+    }
+  }
+}
 
 .fileupload-buttonbar .btn, table.table tbody.files tr td .btn{
   padding: 6px 12px;

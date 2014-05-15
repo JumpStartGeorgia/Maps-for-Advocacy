@@ -5,19 +5,25 @@ class PlaceSummary < ActiveRecord::Base
   attr_accessible :place_id, :summary_type, :summary_type_identifier, 
                   :data_type, :data_type_identifier, :disability_id,
                   :score, :special_flag, :num_answers, :num_evaluations, 
-                  :is_certified
+                  :is_certified, :percentage, :num_yes, :num_no
   validates :place_id, :summary_type, :data_type, :presence => true
   
   SUMMARY_TYPES = {'overall' => 0, 'disability' => 1, 'instance' => 2}
-  DATA_TYPES = {'overall' => 0, 'category' => 1}
-  SAVE_TYPES = {'summary_overall' => 0, 'summary_category' => 1, 'disability_overall' => 2, 'disability_category' => 3, 'instance_overall' => 4, 'instance_category' => 5}
+  DATA_TYPES = {'overall' => 0, 'category' => 1, 'question' => 2}
+  SAVE_TYPES = {'summary_overall' => 0, 'summary_category' => 1, 
+                'disability_overall' => 2, 'disability_category' => 3, 
+                'instance_overall' => 4, 'instance_category' => 5,
+                'summary_question' => 6, 'disability_question' => 7, 'instance_question' => 8}
 
   def to_summary_hash
     {
       'score' => self.score,
+      'percentage' => self.percentage,
       'special_flag' => self.special_flag,
       'num_answers' => self.num_answers,
-      'num_evaluations' => self.num_evaluations    
+      'num_evaluations' => self.num_evaluations,
+      'num_yes' => self.num_yes,
+      'num_no' => self.num_no
     }
   end
   
@@ -124,6 +130,7 @@ class PlaceSummary < ActiveRecord::Base
           exists_question_ids = questions.select{|x| x.is_exists == true}.map{|x| x.id}
           req_accessibility_question_ids = questions.select{|x| x.required_for_accessibility == true}.map{|x| x.id}
           category_ids = questions.map{|x| x[:root_question_category_id]}.uniq
+          question_ids = questions.map{|x| x[:question_id]}.uniq
 
           # get all existing summaries on record
           existing_summaries = PlaceSummary.not_certified(place_id)
@@ -132,15 +139,25 @@ class PlaceSummary < ActiveRecord::Base
           # compute and save overall summary
           ##############################
           Rails.logger.debug "************* computing overall summary"
+          # - overall
           save_summary(place_id, 
                         existing_summaries, 
-                        summarize_answers(evaluations, exists_question_ids, req_accessibility_question_ids), 
+                        summarize_answers(evaluations, exists_question_ids, req_accessibility_question_ids, false), 
                         SAVE_TYPES['summary_overall'], SUMMARY_TYPES['overall'], DATA_TYPES['overall'])
+
+          # - category
           save_category_summary(place_id, 
                                 existing_summaries, 
-                                summarize_category_answers(evaluations, questions, category_ids, exists_question_ids, req_accessibility_question_ids), 
+                                summarize_category_answers(evaluations, questions, category_ids, exists_question_ids, req_accessibility_question_ids, false), 
                                 category_ids, 
                                 SAVE_TYPES['summary_category'], SUMMARY_TYPES['overall'], DATA_TYPES['category'])
+
+          # - question
+          save_question_summary(place_id, 
+                                existing_summaries, 
+                                summarize_question_answers(evaluations, questions, question_ids, exists_question_ids, req_accessibility_question_ids, false), 
+                                question_ids, 
+                                SAVE_TYPES['summary_question'], SUMMARY_TYPES['overall'], DATA_TYPES['question'])
 
           ##############################
           # if place_eval_id provided, get disability for that id
@@ -175,6 +192,7 @@ class PlaceSummary < ActiveRecord::Base
                 filtered_exists_question_ids = filtered_questions.select{|x| x.is_exists == true}.map{|x| x.id}
                 filtered_req_accessibility_question_ids = filtered_questions.select{|x| x.required_for_accessibility == true}.map{|x| x.id}
                 filtered_category_ids = filtered_questions.map{|x| x[:root_question_category_id]}.uniq
+                filtered_question_ids = filtered_questions.map{|x| x[:question_id]}.uniq
 
                 ##############################
                 # compute summary for disability 
@@ -183,16 +201,24 @@ class PlaceSummary < ActiveRecord::Base
                 # - overall
                 save_summary(place_id, 
                               existing_summaries, 
-                              summarize_answers(filtered_evaluations, filtered_exists_question_ids, filtered_req_accessibility_question_ids), 
+                              summarize_answers(filtered_evaluations, filtered_exists_question_ids, filtered_req_accessibility_question_ids, false), 
                               SAVE_TYPES['disability_overall'], SUMMARY_TYPES['disability'], DATA_TYPES['overall'], 
                               {'disability_id' => disability_id, 'summary_type_identifier' => disability_id})
 
                 # - category
                 save_category_summary(place_id, 
                                       existing_summaries, 
-                                      summarize_category_answers(filtered_evaluations, filtered_questions, filtered_category_ids, filtered_exists_question_ids, filtered_req_accessibility_question_ids), 
+                                      summarize_category_answers(filtered_evaluations, filtered_questions, filtered_category_ids, filtered_exists_question_ids, filtered_req_accessibility_question_ids, false), 
                                       category_ids, 
                                       SAVE_TYPES['disability_category'], SUMMARY_TYPES['disability'], DATA_TYPES['category'], 
+                                      {'disability_id' => disability_id, 'summary_type_identifier' => disability_id})
+
+                # - question
+                save_question_summary(place_id, 
+                                      existing_summaries, 
+                                      summarize_question_answers(filtered_evaluations, filtered_questions, filtered_question_ids, filtered_exists_question_ids, filtered_req_accessibility_question_ids, false), 
+                                      question_ids, 
+                                      SAVE_TYPES['disability_question'], SUMMARY_TYPES['disability'], DATA_TYPES['question'], 
                                       {'disability_id' => disability_id, 'summary_type_identifier' => disability_id})
 
 
@@ -215,15 +241,24 @@ class PlaceSummary < ActiveRecord::Base
                       # - overall
                       save_summary(place_id, 
                                     existing_summaries, 
-                                    summarize_answers(record_evaluations, filtered_exists_question_ids, filtered_req_accessibility_question_ids), 
+                                    summarize_answers(record_evaluations, filtered_exists_question_ids, filtered_req_accessibility_question_ids, false), 
                                     SAVE_TYPES['instance_overall'], SUMMARY_TYPES['instance'], DATA_TYPES['overall'], 
                                     {'disability_id' => disability_id, 'summary_type_identifier' => place_eval_id})
+
                       # - category
                       save_category_summary(place_id, 
                                             existing_summaries, 
-                                            summarize_category_answers(record_evaluations, filtered_questions, filtered_category_ids, filtered_exists_question_ids, filtered_req_accessibility_question_ids), 
+                                            summarize_category_answers(record_evaluations, filtered_questions, filtered_category_ids, filtered_exists_question_ids, filtered_req_accessibility_question_ids, false), 
                                             category_ids, 
                                             SAVE_TYPES['instance_category'], SUMMARY_TYPES['instance'], DATA_TYPES['category'], 
+                                            {'disability_id' => disability_id, 'summary_type_identifier' => place_eval_id})
+
+                      # - question
+                      save_question_summary(place_id, 
+                                            existing_summaries, 
+                                            summarize_question_answers(record_evaluations, filtered_questions, filtered_question_ids, filtered_exists_question_ids, filtered_req_accessibility_question_ids, false), 
+                                            question_ids, 
+                                            SAVE_TYPES['instance_question'], SUMMARY_TYPES['instance'], DATA_TYPES['question'], 
                                             {'disability_id' => disability_id, 'summary_type_identifier' => place_eval_id})
                     end
                   end
@@ -322,13 +357,13 @@ class PlaceSummary < ActiveRecord::Base
                       # - overall
                       save_summary(place_id, 
                                     existing_summaries, 
-                                    summarize_answers(record_evaluations, filtered_exists_question_ids, filtered_req_accessibility_question_ids), 
+                                    summarize_answers(record_evaluations, filtered_exists_question_ids, filtered_req_accessibility_question_ids, true), 
                                     SAVE_TYPES['instance_overall'], SUMMARY_TYPES['instance'], DATA_TYPES['overall'], 
                                     {'disability_id' => disability_id, 'summary_type_identifier' => place_eval_id, 'is_certified' => true})
                       # - category
                       save_category_summary(place_id, 
                                             existing_summaries, 
-                                            summarize_category_answers(record_evaluations, filtered_questions, filtered_category_ids, filtered_exists_question_ids, filtered_req_accessibility_question_ids), 
+                                            summarize_category_answers(record_evaluations, filtered_questions, filtered_category_ids, filtered_exists_question_ids, filtered_req_accessibility_question_ids, true), 
                                             category_ids, 
                                             SAVE_TYPES['instance_category'], SUMMARY_TYPES['instance'], DATA_TYPES['category'], 
                                             {'disability_id' => disability_id, 'summary_type_identifier' => place_eval_id, 'is_certified' => true})
@@ -348,14 +383,14 @@ class PlaceSummary < ActiveRecord::Base
                   # - overall
                   save_summary(place_id, 
                                 existing_summaries, 
-                                summarize_answers(record_evaluations, filtered_exists_question_ids, filtered_req_accessibility_question_ids), 
+                                summarize_answers(record_evaluations, filtered_exists_question_ids, filtered_req_accessibility_question_ids, true), 
                                 SAVE_TYPES['disability_overall'], SUMMARY_TYPES['disability'], DATA_TYPES['overall'], 
                                 {'disability_id' => disability_id, 'summary_type_identifier' => disability_id, 'is_certified' => true})
 
                   # - category
                   save_category_summary(place_id, 
                                         existing_summaries, 
-                                        summarize_category_answers(record_evaluations, filtered_questions, filtered_category_ids, filtered_exists_question_ids, filtered_req_accessibility_question_ids), 
+                                        summarize_category_answers(record_evaluations, filtered_questions, filtered_category_ids, filtered_exists_question_ids, filtered_req_accessibility_question_ids, true), 
                                         category_ids, 
                                         SAVE_TYPES['disability_category'], SUMMARY_TYPES['disability'], DATA_TYPES['category'], 
                                         {'disability_id' => disability_id, 'summary_type_identifier' => disability_id, 'is_certified' => true})
@@ -377,11 +412,11 @@ class PlaceSummary < ActiveRecord::Base
               Rails.logger.debug "************* computing overall summary using #{filtered_evaluations.map{|x| x.id}.uniq.length} evaluations"
               save_summary(place_id, 
                             existing_summaries, 
-                            summarize_answers(filtered_evaluations, exists_question_ids, req_accessibility_question_ids), 
+                            summarize_answers(filtered_evaluations, exists_question_ids, req_accessibility_question_ids, true), 
                             SAVE_TYPES['summary_overall'], SUMMARY_TYPES['overall'], DATA_TYPES['overall'], {'is_certified' => true})
               save_category_summary(place_id, 
                                     existing_summaries, 
-                                    summarize_category_answers(filtered_evaluations, questions, category_ids, exists_question_ids, req_accessibility_question_ids), 
+                                    summarize_category_answers(filtered_evaluations, questions, category_ids, exists_question_ids, req_accessibility_question_ids, true), 
                                     category_ids, 
                                     SAVE_TYPES['summary_category'], SUMMARY_TYPES['overall'], DATA_TYPES['category'], {'is_certified' => true})
               
@@ -415,8 +450,18 @@ private
       # get the category summaries
       categories = summaries.select{|x| x.data_type == DATA_TYPES['category']}
       if categories.present?
+        h['categories'] = {}
         categories.each do |category|
-          h[category.data_type_identifier.to_s] = category.to_summary_hash
+          h['categories'][category.data_type_identifier.to_s] = category.to_summary_hash
+        end
+      end
+
+      # get the question summaries
+      questions = summaries.select{|x| x.data_type == DATA_TYPES['question']}
+      if questions.present?
+        h['questions'] = {}
+        questions.each do |question|
+          h['questions'][question.data_type_identifier.to_s] = question.to_summary_hash
         end
       end
     end
@@ -430,17 +475,23 @@ private
   # records: array of place_evaluation_answers
   # exists_questions_ids: array of ids to questions that have exists flag
   # req_accessibility_question_ids: array of ids to questions that have required for accessibility flag
+  # is_certified: boolean that indicates if the evaluations are public or certified
   # returns: {score, special_flag, num_answers, num_evaluations}
   # - score = overall average of records passed in unless a special case was found
   # - special_flag = one of SUMMARY_ANSWERS values or nil; will be nil if score has value
   # - num_answers = number of answers that exist
   # - num_evaluations = number of evaluations that exist
-  def self.summarize_answers(records, exists_question_ids, req_accessibility_question_ids)
-    h = {'score' => nil, 'special_flag' => nil, 'num_answers' => nil, 'num_evaluations' => nil}
+  # - percentage = converts score into a percent
+  # - num_yes = number of answers that were 'yes', only populated for pulic evals
+  # - num_no = number of answers that were 'no', only populated for pulic evals
+  def self.summarize_answers(records, exists_question_ids, req_accessibility_question_ids, is_certified=true)
+    h = {'score' => nil, 'special_flag' => nil, 'num_answers' => nil, 'num_evaluations' => nil, 'percentage' => nil, 'num_yes' => nil, 'num_no' => nil}
     
     if records.present?
       h['num_evaluations'] = records.map{|x| x.id}.uniq.length
       h['num_answers'] = records.select{|x| x[:answer] > PlaceEvaluation::ANSWERS['no_answer']}.length
+      h['num_yes'] = records.select{|x| x[:answer] == PlaceEvaluation::ANSWERS['yes']}.length
+      h['num_no'] = records.select{|x| x[:answer] == PlaceEvaluation::ANSWERS['no']}.length
 
       # see if any required accessibility questions have 'needs' answer
       if req_accessibility_question_ids.present? && 
@@ -459,6 +510,11 @@ private
           answers = filtered_records.map{|x| x[:answer]}
           avg = answers.sum / answers.size.to_f
           h['score'] = avg
+          if is_certified
+            h['percentage'] = 100*((h['score'] - PlaceEvaluation::ANSWERS['needs'])/(PlaceEvaluation::ANSWERS['has_good'].to_f - PlaceEvaluation::ANSWERS['needs']))
+          else
+            h['percentage'] = 100*((h['score'] - PlaceEvaluation::ANSWERS['no']))
+          end
         else
           if records.select{|x| x[:answer] == PlaceEvaluation::ANSWERS['not_relevant']}.present?
 #            Rails.logger.debug "************ has not relevant only answers"
@@ -481,10 +537,11 @@ private
   # category_ids: array of unique question category ids
   # exists_questions_ids: array of ids to questions that have exists flag
   # req_accessibility_question_ids: array of ids to questions that have required for accessibility flag
+  # is_certified: boolean that indicates if the evaluations are public or certified
   # returns: {category_id => {summary answers}, category_id => {summary answers}}
   # - category_id = id of question category
   # - summary answers = hash of summary answers for the question category (see summarize_answers for hash that is returned)
-  def self.summarize_category_answers(records, questions, category_ids, exists_question_ids, req_accessibility_question_ids)
+  def self.summarize_category_answers(records, questions, category_ids, exists_question_ids, req_accessibility_question_ids, is_certified=true)
     answers = Hash.new
     
     if category_ids.present?
@@ -494,7 +551,35 @@ private
         if question_pairing_ids.present?
           category_records = records.select{|x| question_pairing_ids.index(x[:question_pairing_id]).present? }
           if category_records.present?
-              answers[category_id.to_s] = summarize_answers(category_records, exists_question_ids, req_accessibility_question_ids)
+              answers[category_id.to_s] = summarize_answers(category_records, exists_question_ids, req_accessibility_question_ids, is_certified)
+          end
+        end
+      end    
+    end
+    
+    return answers
+  end
+    
+
+  # records: array of place_evaluation_answers
+  # questions: array of questions
+  # question_ids: array of unique question ids
+  # exists_questions_ids: array of ids to questions that have exists flag
+  # req_accessibility_question_ids: array of ids to questions that have required for accessibility flag
+  # is_certified: boolean that indicates if the evaluations are public or certified
+  # returns: {question_id => {summary answers}, question_id => {summary answers}}
+  # - question_id = id of question category
+  # - summary answers = hash of summary answers for the question (see summarize_answers for hash that is returned)
+  def self.summarize_question_answers(records, questions, question_ids, exists_question_ids, req_accessibility_question_ids, is_certified=true)
+    answers = Hash.new
+    if question_ids.present?
+      question_ids.each do |question_id|
+        question_pairing_ids = questions.select{|x| x.question_id == question_id}.map{|x| x.id}
+ 
+        if question_pairing_ids.present?
+          question_records = records.select{|x| question_pairing_ids.index(x[:question_pairing_id]).present? }
+          if question_records.present?
+              answers[question_id.to_s] = summarize_answers(question_records, exists_question_ids, req_accessibility_question_ids, is_certified)
           end
         end
       end    
@@ -533,15 +618,16 @@ private
     
     if summaries.present?
       Rails.logger.debug "************* - summary answers exist"
-
+      
       answers = nil
       index = nil
       case type
-        when 0 # summary overall
+      
+        when SAVE_TYPES['summary_overall']
           index = existing_summaries.index{|x| x.summary_type == summary_type && x.data_type == data_type}
           answers = summaries
 
-        when 1 # summary category
+        when SAVE_TYPES['summary_category'], SAVE_TYPES['summary_question']
           if options['data_type_identifier'].present?
             index = existing_summaries.index{|x| x.summary_type == summary_type && 
                                                       x.data_type == data_type && 
@@ -549,35 +635,35 @@ private
             answers = summaries[options['data_type_identifier'].to_s] if summaries.has_key?(options['data_type_identifier'].to_s)
           end
 
-        when 2 # disability overall
+        when SAVE_TYPES['disability_overall']
           if options['disability_id'].present?
             index = existing_summaries.index{|x| x.summary_type == summary_type && 
-                                                      x.summary_type_identifier == options['disability_id'] && 
+                                                      x.summary_type_identifier == options['summary_type_identifier'] && 
                                                       x.data_type == data_type}
             answers = summaries
           end
 
-        when 3 # disability category
+        when SAVE_TYPES['disability_category'], SAVE_TYPES['disability_question']
           if options['disability_id'].present? && options['data_type_identifier'].present?
             index = existing_summaries.index{|x| x.summary_type == summary_type && 
-                                                      x.summary_type_identifier == options['disability_id'] && 
+                                                      x.summary_type_identifier == options['summary_type_identifier'] && 
                                                       x.data_type == data_type && 
                                                       x.data_type_identifier == options['data_type_identifier']}
             answers = summaries[options['data_type_identifier'].to_s] if summaries.has_key?(options['data_type_identifier'].to_s)
           end
 
-        when 4 # instance overall
+        when SAVE_TYPES['instance_overall']
           if options['disability_id'].present?
             index = existing_summaries.index{|x| x.summary_type == summary_type && 
-                                                      x.summary_type_identifier == options['disability_id'] && 
+                                                      x.summary_type_identifier == options['summary_type_identifier'] && 
                                                       x.data_type == data_type}
             answers = summaries
           end
 
-        when 5 # instance category
+        when SAVE_TYPES['instance_category'], SAVE_TYPES['instance_question']
           if options['disability_id'].present? && options['data_type_identifier'].present?
             index = existing_summaries.index{|x| x.summary_type == summary_type && 
-                                                      x.summary_type_identifier == options['disability_id'] && 
+                                                      x.summary_type_identifier == options['summary_type_identifier'] && 
                                                       x.data_type == data_type && 
                                                       x.data_type_identifier == options['data_type_identifier']}
             answers = summaries[options['data_type_identifier'].to_s] if summaries.has_key?(options['data_type_identifier'].to_s)
@@ -621,6 +707,19 @@ private
     if category_ids.present?
       category_ids.each do |category_id|
         options['data_type_identifier'] = category_id
+        summary << save_summary(place_id, existing_summaries, summaries, type, summary_type, data_type, options)      
+      end
+    end
+    return summary
+  end  
+
+  # save the summary data for each question
+  def self.save_question_summary(place_id, existing_summaries, summaries, question_ids, type, summary_type, data_type, options={})
+    summary = []
+Rails.logger.debug "************************ #{question_ids}"
+    if question_ids.present?
+      question_ids.each do |question_id|
+        options['data_type_identifier'] = question_id
         summary << save_summary(place_id, existing_summaries, summaries, type, summary_type, data_type, options)      
       end
     end

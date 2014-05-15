@@ -16,7 +16,7 @@ class QuestionPairing < ActiveRecord::Base
     types = [QuestionCategory::TYPES['common'], QuestionCategory::TYPES['custom']]
     types = [QuestionCategory::TYPES['public'], QuestionCategory::TYPES['public_custom']] if !is_certified
     
-    sql = "select qp.id, qp.question_category_id, qp.is_exists, qp.required_for_accessibility, if(qc.ancestry is null, qc.id, convert(qc.ancestry, unsigned)) as root_question_category_id, "
+    sql = "select qp.id, qp.question_category_id, qp.is_exists, qp.required_for_accessibility, qp.question_id, if(qc.ancestry is null, qc.id, convert(qc.ancestry, unsigned)) as root_question_category_id, "
     sql << "group_concat('"
     sql << DISABILITY_ID_SEPARATOR
     sql << "', dqp.disability_id, '"

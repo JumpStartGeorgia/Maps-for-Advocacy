@@ -118,6 +118,10 @@ en:
         no_answer: No answer
         'yes': 'Yes'
         'no': 'No'
+      yes_vote: "Yes Vote"
+      no_vote: "No Vote"
+      yes_votes: "%{votes} Yes Votes"
+      no_votes: "%{votes} No Votes"
       summary_answers:
         not_accessible: Not Accessible
         no_answer: No Answers

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140514071534) do
+ActiveRecord::Schema.define(:version => 20140515061331) do
 
   create_table "disabilities", :force => true do |t|
     t.string   "code"
@@ -123,6 +123,9 @@ ActiveRecord::Schema.define(:version => 20140514071534) do
     t.boolean  "is_certified",                                           :default => false
     t.integer  "venue_id"
     t.integer  "venue_category_id"
+    t.decimal  "percentage",              :precision => 5,  :scale => 2
+    t.integer  "num_yes"
+    t.integer  "num_no"
   end
 
   add_index "place_summaries", ["data_type", "data_type_identifier"], :name => "idx_place_summary_data_type"
