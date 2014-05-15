@@ -61,6 +61,10 @@
       <%= f.submit t('.submit') %>
     </div>
   <% end %>
-    
+
+  <div class="cancel_eval_container">
+    <%= link_to t('.cancel_eval'), place_path(@place), :class => 'cancel_eval' %>
+  </div>    
 <% end %>
+
 

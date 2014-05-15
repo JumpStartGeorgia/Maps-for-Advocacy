@@ -324,6 +324,7 @@ ka:
       certification_no_link_text: "საზოგადოებრივი შეფასება"
       certification_no_link_title: "საზოგადოებრივი შეფასების შვსება"
       submit: შეფასების შევსება
+      cancel_eval: Cancel the Evaluation
     upload_photos:
       title: "'%{name}'-ის სურათის დამატება"
       add_files: სურათის დამატება...

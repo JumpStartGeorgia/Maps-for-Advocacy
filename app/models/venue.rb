@@ -6,7 +6,7 @@ class Venue < ActiveRecord::Base
 	has_many :venue_translations, :dependent => :destroy
 	has_many :places
   accepts_nested_attributes_for :venue_translations
-  attr_accessible :id, :venue_category_id, :question_category_id, :venue_translations_attributes, :sort_order
+  attr_accessible :id, :venue_category_id, :custom_question_category_id, :custom_public_question_category_id, :venue_translations_attributes, :sort_order
 
   validates :venue_category_id, :presence => true
 

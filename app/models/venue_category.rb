@@ -40,12 +40,13 @@ class VenueCategory < ActiveRecord::Base
   def self.with_venues(options={})
     with_question_category_id = options[:with_question_category_id].present? && options[:with_question_category_id] == true ? true : false
     
-    sql = "select vc.id, vct.name as venue_category, vc.sort_order, v.id as venue_id, vt.name as venue, v.sort_order as venue_sort_order, v.question_category_id, qct.name as question_category "
+    sql = "select vc.id, vct.name as venue_category, vc.sort_order, v.id as venue_id, vt.name as venue, v.sort_order as venue_sort_order, v.custom_question_category_id, v.custom_public_question_category_id, qct1.name as custom_question_category, qct2.name as custom_public_question_category  "
     sql << "from venue_categories as vc "
     sql << "left join venue_category_translations as vct on vct.venue_category_id = vc.id and vct.locale = :locale "
     sql << "left join venues as v on v.venue_category_id = vc.id "
     sql << "left join venue_translations as vt on vt.venue_id = v.id and vt.locale = :locale "
-    sql << "left join question_category_translations as qct on qct.question_category_id = v.question_category_id and qct.locale = :locale "
+    sql << "left join question_category_translations as qct1 on qct1.question_category_id = v.custom_question_category_id and qct1.locale = :locale "
+    sql << "left join question_category_translations as qct2 on qct2.question_category_id = v.custom_public_question_category_id and qct2.locale = :locale "
     if options[:venue_category_id].present? || with_question_category_id
       sql << "where "
     end
@@ -53,7 +54,7 @@ class VenueCategory < ActiveRecord::Base
       sql << "vc.id = :venue_category_id "
     end
     if with_question_category_id
-      sql << "v.question_category_id is not null "
+      sql << "v.custom_question_category_id is not null or v.custom_public_question_category_id is not null "
     end
     
     sql << "order by vc.sort_order, vct.name, v.sort_order, vt.name "

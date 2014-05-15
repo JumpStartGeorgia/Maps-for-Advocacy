@@ -324,6 +324,7 @@ en:
       certification_no_link_text: "Public Evaluation"
       certification_no_link_title: "Fill out a Public Evaluation"
       submit: Submit the Evaluation
+      cancel_eval: Cancel the Evaluation
     upload_photos:
       title: Upload Photos for '%{name}'
       add_files: Add photos...
