@@ -123,14 +123,14 @@
                 if summary_index.present? %>
                   <div>
                     <%= "#{t('app.common.certified')}:" %>
-                    <%= format_summary_result(@place_summaries[summary_index].to_summary_hash, is_summary: true) %>
+                    <%= format_summary_result(@place_summaries[summary_index].to_summary_hash, is_summary: true, is_certified: true) %>
                   </div>
              <% end 
                 summary_index = @place_summaries.index{|x| x.place_id == place.id && x.is_certified == false}
                 if summary_index.present? %>
                   <div>
                     <%= "#{t('app.common.public')}:" %>
-                    <%= format_summary_result(@place_summaries[summary_index].to_summary_hash, is_summary: true) %>
+                    <%= format_summary_result(@place_summaries[summary_index].to_summary_hash, is_summary: true, is_certified: false) %>
                   </div>
                 <% end %>
              <% end %>
