@@ -118,7 +118,7 @@ $(document).ready(function(){
   if (gon.show_evaluation_form){
     /* show the evidence text fields as need */
     function show_question_evidence(ths){
-      if ($(ths).is(':checked') && ($(ths).val() == '4' || $(ths).val() == '3') ) {
+      if ($(ths).is(':checked') && ($(ths).val() == gon.answer_yes || $(ths).val() == gon.answer_no) ) {
         $(ths).closest('div.venue_evaluation_question').find('input[type="text"]').attr('aria-hidden', 'true');
         $(ths).closest('div').find('input[type="text"]').attr('aria-hidden', 'false');
       } else{
@@ -137,7 +137,7 @@ $(document).ready(function(){
     
     // if exists question is marked as has, show the rest of the questions
     $('form.place div.venue_evaluation div.exists-question input[type="radio"]').change(function(){
-      if (gon.questions_exists_has == $(this).val()){
+      if (gon.answer_yes == $(this).val()){
         // show the questions
         $(this).closest('.venue_evaluation').find('.non-exists-question').attr('aria-hidden', 'false');
       }else{

@@ -41,80 +41,42 @@
                       </div>
                       <div class="span8">
                         <div class="row-fluid">
-                          <% if question['is_exists'] == 1 %>
-                            <div class="span4">
-                              <input id="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['has']}" %>" 
-                                    name="<%= input_name %>" type="radio" value="<%= PlaceEvaluation::ANSWERS['has'] %>">
-                              <label class="has" for="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['has']}" %>">
-                                <i class="icon-white icon-thumbs-up"></i>
-                                <%= t('app.common.answers.has') %>
-                              </label>
+                          <div class="span2">
+                            <input id="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['yes']}" %>" 
+                                  name="<%= input_name %>" type="radio" value="<%= PlaceEvaluation::ANSWERS['yes'] %>">
+                            <label class="yes" for="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['yes']}" %>">
+                              <i class="icon-white icon-thumbs-up"></i>
+                              <%= t('app.common.answers.yes') %>
+                            </label>
+                            
+                            <% if evidence_class.present? %>
+                              <%= answer.input :evidence1, :label => false, :placeholder => question[:evidence], 
+                                :input_html => {:title => question[:evidence], :class => 'question-evidence', :size => 10, :'aria-hidden' => "true"} %>
+                            <% end %>
+                            
+                          </div>
+                          <div class="span2">
+                            <input id="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['no']}" %>" 
+                                  name="<%= input_name %>" type="radio" value="<%= PlaceEvaluation::ANSWERS['no'] %>">
+                            <label class="no" for="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['no']}" %>">
+                              <i class="icon-thumbs-down icon-white"></i>
+                              <%= t('app.common.answers.no') %>
+                            </label>
 
-                              <% if evidence_class.present? %>
-                                <%= answer.input :evidence1, :label => false, :placeholder => question[:evidence], 
-                                  :input_html => {:title => question[:evidence], :class => 'question-evidence', :size => 10, :'aria-hidden' => "true"} %>
-                              <% end %>
-                            </div>
-                            <div class="span4">
-                              <input id="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['needs']}" %>" 
-                                    name="<%= input_name %>" type="radio" value="<%= PlaceEvaluation::ANSWERS['needs'] %>">
-                              <label class="needs" for="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['needs']}" %>">
-                                <i class="icon-thumbs-down icon-white"></i>
-                                <%= t('app.common.answers.needs') %>
-                              </label>
-                            </div>
-                            <div class="span4">
-                              <input id="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['not_relevant']}" %>" 
-                                    name="<%= input_name %>" type="radio" value="<%= PlaceEvaluation::ANSWERS['not_relevant'] %>">
-                              <label class="not_relevant" for="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['not_relevant']}" %>">
-                                <i class="icon-remove icon-white"></i>
-                                <%= t('app.common.answers.not_relevant') %>
-                              </label>
-                            </div>
-                          <% else %>
-                            <div class="span3">
-                              <input id="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['has_good']}" %>" 
-                                    name="<%= input_name %>" type="radio" value="<%= PlaceEvaluation::ANSWERS['has_good'] %>">
-                              <label class="has_good" for="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['has_good']}" %>">
-                                <i class="icon-white icon-thumbs-up"></i>
-                                <%= t('app.common.answers.has_good') %>
-                              </label>
+                            <% if evidence_class.present? %>
+                              <%= answer.input :evidence2, :label => false, :placeholder => question[:evidence], 
+                                :input_html => {:title => question[:evidence], :class => 'question-evidence', :size => 10, :'aria-hidden' => "true"} %>
+                            <% end %>
 
-                              <% if evidence_class.present? %>
-                                <%= answer.input :evidence1, :label => false, :placeholder => question[:evidence], 
-                                  :input_html => {:title => question[:evidence], :class => 'question-evidence', :size => 10, :'aria-hidden' => "true"} %>
-                              <% end %>
-                            </div>
-                            <div class="span3">
-                              <input id="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['has_bad']}" %>" 
-                                    name="<%= input_name %>" type="radio" value="<%= PlaceEvaluation::ANSWERS['has_bad'] %>">
-                              <label class="has_bad" for="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['has_bad']}" %>">
-                                <i class="icon-white icon-warning-sign"></i>
-                                <%= t('app.common.answers.has_bad') %>
-                              </label>
-
-                              <% if evidence_class.present? %>
-                                <%= answer.input :evidence2, :label => false, :placeholder => question[:evidence], 
-                                  :input_html => {:title => question[:evidence], :class => 'question-evidence', :size => 10, :'aria-hidden' => "true"} %>
-                              <% end %>
-                            </div>
-                            <div class="span3">
-                              <input id="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['needs']}" %>" 
-                                    name="<%= input_name %>" type="radio" value="<%= PlaceEvaluation::ANSWERS['needs'] %>">
-                              <label class="needs" for="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['needs']}" %>">
-                                <i class="icon-thumbs-down icon-white"></i>
-                                <%= t('app.common.answers.needs') %>
-                              </label>
-                            </div>
-                            <div class="span3">
-                              <input id="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['not_relevant']}" %>" 
-                                    name="<%= input_name %>" type="radio" value="<%= PlaceEvaluation::ANSWERS['not_relevant'] %>">
-                              <label class="not_relevant" for="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['not_relevant']}" %>">
-                                <i class="icon-remove icon-white"></i>
-                                <%= t('app.common.answers.not_relevant') %>
-                              </label>
-                            </div>
-                          <% end %>
+                          </div>
+                          <div class="span3">
+                            <input id="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['not_relevant']}" %>" 
+                                  name="<%= input_name %>" type="radio" value="<%= PlaceEvaluation::ANSWERS['not_relevant'] %>">
+                            <label class="not_relevant" for="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['not_relevant']}" %>">
+                              <i class="icon-remove icon-white"></i>
+                              <%= t('app.common.answers.not_relevant') %>
+                            </label>
+                          </div>
                         </div>                  
                       </div>
                     </fieldset>

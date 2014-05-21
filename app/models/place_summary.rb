@@ -510,11 +510,14 @@ private
           answers = filtered_records.map{|x| x[:answer]}
           avg = answers.sum / answers.size.to_f
           h['score'] = avg
+=begin
           if is_certified
             h['percentage'] = 100*((h['score'] - PlaceEvaluation::ANSWERS['needs'])/(PlaceEvaluation::ANSWERS['has_good'].to_f - PlaceEvaluation::ANSWERS['needs']))
           else
             h['percentage'] = 100*((h['score'] - PlaceEvaluation::ANSWERS['no']))
           end
+=end        
+          h['percentage'] = 100*((h['score'] - PlaceEvaluation::ANSWERS['no']))
         else
           if records.select{|x| x[:answer] == PlaceEvaluation::ANSWERS['not_relevant']}.present?
 #            Rails.logger.debug "************ has not relevant only answers"

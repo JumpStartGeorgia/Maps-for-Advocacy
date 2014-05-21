@@ -80,7 +80,11 @@ logger.debug "////////////////////////// BROWSER = #{user_agent}"
     gon.lat = @lat
     gon.lon = @lon
     
-    gon.questions_exists_has = PlaceEvaluation::ANSWERS['has'].to_s
+    gon.answer_has = PlaceEvaluation::ANSWERS['has'].to_s
+    gon.answer_has_good = PlaceEvaluation::ANSWERS['has_good'].to_s
+    gon.answer_has_bad = PlaceEvaluation::ANSWERS['has_bad'].to_s
+    gon.answer_yes = PlaceEvaluation::ANSWERS['yes'].to_s
+    gon.answer_no = PlaceEvaluation::ANSWERS['no'].to_s
 
     gon.zoom_front_page = 7
     gon.lat_front_page = @lat

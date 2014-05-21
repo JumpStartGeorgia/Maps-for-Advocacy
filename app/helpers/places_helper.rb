@@ -5,11 +5,14 @@ module PlacesHelper
     options[:is_summary] = false if options[:is_summary].nil?
     options[:is_certified] = true if options[:is_certified].nil?
     
+=begin
     if options[:is_certified]
       return format_certified_summary_result(hash, options)
     else
       return format_public_summary_result(hash, options)
     end
+=end    
+    return format_public_summary_result(hash, options)
   end
 
 private  
@@ -25,7 +28,7 @@ private
           x << I18n.t('app.common.yes_vote')
         end
         x << "'>"
-        if options[:is_summary] == true
+        if options[:is_summary] == true || options[:is_certified] == true
           x << hash['num_yes'].to_s
           x << "<i class='icon-white icon-thumbs-up'></i>"
         elsif hash['num_yes'] != 0
@@ -57,7 +60,7 @@ private
           x << I18n.t('app.common.no_vote')
         end
         x << "'>"
-        if options[:is_summary] == true
+        if options[:is_summary] == true || options[:is_certified] == true
           x << "<i class='icon-white icon-thumbs-down'></i>"
           x << hash['num_no'].to_s
         elsif hash['num_no'] != 0
@@ -70,17 +73,6 @@ private
         key = PlaceEvaluation.summary_answer_key_name(hash['special_flag'])
         x << "<div class='summary_result_text #{key} public_summary'>"
         x << I18n.t("app.common.summary_answers.#{key}")
-        if hash['special_flag'] != PlaceEvaluation::SUMMARY_ANSWERS['no_answer']
-          if options[:is_summary] == true
-            x << " ("
-            x << "<abbr title='Number of Evlauations'>E</abbr>="
-            x << number_with_delimiter(hash['num_evaluations'])
-            x << ", "
-            x << "<abbr title='Number of Answers'>A</abbr>="
-            x << number_with_delimiter(hash['num_answers'])
-            x << ")"
-          end
-        end
         x << "</div>"
       end
     end
