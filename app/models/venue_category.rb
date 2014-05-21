@@ -38,7 +38,8 @@ class VenueCategory < ActiveRecord::Base
   # - venue_category_id: id of venue category to get info for; if not provided then get all venue categories
   # - with_question_category_id: true if want to only get venues that have custom questions
   def self.with_venues(options={})
-    with_question_category_id = options[:with_question_category_id].present? && options[:with_question_category_id] == true ? true : false
+    with_custom_question_category_id = options[:with_custom_question_category_id] == true ? true : false
+    with_custom_public_question_category_id = options[:with_custom_public_question_category_id] == true ? true : false
     
     sql = "select vc.id, vct.name as venue_category, vc.sort_order, v.id as venue_id, vt.name as venue, v.sort_order as venue_sort_order, v.custom_question_category_id, v.custom_public_question_category_id, qct1.name as custom_question_category, qct2.name as custom_public_question_category  "
     sql << "from venue_categories as vc "
@@ -47,14 +48,17 @@ class VenueCategory < ActiveRecord::Base
     sql << "left join venue_translations as vt on vt.venue_id = v.id and vt.locale = :locale "
     sql << "left join question_category_translations as qct1 on qct1.question_category_id = v.custom_question_category_id and qct1.locale = :locale "
     sql << "left join question_category_translations as qct2 on qct2.question_category_id = v.custom_public_question_category_id and qct2.locale = :locale "
-    if options[:venue_category_id].present? || with_question_category_id
+    if options[:venue_category_id].present? || with_custom_question_category_id || with_custom_public_question_category_id
       sql << "where "
     end
     if options[:venue_category_id].present?
       sql << "vc.id = :venue_category_id "
     end
-    if with_question_category_id
-      sql << "v.custom_question_category_id is not null or v.custom_public_question_category_id is not null "
+    if with_custom_question_category_id
+      sql << "v.custom_question_category_id is not null "
+    end
+    if with_custom_public_question_category_id
+      sql << "v.custom_public_question_category_id is not null "
     end
     
     sql << "order by vc.sort_order, vct.name, v.sort_order, vt.name "
@@ -65,11 +69,18 @@ class VenueCategory < ActiveRecord::Base
   def self.with_venue_custom_questions(options={})
     venues = []
 
-    ops = {:with_question_category_id => true}
+    ops = {}
+    key = :custom_question_category_id
+    if options[:is_certified] == true
+      ops[:with_custom_question_category_id] = true
+    elsif options[:is_certified] == false
+      ops[:with_custom_public_question_category_id] = true
+      key = :custom_public_question_category_id
+    end
     venue_categories = with_venues(ops)
     venue_categories.each do |vc|
       questions = []
-      questions = QuestionCategory.custom_questions_for_venue(vc[:question_category_id], options)      
+      questions = QuestionCategory.custom_questions_for_venue(vc[key], options)      
       venue = {:venue_category => vc[:venue_category], :venue => vc[:venue], :questions => questions}
       venues << venue
     end

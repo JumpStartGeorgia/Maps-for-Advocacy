@@ -8,8 +8,15 @@ class MethodologyController < ApplicationController
 
   def questions
     @disabilities = Disability.sorted.is_active
-    @common_questions = QuestionCategory.questions_for_venue(disability_ids: @disabilities.map{|x| x.id})
-    @venue_questions = VenueCategory.with_venue_custom_questions(disability_ids: @disabilities.map{|x| x.id})
+
+    @questions = {:certified => {:common => [], :venue => []}, :public => {:common => [], :venue => []}}
+
+    @questions[:certified][:common] = QuestionCategory.questions_for_venue(disability_ids: @disabilities.map{|x| x.id}, is_certified: true)
+    @questions[:certified][:venue] = VenueCategory.with_venue_custom_questions(disability_ids: @disabilities.map{|x| x.id}, is_certified: true)
+
+
+    @questions[:public][:common] = QuestionCategory.questions_for_venue(disability_ids: @disabilities.map{|x| x.id}, is_certified: false)
+    @questions[:public][:venue] = VenueCategory.with_venue_custom_questions(disability_ids: @disabilities.map{|x| x.id}, is_certified: false)
 
     respond_to do |format|
       format.html # index.html.erb

@@ -6,47 +6,28 @@
     <% end %>
 
     <ul class="questions">
-      <% Rails.logger.debug "++++ total = #{cat[:questions].length-1}" %>
-      <% qidx = 0 %>
-      <% while qidx <= cat[:questions].length-1 %>
-      <% Rails.logger.debug "++++ qidx = #{qidx}, question = #{cat[:questions][qidx][:question]}" %>
-          <li>
-            <div class="row-fluid">
-              <div class="span4">
-                <%= cat[:questions][qidx][:question] %>
-              </div>
-              <div class="span5">
-                <%= t('.assigned_to') %>
-                <% 
-                  disability_ids = []
-                  idx_increment = 0
-                %>
-                <% 
-                  (0..@disabilities.length-1).each do |didx| 
-                    new_index = qidx + didx
- Rails.logger.debug "++++ new idx = #{new_index}" 
-                    if cat[:questions].length-1 >= new_index && cat[:questions][qidx][:question] == cat[:questions][new_index][:question]
-                      disability_ids << cat[:questions][(qidx+didx)][:disability_id]
-                      idx_increment += 1
- Rails.logger.debug "++++ idx incr = #{idx_increment}" 
-                    end
-                  end 
-                %>
-                <ul class="assigned_to">
-                <% @disabilities.select{|x| disability_ids.index(x.id).present?}.map{|x| x.name}.each do |name| %>
+      <% cat[:questions].each do |question| %>
+        <li>
+          <div class="row-fluid">
+            <div class="span4">
+              <%= question[:question] %>
+            </div>
+            <div class="span5">
+              <%= t('.assigned_to') %>
+
+              <ul class="assigned_to">
+                <% @disabilities.select{|x| question[:disability_ids].split(',').index(x.id.to_s).present?}.map{|x| x.name}.each do |name| %>
                   <li><%= name %></li>
                 <% end %>
-                </ul>
-              </div>
-              <div class="span3">
-                <% if cat[:questions][qidx][:required_for_accessibility] == 1 %>
-                  <%= t('.required_for_accessiblity') %>
-                <% end %>
-              </div>
-              <% qidx += idx_increment %>
+              </ul>
             </div>
-          </li>
-      <% Rails.logger.debug "++++ qidx now = #{qidx}" %>
+            <!--div class="span3">
+              <% if question[:required_for_accessibility] == 1 %>
+                <%= t('.required_for_accessiblity') %>
+              <% end %>
+            </div-->
+          </div>
+        </li>
       <% end %>
     </ul>
 

@@ -25,8 +25,10 @@ class Question < ActiveRecord::Base
     if question_category_id.present?
 
       sql = "SELECT qp.sort_order as question_sort_order, qp.is_exists, qp.required_for_accessibility, q.id as question_id, qt.name as question, qpt.evidence, qp.id as question_pairing_id "
-      if options[:disability_ids].present? || options[:disability_id].present?
+      if options[:disability_id].present?
         sql << ", dqp.disability_id "
+      elsif options[:disability_ids].present?
+        sql << ", group_concat(dqp.disability_id) as disability_ids "
       end
       sql << "FROM question_pairings as qp "
       if options[:disability_ids].present?
@@ -38,6 +40,9 @@ class Question < ActiveRecord::Base
       sql << "inner JOIN questions as q ON q.id = qp.question_id " 
       sql << "inner JOIN question_translations as qt ON qt.question_id = q.id and qt.locale = :locale "
       sql << "where qp.question_category_id = :question_category_id "
+      if options[:disability_ids].present?
+        sql << "group by qp.sort_order, qp.is_exists, qp.required_for_accessibility, q.id, qt.name, qpt.evidence, qp.id "
+      end
       sql << "order by qp.sort_order asc, qt.name asc "
       find_by_sql([sql, :locale => I18n.locale, :question_category_id => question_category_id, 
           :disability_id => options[:disability_id], :disability_ids => options[:disability_ids]])
