@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 
-gem 'bundler', '~> 1.3.0'
+gem 'bundler', '~> 1.6.0'
 gem "rails", "3.1.10"
 gem "mysql2", "~> 0.3.11" # this gem works better with utf-8
 
@@ -34,6 +34,7 @@ gem "geocoder", "~> 1.1.8" # look up lat/lon by address
 gem "ancestry", "~> 2.0.0" # create parent child relationship
 gem "georuby" # manage geo spatial data with ruby
 gem "exifr" # get image meta data
+gem "unidecoder", "~> 1.1.2" #convert utf8 to ascii for permalinks
 
 # Gems used only for assets and not required
 # in production environments by default.

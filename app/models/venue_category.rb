@@ -8,22 +8,60 @@ class VenueCategory < ActiveRecord::Base
   
   
   def self.names_with_count(options={})
+    need_and = false
     sql = "select vc.id, vct.name as venue_category, count(x.venue_category_id) as `count` "
     sql << "from venue_categories as vc "
     sql << "inner join venue_category_translations as vct on vct.venue_category_id = vc.id "
-    sql << "left join ( "
+    sql << "inner join ( "
     sql << " select v.venue_category_id, p.id as place_id "
     sql << " from venues as v inner join places as p on p.venue_id = v.id "
-    if options[:disability_id].present?
-      sql << " inner join place_evaluations as pe on pe.place_id = p.id and pe.disability_id = :disability_id "
+    if options[:disability_id].present? || options[:places_with_evaluation] == true
+      sql << " inner join place_evaluations as pe on pe.place_id = p.id "
+      if options[:disability_id].present?
+        sql << " and pe.disability_id = :disability_id "
+      end
     end
-    if options[:district_id].present?
-      # if this is tbilisi, use all districts in tbilisi
-      if options[:district_id].to_s == District::TBILISI_ID.to_s
+    if options[:place_search].present? || options[:address_search].present?
+      sql << " inner join place_translations as pt on pt.place_id = p.id "
+    end
+
+    if options[:district_id].present? && options[:district_id].to_s == District::TBILISI_ID.to_s
         sql << " inner join districts as d on d.id = p.district_id "
-        sql << " where d.in_tbilisi = 1 "
+    end
+
+    if options[:district_id].present? || options[:place_search].present? || options[:address_search].present?
+      sql << "where "
+      if options[:place_search].present? || options[:address_search].present?
+        sql << "pt.locale = :locale "
+        need_and = true
+      end
+    end
+
+    if options[:place_search].present?
+      if need_and
+        sql << " and "
+      end
+      sql << " pt.search_name like :place_search "
+      need_and = true
+    end
+
+    if options[:address_search].present?
+      if need_and
+        sql << " and "
+      end
+      sql << " pt.search_address like :address_search "
+      need_and = true
+    end
+
+    if options[:district_id].present? 
+      # if this is tbilisi, use all districts in tbilisi
+      if need_and
+        sql << "and "
+      end
+      if options[:district_id].to_s == District::TBILISI_ID.to_s
+        sql << " d.in_tbilisi = 1 "
       else
-        sql << " where p.district_id = :district_id "
+        sql << " p.district_id = :district_id "
       end
     end
     sql << " group by v.venue_category_id, p.id "
@@ -31,7 +69,8 @@ class VenueCategory < ActiveRecord::Base
     sql << "where vct.locale = :locale "
     sql << "group by vc.id, vct.name "
     sql << "order by vc.sort_order, vct.name "
-    find_by_sql([sql, :locale => I18n.locale, :disability_id => options[:disability_id], :district_id => options[:district_id]])
+    find_by_sql([sql, :locale => I18n.locale, :disability_id => options[:disability_id], :district_id => options[:district_id], 
+      :place_search => "%#{options[:place_search]}%", :address_search => "%#{options[:address_search]}%"])
   end
   
   # possible options:

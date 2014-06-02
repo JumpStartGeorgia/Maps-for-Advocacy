@@ -1,5 +1,5 @@
 class Place < ActiveRecord::Base
-	translates :name, :address
+	translates :name, :address, :search_name, :search_address
 
   belongs_to :venue
 	has_many :place_translations, :dependent => :destroy
@@ -35,14 +35,23 @@ class Place < ActiveRecord::Base
     sql << "from places as p inner join place_translations as pt on pt.place_id = p.id "
     sql << "inner join venues as v on v.id = p.venue_id "
     sql << "inner join venue_translations as vt on vt.venue_id = v.id "
-    if options[:disability_id].present?
-      sql << "inner join place_evaluations as pe on pe.place_id = p.id and pe.disability_id = :disability_id "
+    if options[:disability_id].present? || options[:places_with_evaluation] == true
+      sql << " inner join place_evaluations as pe on pe.place_id = p.id "
+      if options[:disability_id].present?
+        sql << " and pe.disability_id = :disability_id "
+      end
     end
     # if this is tbilisi, use all districts in tbilisi
     if options[:district_id].present? && options[:district_id].to_s == District::TBILISI_ID.to_s
       sql << " inner join districts as d on d.id = p.district_id "
     end
     sql << "where pt.locale = :locale and vt.locale = :locale "
+    if options[:place_search].present?
+      sql << "and pt.search_name like :place_search "
+    end
+    if options[:address_search].present?
+      sql << "and pt.search_address like :address_search "
+    end
     if options[:venue_category_id].present?
       sql << "and v.venue_category_id = :venue_category_id "
     end
@@ -57,7 +66,8 @@ class Place < ActiveRecord::Base
     sql << "order by pt.name  "
     
     find_by_sql([sql, :locale => I18n.locale, :venue_category_id => options[:venue_category_id], 
-      :disability_id => options[:disability_id], :district_id => options[:district_id]])
+      :disability_id => options[:disability_id], :district_id => options[:district_id], 
+      :place_search => "%#{options[:place_search]}%", :address_search => "%#{options[:address_search]}%"])
     
   end
 

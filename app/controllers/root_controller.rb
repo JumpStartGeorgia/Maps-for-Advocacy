@@ -2,11 +2,15 @@ class RootController < ApplicationController
 
   def index
     options = {}
+    options[:place_search] = params[:place_search].present? && params[:place_search].strip.present? ? prepare_search_text(params[:place_search]) : nil
+    options[:address_search] = params[:address_search].present? && params[:address_search].strip.present? ? prepare_search_text(params[:address_search]) : nil
     options[:venue_category_id] = params[:venue_category_id] if params[:venue_category_id].present?
     options[:disability_id] = params[:eval_type_id] if params[:eval_type_id].present?
     params[:district_id] = @district_id if params[:district_id].blank?
     options[:district_id] = params[:district_id].present? && params[:district_id] != '0' ? params[:district_id] : nil
     options[:with_numbers_only] = true
+    params[:places_with_evaluation] = params[:places_with_evaluation].present? ? params[:places_with_evaluation].to_bool : true
+    options[:places_with_evaluation] = params[:places_with_evaluation]
     
     @venue_categories = VenueCategory.names_with_count(options)
     @disabilities = Disability.names_with_count(options)
@@ -96,5 +100,12 @@ class RootController < ApplicationController
     
     
     return popup
+  end
+  
+  
+  private
+  
+  def prepare_search_text(text)
+    text.strip.latinize.to_ascii.downcase
   end
 end

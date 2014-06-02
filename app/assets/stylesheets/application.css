@@ -247,7 +247,9 @@ footer, footer ul li, footer div#right ul li {
 
 
 /* add place/evaluation button */
-.navbar .nav > li > a.add_evaluation, a.add_evaluation, a.view_more, #submit-button input, a#place_name_next, a#place_map_next, a.add_photos, a.return_place, a.cancel_eval{
+.navbar .nav > li > a.add_evaluation, a.add_evaluation, a.view_more, a.search, a.reset_filters,
+#submit-button input, a#place_name_next, a#place_map_next, 
+a.add_photos, a.return_place, a.cancel_eval{
   background-color: #3287CC;
   color: #fff !important;
   text-shadow: 0 1px 0 #555;
@@ -260,15 +262,16 @@ footer, footer ul li, footer div#right ul li {
   margin-left: 40px;
   margin-top: 5px;
 }
-a.cancel_eval{
+a.cancel_eval, a.reset_filters{
   background-color: #eedea0;
   color: #333 !important;
   text-shadow: 0 1px 0 #fff;
 }
-a.cancel_eval:hover{
+a.cancel_eval:hover, a.reset_filters:hover{
   background-color: #cebe80;
 }
-.navbar .nav > li > a.add_evaluation:hover, a.add_evaluation:hover, #submit-button input:hover, a#place_name_next:hover, a#place_map_next:hover{
+.navbar .nav > li > a.add_evaluation:hover, a.add_evaluation:hover, 
+#submit-button input:hover, a#place_name_next:hover, a#place_map_next:hover{
   background-color: #1267ac;
 }
 a.view_more, a.return_place{
@@ -278,11 +281,11 @@ a.view_more, a.return_place{
 a.view_more:hover, a.return_place:hover{
   background-color: #444;
 }
-a.add_photos{
+a.add_photos, a.search{
   background-color: #5bb75b;
   color: #fff !important;
 }
-a.add_photos:hover{
+a.add_photos:hover, a.search:hover{
   background-color: #3b973b;
 }
 

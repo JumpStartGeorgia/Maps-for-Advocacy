@@ -250,14 +250,24 @@ en:
   root:
     index:
       header_filter: Filter
-      header_filter_venue: By Venue
-      header_filter_disability: By Evaluation Type
-      header_filter_district: By District
+      header_filter_place_search: Place
+      placeholder_place_search: All Places
+      header_filter_address_search: Address
+      placeholder_address_search: All Addresses
+      header_filter_venue: Venue
+      placeholder_venue: All Venues
+      header_filter_district: District
+      placeholder_district: All Districts
+      header_filter_evaluations: With Evaluations
+      placeholder_evaluations: Places With Evaluations Only?
+      header_filter_disability: Evaluation Type
+      placeholder_disability: All Evalution Types
       clear_filter: Remove Filter
       clear_filters: Remove All Filters
       header_selections: Current Filters
       select_all: All places selected
-      header_table: Filter Results
+      search: Search
+      header_results: Search Results
       no_places: There are no Places on record that matches your search request.
   places:
     show:

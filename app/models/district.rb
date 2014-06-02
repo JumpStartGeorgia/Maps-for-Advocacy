@@ -19,24 +19,43 @@ class District < ActiveRecord::Base
 
   # get number of places with evaluations for each district
   def self.names_with_count(options={})
+    need_and = false
     sql = "select d.id, dt.name as district, d.in_tbilisi, count(x.id) as `count`  "
     sql << "from districts as d  "
     sql << "inner join district_translations as dt on dt.district_id = d.id " 
-    sql << "left join (  "
+    sql << "inner join ( "
     sql << " select d.id, p.id as place_id "
     sql << " from districts as d inner join places as p on p.district_id = d.id  "
-    if options[:disability_id].present?
-      sql << " inner join place_evaluations as pe on pe.place_id = p.id and pe.disability_id = :disability_id "
+    if options[:disability_id].present? || options[:places_with_evaluation] == true
+      sql << " inner join place_evaluations as pe on pe.place_id = p.id "
+      if options[:disability_id].present?
+        sql << " and pe.disability_id = :disability_id "
+      end
     end
     if options[:venue_category_id].present?
       sql << " inner join venues as v on v.id = p.venue_id and v.venue_category_id = :venue_category_id "
+    end
+    if options[:place_search].present? || options[:address_search].present?
+      sql << " inner join place_translations as pt on pt.place_id = p.id "
+      sql << " where "
+    end
+    if options[:place_search].present?
+      sql << " pt.locale = :locale and pt.search_name like :place_search "
+      need_and = true
+    end
+    if options[:address_search].present?
+      if need_and
+        sql << " and "
+      end
+      sql << " pt.search_address like :address_search "
     end
     sql << " group by d.id, p.id  "
     sql << ") as x on x.id = d.id " 
     sql << "where dt.locale = :locale "
     sql << "group by d.id, dt.name "
     sql << "order by dt.name "
-    x = find_by_sql([sql, :locale => I18n.locale, :venue_category_id => options[:venue_category_id], :disability_id => options[:disability_id]])
+    x = find_by_sql([sql, :locale => I18n.locale, :venue_category_id => options[:venue_category_id], :disability_id => options[:disability_id], 
+      :place_search => "%#{options[:place_search]}%", :address_search => "%#{options[:address_search]}%"])
     
     # update the custom tbilisi district to include the counts from all districts in tbilisi 
     tbilisi = x.select{|x| x.id == TBILISI_ID}
@@ -45,7 +64,7 @@ class District < ActiveRecord::Base
     end
     
     # return only records with counts > 0
-    if options[:with_numbers_only].present?
+    if options[:places_with_evaluation] == true
       return x.select{|x| x['count'] > 0}
     else
       return x

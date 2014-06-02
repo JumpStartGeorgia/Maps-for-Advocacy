@@ -118,10 +118,10 @@ ka:
         no_answer: არ არის პასუხი
         'yes': 'დიახ'
         'no': 'არა'
-      yes_vote: "Yes Vote"
-      no_vote: "No Vote"
-      yes_votes: "%{votes} Yes Votes"
-      no_votes: "%{votes} No Votes"
+      yes_vote: "დადებითი ხმა"
+      no_vote: "უარყოფითი ხმა"
+      yes_votes: "%{votes} დადებითი ხმა"
+      no_votes: "%{votes} უარყოფითი ხმა"
       summary_answers:
         not_accessible: არ არის ხელმისაწვდომი
         no_answer: არ არის პასუხი
@@ -251,13 +251,24 @@ ka:
     index:
       header_filter: ფილტრი
       header_filter_venue: ობიექტის მიხედვით
-      header_filter_disability: შეფასების ტიპის მიხედვით
-      header_filter_district: რაიონის მიხედვით
+      header_filter_place_search: მდებარეობა
+      placeholder_place_search: ყველა მდებარეობა
+      header_filter_address_search: Address
+      placeholder_address_search: All Addresses
+      header_filter_venue: ადგილი
+      placeholder_venue: ყველა ადგილი
+      header_filter_district: რაიონი
+      placeholder_district: ყველა რაიონი
+      header_filter_evaluations: შეფასებით
+      placeholder_evaluations: გსურთ აირჩიოთ მხოლოდ შეფასებული ადგილები?
+      header_filter_disability: შეფასების ტიპი
+      placeholder_disability: ყველა შეფასების ტიპი
       clear_filter: ფილტრის მოშორება
       clear_filters: ყველა ფილტრის მოშორება
       header_selections: მიმდინარე ფილტრები
       select_all: ყველა არჩეული ადგილი
-      header_table: ფილტრის შედეგი
+      search: ძებნა
+      header_results: ძიების შედეგი
       no_places: არ მოიძებნა თქვენი ძიების შესაბამისი ადგილი.
   places:
     show:
@@ -324,7 +335,7 @@ ka:
       certification_no_link_text: "საზოგადოებრივი შეფასება"
       certification_no_link_title: "საზოგადოებრივი შეფასების შვსება"
       submit: შეფასების შევსება
-      cancel_eval: Cancel the Evaluation
+      cancel_eval: შეფასების გაუქმება
     upload_photos:
       title: "'%{name}'-ის სურათის დამატება"
       add_files: სურათის დამატება...
