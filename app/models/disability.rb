@@ -33,7 +33,8 @@ class Disability < ActiveRecord::Base
     sql << "inner join ( "
     sql << " select d.id, pe.place_id "
     sql << " from disabilities as d inner join place_evaluations as pe on pe.disability_id = d.id  "
-    if options[:venue_category_id].present? || options[:district_id].present? || options[:place_search].present?
+    if options[:venue_category_id].present? || options[:district_id].present? || 
+        options[:place_search].present?  || options[:address_search].present?
       sql << " inner join places as p on p.id = pe.place_id "
     end
     if options[:venue_category_id].present?
