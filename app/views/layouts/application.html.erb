@@ -72,7 +72,7 @@
 		                <b class="caret"></b>
 				          </a>
 				          <ul class="dropdown-menu" role="menu">
-                    <% if current_user.role?(User::ROLES[:admin]) %>
+                    <% if current_user.role?(User::ROLES[:site_admin]) %>
 						          <li role="menuitem">
 				   		         <%= link_to t('.admin'), admin_path %>
 										  </li>

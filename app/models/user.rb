@@ -19,6 +19,8 @@ class User < ActiveRecord::Base
 	after_find :populate_orig_coordinates
   before_save :assign_district
 
+  ROLES = {:user => 0, :certification => 50, :site_admin => 75, :admin => 99}
+
 	# have to check if lat/lon coordinates change on save and if so, update the district id
 	def populate_orig_coordinates
 		self.lat_orig = read_attribute(:lat)
@@ -61,7 +63,6 @@ class User < ActiveRecord::Base
 
   # use role inheritence
   # - a role with a larger number can do everything that smaller numbers can do
-  ROLES = {:user => 0, :certification => 50, :admin => 99}
   def role?(base_role)
     if base_role && ROLES.values.index(base_role)
       return base_role <= self.role
