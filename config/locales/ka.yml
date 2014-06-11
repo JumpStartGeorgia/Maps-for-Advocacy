@@ -197,7 +197,7 @@ ka:
       districts: რაიონი
       why_monitor: "Edit 'Why Monitor' Text"
     why_monitor:
-      title: "'Why Monitor' Text"
+      title: "Edit 'Why Monitor' Text"
       submit: Save the Text
     users:
       edit:
