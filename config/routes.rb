@@ -12,6 +12,8 @@ BootstrapStarter::Application.routes.draw do
 		devise_for :users, :path_names => {:sign_in => 'login', :sign_out => 'logout'},
 											 :controllers => {:omniauth_callbacks => "omniauth_callbacks"}
 
+		match '/admin/why_monitor', :to => 'admin#why_monitor', :as => :admin_why_monitor, :via => [:get, :post]
+
 		namespace :admin do
 			resources :users
       resources :disabilities
@@ -60,6 +62,8 @@ BootstrapStarter::Application.routes.draw do
 		match '/methodology/venues', :to => 'methodology#venues', :as => :methodology_venues, :via => :get
 		match '/methodology/calculations', :to => 'methodology#calculations', :as => :methodology_calculations, :via => :get
     
+    # why monitor
+		match '/why_monitor', :to => 'root#why_monitor', :as => :why_monitor, :via => :get
 
 		root :to => 'root#index'
 	  match "*path", :to => redirect("/#{I18n.default_locale}") # handles /en/fake/path/whatever

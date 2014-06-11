@@ -152,6 +152,7 @@ en:
       admin: Admin
       settings: Settings
       methodology: Methodology
+      why_monitor: Why Monitor?
       sign_out: Sign Out
       js_link_title: JumpStart Georgia - We communicate data better!
       js_link_text: Built by
@@ -194,6 +195,10 @@ en:
       places: Places
       disabilities: Disabilities
       districts: Districts
+      why_monitor: "Edit 'Why Monitor' Text"
+    why_monitor:
+      title: "'Why Monitor' Text"
+      submit: Save the Text
     users:
       edit:
         title: Editing User
@@ -269,6 +274,9 @@ en:
       search: Search
       header_results: Search Results
       no_places: There are no Places on record that matches your search request.
+    why_monitor:
+      title: Why Monitor Accessibility in Georgia?
+      skip_movie: Skip the movie (jump)
   places:
     show:
       district_link_title: View all places that are in '%{name}'

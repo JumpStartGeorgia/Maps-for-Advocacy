@@ -4,6 +4,9 @@
    <div class="span4">
  		<ul class="standard">
  			<li>
+       <%= link_to t('.why_monitor'), admin_why_monitor_path %>
+      </li>
+ 			<li>
        <%= link_to t('.users'), admin_users_path %>
       </li>
  			<li>
@@ -12,12 +15,12 @@
  			<li>
        <%= link_to t('.districts'), admin_districts_path %>
       </li>
- 			<li>
+ 			<!--li>
        <%= link_to t('.questions'), admin_question_categories_path %>
       </li>
  			<li>
        <%= link_to t('.venues'), admin_venue_categories_path %>
-      </li>
+      </li-->
  		</ul>
   </div>
   <% end %>

@@ -44,6 +44,19 @@ class RootController < ApplicationController
     end
   end
 
+  
+  def why_monitor
+    # get the text
+    if File.exists?(@why_monitor_path)
+      why_monitor_text = JSON.parse(File.read(@why_monitor_path))
+      @why_monitor = why_monitor_text[I18n.locale.to_s]
+    end
+  
+    respond_to do |format|
+      format.html 
+    end
+  end
+
 
   private
   
@@ -102,8 +115,6 @@ class RootController < ApplicationController
     return popup
   end
   
-  
-  private
   
   def prepare_search_text(text)
     text.strip.latinize.to_ascii.downcase

@@ -63,6 +63,7 @@
 
           <div class="container-fluid nav-collapse">
 	          <ul class="nav pull-right">
+              <li role="menuitem"><%= link_to(t('.why_monitor'), why_monitor_path)  %></li>
               <li role="menuitem"><%= link_to(t('.methodology'), methodology_path)  %></li>
 		          <% if user_signed_in? %>
 				        <li id="admin_menu" class="dropdown" role="menuitem" aria-haspopup="true">

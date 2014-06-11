@@ -1,0 +1,24 @@
+<% title t('.title') %>
+
+<%= tinymce_assets %>
+<%= tinymce %>
+
+<%= form_tag admin_why_monitor_path, method: :post  do %>
+
+<% create_sorted_locales.each do |locale| %>
+  <div id="form-<%= locale %>" class="multilanguage">
+	  <h3><%= t("app.language.#{locale}") %></h3>
+
+        <%= text_area_tag "why_monitor_#{locale}", @why_monitor_text[locale.to_s], rows: 10, class: 'tinymce span9' %>
+
+  </div>
+<% end %>
+
+
+  <div class="form-actions">
+    <%= submit_tag t('.submit'), class: 'btn btn-primary' %> 
+    <%= button_tag t('.helpers.links.reset'), type: 'reset', class: 'btn btn-warning' %> 
+    <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                admin_path, :class => 'btn btn-warning' %>
+  </div>
+<% end %>

@@ -152,6 +152,7 @@ ka:
       settings: პარამეტრები
       admin: ადმინისტრატო
       methodology: მეთოდოლოგია
+      why_monitor: Why Monitor?
       sign_out: გასვლა
       js_link_title: ჯამპსტარტ ჯორჯიას - ჩვენ გაწვდით ინფორმაციას უკეთ!
       js_link_text: აგებულია
@@ -194,6 +195,10 @@ ka:
       places: ადგილები
       disabilities: შეზღუდული შესაძლებლობები
       districts: რაიონი
+      why_monitor: "Edit 'Why Monitor' Text"
+    why_monitor:
+      title: "'Why Monitor' Text"
+      submit: Save the Text
     users:
       edit:
         title: ცვლილებების შეტანა მომხმარებლის გვერდზე
@@ -270,6 +275,9 @@ ka:
       search: ძებნა
       header_results: ძიების შედეგი
       no_places: არ მოიძებნა თქვენი ძიების შესაბამისი ადგილი.
+    why_monitor:
+      title: Why Monitor Accessibility in Georgia?
+      skip_movie: Skip the movie (jump)
   places:
     show:
       district_link_title: "'%{name}'-ის ყველა ადგილის ნახვა"
