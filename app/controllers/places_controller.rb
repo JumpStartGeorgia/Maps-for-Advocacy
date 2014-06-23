@@ -180,15 +180,21 @@ class PlacesController < ApplicationController
         format.html { redirect_to place_path(@place), notice: t('app.msgs.success_created', :obj => t('activerecord.models.place')) }
         format.json { render json: @place, status: :created, location: @place }
       else
-        gon.show_evaluation_form = true
-        params[:stage] = '5'
+        params[:stage] = '3'
 	      # get venue
 	      @venue = Venue.with_translations(I18n.locale).find_by_id(@place.venue_id)
+
+        @show_map = true
+        gon.show_place_form_map = true
+        gon.address_search_path = address_search_places_path
+
+=begin
 		    # get list of questions
   		  @question_categories = QuestionCategory.questions_for_venue(question_category_id: @venue.question_category_id, disability_id: params[:eval_type_id])
         # get disability
         @disability = Disability.with_name(params[:eval_type_id])
         @place_evaluation = @place.place_evaluations.first
+=end                
         format.html { render action: "new" }
         format.json { render json: @place.errors, status: :unprocessable_entity }
       end
