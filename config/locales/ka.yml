@@ -154,11 +154,14 @@ ka:
       cause_not_accessible: "გაცემული პასუხი საერთო შეფასების შედეგს 'მიუწვდომელს' ხდის."
   layouts:
     application:
+      menu: Menu
       add_place: ადგილის დამატება
       settings: პარამეტრები
       admin: ადმინისტრატო
       methodology: მეთოდოლოგია
       why_monitor: Why Monitor?
+      un_cprd: UN CPRD
+      georgian_legislation: Georgian Legislation
       sign_out: გასვლა
       js_link_title: ჯამპსტარტ ჯორჯიას - ჩვენ გაწვდით ინფორმაციას უკეთ!
       js_link_text: აგებულია

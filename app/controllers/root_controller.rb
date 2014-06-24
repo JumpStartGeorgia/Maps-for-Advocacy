@@ -37,6 +37,9 @@ class RootController < ApplicationController
         gon.markers << marker
       end
     end
+    
+    @page = Page.by_name('landing_page')
+
   
     respond_to do |format|
       format.html # index.html.erb
@@ -46,12 +49,45 @@ class RootController < ApplicationController
 
   
   def why_monitor
-    # get the text
     @page = Page.by_name('why_monitor')
   
-    respond_to do |format|
-      format.html 
-    end
+    if @page.present?
+      respond_to do |format|
+        format.html 
+      end
+    else
+		  flash[:info] =  t('app.msgs.does_not_exist')
+		  redirect_to root_path(:locale => I18n.locale)
+		  return
+	  end
+  end
+
+  def un_cprd
+    @page = Page.by_name('un_cprd')
+  
+    if @page.present?
+      respond_to do |format|
+        format.html 
+      end
+    else
+		  flash[:info] =  t('app.msgs.does_not_exist')
+		  redirect_to root_path(:locale => I18n.locale)
+		  return
+	  end
+  end
+
+  def georgian_legislation
+    @page = Page.by_name('georgian_legislation')
+  
+    if @page.present?
+      respond_to do |format|
+        format.html 
+      end
+    else
+		  flash[:info] =  t('app.msgs.does_not_exist')
+		  redirect_to root_path(:locale => I18n.locale)
+		  return
+	  end
   end
 
 

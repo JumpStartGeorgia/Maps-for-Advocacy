@@ -5,11 +5,13 @@
   vimeo_id = '97165638' if I18n.locale != :ka
 %>
 
-<%= link_to t('.skip_movie'), '#why_monitor_text', :class => 'accessibly-hidden' %>
-<iframe src="//player.vimeo.com/video/<%= vimeo_id %>" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+<div class="clear">
+  <div id="why_monitor_movie">
+    <%= link_to t('.skip_movie'), '#why_monitor_text', :class => 'accessibly-hidden' %>
+    <iframe src="//player.vimeo.com/video/<%= vimeo_id %>" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+  </div>
 
-
-<div id="why_monitor_text">
-  <%= simple_format_no_tags(@page.content) %>
-</div>       
-
+  <div id="why_monitor_text" class="tinymce_format">
+    <%= simple_format_no_tags(@page.content) %>
+  </div>       
+</div>

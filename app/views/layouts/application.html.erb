@@ -63,12 +63,24 @@
 
           <div class="container-fluid nav-collapse">
 	          <ul class="nav pull-right">
-              <li role="menuitem"><%= link_to(t('.why_monitor'), why_monitor_path)  %></li>
-              <li role="menuitem"><%= link_to(t('.methodology'), methodology_path)  %></li>
+			        <li id="header_menu" class="dropdown" role="menuitem" aria-haspopup="true">
+			          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <i class="icon-list"></i>
+	                <%= t('.menu') %>
+	                <b class="caret"></b>
+			          </a>
+			          <ul class="dropdown-menu" role="menu">
+                  <li role="menuitem"><%= link_to(t('.why_monitor'), why_monitor_path)  %></li>
+                  <li role="menuitem"><%= link_to(t('.georgian_legislation'), georgian_legislation_path)  %></li>
+                  <li role="menuitem"><%= link_to(t('.un_cprd'), un_cprd_path)  %></li>
+                  <li role="menuitem"><%= link_to(t('.methodology'), methodology_path)  %></li>
+			          </ul>
+              </li>
 		          <% if user_signed_in? %>
 				        <li id="admin_menu" class="dropdown" role="menuitem" aria-haspopup="true">
 				          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-		                <%= current_user.nickname %>
+                    <i class="icon-user"></i>
+ 		                <%= current_user.nickname %>
 		                <b class="caret"></b>
 				          </a>
 				          <ul class="dropdown-menu" role="menu">
@@ -138,7 +150,12 @@
     <footer id="footer" class="clear">
 			<div id="left">&copy; <%= Time.now.year %></div>
 		  <div id="middle">
-				&nbsp;
+        <ul>
+          <li role="menuitem"><%= link_to(t('.why_monitor'), why_monitor_path)  %></li>
+          <li role="menuitem"><%= link_to(t('.georgian_legislation'), georgian_legislation_path)  %></li>
+          <li role="menuitem"><%= link_to(t('.un_cprd'), un_cprd_path)  %></li>
+          <li role="menuitem"><%= link_to(t('.methodology'), methodology_path)  %></li>
+        </ul>
 			</div>
 			<div id="right" class="clear">
 				<%= link_to(image_tag("jumpstart-logo.png"), "http://www.jumpstart.ge", :target => "_blank",

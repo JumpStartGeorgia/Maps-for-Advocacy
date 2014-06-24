@@ -8,7 +8,7 @@ class PageTranslation < ActiveRecord::Base
   def required_data_provided?
     provided = false
     
-    provided = self.title.present?
+    provided = self.title.present? && self.content.present?
     
     return provided
   end

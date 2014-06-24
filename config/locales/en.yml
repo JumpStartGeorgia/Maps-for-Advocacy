@@ -154,11 +154,14 @@ en:
       cause_not_accessible: "This answer makes the overall evaluation result be 'Not Accessible'"
   layouts:
     application:
+      menu: Menu
       add_place: Add a Place
       admin: Admin
       settings: Settings
       methodology: Methodology
       why_monitor: Why Monitor?
+      un_cprd: UN CPRD
+      georgian_legislation: Georgian Legislation
       sign_out: Sign Out
       js_link_title: JumpStart Georgia - We communicate data better!
       js_link_text: Built by
