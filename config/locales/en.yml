@@ -11,6 +11,7 @@ en:
       evaluation: Evaluation
       disability: Disability
       district: District
+      page: Text for Pages
     attributes:
       user:
         email: Email Address
@@ -63,6 +64,11 @@ en:
         id: District ID
       district_translation:
         name: District
+      page:
+        name: Unique name for content
+      page_translation:
+        title: Title to show above content
+        content: Content
     errors:
       messages:
         required_field: "is a required field."
@@ -196,6 +202,7 @@ en:
       disabilities: Disabilities
       districts: Districts
       why_monitor: "Edit 'Why Monitor' Text"
+      pages: Edit Text on Site
     why_monitor:
       title: "Edit 'Why Monitor' Text"
       submit: Save the Text

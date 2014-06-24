@@ -58,7 +58,7 @@ class Admin::DistrictsController < ApplicationController
 
     respond_to do |format|
       if @district.save
-        format.html { redirect_to admin_district_path(@district), notice: t('app.msgs.success_created', :obj => t('activerecord.models.district')) }
+2        format.html { redirect_to admin_district_path(@district), notice: t('app.msgs.success_created', :obj => t('activerecord.models.district')) }
         format.json { render json: @district, status: :created, location: @district }
       else
         format.html { render action: "new" }

@@ -47,10 +47,7 @@ class RootController < ApplicationController
   
   def why_monitor
     # get the text
-    if File.exists?(@why_monitor_path)
-      why_monitor_text = JSON.parse(File.read(@why_monitor_path))
-      @why_monitor = why_monitor_text[I18n.locale.to_s]
-    end
+    @page = Page.by_name('why_monitor')
   
     respond_to do |format|
       format.html 
