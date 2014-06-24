@@ -204,11 +204,7 @@ en:
       places: Places
       disabilities: Disabilities
       districts: Districts
-      why_monitor: "Edit 'Why Monitor' Text"
       pages: Edit Text on Site
-    why_monitor:
-      title: "Edit 'Why Monitor' Text"
-      submit: Save the Text
     users:
       edit:
         title: Editing User
