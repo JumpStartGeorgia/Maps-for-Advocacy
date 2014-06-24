@@ -65,7 +65,7 @@ en:
       district_translation:
         name: District
       page:
-        name: Unique name for content
+        name: Unique name for content (do not change!)
       page_translation:
         title: Title to show above content
         content: Content
