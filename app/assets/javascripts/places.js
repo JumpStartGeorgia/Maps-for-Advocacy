@@ -111,6 +111,17 @@ $(document).ready(function(){
       search_for_address();
 		  return false;
     });
+    
+    // after enter buliding number, add it to the beginning of the address
+    $('input.builder_number').focusout(function(){
+      var val = '';
+      if ($(this).val() != ''){
+        val = $(this).val() + ' ';
+      }
+      $('input.place_address').val(val + $('#address-search-results div input[type="radio"]:checked').data('address'));
+    });
+    
+
   }
 
   /*************************************************/

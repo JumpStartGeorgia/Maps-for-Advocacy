@@ -327,6 +327,7 @@ ka:
       next: შემდეგი
       map_link_title: შეარჩიეთ ეს მდებარეობა
       submit: ადგილის შენახვა
+      building_number: Building Number (if not provided above)
     certified_eval_form:
       evaluation_instructions: შეარჩიეთ კატეგორია და შეავსეთ შეფასება.
       question_category_link_title: იხილეთ კითხვები '%{name}'

@@ -112,6 +112,12 @@
               <%= t('.address_search_success') %>
             </p>
             <div class="placeholder"></div>
+            <div class="building_number">
+              <p>
+                <%= label_tag 'building_number1', t('.building_number') %>
+                <%= text_field_tag 'building_number1', nil, :class => "span3 builder_number" %>
+              </p>
+            </div>
           </div>
         
           <div id="address-search-multiple-match" class="alert alert-info" aria-hidden="true">
@@ -119,6 +125,12 @@
               <%= t('.address_search_multiple_success') %>
             </p>
             <div class="placeholder"></div>
+            <div class="building_number">
+              <p>
+                <%= label_tag 'building_number2', t('.building_number') %>
+                <%= text_field_tag 'building_number2', nil, :class => "span3 builder_number" %>
+              </p>
+            </div>
           </div>
           
           <div id="address-search-fail" class="alert alert-danger" aria-hidden="true">
