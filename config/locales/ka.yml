@@ -326,10 +326,8 @@ ka:
       map_instructions: დააკლიკეთ რუკას, რომ მონიშნოთ სად მდებარეობს '%{name}'.
       map_blue_marker: The blue marker (%{img}) indicates where your place is located.
       map_red_marker: "Red markers (%{img}) will appear if similar places are located nearby. If your place is one of the places indicated by a red marker, click on the red marker to go to that place's page."
-      skip_map: დააკლიკეთ რუკას და გადადით მისამართის საძიებო ფორმაზე (გადახტომა)
-      skip_to_address_search: გადადით მისამართის საძიებო ფორმაზე (გადახტომა)
       address_search_results: მისამართის ძიების შედეგი
-      address_instructions: შეგიძლიათ მოიძიოთ მისამართი თუ არ გსურთ რუკის გამოყენება
+      address_instructions: You can indicate the location of '%{name}' by doing an address search or by clicking on the map to place a marker of where '%{name}' is located.  
       address_instructions2: გთხოვთ შეიყვანეთ მისამართი და ქალაქი, სადაც მდებარეობს '%{name}'.
       submit_address_search: მისამართის მოძებნა
       address_search_success: მისამართის ძიებამ იპოვა შემდეგი წყვილები. გთხოვთ დაადასტუროთ, რომ შედეგები სწორია.
@@ -343,6 +341,15 @@ ka:
       map_link_title: შეარჩიეთ ეს მდებარეობა
       submit: ადგილის შენახვა
       building_number: შენობის ნომერი (თუ ზემოთ არ არის მითითებული)
+      header_address_search: Search By Address
+      header_map_search: Location on Map
+      header_places_nearby: Similar Places Nearby
+      places_nearby_explanation: "After you enter an address or place a marker on the map, this section will show you any similar places that are located nearby to '%{name}'. If your place is in this list, click on the place to go that place's page."
+      places_nearby_none: There were no similar places found nearby.
+      skip_to_address_search: Skip to the address search form (jump)
+      skip_to_map: Skip to the map (jump)
+      skip_to_places_nearby: Skip to the listing of places nearby (jump)
+      skip_to_submit: Skip to the form submit button (jump)
     certified_eval_form:
       evaluation_instructions: შეარჩიეთ კატეგორია და შეავსეთ შეფასება.
       question_category_link_title: იხილეთ კითხვები '%{name}'

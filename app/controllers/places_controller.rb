@@ -282,9 +282,11 @@ class PlacesController < ApplicationController
       if x.present?
         x.each do |place|
           marker = Hash.new
+          marker['id'] = place.id
           marker['lat'] = place.lat
           marker['lon'] = place.lon
           marker['popup'] = create_popup_text(place)
+          marker['list'] = create_list_text(place)
           places_near << marker
         end
       end
@@ -436,12 +438,27 @@ class PlacesController < ApplicationController
     popup << "<p>#{place.address}</p>"
 
     popup << "<p>"
-    popup << view_context.link_to(t('app.common.view_place'), place_path(place.id), :title => t('app.common.view_place_title', :place => place[:place]), :class => 'view_more')
+    popup << view_context.link_to(t('app.common.view_place'), place_path(place.id), :title => t('app.common.view_place_title', :place => place.name), :class => 'view_more')
     popup << " "
-    popup << view_context.link_to(t('app.common.add_evaluation'), evaluation_place_path(place), :title => t('app.common.add_evaluation_title', :place => place[:place]), :class => 'add_evaluation')
+    popup << view_context.link_to(t('app.common.add_evaluation'), evaluation_place_path(place), :title => t('app.common.add_evaluation_title', :place => place.name), :class => 'add_evaluation')
     popup << "</p>"
     
     return popup
+  end  
+  
+  def create_list_text(place)
+    list = ''
+    list << "<h3>#{place.name}</h3>"
+    list << "<h4>#{place.venue.name}</h4>"
+    list << "<p>#{place.address}</p>"
+
+    list << "<p>"
+    list << view_context.link_to(t('app.common.view_place'), place_path(place.id), :title => t('app.common.view_place_title', :place => place.name), :class => 'view_more')
+    list << " "
+    list << view_context.link_to(t('app.common.add_evaluation'), evaluation_place_path(place), :title => t('app.common.add_evaluation_title', :place => place.name), :class => 'add_evaluation')
+    list << "</p>"
+    
+    return list
   end  
   
 end

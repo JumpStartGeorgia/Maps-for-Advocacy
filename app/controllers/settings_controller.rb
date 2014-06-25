@@ -15,7 +15,7 @@ class SettingsController < ApplicationController
       gon.lon = params[:lon]
       
       flash[:success] = t('settings.index.success')
-    else params[:remove].present? && params[:remove] == 'true'
+    elsif params[:remove].present? && params[:remove] == 'true'
       current_user.lat = nil
       current_user.lon = nil
       current_user.save

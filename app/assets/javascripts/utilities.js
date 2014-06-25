@@ -17,11 +17,11 @@ var map, marker, map_type, near_markers;
     if (marker != undefined){
       map.removeLayer(marker);  
     }
-    if (near_markers != undefined && near_markers.length > 0){
-      for(var i=0;i<near_markers.length;i++){
-        map.removeLayer(near_markers[i]);  
+    if (near_markers != undefined){
+      for (key in near_markers){
+        map.removeLayer(near_markers[key]);  
       }
-      near_markers = [];
+      near_markers = {};
     }
 
     if (map_type == 'settings'){
@@ -75,20 +75,52 @@ var map, marker, map_type, near_markers;
   }
 
   /* show markers for places that were found near the address search result */
-  function create_places_near_markers(places_near){
+  function create_places_nearby_markers(places_near){
     if (places_near != undefined && places_near.length > 0){
-      near_markers = [];
+      // to create the markers
+      near_markers = {};
       var near_marker;
-      var near_options = jQuery.extend({}, default_leaflet_icon_options);
-      near_options['iconUrl'] = '/assets/marker-icon-red.png';         
+
+      // to create the list
+      var html = '<ul>';
+
       for (var i=0;i < places_near.length;i++){
-        near_marker = L.marker([places_near[i].lat, places_near[i].lon], {icon: L.icon(near_options)}).addTo(map);
+        near_marker = L.marker([places_near[i].lat, places_near[i].lon], {icon: L.icon(red_leaflet_icon_options)}).addTo(map);
         near_marker.bindPopup(places_near[i].popup);
-        near_markers.push(near_marker);
+        near_markers[places_near[i].id] = near_marker;
+        
+        html += '<li data-id="' + places_near[i].id + '">' + places_near[i].list + '</li>';
       }
-    
+      html += '</ul>';
+
+      // show the matches box
+      $('#places_nearby_container #places_nearby_matches').attr('aria-hidden', 'false').html(html);
+      // hide the no matches message
+      $('#places_nearby_container #places_nearby_none').attr('aria-hidden', 'true');
+
+      // when user hovers over search result item, highlight it on the map
+      $('#places_nearby_container #places_nearby_matches li').hover(function(){
+        // when mouse over
+        // find the marker 
+        var m = near_markers[$(this).data('id')];
+        // set new icon
+        m.setIcon(L.icon(default_leaflet_icon_options));
+      },function(){
+        // when mouse out
+        var m = near_markers[$(this).data('id')];
+        // reset icon
+        m.setIcon(L.icon(red_leaflet_icon_options));
+      });
+
+
+    }else{
+      // hide the matches box
+      $('#places_nearby_container #places_nearby_matches').attr('aria-hidden', 'true').empty();
+      // show the no matches message
+      $('#places_nearby_container #places_nearby_none').attr('aria-hidden', 'false');
     }
   }
+
 
   /* add map marker */
   function create_map_marker(lat, lon, address, perform_address_search){
@@ -110,7 +142,7 @@ var map, marker, map_type, near_markers;
       }
       $.post(gon.address_search_path,d,function(data){								
 	      show_address_search_results(data.matches, latlng);												
-        create_places_near_markers(data.places_near);	      
+        create_places_nearby_markers(data.places_near);	      
       });
     }
     
@@ -125,7 +157,7 @@ var map, marker, map_type, near_markers;
       }
       $.post(gon.address_search_path,d,function(data){								
 	      show_address_search_results(data.matches, latlng);												
-        create_places_near_markers(data.places_near);	      
+        create_places_nearby_markers(data.places_near);	      
       });
     });
   }
@@ -217,7 +249,7 @@ var map, marker, map_type, near_markers;
       }
       $.post(gon.address_search_path,d,function(data){								
 	      show_address_search_results(data.matches);												
-        create_places_near_markers(data.places_near);	      
+        create_places_nearby_markers(data.places_near);	      
       });
     }
   }

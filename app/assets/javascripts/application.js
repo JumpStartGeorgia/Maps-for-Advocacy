@@ -37,3 +37,12 @@ var default_leaflet_icon_options = {
 		popupAnchor: [1, -34],
 		shadowSize:  [41, 41]
 };
+
+var red_leaflet_icon_options = {
+    iconUrl:     '/assets/marker-icon-red.png', 
+    shadowUrl:   '/assets/marker-shadow.png',
+    iconSize:    [25, 41],
+		iconAnchor:  [12, 41],
+		popupAnchor: [1, -34],
+		shadowSize:  [41, 41]
+};

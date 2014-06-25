@@ -70,9 +70,13 @@ form.place{
   a#place_map_next[aria-hidden="false"]{
     display: inline;
   }
+  
+  #place-form-address-search-instructions{
+    margin-bottom: 20px;
+  }
 
   #place-form-address-search {
-    #address-search {
+    #address-search-container {
       p:nth-child(1), div.placeholder{
         margin-bottom: 20px;
       }
@@ -91,7 +95,20 @@ form.place{
     }
   }
   
-
+  #places_nearby_container{
+    #places_nearby_explanation{
+      margin-bottom: 20px;
+    }
+    #places_nearby_matches li{
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: solid 1px #ccc;
+      &:last-of-type{
+        margin-bottom: 0;
+        border-bottom: none;
+      }
+    }
+  }
 
 .form-horizontal #venue_evalautions {
   .control-group{

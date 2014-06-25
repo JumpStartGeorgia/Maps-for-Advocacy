@@ -80,25 +80,15 @@
 	    <%= f.hidden_field :venue_id %>
 	  <% end %>
     
+    <p id="place-form-address-search-instructions">
+      <%= t('.address_instructions', :name => params[:name]) %>
+    </p>
     <div id="place-form-address-search" class="row-fluid">
-      <div class="span9">
-        <a href="#address-search" class="accessibly-hidden"><%= t('.skip_map') %></a>
-        <p>
-          <%= t('.map_instructions', :name => params[:name]) %>
-        </p>
-        <div id="map"></div>
-        <p id="map_marker_explanation">
-          <%= t('.map_blue_marker', :img => image_tag(asset_path('marker-icon.png'))).html_safe %>
-          <%= t('.map_red_marker', :img => image_tag(asset_path('marker-icon-red.png'))).html_safe %>
-        </p>
-      </div>
-      <div class="span3" id="address-search">
-        <p>
-          <%= t('.address_instructions') %>
-        </p>
+      <div class="span4" id="address-search-container">
+        <h3><%= t('.header_address_search') %></h3>
       
         <p>
-          <%= t('.address_instructions2', :name => params[:name]) %>
+          <%= label_tag 'address-search', t('.address_instructions2', :name => params[:name]) %>
         </p>
         
         <p>
@@ -143,12 +133,49 @@
             </p>
           </div>
 
+          <a href="#places_nearby_container" class="accessibly-hidden"><%= t('.skip_to_places_nearby') %></a>
+          <a href="#map_container" class="accessibly-hidden"><%= t('.skip_to_map') %></a>
+          <a href="#submit-button" class="accessibly-hidden"><%= t('.skip_to_submit') %></a>
+
           <div id="submit-button" aria-hidden="true">
             <%= f.submit t('.submit') %>
           </div>
 
-          <a href="#address-search" class="accessibly-hidden"><%= t('.skip_to_address_search') %></a>
         </div>      
+      </div>
+      <div class="span4" id="map_container">
+        <h3><%= t('.header_map_search') %></h3>
+        <p id="map_marker_explanation">
+          <%= t('.map_instructions', :name => params[:name]) %>
+          <%= t('.map_blue_marker', :img => image_tag(asset_path('marker-icon.png'))).html_safe %>
+          <%= t('.map_red_marker', :img => image_tag(asset_path('marker-icon-red.png'))).html_safe %>
+        </p>
+
+        <a href="#address-search-container" class="accessibly-hidden"><%= t('.skip_to_address_search') %></a>
+        <a href="#places_nearby_container" class="accessibly-hidden"><%= t('.skip_to_places_nearby') %></a>
+        <a href="#submit-button" class="accessibly-hidden"><%= t('.skip_to_submit') %></a>
+
+        <div id="map"></div>
+      </div>
+      <div class="span4" id="places_nearby_container" aria-live="polite" aria-relevant="additions" aria-busy="false">
+        <h3><%= t('.header_places_nearby') %></h3>
+        <p id="places_nearby_explanation">
+          <%= t('.places_nearby_explanation', :name => params[:name]) %>
+        </p>
+
+        <div id="places_nearby_none" class="alert" aria-hidden="true">
+          <p>
+            <%= t('.places_nearby_none') %>
+          </p>
+        </div>
+
+        <div id="places_nearby_matches" aria-hidden="true">
+        </div>
+
+        <a href="#address-search-container" class="accessibly-hidden"><%= t('.skip_to_address_search') %></a>
+        <a href="#map_container" class="accessibly-hidden"><%= t('.skip_to_map') %></a>
+        <a href="#submit-button" class="accessibly-hidden"><%= t('.skip_to_submit') %></a>
+        
       </div>
     </div>
     

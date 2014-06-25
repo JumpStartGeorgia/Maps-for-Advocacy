@@ -142,9 +142,7 @@ $(document).ready(function(){
         // find the marker 
         var m = landing_page_markers[$(this).data('id')];
         // set new icon
-        var new_options = jQuery.extend({}, default_leaflet_icon_options);
-        new_options['iconUrl'] = '/assets/marker-icon-red.png';         
-        m.setIcon(L.icon(new_options));
+        m.setIcon(L.icon(red_leaflet_icon_options));
       },function(){
         // when mouse out
         var m = landing_page_markers[$(this).data('id')];
