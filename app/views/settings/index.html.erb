@@ -3,14 +3,7 @@
 
 <h2><%= t('.header_location') %></h2>
 <div id="place-form-address-search" class="row-fluid">
-  <div class="span9">
-    <a href="#address-search" class="accessibly-hidden"><%= t('.skip_map') %></a>
-    <p>
-      <%= t('.map_instructions') %>
-    </p>
-    <div id="map"></div>
-  </div>
-  <div class="span3" id="address-search-container">
+  <div class="span4" id="address-search-container">
     <p>
       <%= t('.address_instructions') %>
     </p>
@@ -55,5 +48,12 @@
               :id => 'place_map_remove', :role => 'button', :'aria-hidden' => true %>
       </p>
     </div>      
+  </div>
+  <div class="span8">
+    <a href="#address-search" class="accessibly-hidden"><%= t('.skip_map') %></a>
+    <p>
+      <%= t('.map_instructions') %>
+    </p>
+    <div id="map"></div>
   </div>
 </div>
