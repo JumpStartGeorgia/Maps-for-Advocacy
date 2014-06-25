@@ -263,7 +263,7 @@ en:
         map_link_title: Select this location
   root:
     index:
-      header_filter: Filter
+      header_search: Search
       header_filter_place_search: Place
       placeholder_place_search: All Places
       header_filter_address_search: Address
@@ -283,7 +283,7 @@ en:
       search: Search
       header_results: Search Results
       no_places: There are no Places on record that matches your search request.
-      header_stats: Site Stats
+      header_stats: Evaluation Stats
       skip_movie: Skip the movie (jump)
     why_monitor:
       title: Why Monitor Accessibility in Georgia?

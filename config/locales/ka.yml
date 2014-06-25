@@ -263,7 +263,7 @@ ka:
         map_link_title: შეარჩიეთ ეს მდებარეობა
   root:
     index:
-      header_filter: ფილტრი
+      header_search: Search
       header_filter_place_search: მდებარეობა
       placeholder_place_search: ყველა მდებარეობა
       header_filter_address_search: მისამართი
@@ -283,7 +283,7 @@ ka:
       search: ძებნა
       header_results: ძიების შედეგი
       no_places: არ მოიძებნა თქვენი ძიების შესაბამისი ადგილი.
-      header_stats: Site Stats
+      header_stats: Evaluation Stats
       skip_movie: გამოვტოვოთ ფილმი (გადახტომა)
     why_monitor:
       title: რატომ არის საჭირო ხელმისაწვდომობის მონიტორინგი საქართველოშო?
