@@ -39,7 +39,12 @@ class RootController < ApplicationController
     end
     
     @page = Page.by_name('landing_page')
+    @stats = {}
+    @stats[:places_with_evals] = PlaceSummary.overall_places_with_evals
+    @stats[:public_results] = PlaceSummary.overall_public_results
+    @stats[:certified_results] = PlaceSummary.overall_certified_results
 
+logger.debug "----------------- #{@stats}"
   
     respond_to do |format|
       format.html # index.html.erb

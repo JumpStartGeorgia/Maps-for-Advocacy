@@ -19,7 +19,7 @@ private
   def format_public_summary_result(hash, options)
     x = ''
     if hash.class == Hash
-      if hash.has_key?('percentage') && hash['percentage'].present?
+      if (hash.has_key?('num_yes') && hash['num_yes'].present?) || (hash.has_key?('num_no') && hash['num_no'].present?)
         x << "<div class='public_summary_container'>"
         x << "<div class='yes_votes' title='"
         if options[:is_summary] == true

@@ -11,7 +11,7 @@ ka:
       evaluation: შეფასება
       disability: შეზღუდული შესაძლებლობება
       district: რაიონი
-      page: Text for Pages
+      page: ტექსტი გვერდებისთვის
     attributes:
       user:
         email: ელ.ფოსტა
@@ -65,10 +65,10 @@ ka:
       district_translation:
         name: რაიონი
       page:
-        name: Unique name for content (do not change!)
+        name: შინაარსის უნიკალური სახელი (არ შეცვალოთ!)
       page_translation:
-        title: Title to show above content
-        content: Content
+        title: სათაური, რომელიც გამოჩნდება შინაარსის ზემოთ
+        content: შინაარსი
     errors:
       messages:
         required_field: "სავალდებულოა"
@@ -141,6 +141,9 @@ ka:
       view_place_title: "'%{place}'-ის დეტალების ნახვა"
       certified: სერტიფიცირებული
       public: საზოგადოებრივი
+      certified_overall: '%{num} Overall Certified Evaluation Result(s)'
+      public_overall: '%{num} Overall Public Evaluation Result(s)'
+      num_places_overall: '%{num} Place(s) with Evaluations'
     msgs:
       does_not_exist: თქვენ ცდილობთ იხილოთ გვერდი, რომელიც არ არსებობს.
       not_authorized: თქვენ არ გაქვთ უფლება იხილოთ ეს გვერდი.
@@ -154,14 +157,14 @@ ka:
       cause_not_accessible: "გაცემული პასუხი საერთო შეფასების შედეგს 'მიუწვდომელს' ხდის."
   layouts:
     application:
-      menu: Menu
+      menu: მენიუ
       add_place: ადგილის დამატება
       settings: პარამეტრები
       admin: ადმინისტრატო
       methodology: მეთოდოლოგია
-      why_monitor: Why Monitor?
+      why_monitor: რატომ მონიტორინგი?
       un_cprd: UN CPRD
-      georgian_legislation: Georgian Legislation
+      georgian_legislation: საქართველოს კანონმდებლობა
       sign_out: გასვლა
       js_link_title: ჯამპსტარტ ჯორჯიას - ჩვენ გაწვდით ინფორმაციას უკეთ!
       js_link_text: აგებულია
@@ -204,7 +207,7 @@ ka:
       places: ადგილები
       disabilities: შეზღუდული შესაძლებლობები
       districts: რაიონი
-      pages: Edit Text on Site
+      pages: საიტზე ტექსტის რედაქტირება
     users:
       edit:
         title: ცვლილებების შეტანა მომხმარებლის გვერდზე
@@ -261,11 +264,10 @@ ka:
   root:
     index:
       header_filter: ფილტრი
-      header_filter_venue: ობიექტის მიხედვით
       header_filter_place_search: მდებარეობა
       placeholder_place_search: ყველა მდებარეობა
-      header_filter_address_search: Address
-      placeholder_address_search: All Addresses
+      header_filter_address_search: მისამართი
+      placeholder_address_search: ყველა მისამართი
       header_filter_venue: ადგილი
       placeholder_venue: ყველა ადგილი
       header_filter_district: რაიონი
@@ -281,9 +283,11 @@ ka:
       search: ძებნა
       header_results: ძიების შედეგი
       no_places: არ მოიძებნა თქვენი ძიების შესაბამისი ადგილი.
+      header_stats: Site Stats
+      skip_movie: გამოვტოვოთ ფილმი (გადახტომა)
     why_monitor:
-      title: Why Monitor Accessibility in Georgia?
-      skip_movie: Skip the movie (jump)
+      title: რატომ არის საჭირო ხელმისაწვდომობის მონიტორინგი საქართველოშო?
+      skip_movie: გამოვტოვოთ ფილმი (გადახტომა)
   places:
     show:
       district_link_title: "'%{name}'-ის ყველა ადგილის ნახვა"
@@ -333,7 +337,7 @@ ka:
       next: შემდეგი
       map_link_title: შეარჩიეთ ეს მდებარეობა
       submit: ადგილის შენახვა
-      building_number: Building Number (if not provided above)
+      building_number: შენობის ნომერი (თუ ზემოთ არ არის მითითებული)
     certified_eval_form:
       evaluation_instructions: შეარჩიეთ კატეგორია და შეავსეთ შეფასება.
       question_category_link_title: იხილეთ კითხვები '%{name}'

@@ -43,7 +43,6 @@ class PlaceSummary < ActiveRecord::Base
     end
   end
   
-
   # get summary data for a place/disability
   # return: {
   #  'overall' => {overall => {score, special_flag, num_evaluations, num_answers}, cat_id1 => {score, special_flag, num_evaluations, num_answers}, cat_id2, etc},
@@ -104,6 +103,45 @@ class PlaceSummary < ActiveRecord::Base
 
     return summary
   end
+
+  ########################### 
+  ## overall stats
+  ###########################
+  # num of places with evals
+  def self.overall_places_with_evals
+     where(:summary_type => SUMMARY_TYPES['overall'], :data_type => DATA_TYPES['overall']).count(:place_id, :distinct => true)
+  end
+
+  # overall public eval results
+  def self.overall_public_results
+    counts = {'count' => 0, 'num_yes' => 0, 'num_no' => 0}
+    x = find_by_sql(['select count(*) as c, sum(num_yes) as y, sum(num_no) as n from place_summaries where is_certified = 0 and summary_type = ? and data_type = ?', SUMMARY_TYPES['instance'], DATA_TYPES['overall']])
+    if x.present?
+      counts['count'] = x[0]['c']
+      counts['num_yes'] = x[0]['y'].to_i
+      counts['num_no'] = x[0]['n'].to_i
+    end
+
+    return counts
+  end
+  
+  # overall certified eval results
+  def self.overall_certified_results
+    counts = {'count' => 0, 'num_yes' => 0, 'num_no' => 0}
+    x = find_by_sql(['select count(*) as c, sum(num_yes) as y, sum(num_no) as n from place_summaries where is_certified = 1 and summary_type = ? and data_type = ?', SUMMARY_TYPES['disability'], DATA_TYPES['overall']])
+    if x.present?
+      counts['count'] = x[0]['c']
+      counts['num_yes'] = x[0]['y'].to_i
+      counts['num_no'] = x[0]['n'].to_i
+    end
+
+    return counts
+  end
+
+
+  ########################### 
+  ## update stats
+  ###########################
 
   # for the given place id, update the summary data
   # place_id: id of place to summarize evaluations for

@@ -141,6 +141,9 @@ en:
       view_place_title: "View the details of '%{place}'"
       certified: Certified
       public: Public
+      certified_overall: '%{num} Overall Certified Evaluation Result(s)'
+      public_overall: '%{num} Overall Public Evaluation Result(s)'
+      num_places_overall: '%{num} Place(s) with Evaluations'
     msgs:
       does_not_exist: You tried to access a page that does not exist.
       not_authorized: You are not authorized to view that page.
@@ -280,6 +283,8 @@ en:
       search: Search
       header_results: Search Results
       no_places: There are no Places on record that matches your search request.
+      header_stats: Site Stats
+      skip_movie: Skip the movie (jump)
     why_monitor:
       title: Why Monitor Accessibility in Georgia?
       skip_movie: Skip the movie (jump)
