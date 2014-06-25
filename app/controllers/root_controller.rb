@@ -99,7 +99,7 @@ logger.debug "----------------- #{@stats}"
 
   private
   
-  def create_popup_text(place, summaries)
+  def create_popup_text(place, summaries=nil)
     popup = ''
     popup << "<h3>#{place[:place]}</h3>"
     popup << "<h4>#{place[:venue]}</h4>"

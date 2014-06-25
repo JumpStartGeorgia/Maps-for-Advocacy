@@ -71,18 +71,23 @@ form.place{
     display: inline;
   }
 
-  #place-form-address-search #address-search {
-    p:nth-child(1), div.placeholder{
-      margin-bottom: 20px;
+  #place-form-address-search {
+    #address-search {
+      p:nth-child(1), div.placeholder{
+        margin-bottom: 20px;
+      }
+      #address-search-1-match, #address-search-multiple-match, #address-search-fail{
+        margin-top: 20px;
+        &[aria-hidden="false"]{
+          display: block;
+        }
+        label, input[type="radio"]{
+          display: inline;
+        }
+      }
     }
-    #address-search-1-match, #address-search-multiple-match, #address-search-fail{
-      margin-top: 20px;
-      &[aria-hidden="false"]{
-        display: block;
-      }
-      label, input[type="radio"]{
-        display: inline;
-      }
+    #map_marker_explanation img{
+      width: 12px;
     }
   }
   

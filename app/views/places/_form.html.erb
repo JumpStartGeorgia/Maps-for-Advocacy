@@ -87,6 +87,10 @@
           <%= t('.map_instructions', :name => params[:name]) %>
         </p>
         <div id="map"></div>
+        <p id="map_marker_explanation">
+          <%= t('.map_blue_marker', :img => image_tag(asset_path('marker-icon.png'))).html_safe %>
+          <%= t('.map_red_marker', :img => image_tag(asset_path('marker-icon-red.png'))).html_safe %>
+        </p>
       </div>
       <div class="span3" id="address-search">
         <p>

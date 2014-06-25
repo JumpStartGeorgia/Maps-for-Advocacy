@@ -1,4 +1,11 @@
 class Place < ActiveRecord::Base
+  # to be able to do queries getting places within a distance of a point
+  acts_as_mappable :default_units => :kms,
+                   :default_formula => :sphere,
+                   :distance_field_name => :distance,
+                   :lat_column_name => :lat,
+                   :lng_column_name => :lon
+  
 	translates :name, :address, :search_name, :search_address
 
   belongs_to :venue
@@ -71,6 +78,11 @@ class Place < ActiveRecord::Base
     
   end
 
+
+  # get places that are near these coordinates and are of a venue type
+  def self.get_places_near(lat, lon, venue_id)
+    within(1, :origin => [lat, lon]).where(:venue_id => venue_id)
+  end
 
   def assign_district
     require 'geo_ruby/geojson'

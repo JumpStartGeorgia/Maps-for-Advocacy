@@ -1,4 +1,4 @@
-var map, marker, map_type;
+var map, marker, map_type, near_markers;
   /* update a query string value in a url */
   function updateQueryStringParameter(uri, key, value) {
     var re = new RegExp("([?|&])" + key + "=.*?(&|$)", "i");
@@ -16,6 +16,12 @@ var map, marker, map_type;
     // remove map markers
     if (marker != undefined){
       map.removeLayer(marker);  
+    }
+    if (near_markers != undefined && near_markers.length > 0){
+      for(var i=0;i<near_markers.length;i++){
+        map.removeLayer(near_markers[i]);  
+      }
+      near_markers = [];
     }
 
     if (map_type == 'settings'){
@@ -68,6 +74,22 @@ var map, marker, map_type;
     }
   }
 
+  /* show markers for places that were found near the address search result */
+  function create_places_near_markers(places_near){
+    if (places_near != undefined && places_near.length > 0){
+      near_markers = [];
+      var near_marker;
+      var near_options = jQuery.extend({}, default_leaflet_icon_options);
+      near_options['iconUrl'] = '/assets/marker-icon-red.png';         
+      for (var i=0;i < places_near.length;i++){
+        near_marker = L.marker([places_near[i].lat, places_near[i].lon], {icon: L.icon(near_options)}).addTo(map);
+        near_marker.bindPopup(places_near[i].popup);
+        near_markers.push(near_marker);
+      }
+    
+    }
+  }
+
   /* add map marker */
   function create_map_marker(lat, lon, address, perform_address_search){
     if (perform_address_search == undefined){
@@ -82,8 +104,13 @@ var map, marker, map_type;
 
     if (perform_address_search){
       // get the address
-      $.post(gon.address_search_path,{lat: lat, lon: lon}, function(data){								
-        show_address_search_results(data, latlng);												
+      var d = {lat: lat, lon: lon};
+      if (gon.near_venue_id != undefined){
+        d['near_venue_id'] = gon.near_venue_id;
+      }
+      $.post(gon.address_search_path,d,function(data){								
+	      show_address_search_results(data.matches, latlng);												
+        create_places_near_markers(data.places_near);	      
       });
     }
     
@@ -92,8 +119,13 @@ var map, marker, map_type;
       update_link_parameters(latlng);
 
       // get the address
-      $.post(gon.address_search_path,{lat: latlng.lat, lon: latlng.lng}, function(data){								
-	      show_address_search_results(data, latlng);												
+      var d = {lat: latlng.lat, lon: latlng.lng};
+      if (gon.near_venue_id != undefined){
+        d['near_venue_id'] = gon.near_venue_id;
+      }
+      $.post(gon.address_search_path,d,function(data){								
+	      show_address_search_results(data.matches, latlng);												
+        create_places_near_markers(data.places_near);	      
       });
     });
   }
@@ -179,8 +211,13 @@ var map, marker, map_type;
       $('#address-search-results a#address-search-results').focus();
     }else
     {
-      $.post(gon.address_search_path,{address:address},function(data){								
-	      show_address_search_results(data);												
+      var d = {address:address};
+      if (gon.near_venue_id != undefined){
+        d['near_venue_id'] = gon.near_venue_id;
+      }
+      $.post(gon.address_search_path,d,function(data){								
+	      show_address_search_results(data.matches);												
+        create_places_near_markers(data.places_near);	      
       });
     }
   }

@@ -130,6 +130,7 @@ class PlacesController < ApplicationController
       @show_map = true
       gon.show_place_form_map = true
       gon.address_search_path = address_search_places_path
+      gon.near_venue_id = @venue.id
 
       @place.venue_id = params[:venue_id]
       # create the translation object for however many locales there are
@@ -187,7 +188,7 @@ class PlacesController < ApplicationController
         @show_map = true
         gon.show_place_form_map = true
         gon.address_search_path = address_search_places_path
-
+        gon.near_venue_id = @venue.id
 =begin
 		    # get list of questions
   		  @question_categories = QuestionCategory.questions_for_venue(question_category_id: @venue.question_category_id, disability_id: params[:eval_type_id])
@@ -244,6 +245,7 @@ class PlacesController < ApplicationController
   # use geocoder gem to get coords of address
   def address_search
     coords = []
+    places_near = []
     if params[:address].present?
 		  begin
 			  locations = Geocoder.search("#{params[:address]}")
@@ -273,9 +275,23 @@ class PlacesController < ApplicationController
 			  coords = []
 		  end
     end
+    
+    if params[:near_venue_id].present? && coords.present?
+    logger.debug "************ #{coords}"
+      x = Place.get_places_near(coords[0][:coordinates][0], coords[0][:coordinates][1], params[:near_venue_id])
+      if x.present?
+        x.each do |place|
+          marker = Hash.new
+          marker['lat'] = place.lat
+          marker['lon'] = place.lon
+          marker['popup'] = create_popup_text(place)
+          places_near << marker
+        end
+      end
+    end
 
     respond_to do |format|
-      format.json { render json: coords.to_json }
+      format.json { render json: {matches: coords, places_near: places_near}.to_json }
     end
   end
   
@@ -408,5 +424,24 @@ class PlacesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  
+  private
+  
+  
+  def create_popup_text(place)
+    popup = ''
+    popup << "<h3>#{place.name}</h3>"
+    popup << "<h4>#{place.venue.name}</h4>"
+    popup << "<p>#{place.address}</p>"
+
+    popup << "<p>"
+    popup << view_context.link_to(t('app.common.view_place'), place_path(place.id), :title => t('app.common.view_place_title', :place => place[:place]), :class => 'view_more')
+    popup << " "
+    popup << view_context.link_to(t('app.common.add_evaluation'), evaluation_place_path(place), :title => t('app.common.add_evaluation_title', :place => place[:place]), :class => 'add_evaluation')
+    popup << "</p>"
+    
+    return popup
+  end  
   
 end

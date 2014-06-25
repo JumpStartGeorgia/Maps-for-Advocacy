@@ -324,6 +324,8 @@ ka:
       name_link_title: სახელწოდების შენახვა
       header_location: სად მდებარეობს '%{name}'?
       map_instructions: დააკლიკეთ რუკას, რომ მონიშნოთ სად მდებარეობს '%{name}'.
+      map_blue_marker: The blue marker (%{img}) indicates where your place is located.
+      map_red_marker: "Red markers (%{img}) will appear if similar places are located nearby. If your place is one of the places indicated by a red marker, click on the red marker to go to that place's page."
       skip_map: დააკლიკეთ რუკას და გადადით მისამართის საძიებო ფორმაზე (გადახტომა)
       skip_to_address_search: გადადით მისამართის საძიებო ფორმაზე (გადახტომა)
       address_search_results: მისამართის ძიების შედეგი

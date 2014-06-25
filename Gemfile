@@ -35,6 +35,7 @@ gem "ancestry", "~> 2.0.0" # create parent child relationship
 gem "georuby" # manage geo spatial data with ruby
 gem "exifr" # get image meta data
 gem "unidecoder", "~> 1.1.2" #convert utf8 to ascii for permalinks
+gem 'geokit-rails' # to be able to do activerecord queries to get places within a distance
 
 # Gems used only for assets and not required
 # in production environments by default.

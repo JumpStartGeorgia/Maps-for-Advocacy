@@ -101,6 +101,11 @@ GEM
     formtastic (2.1.1)
       actionpack (~> 3.0)
     geocoder (1.1.8)
+    geokit (1.6.5)
+      multi_json
+    geokit-rails (2.0.1)
+      geokit (~> 1.5)
+      rails (>= 3.0)
     georuby (2.2.1)
     globalize3 (0.2.0)
       activemodel (>= 3.0.0)
@@ -260,6 +265,7 @@ DEPENDENCIES
   formtastic (~> 2.1.1)
   formtastic-bootstrap!
   geocoder (~> 1.1.8)
+  geokit-rails
   georuby
   globalize3 (~> 0.2.0)
   gon (~> 2.2.2)
