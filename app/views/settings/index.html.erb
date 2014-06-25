@@ -51,6 +51,8 @@
       <p>
         <%= link_to t('.next'), settings_path(:lat => '', :lon => '', :address => ''), 
               :id => 'place_map_next', :role => 'button', :'aria-hidden' => true %>
+        <%= link_to t('.remove'), settings_path(:remove => true), 
+              :id => 'place_map_remove', :role => 'button', :'aria-hidden' => true %>
       </p>
     </div>      
   </div>

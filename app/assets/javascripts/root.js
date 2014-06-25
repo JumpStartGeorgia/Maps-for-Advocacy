@@ -1,4 +1,5 @@
 var map;
+var landing_page_markers = {};
 $(document).ready(function(){
 
   // take from: http://stackoverflow.com/questions/5999118/add-or-update-query-string-parameter
@@ -91,6 +92,12 @@ $(document).ready(function(){
 
     function resize_frontpage_map(){
 	    $('#front-page #map').height($(window).height() - $('.popup').height() - $('footer').height() - 90);
+
+      var heights = [];
+      heights.push($('#front-page #search-container #search').height());
+      heights.push($('#front-page #search-container #search_results').height());
+      // update heights to max height of visible detail charts
+      $('#front-page #map').height(Math.max.apply(Math, heights));
     }
 
 
@@ -112,8 +119,11 @@ $(document).ready(function(){
       var marker;
       var coords = [];
       for (var i=0;i < gon.markers.length;i++){
-        marker = L.marker([gon.markers[i].lat, gon.markers[i].lon]).addTo(map);
+        marker = L.marker([gon.markers[i].lat, gon.markers[i].lon], {icon: L.icon(default_leaflet_icon_options)}).addTo(map);
         marker.bindPopup(gon.markers[i].popup);
+        // record the marker so can highlight when user hovers over search results list item
+        landing_page_markers[gon.markers[i].id] = marker;
+        // record coords so can determine bounds for map
         coords.push([gon.markers[i].lat, gon.markers[i].lon]);
       }
 
@@ -125,6 +135,24 @@ $(document).ready(function(){
         $('#' + map_carousel_id_text + map_carousel_id_text).carousel();
       }
 */
+
+      // when user hovers over search result item, highlight it on the map
+      $('.place-item').hover(function(){
+        // when mouse over
+        // find the marker 
+        var m = landing_page_markers[$(this).data('id')];
+        // set new icon
+        var new_options = jQuery.extend({}, default_leaflet_icon_options);
+        new_options['iconUrl'] = '/assets/marker-icon-red.png';         
+        m.setIcon(L.icon(new_options));
+      },function(){
+        // when mouse out
+        var m = landing_page_markers[$(this).data('id')];
+        // reset icon
+        m.setIcon(L.icon(default_leaflet_icon_options));
+      });
+      
+
     }else{
       // load map
       map = L.map(gon.map_id, {center: [gon.lat_front_page, gon.lon_front_page], zoom: gon.zoom_front_page});

@@ -60,11 +60,13 @@ logger.debug "////////////////////////// BROWSER = #{user_agent}"
   def initialize_global_variables
     @lat = 41.69337
     @lon = 44.80149
-    @district_id = 1
+    @district_id = '1'
 
     @why_monitor_path = Rails.root.join('public/system/why_monitor/why_monitor.json')
 
-    if user_signed_in? && current_user.lat.present? && current_user.lon.present?
+    if user_signed_in? && current_user.lat.present? && current_user.lon.present? && 
+        !(params[:controller] == 'settings' && params[:remove].present? && params[:remove] == 'true')
+        
       @lat = current_user.lat
       @lon = current_user.lon
       @district_id = current_user.district_id

@@ -1,4 +1,4 @@
-var map, marker;
+var map, marker, map_type;
   /* update a query string value in a url */
   function updateQueryStringParameter(uri, key, value) {
     var re = new RegExp("([?|&])" + key + "=.*?(&|$)", "i");
@@ -18,16 +18,27 @@ var map, marker;
       map.removeLayer(marker);  
     }
 
-    // reset form fields
-    $('input#place_lat').val('');
-    $('input#place_lon').val('');
-    $('input.place_address').val('');
+    if (map_type == 'settings'){
+      $('#place_map_next').attr('href', updateQueryStringParameter($('#place_map_next').attr('href'), 'lat', ''));
+      $('#place_map_next').attr('href', updateQueryStringParameter($('#place_map_next').attr('href'), 'lon', ''));
+      $('#place_map_next').attr('href', updateQueryStringParameter($('#place_map_next').attr('href'), 'address', ''));
+
+      // hide the button
+      $('#place_map_next').attr('aria-hidden', 'true');
+      $('#place_map_remove').attr('aria-hidden', 'true');
+    }else{
+      // reset form fields
+      $('input#place_lat').val('');
+      $('input#place_lon').val('');
+      $('input.place_address').val('');
+
+      // hide submit button
+      $('#address-search-results #submit-button').attr('aria-hidden', 'true');
+    }
     
     // hide previous messages
     $('#address-search-results > div').attr('aria-hidden', 'true');
     
-    // hide submit button
-    $('#address-search-results #submit-button').attr('aria-hidden', 'true');
         
   }
 
@@ -36,13 +47,25 @@ var map, marker;
     var lat = coords.lat;
     var lng = coords.lng;
 
-    // set form fields
-    $('input#place_lat').val(lat.toString());
-    $('input#place_lon').val(lng.toString());
-    $('input.place_address').val(address);
+    if (map_type == 'settings'){
+        // update the url
+        $('#place_map_next').attr('href', updateQueryStringParameter($('#place_map_next').attr('href'), 'lat', lat.toString()));
+        $('#place_map_next').attr('href', updateQueryStringParameter($('#place_map_next').attr('href'), 'lon', lng.toString()));
+        $('#place_map_next').attr('href', updateQueryStringParameter($('#place_map_next').attr('href'), 'address', address));
+
+        // show the button
+        $('#place_map_next').attr('aria-hidden', 'false');
+        $('#place_map_remove').attr('aria-hidden', 'false');
     
-    // show submit button
-    $('#address-search-results #submit-button').attr('aria-hidden', 'false');
+    }else{
+      // set form fields
+      $('input#place_lat').val(lat.toString());
+      $('input#place_lon').val(lng.toString());
+      $('input.place_address').val(address);
+      
+      // show submit button
+      $('#address-search-results #submit-button').attr('aria-hidden', 'false');
+    }
   }
 
   /* add map marker */
@@ -53,7 +76,7 @@ var map, marker;
     
     var latlng = new L.LatLng(lat, lon);
     map.setView(latlng, gon.zoom);						
-    marker = L.marker(latlng).addTo(map);
+    marker = L.marker(latlng, {icon: L.icon(default_leaflet_icon_options)}).addTo(map);
     marker.dragging.enable();
     update_link_parameters(latlng, address);
 

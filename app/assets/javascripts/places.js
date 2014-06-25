@@ -93,36 +93,35 @@ $(document).ready(function(){
       } else{
         load_place_form_map();
       }  
+
+    /* perform an address search */
+    if (gon.address_search_path){
+      /* if enter key is pressed do address search */
+      $('input#address-search').keypress(function(event){
+	      var keycode = (event.keyCode ? event.keyCode : event.which);
+	      if(keycode == '13'){
+		      search_for_address();
+          return false;
+	      }
+       
+      });
+        
+      $('#submit-address-search').click(function(){
+        search_for_address();
+		    return false;
+      });
+      
+      // after enter buliding number, add it to the beginning of the address
+      $('input.builder_number').focusout(function(){
+        var val = '';
+        if ($(this).val() != ''){
+          val = $(this).val() + ' ';
+        }
+        $('input.place_address').val(val + $('#address-search-results div input[type="radio"]:checked').data('address'));
+      });
+    }
   }
   
-  /* perform an address search */
-  if (gon.address_search_path){
-    /* if enter key is pressed do address search */
-    $('input#address-search').keypress(function(event){
-	    var keycode = (event.keyCode ? event.keyCode : event.which);
-	    if(keycode == '13'){
-		    search_for_address();
-        return false;
-	    }
-     
-    });
-      
-    $('#submit-address-search').click(function(){
-      search_for_address();
-		  return false;
-    });
-    
-    // after enter buliding number, add it to the beginning of the address
-    $('input.builder_number').focusout(function(){
-      var val = '';
-      if ($(this).val() != ''){
-        val = $(this).val() + ' ';
-      }
-      $('input.place_address').val(val + $('#address-search-results div input[type="radio"]:checked').data('address'));
-    });
-    
-
-  }
 
   /*************************************************/
   /* actions for the evaluation form */
@@ -197,7 +196,7 @@ $(document).ready(function(){
 		  map.attributionControl = false;
 		  map.zoomControl = true;
 		
-      marker = L.marker([gon.lat, gon.lon]).addTo(map);
+      marker = L.marker([gon.lat, gon.lon], {icon: L.icon(default_leaflet_icon_options)}).addTo(map);
 
       // show popup
       if (gon.marker_popup){

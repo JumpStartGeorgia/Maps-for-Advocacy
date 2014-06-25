@@ -4,10 +4,16 @@
 
 
 #front-page{
+  #stats{
+    li:first-of-type {
+      margin-bottom: 20px;
+    }
+  }
+
   #search-container{
     margin-top: 20px;
     #map { 
-      height: 500px; 
+      height: 300px; 
     }  
 
     .filter_box{
@@ -18,11 +24,18 @@
       margin: 5px 10px;
     }
     
-    #search .row-fluid{
-      min-height: 56px;
-      &#filter_buttons{
+    #search {
+      .row-fluid{
+        min-height: 56px;
+      }
+      #filter_buttons{
+        margin-top: 10px;
+        text-align: right;
         min-height: inherit;
-        #clear_filters{
+      }
+      #add {
+        margin-bottom: 20px;
+        #add_link{
           text-align: right;
         }
       }
@@ -35,9 +48,8 @@
       }
     }
     #search_results{
-      margin-top: 8px;
-      padding-top: 10px;
-      border-top: 1px solid #ccc;
+      max-height: 600px;
+      overflow-y: auto;
       #selection_results{
         .place-item{
           border-bottom: 1px solid #ccc;

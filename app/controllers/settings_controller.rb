@@ -14,8 +14,16 @@ class SettingsController < ApplicationController
       gon.lat = params[:lat]
       gon.lon = params[:lon]
       
-      flash[:success] = t('settings.location.success')
+      flash[:success] = t('settings.index.success')
+    else params[:remove].present? && params[:remove] == 'true'
+      current_user.lat = nil
+      current_user.lon = nil
+      current_user.save
+
+      flash[:success] = t('settings.index.removed')
     end
+    
+    logger.debug "**************** #{gon.lat}"
 
     respond_to do |format|
       format.html 

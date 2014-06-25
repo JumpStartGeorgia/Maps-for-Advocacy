@@ -30,16 +30,20 @@ class User < ActiveRecord::Base
   # if the lat/lon has changed, update the district id
   def assign_district(override=false)
     if (self.lat_orig != self.lat || self.lon_orig != self.lon) || override
-      require 'geo_ruby/geojson'
-      
-      point = Point.from_lon_lat(self.lon, self.lat)
-      
-      districts = District.order('id')
-      districts.each do |district|
-        geo = Geometry.from_geojson(district.json)
-        if geo.contains_point?(point)
-          self.district_id = district.id
-          break
+      if self.lat.nil? || self.lon.nil?
+        self.district_id = nil
+      else
+        require 'geo_ruby/geojson'
+        
+        point = Point.from_lon_lat(self.lon, self.lat)
+        
+        districts = District.order('id')
+        districts.each do |district|
+          geo = Geometry.from_geojson(district.json)
+          if geo.contains_point?(point)
+            self.district_id = district.id
+            break
+          end
         end
       end
     end

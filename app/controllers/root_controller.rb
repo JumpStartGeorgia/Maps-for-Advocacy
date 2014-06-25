@@ -31,6 +31,7 @@ class RootController < ApplicationController
       
       @places.each do |place|
         marker = Hash.new
+        marker['id'] = place.id
         marker['lat'] = place.lat
         marker['lon'] = place.lon
         marker['popup'] = create_popup_text(place, @place_summaries)

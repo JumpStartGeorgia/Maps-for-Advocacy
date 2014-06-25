@@ -27,3 +27,13 @@ $(document).ready(function(){
 		.off('click.dropdown touchstart.dropdown.data-api', '.dropdown')
 		.on('click.dropdown touchstart.dropdown.data-api', '.dropdown form', function (e) { e.stopPropagation() });
 });
+
+
+var default_leaflet_icon_options = {
+    iconUrl:     '/assets/marker-icon.png', 
+    shadowUrl:   '/assets/marker-shadow.png',
+    iconSize:    [25, 41],
+		iconAnchor:  [12, 41],
+		popupAnchor: [1, -34],
+		shadowSize:  [41, 41]
+};

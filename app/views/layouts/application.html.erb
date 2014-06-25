@@ -57,10 +57,6 @@
           </a>
           <%= link_to(t('app.common.app_name'), root_path(:locale => I18n.locale), :class=>"brand font", :role => 'menuitem')%>
 
-          <ul class="nav">
-            <li role="menuitem"><%= link_to t('.add_place'), new_place_path, :class => 'add_evaluation' %></li>
-          </ul>
-
           <div class="container-fluid nav-collapse">
 	          <ul class="nav pull-right">
 			        <li id="header_menu" class="dropdown" role="menuitem" aria-haspopup="true">
