@@ -9,14 +9,15 @@
     </div>
     
     <div class="span4">
-      <%
-        vimeo_id = '97171156'
-        vimeo_id = '97165638' if I18n.locale != :ka
-      %>
+      <div class="iframe_container">
+        <%
+          vimeo_id = '97171156'
+          vimeo_id = '97165638' if I18n.locale != :ka
+        %>
 
-      <%= link_to t('.skip_movie'), '#why_monitor_text', :class => 'accessibly-hidden' %>
-      <iframe src="//player.vimeo.com/video/<%= vimeo_id %>" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-
+        <%= link_to t('.skip_movie'), '#why_monitor_text', :class => 'accessibly-hidden' %>
+        <iframe src="//player.vimeo.com/video/<%= vimeo_id %>" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+      </div>
     </div>
 
     <div class="span4" id="stats">
