@@ -56,7 +56,9 @@ en:
         address: Address
       disability:
         code: One-letter Code
-        active: Active
+        active_public: Active for Public Evaluations
+        active_certified: Active for Certified Evaluations
+        sort_order: Sort Order
       disability_translation:
         name: Disability
       district:
@@ -356,8 +358,10 @@ en:
       question_instructions: If you do not know the answer, please leave it blank.
     evaluation:
       title1: "Evaluation of '%{name}'"
-      title2: "%{disability} Evaluation of '%{name}'"
-      title3: "Certified %{disability} Evaluation of '%{name}'"
+      title2p: "Public Evaluation of '%{name}'"
+      title2c: "Certified Evaluation of '%{name}'"
+      title3p: "Public %{disability} Evaluation of '%{name}'"
+      title3c: "Certified %{disability} Evaluation of '%{name}'"
       header_disability: Which evaluation do you want to complete?
       disability_link_title: "'%{name}' evaluation"
       header_certification: "Do you want to submit a Certified Evaluation?"

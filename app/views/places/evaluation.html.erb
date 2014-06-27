@@ -1,19 +1,45 @@
 <%- model_class = Place -%>
 <%- model_class_trans = PlaceTranslation -%>
 <% 
-  if @disability.blank?
-    title t('.title1', :name => @place[:name]).html_safe 
-  elsif params[:certification] == true
-    title t('.title3', :name => @place[:name], :disability => @disability.name).html_safe 
-  else
-    title t('.title2', :name => @place[:name], :disability => @disability.name).html_safe 
+  if params[:stage] == '1'
+    title t('.title1', :name => @place[:name])
+  elsif params[:stage] == '2'
+    if params[:certification] == true
+      title t('.title2c', :name => @place[:name])
+    else
+      title t('.title2p', :name => @place[:name])
+    end
+  elsif params[:stage] == '3'
+    if params[:certification] == true
+      title t('.title3c', :name => @place[:name], :disability => @disability.name)
+    else
+      title t('.title3p', :name => @place[:name], :disability => @disability.name)
+    end
   end
   
 %>
 
 <%= semantic_form_for(@place, :url => evaluation_place_path(params[:id]), :html => { :class => 'form-horizontal' }) do |f| %>
 
-  <% if params[:eval_type_id].blank? %>
+  <% if params[:stage] == '1' %>
+    <h2><%= t('.header_certification') %></h2>
+
+    <div id="certification">
+      <ul>
+        <li>
+          <%= link_to t('.certification_yes_link_text'), params.merge(:certification => 1, :stage => 2), 
+              :title => t('.certification_yes_link_title'),
+              :role => 'button' %>
+        </li>
+        <li>
+          <%= link_to t('.certification_no_link_text'), params.merge(:certification => 0, :stage => 2), 
+              :title => t('.certification_no_link_title'),
+              :role => 'button' %>
+        </li>
+      </ul>
+    </div>
+
+  <% elsif params[:stage] == '2' %>
     <h2><%= t('.header_disability') %></h2>
 
     <% if @disabilities.present? %>
@@ -21,7 +47,7 @@
         <ul>
           <% @disabilities.each do |disability| %>
             <li>
-              <%= link_to disability.name, params.merge(:eval_type_id => disability.id), 
+              <%= link_to disability.name, params.merge(:eval_type_id => disability.id, :stage => 3), 
                   :title => t('.disability_link_title', :name => disability.name),
                   :role => 'button' %>
             </li>
@@ -30,24 +56,7 @@
       </div>
     <% end %>
 
-  <% elsif @needs_certification_answer %>
-    <h2><%= t('.header_certification') %></h2>
-
-    <div id="certification">
-      <ul>
-        <li>
-          <%= link_to t('.certification_yes_link_text'), params.merge(:certification => 1), 
-              :title => t('.certification_yes_link_title'),
-              :role => 'button' %>
-        </li>
-        <li>
-          <%= link_to t('.certification_no_link_text'), params.merge(:certification => 0), 
-              :title => t('.certification_no_link_title'),
-              :role => 'button' %>
-        </li>
-      </ul>
-    </div>
-  <% else %>
+  <% elsif params[:stage] == '3' %>
 
     <div id="venue_evalautions">
       <% if params[:certification] == true %>

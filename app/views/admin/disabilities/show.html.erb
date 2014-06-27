@@ -23,7 +23,13 @@
 <p><strong><%= model_class.human_attribute_name(:code) %>:</strong>
 <%= @disability.code %></p>
 
-<p><strong><%= model_class.human_attribute_name(:active) %>:</strong>
-<%= @disability.active %></p>
+<p><strong><%= model_class.human_attribute_name(:active_public) %>:</strong>
+<%= @disability.active_public %></p>
+
+<p><strong><%= model_class.human_attribute_name(:active_certified) %>:</strong>
+<%= @disability.active_certified %></p>
+
+<p><strong><%= model_class.human_attribute_name(:sort_order) %>:</strong>
+<%= @disability.sort_order %></p>
 
 

@@ -7,7 +7,7 @@ class Admin::DisabilitiesController < ApplicationController
   # GET /disabilities
   # GET /disabilities.json
   def index
-    @disabilities = Disability.all
+    @disabilities = Disability.sorted
 
     respond_to do |format|
       format.html # index.html.erb

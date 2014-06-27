@@ -22,8 +22,6 @@ class PlacesController < ApplicationController
 
       # get imgaes
       @place_images = PlaceImage.by_place(params[:id]).with_user.sorted
-
-      @disabilities = Disability.sorted.is_active
       
       certified_overall_question_categories = QuestionCategory.questions_categories_for_venue(question_category_id: @place.custom_question_category_id, is_certified: true)
 #      public_overall_question_categories = QuestionCategory.questions_categories_for_venue(question_category_id: @place.custom_public_question_category_id, is_certified: false)
@@ -35,15 +33,15 @@ class PlacesController < ApplicationController
       @data[:public][:summary] = PlaceSummary.for_place_disablity(params[:id], is_certified: false)
       @data[:public][:summary_questions] = public_overall_question_categories
 
-      # get evaluations
-      if @disabilities.present?
-        @disabilities.each do |disability|
-          qc_cert = QuestionCategory.questions_for_venue(question_category_id: @place.custom_question_category_id, disability_id: disability.id, is_certified: true)
-          qc_public = QuestionCategory.questions_for_venue(question_category_id: @place.custom_public_question_category_id, disability_id: disability.id, is_certified: false)
+      # get the disabilities
+      @disabilities_public = Disability.sorted.is_active_public
+      @disabilities_certified = Disability.sorted.is_active_certified
 
-          #####################
-          # get certified evals
-          #####################
+      # get certified evaluations
+      if @disabilities_certified.present?
+        @disabilities_certified.each do |disability|
+          qc_cert = QuestionCategory.questions_for_venue(question_category_id: @place.custom_question_category_id, disability_id: disability.id, is_certified: true)
+
           c = Hash.new
           @data[:certified][:disability_evaluations] << c
 
@@ -67,11 +65,15 @@ class PlacesController < ApplicationController
             # get user info that submitted evaluations
             c[:users] = User.for_evaluations(c[:evaluations].map{|x| x.user_id}.uniq)
           end        
+        end
+      end
 
 
-          #####################
-          # get public evals
-          #####################
+      # get public evaluations
+      if @disabilities_public.present?
+        @disabilities_public.each do |disability|
+          qc_public = QuestionCategory.questions_for_venue(question_category_id: @place.custom_public_question_category_id, disability_id: disability.id, is_certified: false)
+
           p = Hash.new
           @data[:public][:disability_evaluations] << p
           
@@ -95,7 +97,6 @@ class PlacesController < ApplicationController
             # get user info that submitted evaluations
             p[:users] = User.for_evaluations(p[:evaluations].map{|x| x.user_id}.uniq)
           end        
-
         end
       end
       
@@ -319,47 +320,63 @@ class PlacesController < ApplicationController
       if success
 		    redirect_to place_path(@place), notice: t('app.msgs.success_created', :obj => t('activerecord.models.evaluation')) 
 		    return
-      elsif params[:eval_type_id].blank?
-        @disabilities = Disability.sorted.is_active
-        respond_to do |format|
-          format.html # show.html.erb
-          format.json { render json: @place }
-        end
       else
 		    if params[:certification].blank? && current_user.role?(User::ROLES[:certification])
           # the user can submit certified evals so see if they want to or not
-          @needs_certification_answer = true
+          params[:stage] = '1'
         else      
+          # init value
+          params[:stage] = '2' if params[:stage].blank?
+
+          # set certification value, default to false if not exist
           params[:certification] = !!(params[:certification] =~ (/^(true|t|yes|y|1)$/i))
-          
-          # load the evaluation form
-          gon.show_evaluation_form = true
-
-          @disability = Disability.with_name(params[:eval_type_id])
-          
-	        # get list of questions
-          qc_id = @place.custom_question_category_id
-          if !params[:certification]
-            qc_id = @place.custom_public_question_category_id
-          end
-	        @question_categories = QuestionCategory.questions_for_venue(question_category_id: qc_id, disability_id: params[:eval_type_id], is_certified: params[:certification])
-          
-		      # create the evaluation object for however many questions there are
-		      if @question_categories.present?
-		        @place_evaluation = @place.place_evaluations.build(user_id: current_user.id, disability_id: params[:eval_type_id], is_certified: params[:certification])
-		        num_questions = QuestionCategory.number_questions(@question_categories)
-		        if num_questions > 0
-              (0..num_questions-1).each do |index|
-        		    @place_evaluation.place_evaluation_answers.build(:answer => PlaceEvaluation::ANSWERS['no_answer'])
-		          end
+        
+          if params[:stage] == '2' || params[:eval_type_id].blank? # eval type
+            @disabilities = Disability.sorted.is_active_public
+            @disabilities = Disability.sorted.is_active_certified if params[:certification] == true
+          elsif params[:stage] == '3' # eval form
+            @disability = nil
+            # make sure the eval type is active
+            if params[:certification] == true
+              @disability = Disability.is_active_certified.with_name(params[:eval_type_id])
+            else
+              @disability = Disability.is_active_public.with_name(params[:eval_type_id])
             end
-		      end
-        end
+            
+            if @disability.blank?
+              # disability could not be found, show the form again
+              params[:stage] = '2'
+              @disabilities = Disability.sorted.is_active_public
+              @disabilities = Disability.sorted.is_active_certified if params[:certification] == true
+            else
+              # load the evaluation form js
+              gon.show_evaluation_form = true
 
-        respond_to do |format|
-          format.html # show.html.erb
-          format.json { render json: @place }
+	            # get list of questions
+              qc_id = @place.custom_question_category_id
+              if !params[:certification]
+                qc_id = @place.custom_public_question_category_id
+              end
+	            @question_categories = QuestionCategory.questions_for_venue(question_category_id: qc_id, disability_id: params[:eval_type_id], is_certified: params[:certification])
+              
+		          # create the evaluation object for however many questions there are
+		          if @question_categories.present?
+		            @place_evaluation = @place.place_evaluations.build(user_id: current_user.id, disability_id: params[:eval_type_id], is_certified: params[:certification])
+		            num_questions = QuestionCategory.number_questions(@question_categories)
+		            if num_questions > 0
+                  (0..num_questions-1).each do |index|
+            		    @place_evaluation.place_evaluation_answers.build(:answer => PlaceEvaluation::ANSWERS['no_answer'])
+		              end
+                end
+		          end
+            end          
+          end
         end
+      end
+
+      respond_to do |format|
+        format.html # show.html.erb
+        format.json { render json: @place }
       end
     else
 		  flash[:info] =  t('app.msgs.does_not_exist')

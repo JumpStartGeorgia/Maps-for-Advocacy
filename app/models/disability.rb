@@ -5,17 +5,25 @@ class Disability < ActiveRecord::Base
 	has_many :place_evalations
   has_and_belongs_to_many :question_pairings
   accepts_nested_attributes_for :disability_translations
-  attr_accessible :id, :code, :disability_translations_attributes, :active
+  attr_accessible :id, :code, :disability_translations_attributes, :active_public, :active_certified, :sort_order
   
   validates :code, :presence => true
 
   def self.is_active
-    where(:active => true)
+    where('active_public = 1 or active_certified = 1')
+  end
+
+  def self.is_active_public
+    where(:active_public => true)
+  end
+
+  def self.is_active_certified
+    where(:active_certified => true)
   end
 
   # sort by name
   def self.sorted
-    with_translations(I18n.locale).order('disability_translations.name asc')
+    with_translations(I18n.locale).order('disabilities.sort_order asc, disability_translations.name asc')
   end
 
   # get a disability and include the name
@@ -86,7 +94,7 @@ class Disability < ActiveRecord::Base
 
     sql << " group by d.id, pe.place_id  "
     sql << ") as x on x.id = d.id " 
-    sql << "where d.active = 1 and dt.locale = :locale "
+    sql << "where (d.active_public = 1 or d.active_certified = 1) and dt.locale = :locale "
     sql << "group by d.id, dt.name "
     sql << "order by dt.name "
     find_by_sql([sql, :locale => I18n.locale, :venue_category_id => options[:venue_category_id], :district_id => options[:district_id], 

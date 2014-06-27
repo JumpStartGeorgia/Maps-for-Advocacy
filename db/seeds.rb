@@ -69,18 +69,24 @@ Disability.delete_all
 DisabilityTranslation.delete_all
 
 puts "creating disability records"
-d = Disability.create(:id => 1, :code => 'b', :active => true)
+d = Disability.create(:id => 1, :code => 'b', :active_public => true, :active_certified => true, :sort_order => 1)
 d.disability_translations.create(:locale => 'en', :name => 'Blind')
 d.disability_translations.create(:locale => 'ka', :name => 'Blind')
-d = Disability.create(:id => 2, :code => 's', :active => true)
+d = Disability.create(:id => 2, :code => 's', :active_public => true, :active_certified => true, :sort_order => 2)
 d.disability_translations.create(:locale => 'en', :name => 'Partially Sighted')
 d.disability_translations.create(:locale => 'ka', :name => 'Partially Sighted')
-d = Disability.create(:id => 3, :code => 'd', :active => false)
-d.disability_translations.create(:locale => 'en', :name => 'Deaf / Hard of Hearing')
-d.disability_translations.create(:locale => 'ka', :name => 'Deaf / Hard of Hearing')
-d = Disability.create(:id => 4, :code => 'p', :active => true)
-d.disability_translations.create(:locale => 'en', :name => 'Wheelchair')
-d.disability_translations.create(:locale => 'ka', :name => 'Wheelchair')
+d = Disability.create(:id => 3, :code => 'd', :active_public => true, :active_certified => false, :sort_order => 3)
+d.disability_translations.create(:locale => 'en', :name => 'Deaf')
+d.disability_translations.create(:locale => 'ka', :name => 'Deaf')
+d = Disability.create(:id => 4, :code => 'h', :active_public => true, :active_certified => false, :sort_order => 4)
+d.disability_translations.create(:locale => 'en', :name => 'Hard of Hearing')
+d.disability_translations.create(:locale => 'ka', :name => 'Hard of Hearing')
+d = Disability.create(:id => 5, :code => 'm', :active_public => true, :active_certified => true, :sort_order => 5)
+d.disability_translations.create(:locale => 'en', :name => 'Mobility Disability')
+d.disability_translations.create(:locale => 'ka', :name => 'Mobility Disability')
+d = Disability.create(:id => 6, :code => 'i', :active_public => true, :active_certified => false, :sort_order => 6)
+d.disability_translations.create(:locale => 'en', :name => 'Intellectual Disability')
+d.disability_translations.create(:locale => 'ka', :name => 'Intellectual Disability')
 
 
 ##################################

@@ -56,7 +56,9 @@ ka:
         address: მისამართი
       disability:
         code: ერთ-ასოიანი კოდი
-        active: მოქმედი
+        active_public: Active for Public Evaluations
+        active_certified: Active for Certified Evaluations
+        sort_order: Sort Order
       disability_translation:
         name: შეზღუდული შესაძლებლობები
       district:
@@ -356,8 +358,10 @@ ka:
       question_instructions: თუ არ გაქვთ პასუხი, დატოვეთ ცარიელი. 
     evaluation:
       title1: "'%{name}'-ის შეფასება"
-      title2: "'%{name}'-ის %{disability} შეფასება"
-      title3: "'%{name}'-ის სერტიფიცირებული %{disability} შეფასება"
+      title2p: "Public Evaluation of '%{name}'"
+      title2c: "Certified Evaluation of '%{name}'"
+      title3p: "Public %{disability} Evaluation of '%{name}'"
+      title3c: "Certified %{disability} Evaluation of '%{name}'"
       header_disability: რომელი შეფასების შევსება გსურთ?
       disability_link_title: "'%{name}'-ის შეფასება"
       header_certification: "გსურთ შეავსოთ სერტიფიცირებული შეფასება?"

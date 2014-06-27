@@ -11,16 +11,20 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140624112015) do
+ActiveRecord::Schema.define(:version => 20140627064232) do
 
   create_table "disabilities", :force => true do |t|
     t.string   "code"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "active",     :default => true
+    t.boolean  "active_public",                 :default => true
+    t.boolean  "active_certified",              :default => true
+    t.integer  "sort_order",       :limit => 1, :default => 1
   end
 
-  add_index "disabilities", ["active"], :name => "index_disabilities_on_active"
+  add_index "disabilities", ["active_certified"], :name => "index_disabilities_on_active_certified"
+  add_index "disabilities", ["active_public"], :name => "index_disabilities_on_active_public"
+  add_index "disabilities", ["sort_order"], :name => "index_disabilities_on_sort_order"
 
   create_table "disabilities_question_pairings", :id => false, :force => true do |t|
     t.integer "disability_id"

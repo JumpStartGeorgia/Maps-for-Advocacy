@@ -16,7 +16,9 @@
 
 	<%= f.inputs do %>
 	  <%= f.input :code, :input_html => {:size => 5, :maxlength => 1} %>
-	  <%= f.input :active, :as => :radio %>
+	  <%= f.input :active_public, :as => :radio %>
+	  <%= f.input :active_certified, :as => :radio %>
+	  <%= f.input :sort_order, :input_html => {:size => 5, :maxlength => 2} %>
 	<% end %>
 
 

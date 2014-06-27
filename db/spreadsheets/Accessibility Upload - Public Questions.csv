@@ -1,47 +1,47 @@
 Parent Category Name,Georgian Parent Category Name,Parent Category Sort Order,Parent Category Type,Child Category Name,Georgian Child Category Name,Child Category Sort Order,Child Category Type,Type,Exists Question,Required for Accessibility Flag,Question,Georgian Question,Question Sort Order,Question Evidence,Geogian Question Evidence,Venue
-Public Questions,,,public,,,,,"b,d,p,s",,,Can you independently get to the entrance of the venue?,,1,,,
-Public Questions,,,public,,,,,"b,d,p,s",,,Can you independently get into the venue?,,2,,,
-Public Questions,,,public,,,,,"b,d,p,s",,,Can you independently move through the doorways and/or corridors inside the venue?,,3,,,
-Public Questions,,,public,,,,,"b,d,p,s",,,Can you independently move through the rooms in the venue?,,4,,,
-Public Questions,,,public,,,,,"b,d,p,s",,,Can you independently reach any floor?,,5,,,
-Public Questions,,,public,,,,,"b,d,p,s",,,Can you independently use the public restroom in the venue?,,6,,,
-Public Questions,,,public,,,,,"b,d,p,s",,,Can you independently get information in an accessible format?,,7,,,
-Public Questions,,,public,,,,,"b,d,p,s",,,Can you independently get special services for people with disabilities?,,8,,,
-Public Questions,,,public,,,,,"b,d,p,s",,,Can you independently complete the task you came to the venue for?,,9,,,
-Banks,,,public_custom,,,,,"b,d,p,s",,,Can you sign independently for bank operations?,,1,,,Banks
-Hotels,,,public_custom,,,,,"b,d,p,s",,,Can you independently get to the room?,,1,,,Hotels
-Hotels,,,public_custom,,,,,"b,d,p,s",,,Can you independently get in the room?,,2,,,Hotels
-Hotels,,,public_custom,,,,,"b,d,p,s",,,Can you independently use the bathroom?,,3,,,Hotels
-Hotels,,,public_custom,,,,,"b,d,p,s",,,Can you independently use the shower?,,4,,,Hotels
-Hostels,,,public_custom,,,,,"b,d,p,s",,,Can you independently get to the room?,,1,,,Hostels
-Hostels,,,public_custom,,,,,"b,d,p,s",,,Can you independently get in the room?,,2,,,Hostels
-Hostels,,,public_custom,,,,,"b,d,p,s",,,Can you independently use the bathroom?,,3,,,Hostels
-Hostels,,,public_custom,,,,,"b,d,p,s",,,Can you independently use the shower?,,4,,,Hostels
-Pools,,,public_custom,,,,,"b,d,p,s",,,Can you independently get in the pool?,,1,,,Pools
-Stadiums,,,public_custom,,,,,"b,d,p,s",,,Is there a reserved section?,,1,,,Stadiums
-Cinema / theaters,,,public_custom,,,,,"b,d,p,s",,,Is there a reserved section?,,1,,,Cinema / theaters
-Schools,,,public_custom,,,,,"b,d,p,s",,,Can you receive inclusive education?,,1,,,Schools
-Schools,,,public_custom,,,,,"b,d,p,s",,,Can you obtain disability resources?,,2,,,Schools
-Colleges,,,public_custom,,,,,"b,d,p,s",,,Can you receive inclusive education?,,1,,,Colleges
-Colleges,,,public_custom,,,,,"b,d,p,s",,,Can you obtain disability resources?,,2,,,Colleges
-Universities,,,public_custom,,,,,"b,d,p,s",,,Can you receive inclusive education?,,1,,,Universities
-Universities,,,public_custom,,,,,"b,d,p,s",,,Can you obtain disability resources?,,2,,,Universities
-Public buses,,,public_custom,,,,,"b,d,p,s",,,Can you independently get to the bus stop?,,1,,,Public buses
-Public buses,,,public_custom,,,,,"b,d,p,s",,,Can you independently get on the bus?,,2,,,Public buses
-Public buses,,,public_custom,,,,,"b,d,p,s",,,Is there a reserved section?,,3,,,Public buses
-Metro,,,public_custom,,,,,"b,d,p,s",,,Can you independently get to the metro station platform?,,1,,,Metro
-Metro,,,public_custom,,,,,"b,d,p,s",,,Can you independently get on the metro?,,2,,,Metro
-Metro,,,public_custom,,,,,"b,d,p,s",,,Is there a reserved section?,,3,,,Metro
-Trains,,,public_custom,,,,,"b,d,p,s",,,Can you independently get to the train station platform?,,1,,,Trains
-Trains,,,public_custom,,,,,"b,d,p,s",,,Can you independently get on the train?,,2,,,Trains
-Trains,,,public_custom,,,,,"b,d,p,s",,,Is there a reserved section?,,3,,,Trains
-Airports,,,public_custom,,,,,"b,d,p,s",,,Can you independently get to the airport terminal?,,1,,,Airports
-Airports,,,public_custom,,,,,"b,d,p,s",,,Can you independently get on the plane?,,2,,,Airports
-Airports,,,public_custom,,,,,"b,d,p,s",,,Is there a reserved section?,,3,,,Airports
-Crosswalks,,,public_custom,,,,,"b,d,p,s",,,Can you independently use the crosswalk?,,1,,,Crosswalks
-Crosswalks,,,public_custom,,,,,"b,d,p,s",,,Can you independently cross the street?,,2,,,Crosswalks
-Overpasses,,,public_custom,,,,,"b,d,p,s",,,Can you independently use the overpass?,,1,,,Overpasses
-Overpasses,,,public_custom,,,,,"b,d,p,s",,,Can you independently cross the street?,,2,,,Overpasses
-Underpasses,,,public_custom,,,,,"b,d,p,s",,,Can you independently use the underpass?,,1,,,Underpasses
-Underpasses,,,public_custom,,,,,"b,d,p,s",,,Can you independently cross the street?,,2,,,Underpasses
-Sidewalks,,,public_custom,,,,,"b,d,p,s",,,Can you independently use the sidewalk?,,1,,,Sidewalks
+Public Questions,,,public,,,,,"b,s,d,h,m,i",,,Can you independently get to the entrance of the venue?,,1,,,
+Public Questions,,,public,,,,,"b,s,d,h,m,i",,,Can you independently get into the venue?,,2,,,
+Public Questions,,,public,,,,,"b,s,d,h,m,i",,,Can you independently move through the doorways and/or corridors inside the venue?,,3,,,
+Public Questions,,,public,,,,,"b,s,d,h,m,i",,,Can you independently move through the rooms in the venue?,,4,,,
+Public Questions,,,public,,,,,"b,s,d,h,m,i",,,Can you independently reach any floor?,,5,,,
+Public Questions,,,public,,,,,"b,s,d,h,m,i",,,Can you independently use the public restroom in the venue?,,6,,,
+Public Questions,,,public,,,,,"b,s,d,h,m,i",,,Can you independently get information in an accessible format?,,7,,,
+Public Questions,,,public,,,,,"b,s,d,h,m,i",,,Can you independently get special services for people with disabilities?,,8,,,
+Public Questions,,,public,,,,,"b,s,d,h,m,i",,,Can you independently complete the task you came to the venue for?,,9,,,
+Banks,,,public_custom,,,,,"b,s,d,h,m,i",,,Can you sign independently for bank operations?,,1,,,Banks
+Hotels,,,public_custom,,,,,"b,s,d,h,m,i",,,Can you independently get to the room?,,1,,,Hotels
+Hotels,,,public_custom,,,,,"b,s,d,h,m,i",,,Can you independently get in the room?,,2,,,Hotels
+Hotels,,,public_custom,,,,,"b,s,d,h,m,i",,,Can you independently use the bathroom?,,3,,,Hotels
+Hotels,,,public_custom,,,,,"b,s,d,h,m,i",,,Can you independently use the shower?,,4,,,Hotels
+Hostels,,,public_custom,,,,,"b,s,d,h,m,i",,,Can you independently get to the room?,,1,,,Hostels
+Hostels,,,public_custom,,,,,"b,s,d,h,m,i",,,Can you independently get in the room?,,2,,,Hostels
+Hostels,,,public_custom,,,,,"b,s,d,h,m,i",,,Can you independently use the bathroom?,,3,,,Hostels
+Hostels,,,public_custom,,,,,"b,s,d,h,m,i",,,Can you independently use the shower?,,4,,,Hostels
+Pools,,,public_custom,,,,,"b,s,d,h,m,i",,,Can you independently get in the pool?,,1,,,Pools
+Stadiums,,,public_custom,,,,,"b,s,d,h,m,i",,,Is there a reserved section?,,1,,,Stadiums
+Cinema / theaters,,,public_custom,,,,,"b,s,d,h,m,i",,,Is there a reserved section?,,1,,,Cinema / theaters
+Schools,,,public_custom,,,,,"b,s,d,h,m,i",,,Can you receive inclusive education?,,1,,,Schools
+Schools,,,public_custom,,,,,"b,s,d,h,m,i",,,Can you obtain disability resources?,,2,,,Schools
+Colleges,,,public_custom,,,,,"b,s,d,h,m,i",,,Can you receive inclusive education?,,1,,,Colleges
+Colleges,,,public_custom,,,,,"b,s,d,h,m,i",,,Can you obtain disability resources?,,2,,,Colleges
+Universities,,,public_custom,,,,,"b,s,d,h,m,i",,,Can you receive inclusive education?,,1,,,Universities
+Universities,,,public_custom,,,,,"b,s,d,h,m,i",,,Can you obtain disability resources?,,2,,,Universities
+Public buses,,,public_custom,,,,,"b,s,d,h,m,i",,,Can you independently get to the bus stop?,,1,,,Public buses
+Public buses,,,public_custom,,,,,"b,s,d,h,m,i",,,Can you independently get on the bus?,,2,,,Public buses
+Public buses,,,public_custom,,,,,"b,s,d,h,m,i",,,Is there a reserved section?,,3,,,Public buses
+Metro,,,public_custom,,,,,"b,s,d,h,m,i",,,Can you independently get to the metro station platform?,,1,,,Metro
+Metro,,,public_custom,,,,,"b,s,d,h,m,i",,,Can you independently get on the metro?,,2,,,Metro
+Metro,,,public_custom,,,,,"b,s,d,h,m,i",,,Is there a reserved section?,,3,,,Metro
+Trains,,,public_custom,,,,,"b,s,d,h,m,i",,,Can you independently get to the train station platform?,,1,,,Trains
+Trains,,,public_custom,,,,,"b,s,d,h,m,i",,,Can you independently get on the train?,,2,,,Trains
+Trains,,,public_custom,,,,,"b,s,d,h,m,i",,,Is there a reserved section?,,3,,,Trains
+Airports,,,public_custom,,,,,"b,s,d,h,m,i",,,Can you independently get to the airport terminal?,,1,,,Airports
+Airports,,,public_custom,,,,,"b,s,d,h,m,i",,,Can you independently get on the plane?,,2,,,Airports
+Airports,,,public_custom,,,,,"b,s,d,h,m,i",,,Is there a reserved section?,,3,,,Airports
+Crosswalks,,,public_custom,,,,,"b,s,d,h,m,i",,,Can you independently use the crosswalk?,,1,,,Crosswalks
+Crosswalks,,,public_custom,,,,,"b,s,d,h,m,i",,,Can you independently cross the street?,,2,,,Crosswalks
+Overpasses,,,public_custom,,,,,"b,s,d,h,m,i",,,Can you independently use the overpass?,,1,,,Overpasses
+Overpasses,,,public_custom,,,,,"b,s,d,h,m,i",,,Can you independently cross the street?,,2,,,Overpasses
+Underpasses,,,public_custom,,,,,"b,s,d,h,m,i",,,Can you independently use the underpass?,,1,,,Underpasses
+Underpasses,,,public_custom,,,,,"b,s,d,h,m,i",,,Can you independently cross the street?,,2,,,Underpasses
+Sidewalks,,,public_custom,,,,,"b,s,d,h,m,i",,,Can you independently use the sidewalk?,,1,,,Sidewalks
