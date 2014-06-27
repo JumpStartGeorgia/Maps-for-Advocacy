@@ -12,6 +12,7 @@ ka:
       disability: შეზღუდული შესაძლებლობება
       district: რაიონი
       page: ტექსტი გვერდებისთვის
+      convention_category: Convetion Category
     attributes:
       user:
         email: ელ.ფოსტა
@@ -71,6 +72,9 @@ ka:
       page_translation:
         title: სათაური, რომელიც გამოჩნდება შინაარსის ზემოთ
         content: შინაარსი
+      convention_category:
+      convention_category_translation:
+        name: Convention Category Name
     errors:
       messages:
         required_field: "სავალდებულოა"
@@ -209,6 +213,7 @@ ka:
       disabilities: შეზღუდული შესაძლებლობები
       districts: რაიონი
       pages: საიტზე ტექსტის რედაქტირება
+      convention_categories: Convetion Categories
     users:
       edit:
         title: ცვლილებების შეტანა მომხმარებლის გვერდზე

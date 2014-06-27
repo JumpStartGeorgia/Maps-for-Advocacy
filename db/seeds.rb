@@ -90,6 +90,48 @@ d.disability_translations.create(:locale => 'ka', :name => 'Intellectual Disabil
 
 
 ##################################
+## Convention Categories
+##################################
+puts "deleting all convention categories"
+ConventionCategory.delete_all
+ConventionCategoryTranslation.delete_all
+
+puts "creating convention category records"
+cc = ConventionCategory.create(:id => 1)
+cc.convention_category_translations.create(:locale => 'ka', :name => 'Equal Recognition Before the Law')
+cc.convention_category_translations.create(:locale => 'en', :name => 'Equal Recognition Before the Law')
+cc = ConventionCategory.create(:id => 2)
+cc.convention_category_translations.create(:locale => 'ka', :name => 'Facilities/Physical Infrastructure')
+cc.convention_category_translations.create(:locale => 'en', :name => 'Facilities/Physical Infrastructure')
+cc = ConventionCategory.create(:id => 3)
+cc.convention_category_translations.create(:locale => 'ka', :name => 'Information and Communication')
+cc.convention_category_translations.create(:locale => 'en', :name => 'Information and Communication')
+cc = ConventionCategory.create(:id => 4)
+cc.convention_category_translations.create(:locale => 'ka', :name => 'Nondiscrimination')
+cc.convention_category_translations.create(:locale => 'en', :name => 'Nondiscrimination')
+cc = ConventionCategory.create(:id => 5)
+cc.convention_category_translations.create(:locale => 'ka', :name => 'Physical Environment/Facilities')
+cc.convention_category_translations.create(:locale => 'en', :name => 'Physical Environment/Facilities')
+cc = ConventionCategory.create(:id => 6)
+cc.convention_category_translations.create(:locale => 'ka', :name => 'Reasonable Accommodation')
+cc.convention_category_translations.create(:locale => 'en', :name => 'Reasonable Accommodation')
+cc = ConventionCategory.create(:id => 7)
+cc.convention_category_translations.create(:locale => 'ka', :name => 'Right to Education')
+cc.convention_category_translations.create(:locale => 'en', :name => 'Right to Education')
+cc = ConventionCategory.create(:id => 8)
+cc.convention_category_translations.create(:locale => 'ka', :name => 'Services')
+cc.convention_category_translations.create(:locale => 'en', :name => 'Services')
+cc = ConventionCategory.create(:id => 9)
+cc.convention_category_translations.create(:locale => 'ka', :name => 'Technology/Electronic Media')
+cc.convention_category_translations.create(:locale => 'en', :name => 'Technology/Electronic Media')
+cc = ConventionCategory.create(:id => 10)
+cc.convention_category_translations.create(:locale => 'ka', :name => 'Transportation')
+cc.convention_category_translations.create(:locale => 'en', :name => 'Transportation')
+
+
+=begin
+
+##################################
 ## Districts
 ##################################
 puts "loading districts from json file"
@@ -97,19 +139,10 @@ f = File.open("#{Rails.root}/db/spreadsheets/districts.json", 'r')
 msg = District.process_json_upload(f, true)
 puts msg if msg.present?
 
-=begin
-puts "loading districts from csv file"
-f = File.open("#{Rails.root}/db/spreadsheets/districts.csv", 'r')
-msg = District.process_csv_upload(f, true)
-puts msg if msg.present?
-=end
-
 puts "loading georgian district names from csv file"
 f = File.open("#{Rails.root}/db/spreadsheets/district_ka_names.csv", 'r')
 msg = District.process_georgian_name_csv_upload(f)
 puts msg if msg.present?
-
-=begin
 
 ##################################
 ## Venues

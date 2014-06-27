@@ -1,0 +1,2 @@
+module ConventionCategoriesHelper
+end

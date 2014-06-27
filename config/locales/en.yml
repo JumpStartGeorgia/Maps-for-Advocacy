@@ -12,6 +12,7 @@ en:
       disability: Disability
       district: District
       page: Text for Pages
+      convention_category: Convetion Category
     attributes:
       user:
         email: Email Address
@@ -71,6 +72,9 @@ en:
       page_translation:
         title: Title to show above content
         content: Content
+      convention_category:
+      convention_category_translation:
+        name: Convention Category Name
     errors:
       messages:
         required_field: "is a required field."
@@ -209,6 +213,7 @@ en:
       disabilities: Disabilities
       districts: Districts
       pages: Edit Text on Site
+      convention_categories: Convetion Categories
     users:
       edit:
         title: Editing User

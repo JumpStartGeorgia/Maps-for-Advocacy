@@ -11,7 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140627064232) do
+ActiveRecord::Schema.define(:version => 20140627102041) do
+
+  create_table "convention_categories", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "convention_category_translations", :force => true do |t|
+    t.integer  "convention_category_id"
+    t.string   "locale"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "convention_category_translations", ["convention_category_id"], :name => "index_6b70d14184f63d2943e2c22673e57a76e5a3122b"
+  add_index "convention_category_translations", ["locale"], :name => "index_convention_category_translations_on_locale"
+  add_index "convention_category_translations", ["name"], :name => "index_convention_category_translations_on_name"
 
   create_table "disabilities", :force => true do |t|
     t.string   "code"

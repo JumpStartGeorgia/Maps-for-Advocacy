@@ -333,7 +333,6 @@ class PlacesController < ApplicationController
         
           # if stage is 2 but eval type already exists, set stage to 3
           # - this happens if user clicks on link to evaluate a place by a specific eval type
-logger.debug "******** #{params[:stage] == '2' && params[:eval_type_id].present?}"
           params[:stage] = '3' if params[:stage] == '2' && params[:eval_type_id].present?
         
           if params[:stage] == '2' || params[:eval_type_id].blank? # eval type
