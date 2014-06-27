@@ -12,6 +12,7 @@
   <thead>
     <tr>
       <th><%= model_class_trans.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:right_to_accessibility) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -19,6 +20,7 @@
     <% @convention_categories.each do |convention_category| %>
       <tr>
         <td><%= convention_category.name %></td>
+        <td><%= convention_category.right_to_accessibility %></td>
         <td>
           <%= link_to t('app.buttons.edit'),
                       edit_admin_convention_category_path(convention_category), :class => 'btn btn-mini' %>

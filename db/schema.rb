@@ -11,12 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140627102041) do
+ActiveRecord::Schema.define(:version => 20140627120938) do
 
   create_table "convention_categories", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "right_to_accessibility", :default => false
   end
+
+  add_index "convention_categories", ["right_to_accessibility"], :name => "index_convention_categories_on_right_to_accessibility"
 
   create_table "convention_category_translations", :force => true do |t|
     t.integer  "convention_category_id"
@@ -236,6 +239,8 @@ ActiveRecord::Schema.define(:version => 20140627102041) do
     t.string   "evidence"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "reference"
+    t.text     "help_text"
   end
 
   add_index "question_pairing_translations", ["locale"], :name => "index_question_pairing_translations_on_locale"
@@ -246,11 +251,15 @@ ActiveRecord::Schema.define(:version => 20140627102041) do
     t.integer  "question_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "sort_order",                 :default => 99
-    t.boolean  "is_exists",                  :default => false
-    t.boolean  "required_for_accessibility", :default => false
+    t.integer  "sort_order",                    :default => 99
+    t.boolean  "is_exists",                     :default => false
+    t.boolean  "required_for_accessibility",    :default => false
+    t.boolean  "is_domestic_legal_requirement", :default => false
+    t.integer  "convention_category_id"
   end
 
+  add_index "question_pairings", ["convention_category_id"], :name => "index_question_pairings_on_convention_category_id"
+  add_index "question_pairings", ["is_domestic_legal_requirement"], :name => "index_question_pairings_on_is_domestic_legal_requirement"
   add_index "question_pairings", ["question_category_id", "question_id"], :name => "idx_pairings_ids"
   add_index "question_pairings", ["required_for_accessibility"], :name => "index_question_pairings_on_required_for_accessibility"
   add_index "question_pairings", ["sort_order"], :name => "index_question_pairings_on_sort_order"

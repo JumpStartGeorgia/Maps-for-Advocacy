@@ -3,7 +3,7 @@ class ConventionCategory < ActiveRecord::Base
 
 	has_many :convention_category_translations, :dependent => :destroy
   accepts_nested_attributes_for :convention_category_translations
-  attr_accessible :id, :convention_category_translations_attributes
+  attr_accessible :id, :convention_category_translations_attributes, :right_to_accessibility
   
   
   # sort by name

@@ -73,6 +73,7 @@ ka:
         title: სათაური, რომელიც გამოჩნდება შინაარსის ზემოთ
         content: შინაარსი
       convention_category:
+        right_to_accessibility: Part of Right to Accessibility
       convention_category_translation:
         name: Convention Category Name
     errors:

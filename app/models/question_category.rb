@@ -167,13 +167,19 @@ class QuestionCategory < ActiveRecord::Base
     idx_question_evidence = 14
     idx_question_evidence_ka = 15
     idx_venue_name = 16
+    idx_domestic_legal_req = 17
+    idx_convention_category = 18
+    idx_reference = 19
+    idx_reference_ka = 20
+    idx_help_text = 21
+    idx_help_text_ka = 22
     current_parent, current_child, current_venue = nil
 
 		original_locale = I18n.locale
     I18n.locale = :en
 
     disabilities = Disability.all
-
+    convention_categories = ConventionCategory.all
 
 		QuestionCategory.transaction do
 		  if delete_first
@@ -268,19 +274,40 @@ class QuestionCategory < ActiveRecord::Base
           # create pairing
         	puts "******** creating pairing"
           qc_id = current_child.blank? ? current_parent.id : current_child.id
-          evidence = row[idx_question_evidence].present? ? row[idx_question_evidence].strip : nil
+          conv_cat = row[idx_convention_category].present? ? row[idx_convention_category].strip : nil
+          index = convention_categories.index{|x| x.name.downcase == conv_cat.downcase.strip} if conv_cat.present?
+          conv_cat_id = index.present? ? convention_categories[index].id : nil
+
+          if conv_cat.present? && conv_cat_id.blank?
+      		  msg = "Row #{n}: Could match convetion category with what is in the database. Please make sure it is spelled correctly"
+	          raise ActiveRecord::Rollback
+      		  return msg
+          end
+          
           qp = QuestionPairing.create(
                 :question_category_id => qc_id, 
                 :question_id => question.id, 
                 :sort_order => row[idx_question_sort], 
-                :is_exists => row[idx_exists].present? && row[idx_exists].to_s == '1' ? true : false,
-                :required_for_accessibility => row[idx_req_accessibility].present? && row[idx_req_accessibility].to_s == '1' ? true : false
+                :is_exists => row[idx_exists].present? ? row[idx_exists].to_s.to_bool : false,
+                :required_for_accessibility => row[idx_req_accessibility].present? ? row[idx_req_accessibility].to_s.to_bool : false,
+                :is_domestic_legal_requirement => row[idx_domestic_legal_req].present? ? row[idx_domestic_legal_req].to_s.to_bool : false,
+                :convention_category_id => conv_cat_id
               )
           
           I18n.available_locales.each do |locale|
-            ev = row[idx_question_evidence]
-            ev = row[idx_question_evidence_ka] if locale == :ka
-            qp.question_pairing_translations.create(:locale => locale, :evidence => ev)
+            ev = row[idx_question_evidence].present? ? row[idx_question_evidence] : nil
+            ref = row[idx_reference].present? ? row[idx_reference].strip : nil
+            help = row[idx_help_text].present? ? row[idx_help_text].strip : nil
+            ev_ka = row[idx_question_evidence_ka].present? ? row[idx_question_evidence_ka] : nil
+            ref_ka = row[idx_reference_ka].present? ? row[idx_reference_ka].strip : nil
+            help_ka = row[idx_help_text_ka].present? ? row[idx_help_text_ka].strip : nil
+            
+            # if the locale is georgian and georgian text exists, use it
+            ev = ev_ka if locale == :ka && ev_ka.present?
+            ref = ref_ka if locale == :ka && ref_ka.present?
+            help = help_ka if locale == :ka && help_ka.present?
+            
+            qp.question_pairing_translations.create(:locale => locale, :evidence => ev, :reference => ref, :help_text => help)
           end
          
           # add disability types if needed
