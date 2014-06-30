@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140627120938) do
+ActiveRecord::Schema.define(:version => 20140630123827) do
 
   create_table "convention_categories", :force => true do |t|
     t.datetime "created_at"
@@ -233,6 +233,16 @@ ActiveRecord::Schema.define(:version => 20140627120938) do
   add_index "question_category_translations", ["locale"], :name => "index_question_category_translations_on_locale"
   add_index "question_category_translations", ["question_category_id"], :name => "index_015e56867c95ef35f93185af6897d91e5e0c6800"
 
+  create_table "question_pairing_convention_categories", :force => true do |t|
+    t.integer  "question_pairing_id"
+    t.integer  "convention_category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "question_pairing_convention_categories", ["convention_category_id"], :name => "idx_qpcc_cc_id"
+  add_index "question_pairing_convention_categories", ["question_pairing_id"], :name => "idx_qpcc_qp_id"
+
   create_table "question_pairing_translations", :force => true do |t|
     t.integer  "question_pairing_id"
     t.string   "locale"
@@ -255,10 +265,8 @@ ActiveRecord::Schema.define(:version => 20140627120938) do
     t.boolean  "is_exists",                     :default => false
     t.boolean  "required_for_accessibility",    :default => false
     t.boolean  "is_domestic_legal_requirement", :default => false
-    t.integer  "convention_category_id"
   end
 
-  add_index "question_pairings", ["convention_category_id"], :name => "index_question_pairings_on_convention_category_id"
   add_index "question_pairings", ["is_domestic_legal_requirement"], :name => "index_question_pairings_on_is_domestic_legal_requirement"
   add_index "question_pairings", ["question_category_id", "question_id"], :name => "idx_pairings_ids"
   add_index "question_pairings", ["required_for_accessibility"], :name => "index_question_pairings_on_required_for_accessibility"

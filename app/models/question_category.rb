@@ -274,26 +274,16 @@ class QuestionCategory < ActiveRecord::Base
           # create pairing
         	puts "******** creating pairing"
           qc_id = current_child.blank? ? current_parent.id : current_child.id
-          conv_cat = row[idx_convention_category].present? ? row[idx_convention_category].strip : nil
-          index = convention_categories.index{|x| x.name.downcase == conv_cat.downcase.strip} if conv_cat.present?
-          conv_cat_id = index.present? ? convention_categories[index].id : nil
-
-          if conv_cat.present? && conv_cat_id.blank?
-      		  msg = "Row #{n}: Could match convetion category with what is in the database. Please make sure it is spelled correctly"
-	          raise ActiveRecord::Rollback
-      		  return msg
-          end
-          
           qp = QuestionPairing.create(
                 :question_category_id => qc_id, 
                 :question_id => question.id, 
                 :sort_order => row[idx_question_sort], 
                 :is_exists => row[idx_exists].present? ? row[idx_exists].to_s.to_bool : false,
                 :required_for_accessibility => row[idx_req_accessibility].present? ? row[idx_req_accessibility].to_s.to_bool : false,
-                :is_domestic_legal_requirement => row[idx_domestic_legal_req].present? ? row[idx_domestic_legal_req].to_s.to_bool : false,
-                :convention_category_id => conv_cat_id
+                :is_domestic_legal_requirement => row[idx_domestic_legal_req].present? ? row[idx_domestic_legal_req].to_s.to_bool : false
               )
           
+          # add translations
           I18n.available_locales.each do |locale|
             ev = row[idx_question_evidence].present? ? row[idx_question_evidence] : nil
             ref = row[idx_reference].present? ? row[idx_reference].strip : nil
@@ -309,6 +299,46 @@ class QuestionCategory < ActiveRecord::Base
             
             qp.question_pairing_translations.create(:locale => locale, :evidence => ev, :reference => ref, :help_text => help)
           end
+
+          # add convention catgories
+          # there might be multiple categories for a question
+          # - so split by ; and AND
+          conv_cat = row[idx_convention_category].present? ? row[idx_convention_category].strip : nil
+          if conv_cat.present?
+            conv_cats = []
+            conv_ids = []
+            if conv_cat.index('AND').present?
+              conv_cats = conv_cat.split('AND')
+            elsif conv_cat.index(';').present?
+              conv_cats = conv_cat.split(';')
+            else
+              # no ; or and, so assume just one convention
+              conv_cats << conv_cat
+            end
+            conv_cats.map!{|x| x.strip}
+            
+            # for eahc convention category, look for the matching record in db and save id if found
+            conv_cats.each do |cat|
+              if cat.present?
+                index = convention_categories.index{|x| x.name.downcase == cat.downcase.strip}
+                conv_cat_id = index.present? ? convention_categories[index].id : nil
+                
+                if conv_cat_id.present?
+                  conv_ids << conv_cat_id                
+                else
+            		  msg = "Row #{n}: Could not match convention category '#{cat}' with what is in the database. Please make sure it is spelled correctly."
+	                raise ActiveRecord::Rollback
+            		  return msg
+                end
+              end
+            end
+
+            # save the ids
+            conv_ids.each do |conv_id|
+              qp.question_pairing_convention_categories.create(:convention_category_id => conv_id)
+            end
+          end          
+          
          
           # add disability types if needed
           types = row[idx_type].present? ? row[idx_type].split(',') : nil

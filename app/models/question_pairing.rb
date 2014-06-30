@@ -6,9 +6,11 @@ class QuestionPairing < ActiveRecord::Base
 	has_many :question_pairing_translations, :dependent => :destroy
 	has_many :place_evaluation_answers, :dependent => :destroy
   has_and_belongs_to_many :disabilities
+  has_many :question_pairing_convention_categories, :dependent => :destroy
+  has_many :convention_categories, :through => :question_pairing_convetion_categories
   accepts_nested_attributes_for :question_pairing_translations
   attr_accessible :id, :question_category_id, :question_id, :question_pairing_translations_attributes, 
-      :sort_order, :is_exists, :required_for_accessibility, :is_domestic_legal_requirement, :convention_category_id
+      :sort_order, :is_exists, :required_for_accessibility, :is_domestic_legal_requirement
 
   DISABILITY_ID_SEPARATOR = "+"
 
