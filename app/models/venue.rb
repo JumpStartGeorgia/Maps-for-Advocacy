@@ -5,6 +5,7 @@ class Venue < ActiveRecord::Base
 	belongs_to :venue_category
 	has_many :venue_translations, :dependent => :destroy
 	has_many :places
+	has_many :venue_rights, :dependent => :destroy
   accepts_nested_attributes_for :venue_translations
   attr_accessible :id, :venue_category_id, :custom_question_category_id, :custom_public_question_category_id, :venue_translations_attributes, :sort_order
 

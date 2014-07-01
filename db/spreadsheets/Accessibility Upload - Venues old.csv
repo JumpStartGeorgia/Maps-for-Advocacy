@@ -1,0 +1,76 @@
+Category Name,Georgian Category Name,Category Sort,Venue Name,Georgian Venue Name,Venue Sort
+Food and Drink,საკვები და სასმელი,1,Cafe / bars,კაფე / ბარები,1
+Food and Drink,საკვები და სასმელი,1,Restaurants,რესტორნები,2
+Food and Drink,საკვები და სასმელი,1,Fast food,სწრაფი კვების ობიექტები,3
+Food and Drink,საკვები და სასმელი,1,Market,ბაზარი,4
+Food and Drink,საკვები და სასმელი,1,Grocery store,სურსათის მაღაზია,5
+Food and Drink,საკვები და სასმელი,1,Other food and drink,სხვა საკვები და სასმელები,6
+Financial Institutions and Services,ფინანსური დაწესებულებები  და სერვისები,2,Banks,ბანკები,1
+Financial Institutions and Services,ფინანსური დაწესებულებები  და სერვისები,2,ATMs and pay boxes,ბანკომატები და სწრაფი ჩარიცხვის აპარატები,2
+Financial Institutions and Services,ფინანსური დაწესებულებები  და სერვისები,2,Currency exchange,სავალუტო ჯიხურები,3
+Financial Institutions and Services,ფინანსური დაწესებულებები  და სერვისები,2,Other financial institutions and services,სხვა ფინანსური დაწესებულებები  და სერვისები,4
+Stores and Services,მაღაზიები და სერვისები,3,Stores,მაღაზიები,1
+Stores and Services,მაღაზიები და სერვისები,3,Services,მომსახურების ობიექტები,2
+Stores and Services,მაღაზიები და სერვისები,3,Other stores and services,სხვა მაღაზიები და მომსახურების ობიექტები,3
+Healthcare,ჯანდაცვა,4,Dentist,სტომატოლოგი,1
+Healthcare,ჯანდაცვა,4,Hospital,საავადმყოფო,2
+Healthcare,ჯანდაცვა,4,Pharmacy,აფთიაქი,3
+Healthcare,ჯანდაცვა,4,Other healthcare,სხვა ჯანდაცვის ობიექტი,4
+Emergency,საგანგებო,5,112,,1
+Emergency,საგანგებო,5,Other emergency,სხვა საგანგებო,2
+Government Buildings and Public Services,სამთავრობო შენობები და საჯარო მომსახურება,6,Ministries,სამინისტროები,1
+Government Buildings and Public Services,სამთავრობო შენობები და საჯარო მომსახურება,6,Courthouses,სასამართლოები,2
+Government Buildings and Public Services,სამთავრობო შენობები და საჯარო მომსახურება,6,Embassies,საელჩოები,3
+Government Buildings and Public Services,სამთავრობო შენობები და საჯარო მომსახურება,6,City halls,მერია,4
+Government Buildings and Public Services,სამთავრობო შენობები და საჯარო მომსახურება,6,Prisons,ციხეები,5
+Government Buildings and Public Services,სამთავრობო შენობები და საჯარო მომსახურება,6,Police stations,პოლიციის შენობები,6
+Government Buildings and Public Services,სამთავრობო შენობები და საჯარო მომსახურება,6,Libraries,ბიბლიოთეკები,7
+Government Buildings and Public Services,სამთავრობო შენობები და საჯარო მომსახურება,6,Post-offices,ფოსტა,8
+Government Buildings and Public Services,სამთავრობო შენობები და საჯარო მომსახურება,6,Revenue Services,შემოსავლების სამსახური,9
+Government Buildings and Public Services,სამთავრობო შენობები და საჯარო მომსახურება,6,Justice House,იუსტიციის სახლი,10
+Government Buildings and Public Services,სამთავრობო შენობები და საჯარო მომსახურება,6,Legal aid offices,იურიდიული დახმარების სამსახურები,11
+Government Buildings and Public Services,სამთავრობო შენობები და საჯარო მომსახურება,6,"Shelters (e.g., for victims of domestic violence)",თავშესაფარები (მაგ. ოჯახური ძალადობის მსხვერპლთათვის),12
+Government Buildings and Public Services,სამთავრობო შენობები და საჯარო მომსახურება,6,Polling Stations,საარჩევნო უბნები,13
+Government Buildings and Public Services,სამთავრობო შენობები და საჯარო მომსახურება,6,Other government buildings and public services,სხვა სამთავრობო შენობები და საჯარო მომსახურება,14
+Organizations,ორგანიზაციები,7,Non-governmental organizations,არასამთავრობო ორგანიზაციები,1
+Organizations,ორგანიზაციები,7,International organizations,საერთაშორისო ორგანიზაციები,2
+Organizations,ორგანიზაციები,7,Other organizations,სხვა ორგანიზაციები,3
+Places of Worship,ღვთისმსახურების ადგილების,8,Georgian Orthodox church,ქართული მართმადიდებულური ტაძრები,1
+Places of Worship,ღვთისმსახურების ადგილების,8,Mosque,მეჩეთი,2
+Places of Worship,ღვთისმსახურების ადგილების,8,Armenian Apostolic church,სომხური სამოციქულო ეკლესია,3
+Places of Worship,ღვთისმსახურების ადგილების,8,Roman Catholic church,კათოლიკური ეკლესია,4
+Places of Worship,ღვთისმსახურების ადგილების,8,Synagogue,სინაგოგა,5
+Places of Worship,ღვთისმსახურების ადგილების,8,Other places of worship,სხვა ღვთისმსახურების ადგილები,6
+Lodging,საცხოვრებელი,9,Hotels,სასტუმროები,1
+Lodging,საცხოვრებელი,9,Hostels,ჰოსტელები,2
+Lodging,საცხოვრებელი,9,Other lodging,სხვა საცხოვრებლები,3
+Sports and Recreation,სპორტი და დასვენება,10,Stadiums,სტადიონები,1
+Sports and Recreation,სპორტი და დასვენება,10,Cinema / theaters,კინო / თეატრები,2
+Sports and Recreation,სპორტი და დასვენება,10,Casinos,კაზინოები,3
+Sports and Recreation,სპორტი და დასვენება,10,Clubs,კლუბები,4
+Sports and Recreation,სპორტი და დასვენება,10,Museums,მუზეუმები,5
+Sports and Recreation,სპორტი და დასვენება,10,Historical landmarks (does not include places of worship),ისტორიული ღირშესანიშნაობები (არ მოიცავს ღვთისმსახურების ადგილებს),6
+Sports and Recreation,სპორტი და დასვენება,10,Galleries,გალერეები,7
+Sports and Recreation,სპორტი და დასვენება,10,Gardens / parks,ბაღები / პარკები,8
+Sports and Recreation,სპორტი და დასვენება,10,Beaches,სანაპიროები,9
+Sports and Recreation,სპორტი და დასვენება,10,Amusement parks,გასართობი პარკები,10
+Sports and Recreation,სპორტი და დასვენება,10,Zoos,ზოოპარკები,11
+Sports and Recreation,სპორტი და დასვენება,10,Pools,აუზები,12
+Sports and Recreation,სპორტი და დასვენება,10,Other sports and recreation,სხვა სპორი და დასვენება,13
+Education,განათლება,12,Kindergartens,საბავშვო ბაღები,1
+Education,განათლება,11,Schools,სკოლები,2
+Education,განათლება,11,Colleges,კოლეჯები,3
+Education,განათლება,11,Universities,უნივერსიტეტები,4
+Education,განათლება,11,Other education,სხვა განათლება,5
+Transportation,ტრანსპორტი,12,Public buses,ავტობუსები,1
+Transportation,ტრანსპორტი,12,Metro,მეტრო,2
+Transportation,ტრანსპორტი,12,Trains,მატარებლები,3
+Transportation,ტრანსპორტი,12,Airports,აეროპორტები,4
+Transportation,ტრანსპორტი,12,Other transportation,სხვა ტრანსპორტი,5
+Pathways,ბილიკი ,13,Crosswalks,გზაჯვარედინები,1
+Pathways,ბილიკი,13,Overpasses,ესტაკადები,2
+Pathways,ბილიკი,13,Underpasses,მიწისქვეშა გადასასვლელები,3
+Pathways,ბილიკი,13,Sidewalks,ტრუტუარები,4
+Pathways,ბილიკი,13,Other pathways,სხვა ბილიკები,5
+Habilitation and Rehabilitation Services,,14,Day Care Centers,,1
+Habilitation and Rehabilitation Services,,14,Other habilitation and rehabilitation services,,2

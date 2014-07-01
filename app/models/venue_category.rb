@@ -149,10 +149,13 @@ class VenueCategory < ActiveRecord::Base
     idx_venue_name = 3
     idx_venue_name_ka = 4
     idx_venue_sort = 5
+    idx_right = 6
     current_category = nil
     
 		original_locale = I18n.locale
     I18n.locale = :en
+
+    accessibility_rights = Right.all
 
 		VenueCategory.transaction do
 		  if delete_first
@@ -168,6 +171,7 @@ class VenueCategory < ActiveRecord::Base
         PlaceEvaluationAnswer.delete_all
         PlaceSummary.delete_all
 		  end
+
 		
 		
 		  CSV.parse(infile) do |row|
@@ -208,6 +212,46 @@ class VenueCategory < ActiveRecord::Base
               name = row[idx_venue_name_ka] if locale == :ka
               v.venue_translations.create(:locale => locale, :name => name)
             end
+            
+            # add rights
+            # there might be multiple rights for a venue
+            # - so split by ; and AND
+            right = row[idx_right].present? ? row[idx_right].strip : nil
+            if right.present?
+              rights = []
+              right_ids = []
+              if right.index('AND').present?
+                rights = right.split('AND')
+              elsif right.index(';').present?
+                rights = right.split(';')
+              else
+                # no ; or and, so assume just one convention
+                rights << right
+              end
+              rights.map!{|x| x.strip}
+              
+              # for each right, look for the matching record in db and save id if found
+              rights.each do |r|
+                if r.present?
+                  index = accessibility_rights.index{|x| x.name.downcase == r.downcase.strip}
+                  right_id = index.present? ? accessibility_rights[index].id : nil
+                  
+                  if right_id.present?
+                    right_ids << right_id                
+                  else
+              		  msg = "Row #{n}: Could not match rights '#{r}' with what is in the database. Please make sure it is spelled correctly."
+	                  raise ActiveRecord::Rollback
+              		  return msg
+                  end
+                end
+              end
+
+            # save the ids
+            right_ids.each do |right_id|
+              v.venue_rights.create(:right_id => right_id)
+            end
+          end          
+            
           else
 	    		  msg = "Row #{n}: Venue name is not provided"
 			      raise ActiveRecord::Rollback

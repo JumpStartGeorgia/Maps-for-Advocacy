@@ -2,6 +2,7 @@ class Right < ActiveRecord::Base
 	translates :name, :convention_article
 
 	has_many :right_translations, :dependent => :destroy
+	has_many :venue_rights, :dependent => :destroy
   accepts_nested_attributes_for :right_translations
   attr_accessible :id, :right_translations_attributes
   
