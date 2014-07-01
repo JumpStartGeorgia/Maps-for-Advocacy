@@ -23,9 +23,9 @@ class PlacesController < ApplicationController
       # get imgaes
       @place_images = PlaceImage.by_place(params[:id]).with_user.sorted
       
-      certified_overall_question_categories = QuestionCategory.questions_categories_for_venue(question_category_id: @place.custom_question_category_id, is_certified: true)
+      certified_overall_question_categories = QuestionCategory.questions_categories_for_venue(question_category_id: @place.custom_question_category_id, is_certified: true, venue_id: @place.venue_id)
 #      public_overall_question_categories = QuestionCategory.questions_categories_for_venue(question_category_id: @place.custom_public_question_category_id, is_certified: false)
-      public_overall_question_categories = QuestionCategory.questions_for_venue(question_category_id: @place.custom_public_question_category_id, is_certified: false)
+      public_overall_question_categories = QuestionCategory.questions_for_venue(question_category_id: @place.custom_public_question_category_id, is_certified: false, venue_id: @place.venue_id)
 
       # get overall summary
       @data[:certified][:summary] = PlaceSummary.for_place_disablity(params[:id], is_certified: true)
@@ -40,7 +40,7 @@ class PlacesController < ApplicationController
       # get certified evaluations
       if @disabilities_certified.present?
         @disabilities_certified.each do |disability|
-          qc_cert = QuestionCategory.questions_for_venue(question_category_id: @place.custom_question_category_id, disability_id: disability.id, is_certified: true)
+          qc_cert = QuestionCategory.questions_for_venue(question_category_id: @place.custom_question_category_id, disability_id: disability.id, is_certified: true, venue_id: @place.venue_id)
 
           c = Hash.new
           @data[:certified][:disability_evaluations] << c
@@ -72,7 +72,7 @@ class PlacesController < ApplicationController
       # get public evaluations
       if @disabilities_public.present?
         @disabilities_public.each do |disability|
-          qc_public = QuestionCategory.questions_for_venue(question_category_id: @place.custom_public_question_category_id, disability_id: disability.id, is_certified: false)
+          qc_public = QuestionCategory.questions_for_venue(question_category_id: @place.custom_public_question_category_id, disability_id: disability.id, is_certified: false, venue_id: @place.venue_id)
 
           p = Hash.new
           @data[:public][:disability_evaluations] << p
@@ -361,7 +361,7 @@ class PlacesController < ApplicationController
               if !params[:certification]
                 qc_id = @place.custom_public_question_category_id
               end
-	            @question_categories = QuestionCategory.questions_for_venue(question_category_id: qc_id, disability_id: params[:eval_type_id], is_certified: params[:certification])
+	            @question_categories = QuestionCategory.questions_for_venue(question_category_id: qc_id, disability_id: params[:eval_type_id], is_certified: params[:certification], venue_id: @place.venue_id)
               
 		          # create the evaluation object for however many questions there are
 		          if @question_categories.present?

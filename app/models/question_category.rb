@@ -53,7 +53,7 @@ class QuestionCategory < ActiveRecord::Base
   end
 
   # get all common question main categories and any special questions main categories if a question category id is provided  
-  # possible options: question_category_id, disability_id
+  # possible options: question_category_id, disability_id(s), :venue_id, :is_certified
   def self.questions_categories_for_venue(options = {})
     categories = []
     options[:is_certified] = true if options[:is_certified].nil?
@@ -69,8 +69,9 @@ class QuestionCategory < ActiveRecord::Base
     ops = {:category_type => options[:is_certified] == true ? TYPES['common'] : TYPES['public']}
     ops[:disability_id] = options[:disability_id] if options[:disability_id].present?
     ops[:disability_ids] = options[:disability_ids] if options[:disability_ids].present?
+    ops[:venue_id] = options[:venue_id] if options[:venue_id].present?
+
     categories << get_categories(ops)      
-    
     categories.flatten!    
     
     return categories
@@ -78,7 +79,7 @@ class QuestionCategory < ActiveRecord::Base
   
 
   # get all common questions and any special questions if a question category id is provided  
-  # possible options: question_category_id, disability_id
+  # possible options: question_category_id, disability_id(s), :venue_id, :is_certified
   def self.questions_for_venue(options = {})
     options[:is_certified] = true if options[:is_certified].nil?
     questions = []
@@ -93,8 +94,9 @@ class QuestionCategory < ActiveRecord::Base
     ops = {:category_type => options[:is_certified] == true ? TYPES['common'] : TYPES['public']}
     ops[:disability_id] = options[:disability_id] if options[:disability_id].present?
     ops[:disability_ids] = options[:disability_ids] if options[:disability_ids].present?
+    ops[:venue_id] = options[:venue_id] if options[:venue_id].present?
+
     questions << with_questions(ops)
-    
     questions.flatten!    
     
     return questions
@@ -110,6 +112,8 @@ class QuestionCategory < ActiveRecord::Base
     ops = {:category_type => options[:is_certified] == true ? TYPES['custom'] : TYPES['public_custom'], :question_category_id => question_category_id}
     ops[:disability_id] = options[:disability_id] if options[:disability_id].present?
     ops[:disability_ids] = options[:disability_ids] if options[:disability_ids].present?
+    ops[:venue_id] = options[:venue_id] if options[:venue_id].present?
+
     questions << with_questions(ops)
     questions.flatten!
 
@@ -480,14 +484,20 @@ private
     categories = nil
 
     categories = with_translations(I18n.locale).order('question_categories.sort_order asc')
+    # if want children questions to get children
+    # otherwise only get parents
     if options[:child_of].present?
       categories = categories.where('question_categories.ancestry = ?', options[:child_of]) 
     else
       categories = categories.where('question_categories.ancestry is null') 
     end
+    # filter by category type
     categories = categories.where('question_categories.category_type = ?', options[:category_type]) if options[:category_type].present?
+    # filter by question category (venue with custom questions)
     categories = categories.where('question_categories.id = ?', options[:question_category_id]) if options[:question_category_id].present?
-    
+    # only get categories that this venue is assigned to
+    categories = categories.joins(:venue_question_categories).where('venue_question_categories.venue_id = ?', options[:venue_id]) if options[:venue_id].present? && options[:category_type] == TYPES['common']
+
     return categories
   end
 end
