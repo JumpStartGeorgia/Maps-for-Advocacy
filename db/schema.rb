@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140630123827) do
+ActiveRecord::Schema.define(:version => 20140701081316) do
 
   create_table "convention_categories", :force => true do |t|
     t.datetime "created_at"
@@ -284,6 +284,24 @@ ActiveRecord::Schema.define(:version => 20140630123827) do
   add_index "question_translations", ["question_id"], :name => "index_question_translations_on_question_id"
 
   create_table "questions", :force => true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "right_translations", :force => true do |t|
+    t.integer  "right_id"
+    t.string   "locale"
+    t.string   "name"
+    t.string   "convention_article"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "right_translations", ["locale"], :name => "index_right_translations_on_locale"
+  add_index "right_translations", ["name"], :name => "index_right_translations_on_name"
+  add_index "right_translations", ["right_id"], :name => "index_right_translations_on_right_id"
+
+  create_table "rights", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
   end

@@ -8,14 +8,11 @@
 				<h3><%= t("app.language.#{trans.locale}") %></h3>
 
 				<%= translation.input :name %>
+				<%= translation.input :convention_article %>
 				<%= translation.hidden_field :locale , :value => trans.locale %>
 			</div>
 
 		<% end %>
-	<% end %>
-
-	<%= f.inputs do %>
-	  <%= f.input :right_to_accessibility, :as => :radio %>
 	<% end %>
 
   <div class="form-actions">

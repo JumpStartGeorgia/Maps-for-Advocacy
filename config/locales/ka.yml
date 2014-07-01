@@ -13,6 +13,7 @@ ka:
       district: რაიონი
       page: ტექსტი გვერდებისთვის
       convention_category: Convetion Category
+      right: Rights
     attributes:
       user:
         email: ელ.ფოსტა
@@ -76,6 +77,10 @@ ka:
         right_to_accessibility: Part of Right to Accessibility
       convention_category_translation:
         name: Convention Category Name
+      right:
+      right_translation:
+        name: Rights Name
+        convention_article: Convention Article
     errors:
       messages:
         required_field: "სავალდებულოა"
@@ -215,6 +220,7 @@ ka:
       districts: რაიონი
       pages: საიტზე ტექსტის რედაქტირება
       convention_categories: Convetion Categories
+      rights: Rights
     users:
       edit:
         title: ცვლილებების შეტანა მომხმარებლის გვერდზე

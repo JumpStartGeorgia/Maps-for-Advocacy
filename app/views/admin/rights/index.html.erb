@@ -1,0 +1,38 @@
+<%- model_class = Right -%>
+<%- model_class_trans = RightTranslation -%>
+<% title t '.title', :default => model_class.model_name.human.pluralize %>
+
+<div class="form-actions">
+  <%= link_to t('.new', :default => t("helpers.links.new")),
+              new_admin_right_path,
+              :class => 'btn btn-primary' %>
+</div>
+
+<table class="table table-striped display">
+  <thead>
+    <tr>
+      <th><%= model_class_trans.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:convention_article) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @rights.each do |right| %>
+      <tr>
+        <td><%= right.name %></td>
+        <td><%= right.convention_article %></td>
+        <td>
+          <%= link_to t('app.buttons.edit'),
+                      edit_admin_right_path(right), :class => 'btn btn-mini' %>
+          <%= link_to t('app.buttons.delete'),
+                      admin_right_path(right),
+                      :method => :delete,
+                      :confirm => t('app.buttons.confirm'),
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+

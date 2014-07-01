@@ -1,7 +1,7 @@
 class ConventionCategoryTranslation < ActiveRecord::Base
 	belongs_to :convention_category
 
-  attr_accessible :convention_category, :name, :locale
+  attr_accessible :convention_category_id, :name, :locale
 
   validates :name, :presence => true
 

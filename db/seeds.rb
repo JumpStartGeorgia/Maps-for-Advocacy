@@ -126,6 +126,48 @@ cc.convention_category_translations.create(:locale => 'ka', :name => 'Transporta
 cc.convention_category_translations.create(:locale => 'en', :name => 'Transportation')
 
 
+##################################
+## Rights
+##################################
+puts "deleting all rights"
+Right.delete_all
+RightTranslation.delete_all
+
+puts "creating rights records"
+r = Right.create(:id => 1)
+r.right_translations.create(:locale => 'en', :name => "Right to access to justice", :convention_article => "13")
+r.right_translations.create(:locale => 'ka', :name => "Right to access to justice", :convention_article => "13")
+r = Right.create(:id => 2)
+r.right_translations.create(:locale => 'en', :name => "Right to control one's own financial affairs", :convention_article => "12")
+r.right_translations.create(:locale => 'ka', :name => "Right to control one's own financial affairs", :convention_article => "12")
+r = Right.create(:id => 3)
+r.right_translations.create(:locale => 'en', :name => "Right to education", :convention_article => "24")
+r.right_translations.create(:locale => 'ka', :name => "Right to education", :convention_article => "24")
+r = Right.create(:id => 4)
+r.right_translations.create(:locale => 'en', :name => "Right to freedom of from exploitation, violence, and abuse", :convention_article => "16")
+r.right_translations.create(:locale => 'ka', :name => "Right to freedom of from exploitation, violence, and abuse", :convention_article => "16")
+r = Right.create(:id => 5)
+r.right_translations.create(:locale => 'en', :name => "Right to habilitation and rehabilitation", :convention_article => "26")
+r.right_translations.create(:locale => 'ka', :name => "Right to habilitation and rehabilitation", :convention_article => "26")
+r = Right.create(:id => 6)
+r.right_translations.create(:locale => 'en', :name => "Right to have equal access to bank loans, mortgages and other forms of financial credit", :convention_article => "12")
+r.right_translations.create(:locale => 'ka', :name => "Right to have equal access to bank loans, mortgages and other forms of financial credit", :convention_article => "12")
+r = Right.create(:id => 7)
+r.right_translations.create(:locale => 'en', :name => "Right to health", :convention_article => "25")
+r.right_translations.create(:locale => 'ka', :name => "Right to health", :convention_article => "25")
+r = Right.create(:id => 8)
+r.right_translations.create(:locale => 'en', :name => "Right to live independently and be included in the community", :convention_article => "19")
+r.right_translations.create(:locale => 'ka', :name => "Right to live independently and be included in the community", :convention_article => "19")
+r = Right.create(:id => 9)
+r.right_translations.create(:locale => 'en', :name => "Right to participate in cultural life, recreation, leisure and sport", :convention_article => "30")
+r.right_translations.create(:locale => 'ka', :name => "Right to participate in cultural life, recreation, leisure and sport", :convention_article => "30")
+r = Right.create(:id => 10)
+r.right_translations.create(:locale => 'en', :name => "Right to participate in political and public life", :convention_article => "29")
+r.right_translations.create(:locale => 'ka', :name => "Right to participate in political and public life", :convention_article => "29")
+r = Right.create(:id => 11)
+r.right_translations.create(:locale => 'en', :name => "Right to protection and safety in situations of risk", :convention_article => "11")
+r.right_translations.create(:locale => 'ka', :name => "Right to protection and safety in situations of risk", :convention_article => "11")
+
 =begin
 
 ##################################

@@ -13,6 +13,7 @@ en:
       district: District
       page: Text for Pages
       convention_category: Convetion Category
+      right: Rights
     attributes:
       user:
         email: Email Address
@@ -76,6 +77,10 @@ en:
         right_to_accessibility: Part of Right to Accessibility
       convention_category_translation:
         name: Convention Category Name
+      right:
+      right_translation:
+        name: Rights Name
+        convention_article: Convention Article
     errors:
       messages:
         required_field: "is a required field."
@@ -215,6 +220,7 @@ en:
       districts: Districts
       pages: Edit Text on Site
       convention_categories: Convetion Categories
+      rights: Rights
     users:
       edit:
         title: Editing User
