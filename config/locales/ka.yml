@@ -368,6 +368,8 @@ ka:
       evaluation_instructions: შეარჩიეთ კატეგორია და შეავსეთ შეფასება.
       question_category_link_title: იხილეთ კითხვები '%{name}'
       question_instructions: თუ არ გაქვთ პასუხი, დატოვეთ ცარიელი. 
+    public_eval_form:
+      not_know: თუ არ გაქვთ პასუხი, დატოვეთ ცარიელი. 
     evaluation:
       title1: "'%{name}'-ის შეფასება"
       title2p: "Public Evaluation of '%{name}'"

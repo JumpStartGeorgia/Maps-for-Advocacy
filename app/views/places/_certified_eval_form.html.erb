@@ -30,8 +30,10 @@
                 css = index == 0 ? '' : 'accessibly-hidden'
               %>
               <div id="<%= "question_#{cat.id}"%> " class="question_category <%= css %>" data-id="<%= cat.id %>" tabindex="0">
-                <p>
-                  <%= t('.question_instructions') %>
+                <p class="not_know_instructions">
+                  <span>
+                    <%= t('.question_instructions') %>
+                  </span>
                 </p>
 
                 <%= render :partial => 'certified_eval_form_questions', :locals => {:evaluation => evaluation, :cat => cat, :is_sub_category => false} %>
