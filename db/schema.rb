@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140701092833) do
+ActiveRecord::Schema.define(:version => 20140701104018) do
 
   create_table "convention_categories", :force => true do |t|
     t.datetime "created_at"
@@ -350,6 +350,16 @@ ActiveRecord::Schema.define(:version => 20140701092833) do
 
   add_index "venue_category_translations", ["locale"], :name => "index_venue_category_translations_on_locale"
   add_index "venue_category_translations", ["venue_category_id"], :name => "index_ebb6287e836f963636058fbf5e5bfbd51e8bdebe"
+
+  create_table "venue_question_categories", :force => true do |t|
+    t.integer  "venue_id"
+    t.integer  "question_category_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "venue_question_categories", ["question_category_id"], :name => "index_venue_question_categories_on_question_category_id"
+  add_index "venue_question_categories", ["venue_id"], :name => "index_venue_question_categories_on_venue_id"
 
   create_table "venue_rights", :force => true do |t|
     t.integer  "venue_id"
