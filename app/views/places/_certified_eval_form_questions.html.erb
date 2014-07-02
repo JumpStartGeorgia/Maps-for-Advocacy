@@ -14,18 +14,23 @@
                   @question_index += 1
                   evidence_class = ''
                   evidence_class = "question-with-evidence" if question[:evidence].present?
-                  exists_class = 'non-exists-question'
-
-                  # see if there is an exists question, and if so, only show that one
-                  if qidx == 0
-                    if cat[:questions].index{|x| x['is_exists'] == 1}.present?
-                      exists_hidden_attr = 'aria-hidden=true'
-                      exists_class = 'exists-question'
-                    end
+                  exists_class = ''
+                  data_exists_id = ''
+                  data_exists_parent_id = ''
+                  
+                  # if this is exists question, mark it as one
+                  if question[:exists_id].present?
+                    exists_class = 'exists-question'
+                    data_exists_id = "data-exists-id=#{question[:exists_id]}"
+                  end
+                  # if this is child of exists question, hide it
+                  if question[:exists_parent_id].present?
+                    exists_hidden_attr = 'aria-hidden=true'
+                    data_exists_parent_id = "data-exists-parent-id=#{question[:exists_parent_id]}"
                   end
                 %> 
-                <div class="<%= "venue_evaluation_question row-fluid #{evidence_class} #{exists_class}" %>"
-                    <%= qidx > 0 ? exists_hidden_attr : "" %>>
+                <div class="<%= "venue_evaluation_question row-fluid #{evidence_class} #{exists_class}" %>" 
+                    <%= exists_hidden_attr %> <%= data_exists_id %> <%= data_exists_parent_id %> >
                   <%= evaluation.fields_for :place_evaluation_answers, @place_evaluation.place_evaluation_answers[@question_index] do |answer| %>
 
                     <%= answer.hidden_field :question_pairing_id , :value => question[:question_pairing_id] %>
@@ -37,7 +42,12 @@
 
                     <fieldset>
                       <div class="span4">
-                        <legend><%= question[:question] %></legend>
+                        <legend>
+                          <%= question[:question] %>
+                          <% if question[:exists_id].present? %>
+                            <i class="icon-plus" title="answering yes to this question will show more questions"></i>
+                          <% end %>
+                        </legend>
                       </div>
                       <div class="span8">
                         <div class="row-fluid">

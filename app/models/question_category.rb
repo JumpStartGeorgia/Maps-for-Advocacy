@@ -165,19 +165,21 @@ class QuestionCategory < ActiveRecord::Base
     idx_child_type = 7
     idx_type = 8
     idx_exists = 9
-    idx_req_accessibility = 10
-    idx_question = 11
-    idx_question_ka = 12
-    idx_question_sort = 13
-    idx_question_evidence = 14
-    idx_question_evidence_ka = 15
-    idx_venue_name = 16
-    idx_domestic_legal_req = 17
-    idx_convention_category = 18
-    idx_reference = 19
-    idx_reference_ka = 20
-    idx_help_text = 21
-    idx_help_text_ka = 22
+    idx_exists_id = 10
+    idx_exists_parent_id = 11
+    idx_req_accessibility = 12
+    idx_question = 13
+    idx_question_ka = 14
+    idx_question_sort = 15
+    idx_question_evidence = 16
+    idx_question_evidence_ka = 17
+    idx_venue_name = 18
+    idx_domestic_legal_req = 19
+    idx_convention_category = 20
+    idx_reference = 21
+    idx_reference_ka = 22
+    idx_help_text = 23
+    idx_help_text_ka = 24
     current_parent, current_child, current_venue = nil
 
 		original_locale = I18n.locale
@@ -279,14 +281,22 @@ class QuestionCategory < ActiveRecord::Base
           # create pairing
         	puts "******** creating pairing"
           qc_id = current_child.blank? ? current_parent.id : current_child.id
-          qp = QuestionPairing.create(
+          qp = QuestionPairing.new(
                 :question_category_id => qc_id, 
                 :question_id => question.id, 
                 :sort_order => row[idx_question_sort], 
                 :is_exists => row[idx_exists].present? ? row[idx_exists].to_s.to_bool : false,
+                :exists_id => row[idx_exists_id].present? ? row[idx_exists_id].strip : nil,
+                :exists_parent_id => row[idx_exists_parent_id].present? ? row[idx_exists_parent_id].strip : nil,
                 :required_for_accessibility => row[idx_req_accessibility].present? ? row[idx_req_accessibility].to_s.to_bool : false,
                 :is_domestic_legal_requirement => row[idx_domestic_legal_req].present? ? row[idx_domestic_legal_req].to_s.to_bool : false
               )
+              
+          if !qp.save
+      		  msg = "Row #{n}: Could not create question record due to this error: #{qp.errors.full_messages.join(', ')}"
+	          raise ActiveRecord::Rollback
+      		  return msg
+          end
           
           # add translations
           I18n.available_locales.each do |locale|
@@ -395,10 +405,13 @@ class QuestionCategory < ActiveRecord::Base
       end  
   
 		end
-  	puts "****************** time to build_from_csv: #{Time.now-start} seconds"
+  	puts "****************** time to build_from_csv: #{Time.now-start} seconds for #{n} rows"
 
 		# reset the locale
 		I18n.locale = original_locale
+
+    # load the venue question category matrix
+    VenueQuestionCategory.process_complete_csv_upload
 
     return msg
   end

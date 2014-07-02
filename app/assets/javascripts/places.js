@@ -147,16 +147,27 @@ $(document).ready(function(){
     
     // if exists question is marked as has, show the rest of the questions
     $('form.place div.venue_evaluation div.exists-question input[type="radio"]').change(function(){
+      // get exists id 
+      var exists_id = $(this).closest('.venue_evaluation_question').data('exists-id');
       if (gon.answer_yes == $(this).val()){
         // show the questions
-        $(this).closest('.venue_evaluation').find('.non-exists-question').attr('aria-hidden', 'false');
+        $(this).closest('.venue_evaluation').find('.venue_evaluation_question[data-exists-parent-id="' + exists_id + '"]').each(function(){
+          $(this).attr('aria-hidden', 'false')
+
+          // reset the values
+          $(this).find('input[type="radio"]').prop('checked', false);
+          $(this).find('input[type="text"]').val('').attr('aria-hidden', 'true');
+        });
       }else{
         // hide the questions
-        $(this).closest('.venue_evaluation').find('.non-exists-question').attr('aria-hidden', 'true');
+        $(this).closest('.venue_evaluation').find('.venue_evaluation_question[data-exists-parent-id="' + exists_id + '"]').each(function(){
+          $(this).attr('aria-hidden', 'true')
+
+          // reset the values
+          $(this).find('input[type="radio"]').prop('checked', false);
+          $(this).find('input[type="text"]').val('').attr('aria-hidden', 'true');
+        });
       }
-      // reset the values
-      $(this).closest('.venue_evaluation').find('.non-exists-question input[type="radio"]').prop('checked', false);
-      $(this).closest('.venue_evaluation').find('.non-exists-question input[type="text"]').val('').attr('aria-hidden', 'true');
     });
 
     // if radio button with evidence is selected, show the text box to get the evidence

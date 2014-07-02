@@ -10,8 +10,11 @@ class QuestionPairing < ActiveRecord::Base
   has_many :convention_categories, :through => :question_pairing_convetion_categories
   accepts_nested_attributes_for :question_pairing_translations
   attr_accessible :id, :question_category_id, :question_id, :question_pairing_translations_attributes, 
-      :sort_order, :is_exists, :required_for_accessibility, :is_domestic_legal_requirement
+      :sort_order, :required_for_accessibility, :is_domestic_legal_requirement,
+      :is_exists, :exists_id, :exists_parent_id
 
+  validates_uniqueness_of :exists_id, :allow_nil => true
+ 
   DISABILITY_ID_SEPARATOR = "+"
 
   # get the questions in format that is used for computing summaries

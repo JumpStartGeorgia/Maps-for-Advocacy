@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140701104018) do
+ActiveRecord::Schema.define(:version => 20140702054633) do
 
   create_table "convention_categories", :force => true do |t|
     t.datetime "created_at"
@@ -261,10 +261,12 @@ ActiveRecord::Schema.define(:version => 20140701104018) do
     t.integer  "question_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "sort_order",                    :default => 99
-    t.boolean  "is_exists",                     :default => false
-    t.boolean  "required_for_accessibility",    :default => false
-    t.boolean  "is_domestic_legal_requirement", :default => false
+    t.integer  "sort_order",                                 :default => 99
+    t.boolean  "is_exists",                                  :default => false
+    t.boolean  "required_for_accessibility",                 :default => false
+    t.boolean  "is_domestic_legal_requirement",              :default => false
+    t.integer  "exists_id",                     :limit => 2
+    t.integer  "exists_parent_id",              :limit => 2
   end
 
   add_index "question_pairings", ["is_domestic_legal_requirement"], :name => "index_question_pairings_on_is_domestic_legal_requirement"
