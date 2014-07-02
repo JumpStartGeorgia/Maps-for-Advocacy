@@ -9,27 +9,24 @@
                   <% end %>
                   <ul class="question-results">
                     <%
-                      item_exists = true
-                      exists_index = nil
-                    %>
-                    <% cat[:questions].each_with_index do |question, qidx| %>
-                      <%
-                        # if there is an exists question and the answer is not yes, hide all other questions
-                        if qidx == 0
-                          exists_index = cat[:questions].index{|x| x['is_exists'] == 1}
-                          if exists_index.present?
-                            # get answer for this question
-                            answer = nil
-                            q = evaluation.place_evaluation_answers.select{|x| x.question_pairing_id == cat[:questions][exists_index][:question_pairing_id]}
-                            answer = q.first.answer if q.present?
-                            if answer != PlaceEvaluation::ANSWERS['has']
-                              item_exists = false
-                            end
+                      # get all exist_ids in these questions and the answers for these exists questions
+                      # - if the answer is yes, then show the child questions
+                      exists_questions = cat[:questions].select{|x| x[:exists_id].present?}
+                      show_exists_ids = []
+                      if exists_questions.present?
+                        exists_questions.each do |exists_question|
+                          answer = nil
+                          q = evaluation.place_evaluation_answers.select{|x| x.question_pairing_id == exists_question[:question_pairing_id]}
+                          answer = q.first.answer if q.present?
+                          if answer == PlaceEvaluation::ANSWERS['yes']
+                            show_exists_ids << exists_question[:exists_id]
                           end
                         end
-                      %>
-                      
-                      <% if qidx == exists_index || item_exists %>
+                      end
+                    %> 
+
+                    <% cat[:questions].each_with_index do |question, qidx| %>
+                      <% if question[:exists_parent_id].nil? || show_exists_ids.include?(question[:exists_parent_id]) %>
                         <li>
                           <div>
                             <%= question[:question] %>
