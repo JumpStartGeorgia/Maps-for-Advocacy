@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140702054633) do
+ActiveRecord::Schema.define(:version => 20140702093750) do
 
   create_table "convention_categories", :force => true do |t|
     t.datetime "created_at"
@@ -90,7 +90,7 @@ ActiveRecord::Schema.define(:version => 20140702054633) do
     t.integer  "page_id"
     t.string   "locale"
     t.string   "title"
-    t.text     "content"
+    t.text     "content",    :limit => 16777215
     t.datetime "created_at"
     t.datetime "updated_at"
   end
