@@ -171,15 +171,21 @@ class QuestionCategory < ActiveRecord::Base
     idx_question = 13
     idx_question_ka = 14
     idx_question_sort = 15
-    idx_question_evidence = 16
-    idx_question_evidence_ka = 17
-    idx_venue_name = 18
-    idx_domestic_legal_req = 19
-    idx_convention_category = 20
-    idx_reference = 21
-    idx_reference_ka = 22
-    idx_help_text = 23
-    idx_help_text_ka = 24
+    idx_validation_eq = 16
+    idx_evidence_is_angle = 17
+    idx_question_evidence1 = 18
+    idx_question_evidence1_ka = 19
+    idx_question_evidence2 = 20
+    idx_question_evidence2_ka = 21
+    idx_question_evidence3 = 22
+    idx_question_evidence3_ka = 23
+    idx_venue_name = 24
+    idx_domestic_legal_req = 25
+    idx_convention_category = 26
+    idx_reference = 27
+    idx_reference_ka = 28
+    idx_help_text = 29
+    idx_help_text_ka = 30
     current_parent, current_child, current_venue = nil
 
 		original_locale = I18n.locale
@@ -281,15 +287,90 @@ class QuestionCategory < ActiveRecord::Base
           # create pairing
         	puts "******** creating pairing"
           qc_id = current_child.blank? ? current_parent.id : current_child.id
+          # validation equation
+          val_eq = row[idx_validation_eq].present? ? row[idx_validation_eq].strip : nil
+          # strip out all # . < > ( ) to be left with just the units
+          val_eq_units = nil
+          val_eq_wout_units = nil
+          val_eq_units = val_eq.gsub(/[0-9.<>()]/, '').split(' and ')[0].strip if val_eq.present?
+          val_eq_wout_units = val_eq.gsub(val_eq_units, '').strip if val_eq_units.present?
+          # evidence fields
+          is_evidence_angle = row[idx_evidence_is_angle].present? ? row[idx_evidence_is_angle].to_s.strip.to_bool : false
+          ev1 = row[idx_question_evidence1].present? ? row[idx_question_evidence1] : nil
+          ev2 = row[idx_question_evidence2].present? ? row[idx_question_evidence2] : nil
+          ev3 = row[idx_question_evidence3].present? ? row[idx_question_evidence3] : nil
+          # get units inside ()
+          ev1_units = nil
+          ev2_units = nil
+          ev3_units = nil
+          if ev1.present?
+            ev1_units = ev1.match(/\((.*)\)/) 
+            if ev1_units.nil? && is_evidence_angle == true
+        		  msg = "Row #{n}: Units for Evidence 1 are missing. Please put something in between () like 'Number (#)'"
+              raise ActiveRecord::Rollback
+        		  return msg
+            end    		  
+            ev1_units = ev1_units.present? ? ev1_units[1].strip : nil
+          end
+          if ev2.present?
+            ev2_units = ev2.match(/\((.*)\)/) 
+            if ev2_units.nil? && is_evidence_angle == true
+        		  msg = "Row #{n}: Units for Evidence 2 are missing. Please put something in between () like 'Number (#)'"
+              raise ActiveRecord::Rollback
+        		  return msg
+            end    		  
+            ev2_units = ev2_units.present? ? ev2_units[1].strip : nil
+          end
+          if ev3.present?
+            ev3_units = ev3.match(/\((.*)\)/) 
+            if ev3_units.nil? && is_evidence_angle == true
+        		  msg = "Row #{n}: Units for Evidence 3 are missing. Please put something in between () like 'Number (#)'"
+              raise ActiveRecord::Rollback
+        		  return msg
+            end    		  
+            ev3_units = ev3_units.present? ? ev3_units[1].strip : nil
+          end
+
+          # validation equation validation
+          # - if present, at least evidence1 must have content
+          # - units in evidence1 and eq must match unless is evidence angle
+          # - if is evidence angle, then evidence 1-3 must be present
+          if val_eq.present? 
+            # evidence 1 exists?
+            if ev1.blank?
+        		  msg = "Row #{n}: A Validation Equation exists but there is no Evidence 1 text"
+	            raise ActiveRecord::Rollback
+        		  return msg
+      		  
+            # evidence angle and all 3 evidence
+            elsif is_evidence_angle == true && !(ev1.present? && ev2.present? && ev3.present?)
+        		  msg = "Row #{n}: This question is marked as an Evidence is Angle question, but Evidence 1, 2, or 3 text is missing. All three are required and should be in format of 1: Height; 2: Depth; 3: Angle"
+	            raise ActiveRecord::Rollback
+        		  return msg
+            
+      		  # matching units
+            elsif is_evidence_angle == false && !(val_eq_units.downcase == ev1_units.downcase)
+        		  msg = "Row #{n}: The units of Evidence 1 do match the units in the Validation Equation"
+	            raise ActiveRecord::Rollback
+        		  return msg
+              
+            end          
+          end
+          
+          
           qp = QuestionPairing.new(
                 :question_category_id => qc_id, 
                 :question_id => question.id, 
                 :sort_order => row[idx_question_sort], 
-                :is_exists => row[idx_exists].present? ? row[idx_exists].to_s.to_bool : false,
+                :is_exists => row[idx_exists].present? ? row[idx_exists].to_s.strip.to_bool : false,
                 :exists_id => row[idx_exists_id].present? ? row[idx_exists_id].strip : nil,
                 :exists_parent_id => row[idx_exists_parent_id].present? ? row[idx_exists_parent_id].strip : nil,
-                :required_for_accessibility => row[idx_req_accessibility].present? ? row[idx_req_accessibility].to_s.to_bool : false,
-                :is_domestic_legal_requirement => row[idx_domestic_legal_req].present? ? row[idx_domestic_legal_req].to_s.to_bool : false
+                :required_for_accessibility => row[idx_req_accessibility].present? ? row[idx_req_accessibility].to_s.strip.to_bool : false,
+                :is_domestic_legal_requirement => row[idx_domestic_legal_req].present? ? row[idx_domestic_legal_req].to_s.strip.to_bool : false,
+                :validation_equation => val_eq, 
+                :validation_equation_units => val_eq_units, 
+                :validation_equation_wout_units => val_eq_wout_units, 
+                :is_evidence_angle => is_evidence_angle
               )
               
           if !qp.save
@@ -300,19 +381,27 @@ class QuestionCategory < ActiveRecord::Base
           
           # add translations
           I18n.available_locales.each do |locale|
-            ev = row[idx_question_evidence].present? ? row[idx_question_evidence] : nil
+            # evidence 1-3 gathered above
             ref = row[idx_reference].present? ? row[idx_reference].strip : nil
             help = row[idx_help_text].present? ? row[idx_help_text].strip : nil
-            ev_ka = row[idx_question_evidence_ka].present? ? row[idx_question_evidence_ka] : nil
+            ev1_ka = row[idx_question_evidence1_ka].present? ? row[idx_question_evidence1_ka] : nil
+            ev2_ka = row[idx_question_evidence2_ka].present? ? row[idx_question_evidence2_ka] : nil
+            ev3_ka = row[idx_question_evidence3_ka].present? ? row[idx_question_evidence3_ka] : nil
             ref_ka = row[idx_reference_ka].present? ? row[idx_reference_ka].strip : nil
             help_ka = row[idx_help_text_ka].present? ? row[idx_help_text_ka].strip : nil
             
             # if the locale is georgian and georgian text exists, use it
-            ev = ev_ka if locale == :ka && ev_ka.present?
+            ev1 = ev1_ka if locale == :ka && ev1_ka.present?
+            ev2 = ev2_ka if locale == :ka && ev2_ka.present?
+            ev3 = ev3_ka if locale == :ka && ev3_ka.present?
             ref = ref_ka if locale == :ka && ref_ka.present?
             help = help_ka if locale == :ka && help_ka.present?
             
-            qp.question_pairing_translations.create(:locale => locale, :evidence => ev, :reference => ref, :help_text => help)
+            qp.question_pairing_translations.create(:locale => locale, 
+                :evidence1 => ev1, :evidence1_units => ev1_units,
+                :evidence2 => ev2, :evidence2_units => ev2_units,
+                :evidence3 => ev3, :evidence3_units => ev2_units,
+                :reference => ref, :help_text => help)
           end
 
           # add convention catgories
@@ -395,9 +484,7 @@ class QuestionCategory < ActiveRecord::Base
             current_venue.custom_public_question_category_id = current_parent.id if current_parent.category_type == TYPES['public_custom']
             current_venue.save
           end
-          
-
-          
+         
           
         	puts "******** time to process row: #{Time.now-startRow} seconds"
           puts "************************ total time so far : #{Time.now-start} seconds"
@@ -405,13 +492,14 @@ class QuestionCategory < ActiveRecord::Base
       end  
   
 		end
-  	puts "****************** time to build_from_csv: #{Time.now-start} seconds for #{n} rows"
 
 		# reset the locale
 		I18n.locale = original_locale
 
     # load the venue question category matrix
     VenueQuestionCategory.process_complete_csv_upload
+
+  	puts "****************** time to build question categories from csv: #{Time.now-start} seconds for #{n} rows"
 
     return msg
   end

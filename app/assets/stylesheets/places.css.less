@@ -199,6 +199,16 @@ form.place{
           min-height: 25px;
         }
       }
+      legend i{
+        cursor: help;
+      }
+      .evidence{
+        text-align: center;
+        .evidence-message-container{
+          margin-bottom: 0;
+          padding: 4px;
+        }
+      }
       .question-evidence{
         margin-top: 5px;
       }
@@ -228,6 +238,9 @@ form.place{
           &.not_relevant{
             background-color: #555;
             color: #fff;
+          }
+          &.disabled{
+            cursor: default;
           }
       }
       input[type=radio]:checked + label { 

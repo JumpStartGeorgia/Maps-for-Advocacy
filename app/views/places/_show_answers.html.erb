@@ -30,6 +30,9 @@
                         <li>
                           <div>
                             <%= question[:question] %>
+                            <% if question[:validation_equation].present? %>
+                              (<%= question[:validation_equation] %>)
+                            <% end %>
                           </div>
                           <% 
                             answer = nil
@@ -40,8 +43,10 @@
                           %>
                             <div class="<%= "selected-answer #{PlaceEvaluation.answer_key_name(answer)}"%>">
                               <%= t("app.common.answers.#{PlaceEvaluation.answer_key_name(answer)}") %>
-                              <% if question[:evidence].present? && q.first.evidence.present? %>
-                                <%= " (#{question[:evidence]}: #{q.first.evidence})" %>
+                              <% if q.first.evidence1.present? %>
+                                <%= " (#{q.first.evidence1})" %>
+                              <% elsif question[:is_evidence_angle].to_s.to_bool && q.first.evidence_angle.present? %>
+                                <%= " (#{number_to_percentage(q.first.evidence_angle)})" %>
                               <% end %>
                             </div>
                             

@@ -12,11 +12,18 @@
               <% cat[:questions].each_with_index do |question, qidx| %>
                 <% 
                   @question_index += 1
-                  evidence_class = ''
-                  evidence_class = "question-with-evidence" if question[:evidence].present?
                   exists_class = ''
                   data_exists_id = ''
                   data_exists_parent_id = ''
+                  disable_button = ''
+                  disable_label_class = ''
+                  evidence_data = ''
+                  
+                  # if this question has validation disable the radio buttons
+                  if question[:validation_equation].present? 
+                    disable_button = 'disabled=disabled' 
+                    disable_label_class = "disabled"
+                  end 
                   
                   # if this is exists question, mark it as one
                   if question[:exists_id].present?
@@ -28,9 +35,19 @@
                     exists_hidden_attr = 'aria-hidden=true'
                     data_exists_parent_id = "data-exists-parent-id=#{question[:exists_parent_id]}"
                   end
+                  # if this questions has validation eq, create the data tags for the eq
+                  if question[:validation_equation].present? 
+                    evidence_data << "data-val-eq="
+                    evidence_data << question[:validation_equation_wout_units]
+                    evidence_data << " data-val-eq-units="
+                    evidence_data << question[:validation_equation_units].downcase
+                    evidence_data << " data-is-angle="
+                    evidence_data << question[:is_evidence_angle].to_s.to_bool.to_s
+                  end
                 %> 
-                <div class="<%= "venue_evaluation_question row-fluid #{evidence_class} #{exists_class}" %>" 
+                <div id="<%= "question_#{question[:question_id]}" %>" class="<%= "venue_evaluation_question row-fluid #{exists_class}" %>" 
                     <%= exists_hidden_attr %> <%= data_exists_id %> <%= data_exists_parent_id %> >
+                    
                   <%= evaluation.fields_for :place_evaluation_answers, @place_evaluation.place_evaluation_answers[@question_index] do |answer| %>
 
                     <%= answer.hidden_field :question_pairing_id , :value => question[:question_pairing_id] %>
@@ -44,40 +61,71 @@
                       <div class="span4">
                         <legend>
                           <%= question[:question] %>
+                          <% if question[:validation_equation].present? %>
+                            (<%= question[:validation_equation] %>)
+                          <% end %>
+
                           <% if question[:exists_id].present? %>
-                            <i class="icon-plus" title="answering yes to this question will show more questions"></i>
+                            <i class="icon-plus tooltipster" title="<%= t('.tip_exists') %>"></i>
+                          <% end %>
+                          <% if question[:evidence1].present? %>
+                            <i class="icon-pencil tooltipster" title="<%= t('.tip_evidence') %>"></i>
+                          <% end %>
+                          <% if question[:validation_equation].present? %>
+                            <i class="icon-check tooltipster" title="<%= t('.tip_validation') %>"></i>
+                          <% end %>
+                          <% if question[:is_evidence_angle].to_s.to_bool == true %>
+                            <i class="icon-resize-full tooltipster" title="<%= t('.tip_angle') %>"></i>
                           <% end %>
                         </legend>
                       </div>
                       <div class="span8">
                         <div class="row-fluid">
+                          <div class="span2 evidence" <%= evidence_data %>>
+                            <div class="evidence-message-container accessibly-hidden alert" aria-live="polite" aria-relevant="additions" >
+                              <div class="evidence-message"></div>
+                              <a href="<%= "#evidence1_#{question[:question_id]}" %>" class="accessibly-hidden"><%= t('.skip_to_evidence_input') %></a>
+                              <% if qidx < cat[:questions].length-1 %>
+                                <a href="<%= "#question_#{cat[:questions][qidx+1][:question_id]}" %>" class="accessibly-hidden"><%= t('.skip_to_next_question') %></a>
+                              <% end %>
+                            </div>
+                            <% if question[:evidence1].present? %>
+                              <div id="<%= "evidence1_#{question[:question_id]}" %>">
+                                <%= answer.input :evidence1, :label => false, :placeholder => question[:evidence1], 
+                                  :input_html => {:title => question[:evidence1], :class => 'question-evidence', :size => 10} %>
+                              </div>
+                            <% end %>
+                            <% if question[:evidence2].present? %>
+                              <%= answer.input :evidence2, :label => false, :placeholder => question[:evidence2], 
+                                :input_html => {:title => question[:evidence2], :class => 'question-evidence', :size => 10} %>
+                            <% end %>
+                            <% if question[:evidence3].present? %>
+                              <%= answer.input :evidence3, :label => false, :placeholder => question[:evidence3], 
+                                :input_html => {:title => question[:evidence3], :class => 'question-evidence', :size => 10} %>
+                            <% end %>
+                            <% if question[:validation_equation].present? %>
+                              <%= link_to t('.validate'), '#', :class => 'process_evidence tooltipster_right', 
+                                  :title => t('.tip_validate', :val_eq => question[:validation_equation]) %>
+                            <% end %>
+                            <% if question[:is_evidence_angle].to_s.to_bool == true %>
+                              <%= answer.hidden_field :evidence_angle, :class => 'question-evidence-angle' %>
+                            <% end %>
+                          </div>
                           <div class="span2">
-                            <input id="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['yes']}" %>" 
+                             <input id="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['yes']}" %>" <%= disable_button %>
                                   name="<%= input_name %>" type="radio" value="<%= PlaceEvaluation::ANSWERS['yes'] %>">
-                            <label class="yes" for="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['yes']}" %>">
+                            <label class="yes <%= disable_label_class %>" for="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['yes']}" %>">
                               <i class="icon-white icon-thumbs-up"></i>
                               <%= t('app.common.answers.yes') %>
                             </label>
-                            
-                            <% if evidence_class.present? %>
-                              <%= answer.input :evidence1, :label => false, :placeholder => question[:evidence], 
-                                :input_html => {:title => question[:evidence], :class => 'question-evidence', :size => 10, :'aria-hidden' => "true"} %>
-                            <% end %>
-                            
                           </div>
                           <div class="span2">
-                            <input id="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['no']}" %>" 
+                            <input id="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['no']}" %>" <%= disable_button %>
                                   name="<%= input_name %>" type="radio" value="<%= PlaceEvaluation::ANSWERS['no'] %>">
-                            <label class="no" for="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['no']}" %>">
+                            <label class="no <%= disable_label_class %>" for="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['no']}" %>">
                               <i class="icon-thumbs-down icon-white"></i>
                               <%= t('app.common.answers.no') %>
                             </label>
-
-                            <% if evidence_class.present? %>
-                              <%= answer.input :evidence2, :label => false, :placeholder => question[:evidence], 
-                                :input_html => {:title => question[:evidence], :class => 'question-evidence', :size => 10, :'aria-hidden' => "true"} %>
-                            <% end %>
-
                           </div>
                           <div class="span3">
                             <input id="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['not_relevant']}" %>" 

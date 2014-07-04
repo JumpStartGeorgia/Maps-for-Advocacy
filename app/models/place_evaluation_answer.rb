@@ -3,24 +3,25 @@ class PlaceEvaluationAnswer < ActiveRecord::Base
   belongs_to :place_evaluation
   belongs_to :question_pairing
 
-  attr_accessible :place_evaluation_id, :question_pairing_id, :answer, :evidence, :evidence1, :evidence2, :old_user_id, :old_place_id
-  attr_accessor :evidence1, :evidence2
+  attr_accessible :place_evaluation_id, :question_pairing_id, :answer, :old_user_id, :old_place_id, :evidence1, :evidence2, :evidence3, :evidence_angle
   
   validates :question_pairing_id, :answer, :presence => true
 
-  before_save :populate_evidence
   before_save :populate_answer
-  
+
+  # if there is no answer, default it to no-answer
+  def populate_answer
+    self.answer = ANSWERS['no_answer'] if read_attribute(:answer).blank?
+  end
+
+=begin  
+  before_save :populate_evidence
+
   # evaluation form has two evidence textboxes
   # if one has value, set evidence to this value
   def populate_evidence
     self.evidence = read_attribute(:evidence1) if read_attribute(:evidence1).present?
     self.evidence = read_attribute(:evidence2) if read_attribute(:evidence2).present?
-  end
-
-  # if there is no answer, default it to no-answer
-  def populate_answer
-    self.answer = ANSWERS['no_answer'] if read_attribute(:answer).blank?
   end
 
   def evidence1=(text)
@@ -46,6 +47,6 @@ class PlaceEvaluationAnswer < ActiveRecord::Base
       read_attribute(:evidence)
     end
   end
-
+=end
     
 end

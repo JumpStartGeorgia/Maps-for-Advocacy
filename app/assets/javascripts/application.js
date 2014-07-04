@@ -26,6 +26,9 @@ $(document).ready(function(){
 	$('body')
 		.off('click.dropdown touchstart.dropdown.data-api', '.dropdown')
 		.on('click.dropdown touchstart.dropdown.data-api', '.dropdown form', function (e) { e.stopPropagation() });
+		
+  $('.tooltipster').tooltipster();		
+  $('.tooltipster_right').tooltipster({position:'right'});		
 });
 
 

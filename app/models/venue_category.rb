@@ -264,7 +264,7 @@ class VenueCategory < ActiveRecord::Base
       end  
   
 		end
-  	puts "****************** time to build_from_csv: #{Time.now-start} seconds for #{n} rows"
+  	puts "****************** time to build venue categories csv: #{Time.now-start} seconds for #{n} rows"
 
 		# reset the locale
 		I18n.locale = original_locale

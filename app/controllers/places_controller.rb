@@ -329,7 +329,7 @@ class PlacesController < ApplicationController
           params[:stage] = '2' if params[:stage].blank?
 
           # set certification value, default to false if not exist
-          params[:certification] = !!(params[:certification] =~ (/^(true|t|yes|y|1)$/i))
+          params[:certification] = params[:certification].to_s.to_bool
         
           # if stage is 2 but eval type already exists, set stage to 3
           # - this happens if user clicks on link to evaluate a place by a specific eval type
@@ -377,6 +377,15 @@ class PlacesController < ApplicationController
           end
         end
       end
+
+      # set gon variables for evidence evaluation messages
+      gon.no_evidence_entered = I18n.t('app.msgs.evidence_validation.no_evidence_entered')
+      gon.no_evidence_entered_angle = I18n.t('app.msgs.evidence_validation.no_evidence_entered_angle')
+      gon.no_units_entered = I18n.t('app.msgs.evidence_validation.no_units_entered')
+      gon.units_not_match = I18n.t('app.msgs.evidence_validation.units_not_match')
+      gon.units_not_match_angle = I18n.t('app.msgs.evidence_validation.units_not_match_angle')
+      gon.validation_passed = I18n.t('app.msgs.evidence_validation.validation_passed')
+      gon.validation_failed = I18n.t('app.msgs.evidence_validation.validation_failed')
 
       respond_to do |format|
         format.html # show.html.erb

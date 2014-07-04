@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140702093750) do
+ActiveRecord::Schema.define(:version => 20140703102016) do
 
   create_table "convention_categories", :force => true do |t|
     t.datetime "created_at"
@@ -111,7 +111,10 @@ ActiveRecord::Schema.define(:version => 20140702093750) do
     t.integer  "old_user_id"
     t.integer  "question_pairing_id"
     t.integer  "answer",              :default => 0
-    t.string   "evidence"
+    t.string   "evidence1"
+    t.string   "evidence2"
+    t.string   "evidence3"
+    t.string   "evidence_angle"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "place_evaluation_id"
@@ -246,7 +249,12 @@ ActiveRecord::Schema.define(:version => 20140702093750) do
   create_table "question_pairing_translations", :force => true do |t|
     t.integer  "question_pairing_id"
     t.string   "locale"
-    t.string   "evidence"
+    t.string   "evidence1"
+    t.string   "evidence1_units",     :limit => 10
+    t.string   "evidence2"
+    t.string   "evidence2_units",     :limit => 10
+    t.string   "evidence3"
+    t.string   "evidence3_units",     :limit => 10
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "reference"
@@ -261,12 +269,16 @@ ActiveRecord::Schema.define(:version => 20140702093750) do
     t.integer  "question_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "sort_order",                                 :default => 99
-    t.boolean  "is_exists",                                  :default => false
-    t.boolean  "required_for_accessibility",                 :default => false
-    t.boolean  "is_domestic_legal_requirement",              :default => false
-    t.integer  "exists_id",                     :limit => 2
-    t.integer  "exists_parent_id",              :limit => 2
+    t.integer  "sort_order",                                   :default => 99
+    t.boolean  "is_exists",                                    :default => false
+    t.boolean  "required_for_accessibility",                   :default => false
+    t.boolean  "is_domestic_legal_requirement",                :default => false
+    t.integer  "exists_id",                      :limit => 2
+    t.integer  "exists_parent_id",               :limit => 2
+    t.string   "validation_equation"
+    t.string   "validation_equation_wout_units"
+    t.string   "validation_equation_units",      :limit => 10
+    t.boolean  "is_evidence_angle",                            :default => false
   end
 
   add_index "question_pairings", ["is_domestic_legal_requirement"], :name => "index_question_pairings_on_is_domestic_legal_requirement"

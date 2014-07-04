@@ -11,6 +11,9 @@
           <div class="row-fluid">
             <div class="span4">
               <%= question[:question] %>
+              <% if question[:validation_equation].present? %>
+                (<%= question[:validation_equation] %>)
+              <% end %>
             </div>
             <div class="span8">
               <%= t('.assigned_to') %>

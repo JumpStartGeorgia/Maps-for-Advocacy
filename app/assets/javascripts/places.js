@@ -33,6 +33,23 @@ $(document).ready(function(){
     
     map.on('click', onMapClick);  
   }
+  
+  // show question evidence validation message and reset fields if necesary
+  function show_question_evidence_message(message, alert_type, obj_parent, obj_evidence, reset_values){
+    if (reset_values == undefined || reset_values == null){
+      reset_values = false;
+    }
+    
+    // show the message
+    $(obj_evidence).find('.evidence-message-container').removeClass('alert-success alert-error accessibly-hidden').addClass(alert_type);
+    $(obj_evidence).find('.evidence-message').html(message);
+    
+    // reset values if needed
+    if (reset_values){
+      $(obj_evidence).find('input[type="text"]:first').focus();
+      $(obj_parent).find('input[type="radio"]').prop('checked', false);
+    }
+  }
 
   /*************************************************/
   /* venue filter on place form */
@@ -126,60 +143,7 @@ $(document).ready(function(){
   /*************************************************/
   /* actions for the evaluation form */
   if (gon.show_evaluation_form){
-    /* show the evidence text fields as need */
-    function show_question_evidence(ths){
-      if ($(ths).is(':checked') && ($(ths).val() == gon.answer_yes || $(ths).val() == gon.answer_no) ) {
-        $(ths).closest('div.venue_evaluation_question').find('input[type="text"]').attr('aria-hidden', 'true');
-        $(ths).closest('div').find('input[type="text"]').attr('aria-hidden', 'false');
-      } else{
-        $(ths).closest('div.venue_evaluation_question').find('input[type="text"]').attr('aria-hidden', 'true');
-      }
-    }
 
-    // show the submit button if at least one item is selected
-    $('form.place div.venue_evaluation input[type="radio"]').change(function(){
-      if ($('form.place div.venue_evaluation input[type="radio"]:checked').length == 0){
-        $('form.place #submit-button').addClass('accessibly-hidden');
-      }else{
-        $('form.place #submit-button').removeClass('accessibly-hidden');
-      }
-    });
-    
-    // if exists question is marked as has, show the rest of the questions
-    $('form.place div.venue_evaluation div.exists-question input[type="radio"]').change(function(){
-      // get exists id 
-      var exists_id = $(this).closest('.venue_evaluation_question').data('exists-id');
-      if (gon.answer_yes == $(this).val()){
-        // show the questions
-        $(this).closest('.venue_evaluation').find('.venue_evaluation_question[data-exists-parent-id="' + exists_id + '"]').each(function(){
-          $(this).attr('aria-hidden', 'false')
-
-          // reset the values
-          $(this).find('input[type="radio"]').prop('checked', false);
-          $(this).find('input[type="text"]').val('').attr('aria-hidden', 'true');
-        });
-      }else{
-        // hide the questions
-        $(this).closest('.venue_evaluation').find('.venue_evaluation_question[data-exists-parent-id="' + exists_id + '"]').each(function(){
-          $(this).attr('aria-hidden', 'true')
-
-          // reset the values
-          $(this).find('input[type="radio"]').prop('checked', false);
-          $(this).find('input[type="text"]').val('').attr('aria-hidden', 'true');
-        });
-      }
-    });
-
-    // if radio button with evidence is selected, show the text box to get the evidence
-    $('form.place div.venue_evaluation div.question-with-evidence input[type="radio"]').change(function(){
-      show_question_evidence(this);
-    });
-
-    // if any fields are already marked, show evidence if necessary 
-    $('form.place div.venue_evaluation div.question-with-evidence input[type="radio"]:checked').each(function(){
-      show_question_evidence(this);
-    });
-    
     // when click on question category navigation, show the appropriate section
     $('ul.question_categories li a').click(function(){
       // unmark all links as active
@@ -196,6 +160,213 @@ $(document).ready(function(){
       $(window).scrollTop(0);
     });
     
+
+    // show the submit button if at least one item is selected
+    $('form.place div.venue_evaluation input[type="radio"]').change(function(){
+      if ($('form.place div.venue_evaluation input[type="radio"]:checked').length == 0){
+        $('form.place #submit-button').addClass('accessibly-hidden');
+      }else{
+        $('form.place #submit-button').removeClass('accessibly-hidden');
+      }
+    });
+    
+    // if exists question is marked as yes, show the rest of the questions
+    $('form.place div.venue_evaluation div.exists-question input[type="radio"]').change(function(){
+      // get exists id 
+      var exists_id = $(this).closest('.venue_evaluation_question').data('exists-id');
+      if (gon.answer_yes == $(this).val()){
+        // show the questions
+        $(this).closest('.venue_evaluation').find('.venue_evaluation_question[data-exists-parent-id="' + exists_id + '"]').each(function(){
+          $(this).attr('aria-hidden', 'false')
+
+          // reset the values
+          $(this).find('input[type="radio"]').prop('checked', false);
+          $(this).find('input[type="text"]').val('');
+        });
+      }else{
+        // hide the questions
+        $(this).closest('.venue_evaluation').find('.venue_evaluation_question[data-exists-parent-id="' + exists_id + '"]').each(function(){
+          $(this).attr('aria-hidden', 'true')
+
+          // reset the values
+          $(this).find('input[type="radio"]').prop('checked', false);
+          $(this).find('input[type="text"]').val('');
+        });
+      }
+    });
+    
+    // if press enter while in evidence field, trigger validate button
+    $('form.place div.venue_evaluation .evidence .question-evidence').keypress(function(event){
+      var keycode = (event.keyCode ? event.keyCode : event.which);
+      if(keycode == '13'){
+        $(this).closest('.evidence').find('a.process_evidence').trigger('click');
+        return false;
+      }
+     
+    });    
+
+    // process measurements and see if valid
+    $('form.place div.venue_evaluation .evidence a.process_evidence').click(function(e){
+      e.preventDefault();
+
+      var obj_parent = $(this).parent().parent();
+      var obj_evidence = $(this).parent();
+      var val_eq = $(obj_evidence).data('val-eq').toString();
+      var val_eq_units = $(obj_evidence).data('val-eq-units');
+      var is_angle = $(obj_evidence).data('is-angle');
+      var raw_evidence = [];
+      var evidence = [];
+      var units = [];
+
+      $(this).parent().find('.evidence-message-container').attr('aria-busy', 'true');
+
+      // get evidence and unit values
+      $(obj_evidence).find('input[type="text"]').each(function(){
+        raw_evidence.push($(this).val().trim());
+        evidence.push(/[0-9.]+/g.exec($(this).val().trim())); // number, no units
+        units.push($(this).val().replace(/[^a-zA-Z]+/g, '').trim()); // text only
+      });
+      
+      // if no evidence entered, show error
+      // - if this is an angle measurement, either the first 2 evidences must be provided or the last one
+      var has_evidence = true;
+      var has_angle_evidence = true;
+      if (is_angle){
+        if (!((evidence[0] != null && evidence[0].length > 0 && evidence[1] != null && evidence[1].length > 0 && (evidence[2] == null || evidence[2].length == 0)) || 
+              (evidence[2] != null && evidence[2].length > 0 && (evidence[0] == null || evidence[0].length == 0) && (evidence[0] == null || evidence[0].length == 0)))) {
+          has_angle_evidence = false;
+        }
+      }else{
+        for(var i=0; i<evidence.length;i++){
+          if (evidence[i] == null || evidence[i].length == 0){
+            has_evidence = false;
+            break;
+          }
+        }
+      }
+      if (!has_evidence){
+        show_question_evidence_message(gon.no_evidence_entered, 'alert-error', obj_parent, obj_evidence, true)
+        return
+      }else if (!has_angle_evidence){
+        show_question_evidence_message(gon.no_evidence_entered_angle, 'alert-error', obj_parent, obj_evidence, true)
+        return
+      }
+      
+      // if units not match or not provided, show error
+      var has_units = true;
+      var units_match = true;
+      var units_angle_match = true;
+      if (is_angle){
+        // if height/depth provided, make sure they are in the same units
+        if (units[0].toLowerCase() != units[1].toLowerCase()){
+          units_angle_match = false;
+        }
+      }else {
+        for(var i=0; i<units.length;i++){
+          if (units[i].length == 0){
+            has_units = false;
+            break;
+          }else if (units[i].toLowerCase() != val_eq_units){
+            units_match = false;
+            break;
+          }
+        }
+      }
+      if (!has_units){
+        show_question_evidence_message(gon.no_units_entered, 'alert-error', obj_parent, obj_evidence, true)
+        return
+      }else if (!units_match){
+        show_question_evidence_message(gon.units_not_match.replace('[unit]', val_eq_units), 'alert-error', obj_parent, obj_evidence, true)
+        return
+      }else if (!units_angle_match){
+        show_question_evidence_message(gon.units_not_match_angle, 'alert-error', obj_parent, obj_evidence, true)
+        return
+      }
+      
+      // perform analysis
+      // - if this is an angle measurement, calculate the % so can do comparisson
+      // - otherwise, compare by =, < or >
+      var validates = false;
+      var user_entered_value;
+      if (evidence[0] != null){
+        user_entered_value = parseFloat(evidence[0][0]);
+      }
+      if (is_angle){
+        // if height/depth provided, use it
+        // else use degrees
+        if (evidence[0] != null && evidence[0].length > 0 && evidence[1] != null && evidence[1].length > 0){
+          // height/depth
+          // - eq = height/depth * 100
+          user_entered_value = parseFloat(evidence[0][0]) / parseFloat(evidence[1][0]) * 100;
+        }else{
+          // degrees
+          // - eq = tan(degrees) * 100
+          user_entered_value = Math.tan(parseFloat(evidence[2][0])*Math.PI/180)*100;
+        }
+      }
+
+      // figure out what comparisson to use
+			var indexG = val_eq.indexOf(">");
+			var indexL = val_eq.indexOf("<");
+			if (indexG >= 0 && indexL >= 0) {
+        values = val_eq.split(' and ');
+        if (indexG == 0){
+			    var value1 = parseFloat(values[0].replace('>', ''));
+			    var value2 = parseFloat(values[1].replace('<', ''));
+					if (user_entered_value >= value1 && user_entered_value <= value2){
+					  validates = true;
+					}
+        }else {
+			    var value1 = parseFloat(values[0].replace('<', ''));
+			    var value2 = parseFloat(values[1].replace('>', ''));
+					if (user_entered_value <= value1 && user_entered_value >= value2){
+					  validates = true;
+					}
+        }          
+			} else if (indexL >= 0) {
+				// set to <=
+		    var value = parseFloat(val_eq.replace('<', ''));
+				if (user_entered_value <= value){
+				  validates = true;
+				}
+			} else if (indexG >= 0) {
+				// set to >=
+		    var value = parseFloat(val_eq.replace('>', ''));
+				if (user_entered_value >= value){
+				  validates = true;
+				}
+			} else {
+				// set to '='
+				if (user_entered_value == parseFloat(val_eq)){
+				  validates = true;
+				}
+			}
+      
+      if (validates){
+        show_question_evidence_message(gon.validation_passed, 'alert-success', obj_parent, obj_evidence)
+        $(obj_evidence).find(' + div > input[type="radio"]').prop('checked', true).removeProp('disabled');
+        $(obj_evidence).find('+ div + div > input[type="radio"]').attr('disabled', true);
+      }else{
+        show_question_evidence_message(gon.validation_failed, 'alert-success', obj_parent, obj_evidence)
+        $(obj_evidence).find(' + div > input[type="radio"]').attr('disabled', true);
+        $(obj_evidence).find('+ div + div > input[type="radio"]').prop('checked', true).removeProp('disabled');
+      }
+      
+      // if this is an angle, record the value
+      if(is_angle){
+        $(obj_evidence).find('input.question-evidence-angle').val(user_entered_value);
+      }
+      
+      evidence_angle
+
+      // make sure the submit button is showing
+      $('form.place #submit-button').removeClass('accessibly-hidden');
+
+
+      $(this).parent().find('.evidence-message-container').attr('aria-busy', 'true');
+    });
+    
+
   }
 
 

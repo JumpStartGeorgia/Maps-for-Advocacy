@@ -167,6 +167,14 @@ en:
       added_new_venue: The new Venue has been added to this Venue Category.
       missing_required: Please supply all required information.
       cause_not_accessible: "This answer makes the overall evaluation result be 'Not Accessible'"
+      evidence_validation:  
+        no_evidence_entered: Please enter measurement
+        no_evidence_entered_angle: 'Enter measurements for one of the following: Height and Depth; OR Angle'
+        no_units_entered: Include units with measurement
+        units_not_match: Units must be in '[unit]'
+        units_not_match_angle: Height and Depth units must be the same
+        validation_passed: Passes Validation!
+        validation_failed: Fails Validation!
   layouts:
     application:
       menu: Menu
@@ -368,6 +376,15 @@ en:
       evaluation_instructions: Fill out the evaluation by selecting a category and answering the statements.
       question_category_link_title: View questions in '%{name}'
       question_instructions: If you do not know the answer, please leave it blank.
+    certified_eval_form_questions:
+      tip_exists: Answering yes to this question will show more questions
+      tip_evidence: Mesaurements are needed for this question
+      tip_validation: Your measurement input will determine the answer for this question
+      tip_angle: "This measurement is for a ramp slope. Please measure one of the following: the height of the ramp and the depth of the ramp; OR the angle of the ramp."
+      validate: Validate
+      tip_validate: "Compare your measurements to the required value of '%{val_eq}' and determine the answer for the question"
+      skip_to_evidence_input: Skip to the measurement input field (jump)
+      skip_to_next_question: Skip to the next question (jump)
     public_eval_form:
       not_know: If you do not know the answer, please leave it blank.
     evaluation:
