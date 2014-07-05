@@ -67,7 +67,8 @@ var map, marker, map_type, near_markers;
       // set form fields
       $('input#place_lat').val(lat.toString());
       $('input#place_lon').val(lng.toString());
-      $('input.place_address').val(address);
+      // create data-original so can easily append building number to address
+      $('input.place_address').val(address).data('original', address);
       
       // show submit button
       $('#address-search-results #submit-button').attr('aria-hidden', 'false');

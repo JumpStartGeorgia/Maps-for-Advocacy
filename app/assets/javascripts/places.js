@@ -134,7 +134,9 @@ $(document).ready(function(){
         if ($(this).val() != ''){
           val = $(this).val() + ' ';
         }
-        $('input.place_address').val(val + $('#address-search-results div input[type="radio"]:checked').data('address'));
+        $('input.place_address').each(function(){
+          $(this).val(val + $(this).data('original'));
+        });
       });
     }
   }
