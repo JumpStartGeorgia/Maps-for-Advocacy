@@ -264,13 +264,14 @@ class VenueCategory < ActiveRecord::Base
       end  
   
 		end
-  	puts "****************** time to build venue categories csv: #{Time.now-start} seconds for #{n} rows"
 
 		# reset the locale
 		I18n.locale = original_locale
 
     # load the venue question category matrix
-    VenueQuestionCategory.process_complete_csv_upload
+    VenueQuestionCategory.process_complete_csv_upload if msg.blank?
+
+  	puts "****************** time to build venue categories csv: #{Time.now-start} seconds for #{n} rows"
 
     return msg
   end

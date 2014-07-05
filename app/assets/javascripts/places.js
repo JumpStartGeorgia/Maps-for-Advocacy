@@ -201,6 +201,7 @@ $(document).ready(function(){
     $('form.place div.venue_evaluation .evidence .question-evidence').keypress(function(event){
       var keycode = (event.keyCode ? event.keyCode : event.which);
       if(keycode == '13'){
+        event.preventDefault();
         $(this).closest('.evidence').find('a.process_evidence').trigger('click');
         return false;
       }

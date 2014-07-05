@@ -278,7 +278,6 @@ class PlacesController < ApplicationController
     end
     
     if params[:near_venue_id].present? && coords.present?
-    logger.debug "************ #{coords}"
       x = Place.get_places_near(coords[0][:coordinates][0], coords[0][:coordinates][1], params[:near_venue_id])
       if x.present?
         x.each do |place|
@@ -406,8 +405,6 @@ class PlacesController < ApplicationController
     @place = Place.with_translation(params[:id]).first
     gon.load_place_photos_path = upload_photos_place_url(:id => @place.id, :format => :json)
     @place_image_count = @place.place_images.count
-
-    Rails.logger.debug "///////////////////// #{place_destroy_photo_path(:id => 16, :place_id => 3)}"
 
     if @place.present?
       respond_to do |format|

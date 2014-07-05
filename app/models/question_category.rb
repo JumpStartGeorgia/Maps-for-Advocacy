@@ -497,7 +497,7 @@ class QuestionCategory < ActiveRecord::Base
 		I18n.locale = original_locale
 
     # load the venue question category matrix
-    VenueQuestionCategory.process_complete_csv_upload
+    VenueQuestionCategory.process_complete_csv_upload if msg.blank?
 
   	puts "****************** time to build question categories from csv: #{Time.now-start} seconds for #{n} rows"
 
