@@ -59,8 +59,32 @@ p = Page.create(:id => 4, :name => 'un_cprd')
 p.page_translations.create(:locale => 'en', :title => 'United Nations Convention on the Rights of Persons with Disabilities')
 p.page_translations.create(:locale => 'ka', :title => 'United Nations Convention on the Rights of Persons with Disabilities')
 p = Page.create(:id => 5, :name => 'partners')
-p.page_translations.create(:locale => 'en', :title => 'Project Partners')
-p.page_translations.create(:locale => 'ka', :title => 'Project Partners')
+p.page_translations.create(:locale => 'en', :title => 'Project Partners', :content => '<div>
+  <a href="http://www.ertad.org/" title="Go to ERTAD\'s webiste" target="_blank"><img src="/assets/ertad.png" alt="ERTAD logo" /></a>    
+</div>
+<div id="mariani">
+  <a href="https://www.facebook.com/NGOmariani" title="Go to their Mariani\'s" target="_blank"><img src="/assets/mariani.jpg" alt="Mariani logo" /></a>    
+</div>
+<div>
+  <a href="http://www.newmediaadvocacy.org/" title="Go to NMAP\'s webiste" target="_blank"><img src="/assets/nmap.png" alt="NMAP logo" /></a>    
+</div>
+<div>
+  <a href="http://jumpstart.ge/" title="Go to JumpStart\'s webiste" target="_blank"><img src="/assets/jumpstart-logo.png" title="JumpStart Georgia logo" /></a>    
+</div>
+')
+p.page_translations.create(:locale => 'ka', :title => 'Project Partners', :content => '<div>
+  <a href="http://www.ertad.org/" title="Go to ERTAD\'s webiste" target="_blank"><img src="/assets/ertad.png" alt="ERTAD logo" /></a>    
+</div>
+<div id="mariani">
+  <a href="https://www.facebook.com/NGOmariani" title="Go to their Mariani\'s" target="_blank"><img src="/assets/mariani.jpg" alt="Mariani logo" /></a>    
+</div>
+<div>
+  <a href="http://www.newmediaadvocacy.org/" title="Go to NMAP\'s webiste" target="_blank"><img src="/assets/nmap.png" alt="NMAP logo" /></a>    
+</div>
+<div>
+  <a href="http://jumpstart.ge/" title="Go to JumpStart\'s webiste" target="_blank"><img src="/assets/jumpstart-logo.png" title="JumpStart Georgia logo" /></a>    
+</div>
+')
 
 
 
