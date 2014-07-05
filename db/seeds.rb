@@ -58,6 +58,9 @@ p.page_translations.create(:locale => 'ka', :title => 'Georgian Legislation')
 p = Page.create(:id => 4, :name => 'un_cprd')
 p.page_translations.create(:locale => 'en', :title => 'United Nations Convention on the Rights of Persons with Disabilities')
 p.page_translations.create(:locale => 'ka', :title => 'United Nations Convention on the Rights of Persons with Disabilities')
+p = Page.create(:id => 5, :name => 'partners')
+p.page_translations.create(:locale => 'en', :title => 'Project Partners')
+p.page_translations.create(:locale => 'ka', :title => 'Project Partners')
 
 
 

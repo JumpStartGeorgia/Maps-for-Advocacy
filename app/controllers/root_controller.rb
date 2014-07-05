@@ -96,6 +96,20 @@ logger.debug "----------------- #{@stats}"
 	  end
   end
 
+  def partners
+    @page = Page.by_name('partners')
+  
+    if @page.present?
+      respond_to do |format|
+        format.html 
+      end
+    else
+		  flash[:info] =  t('app.msgs.does_not_exist')
+		  redirect_to root_path(:locale => I18n.locale)
+		  return
+	  end
+  end
+
 
   private
   
