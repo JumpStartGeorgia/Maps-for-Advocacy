@@ -16,7 +16,7 @@
           # check if venue category has at least one venue with questions
           x = questions[:venue].select{|x| x[:venue_category] == current_venue_category}
           x = x.map{|x| x[:questions]}.flatten!.map{|x| x[:questions]}.flatten! if x.present?
-          skip_venue_cat = x.length == 0
+          skip_venue_cat = x.blank?
         %>
 
         <% if !skip_venue_cat %>
