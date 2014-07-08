@@ -2,6 +2,9 @@ module ApplicationHelper
   def title(page_title)
     content_for(:title) { page_title.html_safe }
   end
+  def body_id(id)
+    content_for(:body_id) { "id='#{id}'".html_safe }
+  end
 
 	def flash_translation(level)
     case level

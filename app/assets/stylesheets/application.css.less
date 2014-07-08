@@ -7,6 +7,7 @@
  *= require formtastic-bootstrap
  *= require jquery.ui.core
  *= require jquery.ui.theme
+ *= require jquery.ui.menu
  *= require dataTables/jquery.dataTables.bootstrap
  *= require jquery.fileupload-ui
  *= require_tree .
@@ -248,7 +249,7 @@ footer, footer ul li, footer div#right ul li {
 
 /* add place/evaluation button */
 .navbar .nav > li > a.add_evaluation, a.add_evaluation, a.view_more, a.search, a.reset_filters,
-#submit-button input, a#place_name_next, a#place_map_next, a#place_map_remove,
+#submit-button input, a#place_name_next, a#place_map_next, a#place_map_remove, a#btn_print,
 a.add_photos, a.return_place, a.cancel_eval, a.process_evidence{
   background-color: #3287CC;
   color: #fff !important;
@@ -281,11 +282,11 @@ a.view_more, a.return_place{
 a.view_more:hover, a.return_place:hover{
   background-color: #444;
 }
-a.add_photos, a.search{
+a.add_photos, a.search, a#btn_print{
   background-color: #5bb75b;
   color: #fff !important;
 }
-a.add_photos:hover, a.search:hover{
+a.add_photos:hover, a.search:hover, a#btn_print:hover{
   background-color: #3b973b;
 }
 

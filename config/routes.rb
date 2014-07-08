@@ -57,6 +57,9 @@ BootstrapStarter::Application.routes.draw do
     # user settings
 		match '/settings', :to => 'settings#index', :as => :settings, :via => :get
 
+    # print questions
+		match '/print', :to => 'print#index', :as => :print, :via => :get
+
     # methodology
 		match '/methodology', :to => 'methodology#index', :as => :methodology, :via => :get
 		match '/methodology/questions', :to => 'methodology#questions', :as => :methodology_questions, :via => :get

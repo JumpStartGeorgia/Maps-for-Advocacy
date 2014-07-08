@@ -1,0 +1,65 @@
+<% if cat[:questions].present? %>
+  <% if is_sub_category %>
+    <h5><%= cat.name %></h5>
+  <% else %>
+    <h4><%= cat.name %></h4>
+  <% end %>
+  
+  <div class="questions">
+    <% cat[:questions].each do |question| %>
+      <% 
+        dis_ids = []
+        if question[:disability_id].present?
+          dis_ids << question[:disability_id]
+        end
+        if question[:disability_ids].present?
+          dis_ids << question[:disability_ids].split(',')
+        end
+        dis_ids.flatten!.map!{|x| x.to_i}.sort!
+      %>
+      <div class="question_container clear" data-disability-ids="<%= dis_ids %>">
+        <div class="question">
+          <%= question[:question] %>
+          <% if question[:validation_equation].present? %>
+            (<%= question[:validation_equation] %>)
+          <% end %>
+        </div>
+        <% if question[:evidence1].present? %>
+          <div class="evidence">
+            <%= question[:evidence1] %>:
+          </div>
+        <% end %>
+        <% if question[:evidence2].present? %>
+          <div class="evidence">
+            <%= question[:evidence2] %>:
+          </div>
+        <% end %>
+        <% if question[:evidence3].present? %>
+          <div class="evidence">
+            <%= question[:evidence3] %>:
+          </div>
+        <% end %>
+        
+        <% if question[:validation_equation].present? %>
+          <% if question[:is_evidence_angle].to_s.to_bool == true %>
+
+          <% else %>
+
+          <% end %>
+        <% else %>
+          <div class="icons">
+            <i class="icon-thumbs-up icon-white "></i>
+            <i class="icon-thumbs-down icon-white"></i>
+            <i class="icon-remove icon-white"></i>
+          </div>
+        <% end %>
+      </div>
+    <% end %>
+
+    <% if cat[:sub_categories].present? %>
+      <% cat[:sub_categories].each do |sub| %>
+        <%= render :partial => 'show_questions', :locals => {:cat => sub, :is_sub_category => true} %>
+      <% end %>
+    <% end %>
+  </div>
+<% end %>

@@ -1,0 +1,147 @@
+<% title t('.title') %>
+<% body_id 'print' %>
+
+<div id="filter_options" class="hidden-print">
+  <form class="form-horizontal" id="print_options">
+    <div id="row1" class="clear">
+      <div>
+        <legend>
+          <strong><%= t('.header_venue') %>:</strong>
+        </legend>
+        <ul id="venues">
+          <%
+            categories = @venue_categories.map{|x| [x.id, x.venue_category]}.uniq
+            categories.each do |category|
+          %>
+          <li>
+            <%= link_to category[1], '#' %>
+            <%
+              venues = @venue_categories.select{|x| x.id == category[0]}
+              if venues.present?
+            %>
+                <ul>
+                  <% venues.each do |venue| %>
+                    <li>          
+                      <%= link_to venue[:venue], '#', :'data-id' => venue[:custom_question_category_id] %>
+                    </li>
+                  <% end %>
+                </ul>
+            <% end %>
+          </li>
+        
+        <% end %>
+        </ul>
+      </div>
+      <div>
+        <div data-evaluation-type-ids="<%= @disabilities.map{|x| x.id} %>" id="evaluation_types">
+          <legend>
+            <strong><%= t('.header_evaluation_type') %>:</strong>
+          </legend>
+          <% @disabilities.each do |dis| %>
+            <label class="checkbox">
+              <input type="checkbox" name="evaluation_type" id="evaluation_type_<%= dis.id %>" value="<%= dis.id %>" checked="checked">
+              <%= dis.name %>
+            </label>
+          <% end %>
+        </div>
+        <div>
+          <legend>
+            <strong><%= t('.header_layout') %>:</strong>
+          </legend>
+          <label class="radio">
+            <input type="radio" name="layout" id="layout_portrait" value="portrait" checked="checked">
+            <%= t('.portrait') %>
+          </label>
+          <label class="radio">
+            <input type="radio" name="layout" id="layout_landscape" value="landscape">
+            <%= t('.landscape') %>
+          </label>
+        </div>
+        <div style="display: none;">
+          <legend>
+            <strong><%= t('.header_help') %>:</strong>
+          </legend>
+          <label class="radio">
+            <input type="radio" name="help" id="help_yes" value="yes">
+            <%= t('app.common.answers.yes') %>
+          </label>
+          <label class="radio">
+            <input type="radio" name="help" id="help_no" value="no" checked="checked">
+            <%= t('app.common.answers.no') %>
+          </label>
+        </div>
+        <div>
+          <p>
+            <%= t('.print_instructions') %>
+          </p>
+        </div>
+        <div>
+          <%= link_to "#", :id => 'btn_print' do %>
+            <i class="icon-print icon-white "></i>
+            <%= t('.print') %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<div id="print_area">
+  <div id="print_heading">
+    <div id="row1" class="clear">
+      <div id="venue_name">
+        <%= t('.all_venues') %>:
+        <span></span>
+      </div>
+      <div>
+        <% @disabilities.each do |dis| %>
+          <div class="evaluation_type" data-id="<%= dis.id %>">
+            <%= dis.name %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <div id="row2" class="clear">
+      <div>
+        <%= t('.header_place') %>:
+      </div>
+      <div>
+        <%= t('.header_address') %>:
+      </div>
+    </div>
+  </div>
+
+  <div id="print_questions">
+
+
+    <% @questions[:common].each do |cat| %>
+      <%= render :partial => 'show_questions', :locals => {:cat => cat, :is_sub_category => false} %>
+    <% end %>
+
+
+    <% 
+      current_venue_category = '' 
+      skip_venue_cat = false
+    %>
+    <% @questions[:venue].each do |venue| %>
+      <% if venue[:venue_category] != current_venue_category %>
+        <% current_venue_category = venue[:venue_category] %>
+        <% 
+          # check if venue category has at least one venue with questions
+          x = @questions[:venue].select{|x| x[:venue_category] == current_venue_category}
+          x = x.map{|x| x[:questions]}.flatten!.map{|x| x[:questions]}.flatten! if x.present?
+          skip_venue_cat = x.blank?
+        %>
+      <% end %>
+
+      <% if !skip_venue_cat %>
+        <% venue[:questions].each do |cat| %>
+          <div class="venue_questions" data-id="<%= cat[:questions].map{|x| x[:question_category_id].to_s}.uniq.first %>">
+            <%= render :partial => 'show_questions', :locals => {:cat => cat, :is_sub_category => false} %>
+          </div>
+        <% end %>
+      <% end %>
+    <% end %>
+    
+  </div>
+</div>

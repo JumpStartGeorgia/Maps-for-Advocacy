@@ -175,6 +175,7 @@ ka:
         units_not_match_angle: Height and Depth units must be the same
         validation_passed: Passes Validation!
         validation_failed: Fails Validation!
+      print_landscape: "Selecting 'Landscape' Paper Orientation only formats the content for landscape printing. In order to print in landscape layout, you must select landscape from the options in the print window."
   layouts:
     application:
       menu: მენიუ
@@ -185,6 +186,7 @@ ka:
       un_cprd: UN CPRD
       georgian_legislation: საქართველოს კანონმდებლობა
       partners: Project Partners
+      print: Print Certified Evaluation
       sign_out: გასვლა
       js_link_title: ჯამპსტარტ ჯორჯიას - ჩვენ გაწვდით ინფორმაციას უკეთ!
       js_link_text: აგებულია
@@ -450,3 +452,17 @@ ka:
       explanation1: ადგილმდებარეობები გულისხმობს ადგილებს, გზებს და ობიექტებს, რომლებსაც გააჩნიათ გეოგრაფიული მდებარეობა და შესაძლებელია მათი ხელმისაწვდომობის შეფასება.
     calculations:
       title: მეთოდოლოგიური - გამოთვლები    
+  print:
+    index:
+      title: Print Out Certified Evaluation      
+      header_venue: Venue
+      header_evaluation_type: Evaluation Type
+      header_layout: Paper Orientation
+      header_help: Include Help Information
+      portrait: Portrait
+      landscape: Landscape
+      print: Print the Evaluation
+      print_instructions: Everything below the line is what will be printed out.
+      print_instructions: Everything below the line is what will be printed out.
+      header_place: Place Name
+      header_address: Address
