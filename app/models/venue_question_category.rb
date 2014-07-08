@@ -68,7 +68,7 @@ class VenueQuestionCategory < ActiveRecord::Base
           # find the venue
           index = venues.index{|x| x.name.downcase == row[idx_venue].downcase.strip}
           if index.blank?
-      		  msg = "Row #{n}: Venue '#{row[idx_name]}' could not be found in the database. Please make sure it is spelled correctly."
+      		  msg = "Row #{n}: Venue '#{row[idx_venue]}' could not be found in the database. Please make sure it is spelled correctly."
 		        raise ActiveRecord::Rollback
       		  return msg
           end

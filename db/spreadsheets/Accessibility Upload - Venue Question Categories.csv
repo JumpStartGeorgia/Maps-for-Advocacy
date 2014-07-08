@@ -1,16 +1,16 @@
 Venue,General,Accessibility Services,Public Transportation,Parking,Outside Pathways,Entrances,"Interior Corridors, Doorways and Passageways",Interior Rooms,Public Restrooms,Website
-Cafe / bars,1,1,1,1,,1,1,1,1,1
-Restaurants,1,1,1,1,,1,1,1,1,1
+Cafe / bar,1,1,1,1,,1,1,1,1,1
+Restaurant,1,1,1,1,,1,1,1,1,1
 Fast food,1,1,1,1,,1,1,1,1,1
 Market,1,1,1,1,,1,1,1,1,1
 Grocery store,1,1,1,1,,1,1,1,1,1
 Other food and drink,1,1,1,1,,1,1,1,1,1
-Banks,1,1,1,1,,1,1,1,1,1
-ATMs and pay boxes,1,,1,1,,1,,,,
+Bank,1,1,1,1,,1,1,1,1,1
+ATM / pay box,1,,1,1,,1,,,,
 Currency exchange,1,,1,1,,1,1,1,,1
 Other financial institutions and services,1,1,1,1,,1,1,1,1,1
-Stores,1,1,1,1,,1,1,1,1,1
-Services,1,1,1,1,,1,1,1,1,1
+Store,1,1,1,1,,1,1,1,1,1
+Service,1,1,1,1,,1,1,1,1,1
 Other stores and services,1,1,1,1,,1,1,1,1,1
 Dentist,1,1,1,1,,1,1,1,1,1
 Hospital,1,1,1,1,,1,1,1,1,1
@@ -18,22 +18,22 @@ Pharmacy,1,1,1,1,,1,1,1,1,1
 Other healthcare,1,1,1,1,,1,1,1,1,1
 112,,1,,,,,,,,
 Other emergency,1,1,1,1,,1,1,1,1,1
-Ministries,1,1,1,1,,1,1,1,1,1
-Courthouses,1,1,1,1,,1,1,1,1,1
-Embassies,1,1,1,1,,1,1,1,1,1
-City halls,1,1,1,1,,1,1,1,1,1
-Prisons,1,1,1,1,,1,1,1,1,1
-Police stations,1,1,1,1,,1,1,1,1,1
-Libraries,1,1,1,1,,1,1,1,1,1
-Post-offices,1,1,1,1,,1,1,1,1,1
-Revenue Services,1,1,1,1,,1,1,1,1,1
+Ministry,1,1,1,1,,1,1,1,1,1
+Courthouse,1,1,1,1,,1,1,1,1,1
+Embassy,1,1,1,1,,1,1,1,1,1
+City hall,1,1,1,1,,1,1,1,1,1
+Prison,1,1,1,1,,1,1,1,1,1
+Police station,1,1,1,1,,1,1,1,1,1
+Library,1,1,1,1,,1,1,1,1,1
+Post-office,1,1,1,1,,1,1,1,1,1
+Revenue Service,1,1,1,1,,1,1,1,1,1
 Justice House,1,1,1,1,,1,1,1,1,1
-Legal aid offices,1,1,1,1,,1,1,1,1,1
-"Shelters (e.g., for victims of domestic violence)",1,1,1,1,,1,1,1,1,1
-Polling Stations,1,1,1,1,,1,1,1,1,1
+Legal aid office,1,1,1,1,,1,1,1,1,1
+"Shelter (e.g., for victims of domestic violence)",1,1,1,1,,1,1,1,1,1
+Polling Station,1,1,1,1,,1,1,1,1,1
 Other government buildings and public services,1,1,1,1,,1,1,1,1,1
-Non-governmental organizations,1,1,1,1,,1,1,1,1,1
-International organizations,1,1,1,1,,1,1,1,1,1
+Non-governmental organization,1,1,1,1,,1,1,1,1,1
+International organization,1,1,1,1,,1,1,1,1,1
 Other organizations,1,1,1,1,,1,1,1,1,1
 Georgian Orthodox church,1,1,1,1,,1,1,1,,1
 Mosque,1,1,1,1,,1,1,1,,1
@@ -41,36 +41,37 @@ Armenian Apostolic church,1,1,1,1,,1,1,1,,1
 Roman Catholic church,1,1,1,1,,1,1,1,,1
 Synagogue,1,1,1,1,,1,1,1,,1
 Other places of worship,1,1,1,1,,1,1,1,,1
-Hotels,1,1,1,1,,1,1,1,1,1
-Hostels,1,1,1,1,,1,1,1,1,1
+Hotel,1,1,1,1,,1,1,1,1,1
+Hostel,1,1,1,1,,1,1,1,1,1
 Other lodging,1,1,1,1,,1,1,1,1,1
-Stadiums,1,1,1,1,,1,1,1,1,1
-Cinema / theaters,1,1,1,1,,1,1,1,1,1
-Casinos,1,1,1,1,,1,1,1,1,1
-Clubs,1,1,1,1,,1,1,1,1,1
-Museums,1,1,1,1,1,1,1,1,1,1
-Historical landmarks (does not include places of worship),1,1,1,1,1,1,1,1,1,1
-Galleries,1,1,1,1,,1,1,1,1,1
-Gardens / parks,1,1,1,1,1,,,,1,1
-Beaches,1,1,1,1,1,,,,1,
-Amusement parks,1,1,1,1,1,1,1,1,1,1
-Zoos,1,1,1,1,1,1,1,1,1,1
-Pools,1,1,1,1,1,1,,,1,1
+Stadium,1,1,1,1,,1,1,1,1,1
+Cinema / theater,1,1,1,1,,1,1,1,1,1
+Casino,1,1,1,1,,1,1,1,1,1
+Club,1,1,1,1,,1,1,1,1,1
+Museum,1,1,1,1,1,1,1,1,1,1
+Historical landmark (does not include places of worship),1,1,1,1,1,1,1,1,1,1
+Gallery,1,1,1,1,,1,1,1,1,1
+Garden / park,1,1,1,1,1,,,,1,1
+Beach,1,1,1,1,1,,,,1,
+Amusement park,1,1,1,1,1,1,1,1,1,1
+Zoo,1,1,1,1,1,1,1,1,1,1
+Pool,1,1,1,1,1,1,,,1,1
 Other sports and recreation,1,1,1,1,1,1,1,1,1,1
-Kindergartens,1,1,1,1,1,1,1,1,1,1
-Schools,1,1,1,1,1,1,1,1,1,1
-Universities / Higher Education,1,1,1,1,1,1,1,1,1,1
-Vocational Education,1,1,1,1,1,1,1,1,1,1
+Kindergarten,1,1,1,1,1,1,1,1,1,1
+School,1,1,1,1,1,1,1,1,1,1
+College,1,1,1,1,1,1,1,1,1,1
+University / higher education,1,1,1,1,1,1,1,1,1,1
+Vocational education,1,1,1,1,1,1,1,1,1,1
 Other education,1,1,1,1,1,1,1,1,1,1
-Public buses,1,1,1,,1,,,,,1
+Public bus,1,1,1,,1,,,,,1
 Metro,1,1,1,,,1,1,1,1,1
-Trains,1,1,1,,,1,1,1,1,1
-Airports,1,1,1,1,,1,1,1,1,1
+Train,1,1,1,,,1,1,1,1,1
+Airport,1,1,1,1,,1,1,1,1,1
 Other transportation,1,1,1,1,,1,1,1,1,1
-Crosswalks,1,,,,,,,,,
-Overpasses,1,,,,,,,,,
-Underpasses,1,,,,,,,,,
-Sidewalks,1,,,,1,,,,,
+Crosswalk,1,,,,,,,,,
+Overpass,1,,,,,,,,,
+Underpass,1,,,,,,,,,
+Sidewalk,1,,,,1,,,,,
 Other pathways,1,,,,1,,,,,
-Day Care Centers,1,1,1,1,1,1,1,1,1,1
+Day Care Center,1,1,1,1,1,1,1,1,1,1
 Other habilitation and rehabilitation services,1,1,1,1,1,1,1,1,1,1
