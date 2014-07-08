@@ -1,8 +1,8 @@
 class PrintController < ApplicationController
-#  before_filter :authenticate_user!
-#  before_filter do |controller_instance|
-#    controller_instance.send(:valid_role?, User::ROLES[:certification])
-#  end
+  before_filter :authenticate_user!
+  before_filter do |controller_instance|
+    controller_instance.send(:valid_role?, User::ROLES[:certification])
+  end
 
   def index
     @venue_categories = VenueCategory.with_venues
