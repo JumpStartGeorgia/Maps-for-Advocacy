@@ -1,77 +1,77 @@
 Category Name,Georgian Category Name,Category Sort,Venue Name,Georgian Venue Name,Venue Sort,Rights
 Food and Drink,საკვები და სასმელი,1,Cafe / bar,კაფე / ბარები,1,Right to live independently and be included in the community
 Food and Drink,საკვები და სასმელი,1,Restaurant,რესტორნები,2,Right to live independently and be included in the community
-Food and Drink,საკვები და სასმელი,1,Fast food,სწრაფი კვების ობიექტები,3,Right to live independently and be included in the community
+Food and Drink,საკვები და სასმელი,1,Fast food,სწრაფი კვების ობიექტი,3,Right to live independently and be included in the community
 Food and Drink,საკვები და სასმელი,1,Market,ბაზარი,4,Right to live independently and be included in the community
 Food and Drink,საკვები და სასმელი,1,Grocery store,სურსათის მაღაზია,5,Right to live independently and be included in the community
-Food and Drink,საკვები და სასმელი,1,Other food and drink,სხვა საკვები და სასმელები,6,Right to live independently and be included in the community
-Financial Institutions and Services,ფინანსური დაწესებულებები  და სერვისები,2,Bank,ბანკები,1,"Right to control one's own financial affairs; Right to have equal access to bank loans, mortgages and other forms of financial credit"
-Financial Institutions and Services,ფინანსური დაწესებულებები  და სერვისები,2,ATM / pay box,ბანკომატები და სწრაფი ჩარიცხვის აპარატები,2,"Right to control one's own financial affairs; Right to have equal access to bank loans, mortgages and other forms of financial credit"
+Food and Drink,საკვები და სასმელი,1,Other food and drink,სხვა საკვები და სასმელი,6,Right to live independently and be included in the community
+Financial Institutions and Services,ფინანსური დაწესებულებები  და სერვისები,2,Bank,ბანკი,1,"Right to control one's own financial affairs; Right to have equal access to bank loans, mortgages and other forms of financial credit"
+Financial Institutions and Services,ფინანსური დაწესებულებები  და სერვისები,2,ATM / pay box,ბანკომატი და სწრაფი ჩარიცხვის აპარატი,2,"Right to control one's own financial affairs; Right to have equal access to bank loans, mortgages and other forms of financial credit"
 Financial Institutions and Services,ფინანსური დაწესებულებები  და სერვისები,2,Currency exchange,სავალუტო ჯიხურები,3,"Right to control one's own financial affairs; Right to have equal access to bank loans, mortgages and other forms of financial credit"
-Financial Institutions and Services,ფინანსური დაწესებულებები  და სერვისები,2,Other financial institutions and services,სხვა ფინანსური დაწესებულებები  და სერვისები,4,"Right to control one's own financial affairs; Right to have equal access to bank loans, mortgages and other forms of financial credit"
-Stores and Services,მაღაზიები და სერვისები,3,Store,მაღაზიები,1,Right to live independently and be included in the community
-Stores and Services,მაღაზიები და სერვისები,3,Service,მომსახურების ობიექტები,2,Right to live independently and be included in the community
+Financial Institutions and Services,ფინანსური დაწესებულებები  და სერვისები,2,Other financial institutions and services,სხვა ფინანსური დაწესებულებები და სერვისები,4,"Right to control one's own financial affairs; Right to have equal access to bank loans, mortgages and other forms of financial credit"
+Stores and Services,მაღაზიები და სერვისები,3,Store,მაღაზია,1,Right to live independently and be included in the community
+Stores and Services,მაღაზიები და სერვისები,3,Service,მომსახურების ობიექი,2,Right to live independently and be included in the community
 Stores and Services,მაღაზიები და სერვისები,3,Other stores and services,სხვა მაღაზიები და მომსახურების ობიექტები,3,Right to live independently and be included in the community
 Healthcare,ჯანდაცვა,4,Dentist,სტომატოლოგი,1,Right to health
 Healthcare,ჯანდაცვა,4,Hospital,საავადმყოფო,2,Right to health
 Healthcare,ჯანდაცვა,4,Pharmacy,აფთიაქი,3,Right to health
 Healthcare,ჯანდაცვა,4,Other healthcare,სხვა ჯანდაცვის ობიექტი,4,Right to health
-Emergency,საგანგებო,5,112,,1,Right to protection and safety in situations of risk
-Emergency,საგანგებო,5,Other emergency,სხვა საგანგებო,2,Right to protection and safety in situations of risk
-Government Buildings and Public Services,სამთავრობო შენობები და საჯარო მომსახურება,6,Ministry,სამინისტროები,1,Right to participate in political and public life
-Government Buildings and Public Services,სამთავრობო შენობები და საჯარო მომსახურება,6,Courthouse,სასამართლოები,2,Right to access to justice
-Government Buildings and Public Services,სამთავრობო შენობები და საჯარო მომსახურება,6,Embassy,საელჩოები,3,"Right to participate in cultural life, recreation, leisure and sport"
+Emergency,საგანგებო,5,112,112,1,Right to protection and safety in situations of risk
+Emergency,საგანგებო,5,Other emergency,სხვა საგანგებო სამსახური,2,Right to protection and safety in situations of risk
+Government Buildings and Public Services,სამთავრობო შენობები და საჯარო მომსახურება,6,Ministry,სამინისტრო,1,Right to participate in political and public life
+Government Buildings and Public Services,სამთავრობო შენობები და საჯარო მომსახურება,6,Courthouse,სასამართლო,2,Right to access to justice
+Government Buildings and Public Services,სამთავრობო შენობები და საჯარო მომსახურება,6,Embassy,საელჩო,3,"Right to participate in cultural life, recreation, leisure and sport"
 Government Buildings and Public Services,სამთავრობო შენობები და საჯარო მომსახურება,6,City hall,მერია,4,Right to participate in political and public life
-Government Buildings and Public Services,სამთავრობო შენობები და საჯარო მომსახურება,6,Prison,ციხეები,5,Right to access to justice
-Government Buildings and Public Services,სამთავრობო შენობები და საჯარო მომსახურება,6,Police station,პოლიციის შენობები,6,Right to access to justice
-Government Buildings and Public Services,სამთავრობო შენობები და საჯარო მომსახურება,6,Library,ბიბლიოთეკები,7,"Right to participate in cultural life, recreation, leisure and sport"
+Government Buildings and Public Services,სამთავრობო შენობები და საჯარო მომსახურება,6,Prison,ციხე,5,Right to access to justice
+Government Buildings and Public Services,სამთავრობო შენობები და საჯარო მომსახურება,6,Police station,პოლიციის შენობა,6,Right to access to justice
+Government Buildings and Public Services,სამთავრობო შენობები და საჯარო მომსახურება,6,Library,ბიბლიოთეკა,7,"Right to participate in cultural life, recreation, leisure and sport"
 Government Buildings and Public Services,სამთავრობო შენობები და საჯარო მომსახურება,6,Post-office,ფოსტა,8,Right to live independently and be included in the community
 Government Buildings and Public Services,სამთავრობო შენობები და საჯარო მომსახურება,6,Revenue Service,შემოსავლების სამსახური,9,Right to control one's own financial affairs
 Government Buildings and Public Services,სამთავრობო შენობები და საჯარო მომსახურება,6,Justice House,იუსტიციის სახლი,10,Right to live independently and be included in the community
-Government Buildings and Public Services,სამთავრობო შენობები და საჯარო მომსახურება,6,Legal aid office,იურიდიული დახმარების სამსახურები,11,Right to access to justice
-Government Buildings and Public Services,სამთავრობო შენობები და საჯარო მომსახურება,6,"Shelter (e.g., for victims of domestic violence)",თავშესაფარები (მაგ. ოჯახური ძალადობის მსხვერპლთათვის),12,"Right to freedom of from exploitation, violence, and abuse"
-Government Buildings and Public Services,სამთავრობო შენობები და საჯარო მომსახურება,6,Polling Station,საარჩევნო უბნები,13,Right to participate in political and public life
+Government Buildings and Public Services,სამთავრობო შენობები და საჯარო მომსახურება,6,Legal aid office,იურიდიული დახმარების სამსახური,11,Right to access to justice
+Government Buildings and Public Services,სამთავრობო შენობები და საჯარო მომსახურება,6,"Shelter (e.g., for victims of domestic violence)",თავშესაფარი (მაგ. ოჯახური ძალადობის მსხვერპლთათვის),12,"Right to freedom of from exploitation, violence, and abuse"
+Government Buildings and Public Services,სამთავრობო შენობები და საჯარო მომსახურება,6,Polling Station,საარჩევნო უბანი,13,Right to participate in political and public life
 Government Buildings and Public Services,სამთავრობო შენობები და საჯარო მომსახურება,6,Other government buildings and public services,სხვა სამთავრობო შენობები და საჯარო მომსახურება,14,Right to participate in political and public life
-Organizations,ორგანიზაციები,7,Non-governmental organization,არასამთავრობო ორგანიზაციები,1,Right to participate in political and public life
-Organizations,ორგანიზაციები,7,International organization,საერთაშორისო ორგანიზაციები,2,Right to participate in political and public life
+Organizations,ორგანიზაციები,7,Non-governmental organization,არასამთავრობო ორგანიზაცია,1,Right to participate in political and public life
+Organizations,ორგანიზაციები,7,International organization,საერთაშორისო ორგანიზაცია,2,Right to participate in political and public life
 Organizations,ორგანიზაციები,7,Other organizations,სხვა ორგანიზაციები,3,Right to participate in political and public life
-Places of Worship,ღვთისმსახურების ადგილების,8,Georgian Orthodox church,ქართული მართმადიდებულური ტაძრები,1,Right to live independently and be included in the community
+Places of Worship,ღვთისმსახურების ადგილების,8,Georgian Orthodox church,ქართული მართმადიდებულური ტაძარი,1,Right to live independently and be included in the community
 Places of Worship,ღვთისმსახურების ადგილების,8,Mosque,მეჩეთი,2,Right to live independently and be included in the community
 Places of Worship,ღვთისმსახურების ადგილების,8,Armenian Apostolic church,სომხური სამოციქულო ეკლესია,3,Right to live independently and be included in the community
 Places of Worship,ღვთისმსახურების ადგილების,8,Roman Catholic church,კათოლიკური ეკლესია,4,Right to live independently and be included in the community
 Places of Worship,ღვთისმსახურების ადგილების,8,Synagogue,სინაგოგა,5,Right to live independently and be included in the community
 Places of Worship,ღვთისმსახურების ადგილების,8,Other places of worship,სხვა ღვთისმსახურების ადგილები,6,Right to live independently and be included in the community
-Lodging,საცხოვრებელი,9,Hotel,სასტუმროები,1,"Right to participate in cultural life, recreation, leisure and sport"
+Lodging,საცხოვრებელი,9,Hotel,სასტუმრო,1,"Right to participate in cultural life, recreation, leisure and sport"
 Lodging,საცხოვრებელი,9,Hostel,ჰოსტელები,2,"Right to participate in cultural life, recreation, leisure and sport"
 Lodging,საცხოვრებელი,9,Other lodging,სხვა საცხოვრებლები,3,"Right to participate in cultural life, recreation, leisure and sport"
-Sports and Recreation,სპორტი და დასვენება,10,Stadium,სტადიონები,1,"Right to participate in cultural life, recreation, leisure and sport"
-Sports and Recreation,სპორტი და დასვენება,10,Cinema / theater,კინო / თეატრები,2,"Right to participate in cultural life, recreation, leisure and sport"
-Sports and Recreation,სპორტი და დასვენება,10,Casino,კაზინოები,3,"Right to participate in cultural life, recreation, leisure and sport"
-Sports and Recreation,სპორტი და დასვენება,10,Club,კლუბები,4,"Right to participate in cultural life, recreation, leisure and sport"
-Sports and Recreation,სპორტი და დასვენება,10,Museum,მუზეუმები,5,"Right to participate in cultural life, recreation, leisure and sport"
-Sports and Recreation,სპორტი და დასვენება,10,Historical landmark (does not include places of worship),ისტორიული ღირშესანიშნაობები (არ მოიცავს ღვთისმსახურების ადგილებს),6,"Right to participate in cultural life, recreation, leisure and sport"
-Sports and Recreation,სპორტი და დასვენება,10,Gallery,გალერეები,7,"Right to participate in cultural life, recreation, leisure and sport"
-Sports and Recreation,სპორტი და დასვენება,10,Garden / park,ბაღები / პარკები,8,"Right to participate in cultural life, recreation, leisure and sport"
-Sports and Recreation,სპორტი და დასვენება,10,Beach,სანაპიროები,9,"Right to participate in cultural life, recreation, leisure and sport"
-Sports and Recreation,სპორტი და დასვენება,10,Amusement park,გასართობი პარკები,10,"Right to participate in cultural life, recreation, leisure and sport"
-Sports and Recreation,სპორტი და დასვენება,10,Zoo,ზოოპარკები,11,"Right to participate in cultural life, recreation, leisure and sport"
-Sports and Recreation,სპორტი და დასვენება,10,Pool,აუზები,12,"Right to participate in cultural life, recreation, leisure and sport"
-Sports and Recreation,სპორტი და დასვენება,10,Other sports and recreation,სხვა სპორი და დასვენება,13,"Right to participate in cultural life, recreation, leisure and sport"
-Education,განათლება,12,Kindergarten,საბავშვო ბაღები,1,Right to education
-Education,განათლება,11,School,სკოლები,2,Right to education
-Education,განათლება,11,College,კოლეჯები,3,Right to education
-Education,განათლება,11,University / higher education,Universities / Higher Education,4,Right to education
-Education,განათლება,11,Vocational education,Vocational Education,5,Right to education
+Sports and Recreation,სპორტი და დასვენება,10,Stadium,სტადიონი,1,"Right to participate in cultural life, recreation, leisure and sport"
+Sports and Recreation,სპორტი და დასვენება,10,Cinema / theater,კინო / თეატრი,2,"Right to participate in cultural life, recreation, leisure and sport"
+Sports and Recreation,სპორტი და დასვენება,10,Casino,კაზინო,3,"Right to participate in cultural life, recreation, leisure and sport"
+Sports and Recreation,სპორტი და დასვენება,10,Club,კლუბი,4,"Right to participate in cultural life, recreation, leisure and sport"
+Sports and Recreation,სპორტი და დასვენება,10,Museum,მუზეუმი,5,"Right to participate in cultural life, recreation, leisure and sport"
+Sports and Recreation,სპორტი და დასვენება,10,Historical landmark (does not include places of worship),ისტორიული ღირშესანიშნაობა (არ მოიცავს ღვთისმსახურების ადგილს),6,"Right to participate in cultural life, recreation, leisure and sport"
+Sports and Recreation,სპორტი და დასვენება,10,Gallery,გალერეა,7,"Right to participate in cultural life, recreation, leisure and sport"
+Sports and Recreation,სპორტი და დასვენება,10,Garden / park,ბაღი / პარკი,8,"Right to participate in cultural life, recreation, leisure and sport"
+Sports and Recreation,სპორტი და დასვენება,10,Beach,სანაპირო,9,"Right to participate in cultural life, recreation, leisure and sport"
+Sports and Recreation,სპორტი და დასვენება,10,Amusement park,გასართობი პარკი,10,"Right to participate in cultural life, recreation, leisure and sport"
+Sports and Recreation,სპორტი და დასვენება,10,Zoo,ზოოპარკი,11,"Right to participate in cultural life, recreation, leisure and sport"
+Sports and Recreation,სპორტი და დასვენება,10,Pool,აუზი,12,"Right to participate in cultural life, recreation, leisure and sport"
+Sports and Recreation,სპორტი და დასვენება,10,Other sports and recreation,სხვა სპორტი და დასვენება,13,"Right to participate in cultural life, recreation, leisure and sport"
+Education,განათლება,12,Kindergarten,საბავშვო ბაღი,1,Right to education
+Education,განათლება,11,School,სკოლა,2,Right to education
+Education,განათლება,11,College,კოლეჯი,3,Right to education
+Education,განათლება,11,University / higher education,უნივერსიტეტი / უმაღლესი განათლება,4,Right to education
+Education,განათლება,11,Vocational education,პროფესიული გადამზადების ცენტრი,5,Right to education
 Education,განათლება,11,Other education,სხვა განათლება,6,Right to education
-Transportation,ტრანსპორტი,12,Public bus,ავტობუსები,1,Right to live independently and be included in the community
+Transportation,ტრანსპორტი,12,Public bus,ავტობუსი,1,Right to live independently and be included in the community
 Transportation,ტრანსპორტი,12,Metro,მეტრო,2,Right to live independently and be included in the community
-Transportation,ტრანსპორტი,12,Train,მატარებლები,3,Right to live independently and be included in the community
-Transportation,ტრანსპორტი,12,Airport,აეროპორტები,4,Right to live independently and be included in the community
+Transportation,ტრანსპორტი,12,Train,მატარებელი,3,Right to live independently and be included in the community
+Transportation,ტრანსპორტი,12,Airport,აეროპორტი,4,Right to live independently and be included in the community
 Transportation,ტრანსპორტი,12,Other transportation,სხვა ტრანსპორტი,5,Right to live independently and be included in the community
-Pathways,ბილიკი ,13,Crosswalk,გზაჯვარედინები,1,Right to live independently and be included in the community
-Pathways,ბილიკი,13,Overpass,ესტაკადები,2,Right to live independently and be included in the community
-Pathways,ბილიკი,13,Underpass,მიწისქვეშა გადასასვლელები,3,Right to live independently and be included in the community
-Pathways,ბილიკი,13,Sidewalk,ტრუტუარები,4,Right to live independently and be included in the community
-Pathways,ბილიკი,13,Other pathways,სხვა ბილიკები,5,Right to live independently and be included in the community
-Habilitation and Rehabilitation Services,,14,Day Care Center,,1,Right to habilitation and rehabilitation
-Habilitation and Rehabilitation Services,,14,Other habilitation and rehabilitation services,,2,Right to habilitation and rehabilitation
+Pathways,ბილიკი ,13,Crosswalk,გზაჯვარედინი,1,Right to live independently and be included in the community
+Pathways,ბილიკი,13,Overpass,ესტაკადა,2,Right to live independently and be included in the community
+Pathways,ბილიკი,13,Underpass,მიწისქვეშა გადასასვლელი,3,Right to live independently and be included in the community
+Pathways,ბილიკი,13,Sidewalk,ტროტუარი,4,Right to live independently and be included in the community
+Pathways,ბილიკი,13,Other pathways,სხვა ბილიკი,5,Right to live independently and be included in the community
+Habilitation and Rehabilitation Services,,14,Day Care Center,ბაგაბაღი,1,Right to habilitation and rehabilitation
+Habilitation and Rehabilitation Services,,14,Other habilitation and rehabilitation services,სხვა რეაბილიტაციური ცენტრი,2,Right to habilitation and rehabilitation
