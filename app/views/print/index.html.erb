@@ -13,23 +13,23 @@
             categories = @venue_categories.map{|x| [x.id, x.venue_category]}.uniq
             categories.each do |category|
           %>
-          <li>
-            <%= link_to category[1], '#' %>
-            <%
-              venues = @venue_categories.select{|x| x.id == category[0]}
-              if venues.present?
-            %>
-                <ul>
-                  <% venues.each do |venue| %>
-                    <li>          
-                      <%= link_to venue[:venue], '#', :'data-id' => venue[:custom_question_category_id] %>
-                    </li>
-                  <% end %>
-                </ul>
-            <% end %>
-          </li>
+            <li>
+              <%= link_to category[1], '#' %>
+              <%
+                venues = @venue_categories.select{|x| x.id == category[0]}
+                if venues.present?
+              %>
+                  <ul>
+                    <% venues.each do |venue| %>
+                      <li>          
+                        <%= link_to venue[:venue], '#', :'data-id' => venue[:custom_question_category_id] %>
+                      </li>
+                    <% end %>
+                  </ul>
+              <% end %>
+            </li>
         
-        <% end %>
+          <% end %>
         </ul>
       </div>
       <div>

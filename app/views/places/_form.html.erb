@@ -7,43 +7,30 @@
 
   <% if params[:stage] == '1' %>
     <h2><%= t('.header_venue') %></h2>
-    <p><%= t('.venue_instructions') %></p>
-    <ul id="venue_categories">
+
+    <ul id="venues">
       <%
         categories = @venue_categories.map{|x| [x.id, x.venue_category]}.uniq
         categories.each do |category|
       %>
         <li>
-          <%= link_to category[1], "#venue_#{category[0]}", :title => t('.venue_category_link_title', :name => category[1]), :'data-id' => category[0] %>
+          <%= link_to category[1], '#' %>
+          <%
+            venues = @venue_categories.select{|x| x.id == category[0]}
+            if venues.present?
+          %>
+              <ul>
+                <% venues.each do |venue| %>
+                  <li>          
+                    <%= link_to venue[:venue], new_place_path(:stage => '2', :venue_id => venue[:venue_id]) %>
+                  </li>
+                <% end %>
+              </ul>
+          <% end %>
         </li>
-      <% end %>      
-    </ul>
-
-    <hr />
-
-    <div id="venue_category_lists">
-      <%
-        categories = @venue_categories.map{|x| [x.id, x.venue_category]}.uniq
-        categories.each do |category|
-
-          venues = @venue_categories.select{|x| x.id == category[0]}
-          if venues.present?
-      %>
-        <div id="<%= "venue_#{category[0]}" %>" class="venue_category accessibly-hidden" data-id="<%= category[0] %>" tabindex="0">
-          <h3><%= category[1] %></h3>
-          <ul>
-            <% venues.each do |venue| %>
-              <li>
-                <%= link_to venue[:venue], new_place_path(:stage => '2', :venue_id => venue[:venue_id]), 
-                  :role => 'button' %>
-              </li>
-            <% end %>            
-          </ul>
-          <a href="#venue_categories" class="accessibly-hidden"><%= t('.skip_venue_search') %></a>
-        </div>
-        <% end %>
+    
       <% end %>
-    </div>
+    </ul>
 
   <% elsif params[:stage] == '2' %>
     <h2><%= t('.header_name', :name => @venue.name) %></h2>

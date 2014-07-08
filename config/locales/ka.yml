@@ -463,6 +463,6 @@ ka:
       landscape: Landscape
       print: Print the Evaluation
       print_instructions: Everything below the line is what will be printed out.
-      print_instructions: Everything below the line is what will be printed out.
+      all_venues: Venue
       header_place: Place Name
       header_address: Address

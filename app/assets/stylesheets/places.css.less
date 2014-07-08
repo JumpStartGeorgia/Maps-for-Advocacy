@@ -20,6 +20,9 @@ form.place{
     margin-top: 25px;
   }
   
+  ul#venues{
+    width: 350px;
+  }
   ul#venue_categories, ul.question_categories{
     li{
       display: inline-block;
@@ -37,18 +40,12 @@ form.place{
     }
   }
 
-  div#venue_category_lists .venue_category, #disabilities, #certification{
-      &:focus {
-        outline: none;
-      }
+  #disabilities, #certification{
+      width: 350px;
       ul li{
-      margin-left: 15px;
-      padding: 5px;
+      padding: 5px 0;
       &:nth-child(even) {background: #ddd}
       &:nth-child(odd) {background: #FFF}
-      a{
-        display: block;
-      }
     }
   }
   

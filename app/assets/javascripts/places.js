@@ -54,20 +54,8 @@ $(document).ready(function(){
   /*************************************************/
   /* venue filter on place form */
   if (gon.place_form_venue_filter){
-    $('ul#venue_categories li a').click(function(){
-      // unmark all links as active
-      $('ul#venue_categories li a').removeClass('active');
-      // mark this link as active
-      $(this).addClass('active');
-
-      // turn off all lists
-      $('#venue_category_lists .venue_category').addClass('accessibly-hidden');
-      // turn on the correct list
-      $('#venue_category_lists .venue_category[data-id="' + $(this).data('id') + '"]').removeClass('accessibly-hidden').focus();
-     
-      // make sure window is at the top
-      $(window).scrollTop(0);
-    });
+    // turn venue list into menu
+    $('form.place ul#venues').menu();
   }
   
   
@@ -141,10 +129,20 @@ $(document).ready(function(){
     }
   }
   
+  if ($('form.place div#certification ul').length > 0){
+    // turn certification/public into menu
+    $('form.place div#certification ul').menu();
+  }
+  if ($('form.place div#disabilities ul').length > 0){
+    // turn disabilities into menu
+    $('form.place div#disabilities ul').menu();
+  }
 
   /*************************************************/
   /* actions for the evaluation form */
   if (gon.show_evaluation_form){
+
+
 
     // when click on question category navigation, show the appropriate section
     $('ul.question_categories li a').click(function(){
