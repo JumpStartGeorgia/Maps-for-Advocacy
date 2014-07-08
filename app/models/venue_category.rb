@@ -209,7 +209,7 @@ class VenueCategory < ActiveRecord::Base
             v = Venue.create(:venue_category_id => current_category.id, :sort_order => row[idx_venue_sort])
             I18n.available_locales.each do |locale|
               name = row[idx_venue_name]
-              name = row[idx_venue_name_ka] if locale == :ka
+              name = row[idx_venue_name_ka] if locale == :ka && row[idx_venue_name_ka].present?
               v.venue_translations.create(:locale => locale, :name => name)
             end
             
@@ -298,7 +298,7 @@ private
       vc = VenueCategory.create(:sort_order => sort)
       I18n.available_locales.each do |locale|
         x = name
-        x = name_ka if locale == :ka
+        x = name_ka if locale == :ka && name_ka.present?
         vc.venue_category_translations.create(:locale => locale, :name => x)
       end
       vc[:name] = name
