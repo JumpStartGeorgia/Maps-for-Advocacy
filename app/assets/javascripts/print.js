@@ -1,24 +1,3 @@
-// get all possible combintations of items in an array
-// ex: [1,2] = ['1','2','1;2']
-function combinations(ary) {
-  var fn = function(active, rest, a) {
-    if (!active && rest.length == 0)
-      return;
-    if (rest.length == 0) {
-      a.push(active);
-    } else {
-      if (active == ''){
-        fn(rest[0].toString(), rest.slice(1), a);
-      }else{
-        fn(active + ';' + rest[0].toString(), rest.slice(1), a);
-      }
-      fn(active, rest.slice(1), a);
-    }
-    return a;
-  }
-  return fn("", ary, []);
-}
-
 $(document).ready(function(){
   // turn venue list into menu
   $('form#print_options ul#venues').menu();

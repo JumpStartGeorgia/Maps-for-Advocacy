@@ -1,0 +1,196 @@
+#evaluation_form{
+  #no_questions{
+    display: none;
+    margin-top: 20px;
+  }
+  #complete_form{
+    #evaluation_types{
+      display: none;
+      #evaluation_types_public, #evaluation_types_certified{
+        display: none;
+      }
+    }
+  }
+  form.evaluation_public, form.evaluation_certified{
+    display: none;
+  }
+  
+  #evaluation_types, #certification{
+    margin-bottom: 20px;
+    li{
+      display: inline-block;
+      margin: 0 5px;
+      input[type=checkbox], input[type=radio]{
+        display: none;
+        & + label{
+          margin:-2px;
+          padding: 4px 12px;
+          background-color: #e7e7e7;
+          border-color: #ddd;
+          cursor: pointer;
+        }
+        &:checked + label{
+          background-color:#3287CC;
+          color: #fff;
+        }
+      }
+    }
+  }
+
+
+  #venue_evalautions, .venue_evaluations{
+    h2{
+      margin: 20px 0;
+      span{
+        display: inline-block;
+        float: right;
+        font-size: 13px;
+        font-weight: normal;
+      }
+    }
+    h3{
+      margin-top: 10px;
+      border-bottom: solid 2px #555;
+      .user_name{
+        float: right;
+        display: inline-block;
+        img{
+          vertical-align: middle;
+        }
+      }
+      .evaluation_date{
+        float: left;
+        display: inline-block;
+        vertical-align: middle;
+      }
+    }
+    h4{
+      margin-top: 10px;
+      font-size: 14px;
+      font-weight: bold;    
+    }
+    h5{
+      margin-top: 10px;
+      font-style: italic;
+      border-bottom: solid 1px #555;
+    }
+    .top > div:last-of-type{
+      text-align: right;
+    }
+
+    .not_know_instructions {
+      margin-bottom: 15px;
+      font-size: 15px;
+      span{
+        padding: 7px;
+        background-color: #EEDEA0;
+        color: #000;
+      }
+    }
+
+    div.question_category{
+      &:focus {
+        outline: none;
+      }
+      div.venue_evaluation {
+        & > .row-fluid {
+          padding: 5px 0 5px 5px;
+          &:nth-child(even) {background: #ddd}
+          &:nth-child(odd) {background: #FFF}
+          [class*="span"]{
+            min-height: 25px;
+          }
+        }
+        legend i{
+          cursor: help;
+        }
+        .evidence{
+          text-align: center;
+          .evidence-message-container{
+            margin-bottom: 0;
+            padding: 4px;
+          }
+        }
+        .question-evidence{
+          margin-top: 5px;
+        }
+        label, input[type="radio"]{
+          display: inline;
+        }
+        input[type=radio] {
+            display:none; 
+            margin:10px;
+        }      
+        input[type=radio] + label {
+            display:inline-block;
+            margin:-2px;
+            padding: 4px 12px;
+            background-color: #e7e7e7;
+            border-color: #ddd;
+            cursor: pointer;
+            &.yes, &.has_good, &.has{
+              background-color: #a8d2b8;
+            }
+            &.has_bad{
+              background-color: #eedea0;
+            }
+            &.no, &.needs{
+              background-color: #e1919f;
+            }
+            &.not_relevant{
+              background-color: #555;
+              color: #fff;
+            }
+            &.disabled{
+              cursor: default;
+            }
+        }
+        input[type=radio]:checked + label { 
+           background-image: none;
+            background-color:#3287CC;
+            color: #fff;
+        }
+      }
+    }
+    ul.question-results li {
+      border-bottom: solid 1px #ccc;
+      /*padding: 10px 0;*/
+      & > div{
+        vertical-align: top;
+        padding: 10px;
+        display: inline-block;
+        width: 25%;
+        &.cause_not_accessible{
+          width: 40%;
+          background-color: #fff;
+          color: #f00;
+        }
+      }
+      &:last-of-type{
+        border-bottom: none;
+      }
+    }
+    div.selected-answer{
+      background-color: #ccc;
+      color: #000;
+      &.has_good, &.has, &.yes{
+        background-color: #a8d2b8;
+      }
+      &.has_bad{
+        background-color: #eedea0;
+      }
+      &.needs, &.no{
+        background-color: #e1919f;
+      }
+      &.not_relevant{
+        background-color: #555;
+        color: #fff;
+      }
+    }
+
+    ul.evaluation_summary li{
+      display: inline-block;
+      width: 24%;
+    }
+  }  
+}

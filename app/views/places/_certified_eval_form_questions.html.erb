@@ -1,4 +1,3 @@
-
             <% if is_sub_category %>
               <h5><%= cat.name %></h5>
             <% else %>
@@ -18,7 +17,20 @@
                   disable_button = ''
                   disable_label_class = ''
                   evidence_data = ''
+
+                  # get the disability ids for this question
+                  disability_ids = []
+                  if question[:disability_id].present?
+                    disability_ids << question[:disability_id]
+                  end
+                  if question[:disability_ids].present?
+                    disability_ids << question[:disability_ids].split(',')
+                  end
+                  if disability_ids.present?
+                    disability_ids.flatten!.map!{|x| x.to_i}.sort!
+                  end
                   
+                                    
                   # if this question has validation disable the radio buttons
                   if question[:validation_equation].present? 
                     disable_button = 'disabled=disabled' 
@@ -46,9 +58,10 @@
                   end
                 %> 
                 <div id="<%= "question_#{question[:question_id]}" %>" class="<%= "venue_evaluation_question row-fluid #{exists_class}" %>" 
-                    <%= exists_hidden_attr %> <%= data_exists_id %> <%= data_exists_parent_id %> >
+                    <%= exists_hidden_attr %> <%= data_exists_id %> <%= data_exists_parent_id %> 
+                    data-disability-ids="<%= disability_ids %>" >
                     
-                  <%= evaluation.fields_for :place_evaluation_answers, @place_evaluation.place_evaluation_answers[@question_index] do |answer| %>
+                  <%= evaluation.fields_for :place_evaluation_answers, @place_evaluation_certified.place_evaluation_answers[(@question_index-@public_questions_count)] do |answer| %>
 
                     <%= answer.hidden_field :question_pairing_id , :value => question[:question_pairing_id] %>
 

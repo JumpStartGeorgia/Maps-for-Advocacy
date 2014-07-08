@@ -2,16 +2,18 @@
           <%= t('.evaluation_instructions') %>
         </p>
 
-        <% 
-          @question_index = -1
+        <%
+          # make sure index starts after the public eval questions so there is no shared ids 
+          @public_questions_count = @question_categories_public.map{|x| x[:questions].length}.inject(:+)
+          @question_index = @public_questions_count-1
         %>
-        <%= f.fields_for :place_evaluations, @place_evaluation do |evaluation| %>
-          <%= evaluation.hidden_field :user_id , :value => @place_evaluation.user_id %>
-          <%= evaluation.hidden_field :disability_id , :value => @place_evaluation.disability_id %>
-          <%= evaluation.hidden_field :is_certified , :value => @place_evaluation.is_certified %>
+        <%= f.fields_for :place_evaluations, @place_evaluation_certified do |evaluation| %>
+          <%= evaluation.hidden_field :user_id , :value => @place_evaluation_certified.user_id %>
+          <%= evaluation.hidden_field :disability_ids , :value => @place_evaluation_certified.disability_ids %>
+          <%= evaluation.hidden_field :is_certified , :value => @place_evaluation_certified.is_certified %>
 
           <ul class="question_categories">
-            <% @question_categories.each_with_index do |cat, index| %>
+            <% @question_categories_certified.each_with_index do |cat, index| %>
               <%
                 css = index == 0 ? 'active' : ''
               %>
@@ -25,7 +27,7 @@
 
 
           <div id="question_category_lists">
-            <% @question_categories.each_with_index do |cat, index| %>
+            <% @question_categories_certified.each_with_index do |cat, index| %>
               <%
                 css = index == 0 ? '' : 'accessibly-hidden'
               %>
@@ -44,7 +46,7 @@
           <hr />
 
           <ul class="question_categories">
-            <% @question_categories.each_with_index do |cat, index| %>
+            <% @question_categories_certified.each_with_index do |cat, index| %>
               <%
                 css = index == 0 ? 'active' : ''
               %>

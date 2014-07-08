@@ -391,6 +391,18 @@ en:
     public_eval_form:
       not_know: If you do not know the answer, please leave it blank.
     evaluation:
+      title: "Evaluation of '%{name}'"
+      header_certification: Which evaluation do you want to fill out?
+      header_evaluation_types: Which types do you want to evaluate?
+      header_form: Evaluation Form
+      certification_yes_link_text: "Certified Evaluation"
+      certification_yes_link_title: "Fill out a Certified Evaluation"
+      certification_no_link_text: "Public Evaluation"
+      certification_no_link_title: "Fill out a Public Evaluation"
+      submit: Submit the Evaluation
+      cancel_eval: Cancel the Evaluation
+      no_questions: There are no evaluation questions on file for your selection.
+    evaluation_old:
       title1: "Evaluation of '%{name}'"
       title2p: "Public Evaluation of '%{name}'"
       title2c: "Certified Evaluation of '%{name}'"
