@@ -302,60 +302,134 @@ class PlacesController < ApplicationController
   # let user submit evaluation for an existing place
   def evaluation
     @place = Place.with_translation(params[:id]).first
-    
-    success = false
-    
+    # make a copy of @place for saving
+    # since loading blank eval objects into @place before saving
+#    place_for_save = @place.dup
+
     if @place.present?
-      if request.put?
-        # save the evaluation
-        @place.assign_attributes(params[:place])
-
-        add_missing_translation_content(@place.place_translations)
-            
-        success = @place.save
-
+      @can_certify = current_user.role?(User::ROLES[:certification])
+      @evaluation_types_public = Disability.sorted.is_active_public
+      @evaluation_types_certified = Disability.sorted.is_active_certified
+      
+      if @evaluation_types_public.present?
+        # get list of questions
+        qc_id_public = @place.custom_public_question_category_id
+        @question_categories_public = QuestionCategory.questions_for_venue(question_category_id: qc_id_public, disability_ids: @evaluation_types_public.map{|x| x.id}, is_certified: false, venue_id: @place.venue_id)
+      end
+      
+      if @evaluation_types_certified.present? && @can_certify
+        # get list of questions
+        qc_id_certified = @place.custom_question_category_id
+        @question_categories_certified = QuestionCategory.questions_for_venue(question_category_id: qc_id_certified, disability_ids: @evaluation_types_certified.map{|x| x.id}, is_certified: true, venue_id: @place.venue_id)
       end
 
-      if success
-		    redirect_to place_path(@place), notice: t('app.msgs.success_created', :obj => t('activerecord.models.evaluation')) 
-		    return
-      else
-        @can_certify = current_user.role?(User::ROLES[:certification])
-        @evaluation_types_public = Disability.sorted.is_active_public
-        @evaluation_types_certified = Disability.sorted.is_active_certified
-        
-        if @evaluation_types_public.present?
-          # get list of questions
-          qc_id_public = @place.custom_public_question_category_id
-          @question_categories_public = QuestionCategory.questions_for_venue(question_category_id: qc_id_public, disability_ids: @evaluation_types_public.map{|x| x.id}, is_certified: false, venue_id: @place.venue_id)
-        
-          # create the evaluation object for however many questions there are
-          if @question_categories_public.present?
-            @place_evaluation_public = @place.place_evaluations.build(user_id: current_user.id, disability_ids: @evaluation_types_public.map{|x| x.id}, is_certified: false)
-            num_questions = QuestionCategory.number_questions(@question_categories_public)
-            if num_questions > 0
-              (0..num_questions-1).each do |index|
-        		    @place_evaluation_public.place_evaluation_answers.build(:answer => PlaceEvaluation::ANSWERS['no_answer'])
-              end
+      if request.get?
+        # create the evaluation object for however many questions there are
+        if @question_categories_public.present?
+          @place_evaluation_public = @place.place_evaluations.build(user_id: current_user.id, disability_ids: @evaluation_types_public.map{|x| x.id}, is_certified: false)
+          num_questions = QuestionCategory.number_questions(@question_categories_public)
+          if num_questions > 0
+            (0..num_questions-1).each do |index|
+      		    @place_evaluation_public.place_evaluation_answers.build(:answer => PlaceEvaluation::ANSWERS['no_answer'])
             end
           end
         end
         
-        if @evaluation_types_certified.present?
-          # get list of questions
-          qc_id_certified = @place.custom_question_category_id
-          @question_categories_certified = QuestionCategory.questions_for_venue(question_category_id: qc_id_certified, disability_ids: @evaluation_types_certified.map{|x| x.id}, is_certified: true, venue_id: @place.venue_id)
-          
-          # create the evaluation object for however many questions there are
-          if @question_categories_certified.present?
-            @place_evaluation_certified = @place.place_evaluations.build(user_id: current_user.id, disability_ids: @evaluation_types_certified.map{|x| x.id}, is_certified: false)
-            num_questions = QuestionCategory.number_questions(@question_categories_certified)
-            if num_questions > 0
-              (0..num_questions-1).each do |index|
-        		    @place_evaluation_certified.place_evaluation_answers.build(:answer => PlaceEvaluation::ANSWERS['no_answer'])
-              end
+        # create the evaluation object for however many questions there are
+        if @question_categories_certified.present?
+          @place_evaluation_certified = @place.place_evaluations.build(user_id: current_user.id, disability_ids: @evaluation_types_certified.map{|x| x.id}, is_certified: true)
+          num_questions = QuestionCategory.number_questions(@question_categories_certified)
+          if num_questions > 0
+            (0..num_questions-1).each do |index|
+      		    @place_evaluation_certified.place_evaluation_answers.build(:answer => PlaceEvaluation::ANSWERS['no_answer'])
             end
           end
+        end
+        
+      elsif request.put?
+        success = false
+
+        # for each disability id, pull out the answers that match it and save the evaluation
+        ids = params[:place][:place_evaluations_attributes]['0'][:disability_ids]
+        is_certified = params[:place][:place_evaluations_attributes]['0'][:is_certified].to_s.to_bool
+        if is_certified && !@can_certify
+          # TODO this is not good so catch and do something
+        end
+        
+        if ids.present?
+          # convert to array
+          disability_ids = ids.gsub('[','').gsub(']','').split(',')
+          
+          # create place holder for result of evaluation saving
+          success = Array.new(disability_ids.length, false)
+          
+logger.debug "----- dis ids = #{disability_ids}"          
+          # pull out the question pairing id and the disability ids associated with it
+          id_mappings = []      
+          if disability_ids.present?
+            if is_certified
+              id_mappings = @question_categories_certified.map{|x| x[:questions]}.flatten!
+                                  .map{|x| [x[:question_pairing_id], [x[:disability_id], x[:disability_ids].split(',')].flatten!]}     
+            else
+              id_mappings = @question_categories_public.map{|x| x[:questions]}.flatten!
+                                  .map{|x| [x[:question_pairing_id], [x[:disability_id], x[:disability_ids].split(',')].flatten!]}     
+            end  
+          end
+logger.debug "----- id mappings = #{id_mappings}"          
+
+          place_params = nil
+          if id_mappings.present?            
+            # make copy of params and remove evalautions
+            # new eval objects will be added for each disability
+            place_params = params[:place].deep_dup
+            place_params['place_evaluations_attributes'].delete('0')
+            
+
+            disability_ids.each_with_index do |disability_id, idx_disability|
+logger.debug "-----> dis id = #{disability_id}"          
+              # get the questions for this disability id
+              qp_ids = id_mappings.select{|x| x[1].include?(disability_id.to_s)}.map{|x| x[0].to_s}
+              
+              if qp_ids.present?
+logger.debug "------- qp_ids = #{qp_ids}"  
+                # create new eval attributes key
+                place_params['place_evaluations_attributes'][idx_disability.to_s] = {}
+        
+                # add place eval variables
+                place_params['place_evaluations_attributes'][idx_disability.to_s]['disability_id'] = disability_id
+                place_params['place_evaluations_attributes'][idx_disability.to_s]['user_id'] = params[:place]['place_evaluations_attributes']['0']['user_id']
+                place_params['place_evaluations_attributes'][idx_disability.to_s]['is_certified'] = params[:place]['place_evaluations_attributes']['0']['is_certified']
+
+                # pull questions/answers that are in qp_ids
+                place_params['place_evaluations_attributes'][idx_disability.to_s]['place_evaluation_answers_attributes'] = 
+                    params[:place]['place_evaluations_attributes']['0']['place_evaluation_answers_attributes']
+                      .select{|k,v| qp_ids.include?(v['question_pairing_id'])}              
+                      
+              end
+            end
+
+            if place_params.present? && place_params['place_evaluations_attributes'].keys.length > 0
+logger.debug "------- saving!"          
+
+logger.debug "------- place_params = #{place_params}"
+
+logger.debug "------- @place was = #{@place.place_evaluations.inspect}"
+
+              # save!
+              @place.assign_attributes(place_params)
+
+logger.debug "------- place eval now = #{@place.place_evaluations.inspect}"
+
+              success = @place.save
+            
+              if success
+		            redirect_to place_path(@place), notice: t('app.msgs.success_created', :obj => t('activerecord.models.evaluation')) 
+		            return
+              else
+logger.debug "-------> error: #{@place.errors.full_messages}"                    
+              end
+            end
+          end          
         end
       end
 
