@@ -30,7 +30,9 @@
             <ul>
               <% @evaluation_types_public.each do |evaluation_type| %>
                 <li>
-                  <input id="<%= "evaluation_type_public_#{evaluation_type.id}" %>" name="evaluation_type" type="checkbox" value="<%= evaluation_type.id %>">
+                  <input id="<%= "evaluation_type_public_#{evaluation_type.id}" %>" 
+                    <%= params[:eval_type_id].present? && params[:eval_type_id].to_s == evaluation_type.id.to_s ? 'checked=checked' : '' %>
+                    name="evaluation_type" type="checkbox" value="<%= evaluation_type.id %>">
                   <label for="<%= "evaluation_type_public_#{evaluation_type.id}" %>">
                     <%= evaluation_type.name %>
                   </label>
@@ -44,7 +46,9 @@
             <ul>
               <% @evaluation_types_certified.each do |evaluation_type| %>
                 <li>
-                  <input id="<%= "evaluation_type_certified_#{evaluation_type.id}" %>" name="evaluation_type" type="checkbox" value="<%= evaluation_type.id %>">
+                  <input id="<%= "evaluation_type_certified_#{evaluation_type.id}" %>"  
+                    <%= params[:eval_type_id].present? && params[:eval_type_id].to_s == evaluation_type.id.to_s ? 'checked=checked' : '' %>
+                    name="evaluation_type" type="checkbox" value="<%= evaluation_type.id %>">
                   <label for="<%= "evaluation_type_certified_#{evaluation_type.id}" %>">
                     <%= evaluation_type.name %>
                   </label>
@@ -95,7 +99,9 @@
         <ul>
           <% @evaluation_types_public.each do |evaluation_type| %>
             <li>
-              <input id="<%= "evaluation_type_public_#{evaluation_type.id}" %>" name="evaluation_type" type="checkbox" value="<%= evaluation_type.id %>">
+              <input id="<%= "evaluation_type_public_#{evaluation_type.id}" %>"  
+                    <%= params[:eval_type_id].present? && params[:eval_type_id].to_s == evaluation_type.id.to_s ? 'checked=checked' : '' %>
+                    name="evaluation_type" type="checkbox" value="<%= evaluation_type.id %>">
               <label for="<%= "evaluation_type_public_#{evaluation_type.id}" %>">
                 <%= evaluation_type.name %>
               </label>

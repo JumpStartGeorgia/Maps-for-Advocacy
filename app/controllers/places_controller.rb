@@ -363,7 +363,6 @@ class PlacesController < ApplicationController
           # create place holder for result of evaluation saving
           success = Array.new(disability_ids.length, false)
           
-logger.debug "----- dis ids = #{disability_ids}"          
           # pull out the question pairing id and the disability ids associated with it
           id_mappings = []      
           if disability_ids.present?
@@ -375,7 +374,6 @@ logger.debug "----- dis ids = #{disability_ids}"
                                   .map{|x| [x[:question_pairing_id], [x[:disability_id], x[:disability_ids].split(',')].flatten!]}     
             end  
           end
-logger.debug "----- id mappings = #{id_mappings}"          
 
           place_params = nil
           if id_mappings.present?            
@@ -386,12 +384,10 @@ logger.debug "----- id mappings = #{id_mappings}"
             
 
             disability_ids.each_with_index do |disability_id, idx_disability|
-logger.debug "-----> dis id = #{disability_id}"          
               # get the questions for this disability id
               qp_ids = id_mappings.select{|x| x[1].include?(disability_id.to_s)}.map{|x| x[0].to_s}
               
               if qp_ids.present?
-logger.debug "------- qp_ids = #{qp_ids}"  
                 # create new eval attributes key
                 place_params['place_evaluations_attributes'][idx_disability.to_s] = {}
         
@@ -409,17 +405,8 @@ logger.debug "------- qp_ids = #{qp_ids}"
             end
 
             if place_params.present? && place_params['place_evaluations_attributes'].keys.length > 0
-logger.debug "------- saving!"          
-
-logger.debug "------- place_params = #{place_params}"
-
-logger.debug "------- @place was = #{@place.place_evaluations.inspect}"
-
               # save!
               @place.assign_attributes(place_params)
-
-logger.debug "------- place eval now = #{@place.place_evaluations.inspect}"
-
               success = @place.save
             
               if success
