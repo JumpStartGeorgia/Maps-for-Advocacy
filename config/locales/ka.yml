@@ -12,8 +12,8 @@ ka:
       disability: შეზღუდული შესაძლებლობება
       district: რაიონი
       page: ტექსტი გვერდებისთვის
-      convention_category: Convetion Category
-      right: Rights
+      convention_category: კონვენციის კატეგორია
+      right: უფლებები
     attributes:
       user:
         email: ელ.ფოსტა
@@ -58,9 +58,9 @@ ka:
         address: მისამართი
       disability:
         code: ერთ-ასოიანი კოდი
-        active_public: Active for Public Evaluations
-        active_certified: Active for Certified Evaluations
-        sort_order: Sort Order
+        active_public: აქტიურია საზოგადოებრივი შეფასებისთვის
+        active_certified: აქტიურია სერტიფიცირებული შეფასებისთვის
+        sort_order: დახარისხების ბრძანება
       disability_translation:
         name: შეზღუდული შესაძლებლობები
       district:
@@ -74,13 +74,13 @@ ka:
         title: სათაური, რომელიც გამოჩნდება შინაარსის ზემოთ
         content: შინაარსი
       convention_category:
-        right_to_accessibility: Part of Right to Accessibility
+        right_to_accessibility: ხელმისაწვდომობის უფლების ნაწილი
       convention_category_translation:
-        name: Convention Category Name
+        name: კონვენციის კატეგორიის სახელი
       right:
       right_translation:
-        name: Rights Name
-        convention_article: Convention Article
+        name: უფლების სახელი
+        convention_article: კონვენციის მუხლი
     errors:
       messages:
         required_field: "სავალდებულოა"
@@ -153,9 +153,9 @@ ka:
       view_place_title: "'%{place}'-ის დეტალების ნახვა"
       certified: სერტიფიცირებული
       public: საზოგადოებრივი
-      certified_overall: '%{num} Overall Certified Evaluation Result(s)'
-      public_overall: '%{num} Overall Public Evaluation Result(s)'
-      num_places_overall: '%{num} Place(s) with Evaluations'
+      certified_overall: '%{num} სერტიფიცირებული შეფასება'
+      public_overall: '%{num} საზოგადოებრივი შეფასება'
+      num_places_overall: '%{num} შეფასებული ადგილი'
     msgs:
       does_not_exist: თქვენ ცდილობთ იხილოთ გვერდი, რომელიც არ არსებობს.
       not_authorized: თქვენ არ გაქვთ უფლება იხილოთ ეს გვერდი.
@@ -168,13 +168,13 @@ ka:
       missing_required: გთხოვთ მოგვაწოდეთ ყველა საჭირო ინფორმაცია
       cause_not_accessible: "გაცემული პასუხი საერთო შეფასების შედეგს 'მიუწვდომელს' ხდის."
       evidence_validation:  
-        no_evidence_entered: Please enter measurement
-        no_evidence_entered_angle: 'Enter measurements for one of the following: Height and Depth; OR Angle'
-        no_units_entered: Include units with measurement
-        units_not_match: Units must be in '[unit]'
-        units_not_match_angle: Height and Depth units must be the same
-        validation_passed: Passes Validation!
-        validation_failed: Fails Validation!
+        no_evidence_entered: გთხოვთ შეიყვანოთ პარამეტრები
+        no_evidence_entered_angle: 'შეიყვანეთ ერთ ერთის პარამეტრები: სიმაღლე და სიგანე; დახრილობა'
+        no_units_entered: შეიცავდეს პარამეტრებიან ერთეულებს
+        units_not_match: პარამეტრები უნდა იყოს '[unit]'
+        units_not_match_angle: სიმაღლისა და სიღრმის პარამეტრები ერთნაირი უნდა იყოს
+        validation_passed: აკმაყოფილებს მოთხოვნებს!
+        validation_failed: არ აკმაყოფილებს მოთხოვნებს!
       print_landscape: "Selecting 'Landscape' Paper Orientation only formats the content for landscape printing. In order to print in landscape layout, you must select landscape from the options in the print window."
   layouts:
     application:
@@ -230,8 +230,8 @@ ka:
       disabilities: შეზღუდული შესაძლებლობები
       districts: რაიონი
       pages: საიტზე ტექსტის რედაქტირება
-      convention_categories: Convetion Categories
-      rights: Rights
+      convention_categories: კონვენციის კატეგორიები
+      rights: უფლებები
     users:
       edit:
         title: ცვლილებების შეტანა მომხმარებლის გვერდზე
@@ -287,11 +287,11 @@ ka:
         map_link_title: შეარჩიეთ ეს მდებარეობა
   root:
     index:
-      header_add: Add Evaluation
-      add_p1: Use the search below to see if the place you want to evaluate already exists. If so, click the '%{add_eval_text}' button for the place.
-      add_p2: Otherwise, if you cannot find the place you want to evaluate through the search, be the first to add it and evaluate it!
+      header_add: შეფასების დამატება
+      add_p1: "გამოიყენოთ ქვემოთ მოცემული საძიებო გრაფა, რათა ნახოთ, ხომ არ არსებობს თქვენთვის სასურველი ადგილის შეფასება. თუ ასეა, დააჭირეთ '%{add_eval_text}' ღილაკს."
+      add_p2: წინააღმდეგ შემთხვევაში, თუ თქვენ ვერ იპოვით სასურველი ადგილის შეფასებას, იყავით პირველი და დაამატეთ თქვენი შეფასება!
       add_place: ადგილის დამატება
-      header_search: Search
+      header_search: ძიება
       header_filter_place_search: მდებარეობა
       placeholder_place_search: ყველა მდებარეობა
       header_filter_address_search: მისამართი
@@ -311,7 +311,7 @@ ka:
       search: ძებნა
       header_results: ძიების შედეგი
       no_places: არ მოიძებნა თქვენი ძიების შესაბამისი ადგილი.
-      header_stats: Evaluation Stats
+      header_stats: შეფასების სტატისტიკა
       skip_movie: გამოვტოვოთ ფილმი (გადახტომა)
     why_monitor:
       title: რატომ არის საჭირო ხელმისაწვდომობის მონიტორინგი საქართველოშო?
@@ -349,10 +349,10 @@ ka:
       name_link_title: სახელწოდების შენახვა
       header_location: სად მდებარეობს '%{name}'?
       map_instructions: დააკლიკეთ რუკას, რომ მონიშნოთ სად მდებარეობს '%{name}'.
-      map_blue_marker: The blue marker (%{img}) indicates where your place is located.
-      map_red_marker: "Red markers (%{img}) will appear if similar places are located nearby. If your place is one of the places indicated by a red marker, click on the red marker to go to that place's page."
+      map_blue_marker: ლურჯი მარკერი (%{img}) აღნიშნავს თქვენი ადგილის ლოკაციას.
+      map_red_marker: "წითელი მარკერი (%{img}) გამოჩნდება თუ ერთნაირი ადგილები არის გვერდიგვერდ განლაგებული. თუ თქვენთვის სასურველი ადგილი მონიშნულია წითელი ფერით, დააჭირეთ მას და გადადით ამ ადგილის გვერძე."
       address_search_results: მისამართის ძიების შედეგი
-      address_instructions: You can indicate the location of '%{name}' by doing an address search or by clicking on the map to place a marker of where '%{name}' is located.  
+      address_instructions: "'%{name}'-ის ლოკაციის განსაზღვრა შეგიძლიათ საძიებო სისტემაში მისამართის ჩაწერით ან რუკაზე '%{name}'-ის ადგილის მონიშვნით ."
       address_instructions2: გთხოვთ შეიყვანეთ მისამართი და ქალაქი, სადაც მდებარეობს '%{name}'.
       submit_address_search: მისამართის მოძებნა
       address_search_success: მისამართის ძიებამ იპოვა შემდეგი წყვილები. გთხოვთ დაადასტუროთ, რომ შედეგები სწორია.
@@ -366,15 +366,15 @@ ka:
       map_link_title: შეარჩიეთ ეს მდებარეობა
       submit: ადგილის შენახვა
       building_number: შენობის ნომერი (თუ ზემოთ არ არის მითითებული)
-      header_address_search: Search By Address
-      header_map_search: Location on Map
-      header_places_nearby: Similar Places Nearby
-      places_nearby_explanation: "After you enter an address or place a marker on the map, this section will show you any similar places that are located nearby to '%{name}'. If your place is in this list, click on the place to go that place's page."
-      places_nearby_none: There were no similar places found nearby.
-      skip_to_address_search: Skip to the address search form (jump)
-      skip_to_map: Skip to the map (jump)
-      skip_to_places_nearby: Skip to the listing of places nearby (jump)
-      skip_to_submit: Skip to the form submit button (jump)
+      header_address_search: ძიება მისამართით
+      header_map_search: ალდილმდებარეობა რუკაზე
+      header_places_nearby: მსგავსი ადგილი ამავე ტერიტორიაზე
+      places_nearby_explanation: "მას შემდეგ, რაც შეიყვანთ მისამართს ან რუკაზე მონიშნავთ ადგილს, ეს სექცია გიჩვენებთ არის თუ არა '%{name}'-ის მსგავსი ადგილები ამ ტერიტორიაზე."
+      places_nearby_none: არ მოიძია ამ ტერიოტორიაზე მსგავსი ადგილები.
+      skip_to_address_search: მისამართის საძიებო ფორმაზე გადასვლა (გადახტომა)
+      skip_to_map: რუკაზე გადასვლა (გადახტომა)
+      skip_to_places_nearby: გადასვლა მსგავსი ადგილების ჩამონათვალზე (გადახტომა)
+      skip_to_submit: გადასვლა ფორმის გაგზავნის ღილაკზე (გადახტომა)
     certified_eval_form:
       evaluation_instructions: შეარჩიეთ კატეგორია და შეავსეთ შეფასება.
       question_category_link_title: იხილეთ კითხვები '%{name}'
@@ -385,14 +385,14 @@ ka:
       skip_to_eval_type: Skip to the type of evaluation selection (jump)
       skip_to_submit_button: Skip to the submit button (jump)
     certified_eval_form_questions:
-      tip_exists: Answering yes to this question will show more questions
-      tip_evidence: Mesaurements are needed for this question
-      tip_validation: Your measurement input will determine the answer for this question
-      tip_angle: "This measurement is for a ramp slope. Please measure one of the following: the height of the ramp and the depth of the ramp; OR the angle of the ramp."
-      validate: Validate
-      tip_validate: "Compare your measurements to the required value of '%{val_eq}' and determine the answer for the question"
-      skip_to_evidence_input: Skip to the measurement input field (jump)
-      skip_to_next_question: Skip to the next question (jump)
+      tip_exists: კითხვაზე დადებითი პასუხის გაცემისას გამოჩნდება დამატებითი კითხვები
+      tip_evidence: ამ კითხვისთვის საჭიროა პარამეტრების ცოდნა
+      tip_validation: თქვენს მიერ შეყვანილი პარამეტრები განსაზღვრავს ამ კითხვაზე პასუხს
+      tip_angle: "ეს არის პანდუსის პარამეტრი. გთხოვთ შეიყვანოთ შემდეგი მონაცემები: პანდუსის სიმაღლე და სიღრმე ან პანდუსის დახრილობის კუთხე."
+      validate: დამტკიცება
+      tip_validate: "შეადარეთ თქვნეს მიერ წარმოდგენილი  '%{val_eq}'-ის პარამეტრები სტანდარტებს და განსაზღვრეთ კითხვაზე პასუხი"
+      skip_to_evidence_input: პარამეტრების შეყვანის ფორმაზე გადასვლა (გადახტომა)
+      skip_to_next_question: შემდეგ კითხვაზე გადასვლა (გადახტომა)
     public_eval_form:
       not_know: თუ არ გაქვთ პასუხი, დატოვეთ ცარიელი. 
     evaluation:
@@ -426,9 +426,9 @@ ka:
       address_search_multiple_success: მისამართის ძიებამ იპოვა შემდეგი წყვილები. გთხოვთ შეარჩიოთ სწორი შედეგი.
       address_search_fail: არ მოიძებნა. კიდევ სცადეთ.
       next: ადგილმდებარეობის შენახვა
-      remove: Remove the Location
+      remove: ადგილის ამოშლა
       success: თქვენი რუკის ავტომატური ადგილმდებარეობა შენახულია
-      removed: Your default map location has been removed.
+      removed: თქვენი ლოკაცია რუკიდან წაშლილია.
   methodology:
     index:
       title: მეთოდოლოგია
