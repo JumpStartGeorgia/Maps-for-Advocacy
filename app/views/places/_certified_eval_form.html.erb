@@ -6,7 +6,6 @@
           # make sure index starts after the public eval questions so there is no shared ids 
           @public_questions_count = @question_categories_public.map{|x| x[:questions].length}.inject(:+)
           @question_index = @public_questions_count-1
-logger.debug "++++++++ pub questioncount = #{@public_questions_count}; quest index start = #{@question_index}"
         %>
         
         <%= f.fields_for :place_evaluations, @place_evaluation_certified do |evaluation| %>
@@ -17,11 +16,8 @@ logger.debug "++++++++ pub questioncount = #{@public_questions_count}; quest ind
 
           <ul class="question_categories">
             <% @question_categories_certified.each_with_index do |cat, index| %>
-              <%
-                css = index == 0 ? 'active' : ''
-              %>
               <li>
-                <%= link_to cat.name, "#question_#{cat.id}", :title => t('.question_category_link_title', :name => cat.name), :'data-id' => cat.id, :class => css %>
+                <%= link_to cat.name, "#question_category_#{cat.id}", :title => t('.question_category_link_title', :name => cat.name), :'data-id' => cat.id %>
               </li>
             <% end %>      
           </ul>
@@ -31,10 +27,7 @@ logger.debug "++++++++ pub questioncount = #{@public_questions_count}; quest ind
 
           <div id="question_category_lists">
             <% @question_categories_certified.each_with_index do |cat, index| %>
-              <%
-                css = index == 0 ? '' : 'accessibly-hidden'
-              %>
-              <div id="<%= "question_#{cat.id}"%> " class="question_category <%= css %>" data-id="<%= cat.id %>" tabindex="0">
+              <div id="<%= "question_category_#{cat.id}"%>" class="question_category accessibly-hidden" data-id="<%= cat.id %>" tabindex="0">
                 <p class="not_know_instructions">
                   <span>
                     <%= t('.question_instructions') %>
@@ -50,11 +43,8 @@ logger.debug "++++++++ pub questioncount = #{@public_questions_count}; quest ind
 
           <ul class="question_categories">
             <% @question_categories_certified.each_with_index do |cat, index| %>
-              <%
-                css = index == 0 ? 'active' : ''
-              %>
               <li>
-                <%= link_to cat.name, "#question_#{cat.id}", :title => t('.question_category_link_title', :name => cat.name), :'data-id' => cat.id, :class => css %>
+                <%= link_to cat.name, "#question_category_#{cat.id}", :title => t('.question_category_link_title', :name => cat.name), :'data-id' => cat.id %>
               </li>
             <% end %>      
           </ul>

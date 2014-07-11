@@ -11,7 +11,6 @@
               <% cat[:questions].each_with_index do |question, qidx| %>
                 <% 
                   @question_index += 1
-logger.debug "++++++++ pub questioncount = #{@public_questions_count}; quest index now = #{@question_index}"
                   exists_class = ''
                   data_exists_id = ''
                   data_exists_parent_id = ''
@@ -122,7 +121,7 @@ logger.debug "++++++++ pub questioncount = #{@public_questions_count}; quest ind
                               <div class="string control-group optional stringish" id="<%= evidence_id.gsub('[num]', '2_input') %>">
                                   <div class="controls">
                                     <input id="<%= evidence_id.gsub('[num]', '2') %>" name="<%= evidence_name.gsub('[num]', '2') %>" type="text" class="question-evidence" 
-                                      maxlength="255" placeholder="<%= question[:evidence1]%>" size="10" title="<%= question[:evidence1] %>" >
+                                      maxlength="255" placeholder="<%= question[:evidence2]%>" size="10" title="<%= question[:evidence2] %>" >
                                   </div>
                               </div>
                             <% end %>
@@ -130,7 +129,7 @@ logger.debug "++++++++ pub questioncount = #{@public_questions_count}; quest ind
                               <div class="string control-group optional stringish" id="<%= evidence_id.gsub('[num]', '3_input') %>">
                                   <div class="controls">
                                     <input id="<%= evidence_id.gsub('[num]', '3') %>" name="<%= evidence_name.gsub('[num]', '3') %>" type="text" class="question-evidence" 
-                                      maxlength="255" placeholder="<%= question[:evidence1]%>" size="10" title="<%= question[:evidence1] %>" >
+                                      maxlength="255" placeholder="<%= question[:evidence3]%>" size="10" title="<%= question[:evidence3] %>" >
                                   </div>
                               </div>
                             <% end %>

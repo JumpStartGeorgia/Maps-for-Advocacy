@@ -16,10 +16,100 @@ $(document).ready(function(){
     }
   }
 
+  // highlight the question category and show it's questions
+  function select_new_question_category(id){
+    // unmark all links as active
+    $('ul.question_categories li a').removeClass('active');
+    // mark this link as active
+    $('ul.question_categories li a[data-id="' + id + '"]').addClass('active');
+
+    // turn off all questions
+    $('#question_category_lists .question_category').addClass('accessibly-hidden');
+    // turn on the correct questions
+    $('#question_category_lists .question_category[data-id="' + id + '"]').removeClass('accessibly-hidden').focus();
+    
+    // make sure window is at the top
+    $(window).scrollTop(0);
+  }
+
+  // change evaluation type selection and update form as appropriate
+  function change_evaluation_type(ths){
+      var type = $(ths).closest('div').data('type');
+      var form_path = '#evaluation_form form.evaluation_' + type;
+      var eval_path = form_path + ' #venue_evaluations';
+      var no_questions_path = '#evaluation_form #no_questions';
+      var eval_types = $(ths).parent().parent().parent();
+
+      // reset and show all questions and headers
+      $(form_path).show();
+      $(form_path + ' .venue_evaluation_question').show();
+      $('#evaluation_form .question_category').show();
+      $('#evaluation_form .question_category h4, #evaluation_form .question_category h5').show();
+      $('#evaluation_form .question_categories li').show();
+      $(no_questions_path).hide();
+
+      // get all of the selected ids
+      var selected_ids = [];
+      var hide_ids = $(eval_types).data('ids').slice();
+      $(eval_types).find('input[name="evaluation_type"]:checked').each(function(){
+        selected_ids.push(parseInt($(this).val()));
+        hide_ids.splice( $.inArray(parseInt($(this).val()), hide_ids), 1 );
+      });
+ 
+      // update disability ids form field
+      $(form_path + ' input#place_place_evaluations_attributes_0_disability_ids').val('[' + selected_ids + ']');
+      
+      if (selected_ids.length == 0){
+        $(form_path).hide();
+        $(no_questions_path).show();
+      }else if (hide_ids.length > 0){
+        // create all possible combinations of these ids
+        var combination_hide_ids = combinations(hide_ids);
+        // hide questions that only have ids in hide_ids
+        for(var i=0;i<combination_hide_ids.length;i++){
+          var nums = combination_hide_ids[i].split(';').sort();
+          if (nums.length > 0){
+            $(form_path + ' .venue_evaluation_question[data-disability-ids="[' + nums.join(', ') + ']"]').hide();  
+          }
+        }
+        
+        // if no questions showing, hide form
+        if ($(form_path + ' .venue_evaluation_question').filter(function(){return $(this).css('display') != 'none';}).length == 0){
+          $(form_path).hide();
+          $(no_questions_path).show();
+        }else{
+          // hide headers if no questions
+          $('#evaluation_form .question_category h4, #evaluation_form .question_category h5').each(function(){
+            if ($(this).find('+ div.venue_evaluation div.venue_evaluation_question').filter(function(){return $(this).css('display') != 'none';}).length == 0){
+              $(this).hide();
+            }
+          }); 
+          
+          // hide categories if no questions
+          $('#evaluation_form .question_category').each(function(){
+            if ($(this).find('div.venue_evaluation_question').filter(function(){return $(this).css('display') != 'none';}).length == 0){
+              // make sure questions are not visible
+              $(this).hide();
+              // turn of link for category
+              $('#evaluation_form .question_categories li a[data-id="' + $(this).data('id') + '"]').parent().hide();
+            }
+          }); 
+          
+          // select the first catgory that is visible if the one that is active is not visible
+          var active = $('ul.question_categories li a').filter(function(){return $(this).hasClass('active');});
+          if (active.length == 0 || (active.length > 0 && $(active).parent().css('display') == 'none')) {
+            var link_id = $($('ul.question_categories li').filter(function(){return $(this).css('display') != 'none';})[0]).find('a').data('id');
+            select_new_question_category(link_id);
+          }
+          
+        }
+      }      
+    }
 
   /*************************************************/
   /* actions for the evaluation form */
   if (gon.show_evaluation_form){
+    //////////////////////////////////////////////////////////////////////////
     // when certification value changes, show the correct evaluation types
     $('#evaluation_form #complete_form #certification input[name="certification_form"]').change(function(){
       // reset - hide forms and show eval types container
@@ -39,6 +129,12 @@ $(document).ready(function(){
         if ($('#evaluation_form #complete_form #evaluation_types #evaluation_types_certified input[name="evaluation_type"]').filter(':checked').length > 0){
           $('#evaluation_form #complete_form form.evaluation_certified').show();
         }
+
+        //////////////////////////////////////////////////////////////////////////
+        // if an eval type is selected when the page loads, then update the form
+        $('#evaluation_form #complete_form #evaluation_types #evaluation_types_certified input[name="evaluation_type"]:checked').each(function(){
+          change_evaluation_type(this);
+        });
       }else{
         // show public
         $('#evaluation_form #complete_form #evaluation_types #evaluation_types_certified').hide();
@@ -51,74 +147,37 @@ $(document).ready(function(){
         if ($('#evaluation_form #complete_form #evaluation_types #evaluation_types_public input[name="evaluation_type"]').filter(':checked').length > 0){
           $('#evaluation_form #complete_form form.evaluation_public').show();
         }
+
+        //////////////////////////////////////////////////////////////////////////
+        // if an eval type is selected when the page loads, then update the form
+        $('#evaluation_form #complete_form #evaluation_types #evaluation_types_public input[name="evaluation_type"]:checked').each(function(){
+          change_evaluation_type(this);
+        });
       }
     });    
 
+
+    //////////////////////////////////////////////////////////////////////////
     // when evaluation type is changed, update the hidden form field and show the correct questions
     $('#evaluation_form #evaluation_types input[name="evaluation_type"]').change(function(){
-      var type = $(this).closest('div').data('type');
-      var form_path = '#evaluation_form form.evaluation_' + type;
-      var eval_path = form_path + ' #venue_evaluations';
-      var no_questions_path = '#evaluation_form #no_questions';
-
-      // reset and show all questions and headers
-      $(form_path).show();
-      $(form_path + ' .venue_evaluation_question').show();
-      $(no_questions_path).hide();
-
-      // get all of the selected ids
-      var selected_ids = [];
-      var hide_ids = $('#evaluation_form #evaluation_types').data('ids').slice();
-      $('#evaluation_form #evaluation_types input[name="evaluation_type"]:checked').each(function(){
-        selected_ids.push(parseInt($(this).val()));
-        hide_ids.splice( $.inArray(parseInt($(this).val()), hide_ids), 1 );
-      });
-      
-      // update form field
-      $(form_path + ' input#place_place_evaluations_attributes_0_disability_ids').val('[' + selected_ids + ']');
-      
-      if (selected_ids.length == 0){
-        $(form_path).hide();
-        $(no_questions_path).show();
-      }else{
-        // create all possible combinations of these ids
-        var combination_hide_ids = combinations(hide_ids);
-        // hide questions that only have ids in hide_ids
-        for(var i=0;i<combination_hide_ids.length;i++){
-          var nums = combination_hide_ids[i].split(';').sort();
-          if (nums.length > 0){
-            $(form_path + ' .venue_evaluation_question[data-disability-ids="[' + nums.join(', ') + ']"]').hide();  
-          }
-        }
-        
-        // if no questions showing, hide form
-        if ($(form_path + ' .venue_evaluation_question').filter(':visible').length == 0){
-          $(form_path).hide();
-          $(no_questions_path).show();
-        }else{
-          // hide headers if no questions
-        
-        }
-      }      
-    });
-
-    // when click on question category navigation, show the appropriate section
-    $('ul.question_categories li a').click(function(){
-      // unmark all links as active
-      $('ul.question_categories li a').removeClass('active');
-      // mark this link as active
-      $('ul.question_categories li a[data-id="' + $(this).data('id') + '"]').addClass('active');
-
-      // turn off all questions
-      $('#question_category_lists .question_category').addClass('accessibly-hidden');
-      // turn on the correct questions
-      $('#question_category_lists .question_category[data-id="' + $(this).data('id') + '"]').removeClass('accessibly-hidden').focus();
-      
-      // make sure window is at the top
-      $(window).scrollTop(0);
+      change_evaluation_type(this);
     });
     
+    //////////////////////////////////////////////////////////////////////////
+    // if an eval type is selected for the public on form when the page loads, then update the form
+    $('#evaluation_form #evaluation_types[data-type="public"] input[name="evaluation_type"]:checked').each(function(){
+      change_evaluation_type(this);
+    });
 
+    //////////////////////////////////////////////////////////////////////////
+    // when click on question category navigation, show the appropriate section
+    $('ul.question_categories li a').click(function(){
+      select_new_question_category($(this).data('id'));
+    });
+    
+    
+
+    //////////////////////////////////////////////////////////////////////////
     // show the submit button if at least one item is selected
     $('form.place div.venue_evaluation input[type="radio"]').change(function(){
       if ($('form.place div.venue_evaluation input[type="radio"]:checked').length == 0){
@@ -128,6 +187,7 @@ $(document).ready(function(){
       }
     });
     
+    //////////////////////////////////////////////////////////////////////////
     // if exists question is marked as yes, show the rest of the questions
     $('form.place div.venue_evaluation div.exists-question input[type="radio"]').change(function(){
       // get exists id 
@@ -153,6 +213,7 @@ $(document).ready(function(){
       }
     });
     
+    //////////////////////////////////////////////////////////////////////////
     // if press enter while in evidence field, trigger validate button
     $('form.place div.venue_evaluation .evidence .question-evidence').keypress(function(event){
       var keycode = (event.keyCode ? event.keyCode : event.which);
@@ -164,6 +225,7 @@ $(document).ready(function(){
      
     });    
 
+    //////////////////////////////////////////////////////////////////////////
     // process measurements and see if valid
     $('form.place div.venue_evaluation .evidence a.process_evidence').click(function(e){
       e.preventDefault();
@@ -316,7 +378,7 @@ $(document).ready(function(){
         $(obj_evidence).find('input.question-evidence-angle').val(user_entered_value);
       }
       
-      evidence_angle
+//      evidence_angle
 
       // make sure the submit button is showing
       $('form.place #submit-button').removeClass('accessibly-hidden');
