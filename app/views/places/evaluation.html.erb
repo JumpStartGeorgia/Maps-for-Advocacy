@@ -1,79 +1,140 @@
-<%- model_class = Place -%>
-<%- model_class_trans = PlaceTranslation -%>
-<% 
-  if params[:stage] == '1'
-    title t('.title1', :name => @place[:name])
-  elsif params[:stage] == '2'
-    if params[:certification] == true
-      title t('.title2c', :name => @place[:name])
-    else
-      title t('.title2p', :name => @place[:name])
-    end
-  elsif params[:stage] == '3'
-    if params[:certification] == true
-      title t('.title3c', :name => @place[:name], :disability => @disability.name)
-    else
-      title t('.title3p', :name => @place[:name], :disability => @disability.name)
-    end
-  end
-  
-%>
+<% title t('.title', :name => @place[:name]) %>
 
-<%= semantic_form_for(@place, :url => evaluation_place_path(params[:id]), :html => { :class => 'form-horizontal' }) do |f| %>
+<div id="evaluation_form">
+  <% if @can_certify %>
+    <div id="complete_form">
+      <h2><%= t('.header_certification') %></h2>
 
-  <% if params[:stage] == '1' %>
-    <h2><%= t('.header_certification') %></h2>
-
-    <div id="certification">
-      <ul>
-        <li>
-          <%= link_to t('.certification_yes_link_text'), params.merge(:certification => 1, :stage => 2), 
-              :title => t('.certification_yes_link_title'),
-              :role => 'button' %>
-        </li>
-        <li>
-          <%= link_to t('.certification_no_link_text'), params.merge(:certification => 0, :stage => 2), 
-              :title => t('.certification_no_link_title'),
-              :role => 'button' %>
-        </li>
-      </ul>
-    </div>
-
-  <% elsif params[:stage] == '2' %>
-    <h2><%= t('.header_disability') %></h2>
-
-    <% if @disabilities.present? %>
-      <div id="disabilities">
+      <div id="certification">
         <ul>
-          <% @disabilities.each do |disability| %>
+          <li>
+            <input id="<%= "certification_form_y" %>" name="certification_form" type="radio" value="y" aria-controls="evaluation_types">
+            <label for="<%= "certification_form_y" %>">
+              <%= t('.certification_yes_link_text') %>
+            </label>
+          </li>
+          <li>
+            <input id="<%= "certification_form_n" %>" name="certification_form" type="radio" value="n" aria-controls="evaluation_types">
+            <label for="<%= "certification_form_n" %>">
+              <%= t('.certification_no_link_text') %>
+            </label>
+          </li>
+        </ul>
+      </div>
+      
+      <div id="evaluation_types" data-ids="" role="region" aria-live="polite">
+        <h2><%= t('.header_evaluation_types') %></h2>
+
+        <div id="evaluation_types_public" data-type="public" data-ids="<%= @evaluation_types_public.map{|x| x.id} %>">
+          <% if @evaluation_types_public.present? %>
+            <ul>
+              <% @evaluation_types_public.each do |evaluation_type| %>
+                <li>
+                  <input id="<%= "evaluation_type_public_#{evaluation_type.id}" %>" 
+                    <%= params[:eval_type_id].present? && params[:eval_type_id].to_s == evaluation_type.id.to_s ? 'checked=checked' : '' %>
+                    name="evaluation_type" type="checkbox" value="<%= evaluation_type.id %>"
+                    aria-controls="venue_evaluations_public">
+                  <label for="<%= "evaluation_type_public_#{evaluation_type.id}" %>">
+                    <%= evaluation_type.name %>
+                  </label>
+                </li>
+              <% end %>            
+            </ul>
+          <% end %>
+        </div>
+        <div id="evaluation_types_certified" data-type="certified" data-ids="<%= @evaluation_types_certified.map{|x| x.id} %>">
+          <% if @evaluation_types_certified.present? %>
+            <ul>
+              <% @evaluation_types_certified.each do |evaluation_type| %>
+                <li>
+                  <input id="<%= "evaluation_type_certified_#{evaluation_type.id}" %>"  
+                    <%= params[:eval_type_id].present? && params[:eval_type_id].to_s == evaluation_type.id.to_s ? 'checked=checked' : '' %>
+                    name="evaluation_type" type="checkbox" value="<%= evaluation_type.id %>"
+                    aria-controls="venue_evaluations_certified">
+                  <label for="<%= "evaluation_type_certified_#{evaluation_type.id}" %>">
+                    <%= evaluation_type.name %>
+                  </label>
+                </li>
+              <% end %>            
+            </ul>
+          <% end %>
+        </div>
+      </div>
+      
+      <%= semantic_form_for(@place, :url => evaluation_place_path(params[:id]), :html => { :class => 'evaluation_public' }) do |f| %>
+        <h2><%= t('.header_form') %></h2>
+      
+        <div id="venue_evaluations_public" class="venue_evaluations" role="region" aria-live="polite">
+          <%= render :partial => 'public_eval_form', :locals => {:f => f} %>
+        </div>
+
+        <div id="btn-container">
+          <div id="submit-button" class="accessibly-hidden">
+            <%= f.submit t('.submit') %>
+          </div>
+          <%= link_to t('.cancel_eval'), place_path(@place), :class => 'cancel_eval' %>
+        </div>
+      <% end %>    
+      
+      <%= semantic_form_for(@place, :url => evaluation_place_path(params[:id]), :html => { :class => 'evaluation_certified' }) do |f| %>
+        <h2><%= t('.header_form') %></h2>
+
+        <div id="venue_evaluations_certified" class="venue_evaluations" role="region" aria-live="polite">
+          <%= render :partial => 'certified_eval_form', :locals => {:f => f} %>
+        </div>
+
+        <div id="btn-container">
+          <div id="submit-button" class="accessibly-hidden">
+            <%= f.submit t('.submit') %>
+          </div>
+          <%= link_to t('.cancel_eval'), place_path(@place), :class => 'cancel_eval' %>
+        </div>
+      <% end %>    
+    </div>    
+  <% else %>
+    <% #public eval only %>
+
+    <div id="evaluation_types" data-type="public" data-ids="<%= @evaluation_types_public.map{|x| x.id} %>">
+      <h2><%= t('.header_evaluation_types') %></h2>
+
+      <% if @evaluation_types_public.present? %>
+        <ul>
+          <% @evaluation_types_public.each do |evaluation_type| %>
             <li>
-              <%= link_to disability.name, params.merge(:eval_type_id => disability.id, :stage => 3), 
-                  :title => t('.disability_link_title', :name => disability.name),
-                  :role => 'button' %>
+              <input id="<%= "evaluation_type_public_#{evaluation_type.id}" %>"  
+                    <%= params[:eval_type_id].present? && params[:eval_type_id].to_s == evaluation_type.id.to_s ? 'checked=checked' : '' %>
+                    name="evaluation_type" type="checkbox" value="<%= evaluation_type.id %>"
+                    aria-controls="venue_evaluations_public">
+              <label for="<%= "evaluation_type_public_#{evaluation_type.id}" %>">
+                <%= evaluation_type.name %>
+              </label>
             </li>
           <% end %>            
         </ul>
-      </div>
-    <% end %>
-
-  <% elsif params[:stage] == '3' %>
-
-    <div id="venue_evalautions">
-      <% if params[:certification] == true %>
-        <%= render :partial => 'certified_eval_form', :locals => {:f => f} %>
-      <% else %>
-        <%= render :partial => 'public_eval_form', :locals => {:f => f} %>
       <% end %>
     </div>
 
+
+
+    <%= semantic_form_for(@place, :url => evaluation_place_path(params[:id]), :html => { :class => 'evaluation_public' }) do |f| %>
+      <h2><%= t('.header_form') %></h2>
+      
+      <div id="venue_evaluations_public" class="venue_evaluations" role="region" aria-live="polite">
+        <%= render :partial => 'public_eval_form', :locals => {:f => f} %>
+      </div>
+
+      <div id="btn-container">
+        <div id="submit-button" class="accessibly-hidden">
+          <%= f.submit t('.submit') %>
+        </div>
+        <%= link_to t('.cancel_eval'), place_path(@place), :class => 'cancel_eval' %>
+      </div>
+    <% end %>
   <% end %>
 
-  <div id="btn-container">
-    <div id="submit-button" class="accessibly-hidden">
-      <%= f.submit t('.submit') %>
-    </div>
-    <%= link_to t('.cancel_eval'), place_path(@place), :class => 'cancel_eval' %>
-  </div>
-<% end %>
+  <p id="no_questions" class="alert alert-error">
+    <%= t('.no_questions') %>
+  </p>
+</div>
 
 

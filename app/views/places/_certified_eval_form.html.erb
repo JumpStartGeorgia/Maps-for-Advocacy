@@ -2,21 +2,23 @@
           <%= t('.evaluation_instructions') %>
         </p>
 
-        <% 
-          @question_index = -1
+        <%
+          # make sure index starts after the public eval questions so there is no shared ids 
+          @public_questions_count = @question_categories_public.map{|x| x[:questions].length}.inject(:+)
+          @question_index = @public_questions_count-1
         %>
-        <%= f.fields_for :place_evaluations, @place_evaluation do |evaluation| %>
-          <%= evaluation.hidden_field :user_id , :value => @place_evaluation.user_id %>
-          <%= evaluation.hidden_field :disability_id , :value => @place_evaluation.disability_id %>
-          <%= evaluation.hidden_field :is_certified , :value => @place_evaluation.is_certified %>
+        
+        <%= f.fields_for :place_evaluations, @place_evaluation_certified do |evaluation| %>
+          <%= evaluation.hidden_field :user_id , :value => @place_evaluation_certified.user_id %>
+          <%= evaluation.hidden_field :disability_id %>
+          <%= evaluation.hidden_field :disability_ids , :value => @place_evaluation_certified.disability_ids %>
+          <%= evaluation.hidden_field :is_certified , :value => @place_evaluation_certified.is_certified %>
 
           <ul class="question_categories">
-            <% @question_categories.each_with_index do |cat, index| %>
-              <%
-                css = index == 0 ? 'active' : ''
-              %>
+            <% @question_categories_certified.each_with_index do |cat, index| %>
               <li>
-                <%= link_to cat.name, "#question_#{cat.id}", :title => t('.question_category_link_title', :name => cat.name), :'data-id' => cat.id, :class => css %>
+                <%= link_to cat.name, "#question_category_#{cat.id}", :title => t('.question_category_link_title', :name => cat.name), 
+                  :'data-id' => cat.id, :'aria-controls' => "question_category_lists" %>
               </li>
             <% end %>      
           </ul>
@@ -24,12 +26,9 @@
           <hr />
 
 
-          <div id="question_category_lists">
-            <% @question_categories.each_with_index do |cat, index| %>
-              <%
-                css = index == 0 ? '' : 'accessibly-hidden'
-              %>
-              <div id="<%= "question_#{cat.id}"%> " class="question_category <%= css %>" data-id="<%= cat.id %>" tabindex="0">
+          <div id="question_category_lists" role="region" aria-live="polite">
+            <% @question_categories_certified.each_with_index do |cat, index| %>
+              <div id="<%= "question_category_#{cat.id}"%>" class="question_category accessibly-hidden" data-id="<%= cat.id %>" tabindex="0">
                 <p class="not_know_instructions">
                   <span>
                     <%= t('.question_instructions') %>
@@ -37,6 +36,18 @@
                 </p>
 
                 <%= render :partial => 'certified_eval_form_questions', :locals => {:evaluation => evaluation, :cat => cat, :is_sub_category => false} %>
+                
+                <div role="menubar">
+                  <% if index < @question_categories_certified.length-1 %>
+                    <a href="<%="#question_category_#{@question_categories_certified[index+1].id}"%>" class="accessibly-hidden"><%= t('.skip_to_next_quest_cat') %></a>
+                  <% end %>
+                  <% if index > 0 %>
+                    <a href="<%="#question_category_#{@question_categories_certified[index-1].id}"%>" class="accessibly-hidden"><%= t('.skip_to_previous_quest_cat') %></a>
+                  <% end %>
+                  <a href="#certification" class="accessibly-hidden"><%= t('.skip_to_certification') %></a>
+                  <a href="#evaluation_types" class="accessibly-hidden"><%= t('.skip_to_eval_type') %></a>
+                  <a href="#btn-container" class="accessibly-hidden"><%= t('.skip_to_submit_button') %></a>
+                </div>                
               </div>
             <% end %>
           </div>
@@ -44,12 +55,10 @@
           <hr />
 
           <ul class="question_categories">
-            <% @question_categories.each_with_index do |cat, index| %>
-              <%
-                css = index == 0 ? 'active' : ''
-              %>
+            <% @question_categories_certified.each_with_index do |cat, index| %>
               <li>
-                <%= link_to cat.name, "#question_#{cat.id}", :title => t('.question_category_link_title', :name => cat.name), :'data-id' => cat.id, :class => css %>
+                <%= link_to cat.name, "#question_category_#{cat.id}", :title => t('.question_category_link_title', :name => cat.name), 
+                  :'data-id' => cat.id, :'aria-controls' => "question_category_lists" %>
               </li>
             <% end %>      
           </ul>

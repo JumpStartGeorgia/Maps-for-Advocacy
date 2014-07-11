@@ -1,7 +1,8 @@
-<%= f.fields_for :place_evaluations, @place_evaluation do |evaluation| %>
-  <%= evaluation.hidden_field :user_id , :value => @place_evaluation.user_id %>
-  <%= evaluation.hidden_field :disability_id , :value => @place_evaluation.disability_id %>
-  <%= evaluation.hidden_field :is_certified , :value => @place_evaluation.is_certified %>
+<%= f.fields_for :place_evaluations, @place_evaluation_public do |evaluation| %>
+  <%= evaluation.hidden_field :user_id , :value => @place_evaluation_public.user_id %>
+  <%= evaluation.hidden_field :disability_id %>
+  <%= evaluation.hidden_field :disability_ids , :value => @place_evaluation_public.disability_ids %>
+  <%= evaluation.hidden_field :is_certified , :value => @place_evaluation_public.is_certified %>
 
 
   <div class="question_category">
@@ -13,12 +14,12 @@
       </p>
     
       <% question_index = -1 %>
-      <% @question_categories.each do |cat| %>
+      <% @question_categories_public.each do |cat| %>
         <% cat[:questions].each do |question| %>    
           <% question_index += 1 %>
 
-          <div class="row-fluid venue_evaluation_question">
-            <%= evaluation.fields_for :place_evaluation_answers, @place_evaluation.place_evaluation_answers[question_index] do |answer| %>
+          <div class="row-fluid venue_evaluation_question" data-disability-ids="<%= @evaluation_types_public.map{|x| x.id}[0..3] %>">
+            <%= evaluation.fields_for :place_evaluation_answers, @place_evaluation_public.place_evaluation_answers[question_index] do |answer| %>
 
               <%= answer.hidden_field :question_pairing_id , :value => question[:question_pairing_id] %>
 

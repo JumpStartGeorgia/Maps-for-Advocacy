@@ -1,4 +1,5 @@
 var map, marker, map_type, near_markers;
+
   /* update a query string value in a url */
   function updateQueryStringParameter(uri, key, value) {
     var re = new RegExp("([?|&])" + key + "=.*?(&|$)", "i");
@@ -254,5 +255,26 @@ var map, marker, map_type, near_markers;
       });
     }
   }
+
+// get all possible combintations of items in an array
+// ex: [1,2] = ['1','2','1;2']
+function combinations(ary) {
+  var fn = function(active, rest, a) {
+    if (!active && rest.length == 0)
+      return;
+    if (rest.length == 0) {
+      a.push(active);
+    } else {
+      if (active == ''){
+        fn(rest[0].toString(), rest.slice(1), a);
+      }else{
+        fn(active + ';' + rest[0].toString(), rest.slice(1), a);
+      }
+      fn(active, rest.slice(1), a);
+    }
+    return a;
+  }
+  return fn("", ary, []);
+}
 
 

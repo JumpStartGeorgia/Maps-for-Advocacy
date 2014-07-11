@@ -1,4 +1,3 @@
-
             <% if is_sub_category %>
               <h5><%= cat.name %></h5>
             <% else %>
@@ -18,7 +17,20 @@
                   disable_button = ''
                   disable_label_class = ''
                   evidence_data = ''
+
+                  # get the disability ids for this question
+                  disability_ids = []
+                  if question[:disability_id].present?
+                    disability_ids << question[:disability_id]
+                  end
+                  if question[:disability_ids].present?
+                    disability_ids << question[:disability_ids].split(',')
+                  end
+                  if disability_ids.present?
+                    disability_ids.flatten!.map!{|x| x.to_i}.sort!
+                  end
                   
+                                    
                   # if this question has validation disable the radio buttons
                   if question[:validation_equation].present? 
                     disable_button = 'disabled=disabled' 
@@ -46,16 +58,22 @@
                   end
                 %> 
                 <div id="<%= "question_#{question[:question_id]}" %>" class="<%= "venue_evaluation_question row-fluid #{exists_class}" %>" 
-                    <%= exists_hidden_attr %> <%= data_exists_id %> <%= data_exists_parent_id %> >
+                    <%= exists_hidden_attr %> <%= data_exists_id %> <%= data_exists_parent_id %> 
+                    data-disability-ids="<%= disability_ids %>" >
                     
-                  <%= evaluation.fields_for :place_evaluation_answers, @place_evaluation.place_evaluation_answers[@question_index] do |answer| %>
-
-                    <%= answer.hidden_field :question_pairing_id , :value => question[:question_pairing_id] %>
+                  <%= evaluation.fields_for :place_evaluation_answers, @place_evaluation_certified.place_evaluation_answers[(@question_index-@public_questions_count)] do |answer| %>
 
                     <% 
+                      qp_id = "place_place_evaluations_attributes_0_place_evaluation_answers_attributes_#{@question_index}_question_pairing_id" 
+                      qp_name = "place[place_evaluations_attributes][0][place_evaluation_answers_attributes][#{@question_index}][question_pairing_id]" 
                       input_id = "place_place_evaluations_attributes_0_place_evaluation_answers_attributes_#{@question_index}_answer_" 
                       input_name = "place[place_evaluations_attributes][0][place_evaluation_answers_attributes][#{@question_index}][answer]" 
+                      evidence_id = "place_place_evaluations_attributes_0_place_evaluation_answers_attributes_#{@question_index}_evidence[num]" 
+                      evidence_name = "place[place_evaluations_attributes][0][place_evaluation_answers_attributes][#{@question_index}][evidence[num]]" 
                     %>
+
+                    <%#= answer.hidden_field :question_pairing_id , :value => question[:question_pairing_id] %>
+                     <input id="<%= qp_id %>" name="<%= qp_name %>" type="hidden" value="<%= question[:question_pairing_id] %>">
 
                     <fieldset>
                       <div class="span4">
@@ -91,24 +109,36 @@
                             </div>
                             <% if question[:evidence1].present? %>
                               <div id="<%= "evidence1_#{question[:question_id]}" %>">
-                                <%= answer.input :evidence1, :label => false, :placeholder => question[:evidence1], 
-                                  :input_html => {:title => question[:evidence1], :class => 'question-evidence', :size => 10} %>
+                                <div class="string control-group optional stringish" id="<%= evidence_id.gsub('[num]', '1_input') %>">
+                                    <div class="controls">
+                                      <input id="<%= evidence_id.gsub('[num]', '1') %>" name="<%= evidence_name.gsub('[num]', '1') %>" type="text" class="question-evidence" 
+                                        maxlength="255" placeholder="<%= question[:evidence1]%>" size="10" title="<%= question[:evidence1] %>" >
+                                    </div>
+                                </div>
                               </div>
                             <% end %>
                             <% if question[:evidence2].present? %>
-                              <%= answer.input :evidence2, :label => false, :placeholder => question[:evidence2], 
-                                :input_html => {:title => question[:evidence2], :class => 'question-evidence', :size => 10} %>
+                              <div class="string control-group optional stringish" id="<%= evidence_id.gsub('[num]', '2_input') %>">
+                                  <div class="controls">
+                                    <input id="<%= evidence_id.gsub('[num]', '2') %>" name="<%= evidence_name.gsub('[num]', '2') %>" type="text" class="question-evidence" 
+                                      maxlength="255" placeholder="<%= question[:evidence2]%>" size="10" title="<%= question[:evidence2] %>" >
+                                  </div>
+                              </div>
                             <% end %>
                             <% if question[:evidence3].present? %>
-                              <%= answer.input :evidence3, :label => false, :placeholder => question[:evidence3], 
-                                :input_html => {:title => question[:evidence3], :class => 'question-evidence', :size => 10} %>
+                              <div class="string control-group optional stringish" id="<%= evidence_id.gsub('[num]', '3_input') %>">
+                                  <div class="controls">
+                                    <input id="<%= evidence_id.gsub('[num]', '3') %>" name="<%= evidence_name.gsub('[num]', '3') %>" type="text" class="question-evidence" 
+                                      maxlength="255" placeholder="<%= question[:evidence3]%>" size="10" title="<%= question[:evidence3] %>" >
+                                  </div>
+                              </div>
                             <% end %>
                             <% if question[:validation_equation].present? %>
                               <%= link_to t('.validate'), '#', :class => 'process_evidence tooltipster_right', 
                                   :title => t('.tip_validate', :val_eq => question[:validation_equation]) %>
                             <% end %>
                             <% if question[:is_evidence_angle].to_s.to_bool == true %>
-                              <%= answer.hidden_field :evidence_angle, :class => 'question-evidence-angle' %>
+                              <input id="<%= evidence_id.gsub('[num]', '_angle') %>" name="<%= evidence_name.gsub('[num]', '_angle') %>" type="hidden" class="question-evidence-angle" >
                             <% end %>
                           </div>
                           <div class="span2">
