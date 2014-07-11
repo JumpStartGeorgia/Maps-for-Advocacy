@@ -175,7 +175,7 @@ ka:
         units_not_match_angle: სიმაღლისა და სიღრმის პარამეტრები ერთნაირი უნდა იყოს
         validation_passed: აკმაყოფილებს მოთხოვნებს!
         validation_failed: არ აკმაყოფილებს მოთხოვნებს!
-      print_landscape: "Selecting 'Landscape' Paper Orientation only formats the content for landscape printing. In order to print in landscape layout, you must select landscape from the options in the print window."
+      print_landscape: "'ჰორიზონტალური' ბეჭდვის ფუნქციის შერჩევისას შინაარსი დაფორმატდება ჰორიზონტალურად. ჰორიზონტალურად ბეჭდვისთვის საჭიროა შესაბამისი ღილაკის მონიშვნა ბეჭდვის ფუნქციების განყოფილებაში."
   layouts:
     application:
       menu: მენიუ
@@ -185,8 +185,8 @@ ka:
       why_monitor: რატომ მონიტორინგი?
       un_cprd: UN CPRD
       georgian_legislation: საქართველოს კანონმდებლობა
-      partners: Project Partners
-      print: Print Certified Evaluation
+      partners: პროექტის პარტნიორები
+      print: ამობეჭდეთ სერტიფიცირებული შეფასება
       sign_out: გასვლა
       js_link_title: ჯამპსტარტ ჯორჯიას - ჩვენ გაწვდით ინფორმაციას უკეთ!
       js_link_text: აგებულია
@@ -379,11 +379,11 @@ ka:
       evaluation_instructions: შეარჩიეთ კატეგორია და შეავსეთ შეფასება.
       question_category_link_title: იხილეთ კითხვები '%{name}'
       question_instructions: თუ არ გაქვთ პასუხი, დატოვეთ ცარიელი. 
-      skip_to_next_quest_cat: Skip to the next category of questions (jump)
-      skip_to_previous_quest_cat: Skip to the previous category of questions (jump)
-      skip_to_certification: Skip to the certified or public evaluation selection (jump)
-      skip_to_eval_type: Skip to the type of evaluation selection (jump)
-      skip_to_submit_button: Skip to the submit button (jump)
+      skip_to_next_quest_cat: შემდეგ კატეგორიაზე ან კითხვაზე გადასვლა (გადახტომა)
+      skip_to_previous_quest_cat: წინა კატეგორიაზე ან კითხვაზე გადასვლა (გადახტომა
+      skip_to_certification: საზოგადოებრივ ან სერტიფიცირებულ შეფასებაზე გადასვლა (გადახტომა)
+      skip_to_eval_type: შეფასების ტიპის არჩევაზე გადასვლა (გადახტომა)
+      skip_to_submit_button: შეჯამების ღილაკზე გადასვლა (გადახტომა)
     certified_eval_form_questions:
       tip_exists: კითხვაზე დადებითი პასუხის გაცემისას გამოჩნდება დამატებითი კითხვები
       tip_evidence: ამ კითხვისთვის საჭიროა პარამეტრების ცოდნა
@@ -397,16 +397,16 @@ ka:
       not_know: თუ არ გაქვთ პასუხი, დატოვეთ ცარიელი. 
     evaluation:
       title: "'%{name}'-ის შეფასება"
-      header_certification: Which evaluation do you want to fill out?
-      header_evaluation_types: Which types do you want to evaluate?
-      header_form: Evaluation Form
+      header_certification: რომელი შეფასების შევსება გსურთ?
+      header_evaluation_types: რა სახის შეფასების შევსება გსურთ?
+      header_form: შეფასების ფორმა
       certification_yes_link_text: "სერტიფიცირებული შეფასება"
       certification_yes_link_title: "სერტიფიცირებული შეფასების შევსება"
       certification_no_link_text: "საზოგადოებრივი შეფასება"
       certification_no_link_title: "საზოგადოებრივი შეფასების შვსება"
       submit: შეფასების შევსება
       cancel_eval: შეფასების გაუქმება
-      no_questions: There are no evaluation questions on file for your selection.
+      no_questions: თქვენი მოთხოვნის შესაბამისი კითხვები არ არის წარმოდგენილი შეფასების ფაილში.
     upload_photos:
       title: "'%{name}'-ის სურათის დამატება"
       add_files: სურათის დამატება...
@@ -456,15 +456,15 @@ ka:
       title: მეთოდოლოგიური - გამოთვლები    
   print:
     index:
-      title: Print Out Certified Evaluation      
-      header_venue: Venue
-      header_evaluation_type: Evaluation Type
-      header_layout: Paper Orientation
-      header_help: Include Help Information
-      portrait: Portrait
-      landscape: Landscape
-      print: Print the Evaluation
-      print_instructions: Everything below the line is what will be printed out.
-      all_venues: Venue
-      header_place: Place Name
-      header_address: Address
+      title: სერტიფიცირებული შეფასების ამობეჭდვა
+      header_venue: ადგილი
+      header_evaluation_type: შეფასების ტიპი
+      header_layout: ფურცლის  მიმართულება
+      header_help: შევიყვანოთ დამხმარე ინფორმაცია
+      portrait: ვერტიკალური
+      landscape: ჰორიზონტალური
+      print: შეფასების ამობეჭდვა
+      print_instructions: ხაზის ქვემოთ წარმოდგენილია ის ნაწილი, რომელიც ამოივეჭდება.
+      all_venues: ადგილი
+      header_place: ადგილის სახელწოდება
+      header_address: მისამართი
