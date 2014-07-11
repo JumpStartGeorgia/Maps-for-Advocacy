@@ -8,13 +8,13 @@
       <div id="certification">
         <ul>
           <li>
-            <input id="<%= "certification_form_y" %>" name="certification_form" type="radio" value="y">
+            <input id="<%= "certification_form_y" %>" name="certification_form" type="radio" value="y" aria-controls="evaluation_types">
             <label for="<%= "certification_form_y" %>">
               <%= t('.certification_yes_link_text') %>
             </label>
           </li>
           <li>
-            <input id="<%= "certification_form_n" %>" name="certification_form" type="radio" value="n">
+            <input id="<%= "certification_form_n" %>" name="certification_form" type="radio" value="n" aria-controls="evaluation_types">
             <label for="<%= "certification_form_n" %>">
               <%= t('.certification_no_link_text') %>
             </label>
@@ -22,7 +22,7 @@
         </ul>
       </div>
       
-      <div id="evaluation_types" data-ids="">
+      <div id="evaluation_types" data-ids="" role="region" aria-live="polite">
         <h2><%= t('.header_evaluation_types') %></h2>
 
         <div id="evaluation_types_public" data-type="public" data-ids="<%= @evaluation_types_public.map{|x| x.id} %>">
@@ -32,7 +32,8 @@
                 <li>
                   <input id="<%= "evaluation_type_public_#{evaluation_type.id}" %>" 
                     <%= params[:eval_type_id].present? && params[:eval_type_id].to_s == evaluation_type.id.to_s ? 'checked=checked' : '' %>
-                    name="evaluation_type" type="checkbox" value="<%= evaluation_type.id %>">
+                    name="evaluation_type" type="checkbox" value="<%= evaluation_type.id %>"
+                    aria-controls="venue_evaluations_public">
                   <label for="<%= "evaluation_type_public_#{evaluation_type.id}" %>">
                     <%= evaluation_type.name %>
                   </label>
@@ -48,7 +49,8 @@
                 <li>
                   <input id="<%= "evaluation_type_certified_#{evaluation_type.id}" %>"  
                     <%= params[:eval_type_id].present? && params[:eval_type_id].to_s == evaluation_type.id.to_s ? 'checked=checked' : '' %>
-                    name="evaluation_type" type="checkbox" value="<%= evaluation_type.id %>">
+                    name="evaluation_type" type="checkbox" value="<%= evaluation_type.id %>"
+                    aria-controls="venue_evaluations_certified">
                   <label for="<%= "evaluation_type_certified_#{evaluation_type.id}" %>">
                     <%= evaluation_type.name %>
                   </label>
@@ -62,7 +64,7 @@
       <%= semantic_form_for(@place, :url => evaluation_place_path(params[:id]), :html => { :class => 'evaluation_public' }) do |f| %>
         <h2><%= t('.header_form') %></h2>
       
-        <div class="venue_evaluations">
+        <div id="venue_evaluations_public" class="venue_evaluations" role="region" aria-live="polite">
           <%= render :partial => 'public_eval_form', :locals => {:f => f} %>
         </div>
 
@@ -77,7 +79,7 @@
       <%= semantic_form_for(@place, :url => evaluation_place_path(params[:id]), :html => { :class => 'evaluation_certified' }) do |f| %>
         <h2><%= t('.header_form') %></h2>
 
-        <div class="venue_evaluations">
+        <div id="venue_evaluations_certified" class="venue_evaluations" role="region" aria-live="polite">
           <%= render :partial => 'certified_eval_form', :locals => {:f => f} %>
         </div>
 
@@ -101,7 +103,8 @@
             <li>
               <input id="<%= "evaluation_type_public_#{evaluation_type.id}" %>"  
                     <%= params[:eval_type_id].present? && params[:eval_type_id].to_s == evaluation_type.id.to_s ? 'checked=checked' : '' %>
-                    name="evaluation_type" type="checkbox" value="<%= evaluation_type.id %>">
+                    name="evaluation_type" type="checkbox" value="<%= evaluation_type.id %>"
+                    aria-controls="venue_evaluations_public">
               <label for="<%= "evaluation_type_public_#{evaluation_type.id}" %>">
                 <%= evaluation_type.name %>
               </label>
@@ -116,7 +119,7 @@
     <%= semantic_form_for(@place, :url => evaluation_place_path(params[:id]), :html => { :class => 'evaluation_public' }) do |f| %>
       <h2><%= t('.header_form') %></h2>
       
-      <div class="venue_evaluations">
+      <div id="venue_evaluations_public" class="venue_evaluations" role="region" aria-live="polite">
         <%= render :partial => 'public_eval_form', :locals => {:f => f} %>
       </div>
 

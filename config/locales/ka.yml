@@ -379,6 +379,11 @@ ka:
       evaluation_instructions: შეარჩიეთ კატეგორია და შეავსეთ შეფასება.
       question_category_link_title: იხილეთ კითხვები '%{name}'
       question_instructions: თუ არ გაქვთ პასუხი, დატოვეთ ცარიელი. 
+      skip_to_next_quest_cat: Skip to the next category of questions (jump)
+      skip_to_previous_quest_cat: Skip to the previous category of questions (jump)
+      skip_to_certification: Skip to the certified or public evaluation selection (jump)
+      skip_to_eval_type: Skip to the type of evaluation selection (jump)
+      skip_to_submit_button: Skip to the submit button (jump)
     certified_eval_form_questions:
       tip_exists: Answering yes to this question will show more questions
       tip_evidence: Mesaurements are needed for this question
@@ -395,28 +400,13 @@ ka:
       header_certification: Which evaluation do you want to fill out?
       header_evaluation_types: Which types do you want to evaluate?
       header_form: Evaluation Form
-      certification_yes_link_text: "Certified Evaluation"
-      certification_yes_link_title: "Fill out a Certified Evaluation"
-      certification_no_link_text: "Public Evaluation"
-      certification_no_link_title: "Fill out a Public Evaluation"
-      submit: Submit the Evaluation
-      cancel_eval: Cancel the Evaluation
-      no_questions: There are no evaluation questions on file for your selection.
-    evaluation_old:
-      title1: "'%{name}'-ის შეფასება"
-      title2p: "Public Evaluation of '%{name}'"
-      title2c: "Certified Evaluation of '%{name}'"
-      title3p: "Public %{disability} Evaluation of '%{name}'"
-      title3c: "Certified %{disability} Evaluation of '%{name}'"
-      header_disability: რომელი შეფასების შევსება გსურთ?
-      disability_link_title: "'%{name}'-ის შეფასება"
-      header_certification: "გსურთ შეავსოთ სერტიფიცირებული შეფასება?"
       certification_yes_link_text: "სერტიფიცირებული შეფასება"
       certification_yes_link_title: "სერტიფიცირებული შეფასების შევსება"
       certification_no_link_text: "საზოგადოებრივი შეფასება"
       certification_no_link_title: "საზოგადოებრივი შეფასების შვსება"
       submit: შეფასების შევსება
       cancel_eval: შეფასების გაუქმება
+      no_questions: There are no evaluation questions on file for your selection.
     upload_photos:
       title: "'%{name}'-ის სურათის დამატება"
       add_files: სურათის დამატება...

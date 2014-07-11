@@ -379,6 +379,11 @@ en:
       evaluation_instructions: Fill out the evaluation by selecting a category and answering the statements.
       question_category_link_title: View questions in '%{name}'
       question_instructions: If you do not know the answer, please leave it blank.
+      skip_to_next_quest_cat: Skip to the next category of questions (jump)
+      skip_to_previous_quest_cat: Skip to the previous category of questions (jump)
+      skip_to_certification: Skip to the certified or public evaluation selection (jump)
+      skip_to_eval_type: Skip to the type of evaluation selection (jump)
+      skip_to_submit_button: Skip to the submit button (jump)
     certified_eval_form_questions:
       tip_exists: Answering yes to this question will show more questions
       tip_evidence: Mesaurements are needed for this question
@@ -402,21 +407,6 @@ en:
       submit: Submit the Evaluation
       cancel_eval: Cancel the Evaluation
       no_questions: There are no evaluation questions on file for your selection.
-    evaluation_old:
-      title1: "Evaluation of '%{name}'"
-      title2p: "Public Evaluation of '%{name}'"
-      title2c: "Certified Evaluation of '%{name}'"
-      title3p: "Public %{disability} Evaluation of '%{name}'"
-      title3c: "Certified %{disability} Evaluation of '%{name}'"
-      header_disability: Which evaluation do you want to complete?
-      disability_link_title: "'%{name}' evaluation"
-      header_certification: "Do you want to submit a Certified Evaluation?"
-      certification_yes_link_text: "Certified Evaluation"
-      certification_yes_link_title: "Fill out a Certified Evaluation"
-      certification_no_link_text: "Public Evaluation"
-      certification_no_link_title: "Fill out a Public Evaluation"
-      submit: Submit the Evaluation
-      cancel_eval: Cancel the Evaluation
     upload_photos:
       title: Upload Photos for '%{name}'
       add_files: Add photos...
