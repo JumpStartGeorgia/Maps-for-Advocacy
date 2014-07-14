@@ -53,6 +53,7 @@ ka:
         venue_id: ადგილმდებარეობა
         lat: განედი
         lon: გრძედი
+        url: Website
       place_translation:
         name: ადგილის სახელი
         address: მისამართი
@@ -337,39 +338,23 @@ ka:
       header_user_details: დეტალები
       details_link_title: იხილეთ ამ შეფასების დეტალები
     form:
-      header_venue: რა არის ადგილმდებარეობა?
-      venue_instructions: აირჩიეთ კატეგორია, რომ იხილოთ ობიექტების ჩამონათვალი.
-      venue_category_link_title: "'%{name}'-ის ობიექტების ნახვა"
-      skip_venue_search: აირჩიეთ ობიექტის კატეგორია (გადახტომა)
-      venue_filter_num_match: შესაბამისი ობიექტი ნაპოვნია.
-      venue_category_title: "'%{name}'-ის ობიექტების ნახვა"
-      venue_link_title: "შეარჩიეთ %{category} - %{venue}"
-      header_name: რა ქვია '%{name}'-ს?
-      label_name: "'%{name}'-ის სახელწოდება"
-      name_link_title: სახელწოდების შენახვა
-      header_location: სად მდებარეობს '%{name}'?
-      map_instructions: დააკლიკეთ რუკას, რომ მონიშნოთ სად მდებარეობს '%{name}'.
+      header_location: Where is this place located?
+      map_instructions: Click on the map to add a marker of where the place is located.  
       map_blue_marker: ლურჯი მარკერი (%{img}) აღნიშნავს თქვენი ადგილის ლოკაციას.
       map_red_marker: "წითელი მარკერი (%{img}) გამოჩნდება თუ ერთნაირი ადგილები არის გვერდიგვერდ განლაგებული. თუ თქვენთვის სასურველი ადგილი მონიშნულია წითელი ფერით, დააჭირეთ მას და გადადით ამ ადგილის გვერძე."
       address_search_results: მისამართის ძიების შედეგი
-      address_instructions: "'%{name}'-ის ლოკაციის განსაზღვრა შეგიძლიათ საძიებო სისტემაში მისამართის ჩაწერით ან რუკაზე '%{name}'-ის ადგილის მონიშვნით ."
-      address_instructions2: გთხოვთ შეიყვანეთ მისამართი და ქალაქი, სადაც მდებარეობს '%{name}'.
+      address_instructions: You can indicate the location of te place by doing an address search or by clicking on the map to add a marker of where the place is located.  
+      address_instructions2: Please enter the address and city of where the place is located.  
       submit_address_search: მისამართის მოძებნა
       address_search_success: მისამართის ძიებამ იპოვა შემდეგი წყვილები. გთხოვთ დაადასტუროთ, რომ შედეგები სწორია.
       address_search_multiple_success: მისამართის ძიებამ იპოვა შემდეგი წყვილები. გთხოვთ შეარჩიოთ სწორი შედეგი.
       address_search_fail: არ მოიძებნა. კიდევ სცადეთ.
-      header_disability: რომელი შეფასების შევსება გსურთ?
-      disability_link_title: "'%{name}'-ის შეფასება"
-      header_evaluation: "'%{name}'-ის %{disability} შეფასება"
-      questions: კითხვები
-      next: შემდეგი
-      map_link_title: შეარჩიეთ ეს მდებარეობა
       submit: ადგილის შენახვა
       building_number: შენობის ნომერი (თუ ზემოთ არ არის მითითებული)
       header_address_search: ძიება მისამართით
       header_map_search: ალდილმდებარეობა რუკაზე
       header_places_nearby: მსგავსი ადგილი ამავე ტერიტორიაზე
-      places_nearby_explanation: "მას შემდეგ, რაც შეიყვანთ მისამართს ან რუკაზე მონიშნავთ ადგილს, ეს სექცია გიჩვენებთ არის თუ არა '%{name}'-ის მსგავსი ადგილები ამ ტერიტორიაზე."
+      places_nearby_explanation: "After you enter an address or place a marker on the map, this section will show you any similar places that are located nearby. If your place is in this list, click on the place to go that place's page."
       places_nearby_none: არ მოიძია ამ ტერიოტორიაზე მსგავსი ადგილები.
       skip_to_address_search: მისამართის საძიებო ფორმაზე გადასვლა (გადახტომა)
       skip_to_map: რუკაზე გადასვლა (გადახტომა)

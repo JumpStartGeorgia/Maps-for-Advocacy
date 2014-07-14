@@ -53,6 +53,7 @@ en:
         venue_id: Venue
         lat: Latitude
         lon: Longitude
+        url: Website
       place_translation:
         name: Name of Place
         address: Address
@@ -337,39 +338,23 @@ en:
       header_user_details: Details
       details_link_title: View the details of this evaluation
     form:
-      header_venue: What is the Venue?
-      venue_instructions: Select a venue category to view a list of venues.
-      venue_category_link_title: View venues in '%{name}'
-      skip_venue_search: Go to select venue category (jump)
-      venue_filter_num_match: venue matches found.
-      venue_category_title: View the venues in '%{name}'
-      venue_link_title: "Select %{category} - %{venue}"
-      header_name: What is the name of the '%{name}'?
-      label_name: "'%{name}' Name"
-      name_link_title: Save this name
-      header_location: Where is '%{name}' located?  
-      map_instructions: Click on the map to place a marker of where '%{name}' is located.  
+      header_location: Where is this place located?
+      map_instructions: Click on the map to add a marker of where the place is located.  
       map_blue_marker: The blue marker (%{img}) indicates where your place is located.
       map_red_marker: "Red markers (%{img}) will appear if similar places are located nearby. If your place is one of the places indicated by a red marker, click on the red marker to go to that place's page."
       address_search_results: Results of the address search
-      address_instructions: You can indicate the location of '%{name}' by doing an address search or by clicking on the map to place a marker of where '%{name}' is located.  
-      address_instructions2: Please enter the address and city of where '%{name}' is located.  
+      address_instructions: You can indicate the location of te place by doing an address search or by clicking on the map to add a marker of where the place is located.  
+      address_instructions2: Please enter the address and city of where the place is located.  
       submit_address_search: Lookup Address
       address_search_success: The address search found the following match.  Please confirm that it is correct.
       address_search_multiple_success: The address search found the following matches.  Please select the correct one.
       address_search_fail: Sorry, but your search did not return any results.  Please try again.
-      header_disability: Which evaluation do you want to complete?
-      disability_link_title: "'%{name}' evaluation"
-      header_evaluation: "%{disability} Evaluation of '%{name}'"
-      questions: Questions
-      next: Next
-      map_link_title: Select this location
       submit: Save the Place
       building_number: Building Number (if not provided above)
       header_address_search: Search By Address
       header_map_search: Location on Map
       header_places_nearby: Similar Places Nearby
-      places_nearby_explanation: "After you enter an address or place a marker on the map, this section will show you any similar places that are located nearby to '%{name}'. If your place is in this list, click on the place to go that place's page."
+      places_nearby_explanation: "After you enter an address or place a marker on the map, this section will show you any similar places that are located nearby. If your place is in this list, click on the place to go that place's page."
       places_nearby_none: There were no similar places found nearby.
       skip_to_address_search: Skip to the address search form (jump)
       skip_to_map: Skip to the map (jump)

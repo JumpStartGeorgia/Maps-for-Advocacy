@@ -5,167 +5,146 @@
 <%= semantic_form_for(@place, :html => { :class => 'form-horizontal' }) do |f| %>
 	<%= f.error_messages %>
 
-  <% if params[:stage] == '1' %>
-    <h2><%= t('.header_venue') %></h2>
-
-    <ul id="venues">
+  <div class="row-fluid">
+    <div class="span4">
+  	  <%= f.input :name, :input_html => { :value => @place.place_translations.present? ? @place.place_translations.first.name : nil } %>
+    </div>
+    <div class="span4">
       <%
+        options = []
         categories = @venue_categories.map{|x| [x.id, x.venue_category]}.uniq
         categories.each do |category|
+          venues = @venue_categories.select{|x| x.id == category[0]}.map{|x| [x[:venue], x[:venue_id]]}
+          if venues.present?
+            options << [category[1], venues]
+          end
+        end
       %>
-        <li>
-          <%= link_to category[1], '#' %>
-          <%
-            venues = @venue_categories.select{|x| x.id == category[0]}
-            if venues.present?
-          %>
-              <ul>
-                <% venues.each do |venue| %>
-                  <li>          
-                    <%= link_to venue[:venue], new_place_path(:stage => '2', :venue_id => venue[:venue_id]) %>
-                  </li>
-                <% end %>
-              </ul>
-          <% end %>
-        </li>
-    
-      <% end %>
-    </ul>
 
-  <% elsif params[:stage] == '2' %>
-    <h2><%= t('.header_name', :name => @venue.name) %></h2>
-
-    <div class="string control-group required stringish">
-      <label class=" control-label" for="place_name"><%= t('.label_name', :name => @venue.name) %></label>
-      <div class="controls">
-        <%= text_field_tag 'place_name', params[:name] %>
-      </div>
+      <%= f.input :venue_id, :as => :select, :collection => grouped_options_for_select(options, @place.venue_id),
+          :input_html => {:style => 'width: 100%'} %>
     </div>
+    <div class="span4">
+  	  <%= f.input :url, :as => :url %>
+    </div>
+  </div>
 
-    <p>
-      <%= link_to t('.next'), params.merge(:stage => '3', :name => ''), 
-            :id => 'place_name_next', :role => 'button', :'aria-hidden' => true,
-            :title => t('.name_link_title') %>
-    </p>
 
-  <% elsif params[:stage] == '3' %>
 
-    <h2><%= t('.header_location', :name => params[:name]) %></h2>
-    
-    
-    <% create_sorted_translation_objects(@place.place_translations).each do |trans| %>
-		  <%= f.fields_for :place_translations, trans do |translation| %>
-			  <%= translation.hidden_field :name %>
-			  <%= translation.hidden_field :locale %>
-			  <%= translation.hidden_field :address, :class => 'place_address' %>
-		  <% end %>
+  <h2><%= t('.header_location') %></h2>
+  
+  
+  <% create_sorted_translation_objects(@place.place_translations).each do |trans| %>
+	  <%= f.fields_for :place_translations, trans do |translation| %>
+		  <%= translation.hidden_field :name, :class => 'place_form_name_translation' %>
+		  <%= translation.hidden_field :locale %>
+		  <%= translation.hidden_field :address, :class => 'place_address' %>
 	  <% end %>
+  <% end %>
 
-	  <%= f.inputs do %>
-	    <%= f.hidden_field :lat %>
-	    <%= f.hidden_field :lon %>
-	    <%= f.hidden_field :venue_id %>
-	  <% end %>
+  <%= f.inputs do %>
+    <%= f.hidden_field :lat %>
+    <%= f.hidden_field :lon %>
+  <% end %>
+  
+  <p id="place-form-address-search-instructions">
+    <%= t('.address_instructions') %>
+  </p>
+  <div id="place-form-address-search" class="row-fluid">
+    <div class="span4" id="address-search-container">
+      <h3><%= t('.header_address_search') %></h3>
     
-    <p id="place-form-address-search-instructions">
-      <%= t('.address_instructions', :name => params[:name]) %>
-    </p>
-    <div id="place-form-address-search" class="row-fluid">
-      <div class="span4" id="address-search-container">
-        <h3><%= t('.header_address_search') %></h3>
+      <p>
+        <%= label_tag 'address-search', t('.address_instructions2') %>
+      </p>
       
-        <p>
-          <%= label_tag 'address-search', t('.address_instructions2', :name => params[:name]) %>
-        </p>
-        
-        <p>
-          <%= text_field_tag 'address-search', nil, :class => "span10" %>
-        </p>
-        
-        <p>
-          <%= link_to t('.submit_address_search'), '#', :id => 'submit-address-search', :class => 'btn btn-mini', :role => 'button' %>
-        </p>
-        
-        <div id="address-search-results" aria-live="polite" aria-relevant="additions" aria-busy="false">
-          <a href="#address-search-results" id="address-search-results" class="accessibly-hidden"><%= t('.address_search_results') %></a>
-          <div id="address-search-1-match" class="alert alert-info" aria-hidden="true">
-            <p>
-              <%= t('.address_search_success') %>
-            </p>
-            <div class="placeholder"></div>
-            <div class="building_number">
-              <p>
-                <%= label_tag 'building_number1', t('.building_number') %>
-                <%= text_field_tag 'building_number1', nil, :class => "span3 builder_number" %>
-              </p>
-            </div>
-          </div>
-        
-          <div id="address-search-multiple-match" class="alert alert-info" aria-hidden="true">
-            <p>
-              <%= t('.address_search_multiple_success') %>
-            </p>
-            <div class="placeholder"></div>
-            <div class="building_number">
-              <p>
-                <%= label_tag 'building_number2', t('.building_number') %>
-                <%= text_field_tag 'building_number2', nil, :class => "span3 builder_number" %>
-              </p>
-            </div>
-          </div>
-          
-          <div id="address-search-fail" class="alert alert-danger" aria-hidden="true">
-            <p>
-              <%= t('.address_search_fail') %>
-            </p>
-          </div>
-
-          <a href="#places_nearby_container" class="accessibly-hidden"><%= t('.skip_to_places_nearby') %></a>
-          <a href="#map_container" class="accessibly-hidden"><%= t('.skip_to_map') %></a>
-          <a href="#submit-button" class="accessibly-hidden"><%= t('.skip_to_submit') %></a>
-
-          <div id="submit-button" aria-hidden="true">
-            <%= f.submit t('.submit') %>
-          </div>
-
-        </div>      
-      </div>
-      <div class="span4" id="map_container">
-        <h3><%= t('.header_map_search') %></h3>
-        <p id="map_marker_explanation">
-          <%= t('.map_instructions', :name => params[:name]) %>
-          <%= t('.map_blue_marker', :img => image_tag(asset_path('marker-icon.png'))).html_safe %>
-          <%= t('.map_red_marker', :img => image_tag(asset_path('marker-icon-red.png'))).html_safe %>
-        </p>
-
-        <a href="#address-search-container" class="accessibly-hidden"><%= t('.skip_to_address_search') %></a>
-        <a href="#places_nearby_container" class="accessibly-hidden"><%= t('.skip_to_places_nearby') %></a>
-        <a href="#submit-button" class="accessibly-hidden"><%= t('.skip_to_submit') %></a>
-
-        <div id="map"></div>
-      </div>
-      <div class="span4" id="places_nearby_container" aria-live="polite" aria-relevant="additions" aria-busy="false">
-        <h3><%= t('.header_places_nearby') %></h3>
-        <p id="places_nearby_explanation">
-          <%= t('.places_nearby_explanation', :name => params[:name]) %>
-        </p>
-
-        <div id="places_nearby_none" class="alert" aria-hidden="true">
+      <p>
+        <%= text_field_tag 'address-search', @place.place_translations.present? ? @place.place_translations.first.address : nil, :class => "span10" %>
+      </p>
+      
+      <p>
+        <%= link_to t('.submit_address_search'), '#', :id => 'submit-address-search', :class => 'btn btn-mini', :role => 'button' %>
+      </p>
+      
+      <div id="address-search-results" aria-live="polite" aria-relevant="additions" aria-busy="false">
+        <a href="#address-search-results" id="address-search-results" class="accessibly-hidden"><%= t('.address_search_results') %></a>
+        <div id="address-search-1-match" class="alert alert-info" aria-hidden="true">
           <p>
-            <%= t('.places_nearby_none') %>
+            <%= t('.address_search_success') %>
+          </p>
+          <div class="placeholder"></div>
+          <div class="building_number">
+            <p>
+              <%= label_tag 'building_number1', t('.building_number') %>
+              <%= text_field_tag 'building_number1', nil, :class => "span3 builder_number" %>
+            </p>
+          </div>
+        </div>
+      
+        <div id="address-search-multiple-match" class="alert alert-info" aria-hidden="true">
+          <p>
+            <%= t('.address_search_multiple_success') %>
+          </p>
+          <div class="placeholder"></div>
+          <div class="building_number">
+            <p>
+              <%= label_tag 'building_number2', t('.building_number') %>
+              <%= text_field_tag 'building_number2', nil, :class => "span3 builder_number" %>
+            </p>
+          </div>
+        </div>
+        
+        <div id="address-search-fail" class="alert alert-danger" aria-hidden="true">
+          <p>
+            <%= t('.address_search_fail') %>
           </p>
         </div>
 
-        <div id="places_nearby_matches" aria-hidden="true">
-        </div>
-
-        <a href="#address-search-container" class="accessibly-hidden"><%= t('.skip_to_address_search') %></a>
+        <a href="#places_nearby_container" class="accessibly-hidden"><%= t('.skip_to_places_nearby') %></a>
         <a href="#map_container" class="accessibly-hidden"><%= t('.skip_to_map') %></a>
         <a href="#submit-button" class="accessibly-hidden"><%= t('.skip_to_submit') %></a>
-        
-      </div>
+
+        <div id="submit-button" aria-hidden="true">
+          <%= f.submit t('.submit') %>
+        </div>
+
+      </div>      
     </div>
-    
-  <% end %>
+    <div class="span4" id="map_container">
+      <h3><%= t('.header_map_search') %></h3>
+      <p id="map_marker_explanation">
+        <%= t('.map_instructions') %>
+        <%= t('.map_blue_marker', :img => image_tag(asset_path('marker-icon.png'))).html_safe %>
+        <%= t('.map_red_marker', :img => image_tag(asset_path('marker-icon-red.png'))).html_safe %>
+      </p>
+
+      <a href="#address-search-container" class="accessibly-hidden"><%= t('.skip_to_address_search') %></a>
+      <a href="#places_nearby_container" class="accessibly-hidden"><%= t('.skip_to_places_nearby') %></a>
+      <a href="#submit-button" class="accessibly-hidden"><%= t('.skip_to_submit') %></a>
+
+      <div id="map"></div>
+    </div>
+    <div class="span4" id="places_nearby_container" aria-live="polite" aria-relevant="additions" aria-busy="false">
+      <h3><%= t('.header_places_nearby') %></h3>
+      <p id="places_nearby_explanation">
+        <%= t('.places_nearby_explanation') %>
+      </p>
+
+      <div id="places_nearby_none" class="alert" aria-hidden="true">
+        <p>
+          <%= t('.places_nearby_none') %>
+        </p>
+      </div>
+
+      <div id="places_nearby_matches" aria-hidden="true">
+      </div>
+
+      <a href="#address-search-container" class="accessibly-hidden"><%= t('.skip_to_address_search') %></a>
+      <a href="#map_container" class="accessibly-hidden"><%= t('.skip_to_map') %></a>
+      <a href="#submit-button" class="accessibly-hidden"><%= t('.skip_to_submit') %></a>
+      
+    </div>
+  </div>
+  
 <% end %>
 

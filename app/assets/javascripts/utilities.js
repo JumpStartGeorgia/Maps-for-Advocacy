@@ -129,7 +129,6 @@ var map, marker, map_type, near_markers;
     if (perform_address_search == undefined){
       perform_address_search = false;
     }
-    
     var latlng = new L.LatLng(lat, lon);
     map.setView(latlng, gon.zoom);						
     marker = L.marker(latlng, {icon: L.icon(default_leaflet_icon_options)}).addTo(map);
@@ -139,7 +138,7 @@ var map, marker, map_type, near_markers;
     if (perform_address_search){
       // get the address
       var d = {lat: lat, lon: lon};
-      if (gon.near_venue_id != undefined){
+      if (gon.near_venue_id != undefined && gon.near_venue_id != ''){
         d['near_venue_id'] = gon.near_venue_id;
       }
       $.post(gon.address_search_path,d,function(data){								
@@ -154,7 +153,7 @@ var map, marker, map_type, near_markers;
 
       // get the address
       var d = {lat: latlng.lat, lon: latlng.lng};
-      if (gon.near_venue_id != undefined){
+      if (gon.near_venue_id != undefined && gon.near_venue_id != ''){
         d['near_venue_id'] = gon.near_venue_id;
       }
       $.post(gon.address_search_path,d,function(data){								
@@ -246,7 +245,7 @@ var map, marker, map_type, near_markers;
     }else
     {
       var d = {address:address};
-      if (gon.near_venue_id != undefined){
+      if (gon.near_venue_id != undefined && gon.near_venue_id != ''){
         d['near_venue_id'] = gon.near_venue_id;
       }
       $.post(gon.address_search_path,d,function(data){								

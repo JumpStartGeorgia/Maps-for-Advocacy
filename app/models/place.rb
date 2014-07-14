@@ -15,16 +15,17 @@ class Place < ActiveRecord::Base
 	has_many :place_summaries, :dependent => :destroy
   accepts_nested_attributes_for :place_translations
   accepts_nested_attributes_for :place_evaluations
-  attr_accessible :venue_id, :district_id, :lat, :lon, :place_translations_attributes, :place_evaluations_attributes
+  attr_accessible :venue_id, :district_id, :lat, :lon, :place_translations_attributes, :place_evaluations_attributes, :url
   
   validates :venue_id, :lat, :lon, :presence => true
+	validates :url, :format => {:with => URI::regexp(['http','https'])}, allow_blank: true
 
   include GeoRuby::SimpleFeatures
 
   after_create :assign_district
   
   def self.with_translation(id=nil)
-    sql = "select p.id, p.district_id, dt.name as district, p.venue_id, vt.name as venue, v.custom_question_category_id, v.custom_public_question_category_id, v.venue_category_id, p.lat, p.lon, pt.name as place, pt.address "
+    sql = "select p.id, p.district_id, dt.name as district, p.venue_id, vt.name as venue, v.custom_question_category_id, v.custom_public_question_category_id, v.venue_category_id, p.lat, p.lon, pt.name as place, pt.address, p.url "
     sql << "from places as p "
     sql << "inner join place_translations as pt on pt.place_id = p.id and pt.locale = :locale "
     sql << "left join venues as v on v.id = p.venue_id "

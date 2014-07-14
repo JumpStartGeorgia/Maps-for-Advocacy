@@ -32,55 +32,50 @@ $(document).ready(function(){
     }
     
     map.on('click', onMapClick);  
+
+    // if lat/lon and address already exist, show marker
+    if ($('form.place input#place_lat').length > 0 && $('form.place input#place_lat').val() != '' &&
+        $('form.place input#place_lon').length > 0 && $('form.place input#place_lat').val() != '' && 
+        $('form.place input#place_place_translations_attributes_0_address').length > 0 && $('form.place input#place_place_translations_attributes_0_address').val() != ''){
+      
+      create_map_marker($('form.place input#place_lat').val(), 
+                        $('form.place input#place_lon').val(), 
+                        $('form.place input#place_place_translations_attributes_0_address').val());
+      
+    }
   }
   
   /*************************************************/
-  /* venue filter on place form */
-  if (gon.place_form_venue_filter){
-    // turn venue list into menu
-    $('form.place ul#venues').menu();
-  }
-  
-  
-  /* show name for place form */
-  if (gon.show_place_name_form){
+  /* javascript for place form */
+  if (gon.show_place_form){
+    // venue select box
+    $('form.place #place_venue_id').select2({width:'element', allowClear:true});
+    // when venu changes, update gon variable that is used to search for similar venues nearby
+    $('form.place #place_venue_id').change(function(){
+      gon.near_venue_id = $(this).val();
+    });
+
+    // as enter name, update hidden fields
     $('form.place #place_name').change(function(){
       var name = $(this).val();
-      var url = updateQueryStringParameter($('#place_name_next').attr('href'), 'name', name);
-
-      if (name.length == 0){
-        // hide the next button
-        $('#place_name_next').attr('href', url).attr('aria-hidden', 'true');
-      }else {
-        // show the next button
-        $('#place_name_next').attr('href', url).attr('aria-hidden', 'false');
-      }
+      $('form.place input.place_form_name_translation').val($(this).val());
     })
     .keyup( function () {
       // fire the above change event after every letter
       $(this).change();
-    })
-    .keypress(function(event){
-	    var keycode = (event.keyCode ? event.keyCode : event.which);
-	    if(keycode == '13'){
-        return false;
-	    }
     });
 
-  }  
-  
-  
-  /* show map for place form */
-  if (gon.show_place_form_map){
-      // if the user is using a browser that supports geolocation
-      // use the current users coordinates
-      if (navigator.geolocation){
-        console.log('user can use geolocation');
-        // not catching any errors for if there are some, the var coords will not change and that is ok
-        navigator.geolocation.getCurrentPosition(get_user_coordinates, get_geolocation_error);
-      } else{
-        load_place_form_map();
-      }  
+
+    // if the user is using a browser that supports geolocation
+    // use the current users coordinates
+    if (navigator.geolocation){
+      console.log('user can use geolocation');
+      // not catching any errors for if there are some, the var coords will not change and that is ok
+      navigator.geolocation.getCurrentPosition(get_user_coordinates, get_geolocation_error);
+    } else{
+      load_place_form_map();
+    }  
+
 
     /* perform an address search */
     if (gon.address_search_path){
@@ -111,6 +106,63 @@ $(document).ready(function(){
       });
     }
   }
+/*  
+  
+  // show name for place form 
+  if (gon.show_place_name_form){
+    $('form.place #place_name').change(function(){
+      var name = $(this).val();
+      var url = updateQueryStringParameter($('#place_name_next').attr('href'), 'name', name);
+
+      if (name.length == 0){
+        // hide the next button
+        $('#place_name_next').attr('href', url).attr('aria-hidden', 'true');
+      }else {
+        // show the next button
+        $('#place_name_next').attr('href', url).attr('aria-hidden', 'false');
+      }
+    })
+    .keyup( function () {
+      // fire the above change event after every letter
+      $(this).change();
+    })
+    .keypress(function(event){
+	    var keycode = (event.keyCode ? event.keyCode : event.which);
+	    if(keycode == '13'){
+        return false;
+	    }
+    });
+
+    $('form.place #place_url').change(function(){
+      var name = $(this).val();
+      var url = updateQueryStringParameter($('#place_name_next').attr('href'), 'url', name);
+
+      if (name.length == 0){
+        // hide the next button
+        $('#place_name_next').attr('href', url).attr('aria-hidden', 'true');
+      }else {
+        // show the next button
+        $('#place_name_next').attr('href', url).attr('aria-hidden', 'false');
+      }
+    })
+    .keyup( function () {
+      // fire the above change event after every letter
+      $(this).change();
+    })
+    .keypress(function(event){
+	    var keycode = (event.keyCode ? event.keyCode : event.which);
+	    if(keycode == '13'){
+        return false;
+	    }
+    });
+
+  }  
+  
+  // show map for place form
+  if (gon.show_place_form_map){
+
+  }
+*/
   
   /*************************************************/
   /* show map for place show */

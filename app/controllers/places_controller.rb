@@ -116,6 +116,21 @@ class PlacesController < ApplicationController
   # GET /places/new.json
   def new
     @place = Place.new
+    # create the translation object for however many locales there are
+    # so the form will properly create all of the nested form fields
+    I18n.available_locales.each do |locale|
+		  @place.place_translations.build(:locale => locale.to_s)
+	  end
+
+    @venue_categories = VenueCategory.with_venues
+    @show_map = true
+
+    gon.show_place_form = true
+    gon.address_search_path = address_search_places_path
+    gon.near_venue_id = 0
+
+
+=begin
     params[:stage] = '1' if params[:stage].blank?
 
 	  # get venue
@@ -134,13 +149,14 @@ class PlacesController < ApplicationController
       gon.near_venue_id = @venue.id
 
       @place.venue_id = params[:venue_id]
+      @place.url = params[:url]
       # create the translation object for however many locales there are
       # so the form will properly create all of the nested form fields
       I18n.available_locales.each do |locale|
 			  @place.place_translations.build(:locale => locale.to_s, :name => params[:name])
 		  end
     end
-
+=end
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @place }
@@ -182,14 +198,15 @@ class PlacesController < ApplicationController
         format.html { redirect_to place_path(@place), notice: t('app.msgs.success_created', :obj => t('activerecord.models.place')) }
         format.json { render json: @place, status: :created, location: @place }
       else
-        params[:stage] = '3'
-	      # get venue
-	      @venue = Venue.with_translations(I18n.locale).find_by_id(@place.venue_id)
-
+        @venue_categories = VenueCategory.with_venues
         @show_map = true
-        gon.show_place_form_map = true
+        gon.show_place_form = true
         gon.address_search_path = address_search_places_path
-        gon.near_venue_id = @venue.id
+        gon.near_venue_id = @place.venue_id
+        if @place.lat.present? && @place.lon.present?
+          gon.lat = @place.lat
+          gon.lon = @place.lon
+        end
 =begin
 		    # get list of questions
   		  @question_categories = QuestionCategory.questions_for_venue(question_category_id: @venue.question_category_id, disability_id: params[:eval_type_id])
