@@ -106,6 +106,13 @@ $(document).ready(function(){
       }      
     }
 
+    function show_submit_button_if_ok(){
+      if ($('form.place div.venue_evaluation input[type="radio"]:checked').length == 0){
+        $('form.place #submit-button').addClass('accessibly-hidden');
+      }else{
+        $('form.place #submit-button').removeClass('accessibly-hidden');
+      }
+    }
   /*************************************************/
   /* actions for the evaluation form */
   if (gon.show_evaluation_form){
@@ -180,10 +187,30 @@ $(document).ready(function(){
     //////////////////////////////////////////////////////////////////////////
     // show the submit button if at least one item is selected
     $('form.place div.venue_evaluation input[type="radio"]').change(function(){
-      if ($('form.place div.venue_evaluation input[type="radio"]:checked').length == 0){
-        $('form.place #submit-button').addClass('accessibly-hidden');
-      }else{
-        $('form.place #submit-button').removeClass('accessibly-hidden');
+      show_submit_button_if_ok();
+    });
+    
+
+    //////////////////////////////////////////////////////////////////////////
+    // if question has selected value and it is the same as the value they are trying
+    // to select again, turn the selection off
+    $('form.place div.venue_evaluation .venue_evaluation_question input[type="radio"]').click(function(){
+      console.log($(this).attr('name'));
+      console.log($(this).val());
+     
+      var set_checked = true;
+      if ($(this).data('was-checked') == true){
+        $(this).prop('checked', false);
+        set_checked = false;
+
+        show_submit_button_if_ok();
+      }
+      
+      // reset all to false
+      $('form.place div.venue_evaluation .venue_evaluation_question input[name="' + $(this).attr('name') + '"]').data('was-checked', false);
+      // if needed, record that this item was checked
+      if (set_checked){
+        $(this).data('was-checked', true);
       }
     });
     

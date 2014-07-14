@@ -18,7 +18,7 @@
         <% cat[:questions].each do |question| %>    
           <% question_index += 1 %>
 
-          <div class="row-fluid venue_evaluation_question" data-disability-ids="<%= @evaluation_types_public.map{|x| x.id}[0..3] %>">
+          <div class="row-fluid venue_evaluation_question" data-disability-ids="<%= @evaluation_types_public.map{|x| x.id} %>">
             <%= evaluation.fields_for :place_evaluation_answers, @place_evaluation_public.place_evaluation_answers[question_index] do |answer| %>
 
               <%= answer.hidden_field :question_pairing_id , :value => question[:question_pairing_id] %>

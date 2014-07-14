@@ -383,7 +383,7 @@ ka:
     evaluation:
       title: "'%{name}'-ის შეფასება"
       header_certification: რომელი შეფასების შევსება გსურთ?
-      header_evaluation_types: რა სახის შეფასების შევსება გსურთ?
+      header_evaluation_types: Which types do you want to evaluate (select all that apply)?
       header_form: შეფასების ფორმა
       certification_yes_link_text: "სერტიფიცირებული შეფასება"
       certification_yes_link_title: "სერტიფიცირებული შეფასების შევსება"

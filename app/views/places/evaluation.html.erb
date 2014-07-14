@@ -24,7 +24,6 @@
       
       <div id="evaluation_types" data-ids="" role="region" aria-live="polite">
         <h2><%= t('.header_evaluation_types') %></h2>
-
         <div id="evaluation_types_public" data-type="public" data-ids="<%= @evaluation_types_public.map{|x| x.id} %>">
           <% if @evaluation_types_public.present? %>
             <ul>

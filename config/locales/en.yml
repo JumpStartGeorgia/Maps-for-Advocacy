@@ -383,7 +383,7 @@ en:
     evaluation:
       title: "Evaluation of '%{name}'"
       header_certification: Which evaluation do you want to fill out?
-      header_evaluation_types: Which types do you want to evaluate?
+      header_evaluation_types: Which types do you want to evaluate (select all that apply)?
       header_form: Evaluation Form
       certification_yes_link_text: "Certified Evaluation"
       certification_yes_link_title: "Fill out a Certified Evaluation"
