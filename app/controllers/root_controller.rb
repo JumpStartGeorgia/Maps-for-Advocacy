@@ -68,7 +68,7 @@ logger.debug "----------------- #{@stats}"
 	  end
   end
 
-  def un_cprd
+  def un_crpd
     @page = Page.by_name('un_cprd')
   
     if @page.present?

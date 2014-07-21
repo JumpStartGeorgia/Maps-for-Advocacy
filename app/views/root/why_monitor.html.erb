@@ -11,6 +11,6 @@
   </div>
 
   <div id="why_monitor_text" class="tinymce_format">
-    <%= simple_format_no_tags(@page.content) %>
+    <%= simple_format_no_tags(@page.content, {}, {sanitize: false}) %>
   </div>       
 </div>
