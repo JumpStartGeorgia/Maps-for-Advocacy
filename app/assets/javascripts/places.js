@@ -71,7 +71,7 @@ $(document).ready(function(){
     if (navigator.geolocation){
       console.log('user can use geolocation');
       // not catching any errors for if there are some, the var coords will not change and that is ok
-      navigator.geolocation.getCurrentPosition(get_user_coordinates, get_geolocation_error);
+      navigator.geolocation.getCurrentPosition(get_user_coordinates, get_geolocation_error, {timeout:3000});
     } else{
       load_place_form_map();
     }  
