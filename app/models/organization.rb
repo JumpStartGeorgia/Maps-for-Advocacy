@@ -1,6 +1,8 @@
 class Organization < ActiveRecord::Base
 	translates :name, :description
 
+	has_many :organization_users, :dependent => :destroy
+	has_many :users, :through => :organization_users
 	has_many :organization_translations, :dependent => :destroy
   accepts_nested_attributes_for :organization_translations
   attr_accessible :id, :url, :organization_translations_attributes, :avatar

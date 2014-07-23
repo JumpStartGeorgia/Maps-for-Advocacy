@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140723053240) do
+ActiveRecord::Schema.define(:version => 20140723063401) do
 
   create_table "convention_categories", :force => true do |t|
     t.datetime "created_at"
@@ -98,6 +98,16 @@ ActiveRecord::Schema.define(:version => 20140723053240) do
   add_index "organization_translations", ["locale"], :name => "index_organization_translations_on_locale"
   add_index "organization_translations", ["name"], :name => "index_organization_translations_on_name"
   add_index "organization_translations", ["organization_id"], :name => "index_b182f63d9a9aa74a99d1d5dca589cbf53f3a688c"
+
+  create_table "organization_users", :force => true do |t|
+    t.integer  "organization_id"
+    t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "organization_users", ["organization_id"], :name => "index_organization_users_on_organization_id"
+  add_index "organization_users", ["user_id"], :name => "index_organization_users_on_user_id"
 
   create_table "organizations", :force => true do |t|
     t.string   "url"

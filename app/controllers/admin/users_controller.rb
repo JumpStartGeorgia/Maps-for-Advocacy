@@ -28,7 +28,8 @@ class Admin::UsersController < ApplicationController
   # GET /admin/users/new.json
   def new
     @user = User.new
-
+    @organizations = Organization.sorted
+    
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @user }
@@ -38,6 +39,8 @@ class Admin::UsersController < ApplicationController
   # GET /admin/users/1/edit
   def edit
     @user = User.find(params[:id])
+    @organizations = Organization.sorted
+
     if @user.role == User::ROLES[:admin] && current_user.role != User::ROLES[:admin]
       redirect_to admin_users_path
     end

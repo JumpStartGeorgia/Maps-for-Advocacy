@@ -13,6 +13,9 @@
 			<%= f.hidden_field :role , :value => User::ROLES[:user] %>
 		<% end %>
 
+    <div id="user_organizations" aria-live="polite" aria-relevant="additions" aria-hidden="true">
+		  <%= f.input :organizations, :as => :select, :collection => @organizations, :multiple => true %>
+    </div>
 	<% end %>
 
 

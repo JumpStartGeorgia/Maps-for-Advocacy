@@ -1,4 +1,7 @@
 class User < ActiveRecord::Base
+	has_many :organization_users, :dependent => :destroy
+	has_many :organizations, :through => :organization_users
+
   # Include default devise modules. Others available are:
   # :token_authenticatable, :encryptable, :confirmable, :lockable, :timeoutable and :omniauthable
 	# :registerable, :recoverable,
@@ -6,7 +9,9 @@ class User < ActiveRecord::Base
          :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:facebook]
 
   # Setup accessible (or protected) attributes for your model
-  attr_accessible :email, :password, :password_confirmation, :remember_me, :role, :provider, :uid, :nickname, :avatar, :lat, :lon, :district_id
+  attr_accessible :email, :password, :password_confirmation, :remember_me, :role, 
+      :provider, :uid, :nickname, :avatar, :organization_ids, 
+      :lat, :lon, :district_id
   attr_accessor :lat_orig, :lon_orig
   
   validates :role, :presence => true
@@ -19,7 +24,7 @@ class User < ActiveRecord::Base
 	after_find :populate_orig_coordinates
   before_save :assign_district
 
-  ROLES = {:user => 0, :certification => 50, :site_admin => 75, :admin => 99}
+  ROLES = {:user => 0, :certification => 50, :organization_admin => 60, :site_admin => 75, :admin => 99}
 
 	# have to check if lat/lon coordinates change on save and if so, update the district id
 	def populate_orig_coordinates
