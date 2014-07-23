@@ -3,6 +3,8 @@ class Organization < ActiveRecord::Base
 
 	has_many :organization_users, :dependent => :destroy
 	has_many :users, :through => :organization_users
+	has_many :place_evaluation_organizations, :dependent => :destroy
+	has_many :place_evaluations, :through => :place_evaluation_organizations
 	has_many :organization_translations, :dependent => :destroy
   accepts_nested_attributes_for :organization_translations
   attr_accessible :id, :url, :organization_translations_attributes, :avatar

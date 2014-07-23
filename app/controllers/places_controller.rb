@@ -325,6 +325,7 @@ class PlacesController < ApplicationController
 
     if @place.present?
       @can_certify = current_user.role?(User::ROLES[:certification])
+      @user_organizations_ids = current_user.organizations.present? ? current_user.organizations.map{|x| x.id} : nil
       @evaluation_types_public = Disability.sorted.is_active_public
       @evaluation_types_certified = Disability.sorted.is_active_certified
       
@@ -344,6 +345,13 @@ class PlacesController < ApplicationController
         # create the evaluation object for however many questions there are
         if @question_categories_public.present?
           @place_evaluation_public = @place.place_evaluations.build(user_id: current_user.id, disability_ids: @evaluation_types_public.map{|x| x.id}, is_certified: false)
+=begin          
+          if @user_organizations_ids.length > 0 && @place_evaluation_public.organizations.length < @user_organizations_ids.length
+            (0..(@user_organizations_ids.length-@place_evaluation_public.organizations.length)).each do |item|
+              @place_evaluation_public.organizations.build
+            end
+          end
+=end          
           num_questions = QuestionCategory.number_questions(@question_categories_public)
           if num_questions > 0
             (0..num_questions-1).each do |index|
@@ -355,6 +363,13 @@ class PlacesController < ApplicationController
         # create the evaluation object for however many questions there are
         if @question_categories_certified.present?
           @place_evaluation_certified = @place.place_evaluations.build(user_id: current_user.id, disability_ids: @evaluation_types_certified.map{|x| x.id}, is_certified: true)
+=begin          
+          if @user_organizations_ids.length > 0 && @place_evaluation_certified.organizations.length < @user_organizations_ids.length
+            (0..(@user_organizations_ids.length-@place_evaluation_certified.organizations.length)).each do |item|
+              @place_evaluation_certified.organizations.build
+            end
+          end
+=end          
           num_questions = QuestionCategory.number_questions(@question_categories_certified)
           if num_questions > 0
             (0..num_questions-1).each do |index|
@@ -398,6 +413,9 @@ class PlacesController < ApplicationController
             # new eval objects will be added for each disability
             place_params = params[:place].deep_dup
             place_params['place_evaluations_attributes'].delete('0')
+
+            # pull out and format the org ids so they can be saved correctly
+            org_ids = params[:place]['place_evaluations_attributes']['0']['organization_ids'].gsub('[','').gsub(']','').split(',').map{|x| x.strip}
             
 
             disability_ids.each_with_index do |disability_id, idx_disability|
@@ -412,6 +430,7 @@ class PlacesController < ApplicationController
                 place_params['place_evaluations_attributes'][idx_disability.to_s]['disability_id'] = disability_id
                 place_params['place_evaluations_attributes'][idx_disability.to_s]['user_id'] = params[:place]['place_evaluations_attributes']['0']['user_id']
                 place_params['place_evaluations_attributes'][idx_disability.to_s]['is_certified'] = params[:place]['place_evaluations_attributes']['0']['is_certified']
+                place_params['place_evaluations_attributes'][idx_disability.to_s]['organization_ids'] = org_ids
 
                 # pull questions/answers that are in qp_ids
                 place_params['place_evaluations_attributes'][idx_disability.to_s]['place_evaluation_answers_attributes'] = 

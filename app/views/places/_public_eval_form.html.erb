@@ -3,6 +3,9 @@
   <%= evaluation.hidden_field :disability_id %>
   <%= evaluation.hidden_field :disability_ids , :value => @place_evaluation_public.disability_ids %>
   <%= evaluation.hidden_field :is_certified , :value => @place_evaluation_public.is_certified %>
+  <% if @user_organizations_ids.present? %>
+	  <%= evaluation.hidden_field :organization_ids , :value => @user_organizations_ids %>
+  <% end %>
 
 
   <div class="question_category">

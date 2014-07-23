@@ -134,6 +134,8 @@ class User < ActiveRecord::Base
     .order('nickname asc')
   end
 
-
+  def self.in_role(role)
+    where('role >= ?', role)
+  end
 
 end

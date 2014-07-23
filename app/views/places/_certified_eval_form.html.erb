@@ -13,6 +13,9 @@
           <%= evaluation.hidden_field :disability_id %>
           <%= evaluation.hidden_field :disability_ids , :value => @place_evaluation_certified.disability_ids %>
           <%= evaluation.hidden_field :is_certified , :value => @place_evaluation_certified.is_certified %>
+          <% if @user_organizations_ids.present? %>
+	          <%= evaluation.hidden_field :organization_ids , :value => @user_organizations_ids %>
+          <% end %>
 
           <ul class="question_categories">
             <% @question_categories_certified.each_with_index do |cat, index| %>

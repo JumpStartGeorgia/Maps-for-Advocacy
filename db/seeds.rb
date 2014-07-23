@@ -1,3 +1,5 @@
+# encoding: UTF-8
+
 # This file should contain all the record creation needed to seed the database with its default values.
 # The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
 #
@@ -115,6 +117,28 @@ r.right_translations.create(:locale => 'ka', :name => "Right to participate in p
 r = Right.create(:id => 11)
 r.right_translations.create(:locale => 'en', :name => "Right to protection and safety in situations of risk", :convention_article => "11")
 r.right_translations.create(:locale => 'ka', :name => "Right to protection and safety in situations of risk", :convention_article => "11")
+
+
+##################################
+## Organizations
+##################################
+puts "deleting all organizations"
+Organization.delete_all
+OrganizationTranslation.delete_all
+
+puts "creating organization records"
+o = Organization.create(:id => 1, :url => 'http://jumpstart.ge/')
+o.organization_translations.create(:locale => 'en', :name => "JumpStart Georgia")
+o.organization_translations.create(:locale => 'ka', :name => "JumpStart Georgia")
+o = Organization.create(:id => 2, :url => 'http://www.newmediaadvocacy.org/')
+o.organization_translations.create(:locale => 'en', :name => "New Media Advocacy Project")
+o.organization_translations.create(:locale => 'ka', :name => "New Media Advocacy Project")
+o = Organization.create(:id => 3, :url => 'http://www.ertad.org/')
+o.organization_translations.create(:locale => 'en', :name => "Accessible Environment for Everyone")
+o.organization_translations.create(:locale => 'ka', :name => "ხელმისაწვდომი გარემო ყველასათვის")
+o = Organization.create(:id => 4, :url => 'https://www.facebook.com/NGOmariani')
+o.organization_translations.create(:locale => 'en', :name => "Mariani")
+o.organization_translations.create(:locale => 'ka', :name => "მარიანი")
 
 
 =begin

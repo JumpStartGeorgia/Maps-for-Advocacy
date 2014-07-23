@@ -4,8 +4,10 @@ class PlaceEvaluation < ActiveRecord::Base
   belongs_to :user
   belongs_to :disability
   has_many :place_evaluation_answers, :dependent => :destroy
+	has_many :place_evaluation_organizations, :dependent => :destroy
+	has_many :organizations, :through => :place_evaluation_organizations
   accepts_nested_attributes_for :place_evaluation_answers
-  attr_accessible :place_id, :user_id, :place_evaluation_answers_attributes, :created_at, :disability_id, :is_certified, :disability_ids
+  attr_accessible :place_id, :user_id, :place_evaluation_answers_attributes, :created_at, :disability_id, :is_certified, :disability_ids, :organization_ids
   attr_accessor :disability_ids
 
   validates :user_id, :disability_id, :presence => true

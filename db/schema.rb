@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140723063401) do
+ActiveRecord::Schema.define(:version => 20140723082839) do
 
   create_table "convention_categories", :force => true do |t|
     t.datetime "created_at"
@@ -155,6 +155,16 @@ ActiveRecord::Schema.define(:version => 20140723063401) do
 
   add_index "place_evaluation_answers", ["place_evaluation_id"], :name => "index_place_evaluation_answers_on_place_evaluation_id"
   add_index "place_evaluation_answers", ["question_pairing_id"], :name => "index_place_evaluation_answers_on_question_pairing_id"
+
+  create_table "place_evaluation_organizations", :force => true do |t|
+    t.integer  "place_evaluation_id"
+    t.integer  "organization_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "place_evaluation_organizations", ["organization_id"], :name => "index_place_evaluation_organizations_on_organization_id"
+  add_index "place_evaluation_organizations", ["place_evaluation_id"], :name => "index_place_evaluation_organizations_on_place_evaluation_id"
 
   create_table "place_evaluations", :force => true do |t|
     t.integer  "place_id"
