@@ -1,4 +1,5 @@
 <%- model_class = User -%>
+<%- model_class_org = OrganizationUser -%>
 <% title t '.title', :default => model_class.model_name.human.pluralize %>
 
 <div class="form-actions">
@@ -13,6 +14,7 @@
     <tr>
       <th><%= model_class.human_attribute_name(:email) %></th>
       <th><%= model_class.human_attribute_name(:role) %></th>
+      <th><%= model_class_org.human_attribute_name(:organization_id) %></th>
       <th><%=	t('app.common.actions') %></th>
     </tr>
   </thead>

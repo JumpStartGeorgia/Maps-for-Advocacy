@@ -24,6 +24,7 @@ private
       [
         user.email,
         user.role_name.humanize,
+        user.organizations.map{|x| x.name}.join("<br />").html_safe,
         action_links(user)
       ]
     end

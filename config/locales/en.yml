@@ -89,6 +89,9 @@ en:
       organization_translation:
         name: Name
         description: Description
+      organization_user:
+        user_id: User
+        organization_id: Organization
     errors:
       messages:
         required_field: "is a required field."

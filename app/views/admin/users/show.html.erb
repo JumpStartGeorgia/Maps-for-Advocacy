@@ -1,4 +1,5 @@
 <%- model_class = User -%>
+<%- model_class_org = OrganizationUser -%>
 <% title t '.title', :default => model_class.model_name.human %>
 
 <div class="form-actions">
@@ -23,5 +24,10 @@
   <strong><%= model_class.human_attribute_name(:role) %>:</strong>
   <%= @user.role_name.humanize %>
 </p>
+<p>
+  <strong><%= model_class_org.human_attribute_name(:organization_id) %>:</strong>
+  <%= @user.organizations.map{|x| x.name}.join("<br />").html_safe %>
+</p>
+
 
 
