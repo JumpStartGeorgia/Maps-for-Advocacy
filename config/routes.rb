@@ -1,6 +1,7 @@
 BootstrapStarter::Application.routes.draw do
 
 
+
 	#--------------------------------
 	# all resources should be within the scope block below
 	#--------------------------------
@@ -13,6 +14,7 @@ BootstrapStarter::Application.routes.draw do
 		match '/admin/why_monitor', :to => 'admin#why_monitor', :as => :admin_why_monitor, :via => [:get, :post]
 
 		namespace :admin do
+      resources :organizations
       resources :rights
       resources :convention_categories
       resources :pages

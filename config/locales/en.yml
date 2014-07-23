@@ -14,6 +14,7 @@ en:
       page: Text for Pages
       convention_category: Convetion Category
       right: Rights
+      organization: Organization
     attributes:
       user:
         email: Email Address
@@ -82,6 +83,12 @@ en:
       right_translation:
         name: Rights Name
         convention_article: Convention Article
+      organization:
+        url: Website URL
+        avatar: Logo
+      organization_translation:
+        name: Name
+        description: Description
     errors:
       messages:
         required_field: "is a required field."
@@ -233,6 +240,7 @@ en:
       pages: Edit Text on Site
       convention_categories: Convetion Categories
       rights: Rights
+      organizations: Organizations
     users:
       edit:
         title: Editing User

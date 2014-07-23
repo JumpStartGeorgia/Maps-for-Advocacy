@@ -1,0 +1,33 @@
+<%= tinymce_assets %>
+<%= tinymce %>
+
+<%= semantic_form_for([:admin, @organization], :html => { :class => 'form-horizontal' }) do |f| %>
+	<%= f.error_messages %>
+
+  <% create_sorted_translation_objects(@organization.organization_translations).each do |trans| %>
+		<%= f.fields_for :organization_translations, trans do |translation| %>
+
+			<div id="form-<%= trans.locale %>" class="multilanguage_nested">
+				<h3><%= t("app.language.#{trans.locale}") %></h3>
+
+				<%= translation.input :name %>
+				<%= translation.input :description, :as => :text, rows: 10, :input_html => { class: 'tinymce' } %>
+				<%= translation.hidden_field :locale , :value => trans.locale %>
+			</div>
+
+		<% end %>
+	<% end %>
+
+	<%= f.inputs do %>
+	  <%= f.input :url, :as => :url %>
+    <%= f.input :avatar, :as => :file, :input_html => { accept:"image/jpeg,image/png" }  %> 
+	<% end %>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+	  <%= f.submit nil, :class => 'btn btn-warning', :type => :reset, :value => t('app.buttons.reset'), :name => :reset %>
+	  <%= link_to t('app.buttons.cancel'), admin_organizations_path, :class => 'btn btn-mini btn-warning' %>
+  </div>
+<% end %>
+
+

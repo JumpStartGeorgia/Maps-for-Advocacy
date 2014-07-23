@@ -14,6 +14,7 @@ ka:
       page: ტექსტი გვერდებისთვის
       convention_category: კონვენციის კატეგორია
       right: უფლებები
+      organization: Organization
     attributes:
       user:
         email: ელ.ფოსტა
@@ -82,6 +83,12 @@ ka:
       right_translation:
         name: უფლების სახელი
         convention_article: კონვენციის მუხლი
+      organization:
+        url: Website URL
+        avatar: Logo
+      organization_translation:
+        name: Name
+        description: Description
     errors:
       messages:
         required_field: "სავალდებულოა"
@@ -233,6 +240,7 @@ ka:
       pages: საიტზე ტექსტის რედაქტირება
       convention_categories: კონვენციის კატეგორიები
       rights: უფლებები
+      organizations: Organizations
     users:
       edit:
         title: ცვლილებების შეტანა მომხმარებლის გვერდზე

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140714060338) do
+ActiveRecord::Schema.define(:version => 20140723053240) do
 
   create_table "convention_categories", :force => true do |t|
     t.datetime "created_at"
@@ -85,6 +85,29 @@ ActiveRecord::Schema.define(:version => 20140714060338) do
   end
 
   add_index "districts", ["in_tbilisi"], :name => "index_districts_on_in_tbilisi"
+
+  create_table "organization_translations", :force => true do |t|
+    t.integer  "organization_id"
+    t.string   "locale"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "organization_translations", ["locale"], :name => "index_organization_translations_on_locale"
+  add_index "organization_translations", ["name"], :name => "index_organization_translations_on_name"
+  add_index "organization_translations", ["organization_id"], :name => "index_b182f63d9a9aa74a99d1d5dca589cbf53f3a688c"
+
+  create_table "organizations", :force => true do |t|
+    t.string   "url"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+  end
 
   create_table "page_translations", :force => true do |t|
     t.integer  "page_id"

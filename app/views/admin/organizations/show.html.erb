@@ -1,0 +1,33 @@
+<%- model_class = Organization -%>
+<%- model_class_trans = OrganizationTranslation -%>
+<% title t '.title', :default => model_class.model_name.human %>
+
+
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              admin_organizations_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_admin_organization_path(@organization), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              admin_organization_path(@organization),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm")) },
+              :class => 'btn btn-danger' %>
+	<%= link_to t('helpers.links.admin'), admin_path, :class => 'btn' %>
+</div>
+
+
+<p><strong><%= model_class_trans.human_attribute_name(:name) %>:</strong>
+<%= @organization.name %></p>
+
+<p><strong><%= model_class.human_attribute_name(:url) %>:</strong>
+<%= link_to @organization.url, @organization.url, :target => :blank if @organization.url.present? %></p>
+
+<p><strong><%= model_class.human_attribute_name(:avatar) %>:</strong>
+<%= image_tag @organization.avatar(:thumb) if @organization.avatar.exists? %></p>
+
+<p><strong><%= model_class.human_attribute_name(:description) %>:</strong></p>
+<%= simple_format_no_tags(@organization.descritpion, {}, {sanitize: false}) %>
+
+
+
