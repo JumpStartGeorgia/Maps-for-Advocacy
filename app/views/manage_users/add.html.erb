@@ -1,0 +1,38 @@
+<%- model_class = User -%>
+<% title t('.title', :org => @org.name) %>
+
+<p>
+  <%= link_to t('.back'), manage_users_path, :class => 'btn' %>
+</p>
+
+<% if @users.present? %>
+
+  <table class="table table-striped display">
+    <thead>
+      <tr>
+        <th><%= model_class.human_attribute_name(:avatar) %></th>
+        <th><%= model_class.human_attribute_name(:nickname) %></th>
+        <th><%=	t('app.common.actions') %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @users.each do |user| %>
+        <tr>
+          <td><%= image_tag user.avatar if user.avatar.present? %></td>
+          <td><%= user.nickname %></td>
+          <td>
+            <%= link_to t('app.buttons.add'),
+                        add_new_manage_users_path(:user_id => user.id),
+                        :class => 'btn btn-mini btn-success' %>
+          </td>
+        </tr>            
+      <% end %>
+    </tbody>
+  </table>
+
+<% else %>
+
+<p>
+  <%= t('.no_users', :org => @org.name) %>
+</p>
+<% end %>

@@ -22,6 +22,8 @@ ka:
         password_confirmation: გაიმეორეთ პაროლი
         role: როლი
         remember_me: დამიმახსოვრე
+        avatar: Avatar
+        nickname: Nickname
       question:
         question_categories: კითხვის კატეგორიები
       question_translation:
@@ -134,6 +136,7 @@ ka:
       confirm: დარწმუნებული ხართ?
       new: ახალი
       start: დაწყება
+      add: Add
     common:
       app_name: Accessing Georgia
       added_on: "დამატებულია: %{date}" 
@@ -178,6 +181,8 @@ ka:
       added_new_venue: ახალი ადგილმდებარეობა დაემატა ადგილმდებარეობის ამ კატეგორიას
       missing_required: გთხოვთ მოგვაწოდეთ ყველა საჭირო ინფორმაცია
       cause_not_accessible: "გაცემული პასუხი საერთო შეფასების შედეგს 'მიუწვდომელს' ხდის."
+      success_remove_user: "The user '%{nickname}' was removed from '%{org}'"
+      success_add_user: "The user '%{nickname}' was added to '%{org}'"
       evidence_validation:  
         no_evidence_entered: გთხოვთ შეიყვანოთ პარამეტრები
         no_evidence_entered_angle: 'შეიყვანეთ ერთ ერთის პარამეტრები: სიმაღლე და სიგანე; დახრილობა'
@@ -198,6 +203,7 @@ ka:
       georgian_legislation: საქართველოს კანონმდებლობა
       partners: პროექტის პარტნიორები
       print: ამობეჭდეთ სერტიფიცირებული შეფასება
+      manage_users: Manage Organization Users
       sign_out: გასვლა
       js_link_title: ჯამპსტარტ ჯორჯიას - ჩვენ გაწვდით ინფორმაციას უკეთ!
       js_link_text: აგებულია
@@ -464,3 +470,11 @@ ka:
       all_venues: ადგილი
       header_place: ადგილის სახელწოდება
       header_address: მისამართი
+  manage_users:
+    index:
+      title: Manage Organization Users      
+      add_user: Add User to Organization
+    add:
+      title: Add User to %{org}      
+      no_users: There are no users available to add to %{org}.      
+      back: Back to Manage Organization Users page      

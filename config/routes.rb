@@ -61,6 +61,12 @@ BootstrapStarter::Application.routes.draw do
 
     # print questions
 		match '/print', :to => 'print#index', :as => :print, :via => :get
+		
+		# manage org users
+		match '/manage_users', :to => 'manage_users#index', :as => :manage_users, :via => :get
+		match '/manage_users/delete/:organization_id/:user_id', :to => 'manage_users#delete', :as => :delete_manage_users, :via => :delete
+		match '/manage_users/add/:organization_id', :to => 'manage_users#add', :as => :add_manage_users, :via => :get
+		match '/manage_users/add/:organization_id/:user_id', :to => 'manage_users#add_user', :as => :add_new_manage_users, :via => :get
 
     # methodology
 		match '/methodology', :to => 'methodology#index', :as => :methodology, :via => :get

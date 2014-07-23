@@ -5,6 +5,8 @@ $(document).ready(function(){
       $('form.user div#user_organizations').attr('aria-hidden', false);
     }else{
       $('form.user div#user_organizations').attr('aria-hidden', true);
+      $('form.user div#user_organizations select option').prop("selected", false);
+      $('form.user div#user_organizations select option:first').prop('selected', true);
     }
   }
 

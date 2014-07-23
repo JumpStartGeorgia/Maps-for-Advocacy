@@ -1,0 +1,51 @@
+<%- model_class = User -%>
+<% title t('.title') %>
+
+<ul id="organization-tabs" class="nav nav-tabs" data-tabs="organization-tabs">
+  <% @orgs.each_with_index do |org, index| %>
+    <% cls = index == 0 ? 'class=active' : '' %>
+    <li <%= cls %>>
+      <%= link_to org.name, "#org_#{org.id}", :'data-toggle' => 'tab' %>
+    </li>
+  <% end %>
+</ul>
+
+<div id="organization-content" class="tab-content">
+  <% @orgs.each_with_index do |org, index| %>
+    <% cls = index == 0 ? 'active' : '' %>
+    <div class="tab-pane <%= cls %>" id="<%= "org_#{org.id}" %>">
+      <p>
+        <%= link_to t('.add_user'), add_manage_users_path(:organization_id => org.id), :class => 'btn btn-success' %>
+      </p>
+
+      <% if org.users.present? %>
+        <table class="table table-striped display">
+          <thead>
+            <tr>
+              <th><%= model_class.human_attribute_name(:avatar) %></th>
+              <th><%= model_class.human_attribute_name(:nickname) %></th>
+              <th><%=	t('app.common.actions') %></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% org.users.each do |user| %>
+              <tr>
+                <td><%= image_tag user.avatar if user.avatar.present? %></td>
+                <td><%= user.nickname %></td>
+                <td>
+                  <%= link_to t('app.buttons.delete'),
+                              delete_manage_users_path(:organization_id => org.id, :user_id => user.id),
+                              :method => :delete,
+                              :confirm => t('app.buttons.confirm'),
+                              :class => 'btn btn-mini btn-danger' %>
+                </td>
+              </tr>            
+            <% end %>
+          </tbody>
+        </table>
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
+

@@ -1,6 +1,6 @@
 class UsersDatatable
   include Rails.application.routes.url_helpers
-  delegate :params, :h, :link_to, :number_to_currency, :number_with_delimiter, to: :@view
+  delegate :params, :h, :link_to, :number_to_currency, :number_with_delimiter, :image_tag, to: :@view
   delegate :current_user, to: :@current_user
 
   def initialize(view, current_user)
@@ -22,11 +22,19 @@ private
   def data
     users.map do |user|
       [
+        load_avatar(user),
         user.email,
+        user.nickname,
         user.role_name.humanize,
         user.organizations.map{|x| x.name}.join("<br />").html_safe,
         action_links(user)
       ]
+    end
+  end
+
+  def load_avatar(user)
+    if user.avatar.present?
+      image_tag(user.avatar)
     end
   end
 
@@ -76,7 +84,7 @@ private
   end
 
   def sort_column
-    columns = %w[users.email users.role users.created_at]
+    columns = %w[users.email users.email users.nickname users.role users.email users.created_at]
     columns[params[:iSortCol_0].to_i]
   end
 

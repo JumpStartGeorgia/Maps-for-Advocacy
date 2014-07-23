@@ -128,7 +128,11 @@ class User < ActiveRecord::Base
     select('id, nickname, avatar').where(:id => user_ids) if user_ids.present?
   end
 
-
+  # get all users not in the list
+  def self.not_in_list(user_id_list)
+    where('id not in (?)', user_id_list)
+    .order('nickname asc')
+  end
 
 
 

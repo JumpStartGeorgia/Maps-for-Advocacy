@@ -86,6 +86,11 @@
 				   		         <%= link_to t('.admin'), admin_path %>
 										  </li>
                     <% end %>
+                    <% if current_user.role?(User::ROLES[:organization_admin]) && current_user.organizations.present? %>
+						          <li role="menuitem">
+				   		         <%= link_to t('.manage_users'), manage_users_path %>
+										  </li>
+                    <% end %>
                     <% if current_user.role?(User::ROLES[:certification]) %>
 						          <li role="menuitem">
 				   		         <%= link_to t('.print'), print_path %>
