@@ -5,9 +5,21 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= content_for?(:title) ? "#{yield(:title)} | #{t('app.common.app_name')}" :
-				t('app.common.app_name') %></title>
+				t('app.common.app_name').html_safe %></title>
     <%= csrf_meta_tags %>
 	  <%= include_gon %>
+
+	  <meta property="og:title" content="<%= content_for?(:title) ? ("#{yield(:title)} | #{t('app.common.app_name')}").html_safe :
+			  t('app.common.app_name').html_safe %>" />
+    <!--meta name="description" content=""-->
+		<!--meta property="og:description" content="" /-->
+	  <meta property="og:type" content="non_profit" />
+	  <meta property="og:url" content="<%= current_url %>" />
+    <!--meta property="og:image" content="" /-->
+	  <meta property="og:site_name" content="<%= t('app.common.app_name') %>" />
+	  <meta property="fb:app_id" content="<%= ENV['ACCESSIBILITY_FACEBOOK_APP_ID'] %>" />
+
+    <meta name="google" content="notranslate" />
 
     <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
     <!--[if lt IE 9]>
@@ -258,9 +270,16 @@
     <% end %>
 
 		<% if Rails.env.production? %>
-			<!-- insert google analytics for production site here -->
-		<% elsif Rails.env.staging? %>
-			<!-- insert google analytics for staging site here -->
+      <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+        (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+        m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-12801815-34', 'auto');
+        ga('send', 'pageview');
+
+      </script>
 		<% end %>
 
   </body>
