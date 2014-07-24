@@ -15,6 +15,14 @@ module ApplicationHelper
     end
   end
 
+  def current_url
+    "#{request.protocol}#{request.host_with_port}#{request.fullpath}"
+  end
+  
+	def full_url(path)
+		"#{request.protocol}#{request.host_with_port}#{path}"
+	end
+
 	# from http://www.kensodev.com/2012/03/06/better-simple_format-for-rails-3-x-projects/
 	# same as simple_format except it does not wrap all text in p tags
 	def simple_format_no_tags(text, html_options = {}, options = {})
