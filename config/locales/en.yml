@@ -138,7 +138,7 @@ en:
       start: Start
       add: Add
     common:
-      app_name: Accessing Georgia
+      app_name: Ability.ge
       added_on: "Added on: %{date}" 
       venue_has_questions: custom questions
       answers:
