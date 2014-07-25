@@ -11,7 +11,7 @@ class CreatePages < ActiveRecord::Migration
   end
   
   def down
-    drop_table :places
+    drop_table :pages
     Page.drop_translation_table!
   end
 end

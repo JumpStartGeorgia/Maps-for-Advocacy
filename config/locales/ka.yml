@@ -14,7 +14,7 @@ ka:
       page: ტექსტი გვერდებისთვის
       convention_category: კონვენციის კატეგორია
       right: უფლებები
-      organization: Organization
+      organization: ორგანიზაცია
     attributes:
       user:
         email: ელ.ფოსტა
@@ -22,8 +22,8 @@ ka:
         password_confirmation: გაიმეორეთ პაროლი
         role: როლი
         remember_me: დამიმახსოვრე
-        avatar: Avatar
-        nickname: Nickname
+        avatar: პროფილის სურათი
+        nickname: სახელი
       question:
         question_categories: კითხვის კატეგორიები
       question_translation:
@@ -86,14 +86,14 @@ ka:
         name: უფლების სახელი
         convention_article: კონვენციის მუხლი
       organization:
-        url: Website URL
-        avatar: Logo
+        url: ვებგვერდის ბმული
+        avatar: ლოგო
       organization_translation:
-        name: Name
-        description: Description
+        name: სახელი
+        description: აღწერილობა
       organization_user:
-        user_id: User
-        organization_id: Organization
+        user_id: მომხმარებელი
+        organization_id: ორგანიზაცია
     errors:
       messages:
         required_field: "სავალდებულოა"
@@ -136,7 +136,7 @@ ka:
       confirm: დარწმუნებული ხართ?
       new: ახალი
       start: დაწყება
-      add: Add
+      add: დამატება
     common:
       app_name: Ability.ge
       added_on: "დამატებულია: %{date}" 
@@ -181,8 +181,8 @@ ka:
       added_new_venue: ახალი ადგილმდებარეობა დაემატა ადგილმდებარეობის ამ კატეგორიას
       missing_required: გთხოვთ მოგვაწოდეთ ყველა საჭირო ინფორმაცია
       cause_not_accessible: "გაცემული პასუხი საერთო შეფასების შედეგს 'მიუწვდომელს' ხდის."
-      success_remove_user: "The user '%{nickname}' was removed from '%{org}'"
-      success_add_user: "The user '%{nickname}' was added to '%{org}'"
+      success_remove_user: "მომხმარებელი '%{nickname}' ამოშლილია '%{org}დან'"
+      success_add_user: "მომხმარებელი  '%{nickname}' დამატებულია '%{org}ში'"
       evidence_validation:  
         no_evidence_entered: გთხოვთ შეიყვანოთ პარამეტრები
         no_evidence_entered_angle: 'შეიყვანეთ ერთ ერთის პარამეტრები: სიმაღლე და სიგანე; დახრილობა'
@@ -203,7 +203,7 @@ ka:
       georgian_legislation: საქართველოს კანონმდებლობა
       partners: პროექტის პარტნიორები
       print: ამობეჭდეთ სერტიფიცირებული შეფასება
-      manage_users: Manage Organization Users
+      manage_users: ორგანიზაციის წევრთა ანგარიშების მართვა
       sign_out: გასვლა
       js_link_title: ჯამპსტარტ ჯორჯიას - ჩვენ გაწვდით ინფორმაციას უკეთ!
       js_link_text: აგებულია
@@ -249,7 +249,7 @@ ka:
       pages: საიტზე ტექსტის რედაქტირება
       convention_categories: კონვენციის კატეგორიები
       rights: უფლებები
-      organizations: Organizations
+      organizations: ორგანიზაციები
     users:
       edit:
         title: ცვლილებების შეტანა მომხმარებლის გვერდზე
@@ -355,13 +355,13 @@ ka:
       header_user_details: დეტალები
       details_link_title: იხილეთ ამ შეფასების დეტალები
     form:
-      header_location: Where is this place located?
-      map_instructions: Click on the map to add a marker of where the place is located.  
+      header_location: სად მდებარეობს ეს ადგილი?
+      map_instructions: დააჭირეთ რუკას, რათა მონიშნოთ ამ ადგილის მდებარეობა.
       map_blue_marker: ლურჯი მარკერი (%{img}) აღნიშნავს თქვენი ადგილის ლოკაციას.
       map_red_marker: "წითელი მარკერი (%{img}) გამოჩნდება თუ ერთნაირი ადგილები არის გვერდიგვერდ განლაგებული. თუ თქვენთვის სასურველი ადგილი მონიშნულია წითელი ფერით, დააჭირეთ მას და გადადით ამ ადგილის გვერძე."
       address_search_results: მისამართის ძიების შედეგი
-      address_instructions: You can indicate the location of te place by doing an address search or by clicking on the map to add a marker of where the place is located.  
-      address_instructions2: Please enter the address and city of where the place is located.  
+      address_instructions: თქვენ შეგიძლიათ მიუთითოთ ადგილის მდებარეობა მისამართის საძიებო სისტემაში მითითებით ან რუკაზე დაჭერით მონიშნეთ ადგილი.
+      address_instructions2: გთხოვთ, შეიყვანეთ მისამართი და ქალაქი სადაც მდებარეობს ეს ადგილი.  
       submit_address_search: მისამართის მოძებნა
       address_search_success: მისამართის ძიებამ იპოვა შემდეგი წყვილები. გთხოვთ დაადასტუროთ, რომ შედეგები სწორია.
       address_search_multiple_success: მისამართის ძიებამ იპოვა შემდეგი წყვილები. გთხოვთ შეარჩიოთ სწორი შედეგი.
@@ -371,7 +371,7 @@ ka:
       header_address_search: ძიება მისამართით
       header_map_search: ალდილმდებარეობა რუკაზე
       header_places_nearby: მსგავსი ადგილი ამავე ტერიტორიაზე
-      places_nearby_explanation: "After you enter an address or place a marker on the map, this section will show you any similar places that are located nearby. If your place is in this list, click on the place to go that place's page."
+      places_nearby_explanation: "მას შემდეგ, რაც მოიძიებთ მისამართს ან რუკაზე მონიშნავთ ადგილს, ეს სექცია გიჩვენებთ ამ ტერიტორიაზე განლაგებულ მსგავსი ადგილების სიას. თუ თქვენი ადგილი ამ სიაშია წარმოდგენილი, დააჭირეთ და გადადით მის პირად გვერძე." 
       places_nearby_none: არ მოიძია ამ ტერიოტორიაზე მსგავსი ადგილები.
       skip_to_address_search: მისამართის საძიებო ფორმაზე გადასვლა (გადახტომა)
       skip_to_map: რუკაზე გადასვლა (გადახტომა)
@@ -400,7 +400,7 @@ ka:
     evaluation:
       title: "'%{name}'-ის შეფასება"
       header_certification: რომელი შეფასების შევსება გსურთ?
-      header_evaluation_types: Which types do you want to evaluate (select all that apply)?
+      header_evaluation_types: როგორი ტიპის შეფახება გსურთ (მონიშნეთ ყველა)? 
       header_form: შეფასების ფორმა
       certification_yes_link_text: "სერტიფიცირებული შეფასება"
       certification_yes_link_title: "სერტიფიცირებული შეფასების შევსება"
@@ -472,9 +472,9 @@ ka:
       header_address: მისამართი
   manage_users:
     index:
-      title: Manage Organization Users      
-      add_user: Add User to Organization
+      title: ორგანიზაციის წევრთა ანგარიშების მართვა
+      add_user: დაამატეთ მომხმარებელი ორგანიზაციას
     add:
-      title: Add User to %{org}      
-      no_users: There are no users available to add to %{org}.      
-      back: Back to Manage Organization Users page      
+      title: დაამატეთ მომხმარებელი  %{org}ში
+      no_users: ვერ მოიძებნა მომხმარებელი %{org}ში დასამატებლად.
+      back: ორგანიზაციის წევრთა ანგარიშების მართვის გვერძე დაბრუნება
