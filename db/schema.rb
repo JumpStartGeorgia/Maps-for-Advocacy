@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140723082839) do
+ActiveRecord::Schema.define(:version => 20140902081943) do
 
   create_table "convention_categories", :force => true do |t|
     t.datetime "created_at"
@@ -155,6 +155,24 @@ ActiveRecord::Schema.define(:version => 20140723082839) do
 
   add_index "place_evaluation_answers", ["place_evaluation_id"], :name => "index_place_evaluation_answers_on_place_evaluation_id"
   add_index "place_evaluation_answers", ["question_pairing_id"], :name => "index_place_evaluation_answers_on_question_pairing_id"
+
+  create_table "place_evaluation_images", :force => true do |t|
+    t.integer  "place_evaluation_id"
+    t.integer  "question_pairing_id"
+    t.integer  "user_id"
+    t.datetime "taken_at"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+  end
+
+  add_index "place_evaluation_images", ["place_evaluation_id"], :name => "index_place_evaluation_images_on_place_evaluation_id"
+  add_index "place_evaluation_images", ["question_pairing_id"], :name => "index_place_evaluation_images_on_question_pairing_id"
+  add_index "place_evaluation_images", ["taken_at"], :name => "index_place_evaluation_images_on_taken_at"
+  add_index "place_evaluation_images", ["user_id"], :name => "index_place_evaluation_images_on_user_id"
 
   create_table "place_evaluation_organizations", :force => true do |t|
     t.integer  "place_evaluation_id"

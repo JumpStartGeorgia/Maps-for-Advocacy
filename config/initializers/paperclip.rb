@@ -4,3 +4,7 @@ Paperclip.interpolates('place_id') do |attachment, style|
   attachment.instance.place_id
 end
 
+Paperclip.interpolates('place_evaluation_id') do |attachment, style|
+  attachment.instance.place_evaluation_id
+end
+

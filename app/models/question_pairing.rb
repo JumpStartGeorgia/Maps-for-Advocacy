@@ -5,6 +5,7 @@ class QuestionPairing < ActiveRecord::Base
 	belongs_to :question
 	has_many :question_pairing_translations, :dependent => :destroy
 	has_many :place_evaluation_answers, :dependent => :destroy
+	has_many :place_evaluation_images, :dependent => :destroy
   has_and_belongs_to_many :disabilities
   has_many :question_pairing_convention_categories, :dependent => :destroy
   has_many :convention_categories, :through => :question_pairing_convetion_categories

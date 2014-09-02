@@ -60,7 +60,7 @@
         </div>
       </div>
       
-      <%= semantic_form_for(@place, :url => evaluation_place_path(params[:id]), :html => { :class => 'evaluation_public' }) do |f| %>
+      <%= semantic_form_for(@place, :url => evaluation_place_path(params[:id]), :html => { :class => 'evaluation_public', :multipart => true }) do |f| %>
         <h2><%= t('.header_form') %></h2>
       
         <div id="venue_evaluations_public" class="venue_evaluations" role="region" aria-live="polite">
@@ -75,7 +75,7 @@
         </div>
       <% end %>    
       
-      <%= semantic_form_for(@place, :url => evaluation_place_path(params[:id]), :html => { :class => 'evaluation_certified' }) do |f| %>
+      <%= semantic_form_for(@place, :url => evaluation_place_path(params[:id]), :html => { :class => 'evaluation_certified', :multipart => true }) do |f| %>
         <h2><%= t('.header_form') %></h2>
 
         <div id="venue_evaluations_certified" class="venue_evaluations" role="region" aria-live="polite">
@@ -115,7 +115,7 @@
 
 
 
-    <%= semantic_form_for(@place, :url => evaluation_place_path(params[:id]), :html => { :class => 'evaluation_public' }) do |f| %>
+    <%= semantic_form_for(@place, :url => evaluation_place_path(params[:id]), :html => { :class => 'evaluation_public', :multipart => true }) do |f| %>
       <h2><%= t('.header_form') %></h2>
       
       <div id="venue_evaluations_public" class="venue_evaluations" role="region" aria-live="polite">

@@ -82,14 +82,26 @@
                             <%= question[:question] %>
                           </p>
                           
-                          <p>
-                            <%= file_field_tag('test', multiple: true, name: "test") %>
-                          </p>
+                          <%= evaluation.fields_for :place_evaluation_images, @place_evaluation_public.place_evaluation_images[question_index] do |image| %>
+
+                            <%= image.hidden_field :question_pairing_id , :value => question[:question_pairing_id] %>
+                            <%= image.hidden_field :user_id , :value => current_user.id %>
+
+                            <% 
+                              input_id = "place_place_evaluations_attributes_0_place_evaluation_images_attributes_#{question_index}_images[]" 
+                              input_name = "place[place_evaluations_attributes][0][place_evaluation_images_attributes][#{question_index}][images][]" 
+                            %>
+  
+                            <p>
+                              <input id="<%= input_id %>" multiple="multiple" name="<%= input_name %>" type="file">
+                            </p>
+                          
+                          <% end %>
 
                         </div>
                         <div class="modal-footer">
-                          <button class="btn" data-dismiss="modal"><%= t('app.buttons.cancel') %></button>
-                          <button class="btn btn-primary"><%= t('app.buttons.save') %></button>
+                          <a href="#" class="btn" data-dismiss="modal"><%= t('app.buttons.cancel') %></a>
+                          <a href="#" class="btn btn-primary" data-dismiss="modal"><%= t('app.buttons.save') %></a>
                         </div>
                       </div>
 

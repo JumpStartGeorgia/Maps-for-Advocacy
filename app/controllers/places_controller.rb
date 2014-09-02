@@ -356,6 +356,7 @@ class PlacesController < ApplicationController
           if num_questions > 0
             (0..num_questions-1).each do |index|
       		    @place_evaluation_public.place_evaluation_answers.build(:answer => PlaceEvaluation::ANSWERS['no_answer'])
+      		    @place_evaluation_public.place_evaluation_images.build
             end
           end
         end
@@ -374,6 +375,7 @@ class PlacesController < ApplicationController
           if num_questions > 0
             (0..num_questions-1).each do |index|
       		    @place_evaluation_certified.place_evaluation_answers.build(:answer => PlaceEvaluation::ANSWERS['no_answer'])
+      		    @place_evaluation_certified.place_evaluation_images.build
             end
           end
         end
@@ -437,6 +439,24 @@ class PlacesController < ApplicationController
                     params[:place]['place_evaluations_attributes']['0']['place_evaluation_answers_attributes']
                       .select{|k,v| qp_ids.include?(v['question_pairing_id'])}              
                       
+                # pull images that exist and create record for each one (multiple can exist for one qp_id)
+                records_with_images = params[:place]['place_evaluations_attributes']['0']['place_evaluation_images_attributes']
+                          .select{|k,v| qp_ids.include?(v['question_pairing_id']) && v['images'].present?}
+                if records_with_images.present?
+                  place_params['place_evaluations_attributes'][idx_disability.to_s]['place_evaluation_images_attributes'] = {}
+                  idx_image = 0
+                  records_with_images.each do |key, record_with_image|
+                    record_with_image['images'].each do |image|
+                      place_params['place_evaluations_attributes'][idx_disability.to_s]['place_evaluation_images_attributes'][idx_image.to_s] = {}
+                      place_params['place_evaluations_attributes'][idx_disability.to_s]['place_evaluation_images_attributes'][idx_image.to_s]['question_pairing_id'] = record_with_image['question_pairing_id']
+                      place_params['place_evaluations_attributes'][idx_disability.to_s]['place_evaluation_images_attributes'][idx_image.to_s]['user_id'] = record_with_image['user_id']
+                      place_params['place_evaluations_attributes'][idx_disability.to_s]['place_evaluation_images_attributes'][idx_image.to_s]['image'] = image
+
+                      idx_image += 1
+                    end
+                  
+                  end
+                end
               end
             end
 
