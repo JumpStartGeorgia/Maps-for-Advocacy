@@ -154,6 +154,11 @@ en:
       no_vote: "No Vote"
       yes_votes: "%{votes} Yes Votes"
       no_votes: "%{votes} No Votes"
+      eval_question_image:
+        button: Upload Images
+        header: Upload Images
+        description: Upload images to provide evidence for the way the question is answered. One or multiple images can be uploaded.
+        question: 'Images for Question:'
       summary_answers:
         not_accessible: Not Accessible
         no_answer: No Answers

@@ -158,13 +158,45 @@
                               <%= t('app.common.answers.no') %>
                             </label>
                           </div>
-                          <div class="span3">
+                          <div class="span3 not-relevant">
                             <input id="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['not_relevant']}" %>" 
                                   name="<%= input_name %>" type="radio" value="<%= PlaceEvaluation::ANSWERS['not_relevant'] %>">
                             <label class="not_relevant" for="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['not_relevant']}" %>">
                               <i class="icon-remove icon-white"></i>
                               <%= t('app.common.answers.not_relevant') %>
                             </label>
+                          </div>
+                          <div class="span3">
+                            <a class="eval-question-image" href="<%= "#image-modal-#{@question_index}"%>" role="button" data-toggle="modal">
+                              <i class="icon-camera icon-white"></i>
+                              <%= t('app.common.eval_question_image.button') %>
+                            </a>
+                            <div id="<%= "image-modal-#{@question_index}"%>" class="image-modal modal hide fade" tabindex="-1" role="dialog" aria-labelledby="image-modal-header" aria-hidden="true">
+                              <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal">×</button>
+                                <h3 id="image-modal-header"><%= t('app.common.eval_question_image.header') %></h3>
+                              </div>
+                              <div class="modal-body">
+                                <p>
+                                  <%= t('app.common.eval_question_image.description') %>
+                                </p>
+                                
+                                <p>
+                                  <%= t('app.common.eval_question_image.question') %>
+                                  <br />
+                                  <%= question[:question] %>
+                                </p>
+                                
+                                <p>
+                                  <%= file_field_tag('test', multiple: true, name: "test") %>
+                                </p>
+
+                              </div>
+                              <div class="modal-footer">
+                                <button class="btn" data-dismiss="modal"><%= t('app.buttons.cancel') %></button>
+                                <button class="btn btn-primary"><%= t('app.buttons.save') %></button>
+                              </div>
+                            </div>
                           </div>
                         </div>                  
                       </div>

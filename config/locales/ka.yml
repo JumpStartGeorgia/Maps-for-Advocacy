@@ -154,6 +154,11 @@ ka:
       no_vote: "უარყოფითი ხმა"
       yes_votes: "%{votes} დადებითი ხმა"
       no_votes: "%{votes} უარყოფითი ხმა"
+      eval_question_image:
+        button: Upload Images
+        header: Upload Images
+        description: Upload images to provide evidence for the way the question is answered. One or multiple images can be uploaded.
+        question: 'Images for Question:'
       summary_answers:
         not_accessible: არ არის ხელმისაწვდომი
         no_answer: არ არის პასუხი
