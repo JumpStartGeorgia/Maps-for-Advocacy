@@ -192,14 +192,11 @@
                                 <% 
                                   image_qp_id = "place_place_evaluations_attributes_0_place_evaluation_images_attributes_#{@question_index}_question_pairing_id" 
                                   image_qp_name = "place[place_evaluations_attributes][0][place_evaluation_images_attributes][#{@question_index}][question_pairing_id]" 
-                                  image_user_id = "place_place_evaluations_attributes_0_place_evaluation_images_attributes_#{@question_index}_user_id" 
-                                  image_user_name = "place[place_evaluations_attributes][0][place_evaluation_images_attributes][#{@question_index}][user_id]" 
                                   image_file_id = "place_place_evaluations_attributes_0_place_evaluation_images_attributes_#{@question_index}_images[]" 
                                   image_file_name = "place[place_evaluations_attributes][0][place_evaluation_images_attributes][#{@question_index}][images][]" 
                                 %>
 
                                 <input id="<%= image_qp_id %>" name="<%= image_qp_name %>" type="hidden" value="<%= question[:question_pairing_id] %>">
-                                <input id="<%= image_user_id %>" name="<%= image_user_name %>" type="hidden" value="<%= current_user.id %>">
 
                                 <p>
                                   <input id="<%= image_file_id %>" multiple="multiple" name="<%= image_file_name %>" type="file">

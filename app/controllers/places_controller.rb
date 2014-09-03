@@ -410,7 +410,19 @@ class PlacesController < ApplicationController
           end
 
           place_params = nil
-          if id_mappings.present?            
+          if id_mappings.present?        
+            # pull out any images that were included and save them first
+            saved_images = []
+            images_to_load = params[:place]['place_evaluations_attributes']['0']['place_evaluation_images_attributes']
+                              .select{|k,v| v['images'].present?}.map{|k,v| v['images']}.flatten
+            unique_image_names = images_to_load.map{|x| x.original_filename}.uniq if images_to_load.present?
+            if unique_image_names.present?
+              unique_image_names.each do |img|
+                saved_images << PlaceImage.create(:user_id => current_user.id, :place_id => params[:id],
+                                  :image => images_to_load.select{|x| x.original_filename == img}.first)
+              end
+            end
+
             # make copy of params and remove evalautions
             # new eval objects will be added for each disability
             place_params = params[:place].deep_dup
@@ -440,6 +452,31 @@ class PlacesController < ApplicationController
                       .select{|k,v| qp_ids.include?(v['question_pairing_id'])}              
                       
                 # pull images that exist and create record for each one (multiple can exist for one qp_id)
+                # - unique images were already saved above, so for this we need to find a match and save the id
+                if saved_images.present?
+                  records_with_images = params[:place]['place_evaluations_attributes']['0']['place_evaluation_images_attributes']
+                            .select{|k,v| qp_ids.include?(v['question_pairing_id']) && v['images'].present?}
+                  if records_with_images.present?
+                    place_params['place_evaluations_attributes'][idx_disability.to_s]['place_evaluation_images_attributes'] = {}
+                    idx_image = 0
+                    records_with_images.each do |key, record_with_image|
+                      record_with_image['images'].each do |image|
+                        # look for this image in the saved_images array
+                        # - if found, use the id of image
+                        image_index = saved_images.index{|x| x.image_file_name == image.original_filename}
+                        if image_index.present?
+                          place_params['place_evaluations_attributes'][idx_disability.to_s]['place_evaluation_images_attributes'][idx_image.to_s] = {}
+                          place_params['place_evaluations_attributes'][idx_disability.to_s]['place_evaluation_images_attributes'][idx_image.to_s]['question_pairing_id'] = record_with_image['question_pairing_id']
+                          place_params['place_evaluations_attributes'][idx_disability.to_s]['place_evaluation_images_attributes'][idx_image.to_s]['place_image_id'] = saved_images[image_index].id
+
+                          idx_image += 1
+                        end
+                      end
+                    
+                    end
+                  end
+                end
+=begin
                 records_with_images = params[:place]['place_evaluations_attributes']['0']['place_evaluation_images_attributes']
                           .select{|k,v| qp_ids.include?(v['question_pairing_id']) && v['images'].present?}
                 if records_with_images.present?
@@ -457,6 +494,7 @@ class PlacesController < ApplicationController
                   
                   end
                 end
+=end                
               end
             end
 

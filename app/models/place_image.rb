@@ -4,13 +4,14 @@ class PlaceImage < ActiveRecord::Base
  
   belongs_to :place
   belongs_to :user
-
+  has_many :place_evaulation_images, :dependent => :destroy
+  
   attr_accessible :image, :place_id, :user_id, :taken_at
   
   has_attached_file :image, 
     :url => "/system/places/:place_id/images/:id_:style.:extension",
 		:styles => {
-					:thumb => {:geometry => "200x200>"},
+					:thumb => {:geometry => "50x50#"},
 					:medium => {:geometry => "450x450>"},
 					:large => {:geometry => "900x900>"}
 				}
