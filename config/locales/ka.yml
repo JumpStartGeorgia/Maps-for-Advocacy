@@ -156,9 +156,12 @@ ka:
       no_votes: "%{votes} უარყოფითი ხმა"
       eval_question_image:
         button: Upload Images
+        button_uploaded_1: Uploaded 1 Image
+        button_uploaded_many: Uploaded [x] Images
         header: Upload Images
         description: Upload images to provide evidence for the way the question is answered. One or multiple images can be uploaded.
         question: 'Images for Question:'
+        contine_eval: Contine Evaluation
       summary_answers:
         not_accessible: არ არის ხელმისაწვდომი
         no_answer: არ არის პასუხი

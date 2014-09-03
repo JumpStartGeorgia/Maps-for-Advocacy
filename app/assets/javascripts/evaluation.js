@@ -113,6 +113,31 @@ $(document).ready(function(){
         $('form.place #submit-button').removeClass('accessibly-hidden');
       }
     }
+
+    //////////////////////////////////////////////////////////////////////////
+    // update the upload image button state
+    // called when modal is closed or button in modal closes window
+    function update_upload_imgage_button(div_modal, type){
+      var file_input = $(div_modal).find('input[type="file"]');
+      var link = $(div_modal).parent().find('a.eval-question-image');
+      var span = $(link).find('span');
+      if ($(file_input).prop('files').length == 0 || type != 'save'){
+        // reset button to default state
+        $(link).removeClass('active');
+        $(file_input).val('');
+        $(span).html($(span).data('upload'));
+      }else{
+        // indicate that there are images for this question
+        $(link).addClass('active');
+        if ($(file_input).prop('files').length == 1){
+          $(span).html($(span).data('uploaded-1'));
+        }else{
+          $(span).html($(span).data('uploaded-many').replace('[x]', $(file_input).prop('files').length.toString()));
+        }
+      }
+    }
+
+
   /*************************************************/
   /* actions for the evaluation form */
   if (gon.show_evaluation_form){
@@ -183,11 +208,34 @@ $(document).ready(function(){
     });
     
     
-
     //////////////////////////////////////////////////////////////////////////
     // show the submit button if at least one item is selected
     $('form.place div.venue_evaluation input[type="radio"]').change(function(){
       show_submit_button_if_ok();
+    });
+
+    //////////////////////////////////////////////////////////////////////////
+    // when image modal window is closed by save button, 
+    // update img upload button to show how many files it has
+    var image_modal_button_click = false;
+    $('form.place div.image-modal a.image-modal-close-buttons').click(function(){
+      image_modal_button_click = true;
+      update_upload_imgage_button($(this).parent().parent(), $(this).data('type'));
+    });
+
+    //////////////////////////////////////////////////////////////////////////
+    // reset flag that indicates if teh image modal button was clicked
+    $('form.place div.image-modal').on('show', function(){
+      image_modal_button_click = false;
+    });
+
+    //////////////////////////////////////////////////////////////////////////
+    // if image modal button was not clicked to close the modal, reset the image form fields
+    // - modal could close by esc, click on background or click on 'x' in top-right
+    $('form.place div.image-modal').on('hide', function(){
+      if (!image_modal_button_click){
+        update_upload_imgage_button($(this));
+      }
     });
     
 
@@ -195,9 +243,6 @@ $(document).ready(function(){
     // if question has selected value and it is the same as the value they are trying
     // to select again, turn the selection off
     $('form.place div.venue_evaluation .venue_evaluation_question input[type="radio"]').click(function(){
-      console.log($(this).attr('name'));
-      console.log($(this).val());
-     
       var set_checked = true;
       if ($(this).data('was-checked') == true){
         $(this).prop('checked', false);
