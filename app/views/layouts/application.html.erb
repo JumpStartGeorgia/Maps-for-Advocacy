@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= content_for?(:title) ? "#{yield(:title)} | #{t('app.common.app_name')}" :
-				t('app.common.app_name').html_safe %></title>
+				"#{t('app.common.app_name')} - #{t('app.common.slogan')}".html_safe %></title>
     <%= csrf_meta_tags %>
 	  <%= include_gon %>
 
@@ -67,7 +67,9 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <%= link_to(t('app.common.app_name'), root_path(:locale => I18n.locale), :class=>"brand font", :role => 'menuitem')%>
+          <%= link_to(t('app.common.app_name'), root_path(:locale => I18n.locale), 
+              :title => "#{t('app.common.app_name')} - #{t('app.common.slogan')}".html_safe,
+              :class=>"brand font", :role => 'menuitem')%>
 
           <div class="container-fluid nav-collapse">
 	          <ul class="nav pull-right">

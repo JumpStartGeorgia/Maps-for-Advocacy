@@ -139,6 +139,7 @@ ka:
       add: დამატება
     common:
       app_name: Ability.ge
+      slogan: Monitoring the Convention on the Rights of Persons with Disabilities in Georgia 
       added_on: "დამატებულია: %{date}" 
       venue_has_questions: მორგებული კითხვები
       answers:

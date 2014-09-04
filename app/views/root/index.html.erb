@@ -1,6 +1,7 @@
 <div id="front-page">
   <div class="row-fluid">
     <div class="span4">
+      <h2><%= t('app.common.slogan') %></h2>
       <% if @page.present? %>
         <div class="tinymce_format">
           <%= simple_format_no_tags(@page.content) %>

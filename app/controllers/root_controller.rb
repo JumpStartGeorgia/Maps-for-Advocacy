@@ -141,7 +141,7 @@ class RootController < ApplicationController
     popup << " "
     popup << view_context.link_to(t('app.common.add_evaluation'), evaluation_place_path(place), :title => t('app.common.add_evaluation_title', :place => place[:place]), :class => 'add_evaluation')
     popup << "</p>"
-    
+=begin    
     # add image slide if exists
     gon.map_carousel_ids = []
     gon.map_carousel_id_text = "map_carousel_"
@@ -161,7 +161,7 @@ class RootController < ApplicationController
         popup << "<a class='carousel-control right' href='#map_carousel_#{place.id}' data-slide='next'>&rsaquo;</a>"
       popup << '</div>' 
     end
-    
+=end    
     
     return popup
   end
