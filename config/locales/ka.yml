@@ -350,9 +350,9 @@ ka:
       tab_certified: "სერტიფიცირებული შეფასება (%{count})"
       tab_public: "საჯარო შეფასება (%{count})"
       skip_map: გამოტოვეთ რუკა და გადადით ფოტო სლაიდშოუზე (გადასვლა)
-      header_images: Images Submitted as Evidence
-      no_images: No images have been submitted yet.
-      no_filter_images: Your selection found no matching images.
+      header_images: მტკიცებულების სახით მოწოდებული ფოტო
+      no_images: ფოტო ჯერ არ  არის მოწოდებული.
+      no_filter_images: თქვენს არჩევას არ შეესაბამება სურათი.
       taken_at: "გადახებულია:"
       uploaded_at: "ატვირთულია:"
       uploaded_by: "ატვირთა:"
