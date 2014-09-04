@@ -12,7 +12,6 @@
 //= require jquery.ui.widget
 //= require jquery.ui.position
 //= require jquery.ui.menu
-//= require jquery-fileupload
 //= require twitter/bootstrap
 //= require dataTables/jquery.dataTables
 //= require dataTables/jquery.dataTables.bootstrap

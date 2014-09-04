@@ -76,6 +76,7 @@ BootstrapStarter::Application.routes.draw do
 		match '/georgian_legislation', :to => 'root#georgian_legislation', :as => :georgian_legislation, :via => :get
 		match '/why_monitor', :to => 'root#why_monitor', :as => :why_monitor, :via => :get
 		match '/partners', :to => 'root#partners', :as => :partners, :via => :get
+		match '/what_is_accessibility', :to => 'root#what_is_accessibility', :as => :what_is_accessibility, :via => :get
 
 		root :to => 'root#index'
 	  match "*path", :to => redirect("/#{I18n.default_locale}") # handles /en/fake/path/whatever

@@ -48,7 +48,6 @@ group :assets do
 	gem "twitter-bootstrap-rails", "~> 2.1.0"
   gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-rails.git'
   gem "jquery-ui-rails"
-  gem 'jquery-fileupload-rails' # jquery file upload
 end
 
 group :development do

@@ -94,6 +94,20 @@ class RootController < ApplicationController
 	  end
   end
 
+  def what_is_accessibility
+    @page = Page.by_name('what_accessibility')
+  
+    if @page.present?
+      respond_to do |format|
+        format.html 
+      end
+    else
+		  flash[:info] =  t('app.msgs.does_not_exist')
+		  redirect_to root_path(:locale => I18n.locale)
+		  return
+	  end
+  end
+
   def partners
     @page = Page.by_name('partners')
   

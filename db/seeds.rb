@@ -221,6 +221,9 @@ p.page_translations.create(:locale => 'ka', :title => 'Project Partners', :conte
   <a href=\"http://jumpstart.ge/\" title=\"Go to JumpStart's webiste\" target=\"_blank\"><img src=\"/assets/jumpstart-logo.png\" title=\"JumpStart Georgia logo\" /></a>    
 </div>
 ")
+p = Page.create(:id => 6, :name => 'what_accessibility')
+p.page_translations.create(:locale => 'en', :title => 'What is Accessibility?')
+p.page_translations.create(:locale => 'ka', :title => 'რა არის ხელმისაწვდომობა?')
 
 
 ##################################
