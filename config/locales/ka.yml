@@ -139,7 +139,7 @@ ka:
       add: დამატება
     common:
       app_name: Ability.ge
-      slogan: Monitoring the Convention on the Rights of Persons with Disabilities in Georgia 
+      slogan: უნარშეზღუდული ადამიანების უფლებების კონვენციის მონიტორინგი საქართველოში
       added_on: "დამატებულია: %{date}" 
       venue_has_questions: მორგებული კითხვები
       answers:
@@ -156,13 +156,13 @@ ka:
       yes_votes: "%{votes} დადებითი ხმა"
       no_votes: "%{votes} უარყოფითი ხმა"
       eval_question_image:
-        button: Upload Images
-        button_uploaded_1: Uploaded 1 Image
-        button_uploaded_many: Uploaded [x] Images
-        header: Upload Images
-        description: Upload images to provide evidence for the way the question is answered. One or multiple images can be uploaded.
-        question: 'Images for Question:'
-        continue_eval: Continue Evaluation
+        button: ფოტოს ატვირთვა
+        button_uploaded_1: ატვირთულია ერთი ფოტო
+        button_uploaded_many: ატვირთულია [x] ფოტო
+        header: ფოტოს ატვირთვა
+        description: ატვირთეთ ფოტო იმის დასტურად, თუ რატომ გაეცით კითხვას ამგვარი პასუხი. შესაძლებელია ერთი ან რამდენიმე ფოტოს ატვირთვა.
+        question: 'სურათები კითხვისთვის:'
+        continue_eval: შეფასების გაგრძელება
       summary_answers:
         not_accessible: არ არის ხელმისაწვდომი
         no_answer: არ არის პასუხი
@@ -353,13 +353,13 @@ ka:
       header_images: Images Submitted as Evidence
       taken_at: "გადახებულია:"
       uploaded_at: "ატვირთულია:"
-      uploaded_by: "Uploaded by:"
-      evaluation: "Evaluation:"
+      uploaded_by: "ატვირთა:"
+      evaluation: "შეფასება:"
       evaluation_certified: "სერტიფიცირებული შეფასება"
       evaluation_public: "საზოგადოებრივი შეფასება"
-      disability: "Type:"
-      question: "Question:"
-      answer: "Answer:"
+      disability: "ტიპი:"
+      question: "კითხვები:"
+      answer: "პასუხები:"
     show_type_results:
       certified_explanation: სერტიფიცირებული შეფასების შვსება შეუძლიათ არასამთავრობო ორგანიზაციების წარმომადგენლებს, რომლებიც დატრენინგებულები არიან ხელმისაწვდომობის შეფასებაში.
       public_explanation: საზოგადოებრივი შეფასების შევსება შეუძლიან ნებისმიერ მსურველს.

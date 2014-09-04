@@ -17,6 +17,9 @@ class PlaceImage < ActiveRecord::Base
 					:large => {:geometry => "900x900>"}
 				}
   
+
+  validates_attachment_content_type :image, :content_type => "image/jpeg"
+
   after_post_process :get_meta_data
 
   # get the meta data from the image
