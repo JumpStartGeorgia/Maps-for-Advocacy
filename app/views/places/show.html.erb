@@ -35,10 +35,10 @@
     
     <ul id="evaluation-certified-tabs" class="nav nav-tabs" data-tabs="evaluation-certified-tabs">
       <li class="active">
-        <a href="<%= "#certified" %>" data-toggle="tab"><%= t('.tab_certified', :count => @data[:certified][:disability_evaluations].map{|x| x[:evaluation_count]}.sum) %></a>
+        <a href="<%= "#certified" %>" data-filter="1" data-toggle="tab"><%= t('.tab_certified', :count => @data[:certified][:disability_evaluations].map{|x| x[:evaluation_count]}.sum) %></a>
       </li>
       <li>
-        <a href="<%= "#public" %>" data-toggle="tab"><%= t('.tab_public', :count => @data[:public][:disability_evaluations].map{|x| x[:evaluation_count]}.sum) %></a>
+        <a href="<%= "#public" %>" data-filter="0" data-toggle="tab"><%= t('.tab_public', :count => @data[:public][:disability_evaluations].map{|x| x[:evaluation_count]}.sum) %></a>
       </li>
     </ul>
     <div id="certified-content" class="tab-content">
@@ -59,58 +59,105 @@
     <a href="#footer" class="accessibly-hidden"><%= t('.skip_map') %></a>
     <div id="map"></div>
     
-    <% if @place_images.present? %>
-      <div id="place-image-grid">
-        <h3><%= t('.header_images') %></h3>
-        <% @place_images.each do |img| %>
-          <div class="place-image-grid-item">
-            <% answer = t("app.common.answers.#{PlaceEvaluation.answer_key_name(img['answer'])}") %>
-            <% eval = img['is_certified'] ? t('.evaluation_certified') : t('.evaluation_public') %>
-            <%= link_to img.image.url(:large), :class => 'place-image-fancybox', 
-                :title => "#{img['disability']} #{eval} - #{img['question']} - #{answer}", 
-                :'formatted-title' => "<span>#{img['disability']} #{eval} </span><span>#{img['question']} </span><span>#{answer}</span>",
-                :rel => 'gallery' do %><%= image_tag(img.image.url(:thumb), :alt => "#{img['disability']} #{eval} - #{img['question']} - #{answer}") %><% end %>
-            <div class="caption-text">
-              <ul class="eval-info">
-                <li>
-                  <span><%= t('.evaluation') %></span>
-                  <%= eval %>
-                </li>
-                <li>
-                  <span><%= t('.disability') %></span>
-                  <%= img['disability'] %>
-                </li>
-              </ul>
-              <ul class="quesiton-answer">
-                <li>
-                  <span><%= t('.question') %></span>
-                  <%= img['question'] %>
-                </li>
-                <li>
-                  <span><%= t('.answer') %></span>
-                  <%= answer %>
-                </li>
-              </ul>
-              <ul class="image-dates">
-                <li>
-                  <span><%= t('.taken_at') %></span>
-                  <%= l(img.taken_at, :format => :no_time) if img.taken_at.present? %>
-                </li>
-                <li>
-                  <span><%= t('.uploaded_at') %></span>
-                  <%= l(img.created_at, :format => :no_time) if img.created_at.present? %>
-                </li>
-                <li>
-                  <span><%= t('.uploaded_by') %></span>
-                  <%= img['nickname'] %>
-                </li>
-              </ul>                
-            </div>
+    <div id="place-image-grid">
+      <h3><%= t('.header_images') %></h3>
+      <% if @place_images.present? %>
+        <div id="place-image-filter" class="row-fluid">
+          <div class="span4">
+            <% options = [[t('.evaluation_certified'), 1], [t('.evaluation_public'), 0]] %>
+            <%= label_tag :filter_image_evaluation, t('.evaluation') %>
+            <%= select_tag(:filter_image_evaluation, 
+                options_for_select(options),
+                :include_blank => true,
+                :'data-placeholder' => t('.filter_all'), 
+                :style => 'width: 100%') %>
           </div>
-        <% end %>      
-      </div>
-    
-    <% end %>
+          <div class="span4">
+            <% 
+              disabilities = [@disabilities_public, @disabilities_certified].flatten(1)
+              options = disabilities.uniq.map{|x| [x.name, x.id]}.sort_by{|x| x[0]}
+            %>
+            <%= label_tag :filter_image_type, t('.disability') %>
+            <%= select_tag(:filter_image_type, 
+                options_for_select(options),
+                :include_blank => true,
+                :'data-placeholder' => t('.filter_all'), 
+                :style => 'width: 100%') %>
+          </div>
+          <div class="span4">
+            <% options = @place_images.map{|x| [x['question'], x['question_id']]}.uniq.sort_by{|x| x[0]} %>
+            <%= label_tag :filter_image_question, t('.question') %>
+            <%= select_tag(:filter_image_question, 
+                options_for_select(options),
+                :include_blank => true,
+                :'data-placeholder' => t('.filter_all'), 
+                :style => 'width: 100%') %>
+          </div>
+                      
+        </div>
+      
+        <div aria-live="polite" aria-relevant="additions">
+          <% @place_images.each do |img| %>
+            <div class="place-image-grid-item" >
+              <% answer = t("app.common.answers.#{PlaceEvaluation.answer_key_name(img['answer'])}") %>
+              <% eval = img['is_certified'] == 1 ? t('.evaluation_certified') : t('.evaluation_public') %>
+              <%= link_to img.image.url(:large), :class => 'place-image-link active place-image-fancybox', 
+                  :'data-certified' => img['is_certified'],
+                  :'data-type' => img['disability_id'],
+                  :'data-question' => img['question_id'],
+                  :title => "#{img['disability']} #{eval} - #{img['question']} - #{answer}", 
+                  :'formatted-title' => "<span>#{img['disability']} #{eval} </span><span>#{img['question']} </span><span>#{answer}</span>",
+                  :rel => 'gallery' do %><%= image_tag(img.image.url(:thumb), :alt => "#{img['disability']} #{eval} - #{img['question']} - #{answer}") %><% end %>
+              <div class="caption-text">
+                <ul class="eval-info">
+                  <li>
+                    <span><%= t('.evaluation') %></span>
+                    <%= eval %>
+                  </li>
+                  <li>
+                    <span><%= t('.disability') %></span>
+                    <%= img['disability'] %>
+                  </li>
+                </ul>
+                <ul class="quesiton-answer">
+                  <li>
+                    <span><%= t('.question') %></span>
+                    <%= img['question'] %>
+                  </li>
+                  <li>
+                    <span><%= t('.answer') %></span>
+                    <%= answer %>
+                  </li>
+                </ul>
+                <ul class="image-dates">
+                  <li>
+                    <span><%= t('.taken_at') %></span>
+                    <%= l(img.taken_at, :format => :no_time) if img.taken_at.present? %>
+                  </li>
+                  <li>
+                    <span><%= t('.uploaded_at') %></span>
+                    <%= l(img.created_at, :format => :no_time) if img.created_at.present? %>
+                  </li>
+                  <li>
+                    <span><%= t('.uploaded_by') %></span>
+                    <%= img['nickname'] %>
+                  </li>
+                </ul>                
+              </div>
+            </div>
+          <% end %>      
+        </div>
+        
+        <p id="place-image-grid-no-match">
+          <%= t('.no_filter_images') %>
+        </p>
+
+      <% else %>
+        <p>
+          <%= t('.no_images') %>
+        </p>
+      <% end %>
+    </div>
   </div>
 </div>
 

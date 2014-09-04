@@ -351,6 +351,9 @@ en:
       tab_public: "Public Evaluations (%{count})"
       skip_map: Skip the map and go to the photo slideshow (jump)
       header_images: Images Submitted as Evidence
+      no_images: No images have been submitted yet.
+      no_filter_images: Your selection found no matching images.
+      filter_all: All
       taken_at: "Photo taken on:"
       uploaded_at: "Uploaded on:"
       uploaded_by: "Uploaded by:"

@@ -10,10 +10,19 @@
   h3{
     margin-bottom: 5px;
   }
+  #place-image-filter{
+    margin-bottom: 5px;
+  }
+  #place-image-grid-no-match{
+    display: none;
+  }
   .place-image-grid-item{
     display: inline-block;
     a{
-      display: inline-block;    
+      display: none;    
+      &.active{
+        display: inline-block;
+      }
     }
     .caption-text{
       display: none;

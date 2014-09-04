@@ -39,7 +39,7 @@
         <% if data[:disability_evaluations].present? %>
           <hr />
         
-          <ul id="evaluation-disability-tabs-<%= type %>" class="nav nav-tabs" data-tabs="evaluation-disability-tabs-<%= type %>">
+          <ul id="evaluation-disability-tabs-<%= type %>" class="nav nav-tabs evaluation-disability-tabs" data-tabs="evaluation-disability-tabs-<%= type %>">
             <% 
               active_index = data[:disability_evaluations].index{|x| x[:evaluation_count] > 0}
               active_index = 0 if active_index.nil?
@@ -51,7 +51,7 @@
                   li_class = "class=active" 
                 end
               %>
-              <li <%= li_class %>><a href="<%= "##{type}-#{disability[:code]}" %>" data-toggle="tab"><%= "#{disability[:name]} (#{disability[:evaluation_count]})" %></a></li>
+              <li <%= li_class %>><a href="<%= "##{type}-#{disability[:code]}" %>" data-filter="<%= disability[:id] %>" data-toggle="tab"><%= "#{disability[:name]} (#{disability[:evaluation_count]})" %></a></li>
             <% end %>
           </ul>
           <div id="tab-content-<%= type %>" class="tab-content">

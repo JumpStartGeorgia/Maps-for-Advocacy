@@ -351,6 +351,8 @@ ka:
       tab_public: "საჯარო შეფასება (%{count})"
       skip_map: გამოტოვეთ რუკა და გადადით ფოტო სლაიდშოუზე (გადასვლა)
       header_images: Images Submitted as Evidence
+      no_images: No images have been submitted yet.
+      no_filter_images: Your selection found no matching images.
       taken_at: "გადახებულია:"
       uploaded_at: "ატვირთულია:"
       uploaded_by: "ატვირთა:"
