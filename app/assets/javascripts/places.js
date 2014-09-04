@@ -226,27 +226,19 @@ $(document).ready(function(){
   /* when tabs change, update filters to match tabs */
   // update evaluation filter to match
   $('#evaluation-certified-tabs li a').click(function(){
-console.log('eval tab click; filter = ' + $(this).data('filter'));
     $('#place-image-grid #place-image-filter #filter_image_evaluation option[value="' + $(this).data('filter') + '"]').prop('selected', true).trigger("change");
-console.log('filter = ' + $('#place-image-grid #place-image-filter #filter_image_evaluation').val());    
-
     // turn off type filter
     $('#place-image-grid #place-image-filter #filter_image_type').val('').trigger("change");
   });
   // update type filter to match
   $('.evaluation-disability-tabs li a').click(function(){
-console.log('dis tab click; filter = ' + $(this).data('filter'));
     // - if eval filter is not selected, select the correct one
     if ($('#place-image-grid #place-image-filter #filter_image_evaluation').val() == ''){
-console.log('- setting eval filter');
       var eval_tab = $('#evaluation-certified-tabs li.active a');
-console.log('eval filter = ' + $(eval_tab).data('filter'));
       $('#place-image-grid #place-image-filter #filter_image_evaluation option[value="' + $(eval_tab).data('filter') + '"]').prop('selected', true).trigger("change");
-console.log('selected eval filter = ' + $('#place-image-grid #place-image-filter #filter_image_evaluation').val());
     }
     
     $('#place-image-grid #place-image-filter #filter_image_type option[value="' + $(this).data('filter') + '"]').prop('selected', true).trigger("change");
-console.log('filter = ' + $('#place-image-grid #place-image-filter #filter_image_type').val());    
   });
 
   /*************************************************/
