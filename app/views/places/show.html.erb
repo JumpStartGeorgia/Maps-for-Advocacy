@@ -62,38 +62,56 @@
     <div id="map"></div>
     
     <% if @place_images.present? %>
-      <div id="place_carousel" class="carousel slide">
-        <!-- Carousel items -->
-        <div class="carousel-inner">
-          <% @place_images.each_with_index do |img, index| %>
-            <div class="<%= 'active' if index == 0 %> item">
-              <%= image_tag img.image.url(:medium) %>
-              <div class="carousel-caption">
-                <ul class="carousel-caption-photo-info">
-                  <% if img.taken_at.present? %>
-                    <li>
-                      <%= t('.taken_at', :date => l(img.taken_at, :format => :no_time)) %>
-                    </li>
-                  <% end %>
-                  <% if img.created_at.present? %>
-                    <li>
-                      <%= t('.uploaded_at', :date => l(img.created_at, :format => :no_time)) %>
-                    </li>
-                  <% end %>
-                  <% if img.user_id.present? %>
-                    <li>
-                      <%= t('.uploaded_by', :user => img.user.nickname) %>
-                    </li>
-                  <% end %>
-                </ul>                
-              </div>
+      <div id="place-image-grid">
+        <h3><%= t('.header_images') %></h3>
+        <% @place_images.each do |img| %>
+          <div class="place-image-grid-item">
+            <% answer = t("app.common.answers.#{PlaceEvaluation.answer_key_name(img['answer'])}") %>
+            <% eval = img['is_certified'] ? t('.evaluation_certified') : t('.evaluation_public') %>
+            <%= link_to img.image.url(:large), :class => 'place-image-fancybox', 
+                :title => "#{img['disability']} #{eval} - #{img['question']} - #{answer}", 
+                :'formatted-title' => "<span>#{img['disability']} #{eval} </span><span>#{img['question']} </span><span>#{answer}</span>",
+                :rel => 'gallery' do %><%= image_tag(img.image.url(:thumb), :alt => "#{img['disability']} #{eval} - #{img['question']} - #{answer}") %><% end %>
+            <div class="caption-text">
+              <ul class="eval-info">
+                <li>
+                  <span><%= t('.evaluation') %></span>
+                  <%= eval %>
+                </li>
+                <li>
+                  <span><%= t('.disability') %></span>
+                  <%= img['disability'] %>
+                </li>
+              </ul>
+              <ul class="quesiton-answer">
+                <li>
+                  <span><%= t('.question') %></span>
+                  <%= img['question'] %>
+                </li>
+                <li>
+                  <span><%= t('.answer') %></span>
+                  <%= answer %>
+                </li>
+              </ul>
+              <ul class="image-dates">
+                <li>
+                  <span><%= t('.taken_at') %></span>
+                  <%= l(img.taken_at, :format => :no_time) if img.taken_at.present? %>
+                </li>
+                <li>
+                  <span><%= t('.uploaded_at') %></span>
+                  <%= l(img.created_at, :format => :no_time) if img.created_at.present? %>
+                </li>
+                <li>
+                  <span><%= t('.uploaded_by') %></span>
+                  <%= img['nickname'] %>
+                </li>
+              </ul>                
             </div>
-          <% end %>
-        </div>
-        <!-- Carousel nav -->
-        <a class="carousel-control left" href="#place_carousel" data-slide="prev">&lsaquo;</a>
-        <a class="carousel-control right" href="#place_carousel" data-slide="next">&rsaquo;</a>
-      </div>    
+          </div>
+        <% end %>      
+      </div>
+    
     <% end %>
   </div>
 </div>

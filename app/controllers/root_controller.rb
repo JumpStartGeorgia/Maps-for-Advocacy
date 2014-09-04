@@ -45,8 +45,6 @@ class RootController < ApplicationController
     @stats[:public_results] = PlaceSummary.overall_public_results
     @stats[:certified_results] = PlaceSummary.overall_certified_results
 
-logger.debug "----------------- #{@stats}"
-  
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @places }

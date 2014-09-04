@@ -349,9 +349,16 @@ ka:
       tab_certified: "სერტიფიცირებული შეფასება (%{count})"
       tab_public: "საჯარო შეფასება (%{count})"
       skip_map: გამოტოვეთ რუკა და გადადით ფოტო სლაიდშოუზე (გადასვლა)
-      taken_at: "გადახებულია: %{date}"
-      uploaded_at: "ატვირთულია: %{date}"
-      uploaded_by: "ატვირთულია: %{user}-ს მიერ"
+      header_images: Images Submitted as Evidence
+      taken_at: "გადახებულია:"
+      uploaded_at: "ატვირთულია:"
+      uploaded_by: "Uploaded by:"
+      evaluation: "Evaluation:"
+      evaluation_certified: "სერტიფიცირებული შეფასება"
+      evaluation_public: "საზოგადოებრივი შეფასება"
+      disability: "Type:"
+      question: "Question:"
+      answer: "Answer:"
     show_type_results:
       certified_explanation: სერტიფიცირებული შეფასების შვსება შეუძლიათ არასამთავრობო ორგანიზაციების წარმომადგენლებს, რომლებიც დატრენინგებულები არიან ხელმისაწვდომობის შეფასებაში.
       public_explanation: საზოგადოებრივი შეფასების შევსება შეუძლიან ნებისმიერ მსურველს.

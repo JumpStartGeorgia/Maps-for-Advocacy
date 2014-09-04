@@ -184,4 +184,22 @@ $(document).ready(function(){
   
 
 
+  /*************************************************/
+  /* turn on fancybox for image slideshow on places page */
+  $(".place-image-fancybox").fancybox({
+    beforeLoad: function() {
+      this.title = $(this.element).find('+ div.caption-text').html();
+    },
+    helpers:  {
+      title : {
+        type : 'outside'
+      }
+    }
+  });
+
+  /*************************************************/
+  /* turn on fancybox for image slideshow on places page */
+  $('#place-image-grid .place-image-grid-item a').tipsy({gravity: 's', fade: true, opacity: 0.9, html: true, title: 'formatted-title'});
+
+
 });

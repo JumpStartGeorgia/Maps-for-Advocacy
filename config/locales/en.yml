@@ -349,9 +349,16 @@ en:
       tab_certified: "Certified Evaluations (%{count})"
       tab_public: "Public Evaluations (%{count})"
       skip_map: Skip the map and go to the photo slideshow (jump)
-      taken_at: "Photo taken on: %{date}"
-      uploaded_at: "Uploaded on: %{date}"
-      uploaded_by: "Uploaded by: %{user}"
+      header_images: Images Submitted as Evidence
+      taken_at: "Photo taken on:"
+      uploaded_at: "Uploaded on:"
+      uploaded_by: "Uploaded by:"
+      evaluation: "Evaluation:"
+      evaluation_certified: "Certified Evaluation"
+      evaluation_public: "Public Evaluation"
+      disability: "Type:"
+      question: "Question:"
+      answer: "Answer:"
     show_type_results:
       certified_explanation: Certified Evaluations are completed by people that are trained in how to evaluate a place for accessibility. Only the latest evaluation from each evaluation type is used to compute the overall accessibility score.
       public_explanation: Public Evaluations can be completed by anyone that wishes to submit an evaluation.  Every evaluation is used to compute the overall accessibility score.

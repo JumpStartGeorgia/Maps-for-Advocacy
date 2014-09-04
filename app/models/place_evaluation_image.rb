@@ -7,4 +7,5 @@ class PlaceEvaluationImage < ActiveRecord::Base
   attr_accessible :place_evaluation_id, :question_pairing_id, :place_image_id
   attr_accessor :images
   
+  
 end
