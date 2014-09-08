@@ -4,7 +4,7 @@ class VenueCategory < ActiveRecord::Base
 	has_many :venue_category_translations, :dependent => :destroy
   has_many :venues, :dependent => :destroy
   accepts_nested_attributes_for :venue_category_translations
-  attr_accessible :id, :venue_category_translations_attributes, :sort_order
+  attr_accessible :id, :venue_category_translations_attributes, :sort_order, :unique_id
   
   
   def self.names_with_count(options={})
@@ -128,7 +128,7 @@ class VenueCategory < ActiveRecord::Base
   end
   
   #######################################
-  ## load all question categories, quetsions and pairings from the main spreadsheet
+  ## load all venue categories and venues from the main spreadsheet
   #######################################
   def self.process_complete_csv_upload()
     path = "#{Rails.root}/db/spreadsheets/Accessibility Upload - Venues.csv"
@@ -136,26 +136,37 @@ class VenueCategory < ActiveRecord::Base
   end  
   
   #######################################
+  ## update all venue categories and venues from the main spreadsheet
+  #######################################
+  def self.process_complete_csv_upload_update()
+    path = "#{Rails.root}/db/spreadsheets/Accessibility Upload - Venues.csv"
+    process_csv_upload(File.open(path, 'r'), false)
+  end  
+  
+  #######################################
   ## load venue categories and venues
   ## from csv file
+  ## - if delete_first is false then will update existing venues
   #######################################
   def self.process_csv_upload(file, delete_first=false)
 		start = Time.now
     infile = file.read
     n, msg = 0, ""
-    idx_category_name = 0
-    idx_category_name_ka = 1
-    idx_category_sort = 2
-    idx_venue_name = 3
-    idx_venue_name_ka = 4
-    idx_venue_sort = 5
-    idx_right = 6
+    idx_category_id = 0
+    idx_category_name = 1
+    idx_category_name_ka = 2
+    idx_category_sort = 3
+    idx_venue_id = 4
+    idx_venue_name = 5
+    idx_venue_name_ka = 6
+    idx_venue_sort = 7
+    idx_right = 8
     current_category = nil
     
 		original_locale = I18n.locale
     I18n.locale = :en
 
-    accessibility_rights = Right.all
+    accessibility_rights = Right.with_translations(I18n.locale)
 
 		VenueCategory.transaction do
 		  if delete_first
@@ -165,12 +176,15 @@ class VenueCategory < ActiveRecord::Base
         VenueCategoryTranslation.delete_all
         Venue.delete_all
         VenueTranslation.delete_all
+        VenueRight.delete_all
+        VenueQuestionCategory.delete_all
         Place.delete_all
         PlaceTranslation.delete_all
         PlaceEvaluation.delete_all
         PlaceEvaluationAnswer.delete_all
         PlaceImage.delete_all
         PlaceEvaluationImage.delete_all
+        PlaceEvaluationOrganization.delete_all
         PlaceSummary.delete_all
 		  end
 
@@ -193,28 +207,47 @@ class VenueCategory < ActiveRecord::Base
             end
 
           	puts "******** having to get parent: #{row[idx_category_name]}"
-            # need to create new question category or get it from db if already exists
-            current_category = get_category(row[idx_category_name], row[idx_category_name_ka], row[idx_category_sort])
+            # need to create new venue category or get it from db if already exists
+            current_category = get_category(row[idx_category_id], row[idx_category_name], row[idx_category_name_ka], row[idx_category_sort])
           end
 
-          if current_category.blank? || current_category.id.blank?
+          if current_category.blank? || current_category[:id].blank?
 	    		  msg = "Row #{n}: Could not find/create category"
 			      raise ActiveRecord::Rollback
 	    		  return msg
           end
 
-        	puts "******** - category: #{current_category.id}; #{current_category[:name]}"
+        	puts "******** - category: #{current_category[:id]}; #{current_category[:name]}"
           
           # create venue
           if row[idx_venue_name].present?
-          	puts "******** creating venue"
-            v = Venue.create(:venue_category_id => current_category.id, :sort_order => row[idx_venue_sort])
-            I18n.available_locales.each do |locale|
+          	v = Venue.includes(:venue_translations).find_by_unique_id(row[idx_venue_id])
+
+            if v.present?
+              puts "******** venue exists, updating if needed"
+              # record already exists, update it
+              v.venue_category_id = current_category[:id] if v.venue_category_id != current_category[:id]
+              v.sort_order = row[idx_venue_sort] if v.sort_order != row[idx_venue_sort]
               name = row[idx_venue_name]
-              name = row[idx_venue_name_ka] if locale == :ka && row[idx_venue_name_ka].present?
-              v.venue_translations.create(:locale => locale, :name => name)
+              name_ka = row[idx_venue_name_ka]
+              v.venue_translations.each do |trans|
+                if trans.locale == 'ka' && trans.name != name_ka
+                  trans.name = name_ka.present? ? name_ka : name
+                elsif trans.locale == 'en' && trans.name != name
+                  trans.name = name 
+                end
+              end
+              v.save
+            else
+              puts "******** creating venue"
+              v = Venue.create(:venue_category_id => current_category[:id], :sort_order => row[idx_venue_sort], :unique_id => row[idx_venue_id])
+              I18n.available_locales.each do |locale|
+                name = row[idx_venue_name]
+                name = row[idx_venue_name_ka] if locale == :ka && row[idx_venue_name_ka].present?
+                v.venue_translations.create(:locale => locale, :name => name)
+              end
             end
-            
+
             # add rights
             # there might be multiple rights for a venue
             # - so split by ; and AND
@@ -248,11 +281,11 @@ class VenueCategory < ActiveRecord::Base
                 end
               end
 
-            # save the ids
-            right_ids.each do |right_id|
-              v.venue_rights.create(:right_id => right_id)
-            end
-          end          
+              # save the ids
+              right_ids.each do |right_id|
+                v.venue_rights.create(:right_id => right_id) if v.venue_rights.index{|x| x.right_id == right_id}.nil?
+              end
+            end          
             
           else
 	    		  msg = "Row #{n}: Venue name is not provided"
@@ -284,20 +317,42 @@ class VenueCategory < ActiveRecord::Base
   ######################################
 private
   # get venue category and if not exist, create it
-  def self.get_category(name, name_ka, sort)
+  def self.get_category(unique_id, name, name_ka, sort)
     vc = nil
+    unique_id.strip! if unique_id.present?
     name.strip! if name.present?
     name_ka.strip! if name_ka.present?
     sort.strip! if sort.present?
-    
+ 
+    x = includes(:venue_category_translations).where(:venue_categories => {:unique_id => unique_id})
 
-    x = select('venue_categories.id, venue_category_translations.name').includes(:venue_category_translations)
-          .where(:venue_categories => {:sort_order => sort}, :venue_category_translations => {:locale => I18n.locale, :name => name})
-          
-    vc = x.first if x.present?
+    if x.present?
+      x = x.first
+
+      # update the record if needed
+      if x.sort_order != sort
+        x.sort_order = sort
+        x.save
+      end
+
+      # update translations if needed
+      x.venue_category_translations.each do |trans|
+        if trans.locale == 'ka' && trans.name != name_ka
+          trans.name = name_ka 
+          trans.save
+        elsif trans.locale == 'en' && trans.name != name
+          trans.name = name 
+          trans.save
+        end
+      end
+
+      # save venue category into variable
+      trans = x.venue_category_translations.select{|y| y.locale == I18n.locale.to_s}.first
+      vc = {:id => x.id, :name => trans.name}
+    end
     
     if vc.nil?
-      vc = VenueCategory.create(:sort_order => sort)
+      vc = VenueCategory.create(:sort_order => sort, :unique_id => unique_id)
       I18n.available_locales.each do |locale|
         x = name
         x = name_ka if locale == :ka && name_ka.present?

@@ -9,7 +9,7 @@ class QuestionCategory < ActiveRecord::Base
 	has_many :venue_question_categories, :dependent => :destroy
   accepts_nested_attributes_for :question_category_translations
   accepts_nested_attributes_for :question_pairings
-  attr_accessible :id, :is_common, :question_category_translations_attributes, :question_pairings_attributes, :sort_order, :category_type
+  attr_accessible :id, :is_common, :question_category_translations_attributes, :question_pairings_attributes, :sort_order, :category_type, :unique_id
 
   before_save :set_sort_order
   DEFAULT_SORT_ORDER = 99
@@ -148,8 +148,17 @@ class QuestionCategory < ActiveRecord::Base
   end  
   
   #######################################
+  ## load all question categories, quetsions and pairings from the main spreadsheet
+  #######################################
+  def self.process_complete_csv_upload_with_updates()
+    path = "#{Rails.root}/db/spreadsheets/Accessibility Upload - Questions.csv"
+    process_csv_upload(File.open(path, 'r'), false)
+  end  
+  
+  #######################################
   ## load question categories, quetsions and pairings 
   ## from csv file
+  ## - if delete_first is false then will update existing questions
   #######################################
   def self.process_csv_upload(file, delete_first=false)
 		start = Time.now
@@ -191,7 +200,7 @@ class QuestionCategory < ActiveRecord::Base
     I18n.locale = :en
 
     disabilities = Disability.all
-    convention_categories = ConventionCategory.all
+    convention_categories = ConventionCategory.with_translations(I18n.locale)
 
 		QuestionCategory.transaction do
 		  if delete_first
@@ -213,7 +222,6 @@ class QuestionCategory < ActiveRecord::Base
         ActiveRecord::Base.connection.execute("truncate disabilities_question_pairings;")        
         
 		  end
-		
 		
 		  CSV.parse(infile) do |row|
         question = nil
@@ -515,7 +523,6 @@ private
     name_ka.strip! if name_ka.present?
     sort.strip! if sort.present?
     category_type.strip! if category_type.present?
-    
 
     x = select('question_categories.id').includes(:question_category_translations)
           .where(:question_categories => {:sort_order => sort, :category_type => TYPES[category_type], :ancestry => nil}, 

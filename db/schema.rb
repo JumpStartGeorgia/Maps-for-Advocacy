@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140904132602) do
+ActiveRecord::Schema.define(:version => 20140908110508) do
 
   create_table "convention_categories", :force => true do |t|
     t.datetime "created_at"
@@ -274,12 +274,14 @@ ActiveRecord::Schema.define(:version => 20140904132602) do
     t.integer  "sort_order",                 :default => 99
     t.string   "ancestry"
     t.integer  "category_type", :limit => 1, :default => 1
+    t.integer  "unique_id"
   end
 
   add_index "question_categories", ["ancestry"], :name => "index_question_categories_on_ancestry"
   add_index "question_categories", ["category_type"], :name => "index_question_categories_on_category_type"
   add_index "question_categories", ["is_common"], :name => "index_question_categories_on_is_common"
   add_index "question_categories", ["sort_order"], :name => "index_question_categories_on_sort_order"
+  add_index "question_categories", ["unique_id"], :name => "index_question_categories_on_unique_id"
 
   create_table "question_category_translations", :force => true do |t|
     t.integer  "question_category_id"
@@ -356,7 +358,10 @@ ActiveRecord::Schema.define(:version => 20140904132602) do
   create_table "questions", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "unique_id"
   end
+
+  add_index "questions", ["unique_id"], :name => "index_questions_on_unique_id"
 
   create_table "right_translations", :force => true do |t|
     t.integer  "right_id"
@@ -406,9 +411,11 @@ ActiveRecord::Schema.define(:version => 20140904132602) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "sort_order", :default => 99
+    t.integer  "unique_id"
   end
 
   add_index "venue_categories", ["sort_order"], :name => "index_venue_categories_on_sort_order"
+  add_index "venue_categories", ["unique_id"], :name => "index_venue_categories_on_unique_id"
 
   create_table "venue_category_translations", :force => true do |t|
     t.integer  "venue_category_id"
@@ -486,11 +493,13 @@ ActiveRecord::Schema.define(:version => 20140904132602) do
     t.datetime "updated_at"
     t.integer  "sort_order",                         :default => 99
     t.integer  "custom_public_question_category_id"
+    t.integer  "unique_id"
   end
 
   add_index "venues", ["custom_public_question_category_id"], :name => "index_venues_on_custom_public_question_category_id"
   add_index "venues", ["custom_question_category_id"], :name => "index_venues_on_custom_question_category_id"
   add_index "venues", ["sort_order"], :name => "index_venues_on_sort_order"
+  add_index "venues", ["unique_id"], :name => "index_venues_on_unique_id"
   add_index "venues", ["venue_category_id"], :name => "index_venues_on_venue_category_id"
 
 end
