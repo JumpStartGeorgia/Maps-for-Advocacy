@@ -84,6 +84,9 @@
                             (<%= question[:validation_equation] %>)
                           <% end %>
 
+                          <% if question[:help_text].present? %>
+                            <i class="icon-info-sign tooltipster" title="<%= question[:help_text] %>"></i>
+                          <% end %>
                           <% if question[:exists_id].present? %>
                             <i class="icon-plus tooltipster" title="<%= t('.tip_exists') %>"></i>
                           <% end %>

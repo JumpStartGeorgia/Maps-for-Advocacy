@@ -138,7 +138,7 @@ class VenueCategory < ActiveRecord::Base
   #######################################
   ## update all venue categories and venues from the main spreadsheet
   #######################################
-  def self.process_complete_csv_upload_update()
+  def self.update_csv_upload()
     path = "#{Rails.root}/db/spreadsheets/Accessibility Upload - Venues.csv"
     process_csv_upload(File.open(path, 'r'), false)
   end  
@@ -237,14 +237,25 @@ class VenueCategory < ActiveRecord::Base
                   trans.name = name 
                 end
               end
-              v.save
+
+              if !v.save
+                msg = "Row #{n}: Could not update venue record due to this error: #{v.errors.full_messages.join(', ')}"
+                raise ActiveRecord::Rollback
+                return msg
+              end
             else
               puts "******** creating venue"
-              v = Venue.create(:venue_category_id => current_category[:id], :sort_order => row[idx_venue_sort], :unique_id => row[idx_venue_id])
+              v = Venue.new(:venue_category_id => current_category[:id], :sort_order => row[idx_venue_sort], :unique_id => row[idx_venue_id])
               I18n.available_locales.each do |locale|
                 name = row[idx_venue_name]
                 name = row[idx_venue_name_ka] if locale == :ka && row[idx_venue_name_ka].present?
-                v.venue_translations.create(:locale => locale, :name => name)
+                v.venue_translations.build(:locale => locale, :name => name)
+              end
+
+              if !v.save
+                msg = "Row #{n}: Could not create venue record due to this error: #{v.errors.full_messages.join(', ')}"
+                raise ActiveRecord::Rollback
+                return msg
               end
             end
 
@@ -324,27 +335,22 @@ private
     name_ka.strip! if name_ka.present?
     sort.strip! if sort.present?
  
-    x = includes(:venue_category_translations).where(:venue_categories => {:unique_id => unique_id})
+    x = includes(:venue_category_translations).find_by_unique_id(unique_id)
 
     if x.present?
-      x = x.first
-
       # update the record if needed
-      if x.sort_order != sort
-        x.sort_order = sort
-        x.save
-      end
+      x.sort_order = sort if x.sort_order != sort
 
       # update translations if needed
       x.venue_category_translations.each do |trans|
         if trans.locale == 'ka' && trans.name != name_ka
-          trans.name = name_ka 
-          trans.save
+          trans.name = name_ka.present? ? name_ka : name
         elsif trans.locale == 'en' && trans.name != name
           trans.name = name 
-          trans.save
         end
       end
+
+      x.save
 
       # save venue category into variable
       trans = x.venue_category_translations.select{|y| y.locale == I18n.locale.to_s}.first

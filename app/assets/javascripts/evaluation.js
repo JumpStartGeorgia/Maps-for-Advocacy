@@ -317,7 +317,7 @@ $(document).ready(function(){
       $(obj_evidence).find('input[type="text"]').each(function(){
         raw_evidence.push($(this).val().trim());
         evidence.push(/[0-9.]+/g.exec($(this).val().trim())); // number, no units
-        units.push($(this).val().replace(/[^a-zA-Z]+/g, '').trim()); // text only
+        units.push($(this).val().replace(/[^a-zA-Zა-ჰ]+/g, '').trim()); // text only
       });
       
       // if no evidence entered, show error
@@ -402,7 +402,7 @@ $(document).ready(function(){
 			var indexG = val_eq.indexOf(">");
 			var indexL = val_eq.indexOf("<");
 			if (indexG >= 0 && indexL >= 0) {
-        values = val_eq.split(' and ');
+        values = val_eq.replace(' და ').split(' and ');
         if (indexG == 0){
 			    var value1 = parseFloat(values[0].replace('>', ''));
 			    var value2 = parseFloat(values[1].replace('<', ''));

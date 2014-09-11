@@ -1,5 +1,6 @@
 class QuestionPairing < ActiveRecord::Base
-	translates :evidence1, :evidence2, :evidence3, :evidence1_units, :evidence2_units, :evidence3_units, :reference, :help_text
+	translates :evidence1, :evidence2, :evidence3, :evidence1_units, :evidence2_units, :evidence3_units, 
+      :reference, :help_text, :validation_equation, :validation_equation_wout_units, :validation_equation_units
 
 	belongs_to :question_category
 	belongs_to :question
@@ -11,8 +12,8 @@ class QuestionPairing < ActiveRecord::Base
   has_many :convention_categories, :through => :question_pairing_convetion_categories
   accepts_nested_attributes_for :question_pairing_translations
   attr_accessible :id, :question_category_id, :question_id, :question_pairing_translations_attributes, 
-      :sort_order, :required_for_accessibility, :is_domestic_legal_requirement,
-      :is_exists, :exists_id, :exists_parent_id, :validation_equation, :validation_equation_wout_units, :validation_equation_units, :is_evidence_angle
+      :sort_order, :required_for_accessibility, :is_domestic_legal_requirement, :unique_id,
+      :is_exists, :exists_id, :exists_parent_id, :is_evidence_angle
 
   validates_uniqueness_of :exists_id, :allow_nil => true
  
