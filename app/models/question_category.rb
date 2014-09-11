@@ -383,16 +383,6 @@ class QuestionCategory < ActiveRecord::Base
             ev3_units_ka = ev3_units_ka.present? ? ev3_units_ka[1].strip : ev3_units
           end
 
-puts "------------ ev1 = #{ev1}; ev1_ka = #{ev1_ka}"
-puts "------------ ev1_units = #{ev1_units}; ev1_units_ka = #{ev1_units_ka}"
-puts "------------ ev2 = #{ev2}; ev2_ka = #{ev2_ka}"
-puts "------------ ev2_units = #{ev2_units}; ev2_units_ka = #{ev2_units_ka}"
-puts "------------ ev3 = #{ev3}; ev3_ka = #{ev3_ka}"
-puts "------------ ev2_units = #{ev2_units}; ev2_units_ka = #{ev2_units_ka}"
-puts "------------ val_eq = #{val_eq}; val_eq_ka = #{val_eq_ka}"
-puts "------------ val_eq_units = #{val_eq_units}; val_eq_units_ka = #{val_eq_units_ka}"
-puts "------------ val_eq_wout_units = #{val_eq_wout_units}; val_eq_wout_units_ka = #{val_eq_wout_units_ka}"
-
           # validation equation validation
           # - if present, at least evidence1 must have content
           # - units in evidence1 and eq must match unless is evidence angle
@@ -535,7 +525,7 @@ puts "------------ val_eq_wout_units = #{val_eq_wout_units}; val_eq_wout_units_k
             end
             conv_cats.map!{|x| x.strip}
             
-            # for eahc convention category, look for the matching record in db and save id if found
+            # for each convention category, look for the matching record in db and save id if found
             conv_cats.each do |cat|
               if cat.present?
                 index = convention_categories.index{|x| x.name.downcase == cat.downcase.strip}
