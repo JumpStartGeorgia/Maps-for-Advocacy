@@ -10,7 +10,7 @@ class PlaceEvaluation < ActiveRecord::Base
   accepts_nested_attributes_for :place_evaluation_answers
   accepts_nested_attributes_for :place_evaluation_images
   attr_accessible :place_id, :user_id, :place_evaluation_answers_attributes, :place_evaluation_images_attributes, 
-                  :created_at, :disability_id, :is_certified, :disability_ids, :organization_ids
+                  :created_at, :disability_id, :is_certified, :disability_ids, :organization_ids, :disability_other_text
   attr_accessor :disability_ids
 
   validates :user_id, :disability_id, :presence => true

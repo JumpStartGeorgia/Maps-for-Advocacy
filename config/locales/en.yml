@@ -374,6 +374,7 @@ en:
       header_user_summary: Summary
       header_user_details: Details
       details_link_title: View the details of this evaluation
+      disability_other: 'Other Type: %{name}'
     form:
       header_location: Where is this place located?
       map_instructions: Click on the map to add a marker of where the place is located.  
@@ -429,6 +430,8 @@ en:
       submit: Submit the Evaluation
       cancel_eval: Cancel the Evaluation
       no_questions: There are no evaluation questions on file for your selection.
+      disability_other_header: Other Explanation
+      disability_other_label: "Please explain the 'Other'"
     upload_photos:
       title: Upload Photos for '%{name}'
       add_files: Add photos...

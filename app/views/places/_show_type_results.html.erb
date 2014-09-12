@@ -133,6 +133,11 @@
                             <% end %>
                           </span>
                         <% end %>
+                        <% if evaluation.disability_id == Disability::OTHER_ID && evaluation.disability_other_text.present? %>
+                          <span class="disability_other">
+                           <%= t('.disability_other', :name => evaluation.disability_other_text) %>
+                          </span>
+                        <% end %>
                       </h3>
 
 	                    <% if questions.present? && summary.present? %>

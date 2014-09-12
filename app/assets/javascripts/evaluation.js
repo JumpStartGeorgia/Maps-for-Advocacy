@@ -137,6 +137,19 @@ $(document).ready(function(){
       }
     }
 
+    //////////////////////////////////////////////////////////////////////////
+    // reset the 'other' disability type settings
+    function reset_other_type_settings(){
+      // reset hidden field
+      $('form.place #place_place_evaluations_attributes_0_disability_other_text').val('');
+      // reset modal form
+      $('#evaluation_form #other-type-modal input#disability_other_popup').val('');
+      // update input label to only show 'other'
+      $('#evaluation_form #evaluation_types ul li label#other-type-label').text($('#evaluation_form #evaluation_types ul li label#other-type-label').data('other'));
+      // make sure the input is not selected
+      $('#evaluation_form #evaluation_types input.other-type-input').prop('checked', false).trigger('change');
+    }
+
 
   /*************************************************/
   /* actions for the evaluation form */
@@ -237,7 +250,48 @@ $(document).ready(function(){
         update_upload_imgage_button($(this));
       }
     });
+
+
+    //////////////////////////////////////////////////////////////////////////
+    // register event for manage other type modal openning
+    // - when 'other' type modal opens and 'other' option is already on, turn it off and cancel modal
+    $('#evaluation_form label#other-type-label').click(function(){
+      if ($('#evaluation_form #evaluation_types input.other-type-input').is(':checked')){
+        reset_other_type_settings();
+      }else{
+        $('#evaluation_form #other-type-modal').modal();
+      }
+    });
+
+    //////////////////////////////////////////////////////////////////////////
+    // when 'other' type modal opens, set focus
+    $('#evaluation_form #other-type-modal').on('shown', function () {
+      $('#evaluation_form #other-type-modal input#disability_other_popup').focus();
+    });
     
+    //////////////////////////////////////////////////////////////////////////
+    // save 'other' type text
+    $('#evaluation_form #other-type-modal a.other-type-modal-save').click(function(){
+      var val = $('#evaluation_form #other-type-modal input#disability_other_popup').val();
+      if (val != ''){
+        // save the value into hidde field
+        $('form.place #place_place_evaluations_attributes_0_disability_other_text').val(val);
+        // reset modal form
+        $('#evaluation_form #other-type-modal input#disability_other_popup').val('');
+        // update input label to show val
+        $('#evaluation_form #evaluation_types ul li label#other-type-label').text($('#evaluation_form #evaluation_types ul li label#other-type-label').data('other') + ': ' + val);
+        // make sure the input is selected
+        $('#evaluation_form #evaluation_types input.other-type-input').prop('checked', true).trigger('change');
+      }else{
+        reset_other_type_settings();
+      }
+    });
+    //////////////////////////////////////////////////////////////////////////
+    // cancel 'other' type text
+    $('#evaluation_form #other-type-modal a.other-type-modal-cancel').click(function(){
+      reset_other_type_settings();
+    });
+
 
     //////////////////////////////////////////////////////////////////////////
     // if question has selected value and it is the same as the value they are trying

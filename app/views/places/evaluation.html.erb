@@ -29,13 +29,37 @@
             <ul>
               <% @evaluation_types_public.each do |evaluation_type| %>
                 <li>
+                  <% 
+                    other_input_class = ''
+                    other_modal = ''
+                    if evaluation_type.id == Disability::OTHER_ID 
+                      other_input_class = 'class=other-type-input'
+                      other_modal = "id=other-type-label data-toggle=modal data-other=#{evaluation_type.name}" 
+                    end
+                  %>
                   <input id="<%= "evaluation_type_public_#{evaluation_type.id}" %>" 
-                    <%= params[:eval_type_id].present? && params[:eval_type_id].to_s == evaluation_type.id.to_s ? 'checked=checked' : '' %>
+                    <%= params[:eval_type_id].present? && params[:eval_type_id].to_s == evaluation_type.id.to_s && params[:eval_type_id].to_s != Disability::OTHER_ID.to_s ? 'checked=checked' : '' %>
                     name="evaluation_type" type="checkbox" value="<%= evaluation_type.id %>"
-                    aria-controls="venue_evaluations_public">
-                  <label for="<%= "evaluation_type_public_#{evaluation_type.id}" %>">
+                    aria-controls="venue_evaluations_public" <%= other_input_class %>>
+                  <label for="<%= "evaluation_type_public_#{evaluation_type.id}" %>" <%= other_modal %>>
                     <%= evaluation_type.name %>
                   </label>
+                  <% if evaluation_type.id == Disability::OTHER_ID %>
+                    <div id="other-type-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="other-type-modal-header" aria-hidden="true">
+                      <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                        <h3 id="other-type-modal-header"><%= t('.disability_other_header') %></h3>
+                      </div>
+                      <div class="modal-body">
+                        <label for="disability_other_popup"><%= t('.disability_other_label') %></label>
+                        <input type="text" id="disability_other_popup" />
+                      </div>
+                      <div class="modal-footer">
+                        <a href="#" class="btn other-type-modal-cancel" data-dismiss="modal"><%= t('app.buttons.cancel') %></a>
+                        <a href="#" class="btn btn-primary other-type-modal-save" data-dismiss="modal"><%= t('app.common.save') %></a>
+                      </div>
+                    </div>
+                  <% end %>
                 </li>
               <% end %>            
             </ul>

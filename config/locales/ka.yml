@@ -354,6 +354,7 @@ ka:
       header_images: მტკიცებულების სახით მოწოდებული ფოტო
       no_images: ფოტო ჯერ არ  არის მოწოდებული.
       no_filter_images: თქვენს არჩევას არ შეესაბამება სურათი.
+      filter_all: All
       taken_at: "გადახებულია:"
       uploaded_at: "ატვირთულია:"
       uploaded_by: "ატვირთა:"
@@ -373,6 +374,7 @@ ka:
       header_user_summary: შეჯამება
       header_user_details: დეტალები
       details_link_title: იხილეთ ამ შეფასების დეტალები
+      disability_other: 'Other Type: %{name}'
     form:
       header_location: სად მდებარეობს ეს ადგილი?
       map_instructions: დააჭირეთ რუკას, რათა მონიშნოთ ამ ადგილის მდებარეობა.
@@ -428,6 +430,8 @@ ka:
       submit: შეფასების შევსება
       cancel_eval: შეფასების გაუქმება
       no_questions: თქვენი მოთხოვნის შესაბამისი კითხვები არ არის წარმოდგენილი შეფასების ფაილში.
+      disability_other_header: Other Explanation
+      disability_other_label: "Please explain the 'Other'"
     upload_photos:
       title: "'%{name}'-ის სურათის დამატება"
       add_files: სურათის დამატება...

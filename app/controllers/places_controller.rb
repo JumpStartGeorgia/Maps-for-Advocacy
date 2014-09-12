@@ -442,6 +442,7 @@ class PlacesController < ApplicationController
         
                 # add place eval variables
                 place_params['place_evaluations_attributes'][idx_disability.to_s]['disability_id'] = disability_id
+                place_params['place_evaluations_attributes'][idx_disability.to_s]['disability_other_text'] = params[:place]['place_evaluations_attributes']['0']['disability_other_text']
                 place_params['place_evaluations_attributes'][idx_disability.to_s]['user_id'] = params[:place]['place_evaluations_attributes']['0']['user_id']
                 place_params['place_evaluations_attributes'][idx_disability.to_s]['is_certified'] = params[:place]['place_evaluations_attributes']['0']['is_certified']
                 place_params['place_evaluations_attributes'][idx_disability.to_s]['organization_ids'] = org_ids

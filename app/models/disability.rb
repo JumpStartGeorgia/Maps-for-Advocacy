@@ -9,6 +9,8 @@ class Disability < ActiveRecord::Base
   
   validates :code, :presence => true
 
+  OTHER_ID = 9
+
   def self.is_active
     where('active_public = 1 or active_certified = 1')
   end

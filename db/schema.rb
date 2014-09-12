@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20140909114234) do
+ActiveRecord::Schema.define(:version => 20140912054841) do
 
   create_table "convention_categories", :force => true do |t|
     t.datetime "created_at"
@@ -184,7 +184,8 @@ ActiveRecord::Schema.define(:version => 20140909114234) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "disability_id"
-    t.boolean  "is_certified",  :default => false
+    t.boolean  "is_certified",          :default => false
+    t.string   "disability_other_text"
   end
 
   add_index "place_evaluations", ["created_at"], :name => "index_place_evaluations_on_created_at"
