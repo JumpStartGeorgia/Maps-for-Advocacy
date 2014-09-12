@@ -196,7 +196,7 @@ ka:
         no_evidence_entered: გთხოვთ შეიყვანოთ პარამეტრები
         no_evidence_entered_angle: 'შეიყვანეთ ერთ ერთის პარამეტრები: სიმაღლე და სიგანე; დახრილობა'
         no_units_entered: შეიცავდეს პარამეტრებიან ერთეულებს
-        units_not_match: პარამეტრები უნდა იყოს '[unit]'
+        units_not_match: "პარამეტრები უნდა იყოს '[unit]'"
         units_not_match_angle: სიმაღლისა და სიღრმის პარამეტრები ერთნაირი უნდა იყოს
         validation_passed: აკმაყოფილებს მოთხოვნებს!
         validation_failed: არ აკმაყოფილებს მოთხოვნებს!
@@ -298,7 +298,7 @@ ka:
     places:
       form:
         header_venue: რა არის ადგილმდებარეობა?
-        header_location: სად მდებარეობს '%{name}'?
+        header_location: "სად მდებარეობს '%{name}'?"
         map_instructions: დააკლიკეთ რუკაზე, რათა მონიშნოთ სად მდებარეობს '%{name}'.
         skip_map: რუკის გამოტოვება და მისამართის ფორმაში გადასვლა (გადახტომა)
         address_instructions: შეგიძლიათ მოიძიოთ მისამართი თუ არ გსურთ რუკის გამოყენება
@@ -368,13 +368,13 @@ ka:
       certified_explanation: სერტიფიცირებული შეფასების შვსება შეუძლიათ არასამთავრობო ორგანიზაციების წარმომადგენლებს, რომლებიც დატრენინგებულები არიან ხელმისაწვდომობის შეფასებაში.
       public_explanation: საზოგადოებრივი შეფასების შევსება შეუძლიან ნებისმიერ მსურველს.
       header_summary: საერთო შეჯამება
-      no_evaluations: ამ დრომდე '%{name}'-ის შეფასებები არ არის წარმოდგენილი
+      no_evaluations: "ამ დრომდე '%{name}'-ის შეფასებები არ არის წარმოდგენილი"
       summary_result: საერთო შედეგები
       header_overall_results: შეფასების შედეგები
       header_user_summary: შეჯამება
       header_user_details: დეტალები
       details_link_title: იხილეთ ამ შეფასების დეტალები
-      disability_other: 'Other Type: %{name}'
+      disability_other: 'სხვა ტიპი: %{name}'
     form:
       header_location: სად მდებარეობს ეს ადგილი?
       map_instructions: დააჭირეთ რუკას, რათა მონიშნოთ ამ ადგილის მდებარეობა.
@@ -400,7 +400,7 @@ ka:
       skip_to_submit: გადასვლა ფორმის გაგზავნის ღილაკზე (გადახტომა)
     certified_eval_form:
       evaluation_instructions: შეარჩიეთ კატეგორია და შეავსეთ შეფასება.
-      question_category_link_title: იხილეთ კითხვები '%{name}'
+      question_category_link_title: "იხილეთ კითხვები '%{name}'"
       question_instructions: თუ არ გაქვთ პასუხი, დატოვეთ ცარიელი. 
       skip_to_next_quest_cat: შემდეგ კატეგორიაზე ან კითხვაზე გადასვლა (გადახტომა)
       skip_to_previous_quest_cat: წინა კატეგორიაზე ან კითხვაზე გადასვლა (გადახტომა
@@ -430,8 +430,8 @@ ka:
       submit: შეფასების შევსება
       cancel_eval: შეფასების გაუქმება
       no_questions: თქვენი მოთხოვნის შესაბამისი კითხვები არ არის წარმოდგენილი შეფასების ფაილში.
-      disability_other_header: Other Explanation
-      disability_other_label: "Please explain the 'Other'"
+      disability_other_header: სხვა ახსნა
+      disability_other_label: "დააკონკრეტეთ 'სხვა'"
     upload_photos:
       title: "'%{name}'-ის სურათის დამატება"
       add_files: სურათის დამატება...
