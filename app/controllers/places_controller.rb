@@ -429,7 +429,10 @@ class PlacesController < ApplicationController
             place_params['place_evaluations_attributes'].delete('0')
 
             # pull out and format the org ids so they can be saved correctly
-            org_ids = params[:place]['place_evaluations_attributes']['0']['organization_ids'].gsub('[','').gsub(']','').split(',').map{|x| x.strip}
+            org_ids = nil
+            if params[:place]['place_evaluations_attributes']['0']['organization_ids'].present?
+              org_ids = params[:place]['place_evaluations_attributes']['0']['organization_ids'].gsub('[','').gsub(']','').split(',').map{|x| x.strip}
+            end
             
 
             disability_ids.each_with_index do |disability_id, idx_disability|
