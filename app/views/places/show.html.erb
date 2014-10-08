@@ -1,6 +1,6 @@
 <%- model_class = Place -%>
 <%- model_class_trans = PlaceTranslation -%>
-<% title @place[:name].html_safe %>
+<% title @place[:name].titlecase.html_safe %>
 
 <div class="row-fluid">
   <div class="span6" id="venue_evalautions">
@@ -12,7 +12,7 @@
         </p>
         <p>
           <strong><%= model_class.human_attribute_name(:url) %>:</strong>
-          <%= link_to @place[:url], @place[:url], :target => '_blank' if @place[:url].present? %>
+          <%= link_to t('.website_button'), @place[:url], :target => '_blank', :class => 'btn_website' if @place[:url].present? %>
         </p>
         <p>
           <strong><%= model_class_trans.human_attribute_name(:district_id) %>:</strong>

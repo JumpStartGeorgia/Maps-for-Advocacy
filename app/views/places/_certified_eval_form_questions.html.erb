@@ -50,9 +50,9 @@
                   end
                   # if this questions has validation eq, create the data tags for the eq
                   if question[:validation_equation].present? 
-                    evidence_data << "data-val-eq="
+                    evidence_data << "data-val-eq='"
                     evidence_data << question[:validation_equation_wout_units]
-                    evidence_data << " data-val-eq-units="
+                    evidence_data << "' data-val-eq-units="
                     evidence_data << question[:validation_equation_units].downcase
                     evidence_data << " data-is-angle="
                     evidence_data << question[:is_evidence_angle].to_s.to_bool.to_s
@@ -103,7 +103,7 @@
                       </div>
                       <div class="span8">
                         <div class="row-fluid">
-                          <div class="span2 evidence" <%= evidence_data %>>
+                          <div class="span2 evidence" <%= evidence_data.html_safe %>>
                             <div class="evidence-message-container accessibly-hidden alert" aria-live="polite" aria-relevant="additions" >
                               <div class="evidence-message"></div>
                               <a href="<%= "#evidence1_#{question[:question_id]}" %>" class="accessibly-hidden"><%= t('.skip_to_evidence_input') %></a>
