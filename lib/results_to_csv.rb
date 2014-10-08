@@ -13,12 +13,12 @@ module ResultsToCsv
 
     original_locale = I18n.locale
     I18n.locale = :en
-    # make sure the parent directory exists
+    # parent directory
     path = "#{Rails.root}/db/results_to_csv/"
+    # and use now's datetime as folder name
+    path << Time.now.strftime('%FT%R') + "/"
+    # create folder path
     FileUtils.mkdir_p(path)
-
-    # delete all exisitng files first
-    FileUtils.rm_r(Dir.glob("#{path}*"))    
 
     # get related content
     disabilities = Disability.is_active.sorted
