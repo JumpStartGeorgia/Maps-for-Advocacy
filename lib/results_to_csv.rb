@@ -22,18 +22,20 @@ module ResultsToCsv
 
       # for each user, update eval user_id and create eval org record
       user_hash.keys.each do |user_id|
-        # get the user org
-        org = org_users.select{|x| x.user_id.to_s == user_id.to_s}.first
+        if user_hash[user_id].present?
+          # get the user org
+          org = org_users.select{|x| x.user_id.to_s == user_id.to_s}.first
 
-        # for each place evaluation
-        PlaceEvaluation.where(:place_id => user_hash[user_id]).each do |eval|
-          # update user id
-          eval.user_id = user_id
-          eval.save
+          # for each place evaluation
+          PlaceEvaluation.where(:place_id => user_hash[user_id]).each do |eval|
+            # update user id
+            eval.user_id = user_id
+            eval.save
 
-          if org.present?
-            # create org id
-            PlaceEvaluationOrganization.create(:place_evaluation_id => eval.id, :organization_id => org.id)
+            if org.present?
+              # create org id
+              PlaceEvaluationOrganization.create(:place_evaluation_id => eval.id, :organization_id => org.organization_id)
+            end
           end
         end
       end
