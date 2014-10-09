@@ -3,8 +3,7 @@ class TitlecasePlaceNames < ActiveRecord::Migration
 
     PlaceTranslation.transaction do
       PlaceTranslation.where(:locale => 'en').each do |place|
-        place.name.titlecase
-        place.name_will_change!
+        place.name = place.name.titlecase
         place.save
       end
     end
