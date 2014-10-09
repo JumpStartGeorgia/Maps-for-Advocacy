@@ -10,20 +10,20 @@ class PlaceTranslation < ActiveRecord::Base
   # if this is not ka locale and name/address have geo text, latinize it
   def clean_text(force_clean=false)
     if self.name_changed? || force_clean
-      self.name = self.name.titlecase.strip
+      self.name = self.name.strip
     
       if self.locale != 'ka'
-        self.name = self.name.latinize if self.name.is_georgian?
+        self.name = self.name.latinize.titlecase if self.name.is_georgian?
       end
       
       self.search_name = self.name.latinize.to_ascii.downcase
     end
     
     if self.address_changed? || force_clean
-      self.address = self.address.titlecase.strip
+      self.address = self.address.strip
     
       if self.locale != 'ka'
-        self.address = self.address.latinize if self.address.is_georgian?
+        self.address = self.address.latinize.titlecase if self.address.is_georgian?
       end
 
       self.search_address = self.address.latinize.to_ascii.downcase
