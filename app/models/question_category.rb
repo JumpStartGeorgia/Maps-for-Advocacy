@@ -218,6 +218,7 @@ class QuestionCategory < ActiveRecord::Base
         QuestionPairingTranslation.delete_all
         PlaceEvaluation.delete_all
         PlaceEvaluationAnswer.delete_all
+        PlaceEvaluationOrganization.delete_all
         PlaceImage.delete_all
         PlaceEvaluationImage.delete_all
         PlaceSummary.delete_all

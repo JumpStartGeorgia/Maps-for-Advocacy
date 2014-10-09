@@ -182,6 +182,7 @@ class VenueCategory < ActiveRecord::Base
         PlaceTranslation.delete_all
         PlaceEvaluation.delete_all
         PlaceEvaluationAnswer.delete_all
+        PlaceEvaluationOrganization.delete_all
         PlaceImage.delete_all
         PlaceEvaluationImage.delete_all
         PlaceEvaluationOrganization.delete_all

@@ -2,6 +2,46 @@
 module ResultsToCsv
 
 
+
+
+
+  #############################
+  ## update the evaluation user ids to be 
+  ## the correct original ones,
+  ## not the ones used to enter evals by hand
+  ## user_hash: {user_id: [place ids they have evaluated], user_id: [], ....}
+  #############################
+  def self.update_evaluation_user_id(user_hash)
+    # get organization users belong to
+    org_users = OrganizationUser.all
+
+    # first clear out all eval org records
+    PlaceEvaluationOrganization.delete_all
+
+    PlaceEvaluation.transaction do
+
+      # for each user, update eval user_id and create eval org record
+      user_hash.keys.each do |user_id|
+        # get the user org
+        org = org_users.select{|x| x.user_id.to_s == user_id.to_s}.first
+
+        # for each place evaluation
+        PlaceEvaluation.where(:place_id => user_hash[user_id]).each do |eval|
+          # update user id
+          eval.user_id = user_id
+          eval.save
+
+          if org.present?
+            # create org id
+            PlaceEvaluationOrganization.create(:place_evaluation_id => eval.id, :organization_id => org.id)
+          end
+        end
+      end
+    end
+  end
+
+
+
   #############################
   ## write all results to csv files
   ## each place will gets its own folder
@@ -32,6 +72,13 @@ module ResultsToCsv
 
     file_count = 0
 
+    # record which users have evaluated places
+    user_evaluations = {}
+    User.select('id').each do |user|
+      user_evaluations[user.id.to_s] = []
+    end
+
+
     if places.present?
       puts "there are #{places.length} places with evaluations"
       places.each_with_index do |place, place_index|
@@ -61,9 +108,12 @@ module ResultsToCsv
               content = []
               puts "  ------------  "
               disability = disabilities.select{|x| x.id == evaluation.disability_id}.first
-              # csv file name format: public/certified - disablity - id
-              filename = "#{type}||#{disability.name}||#{evaluation.id}.csv"
+              # csv file name format: public/certified - disablity - user id
+              filename = "#{type}||#{disability.name}||#{evaluation.user_id}.csv"
               puts "  - filename = #{filename}"
+
+              # record that user evaluated this place
+              user_evaluations[evaluation.user_id.to_s] << place.id
 
               # start file with place and eval info
               content << ["Place ID:", place.id]
@@ -123,6 +173,12 @@ module ResultsToCsv
 
     # reset locale
     I18n.locale = original_locale
+
+    puts "=================================="
+    puts "here are the users and the places they evaluated:"
+    puts  user_evaluations.inspect
+    puts "=================================="
+
 
     puts "=================================="
     puts "Took #{Time.now-start} seconds to generate #{file_count} csv files"
