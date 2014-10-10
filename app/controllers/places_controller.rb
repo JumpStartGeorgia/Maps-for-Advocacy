@@ -144,10 +144,14 @@ class PlacesController < ApplicationController
 
     @venue_categories = VenueCategory.with_venues
     @show_map = true
-
     gon.show_place_form = true
+    gon.edit_place_form = true
     gon.address_search_path = address_search_places_path
     gon.near_venue_id = @place.venue_id
+    if @place.lat.present? && @place.lon.present?
+      gon.lat = @place.lat
+      gon.lon = @place.lon
+    end
 
   end
 

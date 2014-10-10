@@ -68,7 +68,10 @@ $(document).ready(function(){
 
     // if the user is using a browser that supports geolocation
     // use the current users coordinates
-    if (navigator.geolocation){
+    if (gon.edit_place_form){
+      load_place_form_map([gon.lat, gon.lon]);
+      create_map_marker(gon.lat, gon.lon, null, true);
+    }else if (navigator.geolocation){
       console.log('user can use geolocation');
       // not catching any errors for if there are some, the var coords will not change and that is ok
       navigator.geolocation.getCurrentPosition(get_user_coordinates, get_geolocation_error, {timeout:3000});
