@@ -26,7 +26,7 @@
         </p>
       </div>
       <div class="span3">
-        <% if @place.id.present? && current_user.role?(User::ROLES[:site_admin]) %>
+        <% if @place.id.present? && user_signed_in? && current_user.role?(User::ROLES[:site_admin]) %>
           <%= link_to t('app.common.edit_place'), edit_place_path(@place), 
             :class => 'edit_place', :title => t('app.common.edit_place_title', :place => @place[:name]) %>
         <% end %>
