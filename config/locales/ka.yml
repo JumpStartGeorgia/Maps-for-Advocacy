@@ -53,17 +53,17 @@ ka:
         evidence: მტკიცებულება
       place:
         district_id: უბანი
-        venue_id: Category
+        venue_id: კატეგორია
         lat: განედი
         lon: გრძედი
         url: Website
       place_translation:
-        name: ადგილის სახელი
+        name: სახელი
         address: მისამართი
       disability:
         code: ერთ-ასოიანი კოდი
         active_public: აქტიურია საზოგადოებრივი შეფასებისთვის
-        active_certified: Active for Expert Evaluations
+        active_certified: აქტიურია ექსპერტის შეფასებებისთვის
         sort_order: დახარისხების ბრძანება
       disability_translation:
         name: შეზღუდული შესაძლებლობები
@@ -151,14 +151,10 @@ ka:
         no_answer: არ არის პასუხი
         'yes': 'დიახ'
         'no': 'არა'
-      yes_vote: "Accessible Vote"
-      no_vote: "Not Accessible Vote"
-      yes_votes: "%{votes} Accessible Votes"
-      no_votes: "%{votes} Not Accessible Votes"
-      # yes_vote: "დადებითი ხმა"
-      # no_vote: "უარყოფითი ხმა"
-      # yes_votes: "%{votes} დადებითი ხმა"
-      # no_votes: "%{votes} უარყოფითი ხმა"
+      yes_vote: "'ხელმისაწვდომი' შეფახება"
+      no_vote: "'არ არის ხელმისაწვდომი' შეფასება"
+      yes_votes: "%{votes} 'ხელმისაწვდომი' შეფახება"
+      no_votes: "%{votes} 'არ არის ხელმისაწვდომი' შეფასება"
       eval_question_image:
         button: ფოტოს ატვირთვა
         button_uploaded_1: ატვირთულია ერთი ფოტო
@@ -176,12 +172,15 @@ ka:
       add_evaluation: შეფასების დამატება
       add_evaluation_title: "'%{place}'-ის შეფასების დამატება"
       add_evaluation_title2: "დაამატეთ '%{place}'-ის %{disability} შეფასება"
+      edit_place: Edit Place
+      edit_place_title: "Edit the information about '%{place}'"
       view_place: ვრცლად
       view_place_title: "'%{place}'-ის დეტალების ნახვა"
-      certified: Expert
+      certified: ექსპერტი
+      certified_explanation: 'ექსპერტის შეფასებას ავსებს ადამიანი, რომელიც დატრენინგებულია შეზღუდული შესაძლებლობის პირთა უფლებების მონიტორინგში.'
       public: საზოგადოებრივი
-      certified_overall: '%{num} Overall Expert Evaluation Result(s)'
-#      certified_overall: '%{num} სერტიფიცირებული შეფასება'
+      public_explanation: საზოგადოებრივი შეფასება ასახავს ადგილის შეფასებას არა პროფესიონალთა მიერ. მისი შევსება შეუძლია ნებისმიერ ადამიანს.
+      certified_overall: '%{num} ექსპერტის შეფასება'
       public_overall: '%{num} საზოგადოებრივი შეფასება'
       num_places_overall: '%{num} შეფასებული ადგილი'
     msgs:
@@ -217,7 +216,7 @@ ka:
       georgian_legislation: საქართველოს კანონმდებლობა
       partners: პროექტის პარტნიორები
       what_is_accessibility: რა არის ხელმისაწვდომობა?
-      print: Print Expert Evaluation
+      print: ექსპერტის შეფასების ამობეჭდვა
       manage_users: ორგანიზაციის წევრთა ანგარიშების მართვა
       sign_out: გასვლა
       js_link_title: ჯამპსტარტ ჯორჯიას - ჩვენ გაწვდით ინფორმაციას უკეთ!
@@ -329,7 +328,7 @@ ka:
       placeholder_place_search: ყველა მდებარეობა
       header_filter_address_search: მისამართი
       placeholder_address_search: ყველა მისამართი
-      header_filter_venue: Category
+      header_filter_venue: კატეგორია
       placeholder_venue: All Categories
       header_filter_district: რაიონი
       placeholder_district: ყველა რაიონი
@@ -353,7 +352,7 @@ ka:
     show:
       district_link_title: "'%{name}'-ის ყველა ადგილის ნახვა"
       venue_link_title: "'%{name}'-ის ყველა ადგილის ნახვა"
-      tab_certified: "Expert Evaluations (%{count})"
+      tab_certified: "ექსპერტის შეფასება (%{count})"
       tab_public: "საჯარო შეფასება (%{count})"
       skip_map: გამოტოვეთ რუკა და გადადით ფოტო სლაიდშოუზე (გადასვლა)
       header_images: მტკიცებულების სახით მოწოდებული ფოტო
@@ -364,15 +363,14 @@ ka:
       uploaded_at: "ატვირთულია:"
       uploaded_by: "ატვირთა:"
       evaluation: "შეფასება:"
-      evaluation_certified: "Expert Evaluation"
+      evaluation_certified: "ექსპერტის შეფასება"
       evaluation_public: "საზოგადოებრივი შეფასება"
       disability: "ტიპი:"
       question: "კითხვები:"
       answer: "პასუხები:"
       website_button: Go to Website
     show_type_results:
-      certified_explanation: Expert Evaluations are completed by people that are trained in how to evaluate a place for accessibility. Only the latest evaluation from each evaluation type is used to compute the overall accessibility score.
-#      certified_explanation: სერტიფიცირებული შეფასების შვსება შეუძლიათ არასამთავრობო ორგანიზაციების წარმომადგენლებს, რომლებიც დატრენინგებულები არიან ხელმისაწვდომობის შეფასებაში.
+      certified_explanation: ექსპერტის შეფასება ავსებს ადამიანი, რომელიც დატრენინგებულია ადგილის ხელმისაწვდომობის შეფასებაში. თითოეული ტიპის შეფასებიდან მხოლოდ უკანასკნელი შეფასება გამოიყენება საერთო ხელმისაწვდომობის გამოსათვლელად.
       public_explanation: საზოგადოებრივი შეფასების შევსება შეუძლიან ნებისმიერ მსურველს.
       header_summary: საერთო შეჯამება
       no_evaluations: "ამ დრომდე '%{name}'-ის შეფასებები არ არის წარმოდგენილი"
@@ -394,6 +392,8 @@ ka:
       address_search_success: მისამართის ძიებამ იპოვა შემდეგი წყვილები. გთხოვთ დაადასტუროთ, რომ შედეგები სწორია.
       address_search_multiple_success: მისამართის ძიებამ იპოვა შემდეგი წყვილები. გთხოვთ შეარჩიოთ სწორი შედეგი.
       address_search_fail: არ მოიძებნა. კიდევ სცადეთ.
+      header_address_edit: Address that will be saved
+      address_edit_explanation: Below are the addresses that will be saved in the database.
       submit: ადგილის შენახვა
       building_number: შენობის ნომერი (თუ ზემოთ არ არის მითითებული)
       header_address_search: ძიება მისამართით
@@ -411,8 +411,7 @@ ka:
       question_instructions: თუ არ გაქვთ პასუხი, დატოვეთ ცარიელი. 
       skip_to_next_quest_cat: შემდეგ კატეგორიაზე ან კითხვაზე გადასვლა (გადახტომა)
       skip_to_previous_quest_cat: წინა კატეგორიაზე ან კითხვაზე გადასვლა (გადახტომა
-      skip_to_certification: Skip to the expert or public evaluation selection (jump)
-#      skip_to_certification: საზოგადოებრივ ან სერტიფიცირებულ შეფასებაზე გადასვლა (გადახტომა)
+      skip_to_certification: საზოგადოებრივ ან ექსპერტის შეფასებაზე გადასვლა (გადახტომა)
       skip_to_eval_type: შეფასების ტიპის არჩევაზე გადასვლა (გადახტომა)
       skip_to_submit_button: შეჯამების ღილაკზე გადასვლა (გადახტომა)
     certified_eval_form_questions:
@@ -431,10 +430,8 @@ ka:
       header_certification: რომელი შეფასების შევსება გსურთ?
       header_evaluation_types: როგორი ტიპის შეფახება გსურთ (მონიშნეთ ყველა)? 
       header_form: შეფასების ფორმა
-      certification_yes_link_text: "Expert Evaluation"
-      certification_yes_link_title: "Fill out a Expert Evaluation"
-#      certification_yes_link_text: "სერტიფიცირებული შეფასება"
-#      certification_yes_link_title: "სერტიფიცირებული შეფასების შევსება"
+      certification_yes_link_text: "ექსპერტის შეფასება"
+      certification_yes_link_title: "ექსპერტის შეფასების შევსება"
       certification_no_link_text: "საზოგადოებრივი შეფასება"
       certification_no_link_title: "საზოგადოებრივი შეფასების შვსება"
       submit: შეფასების შევსება
@@ -468,20 +465,18 @@ ka:
     index:
       title: მეთოდოლოგია
       questions: კითხვები
-      venues: Categories
+      venues: კატეგორიები
       calculations: გამოთვლები
     questions:
       title: მეთოდოლოგიური - კითხვები
       no_questions: სამწუხაროდ ამ დროისთვის  ფაილში არ არსებობს შეფასების კითხვები.
-      explanation1: The evaluation questions are split into two areas. The first area are questions that are common to all categories.  The second area is for special questions that are needed for specific categories.
-#      explanation1: შეფასების კითხვები იყოფა ორ ნაწილად. პირველ ნაწილში წარმოდგენილია კითხვები, რომლებიც საერთოა ყველა ადგილმდებარეობისთვის. მეორე ნაწილში კი წარმოდგენილია სპეციფიური კითხვები, რომლებიც საჭიროა კონკრეტული ობიექტებისთვის.
+      explanation1: შეფასების კითხვები იყოფა ორ ნაწილად. პირველ ნაწილში წარმოდგენილია კითხვები, რომლებიც საერთოა ყველა კატეგორიისთვის. მეორე ნაწილში კი წარმოდგენილია სპეციფიკური კითხვები, რომლებიც საჭიროა კონკრეტული კატეგორიებისთვის.
       explanation2: "თითოეულ შეფასების კითხვას შესაძლებელია მიესადაგოს შემდეგი შეფასების ტიპი:"
       header_public: საზოგადოებრივი შეფასების კითხვები
-      header_certified: Expert Evaluation Questions
-#      header_certified: სერტიფიცირებული შეფასების კითხვები
+      header_certified: ექსპერტის შეფასების კითხვები
     question_type:
-      header_common: Questions Common to All Categories
-      header_venues: Questions Specific to a Category
+      header_common: ყველა კატეგორიისთვის საერთო კითხვები
+      header_venues: სპეციფიკური კითხვები კატეგორიების მიხედვით
     show_questions:
       assigned_to: "მისადაგებული შემდები ტიპისთვის:"      
       required_for_accessiblity: "იმ შემთხვევაში, თუ პასუხია 'არ აქვს და ესაჭიროება' მაშინ ადგილი არ არის ხელმისაწვდომი"
@@ -490,16 +485,15 @@ ka:
       no_venues: სამწუხაროდ, ფაილზე არ მოიძებნა ადგილმდებარეობები.
       explanation1: ადგილმდებარეობები გულისხმობს ადგილებს, გზებს და ობიექტებს, რომლებსაც გააჩნიათ გეოგრაფიული მდებარეობა და შესაძლებელია მათი ხელმისაწვდომობის შეფასება.
     categories:
-      title: Methodology - Categories
-      no_venues: Sorry, but at this time there are no categories on file.
-      explanation1: Categories are places, pathways or objects that have a geographic location and can be evalated on their accessibility.
+      title: მეთოდოლოგია - კატეგორიები
+      no_venues: სამწუხაროდ, ამ დროისთვის ფაილში არ არის წარმოდგენილი კატეგორიები.
+      explanation1: კატეგორიები გულისხმობს ადგილებს, გზებს და ობიექტებს, რომლებსაც გააჩნიათ გეოგრაფიული მდებარეობა და შესაძლებელია მათი ხელმისაწვდომობის შეფასება.
     calculations:
       title: მეთოდოლოგიური - გამოთვლები    
   print:
     index:
-      title: Print Out Expert Evaluation      
-#      title: სერტიფიცირებული შეფასების ამობეჭდვა
-      header_venue: Category
+      title: ექსპერტის შეფასების ამობეჭდვა      
+      header_venue: კატეგორია
       header_evaluation_type: შეფასების ტიპი
       header_layout: ფურცლის  მიმართულება
       header_help: შევიყვანოთ დამხმარე ინფორმაცია
@@ -507,7 +501,7 @@ ka:
       landscape: ჰორიზონტალური
       print: შეფასების ამობეჭდვა
       print_instructions: ხაზის ქვემოთ წარმოდგენილია ის ნაწილი, რომელიც ამოივეჭდება.
-      all_venues: Category
+      all_venues: კატეგორია
       header_place: ადგილის სახელწოდება
       header_address: მისამართი
   manage_users:

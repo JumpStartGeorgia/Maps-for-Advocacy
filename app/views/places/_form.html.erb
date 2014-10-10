@@ -1,13 +1,23 @@
 <%- model_class = Place -%>
 <%- model_class_v = VenueCategory -%>
 <%- model_class_vt = VenueCategoryTranslation -%>
+<%- is_editable = @place.id.present? && current_user.role?(User::ROLES[:site_admin]) -%>
 
 <%= semantic_form_for(@place, :html => { :class => 'form-horizontal' }) do |f| %>
 	<%= f.error_messages %>
 
   <div class="row-fluid">
     <div class="span4">
-  	  <%= f.input :name, :input_html => { :value => @place.place_translations.present? ? @place.place_translations.first.name : nil } %>
+      <% if is_editable %>
+        <% create_sorted_translation_objects(@place.place_translations).each do |trans| %>
+          <%= f.fields_for :place_translations, trans do |translation| %>
+            <% lang = t("app.language.#{trans.locale}") %>
+            <%= translation.input :name, :label => "#{lang} - #{trans.class.human_attribute_name(:name)}" %>
+          <% end %>
+        <% end %>
+      <% else %>
+        <%= f.input :name, :input_html => { :value => @place.name } %>
+      <% end %>
     </div>
     <div class="span4">
       <%
@@ -34,12 +44,14 @@
   <h2><%= t('.header_location') %></h2>
   
   
-  <% create_sorted_translation_objects(@place.place_translations).each do |trans| %>
-	  <%= f.fields_for :place_translations, trans do |translation| %>
-		  <%= translation.hidden_field :name, :class => 'place_form_name_translation' %>
-		  <%= translation.hidden_field :locale %>
-		  <%= translation.hidden_field :address, :class => 'place_address' %>
-	  <% end %>
+  <% if !is_editable %>
+    <% create_sorted_translation_objects(@place.place_translations).each do |trans| %>
+  	  <%= f.fields_for :place_translations, trans do |translation| %>
+  		  <%= translation.hidden_field :name, :class => 'place_form_name_translation' %>
+  		  <%= translation.hidden_field :locale %>
+  		  <%= translation.hidden_field :address, :class => 'place_address' %>
+  	  <% end %>
+    <% end %>
   <% end %>
 
   <%= f.inputs do %>
@@ -59,7 +71,7 @@
       </p>
       
       <p>
-        <%= text_field_tag 'address-search', @place.place_translations.present? ? @place.place_translations.first.address : nil, :class => "span10" %>
+        <%= text_field_tag 'address-search', @place.address, :class => "span10" %>
       </p>
       
       <p>
@@ -100,11 +112,24 @@
           </p>
         </div>
 
+        <% if is_editable %>
+          <div id="address-edit">
+            <h3><%= t('.header_address_edit') %></h3>
+            <p><%= t('.address_edit_explanation') %></p>
+            <% create_sorted_translation_objects(@place.place_translations).each do |trans| %>
+              <%= f.fields_for :place_translations, trans do |translation| %>
+                <% lang = t("app.language.#{trans.locale}") %>
+                <%= translation.input :address, :label => "#{lang} - #{trans.class.human_attribute_name(:address)}", :input_html => {:class => 'place_address'} %>
+              <% end %>
+            <% end %>
+          </div>
+        <% end %>        
+
         <a href="#places_nearby_container" class="accessibly-hidden"><%= t('.skip_to_places_nearby') %></a>
         <a href="#map_container" class="accessibly-hidden"><%= t('.skip_to_map') %></a>
         <a href="#submit-button" class="accessibly-hidden"><%= t('.skip_to_submit') %></a>
 
-        <div id="submit-button" aria-hidden="true">
+        <div id="submit-button" aria-hidden="<%= !is_editable %>">
           <%= f.submit t('.submit') %>
         </div>
 

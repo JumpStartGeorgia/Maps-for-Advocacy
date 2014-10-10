@@ -43,7 +43,7 @@ BootstrapStarter::Application.routes.draw do
 		end
 
     # add/view places
-    resources :places, :only => [:show, :new, :create] do
+    resources :places, :only => [:show, :new, :create, :edit, :update] do
       member do 
         get 'evaluation'
         put 'evaluation'

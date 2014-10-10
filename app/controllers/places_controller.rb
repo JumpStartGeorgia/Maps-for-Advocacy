@@ -1,5 +1,8 @@
 class PlacesController < ApplicationController
   before_filter :authenticate_user!, :except => :show
+  before_filter :only => [:edit, :update] do |controller_instance|
+    controller_instance.send(:valid_role?, User::ROLES[:site_admin])
+  end
 
   # GET /places/1
   # GET /places/1.json
@@ -129,62 +132,24 @@ class PlacesController < ApplicationController
     gon.address_search_path = address_search_places_path
     gon.near_venue_id = 0
 
-
-=begin
-    params[:stage] = '1' if params[:stage].blank?
-
-	  # get venue
-	  @venue = Venue.with_translations(I18n.locale).find_by_id(params[:venue_id]) if params[:venue_id].present?
-
-    if params[:stage] == '1' # venues
-      gon.place_form_venue_filter = true
-      gon.place_form_venue_num_match = t('places.form.venue_filter_num_match')
-      @venue_categories = VenueCategory.with_venues
-    elsif params[:stage] == '2' # name
-      gon.show_place_name_form = true
-    elsif params[:stage] == '3' # map
-      @show_map = true
-      gon.show_place_form_map = true
-      gon.address_search_path = address_search_places_path
-      gon.near_venue_id = @venue.id
-
-      @place.venue_id = params[:venue_id]
-      @place.url = params[:url]
-      # create the translation object for however many locales there are
-      # so the form will properly create all of the nested form fields
-      I18n.available_locales.each do |locale|
-			  @place.place_translations.build(:locale => locale.to_s, :name => params[:name])
-		  end
-    end
-=end
     respond_to do |format|
       format.html # new.html.erb
       format.json { render json: @place }
     end
   end
   
-=begin
   # GET /places/1/edit
   def edit
     @place = Place.find(params[:id])
-    params[:stage] = '5' if params[:stage].blank?
-    gon.show_evaluation_form = true
+
+    @venue_categories = VenueCategory.with_venues
+    @show_map = true
+
+    gon.show_place_form = true
     gon.address_search_path = address_search_places_path
+    gon.near_venue_id = @place.venue_id
 
-	  # get venue
-	  @venue = Venue.with_translations(I18n.locale).find_by_id(@place.venue_id)
-
-	  # get list of questions
-	  @question_categories = QuestionCategory.questions_for_venue(@venue.question_category_id)
-
-	  # create the evaluation object for however many questions there are
-	  if @question_categories.present?
-      (0..@question_categories.length-1).each do |index|
-		    @place.place_evaluations.build(:user_id => current_user.id, :answer => 0)
-	    end
-	  end
   end
-=end
 
   # POST /places
   # POST /places.json
@@ -207,19 +172,13 @@ class PlacesController < ApplicationController
           gon.lat = @place.lat
           gon.lon = @place.lon
         end
-=begin
-		    # get list of questions
-  		  @question_categories = QuestionCategory.questions_for_venue(question_category_id: @venue.question_category_id, disability_id: params[:eval_type_id])
-        # get disability
-        @disability = Disability.with_name(params[:eval_type_id])
-        @place_evaluation = @place.place_evaluations.first
-=end                
+
         format.html { render action: "new" }
         format.json { render json: @place.errors, status: :unprocessable_entity }
       end
     end
   end
-=begin
+
   # PUT /places/1
   # PUT /places/1.json
   def update
@@ -234,19 +193,23 @@ class PlacesController < ApplicationController
         format.html { redirect_to place_path(@place), notice: t('app.msgs.success_updated', :obj => t('activerecord.models.place')) }
         format.json { head :ok }
       else
-        gon.show_evaluation_form = true
+        @venue_categories = VenueCategory.with_venues
+        @show_map = true
+        gon.show_place_form = true
         gon.address_search_path = address_search_places_path
-        params[:stage] = '5'
-	      # get venue
-	      @venue = Venue.with_translations(I18n.locale).find_by_id(@place.venue_id)
-		    # get list of questions
-		    @question_categories = QuestionCategory.questions_for_venue(@venue.question_category_id)
+        gon.near_venue_id = @place.venue_id
+        if @place.lat.present? && @place.lon.present?
+          gon.lat = @place.lat
+          gon.lon = @place.lon
+        end
+
         format.html { render action: "edit" }
         format.json { render json: @place.errors, status: :unprocessable_entity }
       end
     end
   end
 
+=begin
   # DELETE /places/1
   # DELETE /places/1.json
   def destroy

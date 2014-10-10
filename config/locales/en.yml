@@ -58,7 +58,7 @@ en:
         lon: Longitude
         url: Website
       place_translation:
-        name: Name of Place
+        name: Name
         address: Address
       disability:
         code: One-letter Code
@@ -176,6 +176,8 @@ en:
       add_evaluation: Add an Evaluation
       add_evaluation_title: "Add an Evaluation for '%{place}'"
       add_evaluation_title2: "Add a %{disability} Evaluation for '%{place}'"
+      edit_place: Edit Place
+      edit_place_title: "Edit the information about '%{place}'"
       view_place: View Details
       view_place_title: "View the details of '%{place}'"
       certified: Expert
@@ -394,6 +396,8 @@ en:
       address_search_success: The address search found the following match.  Please confirm that it is correct.
       address_search_multiple_success: The address search found the following matches.  Please select the correct one.
       address_search_fail: Sorry, but your search did not return any results.  Please try again.
+      header_address_edit: Address that will be saved
+      address_edit_explanation: Below are the addresses that will be saved in the database.
       submit: Save the Place
       building_number: Building Number (if not provided above)
       header_address_search: Search By Address

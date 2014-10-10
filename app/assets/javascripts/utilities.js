@@ -44,7 +44,9 @@ var map, marker, map_type, near_markers;
     }
     
     // hide previous messages
+    // but keep showing edit address if exists
     $('#address-search-results > div').attr('aria-hidden', 'true');
+    $('#address-search-results > div#address-edit').attr('aria-hidden', 'false');
     
         
   }
