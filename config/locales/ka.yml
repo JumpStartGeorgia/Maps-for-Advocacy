@@ -172,8 +172,8 @@ ka:
       add_evaluation: შეფასების დამატება
       add_evaluation_title: "'%{place}'-ის შეფასების დამატება"
       add_evaluation_title2: "დაამატეთ '%{place}'-ის %{disability} შეფასება"
-      edit_place: Edit Place
-      edit_place_title: "Edit the information about '%{place}'"
+      edit_place: ადგილის შესახებ ინფორმაციის ჩასწორება
+      edit_place_title: "'%{place}'-ის შესახებ ინფორმაციის შესწორება"
       view_place: ვრცლად
       view_place_title: "'%{place}'-ის დეტალების ნახვა"
       certified: ექსპერტი
@@ -329,7 +329,7 @@ ka:
       header_filter_address_search: მისამართი
       placeholder_address_search: ყველა მისამართი
       header_filter_venue: კატეგორია
-      placeholder_venue: All Categories
+      placeholder_venue: ყველა კატეგორია
       header_filter_district: რაიონი
       placeholder_district: ყველა რაიონი
       header_filter_evaluations: შეფასებით
@@ -358,7 +358,7 @@ ka:
       header_images: მტკიცებულების სახით მოწოდებული ფოტო
       no_images: ფოტო ჯერ არ  არის მოწოდებული.
       no_filter_images: თქვენს არჩევას არ შეესაბამება სურათი.
-      filter_all: All
+      filter_all: ყველა
       taken_at: "გადახებულია:"
       uploaded_at: "ატვირთულია:"
       uploaded_by: "ატვირთა:"
@@ -368,7 +368,7 @@ ka:
       disability: "ტიპი:"
       question: "კითხვები:"
       answer: "პასუხები:"
-      website_button: Go to Website
+      website_button: ვებგვერდზე გადასვლა
     show_type_results:
       certified_explanation: ექსპერტის შეფასება ავსებს ადამიანი, რომელიც დატრენინგებულია ადგილის ხელმისაწვდომობის შეფასებაში. თითოეული ტიპის შეფასებიდან მხოლოდ უკანასკნელი შეფასება გამოიყენება საერთო ხელმისაწვდომობის გამოსათვლელად.
       public_explanation: საზოგადოებრივი შეფასების შევსება შეუძლიან ნებისმიერ მსურველს.
@@ -392,8 +392,8 @@ ka:
       address_search_success: მისამართის ძიებამ იპოვა შემდეგი წყვილები. გთხოვთ დაადასტუროთ, რომ შედეგები სწორია.
       address_search_multiple_success: მისამართის ძიებამ იპოვა შემდეგი წყვილები. გთხოვთ შეარჩიოთ სწორი შედეგი.
       address_search_fail: არ მოიძებნა. კიდევ სცადეთ.
-      header_address_edit: Address that will be saved
-      address_edit_explanation: Below shows how the addresses will be saved in the database.
+      header_address_edit: მისამართი, რომელიც იქნება შენახული
+      address_edit_explanation: ქვემოთ წარმოდგენილია მისამართები, რომლებიც შეინახება მონაცემთა ბაზაში.
       submit: ადგილის შენახვა
       building_number: შენობის ნომერი (თუ ზემოთ არ არის მითითებული)
       header_address_search: ძიება მისამართით
