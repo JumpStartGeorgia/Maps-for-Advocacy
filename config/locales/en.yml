@@ -53,7 +53,7 @@ en:
         evidence: Evidence  
       place:
         district_id: District
-        venue_id: Venue
+        venue_id: Category
         lat: Latitude
         lon: Longitude
         url: Website
@@ -63,7 +63,7 @@ en:
       disability:
         code: One-letter Code
         active_public: Active for Public Evaluations
-        active_certified: Active for Certified Evaluations
+        active_certified: Active for Expert Evaluations
         sort_order: Sort Order
       disability_translation:
         name: Disability
@@ -151,10 +151,14 @@ en:
         no_answer: No answer
         'yes': 'Yes'
         'no': 'No'
-      yes_vote: "Yes Vote"
-      no_vote: "No Vote"
-      yes_votes: "%{votes} Yes Votes"
-      no_votes: "%{votes} No Votes"
+      yes_vote: "Accessible Vote"
+      no_vote: "Not Accessible Vote"
+      yes_votes: "%{votes} Accessible Votes"
+      no_votes: "%{votes} Not Accessible Votes"
+#      yes_vote: "Yes Vote"
+#      no_vote: "No Vote"
+#      yes_votes: "%{votes} Yes Votes"
+#      no_votes: "%{votes} No Votes"
       eval_question_image:
         button: Upload Images
         button_uploaded_1: Uploaded 1 Image
@@ -174,9 +178,11 @@ en:
       add_evaluation_title2: "Add a %{disability} Evaluation for '%{place}'"
       view_place: View Details
       view_place_title: "View the details of '%{place}'"
-      certified: Certified
+      certified: Expert
+      certified_explanation: Expert evaluations are submitted by people who have been trained in disability rights monitoring.
       public: Public
-      certified_overall: '%{num} Overall Certified Evaluation Result(s)'
+      public_explanation: A public evaluation shows non-professionals’ assessment of the place. This applies to most people.
+      certified_overall: '%{num} Overall Expert Evaluation Result(s)'
       public_overall: '%{num} Overall Public Evaluation Result(s)'
       num_places_overall: '%{num} Place(s) with Evaluations'
     msgs:
@@ -212,7 +218,7 @@ en:
       georgian_legislation: Georgian Legislation
       partners: Project Partners
       what_is_accessibility: What is Accessibility?
-      print: Print Certified Evaluation
+      print: Print Expert Evaluation
       manage_users: Manage Organization Users
       sign_out: Sign Out
       js_link_title: JumpStart Georgia - We communicate data better!
@@ -324,8 +330,8 @@ en:
       placeholder_place_search: All Places
       header_filter_address_search: Address
       placeholder_address_search: All Addresses
-      header_filter_venue: Venue
-      placeholder_venue: All Venues
+      header_filter_venue: Category
+      placeholder_venue: All Categories
       header_filter_district: District
       placeholder_district: All Districts
       header_filter_evaluations: With Evaluations
@@ -348,7 +354,7 @@ en:
     show:
       district_link_title: "View all places that are in '%{name}'"
       venue_link_title: "View all places that are '%{name}'"
-      tab_certified: "Certified Evaluations (%{count})"
+      tab_certified: "Expert Evaluations (%{count})"
       tab_public: "Public Evaluations (%{count})"
       skip_map: Skip the map and go to the photo slideshow (jump)
       header_images: Images Submitted as Evidence
@@ -359,14 +365,14 @@ en:
       uploaded_at: "Uploaded on:"
       uploaded_by: "Uploaded by:"
       evaluation: "Evaluation:"
-      evaluation_certified: "Certified Evaluation"
+      evaluation_certified: "Expert Evaluation"
       evaluation_public: "Public Evaluation"
       disability: "Type:"
       question: "Question:"
       answer: "Answer:"
       website_button: Go to Website
     show_type_results:
-      certified_explanation: Certified Evaluations are completed by people that are trained in how to evaluate a place for accessibility. Only the latest evaluation from each evaluation type is used to compute the overall accessibility score.
+      certified_explanation: Expert Evaluations are completed by people that are trained in how to evaluate a place for accessibility. Only the latest evaluation from each evaluation type is used to compute the overall accessibility score.
       public_explanation: Public Evaluations can be completed by anyone that wishes to submit an evaluation.  Every evaluation is used to compute the overall accessibility score.
       header_summary: Overall Summary
       no_evaluations: "At this time no '%{name}' evaluations have been submitted."
@@ -405,7 +411,7 @@ en:
       question_instructions: If you do not know the answer, please leave it blank.
       skip_to_next_quest_cat: Skip to the next category of questions (jump)
       skip_to_previous_quest_cat: Skip to the previous category of questions (jump)
-      skip_to_certification: Skip to the certified or public evaluation selection (jump)
+      skip_to_certification: Skip to the expert or public evaluation selection (jump)
       skip_to_eval_type: Skip to the type of evaluation selection (jump)
       skip_to_submit_button: Skip to the submit button (jump)
     certified_eval_form_questions:
@@ -424,8 +430,8 @@ en:
       header_certification: Which evaluation do you want to fill out?
       header_evaluation_types: Which types do you want to evaluate (select all that apply)?
       header_form: Evaluation Form
-      certification_yes_link_text: "Certified Evaluation"
-      certification_yes_link_title: "Fill out a Certified Evaluation"
+      certification_yes_link_text: "Expert Evaluation"
+      certification_yes_link_title: "Fill out a Expert Evaluation"
       certification_no_link_text: "Public Evaluation"
       certification_no_link_title: "Fill out a Public Evaluation"
       submit: Submit the Evaluation
@@ -459,18 +465,18 @@ en:
     index:
       title: Methodology
       questions: Questions
-      venues: Venues
+      venues: Categories
       calculations: Calculations
     questions:
       title: Methodology - Questions
       no_questions: Sorry, but at this time there are no evaluation questions on file.
-      explanation1: The evaluation questions are split into two areas. The first area are questions that are common to all venues.  The second area is for special questions that are needed for specific venues.
+      explanation1: The evaluation questions are split into two areas. The first area are questions that are common to all categories.  The second area is for special questions that are needed for specific categories.
       explanation2: "Each evaluation question can then be assigned to the following evaluation types:"
       header_public: Public Evaluation Questions
-      header_certified: Certified Evaluation Questions
+      header_certified: Expert Evaluation Questions
     question_type:
-      header_common: Questions Common to All Venues
-      header_venues: Questions Specific to a Venue
+      header_common: Questions Common to All Categories
+      header_venues: Questions Specific to a Category
     show_questions:
       assigned_to: "Assigned to the following types: "      
       required_for_accessiblity: "If answer is 'does not have and needs' then place is not accessible"
@@ -478,12 +484,16 @@ en:
       title: Methodology - Venues
       no_venues: Sorry, but at this time there are no venues on file.
       explanation1: Venues are places, pathways or objects that have a geographic location and can be evalated on their accessibility.
+    categories:
+      title: Methodology - Categories
+      no_venues: Sorry, but at this time there are no categories on file.
+      explanation1: Categories are places, pathways or objects that have a geographic location and can be evalated on their accessibility.
     calculations:
       title: Methodology - Calculations
   print:
     index:
-      title: Print Out Certified Evaluation      
-      header_venue: Venue
+      title: Print Out Expert Evaluation      
+      header_venue: Category
       header_evaluation_type: Evaluation Type
       header_layout: Paper Orientation
       header_help: Include Help Information
@@ -491,7 +501,7 @@ en:
       landscape: Landscape
       print: Print the Evaluation
       print_instructions: Everything below the line is what will be printed out.
-      all_venues: Venue
+      all_venues: Category
       header_place: Place Name
       header_address: Address
   manage_users:

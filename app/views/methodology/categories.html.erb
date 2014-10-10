@@ -1,0 +1,51 @@
+<% title t('.title') %>
+
+<div id="methodology">
+  <% if @venues.blank? %>
+    <p>
+      <%= t('.no_venues') %>
+    </p>
+  <% else %>
+    <p>
+      <%= t('.explanation1') %>
+    </p>
+    
+    <% 
+      current_venue_category = '' 
+      skip_venue_cat = false
+      vidx = 0
+    %>
+    <% while vidx <= @venues.length-1 %>
+      <% 
+        idx_increment = 0
+
+        # check if venue category has at least one venue
+        x = @venues.select{|x| x[:venue_category] == @venues[vidx][:venue_category]}
+        x = x.map{|x| x[:venue_id]} if x.present?
+        skip_venue_cat = x.length == 0
+
+        idx_increment += 1 if skip_venue_cat
+      %>
+      <% if !skip_venue_cat %>
+        <h3><%= @venues[vidx][:venue_category] %></h3>
+        <ul class="standard">
+          <% (vidx..@venues.length-1).each do |tidx| %>
+            <% if @venues[vidx][:venue_category] == @venues[tidx][:venue_category] %>
+              <li>
+                <%= @venues[tidx][:venue] %>
+                <% idx_increment += 1 %>
+              </li>            
+            <% else %>
+              <% break %>            
+            <% end %>
+          <% end %>
+        </ul>
+
+      <% end %>
+
+      <% vidx += idx_increment %>
+    <% end %>
+  <% end %>
+
+  
+</div>

@@ -15,12 +15,12 @@
           <%= link_to t('.website_button'), @place[:url], :target => '_blank', :class => 'btn_website' if @place[:url].present? %>
         </p>
         <p>
-          <strong><%= model_class_trans.human_attribute_name(:district_id) %>:</strong>
+          <strong><%= model_class.human_attribute_name(:district_id) %>:</strong>
           <%= link_to @place[:district], root_path(:district_id => @place[:district_id]),
             :title => t('.district_link_title', :name => @place[:district]) %>
         </p>
         <p>
-          <strong><%= model_class_trans.human_attribute_name(:venue_id) %>:</strong>
+          <strong><%= model_class.human_attribute_name(:venue_id) %>:</strong>
           <%= link_to @place[:venue], root_path(:venue_category_id => @place[:venue_category_id]),
             :title => t('.venue_link_title', :name => @place[:venue]) %>
         </p>
@@ -35,10 +35,10 @@
     
     <ul id="evaluation-certified-tabs" class="nav nav-tabs" data-tabs="evaluation-certified-tabs">
       <li class="active">
-        <a href="<%= "#certified" %>" data-filter="1" data-toggle="tab"><%= t('.tab_certified', :count => @data[:certified][:disability_evaluations].map{|x| x[:evaluation_count]}.sum) %></a>
+        <a href="<%= "#certified" %>" data-filter="1" data-toggle="tab" title="<%= t('app.common.certified_explanation') %>"><%= t('.tab_certified', :count => @data[:certified][:disability_evaluations].map{|x| x[:evaluation_count]}.sum) %></a>
       </li>
       <li>
-        <a href="<%= "#public" %>" data-filter="0" data-toggle="tab"><%= t('.tab_public', :count => @data[:public][:disability_evaluations].map{|x| x[:evaluation_count]}.sum) %></a>
+        <a href="<%= "#public" %>" data-filter="0" data-toggle="tab" title="<%= t('app.common.public_explanation') %>"><%= t('.tab_public', :count => @data[:public][:disability_evaluations].map{|x| x[:evaluation_count]}.sum) %></a>
       </li>
     </ul>
     <div id="certified-content" class="tab-content">

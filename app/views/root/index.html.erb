@@ -30,11 +30,11 @@
               <%= t('app.common.num_places_overall', :num => @stats[:places_with_evals]) %>
             <li>
             <li>
-              <%= "#{t('app.common.certified_overall', :num => @stats[:certified_results]['count'])}:" %>
+              <span title="<%= t('app.common.certified_explanation') %>"><%= "#{t('app.common.certified_overall', :num => @stats[:certified_results]['count'])}:" %></span>
               <%= format_summary_result(@stats[:certified_results], is_summary: true, is_certified: true) %>
             <li>
             <li>
-              <%= "#{t('app.common.public_overall', :num => @stats[:public_results]['count'])}:" %>
+              <span title="<%= t('app.common.public_explanation') %>"><%= "#{t('app.common.public_overall', :num => @stats[:public_results]['count'])}:" %></span>
               <%= format_summary_result(@stats[:public_results], is_summary: true, is_certified: false) %>
             <li>
           </ul>
@@ -148,14 +148,14 @@
                     summary_index = @place_summaries.index{|x| x.place_id == place.id && x.is_certified == true}
                     if summary_index.present? %>
                       <div>
-                        <%= "#{t('app.common.certified')}:" %>
+                        <span title="<%= t('app.common.certified_explanation') %>"><%= "#{t('app.common.certified')}:" %></span>
                         <%= format_summary_result(@place_summaries[summary_index].to_summary_hash, is_summary: true, is_certified: true) %>
                       </div>
                  <% end 
                     summary_index = @place_summaries.index{|x| x.place_id == place.id && x.is_certified == false}
                     if summary_index.present? %>
                       <div>
-                        <%= "#{t('app.common.public')}:" %>
+                        <span title="<%= t('app.common.public_explanation') %>"><%= "#{t('app.common.public')}:" %></span>
                         <%= format_summary_result(@place_summaries[summary_index].to_summary_hash, is_summary: true, is_certified: false) %>
                       </div>
                     <% end %>
