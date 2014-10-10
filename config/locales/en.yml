@@ -155,10 +155,6 @@ en:
       no_vote: "Not Accessible Vote"
       yes_votes: "%{votes} Accessible Votes"
       no_votes: "%{votes} Not Accessible Votes"
-#      yes_vote: "Yes Vote"
-#      no_vote: "No Vote"
-#      yes_votes: "%{votes} Yes Votes"
-#      no_votes: "%{votes} No Votes"
       eval_question_image:
         button: Upload Images
         button_uploaded_1: Uploaded 1 Image
@@ -397,7 +393,7 @@ en:
       address_search_multiple_success: The address search found the following matches.  Please select the correct one.
       address_search_fail: Sorry, but your search did not return any results.  Please try again.
       header_address_edit: Address that will be saved
-      address_edit_explanation: Below are the addresses that will be saved in the database.
+      address_edit_explanation: Below shows how the addresses will be saved in the database.
       submit: Save the Place
       building_number: Building Number (if not provided above)
       header_address_search: Search By Address

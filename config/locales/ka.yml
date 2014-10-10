@@ -393,7 +393,7 @@ ka:
       address_search_multiple_success: მისამართის ძიებამ იპოვა შემდეგი წყვილები. გთხოვთ შეარჩიოთ სწორი შედეგი.
       address_search_fail: არ მოიძებნა. კიდევ სცადეთ.
       header_address_edit: Address that will be saved
-      address_edit_explanation: Below are the addresses that will be saved in the database.
+      address_edit_explanation: Below shows how the addresses will be saved in the database.
       submit: ადგილის შენახვა
       building_number: შენობის ნომერი (თუ ზემოთ არ არის მითითებული)
       header_address_search: ძიება მისამართით
