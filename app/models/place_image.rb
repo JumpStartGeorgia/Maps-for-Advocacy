@@ -4,7 +4,7 @@ class PlaceImage < ActiveRecord::Base
  
   belongs_to :place
   belongs_to :user
-  has_many :place_evaulation_images, :dependent => :destroy
+  has_many :place_evaulation_images#, :dependent => :destroy
   
   attr_accessible :image, :place_id, :user_id, :taken_at
   attr_accessor :nickname, :is_certified, :disability_id, :disability, :question_id, :question, :answer

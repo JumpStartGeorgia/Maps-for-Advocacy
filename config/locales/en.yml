@@ -174,6 +174,10 @@ en:
       add_evaluation_title2: "Add a %{disability} Evaluation for '%{place}'"
       edit_place: Edit Place
       edit_place_title: "Edit the information about '%{place}'"
+      delete_place: Delete Place
+      delete_place_title: "Delete '%{place}' and all of it's evaluations"
+      delete_evaluation: Delete Evaluation
+      delete_evaluation_title: "Delete this evaluation from '%{place}'"
       view_place: View Details
       view_place_title: "View the details of '%{place}'"
       certified: Expert

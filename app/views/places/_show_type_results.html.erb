@@ -125,6 +125,16 @@
                         <span class="evaluation_date">
                           <%= l evaluation.created_at, :format => :no_time %>
                         </span>
+                        <% if user_signed_in? && current_user.role?(User::ROLES[:certification]) %>
+                          
+                          <%= link_to t('app.common.delete_evaluation'),
+                                      delete_place_evaluation_path(:id => @place, :evaluation_id => evaluation.id),
+                                      :method => :delete,
+                                      :class => 'delete_evaluation',
+                                      :confirm => t('app.buttons.confirm'),
+                                      :title => t('app.common.delete_evaluation_title', :place => @place[:name]) %>
+
+                        <% end %>
                         <% if user.present? %>
                           <span class="user_name">      
                             <%= user.nickname %>

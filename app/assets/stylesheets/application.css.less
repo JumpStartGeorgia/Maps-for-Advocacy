@@ -249,7 +249,8 @@ footer, footer ul li, footer div#right ul li {
 /* add place/evaluation button */
 .navbar .nav > li > a.add_evaluation, a.add_evaluation, a.view_more, a.search, a.reset_filters,
 #submit-button input, a#place_name_next, a#place_map_next, a#place_map_remove, a#btn_print,
-a.add_photos, a.return_place, a.cancel_eval, a.process_evidence, a.eval-question-image, a.btn_website, a.edit_place{
+a.add_photos, a.return_place, a.cancel_eval, a.process_evidence, a.eval-question-image, a.btn_website, 
+a.edit_place, a.delete_place, a.delete_evaluation{
   background-color: #3287CC;
   color: #fff !important;
   text-shadow: 0 1px 0 #555;
@@ -299,6 +300,13 @@ a.eval-question-image.active{
 }
 a.eval-question-image:hover{
   background-color: #b7b7b7;
+}
+a.delete_place, a.delete_evaluation{
+  background-color: #C83432;
+  color: #fff !important;
+}
+a.delete_place:hover, a.delete_evaluation:hover{
+  background-color: #980402;
 }
 
 /* fix styles when using tinymce */

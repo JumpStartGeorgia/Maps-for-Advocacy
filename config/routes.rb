@@ -39,11 +39,11 @@ BootstrapStarter::Application.routes.draw do
         collection do
           post 'address_search', :defaults => {:format => 'json'}
         end
-      end
+      end      
 		end
 
     # add/view places
-    resources :places, :only => [:show, :new, :create, :edit, :update] do
+    resources :places do
       member do 
         get 'evaluation'
         put 'evaluation'
@@ -52,6 +52,8 @@ BootstrapStarter::Application.routes.draw do
         post 'address_search', :defaults => {:format => 'json'}
       end
     end
+    match '/places/:id/delete_evaluation/:evaluation_id', :to => 'places#delete_evaluation', :as => :delete_place_evaluation, :via => :delete
+
 
     # user settings
 		match '/settings', :to => 'settings#index', :as => :settings, :via => :get

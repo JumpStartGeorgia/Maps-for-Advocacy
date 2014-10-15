@@ -1,7 +1,7 @@
 class PlacesController < ApplicationController
   before_filter :authenticate_user!, :except => :show
-  before_filter :only => [:edit, :update] do |controller_instance|
-    controller_instance.send(:valid_role?, User::ROLES[:site_admin])
+  before_filter :only => [:edit, :update, :delete, :delete_evaluation] do |controller_instance|
+    controller_instance.send(:valid_role?, User::ROLES[:certification])
   end
 
   # GET /places/1
@@ -213,19 +213,56 @@ class PlacesController < ApplicationController
     end
   end
 
-=begin
   # DELETE /places/1
   # DELETE /places/1.json
   def destroy
     @place = Place.find(params[:id])
+    # delete the place and its evaluations
     @place.destroy
+    # delete the summaries for this place
+    PlaceSummary.where(:place_id => params[:id]).destroy_all
 
     respond_to do |format|
       format.html { redirect_to root_url }
       format.json { head :ok }
     end
   end
-=end
+
+  # delete an evaluation for a place
+  # DELETE /places/1/delete_evaluation/:evaluation_id
+  def delete_evaluation
+    @place = Place.find(params[:id])
+    @evaluation = PlaceEvaluation.find(params[:evaluation_id])
+
+    if @place.present? && @evaluation.present?
+      is_certified = @evaluation.is_certified
+
+      # delete the evaluation
+      @evaluation.destroy
+
+      # if no evals left in this type, delete summary for type
+      # else run summary for type
+      num_evals = PlaceEvaluation.where(:place_id => @place.id, :is_certified => is_certified).count
+
+      if num_evals == 0
+        # no evals left delete all summaries of this type for this places
+        PlaceSummary.where(:place_id => @place.id, :is_certified => is_certified).destroy_all
+      else
+        # some evals of this type still exist, so recompute the summarries for this type
+        if is_certified == true
+          PlaceSummary.update_certified_summaries(@place.id)
+        else
+          PlaceSummary.update_summaries(@place.id)
+        end
+      end
+    end
+
+    respond_to do |format|
+      format.html { redirect_to place_path(@place.id) }
+      format.json { head :ok }
+    end
+
+  end
 
   # use geocoder gem to get coords of address
   def address_search

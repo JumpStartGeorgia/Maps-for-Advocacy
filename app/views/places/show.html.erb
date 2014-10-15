@@ -26,12 +26,19 @@
         </p>
       </div>
       <div class="span3">
-        <% if @place.id.present? && user_signed_in? && current_user.role?(User::ROLES[:site_admin]) %>
-          <%= link_to t('app.common.edit_place'), edit_place_path(@place), 
-            :class => 'edit_place', :title => t('app.common.edit_place_title', :place => @place[:name]) %>
-        <% end %>
         <%= link_to t('app.common.add_evaluation'), evaluation_place_path(@place), 
           :class => 'add_evaluation', :title => t('app.common.add_evaluation_title', :place => @place[:name]) %>
+        <% if @place.id.present? && user_signed_in? && current_user.role?(User::ROLES[:certification]) %>
+          <%= link_to t('app.common.edit_place'), edit_place_path(@place), 
+            :class => 'edit_place', :title => t('app.common.edit_place_title', :place => @place[:name]) %>
+          <%= link_to t('app.common.delete_place'),
+                      place_path(@place),
+                      :method => :delete,
+                      :class => 'delete_place',
+                      :confirm => t('app.buttons.confirm'),
+                      :title => t('app.common.delete_place_title', :place => @place[:name]) %>
+
+        <% end %>
       </div>
     </div>
     
