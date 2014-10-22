@@ -75,6 +75,7 @@ BootstrapStarter::Application.routes.draw do
 		match '/methodology/calculations', :to => 'methodology#calculations', :as => :methodology_calculations, :via => :get
     
     # root pages
+    match '/find_evaluations', :to => 'root#find_evaluations', :as => :find_evaluations, :via => :get
 		match '/un_crpd', :to => 'root#un_crpd', :as => :un_crpd, :via => :get
 		match '/georgian_legislation', :to => 'root#georgian_legislation', :as => :georgian_legislation, :via => :get
 		match '/why_monitor', :to => 'root#why_monitor', :as => :why_monitor, :via => :get

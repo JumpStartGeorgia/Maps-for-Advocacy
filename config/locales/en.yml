@@ -113,6 +113,14 @@ en:
       view: View
       sign_in: Sign In
       sign_in_facebook: Sign in with Facebook
+      evaluate_place: Evaluate a Place
+      statistics: View Statistics
+      methodology: Methodology
+      why_monitor: Why Monitor?
+      un_crpd: UN CRPD
+      georgian_legislation: Georgian Legislation
+      partners: Project Partners
+      what_is_accessibility: What is Accessibility?
     titles:
       new: "New %{model}"
       edit: "Edit %{model}"
@@ -212,14 +220,8 @@ en:
   layouts:
     application:
       menu: Menu
-      admin: Admin
       settings: Settings
-      methodology: Methodology
-      why_monitor: Why Monitor?
-      un_crpd: UN CRPD
-      georgian_legislation: Georgian Legislation
-      partners: Project Partners
-      what_is_accessibility: What is Accessibility?
+      admin: Admin
       print: Print Expert Evaluation
       manage_users: Manage Organization Users
       sign_out: Sign Out
@@ -323,10 +325,10 @@ en:
         map_link_title: Select this location
   root:
     index:
-      header_add: Add Evaluation
-      add_p1: Use the search below to see if the place you want to evaluate already exists. If so, click the '%{add_eval_text}' button for the place.
-      add_p2: Otherwise, if you cannot find the place you want to evaluate through the search, be the first to add it and evaluate it!
-      add_place: Add a Place
+      venue_label: 'Find Evaluations by Category:'
+      venue_all: All Categories
+      skip_movie: Skip the movie (jump)
+    find_evaluations:
       header_search: Search
       header_filter_place_search: Place
       placeholder_place_search: All Places
@@ -346,9 +348,7 @@ en:
       select_all: All places selected
       search: Search
       header_results: Search Results
-      no_places: There are no Places on record that matches your search request.
-      header_stats: Evaluation Stats
-      skip_movie: Skip the movie (jump)
+      no_places: There are no places with evaluations on record that match your search request.
     why_monitor:
       title: Why Monitor Accessibility in Georgia?
       skip_movie: Skip the movie (jump)
@@ -359,7 +359,7 @@ en:
       tab_certified: "Expert Evaluations (%{count})"
       tab_public: "Public Evaluations (%{count})"
       skip_map: Skip the map and go to the photo slideshow (jump)
-      header_images: Images Submitted as Evidence
+      header_images: Visual Evidence
       no_images: No images have been submitted yet.
       no_filter_images: Your selection found no matching images.
       filter_all: All
@@ -410,7 +410,7 @@ en:
       skip_to_places_nearby: Skip to the listing of places nearby (jump)
       skip_to_submit: Skip to the form submit button (jump)
     certified_eval_form:
-      evaluation_instructions: Fill out the evaluation by selecting a category and answering the statements.
+      evaluation_instructions: Select a category and answer the questions.
       question_category_link_title: "View questions in '%{name}'"
       question_instructions: If you do not know the answer, please leave it blank.
       skip_to_next_quest_cat: Skip to the next category of questions (jump)

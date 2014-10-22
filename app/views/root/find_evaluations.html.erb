@@ -1,0 +1,133 @@
+<div id="find-evaluations">
+  <div id="search-container" class="row-fluid">
+    <div class="span4" id="search">
+      
+      <h2><%= t('.header_search') %>:</h2>
+      <div class="row-fluid">
+        <div class="span6">
+          <div class="filter_box">
+            <h3><%= label_tag :filter_place_search, t('.header_filter_place_search') %></h3>
+              <%= text_field_tag :filter_place_search, params[:place_search] %>
+          </div>
+        </div>
+        <div class="span6">    
+          <div class="filter_box">
+            <h3><%= label_tag :filter_address_search, t('.header_filter_address_search') %></h3>
+              <%= text_field_tag :filter_address_search, params[:address_search] %>
+          </div>
+        </div>
+      </div>
+      <div class="row-fluid">
+        <div class="span6">
+          <div class="filter_box">
+            <h3><%= label_tag :filter_venue, t('.header_filter_venue') %></h3>
+              <%= select_tag(:filter_venue, 
+                  options_for_select(@venue_categories.map{|x| ["#{x[:venue_category]} (#{x[:count]})", x.id]}, params[:venue_category_id]),
+                  :include_blank => true,
+                  :'data-placeholder' => t('.placeholder_venue'), 
+                  :style => 'width: 100%') %>
+          </div>
+        </div>
+        <div class="span6">    
+          <div class="filter_box">
+            <h3><%= label_tag :filter_district, t('.header_filter_district') %></h3>
+              <%= select_tag(:filter_district, 
+                  options_for_select(@districts.map{|x| ["#{x[:district]} (#{x[:count]})", x.id]}, params[:district_id]),
+                  :include_blank => true,
+                  :'data-placeholder' => t('.placeholder_district'), 
+                  :style => 'width: 100%') %>
+          </div>
+        </div>
+      </div>
+      <div class="row-fluid">
+        <div class="span6">
+          <div class="filter_box">    
+            <h3><%= t('.header_filter_evaluations') %></h3>
+            <%= label_tag :filter_evaluations do %>
+              <%= check_box_tag :filter_evaluations, '1', checked = params[:places_with_evaluation] %>  
+              <%= t('.placeholder_evaluations') %>
+            <% end %>
+          </div>
+        </div>
+        <div class="span6">    
+          <div class="filter_box" id="disability_filter" <%= params[:places_with_evaluation] == false ? "style=display:none;" : ''%> >    
+            <h3><%= label_tag :filter_disability, t('.header_filter_disability') %></h3>
+              <%= select_tag(:filter_disability, 
+                  options_for_select(@disabilities.map{|x| ["#{x[:disability]} (#{x[:count]})", x.id]}, params[:eval_type_id]),
+                  :include_blank => true,
+                  :'data-placeholder' => t('.placeholder_disability'), 
+                  :style => 'width: 100%') %>
+          </div>
+        </div>
+      </div>
+      
+      <div id="filter_buttons">
+          <% if params[:venue_category_id].present? || params[:eval_type_id].present? || params[:district_id] != @district_id ||
+                params[:places_with_evaluation] == false || params[:place_search].present? || params[:address_search].present?  %>
+            <%= link_to t('.clear_filters'), root_path, :class => 'reset_filters' %>
+          <% end %>
+        <%= link_to t('.search'), root_path, :class => 'search', :id => 'btn_search' %>
+      </div>
+
+    </div>
+    <div class="span4">
+      <div id="search_results">
+        <div id="selection_results">
+          <h2><%= @places.present? ? "#{@places.length} " : "0 "  %><%= t('.header_results') %>:</h2>
+          <% if @places.present? %>
+            <% @places.each do |place| %>
+              <div class="place-item" data-id="<%= place.id %>">
+                <h3>
+                  <%= link_to place[:place], place_path(place) %>
+                </h3>
+                <h4><%= place[:venue] %></h4>
+                
+                <% if place[:address].present? %>
+                  <p>
+                    <%= place[:address] %>
+                  </p>
+                <% end %>
+
+                <% if @place_summaries.present? 
+                    summary_index = @place_summaries.index{|x| x.place_id == place.id && x.is_certified == true}
+                    if summary_index.present? %>
+                      <div>
+                        <span title="<%= t('app.common.certified_explanation') %>"><%= "#{t('app.common.certified')}:" %></span>
+                        <%= format_summary_result(@place_summaries[summary_index].to_summary_hash, is_summary: true, is_certified: true) %>
+                      </div>
+                 <% end 
+                    summary_index = @place_summaries.index{|x| x.place_id == place.id && x.is_certified == false}
+                    if summary_index.present? %>
+                      <div>
+                        <span title="<%= t('app.common.public_explanation') %>"><%= "#{t('app.common.public')}:" %></span>
+                        <%= format_summary_result(@place_summaries[summary_index].to_summary_hash, is_summary: true, is_certified: false) %>
+                      </div>
+                    <% end %>
+                 <% end %>
+                <div class="links">
+                  <%= link_to t('app.common.view_place'), place_path(place), :class => 'view_more', 
+                    :title => t('app.common.view_place_title', :place => place[:place]) %>
+                  <%= link_to t('app.common.add_evaluation'), evaluation_place_path(place), :class => 'add_evaluation',
+                    :title => t('app.common.add_evaluation_title', :place => place[:place]) %>
+                </div>
+              </div>
+            <% end %>
+          <% else %>
+            <div id="no-search-results">
+              <p class="alert">
+                <%= t('.no_places') %>
+              </p>
+              <p>
+                <%= link_to t('helpers.links.evaluate_place'), new_place_path, :class => 'add_evaluation' %>
+              </p>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="span4">
+      <a href="#search_results" class="accessibly-hidden"><%= t('.jump.skip_map') %></a>
+      <div id="map"></div>
+    </div>
+  </div>
+</div>

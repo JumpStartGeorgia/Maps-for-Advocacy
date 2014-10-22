@@ -1,6 +1,38 @@
 var map, marker, map_type, near_markers;
 
+  // take from: http://stackoverflow.com/questions/5999118/add-or-update-query-string-parameter
+  function UpdateQueryString(url, key, value) {
+      if (!url) url = window.location.href;
+      var re = new RegExp("([?&])" + key + "=.*?(&|#|$)(.*)", "gi");
+
+      if (re.test(url)) {
+          if (typeof value !== 'undefined' && value !== null && value !== '')
+              return url.replace(re, '$1' + key + "=" + value + '$2$3');
+          else {
+              var hash = url.split('#');
+              url = hash[0].replace(re, '$1$3').replace(/(&|\?)$/, '');
+              if (typeof hash[1] !== 'undefined' && hash[1] !== null) 
+                  url += '#' + hash[1];
+              return url;
+          }
+      }
+      else {
+          if (typeof value !== 'undefined' && value !== null && value !== '') {
+              var separator = url.indexOf('?') !== -1 ? '&' : '?',
+                  hash = url.split('#');
+              url = hash[0] + separator + key + '=' + value;
+              if (typeof hash[1] !== 'undefined' && hash[1] !== null) 
+                  url += '#' + hash[1];
+              return url;
+          }
+          else
+              return url;
+      }
+  }
+
+
   /* update a query string value in a url */
+/*
   function updateQueryStringParameter(uri, key, value) {
     var re = new RegExp("([?|&])" + key + "=.*?(&|$)", "i");
     separator = uri.indexOf('?') !== -1 ? "&" : "?";
@@ -11,6 +43,7 @@ var map, marker, map_type, near_markers;
       return uri + separator + key + "=" + value;
     }
   }
+*/
 
   /* hide the next button, map markers and messages */
   function reset_map(){
@@ -26,9 +59,9 @@ var map, marker, map_type, near_markers;
     }
 
     if (map_type == 'settings'){
-      $('#place_map_next').attr('href', updateQueryStringParameter($('#place_map_next').attr('href'), 'lat', ''));
-      $('#place_map_next').attr('href', updateQueryStringParameter($('#place_map_next').attr('href'), 'lon', ''));
-      $('#place_map_next').attr('href', updateQueryStringParameter($('#place_map_next').attr('href'), 'address', ''));
+      $('#place_map_next').attr('href', UpdateQueryString($('#place_map_next').attr('href'), 'lat', ''));
+      $('#place_map_next').attr('href', UpdateQueryString($('#place_map_next').attr('href'), 'lon', ''));
+      $('#place_map_next').attr('href', UpdateQueryString($('#place_map_next').attr('href'), 'address', ''));
 
       // hide the button
       $('#place_map_next').attr('aria-hidden', 'true');
@@ -58,9 +91,9 @@ var map, marker, map_type, near_markers;
 
     if (map_type == 'settings'){
         // update the url
-        $('#place_map_next').attr('href', updateQueryStringParameter($('#place_map_next').attr('href'), 'lat', lat.toString()));
-        $('#place_map_next').attr('href', updateQueryStringParameter($('#place_map_next').attr('href'), 'lon', lng.toString()));
-        $('#place_map_next').attr('href', updateQueryStringParameter($('#place_map_next').attr('href'), 'address', address));
+        $('#place_map_next').attr('href', UpdateQueryString($('#place_map_next').attr('href'), 'lat', lat.toString()));
+        $('#place_map_next').attr('href', UpdateQueryString($('#place_map_next').attr('href'), 'lon', lng.toString()));
+        $('#place_map_next').attr('href', UpdateQueryString($('#place_map_next').attr('href'), 'address', address));
 
         // show the button
         $('#place_map_next').attr('aria-hidden', 'false');

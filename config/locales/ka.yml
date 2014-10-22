@@ -113,6 +113,14 @@ ka:
       view: ნახვა
       sign_in: სისტემაში შესვლა
       sign_in_facebook: სისტემაში Facebook-ით შესვლა
+      evaluate_place: Evaluate a Place
+      statistics: View Statistics
+      methodology: მეთოდოლოგია
+      why_monitor: რატომ მონიტორინგი?
+      un_crpd: UN CRPD
+      georgian_legislation: საქართველოს კანონმდებლობა
+      partners: პროექტის პარტნიორები
+      what_is_accessibility: რა არის ხელმისაწვდომობა?
     titles:
       new: "ახალი %{model}"
       edit: "შეცვლა %{model}"
@@ -214,12 +222,6 @@ ka:
       menu: მენიუ
       settings: პარამეტრები
       admin: ადმინისტრატო
-      methodology: მეთოდოლოგია
-      why_monitor: რატომ მონიტორინგი?
-      un_crpd: UN CRPD
-      georgian_legislation: საქართველოს კანონმდებლობა
-      partners: პროექტის პარტნიორები
-      what_is_accessibility: რა არის ხელმისაწვდომობა?
       print: ექსპერტის შეფასების ამობეჭდვა
       manage_users: ორგანიზაციის წევრთა ანგარიშების მართვა
       sign_out: გასვლა
@@ -323,10 +325,10 @@ ka:
         map_link_title: შეარჩიეთ ეს მდებარეობა
   root:
     index:
-      header_add: შეფასების დამატება
-      add_p1: "გამოიყენოთ ქვემოთ მოცემული საძიებო გრაფა, რათა ნახოთ, ხომ არ არსებობს თქვენთვის სასურველი ადგილის შეფასება. თუ ასეა, დააჭირეთ '%{add_eval_text}' ღილაკს."
-      add_p2: წინააღმდეგ შემთხვევაში, თუ თქვენ ვერ იპოვით სასურველი ადგილის შეფასებას, იყავით პირველი და დაამატეთ თქვენი შეფასება!
-      add_place: ადგილის დამატება
+      venue_label: 'Find Evaluations by Category:'
+      venue_all: ყველა კატეგორია
+      skip_movie: გამოვტოვოთ ფილმი (გადახტომა)
+    find_evaluations:
       header_search: ძიება
       header_filter_place_search: მდებარეობა
       placeholder_place_search: ყველა მდებარეობა
@@ -346,9 +348,7 @@ ka:
       select_all: ყველა არჩეული ადგილი
       search: ძებნა
       header_results: ძიების შედეგი
-      no_places: არ მოიძებნა თქვენი ძიების შესაბამისი ადგილი.
-      header_stats: შეფასების სტატისტიკა
-      skip_movie: გამოვტოვოთ ფილმი (გადახტომა)
+      no_places: არ მოიძებნა თქვენი ძიების შესაბამისი ადგილი.    
     why_monitor:
       title: რატომ არის საჭირო ხელმისაწვდომობის მონიტორინგი საქართველოშო?
       skip_movie: გამოვტოვოთ ფილმი (გადახტომა)
@@ -359,7 +359,7 @@ ka:
       tab_certified: "ექსპერტის შეფასება (%{count})"
       tab_public: "საჯარო შეფასება (%{count})"
       skip_map: გამოტოვეთ რუკა და გადადით ფოტო სლაიდშოუზე (გადასვლა)
-      header_images: მტკიცებულების სახით მოწოდებული ფოტო
+      header_images: Visual Evidence
       no_images: ფოტო ჯერ არ  არის მოწოდებული.
       no_filter_images: თქვენს არჩევას არ შეესაბამება სურათი.
       filter_all: ყველა
@@ -410,7 +410,7 @@ ka:
       skip_to_places_nearby: გადასვლა მსგავსი ადგილების ჩამონათვალზე (გადახტომა)
       skip_to_submit: გადასვლა ფორმის გაგზავნის ღილაკზე (გადახტომა)
     certified_eval_form:
-      evaluation_instructions: შეარჩიეთ კატეგორია და შეავსეთ შეფასება.
+      evaluation_instructions: Select a category and answer the questions.
       question_category_link_title: "იხილეთ კითხვები '%{name}'"
       question_instructions: თუ არ გაქვთ პასუხი, დატოვეთ ცარიელი. 
       skip_to_next_quest_cat: შემდეგ კატეგორიაზე ან კითხვაზე გადასვლა (გადახტომა)

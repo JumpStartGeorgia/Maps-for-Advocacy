@@ -1,74 +1,16 @@
-.leaflet-popup-content{
-  text-align: center;
-}
-
 
 #front-page{
+  #text-links{
+    margin-top: 10px;
+    li{
+      display: inline-block;
+      width: 45%;
+      text-align: center;
+    }
+  }
   #stats{
     li:first-of-type {
       margin-bottom: 20px;
-    }
-  }
-
-  #search-container{
-    margin-top: 20px;
-    #map { 
-      height: 300px; 
-    }  
-
-    .filter_box{
-      input#filter_address_search, input#filter_place_search{
-        width: 100%;
-      }
-  /*    padding: 10px 0 15px;*/
-      margin: 5px 10px;
-    }
-    
-    #search {
-      .row-fluid{
-        min-height: 56px;
-      }
-      #filter_buttons{
-        margin-top: 10px;
-        text-align: right;
-        min-height: inherit;
-      }
-      #add {
-        margin-bottom: 20px;
-        #add_link{
-          text-align: right;
-        }
-      }
-    }
-    
-    #current_selections{
-      margin-bottom: 30px;
-      p{
-        padding-left: 10px;
-      }
-    }
-    #search_results{
-      max-height: 600px;
-      overflow-y: auto;
-      #selection_results{
-        .place-item{
-          border-bottom: 1px solid #ccc;
-          padding: 10px 10px 15px;
-          margin: 5px 0;
-          .links{
-            text-align: right;
-          }
-          &:last-of-type{
-            border-bottom: none;
-          }
-          h3 a{
-            display: block;
-          }
-          .view_more{
-            margin-top: 10px;
-          }
-        }
-      }
     }
   }
 }

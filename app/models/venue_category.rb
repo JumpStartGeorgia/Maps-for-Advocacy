@@ -5,7 +5,11 @@ class VenueCategory < ActiveRecord::Base
   has_many :venues, :dependent => :destroy
   accepts_nested_attributes_for :venue_category_translations
   attr_accessible :id, :venue_category_translations_attributes, :sort_order, :unique_id
-  
+
+  def self.sorted  
+    with_translations(I18n.locale)
+    .order('venue_categories.sort_order, venue_category_translations.name')
+  end
   
   def self.names_with_count(options={})
     need_and = false

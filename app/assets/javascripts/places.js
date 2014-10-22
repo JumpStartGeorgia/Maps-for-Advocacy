@@ -115,7 +115,7 @@ $(document).ready(function(){
   if (gon.show_place_name_form){
     $('form.place #place_name').change(function(){
       var name = $(this).val();
-      var url = updateQueryStringParameter($('#place_name_next').attr('href'), 'name', name);
+      var url = UpdateQueryString($('#place_name_next').attr('href'), 'name', name);
 
       if (name.length == 0){
         // hide the next button
@@ -138,7 +138,7 @@ $(document).ready(function(){
 
     $('form.place #place_url').change(function(){
       var name = $(this).val();
-      var url = updateQueryStringParameter($('#place_name_next').attr('href'), 'url', name);
+      var url = UpdateQueryString($('#place_name_next').attr('href'), 'url', name);
 
       if (name.length == 0){
         // hide the next button

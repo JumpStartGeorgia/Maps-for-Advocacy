@@ -1,10 +1,30 @@
 class RootController < ApplicationController
 
-  def index
+  def index    
+    @venue_categories = VenueCategory.sorted
+
+    @page = Page.by_name('landing_page')
+
+    @stats = {}
+    @stats[:places_with_evals] = PlaceSummary.overall_places_with_evals
+    @stats[:public_results] = PlaceSummary.overall_public_results
+    @stats[:certified_results] = PlaceSummary.overall_certified_results
+
+    gon.front_page = true
+    gon.find_evaluations_path = find_evaluations_path(:district_id => 0)
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @page }
+    end
+  end
+
+  
+  def find_evaluations
     options = {}
     options[:place_search] = params[:place_search].present? && params[:place_search].strip.present? ? prepare_search_text(params[:place_search]) : nil
     options[:address_search] = params[:address_search].present? && params[:address_search].strip.present? ? prepare_search_text(params[:address_search]) : nil
-    options[:venue_category_id] = params[:venue_category_id] if params[:venue_category_id].present?
+    options[:venue_category_id] = params[:venue_category_id] if params[:venue_category_id].present? && params[:venue_category_id] != '0'
     options[:disability_id] = params[:eval_type_id] if params[:eval_type_id].present?
     params[:district_id] = @district_id if params[:district_id].blank?
     options[:district_id] = params[:district_id].present? && params[:district_id] != '0' ? params[:district_id] : nil
@@ -18,8 +38,8 @@ class RootController < ApplicationController
     
     @places = Place.filtered(options)
 
-    gon.show_frontpage_map = true
-    gon.frontpage_filters = true
+    gon.show_find_evaluations_map = true
+    gon.find_evaluations_filters = true
     @show_map = true
   
     # if places found, then save info to gon so can show markers/popups
@@ -39,19 +59,13 @@ class RootController < ApplicationController
       end
     end
     
-    @page = Page.by_name('landing_page')
-    @stats = {}
-    @stats[:places_with_evals] = PlaceSummary.overall_places_with_evals
-    @stats[:public_results] = PlaceSummary.overall_public_results
-    @stats[:certified_results] = PlaceSummary.overall_certified_results
-
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @places }
     end
   end
 
-  
+
   def why_monitor
     @page = Page.by_name('why_monitor')
   

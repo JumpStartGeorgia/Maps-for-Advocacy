@@ -1,4 +1,4 @@
-/*
+  /*
  * This is a manifest file that'll automatically include all the stylesheets available in this directory
  * and any sub-directories. You're free to add application-wide styles to this file and they'll appear at
  * the top of the compiled file, but it's generally better to create a new file per style scope.
@@ -250,7 +250,7 @@ footer, footer ul li, footer div#right ul li {
 .navbar .nav > li > a.add_evaluation, a.add_evaluation, a.view_more, a.search, a.reset_filters,
 #submit-button input, a#place_name_next, a#place_map_next, a#place_map_remove, a#btn_print,
 a.add_photos, a.return_place, a.cancel_eval, a.process_evidence, a.eval-question-image, a.btn_website, 
-a.edit_place, a.delete_place, a.delete_evaluation{
+a.edit_place, a.delete_place, a.delete_evaluation, #front-page #text-links li a{
   background-color: #3287CC;
   color: #fff !important;
   text-shadow: 0 1px 0 #555;
@@ -282,11 +282,11 @@ a.view_more, a.return_place{
 a.view_more:hover, a.return_place:hover{
   background-color: #444;
 }
-a.add_photos, a.search, a#btn_print, a.btn_website{
+a.add_photos, a.search, a#btn_print, a.btn_website, #front-page #text-links li a{
   background-color: #5bb75b;
   color: #fff !important;
 }
-a.add_photos:hover, a.search:hover, a#btn_print:hover, a.btn_website:hover{
+a.add_photos:hover, a.search:hover, a#btn_print:hover, a.btn_website:hover, #front-page #text-links li a:hover{
   background-color: #3b973b;
 }
 a.eval-question-image{
@@ -343,3 +343,9 @@ a.delete_place:hover, a.delete_evaluation:hover{
   }
 
 }
+
+/* make leaflet popup content centered */
+.leaflet-popup-content{
+  text-align: center;
+}
+
