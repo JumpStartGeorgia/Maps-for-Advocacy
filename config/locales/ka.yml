@@ -114,7 +114,8 @@ ka:
       sign_in: სისტემაში შესვლა
       sign_in_facebook: სისტემაში Facebook-ით შესვლა
       evaluate_place: Evaluate a Place
-      statistics: View Statistics
+      find_evaluations: Find Evaluations
+      statistics: View More Statistics
       methodology: მეთოდოლოგია
       why_monitor: რატომ მონიტორინგი?
       un_crpd: UN CRPD
@@ -329,6 +330,7 @@ ka:
       venue_all: ყველა კატეგორია
       skip_movie: გამოვტოვოთ ფილმი (გადახტომა)
     find_evaluations:
+      title: Find Evaluations
       header_search: ძიება
       header_filter_place_search: მდებარეობა
       placeholder_place_search: ყველა მდებარეობა

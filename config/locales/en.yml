@@ -114,7 +114,8 @@ en:
       sign_in: Sign In
       sign_in_facebook: Sign in with Facebook
       evaluate_place: Evaluate a Place
-      statistics: View Statistics
+      find_evaluations: Find Evaluations
+      statistics: View More Statistics
       methodology: Methodology
       why_monitor: Why Monitor?
       un_crpd: UN CRPD
@@ -329,6 +330,7 @@ en:
       venue_all: All Categories
       skip_movie: Skip the movie (jump)
     find_evaluations:
+      title: Find Evaluations
       header_search: Search
       header_filter_place_search: Place
       placeholder_place_search: All Places

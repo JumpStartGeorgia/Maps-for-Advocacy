@@ -4,11 +4,15 @@
     <div class="span4">
     
       <p>
-        <%= t('app.common.num_places_overall', :num => @stats[:places_with_evals]) %>
+        small text to motivate people to add evaluations...
       </p>
 
-      <p>
+      <p style="text-align: center;">
         <%= link_to t('helpers.links.evaluate_place'), new_place_path, :class => 'add_evaluation' %>
+      </p>
+
+      <p style="margin-top: 20px;">
+        small text to get people to want to look at evaluation results...
       </p>
 
       <p>
@@ -23,9 +27,33 @@
             :style => 'width: 100%') %>
       </p>
 
-      <p>
-        <%= link_to t('helpers.links.statistics'), '#', :class => 'view_more' %>
-      </p>
+      <% if @stats.present? %>
+        <p style="margin-top: 20px;">
+          To date, <%= @stats[:places_with_evals] %> Places have been evaluated with the following results:
+        </p>
+
+        <div>
+          <ul>
+            <li>
+              <span title="<%= t('app.common.certified_explanation') %>">
+                <%= @stats[:certified_results]['count'] %> Expert Evaluations:
+              </span>
+              <%= format_summary_result(@stats[:certified_results], is_summary: true, is_certified: true) %>
+            <li>
+            <li>
+              <span title="<%= t('app.common.public_explanation') %>">
+                <%= @stats[:public_results]['count'] %> Public Evaluations:
+              </span>
+              <%= format_summary_result(@stats[:public_results], is_summary: true, is_certified: false) %>
+            <li>
+          </ul>
+        </div>    
+
+        <p style="text-align: center;">
+          <%= link_to t('helpers.links.statistics'), '#', :class => 'view_more' %>
+        </p>
+      <% end %>
+
 
     </div>
 

@@ -75,8 +75,13 @@
             <span style="font-size: 11px; margin-left: -3px; color: #C83432; font-weight: bold;">BETA</span>
           <% end %>
 
+          <ul class="nav" role="menu">
+            <li role="menuitem"><%= link_to(t('helpers.links.evaluate_place'), new_place_path)  %></li>
+            <li role="menuitem"><%= link_to(t('helpers.links.find_evaluations'), find_evaluations_path)  %></li>
+          </ul>
+
           <div class="container-fluid nav-collapse">
-	          <ul class="nav pull-right">
+	          <ul class="nav pull-right" role="menu">
 			        <li id="header_menu" class="dropdown" role="menuitem" aria-haspopup="true">
 			          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <i class="icon-list"></i>
