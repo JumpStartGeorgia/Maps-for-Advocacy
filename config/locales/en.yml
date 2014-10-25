@@ -15,6 +15,7 @@ en:
       convention_category: Convetion Category
       right: Rights
       organization: Organization
+      training_video: Training Video
     attributes:
       user:
         email: Email Address
@@ -94,6 +95,16 @@ en:
       organization_user:
         user_id: User
         organization_id: Organization
+      training_video:
+        survey_correct_answer: Correct Answer to Question
+        survey_image: Survey Image
+      training_video_translation:
+        video_url: URL to Video
+        video_embed: Video
+        title: Video Title
+        description: Video Description
+        survey_question: Survey Question
+        survey_wrong_answer_description: Text to Show For Wrong Answer
     errors:
       messages:
         required_field: "is a required field."
@@ -271,6 +282,7 @@ en:
       convention_categories: Convetion Categories
       rights: Rights
       organizations: Organizations
+      training_videos: Training Videos
     users:
       edit:
         title: Editing User
@@ -324,6 +336,10 @@ en:
         next: Next
         venue_link_title: "Select %{category} - %{venue}"
         map_link_title: Select this location
+    training_videos:
+      form:
+        video_embed_success: View the embeded video
+        video_embed_fail: The video URL could not be processed
   root:
     index:
       venue_label: 'Find Evaluations by Category:'

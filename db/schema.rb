@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141009054714) do
+ActiveRecord::Schema.define(:version => 20141025074854) do
 
   create_table "convention_categories", :force => true do |t|
     t.datetime "created_at"
@@ -380,6 +380,33 @@ ActiveRecord::Schema.define(:version => 20141009054714) do
   create_table "rights", :force => true do |t|
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "training_video_translations", :force => true do |t|
+    t.integer  "training_video_id"
+    t.string   "locale"
+    t.string   "title"
+    t.text     "description"
+    t.string   "survey_question"
+    t.text     "survey_wrong_answer_description"
+    t.string   "video_url"
+    t.text     "video_embed"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "training_video_translations", ["locale"], :name => "index_training_video_translations_on_locale"
+  add_index "training_video_translations", ["title"], :name => "index_training_video_translations_on_title"
+  add_index "training_video_translations", ["training_video_id"], :name => "index_89d5a8b563fbcbb0243143fbc9cc11e41176c7d5"
+
+  create_table "training_videos", :force => true do |t|
+    t.string   "survey_correct_answer"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "survey_image_file_name"
+    t.string   "survey_image_content_type"
+    t.integer  "survey_image_file_size"
+    t.datetime "survey_image_updated_at"
   end
 
   create_table "users", :force => true do |t|

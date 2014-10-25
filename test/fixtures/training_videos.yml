@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  title: MyString
+  description: MyText
+  video_url: MyString
+  survey_question: MyString
+  survey_correct_answer: MyString
+  survey_wrong_answer_description: MyText
+
+two:
+  title: MyString
+  description: MyText
+  video_url: MyString
+  survey_question: MyString
+  survey_correct_answer: MyString
+  survey_wrong_answer_description: MyText

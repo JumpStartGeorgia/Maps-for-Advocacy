@@ -1,0 +1,59 @@
+<%= tinymce_assets %>
+<%= tinymce %>
+
+<%= semantic_form_for([:admin, @training_video], :html => { :class => 'form-horizontal' }) do |f| %>
+  <%= f.error_messages %>
+
+  <% create_sorted_translation_objects(@training_video.training_video_translations).each do |trans| %>
+    <%= f.fields_for :training_video_translations, trans do |translation| %>
+
+      <div id="form-<%= trans.locale %>" class="multilanguage_nested">
+        <h3><%= t("app.language.#{trans.locale}") %></h3>
+
+        <%= translation.input :title %>
+        <%= translation.input :description, :as => :text, rows: 10, :input_html => { class: 'tinymce' } %>
+        <%= translation.input :video_url, :as => :url, :input_html => {:class => 'video_url', :'data-locale' => trans.locale} %>
+        <div class="control-group video-embed-messages" data-locale="<%= trans.locale %>">
+          <div class="controls">
+            <div class="video-embed-success" aria-hidden="true">
+              <%= link_to t('.video_embed_success'), "#video_embed_html_#{trans.locale}", 
+                    role: "button", class: "btn btn-small btn-success", :'data-toggle' => "modal", tabindex: '-1' %>
+            </div>
+            <div class="video-embed-fail alert alert-error" aria-hidden="true">
+              <%= t('.video_embed_fail') %>
+            </div>
+          </div>
+        </div>
+        <div id="video_embed_html_<%= trans.locale %>" data-locale="<%= trans.locale %>" class="video_embed_html modal hide fade" tabindex="-1" role="dialog" aria-hidden="true">
+          <% if trans.video_url.present? && trans.video_embed.present? %>
+            <%= trans.video_embed.html_safe %>
+          <% end %>
+        </div>
+        <%= translation.input :survey_question %>
+        <%= translation.input :survey_wrong_answer_description, :as => :text, rows: 10, :input_html => { class: 'tinymce' } %>
+        <%= translation.hidden_field :locale , :value => trans.locale %>
+        <%= translation.hidden_field :video_embed, :class => 'video_embed' %>
+      </div>
+
+    <% end %>
+  <% end %>
+
+  <%= f.inputs do %>
+    <%= f.input :survey_correct_answer %>
+    <%= f.input :survey_image, :as => :file, :input_html => { accept:"image/jpeg" }  %> 
+    <% if @training_video.survey_image.exists? %>
+      <div class="control-group">
+        <div class="controls">
+          <%= image_tag @training_video.survey_image.url(:thumb) %>
+        </div>
+      </div>    
+    <% end %>
+  <% end %>
+
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= f.submit nil, :class => 'btn btn-warning', :type => :reset, :value => t('app.buttons.reset'), :name => :reset %>
+    <%= link_to t('app.buttons.cancel'), admin_training_videos_path, :class => 'btn btn-mini btn-warning' %>
+  </div>
+<% end %>
