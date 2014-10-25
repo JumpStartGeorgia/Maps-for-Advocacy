@@ -125,7 +125,7 @@
                         <span class="evaluation_date">
                           <%= l evaluation.created_at, :format => :no_time %>
                         </span>
-                        <% if user_signed_in? && current_user.role?(User::ROLES[:certification]) %>
+                        <% if user_signed_in? && current_user.role?(User::ROLES[:site_admin]) %>
                           
                           <%= link_to t('app.common.delete_evaluation'),
                                       delete_place_evaluation_path(:id => @place, :evaluation_id => evaluation.id),

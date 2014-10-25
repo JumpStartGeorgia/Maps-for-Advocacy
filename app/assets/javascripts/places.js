@@ -185,45 +185,47 @@ $(document).ready(function(){
       $('#place_carousel').carousel();
   }
   
-  /*************************************************/
-  /* filters for the place images */
-  $('#place-image-grid #place-image-filter #filter_image_evaluation').select2({width:'element', allowClear:true});
-  $('#place-image-grid #place-image-filter #filter_image_type').select2({width:'element', allowClear:true});
-  $('#place-image-grid #place-image-filter #filter_image_question').select2({width:'element', allowClear:true});
-  /* when filters change, update images to show matches */
-  function process_place_image_filter(){
-    // first turn off all images and no image message
-    $('#place-image-grid .place-image-grid-item a.place-image-link').removeClass('active').removeAttr('rel');
-    $('#place-image-grid #place-image-grid-no-match').hide();
-    // get filter values
-    var filter_eval = $('#place-image-grid #place-image-filter #filter_image_evaluation').val();
-    var filter_type = $('#place-image-grid #place-image-filter #filter_image_type').val();
-    var filter_question = $('#place-image-grid #place-image-filter #filter_image_question').val();
+  if (gon.show_place_images){
+    /*************************************************/
+    /* filters for the place images */
+    $('#place-image-grid #place-image-filter #filter_image_evaluation').select2({width:'element', allowClear:true});
+    $('#place-image-grid #place-image-filter #filter_image_type').select2({width:'element', allowClear:true});
+    $('#place-image-grid #place-image-filter #filter_image_question').select2({width:'element', allowClear:true});
+    /* when filters change, update images to show matches */
+    function process_place_image_filter(){
+      // first turn off all images and no image message
+      $('#place-image-grid .place-image-grid-item a.place-image-link').removeClass('active').removeAttr('rel');
+      $('#place-image-grid #place-image-grid-no-match').hide();
+      // get filter values
+      var filter_eval = $('#place-image-grid #place-image-filter #filter_image_evaluation').val();
+      var filter_type = $('#place-image-grid #place-image-filter #filter_image_type').val();
+      var filter_question = $('#place-image-grid #place-image-filter #filter_image_question').val();
 
-    var filter = ''
-    // build filter query
-    if (filter_eval != ''){
-      filter += '[data-certified="' + filter_eval + '"]';
-    }
-    if (filter_type != ''){
-      filter += '[data-type="' + filter_type + '"]';
-    }
-    if (filter_question != ''){
-      filter += '[data-question="' + filter_question + '"]';
-    }
+      var filter = ''
+      // build filter query
+      if (filter_eval != ''){
+        filter += '[data-certified="' + filter_eval + '"]';
+      }
+      if (filter_type != ''){
+        filter += '[data-type="' + filter_type + '"]';
+      }
+      if (filter_question != ''){
+        filter += '[data-question="' + filter_question + '"]';
+      }
+      
+      // turn on appropriate images
+      $('#place-image-grid .place-image-grid-item a.place-image-link' + filter).addClass('active').attr('rel', 'gallery');
     
-    // turn on appropriate images
-    $('#place-image-grid .place-image-grid-item a.place-image-link' + filter).addClass('active').attr('rel', 'gallery');
-  
-    // if no images are showing, show no match message
-    if ($('#place-image-grid .place-image-grid-item a.place-image-link[rel="gallery"]').length == 0){
-      $('#place-image-grid #place-image-grid-no-match').fadeIn();
+      // if no images are showing, show no match message
+      if ($('#place-image-grid .place-image-grid-item a.place-image-link[rel="gallery"]').length == 0){
+        $('#place-image-grid #place-image-grid-no-match').fadeIn();
+      }
     }
+    // when filter changes, update the images
+    $('#place-image-grid #place-image-filter #filter_image_evaluation, #place-image-grid #place-image-filter #filter_image_type, #place-image-grid #place-image-filter #filter_image_question').change(function(){
+      process_place_image_filter();
+    });  
   }
-  // when filter changes, update the images
-  $('#place-image-grid #place-image-filter #filter_image_evaluation, #place-image-grid #place-image-filter #filter_image_type, #place-image-grid #place-image-filter #filter_image_question').change(function(){
-    process_place_image_filter();
-  });  
 
   /*************************************************/
   /* when tabs change, update filters to match tabs */

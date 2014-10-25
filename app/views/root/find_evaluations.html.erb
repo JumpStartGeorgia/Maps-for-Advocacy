@@ -65,7 +65,7 @@
       <div id="filter_buttons">
           <% if params[:venue_category_id].present? || params[:eval_type_id].present? || params[:district_id] != @district_id ||
                 params[:places_with_evaluation] == false || params[:place_search].present? || params[:address_search].present?  %>
-            <%= link_to t('.clear_filters'), root_path, :class => 'reset_filters' %>
+            <%= link_to t('.clear_filters'), find_evaluations_path, :class => 'reset_filters' %>
           <% end %>
         <%= link_to t('.search'), root_path, :class => 'search', :id => 'btn_search' %>
       </div>

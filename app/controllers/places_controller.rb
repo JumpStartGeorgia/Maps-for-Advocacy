@@ -1,7 +1,7 @@
 class PlacesController < ApplicationController
   before_filter :authenticate_user!, :except => :show
   before_filter :only => [:edit, :update, :delete, :delete_evaluation] do |controller_instance|
-    controller_instance.send(:valid_role?, User::ROLES[:certification])
+    controller_instance.send(:valid_role?, User::ROLES[:site_admin])
   end
 
   # GET /places/1
@@ -11,6 +11,8 @@ class PlacesController < ApplicationController
     @data = {:certified => {:summary => [], :summary_questions => [], :disability_evaluations => []}, 
              :public => {:summary => [], :summary_questions => [], :disability_evaluations => []}}
     @disability_evaluations = []
+
+    gon.show_place_images = true
     
     if @place.present?
       if @place.lat.present? && @place.lon.present?
