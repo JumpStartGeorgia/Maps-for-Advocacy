@@ -14,6 +14,7 @@
       <th><%= model_class.human_attribute_name(:survey_image) %></th>
       <th><%= model_class_trans.human_attribute_name(:title) %></th>
       <th><%= model_class_trans.human_attribute_name(:survey_question) %></th>
+      <th><%= model_class.human_attribute_name(:survey_correct_answer) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -23,6 +24,7 @@
         <td><%= link_to(image_tag(training_video.survey_image(:thumb)), admin_training_video_path(training_video)) %></td>
         <td><%= link_to training_video.title, admin_training_video_path(training_video) %></td>
         <td><%= training_video.survey_question %></td>
+        <td><%= training_video.survey_correct_answer_formatted %></td>
         <td>
           <%= link_to t('app.buttons.edit'),
                       edit_admin_training_video_path(training_video), :class => 'btn btn-mini' %>

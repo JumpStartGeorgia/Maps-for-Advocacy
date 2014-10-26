@@ -30,7 +30,7 @@
 <%= image_tag @training_video.survey_image.url(:medium) if @training_video.survey_image.exists? %></p>
 
 <p><strong><%= model_class.human_attribute_name(:survey_correct_answer) %>:</strong>
-<%= @training_video.survey_correct_answer %></p>
+<%= @training_video.survey_correct_answer_formatted %></p>
 
 <p><strong><%= model_class_trans.human_attribute_name(:survey_wrong_answer_description) %>:</strong></p>
 <%= simple_format_no_tags(@training_video.survey_wrong_answer_description, {}, {sanitize: false}) %>

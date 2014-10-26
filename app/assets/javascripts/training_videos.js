@@ -5,15 +5,23 @@ var embed_form_id;
 var embed_locale;
 
 // hide the embed error and show link
-function resetEmbedForm(){
+function resetEmbedMessages(){
   timerCount = 0;
+  // turn off error/show link
   $('.video-embed-messages[data-locale="' + embed_locale + '"] .video-embed-success').attr('aria-hidden', 'true');
   $('.video-embed-messages[data-locale="' + embed_locale + '"] .video-embed-fail').attr('aria-hidden', 'true');
 }
 
+function resetEmbedFields(){
+  timerCount = 0;
+  // reset embed code
+  $('form.training_video input.video_embed[data-locale="' + embed_locale + '"]').val('');
+  $('form.training_video .video_embed_html[data-locale="' + embed_locale + '"]').html('');
+}
+
 // the url could not be formatted for embedding
 function ollyFail(){
-  resetEmbedForm();
+  resetEmbedMessages();
   $('.video-embed-messages[data-locale="' + embed_locale + '"] .video-embed-fail').attr('aria-hidden', 'false');
 }
 
@@ -21,9 +29,11 @@ function ollyFail(){
 // else try again
 function timerOllyCompelte() {
   timerCount += 1;
-  if ($('#' + embed_html_id).html().length > 0){
-    resetEmbedForm();
-    $('#' + embed_form_id).val($('#' + embed_html_id).html());
+  if ($('#' + embed_html_id).html().trim().length > 0){
+    resetEmbedMessages();
+    console.log('before: ' + $('#' + embed_form_id).val() + ' ||| html = ' + $('#' + embed_html_id).html().trim());
+    $('#' + embed_form_id).val($('#' + embed_html_id).html().trim());
+    console.log('after: ' + $('#' + embed_form_id).val() + ' ||| html = ' + $('#' + embed_html_id).html().trim());
     $('.video-embed-messages[data-locale="' + embed_locale + '"] .video-embed-success').attr('aria-hidden', 'false');
     $('.video-embed-messages[data-locale="' + embed_locale + '"] .video-embed-success a').focus();
   }else{
@@ -51,6 +61,10 @@ $(document).ready(function() {
     embed_html_id = 'video_embed_html_' + embed_locale;
     embed_form_id = $(this).attr('id').replace('video_url', 'video_embed');
 
+    resetEmbedFields();
+    
+console.log('----video url for ' + embed_locale + '; url = ' + url);
+
     if (url.length > 0 && isUrl(url)){
       olly.embed(url, document.getElementById(embed_html_id), 'timerOllyCompelte', 'ollyFail');
     }else{
@@ -61,7 +75,7 @@ $(document).ready(function() {
   // when training video form loads, check if embed code already exists
   // if it does, show the success button
   $('.video_embed_html').each(function(){
-    if ($(this).html().length > 0){
+    if ($(this).html().trim().length > 0){
       $('.video-embed-messages[data-locale="' + $(this).data('locale') + '"] .video-embed-success').attr('aria-hidden', 'false');
     }
 

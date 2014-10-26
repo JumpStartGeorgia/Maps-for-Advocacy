@@ -25,4 +25,12 @@ class TrainingVideo < ActiveRecord::Base
     with_translations(I18n.locale).order('training_video_translations.title asc')
   end
 
+
+  def survey_correct_answer_formatted
+    if self.survey_correct_answer == true
+      I18n.t('formtastic.yes')
+    else
+      I18n.t('formtastic.no')
+    end
+  end
 end

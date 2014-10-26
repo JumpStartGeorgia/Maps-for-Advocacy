@@ -32,14 +32,14 @@
         <%= translation.input :survey_question %>
         <%= translation.input :survey_wrong_answer_description, :as => :text, rows: 10, :input_html => { class: 'tinymce' } %>
         <%= translation.hidden_field :locale , :value => trans.locale %>
-        <%= translation.hidden_field :video_embed, :class => 'video_embed' %>
+        <%= translation.hidden_field :video_embed, :class => 'video_embed', :'data-locale' => trans.locale %>
       </div>
 
     <% end %>
   <% end %>
 
   <%= f.inputs do %>
-    <%= f.input :survey_correct_answer %>
+    <%= f.input :survey_correct_answer, :as => :radio %>
     <%= f.input :survey_image, :as => :file, :input_html => { accept:"image/jpeg" }  %> 
     <% if @training_video.survey_image.exists? %>
       <div class="control-group">

@@ -54,7 +54,7 @@ class Admin::TrainingVideosController < ApplicationController
     @training_video = TrainingVideo.new(params[:training_video])
 
     add_missing_translation_content(@training_video.training_video_translations)
-
+logger.debug "$$$$$$$$$$$$$$$4 #{@training_video.training_video_translations.inspect}"
     respond_to do |format|
       if @training_video.save
         format.html { redirect_to admin_training_video_path(@training_video), notice: t('app.msgs.success_created', :obj => t('activerecord.models.training_video')) }

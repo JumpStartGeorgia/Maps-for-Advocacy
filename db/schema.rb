@@ -400,7 +400,7 @@ ActiveRecord::Schema.define(:version => 20141025074854) do
   add_index "training_video_translations", ["training_video_id"], :name => "index_89d5a8b563fbcbb0243143fbc9cc11e41176c7d5"
 
   create_table "training_videos", :force => true do |t|
-    t.string   "survey_correct_answer"
+    t.boolean  "survey_correct_answer",     :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "survey_image_file_name"

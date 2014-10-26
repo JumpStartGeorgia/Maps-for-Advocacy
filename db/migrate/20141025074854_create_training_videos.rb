@@ -1,7 +1,7 @@
 class CreateTrainingVideos < ActiveRecord::Migration
   def up
     create_table :training_videos do |t|
-      t.string :survey_correct_answer
+      t.boolean :survey_correct_answer, :default => false
 
       t.timestamps
     end
