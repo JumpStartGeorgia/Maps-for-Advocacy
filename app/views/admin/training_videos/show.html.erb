@@ -29,6 +29,9 @@
 <br />
 <%= image_tag @training_video.survey_image.url(:medium) if @training_video.survey_image.exists? %></p>
 
+<p><strong><%= model_class_trans.human_attribute_name(:survey_image_description) %>:</strong>
+<%= simple_format_no_tags(@training_video.survey_image_description, {}, {sanitize: false}) %>
+
 <p><strong><%= model_class.human_attribute_name(:survey_correct_answer) %>:</strong>
 <%= @training_video.survey_correct_answer_formatted %></p>
 

@@ -1,5 +1,6 @@
 class TrainingVideo < ActiveRecord::Base
-  translates :title, :description, :survey_question, :survey_wrong_answer_description, :video_url, :video_embed 
+  translates :title, :description, :survey_question, :survey_wrong_answer_description, 
+      :video_url, :video_embed , :survey_image_description
 
   has_many :training_video_translations, :dependent => :destroy
   has_many :place_evalations

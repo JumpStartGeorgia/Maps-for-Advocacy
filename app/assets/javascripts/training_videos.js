@@ -31,9 +31,7 @@ function timerOllyCompelte() {
   timerCount += 1;
   if ($('#' + embed_html_id).html().trim().length > 0){
     resetEmbedMessages();
-    console.log('before: ' + $('#' + embed_form_id).val() + ' ||| html = ' + $('#' + embed_html_id).html().trim());
     $('#' + embed_form_id).val($('#' + embed_html_id).html().trim());
-    console.log('after: ' + $('#' + embed_form_id).val() + ' ||| html = ' + $('#' + embed_html_id).html().trim());
     $('.video-embed-messages[data-locale="' + embed_locale + '"] .video-embed-success').attr('aria-hidden', 'false');
     $('.video-embed-messages[data-locale="' + embed_locale + '"] .video-embed-success a').focus();
   }else{
@@ -63,8 +61,6 @@ $(document).ready(function() {
 
     resetEmbedFields();
     
-console.log('----video url for ' + embed_locale + '; url = ' + url);
-
     if (url.length > 0 && isUrl(url)){
       olly.embed(url, document.getElementById(embed_html_id), 'timerOllyCompelte', 'ollyFail');
     }else{

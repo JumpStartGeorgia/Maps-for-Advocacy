@@ -83,6 +83,8 @@ BootstrapStarter::Application.routes.draw do
 		match '/why_monitor', :to => 'root#why_monitor', :as => :why_monitor, :via => :get
 		match '/partners', :to => 'root#partners', :as => :partners, :via => :get
 		match '/what_is_accessibility', :to => 'root#what_is_accessibility', :as => :what_is_accessibility, :via => :get
+    match '/training_videos', :to => 'root#training_videos', :as => :training_videos, :via => :get
+    match '/training_videos/:id', :to => 'root#training_video', :as => :training_video, :via => :get
 
 		root :to => 'root#index'
 	  match "*path", :to => redirect("/#{I18n.default_locale}") # handles /en/fake/path/whatever

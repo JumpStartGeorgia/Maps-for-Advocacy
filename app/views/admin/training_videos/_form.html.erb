@@ -11,7 +11,7 @@
         <h3><%= t("app.language.#{trans.locale}") %></h3>
 
         <%= translation.input :title %>
-        <%= translation.input :description, :as => :text, rows: 10, :input_html => { class: 'tinymce' } %>
+        <%= translation.input :description, :as => :text, rows: 5, :input_html => { class: 'tinymce' } %>
         <%= translation.input :video_url, :as => :url, :input_html => {:class => 'video_url', :'data-locale' => trans.locale} %>
         <div class="control-group video-embed-messages" data-locale="<%= trans.locale %>">
           <div class="controls">
@@ -30,7 +30,8 @@
           <% end %>
         </div>
         <%= translation.input :survey_question %>
-        <%= translation.input :survey_wrong_answer_description, :as => :text, rows: 10, :input_html => { class: 'tinymce' } %>
+        <%= translation.input :survey_wrong_answer_description, :as => :text, rows: 5, :input_html => { class: 'tinymce' } %>
+        <%= translation.input :survey_image_description, :as => :text, rows: 5, :input_html => { class: 'tinymce' } %>
         <%= translation.hidden_field :locale , :value => trans.locale %>
         <%= translation.hidden_field :video_embed, :class => 'video_embed', :'data-locale' => trans.locale %>
       </div>
@@ -49,7 +50,6 @@
       </div>    
     <% end %>
   <% end %>
-
 
   <div class="form-actions">
     <%= f.submit nil, :class => 'btn btn-primary' %>

@@ -10,7 +10,7 @@ class CreateTrainingVideos < ActiveRecord::Migration
 
     TrainingVideo.create_translation_table! :title => :string, :description => :text, 
             :survey_question => :string, :survey_wrong_answer_description => :text,
-            :video_url => :string, :video_embed => :text
+            :video_url => :string, :video_embed => :text, :survey_image_description => :text
 
     add_index :training_video_translations, :title
 

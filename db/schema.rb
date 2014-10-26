@@ -391,6 +391,7 @@ ActiveRecord::Schema.define(:version => 20141025074854) do
     t.text     "survey_wrong_answer_description"
     t.string   "video_url"
     t.text     "video_embed"
+    t.text     "survey_image_description"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

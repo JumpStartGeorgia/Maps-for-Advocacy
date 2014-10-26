@@ -66,6 +66,25 @@ class RootController < ApplicationController
   end
 
 
+  def training_videos
+    @training_videos = TrainingVideo.sorted
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @training_videos }
+    end
+  end
+
+  def training_video
+    @training_video = TrainingVideo.find(params[:id])
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @training_video }
+    end
+  end
+
+
   def why_monitor
     @page = Page.by_name('why_monitor')
   

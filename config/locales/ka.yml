@@ -105,6 +105,7 @@ ka:
         description: Video Description
         survey_question: Survey Question
         survey_wrong_answer_description: Text to Show For Wrong Answer
+        survey_image_description: Description of Image (for visually impaired)
     errors:
       messages:
         required_field: "სავალდებულოა"
@@ -370,6 +371,12 @@ ka:
     why_monitor:
       title: რატომ არის საჭირო ხელმისაწვდომობის მონიტორინგი საქართველოშო?
       skip_movie: გამოვტოვოთ ფილმი (გადახტომა)
+    training_videos:
+      title: Training Videos
+      watch_video: Watch the Video
+      no_videos: There are no training videos on file at this time.
+    training_video:
+      title: "Training Video: '%{name}'"
   places:
     show:
       district_link_title: "'%{name}'-ის ყველა ადგილის ნახვა"
