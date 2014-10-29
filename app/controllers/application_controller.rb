@@ -60,7 +60,7 @@ logger.debug "////////////////////////// BROWSER = #{user_agent}"
   def initialize_global_variables
     @lat = 41.69337
     @lon = 44.80149
-    @district_id = '1'
+    @district_id = '0'
 
     @why_monitor_path = Rails.root.join('public/system/why_monitor/why_monitor.json')
 

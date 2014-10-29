@@ -1,22 +1,27 @@
 <div id="front-page">
-  <div class="row-fluid">
+  <div class="row-fluid" id="front-page-container">
 
-    <div class="span4">
+    <div class="span4 offset1">
+      <h2><%= t('app.common.slogan') %></h2>
+      <% if @page.present? %>
+        <div class="tinymce_format">
+          <%= simple_format_no_tags(@page.content) %>
+        </div>
+      <% end %>
+      <ul id="text-links" role="menu">
+        <li role="menuitem"><%= link_to(t('helpers.links.what_is_accessibility'), what_is_accessibility_path)  %></li>
+        <li role="menuitem"><%= link_to(t('helpers.links.why_monitor'), why_monitor_path)  %></li>
+      </ul>
+    </div>
+
+    <div class="span4 offset2">
     
-      <p>
-        small text to motivate people to add evaluations...
-      </p>
-
-      <p style="text-align: center;">
+      <p class="text-center">
         <%= link_to t('helpers.links.evaluate_place'), new_place_path, :class => 'add_evaluation' %>
       </p>
 
-      <p style="margin-top: 20px;">
-        small text to get people to want to look at evaluation results...
-      </p>
-
       <p>
-        <%= label_tag :filter_venue, t('.venue_label') %>
+        <%= label_tag :filter_venue, t('.venue_label'), :class => 'text-center' %>
         <%
           options = @venue_categories.map{|x| [x.name, x.id]}
           options.unshift([t('.venue_all'), '0'])
@@ -28,7 +33,7 @@
       </p>
 
       <% if @stats.present? %>
-        <p style="margin-top: 20px;">
+        <p class="text-center">
           To date, <%= @stats[:places_with_evals] %> Places have been evaluated with the following results:
         </p>
 
@@ -49,7 +54,7 @@
           </ul>
         </div>    
 
-        <p style="text-align: center;">
+        <p class="text-center">
           <%= link_to t('helpers.links.statistics'), '#', :class => 'view_more' %>
         </p>
       <% end %>
@@ -57,30 +62,7 @@
 
     </div>
 
-    <div class="span4">
-      <h2><%= t('app.common.slogan') %></h2>
-      <% if @page.present? %>
-        <div class="tinymce_format">
-          <%= simple_format_no_tags(@page.content) %>
-        </div>
-      <% end %>
-      <ul id="text-links" role="menu">
-        <li role="menuitem"><%= link_to(t('helpers.links.what_is_accessibility'), what_is_accessibility_path)  %></li>
-        <li role="menuitem"><%= link_to(t('helpers.links.why_monitor'), why_monitor_path)  %></li>
-      </ul>
-    </div>
     
-    <div class="span4">
-      <div class="iframe_container">
-        <%
-          vimeo_id = '97171156'
-          vimeo_id = '97165638' if I18n.locale != :ka
-        %>
-
-        <%= link_to t('.skip_movie'), '#why_monitor_text', :class => 'accessibly-hidden' %>
-        <iframe src="//player.vimeo.com/video/<%= vimeo_id %>" width="500" height="281" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-      </div>
-    </div>
 
   </div>
 </div>

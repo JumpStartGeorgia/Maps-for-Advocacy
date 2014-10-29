@@ -1,5 +1,33 @@
 
 #front-page{
+  div#front-page-container{
+    position: relative; 
+    height: 500px;
+    & > div:nth-child(1){
+      position: absolute;
+      left: 50px;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      -webkit-transform: translate(-50px,-50%);
+      right: auto;
+    }
+    & > div:nth-child(2){
+      position: absolute;
+      right: 50px;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      -webkit-transform: translate(-50px,-50%);
+      left: auto;
+      & > p:nth-child(1), & > p:nth-child(2){
+        margin-bottom: 20px;
+      }
+    }
+  }
+
+  h2{
+    line-height: 1.1;
+    text-align: center;
+  }
   #text-links{
     margin-top: 10px;
     li{
@@ -12,5 +40,12 @@
     li:first-of-type {
       margin-bottom: 20px;
     }
+  }
+  .add_evaluation{
+    font-size: 18px;
+    line-height: 25px;
+  }
+  .text-center{
+    text-align: center;
   }
 }
