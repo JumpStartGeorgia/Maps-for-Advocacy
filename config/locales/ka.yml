@@ -134,6 +134,7 @@ ka:
       georgian_legislation: საქართველოს კანონმდებლობა
       partners: პროექტის პარტნიორები
       what_is_accessibility: რა არის ხელმისაწვდომობა?
+      training_videos: Training Videos
     titles:
       new: "ახალი %{model}"
       edit: "შეცვლა %{model}"
@@ -373,6 +374,7 @@ ka:
       skip_movie: გამოვტოვოთ ფილმი (გადახტომა)
     training_videos:
       title: Training Videos
+      watched: You have watched this video
       watch_video: Watch the Video
       no_videos: There are no training videos on file at this time.
     training_video:

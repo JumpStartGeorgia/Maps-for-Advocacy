@@ -5,6 +5,11 @@
     <div class="training-video-item span4">
       <div class="training-video-image">
         <%= image_tag video.survey_image.url(:medium), :alt => strip_tags(video.survey_image_description) %>
+        <% if false %>
+          <div class="training-video-watched">
+            <%= t('.watched') %>
+          </div>
+        <% end %>
       </div>
       <div class="training-video-text">
         <h3><%= video.title %></h3>

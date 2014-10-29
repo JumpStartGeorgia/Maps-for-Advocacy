@@ -134,6 +134,7 @@ en:
       georgian_legislation: Georgian Legislation
       partners: Project Partners
       what_is_accessibility: What is Accessibility?
+      training_videos: Training Videos
     titles:
       new: "New %{model}"
       edit: "Edit %{model}"
@@ -373,6 +374,7 @@ en:
       skip_movie: Skip the movie (jump)
     training_videos:
       title: Training Videos
+      watched: You have watched this video
       watch_video: Watch the Video
       no_videos: There are no training videos on file at this time.
     training_video:
