@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141025074854) do
+ActiveRecord::Schema.define(:version => 20141029210501) do
 
   create_table "convention_categories", :force => true do |t|
     t.datetime "created_at"
@@ -381,6 +381,18 @@ ActiveRecord::Schema.define(:version => 20141025074854) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  create_table "training_video_results", :force => true do |t|
+    t.integer  "training_video_id"
+    t.integer  "user_id"
+    t.boolean  "pre_survey_answer"
+    t.boolean  "post_survey_answer"
+    t.boolean  "watched_video",      :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "training_video_results", ["user_id", "watched_video"], :name => "index_training_video_results_on_user_id_and_watched_video"
 
   create_table "training_video_translations", :force => true do |t|
     t.integer  "training_video_id"

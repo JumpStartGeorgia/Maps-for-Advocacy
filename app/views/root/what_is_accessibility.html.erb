@@ -2,5 +2,28 @@
 
 <div class="tinymce_format">
   <%= simple_format_no_tags(@page.content, {}, {sanitize: false}) %>
-</div
+</div>
 
+<hr />
+
+<% if @training_videos.present? %>
+  <% @training_videos.each do |video| %>
+    <div class="training-video-item span4">
+      <div class="training-video-image">
+        <%= image_tag video.survey_image.url(:medium), :alt => strip_tags(video.survey_image_description) %>
+        <% if @watched_videos.present? && @watched_videos.map{|x| x.id}.index(video.id).present? %>
+          <div class="training-video-watched">
+            <%= t('.watched') %>
+          </div>
+        <% end %>
+      </div>
+      <div class="training-video-text">
+        <h3><%= video.title %></h3>
+        <%= simple_format_no_tags(video.description, {}, {sanitize: false}) %>
+        <div class="training-video-watch">
+          <%= link_to t('.watch_video'), training_video_path(video), :class => 'btn' %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+<% end %>

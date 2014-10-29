@@ -165,8 +165,9 @@
 							<% if content_for?(:title) %>
 								<div class="page-header hidden-print">
 								  <div class="block">
-			              <h1>
-										  <%= yield(:title) %>
+			              <h1 class="clear">
+										  <span><%= yield(:title) %></span>
+                      <span><%= yield(:title_right) %></span>
 									  </h1>
 									</div>
 								</div>

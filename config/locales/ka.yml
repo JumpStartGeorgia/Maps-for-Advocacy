@@ -411,6 +411,8 @@ ka:
       header_user_details: დეტალები
       details_link_title: იხილეთ ამ შეფასების დეტალები
       disability_other: 'სხვა ტიპი: %{name}'
+    evaluation2:
+      watch_videos: Watch Training Videos
     form:
       header_location: სად მდებარეობს ეს ადგილი?
       map_instructions: დააჭირეთ რუკას, რათა მონიშნოთ ამ ადგილის მდებარეობა.
@@ -470,6 +472,10 @@ ka:
       no_questions: თქვენი მოთხოვნის შესაბამისი კითხვები არ არის წარმოდგენილი შეფასების ფაილში.
       disability_other_header: სხვა ახსნა
       disability_other_label: "დააკონკრეტეთ 'სხვა'"
+      watch_videos_header: Watch the Training Videos!
+      watch_videos_explanation: 'Before you start your evaluation, please watch our training videos....'
+      watch_videos_button: Watch the Videos
+      watch_videos_close: Contine with Evaluation
     upload_photos:
       title: "'%{name}'-ის სურათის დამატება"
       add_files: სურათის დამატება...

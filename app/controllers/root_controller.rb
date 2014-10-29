@@ -69,6 +69,8 @@ class RootController < ApplicationController
   def training_videos
     @training_videos = TrainingVideo.sorted
 
+    @watched_videos = TrainingVideoResult.watched_videos(current_user.id) if user_signed_in?
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @training_videos }
@@ -130,6 +132,9 @@ class RootController < ApplicationController
   def what_is_accessibility
     @page = Page.by_name('what_accessibility')
   
+    @training_videos = TrainingVideo.sorted
+    @watched_videos = TrainingVideoResult.watched_videos(current_user.id) if user_signed_in?
+
     if @page.present?
       respond_to do |format|
         format.html 

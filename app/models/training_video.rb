@@ -3,6 +3,7 @@ class TrainingVideo < ActiveRecord::Base
       :video_url, :video_embed , :survey_image_description
 
   has_many :training_video_translations, :dependent => :destroy
+  has_many :training_video_results
   accepts_nested_attributes_for :training_video_translations
   attr_accessible :id, :training_video_translations_attributes, :survey_correct_answer, :survey_image
   

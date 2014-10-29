@@ -512,6 +512,11 @@ $(document).ready(function(){
 
       $(this).parent().find('.evidence-message-container').attr('aria-busy', 'false');
     });
+
+    // if the user has not watched any training videos, show the pop-up
+    if (gon.watched_videos !== undefined && gon.watched_videos == false){
+      $('#evaluation-watch-videos').modal('show');
+    }
     
   }
 });

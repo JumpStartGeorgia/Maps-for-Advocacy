@@ -325,6 +325,10 @@ class PlacesController < ApplicationController
   # let user submit evaluation for an existing place
   def evaluation
     @place = Place.with_translation(params[:id]).first
+
+    # record wether or not user has watched training videos yet
+    gon.watched_videos = TrainingVideoResult.watched_videos?(current_user.id)
+
     # make a copy of @place for saving
     # since loading blank eval objects into @place before saving
 #    place_for_save = @place.dup

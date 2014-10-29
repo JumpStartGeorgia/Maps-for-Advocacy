@@ -5,7 +5,7 @@
     <div class="training-video-item span4">
       <div class="training-video-image">
         <%= image_tag video.survey_image.url(:medium), :alt => strip_tags(video.survey_image_description) %>
-        <% if false %>
+        <% if @watched_videos.present? && @watched_videos.map{|x| x.id}.index(video.id).present? %>
           <div class="training-video-watched">
             <%= t('.watched') %>
           </div>
