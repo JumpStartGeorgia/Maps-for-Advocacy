@@ -3,8 +3,6 @@ class TrainingVideo < ActiveRecord::Base
       :video_url, :video_embed , :survey_image_description
 
   has_many :training_video_translations, :dependent => :destroy
-  has_many :place_evalations
-  has_and_belongs_to_many :question_pairings
   accepts_nested_attributes_for :training_video_translations
   attr_accessible :id, :training_video_translations_attributes, :survey_correct_answer, :survey_image
   
@@ -16,9 +14,9 @@ class TrainingVideo < ActiveRecord::Base
           :large => {:geometry => "900x900>"}
         }
 
-  validates :survey_correct_answer, :presence => true
   validates_attachment :survey_image, :presence => true,
     :content_type => { :content_type => "image/jpeg" }
+
 
 
   # sort by title
