@@ -15,6 +15,7 @@ ka:
       convention_category: კონვენციის კატეგორია
       right: უფლებები
       organization: ორგანიზაცია
+      training_video: Training Video
     attributes:
       user:
         email: ელ.ფოსტა
@@ -94,6 +95,17 @@ ka:
       organization_user:
         user_id: მომხმარებელი
         organization_id: ორგანიზაცია
+      training_video:
+        survey_correct_answer: Correct Answer to Question
+        survey_image: Survey Image
+      training_video_translation:
+        video_url: URL to Video
+        video_embed: Video
+        title: Video Title
+        description: Video Description
+        survey_question: Survey Question
+        survey_wrong_answer_description: Text to Show For Wrong Answer
+        survey_image_description: Description of Image (for visually impaired)
     errors:
       messages:
         required_field: "სავალდებულოა"
@@ -122,6 +134,7 @@ ka:
       georgian_legislation: საქართველოს კანონმდებლობა
       partners: პროექტის პარტნიორები
       what_is_accessibility: რა არის ხელმისაწვდომობა?
+      training_videos: Training Videos
     titles:
       new: "ახალი %{model}"
       edit: "შეცვლა %{model}"
@@ -271,6 +284,7 @@ ka:
       convention_categories: კონვენციის კატეგორიები
       rights: უფლებები
       organizations: ორგანიზაციები
+      training_videos: Training Videos
     users:
       edit:
         title: ცვლილებების შეტანა მომხმარებლის გვერდზე
@@ -324,6 +338,10 @@ ka:
         next: შემდეგი        
         venue_link_title: "შეარჩიეთ %{category} - %{venue}"
         map_link_title: შეარჩიეთ ეს მდებარეობა
+    training_videos:
+      form:
+        video_embed_success: View the embeded video
+        video_embed_fail: The video URL could not be processed
   root:
     index:
       venue_label: 'Find Evaluations by Category:'
@@ -354,6 +372,15 @@ ka:
     why_monitor:
       title: რატომ არის საჭირო ხელმისაწვდომობის მონიტორინგი საქართველოშო?
       skip_movie: გამოვტოვოთ ფილმი (გადახტომა)
+    training_videos:
+      title: Training Videos
+      watched: You have watched this video
+      watch_video: Watch the Video
+      no_videos: There are no training videos on file at this time.
+    training_video:
+      title: "Training Video: '%{name}'"
+      continue: Continue
+      watch_more: Watch More Training Videos
   places:
     show:
       district_link_title: "'%{name}'-ის ყველა ადგილის ნახვა"
@@ -386,6 +413,8 @@ ka:
       header_user_details: დეტალები
       details_link_title: იხილეთ ამ შეფასების დეტალები
       disability_other: 'სხვა ტიპი: %{name}'
+    evaluation2:
+      watch_videos: Watch Training Videos
     form:
       header_location: სად მდებარეობს ეს ადგილი?
       map_instructions: დააჭირეთ რუკას, რათა მონიშნოთ ამ ადგილის მდებარეობა.
@@ -445,6 +474,10 @@ ka:
       no_questions: თქვენი მოთხოვნის შესაბამისი კითხვები არ არის წარმოდგენილი შეფასების ფაილში.
       disability_other_header: სხვა ახსნა
       disability_other_label: "დააკონკრეტეთ 'სხვა'"
+      watch_videos_header: Watch the Training Videos!
+      watch_videos_explanation: 'Before you start your evaluation, please watch our training videos....'
+      watch_videos_button: Watch the Videos
+      watch_videos_close: Contine with Evaluation
     upload_photos:
       title: "'%{name}'-ის სურათის დამატება"
       add_files: სურათის დამატება...

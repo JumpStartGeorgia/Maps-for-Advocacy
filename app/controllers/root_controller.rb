@@ -66,6 +66,67 @@ class RootController < ApplicationController
   end
 
 
+  def training_videos
+    @training_videos = TrainingVideo.sorted
+
+    @watched_videos = TrainingVideoResult.watched_videos(current_user.id) if user_signed_in?
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @training_videos }
+    end
+  end
+
+  def training_video
+    @training_video = TrainingVideo.find(params[:id])
+
+    gon.record_progress_path = record_training_video_progress_path
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @training_video }
+    end
+  end
+
+  # as the user progresses through the training videos, record thier progress
+  def record_training_video_progress
+    respond_to do |format|
+      format.js { 
+        # make sure video exists
+        if TrainingVideo.select('id').find_by_id(params[:id]).present?
+          # if the user is not logged in, still record the survey progress
+          user_id = user_signed_in? ? current_user.id : nil
+
+          survey = TrainingVideoResult.find_by_id(params[:survey_id]) if params[:survey_id].present?
+
+          if survey.blank?
+            survey = TrainingVideoResult.new
+            survey.user_id = user_id
+            survey.training_video_id = params[:id]
+          end
+          
+          survey.pre_survey_answer = params[:pre_survey_answer].to_bool if params[:pre_survey_answer].present?
+          survey.post_survey_answer = params[:post_survey_answer].to_bool if params[:post_survey_answer].present?
+          survey.watched_video = params[:watched_video].to_bool if params[:watched_video].present?
+          survey.save
+
+          # if user is logged in and has watched the video, update their show_popup_training flag
+          # so popup does not show when they do an evaluation
+          if user_signed_in? && survey.watched_video? && current_user.show_popup_training?
+            current_user.show_popup_training = false
+            current_user.save
+          end
+
+          render json: {survey_id: survey.id}
+          return
+        end
+
+        render nothing: true
+      }
+    end
+  end
+
+
   def why_monitor
     @page = Page.by_name('why_monitor')
   
@@ -111,6 +172,9 @@ class RootController < ApplicationController
   def what_is_accessibility
     @page = Page.by_name('what_accessibility')
   
+    @training_videos = TrainingVideo.sorted
+    @watched_videos = TrainingVideoResult.watched_videos(current_user.id) if user_signed_in?
+
     if @page.present?
       respond_to do |format|
         format.html 

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141009054714) do
+ActiveRecord::Schema.define(:version => 20141030044549) do
 
   create_table "convention_categories", :force => true do |t|
     t.datetime "created_at"
@@ -382,10 +382,50 @@ ActiveRecord::Schema.define(:version => 20141009054714) do
     t.datetime "updated_at"
   end
 
+  create_table "training_video_results", :force => true do |t|
+    t.integer  "training_video_id"
+    t.integer  "user_id"
+    t.boolean  "pre_survey_answer"
+    t.boolean  "post_survey_answer"
+    t.boolean  "watched_video",      :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "training_video_results", ["user_id", "watched_video"], :name => "index_training_video_results_on_user_id_and_watched_video"
+
+  create_table "training_video_translations", :force => true do |t|
+    t.integer  "training_video_id"
+    t.string   "locale"
+    t.string   "title"
+    t.text     "description"
+    t.string   "survey_question"
+    t.text     "survey_wrong_answer_description"
+    t.string   "video_url"
+    t.text     "video_embed"
+    t.text     "survey_image_description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "training_video_translations", ["locale"], :name => "index_training_video_translations_on_locale"
+  add_index "training_video_translations", ["title"], :name => "index_training_video_translations_on_title"
+  add_index "training_video_translations", ["training_video_id"], :name => "index_89d5a8b563fbcbb0243143fbc9cc11e41176c7d5"
+
+  create_table "training_videos", :force => true do |t|
+    t.boolean  "survey_correct_answer",     :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "survey_image_file_name"
+    t.string   "survey_image_content_type"
+    t.integer  "survey_image_file_size"
+    t.datetime "survey_image_updated_at"
+  end
+
   create_table "users", :force => true do |t|
-    t.string   "email",                                                  :default => "", :null => false
-    t.string   "encrypted_password",                                     :default => "", :null => false
-    t.integer  "role",                                                   :default => 0,  :null => false
+    t.string   "email",                                                  :default => "",   :null => false
+    t.string   "encrypted_password",                                     :default => "",   :null => false
+    t.integer  "role",                                                   :default => 0,    :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -403,6 +443,7 @@ ActiveRecord::Schema.define(:version => 20141009054714) do
     t.decimal  "lat",                    :precision => 15, :scale => 12
     t.decimal  "lon",                    :precision => 15, :scale => 12
     t.integer  "district_id"
+    t.boolean  "show_popup_training",                                    :default => true
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

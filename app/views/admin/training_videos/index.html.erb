@@ -1,0 +1,42 @@
+<%- model_class = TrainingVideo -%>
+<%- model_class_trans = TrainingVideoTranslation -%>
+<% title t '.title', :default => model_class.model_name.human.pluralize %>
+
+<div class="form-actions">
+  <%= link_to t('.new', :default => t("helpers.links.new")),
+              new_admin_training_video_path,
+              :class => 'btn btn-primary' %>
+</div>
+
+<table class="table table-striped display">
+  <thead>
+    <tr>
+      <th><%= model_class.human_attribute_name(:survey_image) %></th>
+      <th><%= model_class_trans.human_attribute_name(:title) %></th>
+      <th><%= model_class_trans.human_attribute_name(:survey_question) %></th>
+      <th><%= model_class.human_attribute_name(:survey_correct_answer) %></th>
+      <th><%=t '.actions', :default => t("helpers.actions") %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @training_videos.each do |training_video| %>
+      <tr>
+        <td><%= link_to(image_tag(training_video.survey_image(:thumb)), admin_training_video_path(training_video)) %></td>
+        <td><%= link_to training_video.title, admin_training_video_path(training_video) %></td>
+        <td><%= training_video.survey_question %></td>
+        <td><%= training_video.survey_correct_answer_formatted %></td>
+        <td>
+          <%= link_to t('app.buttons.edit'),
+                      edit_admin_training_video_path(training_video), :class => 'btn btn-mini' %>
+          <%= link_to t('app.buttons.delete'),
+                      admin_training_video_path(training_video),
+                      :method => :delete,
+                      :confirm => t('app.buttons.confirm'),
+                      :class => 'btn btn-mini btn-danger' %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+

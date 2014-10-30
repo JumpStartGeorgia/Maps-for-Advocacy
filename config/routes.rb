@@ -2,6 +2,7 @@ BootstrapStarter::Application.routes.draw do
 
 
 
+
 	#--------------------------------
 	# all resources should be within the scope block below
 	#--------------------------------
@@ -14,6 +15,7 @@ BootstrapStarter::Application.routes.draw do
 		match '/admin/why_monitor', :to => 'admin#why_monitor', :as => :admin_why_monitor, :via => [:get, :post]
 
 		namespace :admin do
+      resources :training_videos
       resources :organizations
       resources :rights
       resources :convention_categories
@@ -43,6 +45,7 @@ BootstrapStarter::Application.routes.draw do
 		end
 
     # add/view places
+    match '/places/saw_popup', :to => 'places#saw_popup', :as => :saw_popup, :via => :post, :defaults => {:format => :js}
     resources :places do
       member do 
         get 'evaluation'
@@ -81,6 +84,9 @@ BootstrapStarter::Application.routes.draw do
 		match '/why_monitor', :to => 'root#why_monitor', :as => :why_monitor, :via => :get
 		match '/partners', :to => 'root#partners', :as => :partners, :via => :get
 		match '/what_is_accessibility', :to => 'root#what_is_accessibility', :as => :what_is_accessibility, :via => :get
+    match '/training_videos', :to => 'root#training_videos', :as => :training_videos, :via => :get
+    match '/training_videos/:id', :to => 'root#training_video', :as => :training_video, :via => :get
+    match '/training_videos/:id/record_training_video_progress', :to => 'root#record_training_video_progress', :as => :record_training_video_progress, :via => :post, :defaults => {:format => :js}
 
 		root :to => 'root#index'
 	  match "*path", :to => redirect("/#{I18n.default_locale}") # handles /en/fake/path/whatever

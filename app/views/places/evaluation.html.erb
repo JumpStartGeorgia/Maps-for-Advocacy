@@ -1,4 +1,5 @@
 <% title t('.title', :name => @place[:name]) %>
+<% title_right link_to(t('places.evaluation2.watch_videos'), training_videos_path, :class => 'view_more') %>
 
 <div id="evaluation_form">
   <% if @can_certify %>
@@ -158,6 +159,22 @@
   <p id="no_questions" class="alert alert-error">
     <%= t('.no_questions') %>
   </p>
+
+
+  <div id="evaluation-watch-videos" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">×</button>
+      <h3 id="myModalLabel"><%= t('.watch_videos_header') %></h3>
+    </div>
+    <div class="modal-body">
+      <p><%= t('.watch_videos_explanation') %></p>
+    </div>
+    <div class="modal-footer">
+      <button id="btn-training" class="btn" data-dismiss="modal" data-href="<%= training_videos_path%>"><%= t('.watch_videos_button') %></button>
+      <button id="btn-close" class="btn" data-dismiss="modal"><%= t('.watch_videos_close') %></button>
+    </div>
+  </div>
+
 
 </div>
 

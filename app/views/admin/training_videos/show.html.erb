@@ -1,0 +1,46 @@
+<%- model_class = TrainingVideo -%>
+<%- model_class_trans = TrainingVideoTranslation -%>
+<% title t '.title', :default => model_class.model_name.human %>
+
+
+<div class="form-actions">
+  <%= link_to t('.back', :default => t("helpers.links.back")),
+              admin_training_videos_path, :class => 'btn'  %>
+  <%= link_to t('.edit', :default => t("helpers.links.edit")),
+              edit_admin_training_video_path(@training_video), :class => 'btn' %>
+  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
+              admin_training_video_path(@training_video),
+              :method => 'delete',
+              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm")) },
+              :class => 'btn btn-danger' %>
+  <%= link_to t('helpers.links.admin'), admin_path, :class => 'btn' %>
+</div>
+
+<p><strong><%= model_class_trans.human_attribute_name(:title) %>:</strong>
+<%= @training_video.title %></p>
+
+<p><strong><%= model_class_trans.human_attribute_name(:description) %>:</strong></p>
+<%= simple_format_no_tags(@training_video.description, {}, {sanitize: false}) %>
+
+<p><strong><%= model_class_trans.human_attribute_name(:survey_question) %>:</strong>
+<%= @training_video.survey_question %></p>
+
+<p><strong><%= model_class.human_attribute_name(:survey_image) %>:</strong>
+<br />
+<%= image_tag @training_video.survey_image.url(:medium) if @training_video.survey_image.exists? %></p>
+
+<p><strong><%= model_class_trans.human_attribute_name(:survey_image_description) %>:</strong>
+<%= simple_format_no_tags(@training_video.survey_image_description, {}, {sanitize: false}) %>
+
+<p><strong><%= model_class.human_attribute_name(:survey_correct_answer) %>:</strong>
+<%= @training_video.survey_correct_answer_formatted %></p>
+
+<p><strong><%= model_class_trans.human_attribute_name(:survey_wrong_answer_description) %>:</strong></p>
+<%= simple_format_no_tags(@training_video.survey_wrong_answer_description, {}, {sanitize: false}) %>
+
+<p><strong><%= model_class_trans.human_attribute_name(:video_embed) %>:</strong></p>
+<%= simple_format_no_tags(@training_video.video_embed, {}, {sanitize: false}) %>
+
+
+
+

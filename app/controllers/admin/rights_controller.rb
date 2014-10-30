@@ -94,7 +94,7 @@ class Admin::RightsController < ApplicationController
     @right.destroy
 
     respond_to do |format|
-      format.html { redirect_to admin_rights_url }
+      format.html { redirect_to admin_new_translations_url }
       format.json { head :ok }
     end
   end

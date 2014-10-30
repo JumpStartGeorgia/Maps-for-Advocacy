@@ -15,6 +15,7 @@ en:
       convention_category: Convetion Category
       right: Rights
       organization: Organization
+      training_video: Training Video
     attributes:
       user:
         email: Email Address
@@ -94,6 +95,17 @@ en:
       organization_user:
         user_id: User
         organization_id: Organization
+      training_video:
+        survey_correct_answer: Correct Answer to Question
+        survey_image: Survey Image
+      training_video_translation:
+        video_url: URL to Video
+        video_embed: Video
+        title: Video Title
+        description: Video Description
+        survey_question: Survey Question
+        survey_wrong_answer_description: Text to Show For Wrong Answer
+        survey_image_description: Description of Image (for visually impaired)
     errors:
       messages:
         required_field: "is a required field."
@@ -122,6 +134,7 @@ en:
       georgian_legislation: Georgian Legislation
       partners: Project Partners
       what_is_accessibility: What is Accessibility?
+      training_videos: Training Videos
     titles:
       new: "New %{model}"
       edit: "Edit %{model}"
@@ -271,6 +284,7 @@ en:
       convention_categories: Convetion Categories
       rights: Rights
       organizations: Organizations
+      training_videos: Training Videos
     users:
       edit:
         title: Editing User
@@ -324,6 +338,10 @@ en:
         next: Next
         venue_link_title: "Select %{category} - %{venue}"
         map_link_title: Select this location
+    training_videos:
+      form:
+        video_embed_success: View the embeded video
+        video_embed_fail: The video URL could not be processed
   root:
     index:
       venue_label: 'Find Evaluations by Category:'
@@ -354,6 +372,15 @@ en:
     why_monitor:
       title: Why Monitor Accessibility in Georgia?
       skip_movie: Skip the movie (jump)
+    training_videos:
+      title: Training Videos
+      watched: You have watched this video
+      watch_video: Watch the Video
+      no_videos: There are no training videos on file at this time.
+    training_video:
+      title: "Training Video: '%{name}'"
+      continue: Continue
+      watch_more: Watch More Training Videos
   places:
     show:
       district_link_title: "View all places that are in '%{name}'"
@@ -386,6 +413,8 @@ en:
       header_user_details: Details
       details_link_title: View the details of this evaluation
       disability_other: 'Other Type: %{name}'
+    evaluation2:
+      watch_videos: Watch Training Videos
     form:
       header_location: Where is this place located?
       map_instructions: Click on the map to add a marker of where the place is located.  
@@ -445,6 +474,10 @@ en:
       no_questions: There are no evaluation questions on file for your selection.
       disability_other_header: Other Explanation
       disability_other_label: "Please explain the 'Other'"
+      watch_videos_header: Watch the Training Videos!
+      watch_videos_explanation: 'Before you start your evaluation, please watch our training videos....'
+      watch_videos_button: Watch the Videos
+      watch_videos_close: Contine with Evaluation
     upload_photos:
       title: "Upload Photos for '%{name}'"
       add_files: Add photos...
