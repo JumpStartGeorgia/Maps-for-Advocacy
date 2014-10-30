@@ -326,8 +326,9 @@ class PlacesController < ApplicationController
   def evaluation
     @place = Place.with_translation(params[:id]).first
 
-    # record wether or not user has watched training videos yet
-    gon.watched_videos = TrainingVideoResult.watched_videos?(current_user.id)
+    # record wether or not user has seen training video popup yet
+    gon.show_training_popup = current_user.show_popup_training
+    gon.saw_popup_path = saw_popup_path
 
     # make a copy of @place for saving
     # since loading blank eval objects into @place before saving
@@ -530,6 +531,20 @@ logger.debug "-------> error: #{@place.errors.full_messages}"
     end
   end
   
+
+  # record that the user saw the training video popup on evaluation page
+  def saw_popup
+    respond_to do |format|
+      format.js { 
+        if current_user.show_popup_training
+          current_user.show_popup_training = false
+          current_user.save
+        end
+
+        render nothing: true
+      }
+    end
+  end
 
   
   private

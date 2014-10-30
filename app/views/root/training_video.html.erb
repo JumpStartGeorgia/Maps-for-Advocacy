@@ -1,1 +1,96 @@
 <% title t('.title', :name => @training_video.title) %>
+
+<div id="training-video-survey" role="region" aria-live="polite">
+  <div id="pre-survey">
+    <p>
+      Before watching the video, please look at the image and answer the following question.
+    </p>
+    <p class="survey-image">
+      <%= image_tag(@training_video.survey_image.url(:medium), :alt => strip_tags(@training_video.survey_image_description)) %>
+    </p>
+    <p class="survey-question">
+      <%= @training_video.survey_question %>
+    </p>
+    <ul class="survey-answers">
+      <li>
+        <label for="pre-survey-answer-true">
+          <input id="pre-survey-answer-true" name="pre-survey-answer" type="radio" value="true">
+          <%= t('formtastic.yes') %>
+        </label>
+      </li>
+      <li>
+        <label for="pre-survey-answer-false">
+          <input id="pre-survey-answer-false" name="pre-survey-answer" type="radio" value="false">
+          <%= t('formtastic.no') %>
+        </label>
+      </li>
+    </ul>
+    <div class="survey-btn" aria-hidden="true">
+      <button id="btn-pre-survey" class="btn"><%= t('.continue') %></button>
+    </div>
+  </div>
+
+  <div id="video" aria-hidden="true">
+    <%= simple_format_no_tags(@training_video.video_embed, {}, {sanitize: false}) %>
+    <div class="survey-btn">
+      <button id="btn-video" class="btn" data-watched="false"><%= t('.continue') %></button>
+    </div>
+  </div>
+
+
+  <div id="post-survey" aria-hidden="true">
+    <p>
+      Now that you have watched the video, please look at the image and answer the following question.
+    </p>
+    <p class="survey-image">
+      <%= image_tag(@training_video.survey_image.url(:medium), :alt => strip_tags(@training_video.survey_image_description)) %>
+    </p>
+    <p class="survey-question">
+      <%= @training_video.survey_question %>
+    </p>
+    <ul class="survey-answers">
+      <li>
+        <label for="post-survey-answer-true">
+          <input id="post-survey-answer-true" name="post-survey-answer" type="radio" value="true">
+          <%= t('formtastic.yes') %>
+        </label>
+      </li>
+      <li>
+        <label for="post-survey-answer-false">
+          <input id="post-survey-answer-false" name="post-survey-answer" type="radio" value="false">
+          <%= t('formtastic.no') %>
+        </label>
+      </li>
+    </ul>
+    <div class="survey-btn" aria-hidden="true">
+      <button id="btn-post-survey" class="btn"><%= t('.continue') %></button>
+    </div>
+  </div>
+
+
+  <div id="results" data-correct="<%= @training_video.survey_correct_answer.to_s %>" aria-hidden="true">
+    <div id="correct-answer" aria-hidden="true">
+      <p>
+        Correct!
+      </p>
+    </div>
+
+    <div id="wrong-answer" aria-hidden="true">
+      <p>
+        Sorry, your answer is incorrect.
+      </p>
+
+      <%= simple_format_no_tags(@training_video.survey_wrong_answer_description, {}, {sanitize: false}) %>
+    </div>
+
+    <div id="watch-more">
+      <%= link_to t('.watch_more'), training_videos_path, :class => 'btn btn-small' %>
+      <%= link_to t('helpers.links.evaluate_place'), new_place_path, :class => 'btn btn-small' %>
+    </div>
+
+  </div>
+
+  <input id="survey_id" type="hidden" />
+
+
+</div>

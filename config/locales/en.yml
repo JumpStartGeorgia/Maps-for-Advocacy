@@ -379,6 +379,8 @@ en:
       no_videos: There are no training videos on file at this time.
     training_video:
       title: "Training Video: '%{name}'"
+      continue: Continue
+      watch_more: Watch More Training Videos
   places:
     show:
       district_link_title: "View all places that are in '%{name}'"

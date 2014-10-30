@@ -170,8 +170,8 @@
       <p><%= t('.watch_videos_explanation') %></p>
     </div>
     <div class="modal-footer">
-      <%= link_to t('.watch_videos_button'), training_videos_path, :class => 'btn' %>
-      <a href="#" class="btn" data-dismiss="modal"><%= t('.watch_videos_close') %></a>
+      <button id="btn-training" class="btn" data-dismiss="modal" data-href="<%= training_videos_path%>"><%= t('.watch_videos_button') %></button>
+      <button id="btn-close" class="btn" data-dismiss="modal"><%= t('.watch_videos_close') %></button>
     </div>
   </div>
 

@@ -77,4 +77,69 @@ $(document).ready(function() {
 
   });
 
+
+  /* for watching a training video */
+  if (gon.record_progress_path){
+    // ajax call to make the update
+    function update_video_progress(){
+      $.ajax({
+        type: "POST",
+        dataType: 'json',
+        url: gon.record_progress_path,
+        data: {
+          pre_survey_answer: $('#training-video-survey #pre-survey input:checked').val(),
+          post_survey_answer: $('#training-video-survey #post-survey input:checked').val(),
+          watched_video: $('#training-video-survey #video #btn-video').data('watched'),
+          survey_id: $('#survey_id').val()
+        }
+      }).always(function(data){
+        if (data != undefined && data.survey_id != undefined && $('#survey_id').val() == ''){
+          $('#survey_id').val(data.survey_id);
+        }
+      });
+    }
+
+    // switch to video
+    $('#training-video-survey #pre-survey #btn-pre-survey').click(function(){
+      // save response
+      update_video_progress();
+
+      // turn on/off sections
+      $('#training-video-survey #pre-survey').attr('aria-hidden', 'true');
+      $('#training-video-survey #video').attr('aria-hidden', 'false');
+    });
+    // switch to post-survey
+    $('#training-video-survey #video #btn-video').click(function(){
+      // record that video was watched
+      $('#training-video-survey #video #btn-video').data('watched', 'true');
+
+      // save response
+      update_video_progress();
+
+      // turn on/off sections
+      $('#training-video-survey #video').attr('aria-hidden', 'true')
+      $('#training-video-survey #post-survey').attr('aria-hidden', 'false');
+    });
+    // switch to results
+    $('#training-video-survey #post-survey #btn-post-survey').click(function(){
+      // save response
+      update_video_progress();
+
+      // get answer and show proper response
+      if ($('#training-video-survey #post-survey input:checked').val() == $('#training-video-survey #results').data('correct').toString()){
+        $('#training-video-survey #results #correct-answer').attr('aria-hidden', 'false');
+      }else{
+        $('#training-video-survey #results #wrong-answer').attr('aria-hidden', 'false');
+      }
+
+      // turn on/off sections
+      $('#training-video-survey #post-survey').attr('aria-hidden', 'true');
+      $('#training-video-survey #results').attr('aria-hidden', 'false');
+    });
+
+    // when answer is selected, show continue button
+    $('#training-video-survey #pre-survey input, #training-video-survey #post-survey input').change(function(){
+      $(this).closest('.survey-answers').find('+ .survey-btn').attr('aria-hidden', 'false');
+    });
+  }
 });

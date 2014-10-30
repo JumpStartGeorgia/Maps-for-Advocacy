@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141029210501) do
+ActiveRecord::Schema.define(:version => 20141030044549) do
 
   create_table "convention_categories", :force => true do |t|
     t.datetime "created_at"
@@ -423,9 +423,9 @@ ActiveRecord::Schema.define(:version => 20141029210501) do
   end
 
   create_table "users", :force => true do |t|
-    t.string   "email",                                                  :default => "", :null => false
-    t.string   "encrypted_password",                                     :default => "", :null => false
-    t.integer  "role",                                                   :default => 0,  :null => false
+    t.string   "email",                                                  :default => "",   :null => false
+    t.string   "encrypted_password",                                     :default => "",   :null => false
+    t.integer  "role",                                                   :default => 0,    :null => false
     t.string   "reset_password_token"
     t.datetime "reset_password_sent_at"
     t.datetime "remember_created_at"
@@ -443,6 +443,7 @@ ActiveRecord::Schema.define(:version => 20141029210501) do
     t.decimal  "lat",                    :precision => 15, :scale => 12
     t.decimal  "lon",                    :precision => 15, :scale => 12
     t.integer  "district_id"
+    t.boolean  "show_popup_training",                                    :default => true
   end
 
   add_index "users", ["email"], :name => "index_users_on_email", :unique => true

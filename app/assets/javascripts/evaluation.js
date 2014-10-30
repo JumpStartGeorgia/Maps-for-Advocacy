@@ -513,10 +513,27 @@ $(document).ready(function(){
       $(this).parent().find('.evidence-message-container').attr('aria-busy', 'false');
     });
 
-    // if the user has not watched any training videos, show the pop-up
-    if (gon.watched_videos !== undefined && gon.watched_videos == false){
+    // if the user has not seen the training video popup, show it
+    if (gon.show_training_popup == true){
       $('#evaluation-watch-videos').modal('show');
     }
-    
+
+    // record that the user saw the training video pop-up
+    if (gon.show_training_popup == true && gon.saw_popup_path){
+      var go_to_training = false;
+      $('#evaluation-watch-videos').on('click','#btn-training', function (e) {
+        go_to_training = true;
+      });      
+      $('#evaluation-watch-videos').on('hidden', function () {
+        $.ajax({
+          type: "POST",
+          url: gon.saw_popup_path,
+        }).always(function(){
+          if (go_to_training == true){
+            window.location.href = $('#evaluation-watch-videos #btn-training').data('href');
+          }
+        });
+      });
+    }
   }
 });
