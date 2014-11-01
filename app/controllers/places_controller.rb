@@ -1,6 +1,6 @@
 class PlacesController < ApplicationController
   before_filter :authenticate_user!, :except => :show
-  before_filter :only => [:edit, :update, :delete, :delete_evaluation] do |controller_instance|
+  before_filter :only => [:edit, :update, :delete] do |controller_instance|
     controller_instance.send(:valid_role?, User::ROLES[:site_admin])
   end
 
@@ -236,7 +236,10 @@ class PlacesController < ApplicationController
     @place = Place.find(params[:id])
     @evaluation = PlaceEvaluation.find(params[:evaluation_id])
 
-    if @place.present? && @evaluation.present?
+    # if the records were found and the user is a site admin or is the owner of the eval,
+    # contine
+    if @place.present? && @evaluation.present? && 
+        (current_user.role?(User::ROLES[:site_admin]) || current_user.id == @evaluation.user_id)
       is_certified = @evaluation.is_certified
 
       # delete the evaluation
