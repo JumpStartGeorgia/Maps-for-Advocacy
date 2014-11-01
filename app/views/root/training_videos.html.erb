@@ -1,11 +1,17 @@
 <% title t('.title') %>
 
 <% if @training_videos.present? %>
-  <% @training_videos.each do |video| %>
+  <% @training_videos.each_with_index do |video, index| %>
+    <% if index%3 == 0%>
+      <% if index > 0 %>
+        </div>
+      <% end %>
+      <div class="row-fluid">
+    <% end %>
     <div class="training-video-item span4">
       <div class="training-video-image">
         <%= link_to(image_tag(video.survey_image.url(:medium), :alt => strip_tags(video.survey_image_description)), training_video_path(video)) %>
-        <% if @watched_videos.present? && @watched_videos.map{|x| x.id}.index(video.id).present? %>
+        <% if @watched_videos.present? && @watched_videos.map{|x| x.training_video_id}.index(video.id).present? %>
           <div class="training-video-watched">
             <%= t('.watched') %>
           </div>
@@ -19,6 +25,10 @@
         </div>
       </div>
     </div>
+    <% if index == @training_videos.length-1 %>
+      </div>
+    <% end %>
+
   <% end %>
 <% else %>
 
