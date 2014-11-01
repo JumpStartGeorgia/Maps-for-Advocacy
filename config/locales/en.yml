@@ -110,6 +110,10 @@ en:
       messages:
         required_field: "is a required field."
         already_exists: 'already exists in the database.'
+  mailer:
+    closing: "Sincerely,"
+    signature: The Ability.ge Team
+    unsubscribe: Click here to change your notification settings
   helpers:
     actions: Actions
     links:
@@ -123,8 +127,22 @@ en:
       cancel: Cancel
       reset: Reset
       view: View
-      sign_in: Sign In
       sign_in_facebook: Sign in with Facebook
+      forgot_password: Forgot Password?
+      change_password: Change Your Password
+      change_password2: Change Password
+      password_reset: Reset Password
+      sign_in2: Sign In
+      sign_in: "Already have an account?"
+      sign_up2: Sign Up
+      sign_up_question: "Not a member yet?"
+      sign_up: "Register now"
+      sign_up_title: Join %{app_name}
+      sign_out: Sign Out
+      sign_in_provider: "Sign in with %{provider}"
+      sign_up_provider: "Sign up with %{provider}"
+      sign_in_local_or_provider: or log in with your email and password
+      reset_or_sign_in: sign in with facebook or reset your password
       evaluate_place: Evaluate a Place
       find_evaluations: Find Evaluations
       statistics: View More Statistics
@@ -552,3 +570,11 @@ en:
       title: Add User to %{org}
       no_users: There are no users available to add to %{org}.
       back: Back to Manage Organization Users page
+  devise:
+    mailer:
+      reset_password_instructions:
+        title: 'Hello %{nickname}!'
+        p1: "Someone has requested a link to change your password on %{app_name}, and you can do this through the link below."
+        link_title: Change my password
+        p2: "If you didn't request this, please ignore this email."
+        p3: "Your password won't change until you access the link above and create a new one."                

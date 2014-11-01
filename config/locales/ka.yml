@@ -24,7 +24,7 @@ ka:
         role: როლი
         remember_me: დამიმახსოვრე
         avatar: პროფილის სურათი
-        nickname: სახელი
+        nickname: მომხმარებლის სახელი
       question:
         question_categories: კითხვის კატეგორიები
       question_translation:
@@ -110,6 +110,10 @@ ka:
       messages:
         required_field: "სავალდებულოა"
         already_exists: 'უკვე არსებობს მონაცემთა ბაზაში'
+  mailer:
+    closing: "პატივისცემით,"
+    signature: The Ability.ge Team
+    unsubscribe: დააჭირეთ და შეცვალეთ შეტყობინებების პარამეტრები
   helpers:
     actions: აირჩიეთ
     links:
@@ -123,8 +127,22 @@ ka:
       cancel: გაუქმება
       reset: საწყის კონფიგურაციაზე დაბრუნება
       view: ნახვა
-      sign_in: სისტემაში შესვლა
-      sign_in_facebook: სისტემაში Facebook-ით შესვლა
+      sign_in_facebook: Facebook-ით შესვლა
+      forgot_password: დაგავიწყდათ პაროლი?
+      change_password: პაროლის შეცვლა
+      change_password2: პაროლის შეცვლა
+      password_reset: პაროლის აღდგენა
+      sign_in2: შესვლა
+      sign_in: უკვე გაქვთ ანგარიში?      
+      sign_up2: რეგისტრაცია
+      sign_up_question: "არ გაქვთ ანგარიში?"
+      sign_up: დარეგისტრირდით
+      sign_up_title: შემოგვიერთდი “%{app_name}”
+      sign_out: გასვლა
+      sign_in_provider: "შესვლა %{provider}-ით"
+      sign_up_provider: "დარეგისტრირდით  %{provider}-ით"
+      sign_in_local_or_provider: ან შეიყვანეთ თქვენი ელ. ფოსტა და პაროლი
+      reset_or_sign_in: შედით facebook-ით ან შეცვალეთ პაროლი
       evaluate_place: Evaluate a Place
       find_evaluations: Find Evaluations
       statistics: View More Statistics
@@ -552,3 +570,11 @@ ka:
       title: დაამატეთ მომხმარებელი  %{org}ში
       no_users: ვერ მოიძებნა მომხმარებელი %{org}ში დასამატებლად.
       back: ორგანიზაციის წევრთა ანგარიშების მართვის გვერძე დაბრუნება
+  devise:
+    mailer:
+      reset_password_instructions:
+        title: 'მოგესალმებით, %{nickname}!'
+        p1: მივიღეთ მოთხოვნა "%{app_name}" თქვენი პაროლის შეცვლის შესახებ. პაროლის შესაცვლელად, მიჰყევით შემდეგ ბმულს.
+        link_title: პაროლის შეცვლა
+        p2: "თუ თქვენ არ მოგითხოვიათ პაროლის შეცვლა, გთხოვთ, არ მიაქციოთ ყურადღება ამ შეტყობინებას."
+        p3: "თქვენი პაროლი იგივე დარჩება, სანამ არ გადახვალთ ზემოთ მითითებულ ბმულზე და შექმნით ახალ პაროლს."    

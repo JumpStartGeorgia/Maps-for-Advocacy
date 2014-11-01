@@ -1,34 +1,46 @@
 <%- model_class = User -%>
-<% title t('helpers.links.sign_in') %>
+<% title t('helpers.links.sign_in2') %> 
 
 <div id="login-form">
+  <div class="providers">
+    <%- if devise_mapping.omniauthable? %>          
+      <%- resource_class.omniauth_providers.each do |provider| %>
+        <% if provider == :facebook %>
+          <%= link_to  omniauth_authorize_path(resource_name, provider), :class => 'facebook' do %>
+            <i class="s i-facebook-w"></i><span><%= t('helpers.links.sign_in_provider', :provider => provider.to_s.titleize) %></span>
+          <% end %>
+        <% else %>
+          <%= link_to t('helpers.links.sign_in_provider', :provider => provider.to_s.titleize), omniauth_authorize_path(resource_name, provider), :class => 'btn btn-primary' %>
+        <% end %>
+      <% end -%>
+    <% end -%>
+  </div>
 
-  <%- if devise_mapping.omniauthable? %>
-    <div class="providers">
-	    <%= link_to image_tag('connect_fb.png', :alt => t('helpers.links.sign_in_facebook')), 
-	        omniauth_authorize_path(resource_name, :facebook), :title => t('helpers.links.sign_in_facebook') %>
+  <div class="facebook_or_local"><%= t('helpers.links.sign_in_local_or_provider') %></div>
+
+  <%= semantic_form_for(resource, :as => resource_name, :url => session_path(resource_name), :html=>{:"data-form-id"=>"login-form"}) do |f| %>
+    <%= f.error_messages %>
+    <%= f.input :email, :as => :email, :input_html => { :size => 35, :class => "login-username" }, :placeholder => model_class.human_attribute_name(:email) , label: false %>
+    <%= f.input :password, :input_html => { :size => 35, :class => "login-password" }, :placeholder => model_class.human_attribute_name(:password), label: false %>
+    <div class="control-group submit-row">
+      <% if devise_mapping.rememberable? -%>        
+          <label class="checkbox remember-me">
+            <%= f.check_box :remember_me  %> <%= model_class.human_attribute_name(:remember_me) %>
+          </label>
+          <%= f.submit t('helpers.links.sign_in2'), :class => 'btn sign-in' %>
+      <% end -%>
     </div>
-  <% end -%>
-
-  <% if params[:show_local].present? && params[:show_local] == 'true' %>
-
-    <%= semantic_form_for(resource, :as => resource_name, :url => session_path(resource_name)) do |f| %>
-	    <%= f.input :email, :input_html => { :size => 39, :placeholder => model_class.human_attribute_name(:email) }, :label => false %>
-	    <%= f.input :password, :input_html => { :size => 39, :placeholder => model_class.human_attribute_name(:password) }, :label => false %>
-	    <% if devise_mapping.rememberable? -%>
-		    <div class="control-group">
-			    <label class="checkbox">
-				    <%= f.check_box :remember_me %> <%= model_class.human_attribute_name(:remember_me) %>
-			    </label>
-		    </div>
-	    <% end -%>
-
-
-	    <div class="control-group">
-		    <%= f.submit t('helpers.links.sign_in'), :class => 'btn' %>
-	    </div>
-    <% end %>
   <% end %>
 
-</div>
+  <div class="control-group">
+    <%- if devise_mapping.recoverable? && controller_name != 'passwords' %>
+      <%= link_to t('helpers.links.forgot_password'), new_password_path(resource_name), :class => 'forgot-link' %>
+    <% end -%>
 
+    <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+      <div class="sign-up-box">
+        <span><%= t('helpers.links.sign_up_question') %></span>&nbsp;<%= link_to t('helpers.links.sign_up'), new_registration_path(resource_name), :class => 'sign-up-link' %>
+      </div>
+    <% end -%>  
+  </div>  
+</div>

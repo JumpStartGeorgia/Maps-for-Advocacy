@@ -1,12 +1,27 @@
-<h2>Forgot your password?</h2>
+<%- model_class = User -%>
+<% title t('helpers.links.forgot_password') %> 
 
-<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post }) do |f| %>
-  <%= devise_error_messages! %>
+<div id="reset-password-form">
+  <%= semantic_form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => { :method => :post, :"data-form-id"=>"reset-password-form" }) do |f| %>
+    <%= f.error_messages %>
+    <%= f.input :email, :as => :email, :input_html => { :size => 35 , :class => "login-username" }, :placeholder => model_class.human_attribute_name(:email) , label: false  %>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email %></div>
+    <div class="control-group submit-row">
+      <%= f.submit t('helpers.links.password_reset'), :class => 'btn btn-default pass-reset' %>
+    </div>
+  <% end %>
 
-  <div><%= f.submit "Send me reset password instructions" %></div>
-<% end %>
+  <div class="control-group">
+    <%- if controller_name != 'sessions' %>
+      <%= link_to t('helpers.links.sign_in'), new_session_path(resource_name), :class => 'sign-in-link' %>
+    <% end -%>
 
-<%= render "links" %>
+    <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
+      <div class="sign-up-box">
+      <span><%= t('helpers.links.sign_up_question') %></span>&nbsp;<%= link_to t('helpers.links.sign_up'), new_registration_path(resource_name), :class => 'sign-up-link' %>
+      </div>
+    <% end -%>  
+  </div>
+</div>
+
+
