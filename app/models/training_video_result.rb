@@ -2,7 +2,8 @@ class TrainingVideoResult < ActiveRecord::Base
   belongs_to :user
   belongs_to :training_video
 
-  attr_accessible :training_video_id, :user_id, :pre_survey_answer, :post_survey_answer, :watched_video
+  attr_accessible :training_video_id, :user_id, :pre_survey_answer, :post_survey_answer, :watched_video,
+        :country, :ip_address
 
      
   # return flag indicating if user has watched any videos 

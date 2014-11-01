@@ -105,6 +105,12 @@ class RootController < ApplicationController
             survey = TrainingVideoResult.new
             survey.user_id = user_id
             survey.training_video_id = params[:id]
+            # get country from ip
+            location = Geocoder.search(request.remote_ip)
+            if location.present?
+              survey.country = location.first.country
+              survey.ip_address = request.remote_ip
+            end
           end
           
           survey.pre_survey_answer = params[:pre_survey_answer].to_bool if params[:pre_survey_answer].present?

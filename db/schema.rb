@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141101182839) do
+ActiveRecord::Schema.define(:version => 20141101184508) do
 
   create_table "convention_categories", :force => true do |t|
     t.datetime "created_at"
@@ -390,6 +390,8 @@ ActiveRecord::Schema.define(:version => 20141101182839) do
     t.boolean  "watched_video",      :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "country"
+    t.string   "ip_address"
   end
 
   add_index "training_video_results", ["user_id", "watched_video"], :name => "index_training_video_results_on_user_id_and_watched_video"
