@@ -161,7 +161,8 @@ en:
       add: Add
     common:
       app_name: Ability.ge
-      slogan: Monitoring the Convention on the Rights of Persons with Disabilities in Georgia 
+      slogan: Register. Evaluate. Engage.
+      slogan_old: Monitoring the Convention on the Rights of Persons with Disabilities in Georgia 
       added_on: "Added on: %{date}" 
       venue_has_questions: custom questions
       answers:

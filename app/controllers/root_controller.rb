@@ -3,7 +3,9 @@ class RootController < ApplicationController
   def index    
     @venue_categories = VenueCategory.sorted
 
-    @page = Page.by_name('landing_page')
+    @landing_page = Page.by_name('landing_page')
+
+    @how_report = Page.by_name('how_report')
 
     @stats = {}
     @stats[:places_with_evals] = PlaceSummary.overall_places_with_evals
