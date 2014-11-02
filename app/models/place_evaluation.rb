@@ -68,5 +68,112 @@ class PlaceEvaluation < ActiveRecord::Base
   end
 
 
+  #########################
+  ## STATS
+  #########################
+  # get stats for each user that submitted eval
+  # - day_limit - if provided, indicates last x days of evaluations to count
+  # returns: array of hashes
+  # - {name, public_count, ceritifed_count, total_count}
+  def self.stats_by_user(day_limit = nil)
+    results = []
+    stats = PlaceEvaluation
+    if day_limit.present? && day_limit.class == Fixnum
+      stats = stats.where(['created_at > ?', day_limit.days.ago])
+    end
+    stats = stats.group(['user_id', 'is_certified']).count    
 
+    if stats.present?
+      # get user info
+      users = User.select('id, nickname, email').where(:id => stats.keys.map{|x| x[0]}.uniq)
+
+      # stats in format of: {[user_id, true] => count, [user_id, false] => count, ...}
+      # reformat to: [ {name, public_count, certified_count, total_count } ]
+      users.each do |user|
+        h = {name: user.nickname, public_count: 0, certified_count: 0, total_count: 0}
+        h[:public_count] = stats[[user.id, false]] if stats[[user.id, false]].present?
+        h[:certified_count] = stats[[user.id, true]] if stats[[user.id, true]].present?
+        h[:total_count] = h[:public_count] + h[:certified_count]
+        results << h
+      end
+    end
+
+    # return results sorted by total count desc
+    return results.sort_by{|x| -x[:total_count]}
+  end
+
+  # get stats for each org that submitted eval
+  # - day_limit - if provided, indicates last x days of evaluations to count
+  # returns: array of hashes
+  # - {name, avatar_url, public_count, ceritifed_count, total_count}
+  def self.stats_by_org(day_limit = nil)
+    results = []
+
+    stats = PlaceEvaluation
+    if day_limit.present? && day_limit.class == Fixnum
+      stats = stats.where(['place_evaluations.created_at > ?', day_limit.days.ago])
+    end
+    stats = stats.joins(:place_evaluation_organizations)
+            .group(['place_evaluation_organizations.organization_id', 'place_evaluations.is_certified'])
+            .count    
+
+    if stats.present?
+      # get org info
+      orgs = Organization.sorted.where(:id => stats.keys.map{|x| x[0]}.uniq)
+
+      # stats in format of: {[org_id, true] => count, [org_id, false] => count, ...}
+      # reformat to: [ {name, public_count, certified_count, total_count } ]
+      orgs.each do |org|
+        h = {name: org.name, avatar_url: org.avatar.url(:small), public_count: 0, certified_count: 0, total_count: 0}
+        h[:public_count] = stats[[org.id, false]] if stats[[org.id, false]].present?
+        h[:certified_count] = stats[[org.id, true]] if stats[[org.id, true]].present?
+        h[:total_count] = h[:public_count] + h[:certified_count]
+        results << h
+      end
+    end
+
+    # return results sorted by total count desc
+    return results.sort_by{|x| -x[:total_count]}
+  end
+
+  # get overall stats by eval type
+  # returns hash:
+  # - {public_count, ceritifed_count, total_count}
+  def self.stats_by_type
+    results = {}
+    stats = group('is_certified').count
+
+    if stats.present?
+      # stats in format of: {true => count, false => count}
+      # reformat to: {public_count, certified_count, total_count }
+      results = {public_count: 0, certified_count: 0, total_count: 0}
+      results[:public_count] = stats[false] if stats[false].present?
+      results[:certified_count] = stats[true] if stats[true].present?
+      results[:total_count] = results[:public_count] + results[:certified_count]
+    end
+
+    return results
+  end
+
+  # get stats for visual evidence
+  # returns: hash
+  # - {public_count, ceritifed_count, total_count}
+  def self.stats_with_images
+    results = {}
+
+    stats = joins(:place_evaluation_images)
+            .group('place_evaluations.is_certified')
+            .count    
+
+    if stats.present?
+      # stats in format of: {true => count, false => count}
+      # reformat to: {public_count, certified_count, total_count }
+      results = {public_count: 0, certified_count: 0, total_count: 0}
+      results[:public_count] = stats[false] if stats[false].present?
+      results[:certified_count] = stats[true] if stats[true].present?
+      results[:total_count] = results[:public_count] + results[:certified_count]
+    end
+
+    return results
+  end
 end
