@@ -1,1 +1,218 @@
 <% title t('.title') %>
+
+<div class="row-fluid">
+  <div class="span6">
+    <% if @type.present? %>
+      <h2>Evaluations Submitted</h2>
+      <ul>
+        <li>
+          Public Evaluations: <%= number_with_delimiter(@type[:public_count]) %>
+        </li>
+        <li>
+          Expert Evaluations: <%= number_with_delimiter(@type[:certified_count]) %>
+        </li>
+        <li>
+          Total Evaluations: <%= number_with_delimiter(@type[:total_count]) %>
+        </li>
+      </ul>
+    <% end %>
+  </div>
+  <div class="span6">
+    <% if @images.present? %>
+      <h2>Evaluations with Visual Evidence</h2>
+      <ul>
+        <li>
+          Public Evaluations: <%= number_with_delimiter(@images[:public_count]) %>
+        </li>
+        <li>
+          Expert Evaluations: <%= number_with_delimiter(@images[:certified_count]) %>
+        </li>
+        <li>
+          Total Evaluations: <%= number_with_delimiter(@images[:total_count]) %>
+        </li>
+      </ul>
+    <% end %>
+  </div>
+</div>
+
+<br /><br /><br />
+
+<div class="row-fluid">
+  <div class="span6">
+    <% if @user_latest.present? %>
+      <h2>Most Active Users in the Last 30 Days</h2>
+
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>
+              User
+            </th>
+            <th>
+              Public Evaluations
+            </th>
+            <th>
+              Expert Evaluations
+            </th>
+            <th>
+              Total Evaluations
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @user_latest.each do |user| %>
+            <tr>
+              <td>
+                <%= user[:name] %>
+              </td>
+              <td>
+                <%= user[:public_count] %>
+              </td>
+              <td>
+                <%= user[:certified_count] %>
+              </td>
+              <td>
+                <%= user[:total_count] %>
+              </td>
+            </tr> 
+          <% end %>
+        </tbody>
+      </table>
+
+    <% end %>
+  </div>
+  <div class="span6">
+    <% if @org_latest.present? %>
+      <h2>Most Active Organizations in the Last 30 Days</h2>
+
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>
+              Organization
+            </th>
+            <th>
+              Public Evaluations
+            </th>
+            <th>
+              Expert Evaluations
+            </th>
+            <th>
+              Total Evaluations
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @org_latest.each do |org| %>
+            <tr>
+              <td>
+                <%= org[:name] %>
+              </td>
+              <td>
+                <%= org[:public_count] %>
+              </td>
+              <td>
+                <%= org[:certified_count] %>
+              </td>
+              <td>
+                <%= org[:total_count] %>
+              </td>
+            </tr> 
+          <% end %>
+        </tbody>
+      </table>
+
+    <% end %>
+  </div>
+</div>
+
+<br /><br /><br />
+
+<div class="row-fluid">
+  <div class="span6">
+    <% if @user_all.present? %>
+      <h2>User History</h2>
+
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>
+              User
+            </th>
+            <th>
+              Public Evaluations
+            </th>
+            <th>
+              Expert Evaluations
+            </th>
+            <th>
+              Total Evaluations
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @user_all.each do |user| %>
+            <tr>
+              <td>
+                <%= user[:name] %>
+              </td>
+              <td>
+                <%= user[:public_count] %>
+              </td>
+              <td>
+                <%= user[:certified_count] %>
+              </td>
+              <td>
+                <%= user[:total_count] %>
+              </td>
+            </tr> 
+          <% end %>
+        </tbody>
+      </table>
+
+    <% end %>
+  </div>
+  <div class="span6">
+    <% if @org_all.present? %>
+      <h2>Organization History</h2>
+
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>
+              Organization
+            </th>
+            <th>
+              Public Evaluations
+            </th>
+            <th>
+              Expert Evaluations
+            </th>
+            <th>
+              Total Evaluations
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @org_all.each do |org| %>
+            <tr>
+              <td>
+                <%= org[:name] %>
+              </td>
+              <td>
+                <%= org[:public_count] %>
+              </td>
+              <td>
+                <%= org[:certified_count] %>
+              </td>
+              <td>
+                <%= org[:total_count] %>
+              </td>
+            </tr> 
+          <% end %>
+        </tbody>
+      </table>
+
+    <% end %>
+  </div>
+</div>

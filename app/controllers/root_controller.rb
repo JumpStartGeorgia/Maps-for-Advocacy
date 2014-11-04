@@ -81,6 +81,12 @@ class RootController < ApplicationController
   end
 
   def stats
+    @user_all = PlaceEvaluation.stats_by_user
+    @user_latest = PlaceEvaluation.stats_by_user(30)
+    @org_all = PlaceEvaluation.stats_by_org
+    @org_latest = PlaceEvaluation.stats_by_org(30)
+    @type = PlaceEvaluation.stats_by_type
+    @images = PlaceEvaluation.stats_with_images
 
     respond_to do |format|
       format.html # index.html.erb

@@ -161,8 +161,10 @@ class PlaceEvaluation < ActiveRecord::Base
   def self.stats_with_images
     results = {}
 
-    stats = joins(:place_evaluation_images)
-            .group('place_evaluations.is_certified')
+    evals_with_ids = PlaceEvaluationImage.select('distinct place_evaluation_id').map{|x| x.place_evaluation_id}
+
+    stats = where(:id => evals_with_ids)
+            .group('is_certified')
             .count    
 
     if stats.present?
