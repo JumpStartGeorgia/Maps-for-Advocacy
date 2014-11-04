@@ -363,6 +363,7 @@ ka:
         video_embed_fail: The video URL could not be processed
   root:
     index:
+      stats_text: "To date, %{num} Places have been evaluated with the following results:"
       venue_label: 'Find Evaluations by Category:'
       venue_all: ყველა კატეგორია
       skip_movie: გამოვტოვოთ ფილმი (გადახტომა)

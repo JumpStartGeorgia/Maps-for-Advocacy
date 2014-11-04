@@ -30,7 +30,6 @@
 
   h2{
     line-height: 1.1;
-    text-align: center;
   }
 
   #text-links{
@@ -39,6 +38,12 @@
       display: inline-block;
       width: 45%;
       text-align: center;
+      vertical-align: top;
+      a{
+        font-size: 18px;
+        line-height: 25px;        
+        padding: 5px 10px !important;
+      }
     }
   }
   #stats{
@@ -48,11 +53,33 @@
   #eval-place{
     margin-top: 20px;
     .add_evaluation{
-      font-size: 18px;
-      line-height: 25px;
+      font-size: 25px;
+      line-height: 30px;
     }
   }
   #find-eval{
     margin-top: 20px;
+    label{
+      font-weight: bold;
+    }
   }  
+}
+
+@media (max-width: 1540px) {
+  #front-page{
+    #text-links{
+      li{
+        a{
+          height: 50px;
+          font-size: 18px;
+          line-height: 25px;        
+          padding: 5px 10px !important;
+        }
+        &:last-of-type a{
+          padding: 15px 10px 0px !important;
+          height: 45px;
+        }
+      }
+    }
+  }
 }

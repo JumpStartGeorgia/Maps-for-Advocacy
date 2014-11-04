@@ -15,8 +15,8 @@
 
       <% if @stats.present? %>
         <div id="stats">
-          <p class="text-center">
-            To date, <%= @stats[:places_with_evals] %> Places have been evaluated with the following results:
+          <p>
+            <%= t('.stats_text', num: @stats[:places_with_evals]) %>
           </p>
 
           <div>
@@ -57,7 +57,7 @@
       </p>
 
       <p id="find-eval">
-        <%= label_tag :filter_venue, t('.venue_label'), :class => 'text-center' %>
+        <%= label_tag :filter_venue, t('.venue_label') %>
         <%
           options = @venue_categories.map{|x| [x.name, x.id]}
           options.unshift([t('.venue_all'), '0'])
