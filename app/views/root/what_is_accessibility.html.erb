@@ -7,7 +7,14 @@
 <hr />
 
 <% if @training_videos.present? %>
-  <% @training_videos.each do |video| %>
+  <% @training_videos.each_with_index do |video, index| %>
+    <% if index%3 == 0%>
+      <% if index > 0 %>
+        </div>
+        <hr />
+      <% end %>
+      <div class="row-fluid">
+    <% end %>
     <div class="span4 what-accessibility-video">
       <h3>
         <%= video.title %>
@@ -19,5 +26,11 @@
         <%= simple_format_no_tags(video.video_embed, {}, {sanitize: false}) %>
       </div> 
     </div>
+    <% if index == @training_videos.length-1 %>
+      </div>
+    <% end %>
+
   <% end %>
+
+
 <% end %>
