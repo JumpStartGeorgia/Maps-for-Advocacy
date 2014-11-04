@@ -367,6 +367,10 @@ ka:
       venue_label: 'Find Evaluations by Category:'
       venue_all: ყველა კატეგორია
       skip_movie: გამოვტოვოთ ფილმი (გადახტომა)
+    contact:
+      title: Contact
+    about:
+      title: About
     find_evaluations:
       title: Find Evaluations
       header_search: ძიება
@@ -495,7 +499,7 @@ ka:
       disability_other_header: სხვა ახსნა
       disability_other_label: "დააკონკრეტეთ 'სხვა'"
       watch_videos_header: Watch the Video Guides!
-      watch_videos_explanation: 'Before you start your evaluation, please watch our video guides....'
+      watch_videos_explanation: 'Before you complete an evaluation, watch the video guides to see examples of places that are accessible and are not accessible.'
       watch_videos_button: Watch the Videos
       watch_videos_close: Contine with Evaluation
     upload_photos:

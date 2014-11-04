@@ -367,6 +367,10 @@ en:
       venue_label: 'Find Evaluations by Category:'
       venue_all: All Categories
       skip_movie: Skip the movie (jump)
+    contact:
+      title: Contact
+    about:
+      title: About
     find_evaluations:
       title: Find Evaluations
       header_search: Search
@@ -495,7 +499,7 @@ en:
       disability_other_header: Other Explanation
       disability_other_label: "Please explain the 'Other'"
       watch_videos_header: Watch the Video Guides!
-      watch_videos_explanation: 'Before you start your evaluation, please watch our video guides....'
+      watch_videos_explanation: 'Before you complete an evaluation, watch the video guides to see examples of places that are accessible and are not accessible.'
       watch_videos_button: Watch the Videos
       watch_videos_close: Contine with Evaluation
     upload_photos:

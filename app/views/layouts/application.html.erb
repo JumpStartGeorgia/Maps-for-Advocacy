@@ -89,6 +89,7 @@
 	                <b class="caret"></b>
 			          </a>
 			          <ul class="dropdown-menu" role="menu">
+                  <li role="menuitem"><%= link_to(t('helpers.links.about'), about_path)  %></li>
                   <li role="menuitem"><%= link_to(t('helpers.links.what_is_accessibility'), what_is_accessibility_path)  %></li>
                   <li role="menuitem"><%= link_to(t('helpers.links.why_monitor'), why_monitor_path)  %></li>
                   <li role="menuitem"><%= link_to(t('helpers.links.training_videos'), video_guides_path)  %></li>
@@ -100,6 +101,8 @@
                   <li role="menuitem"><%= link_to(t('helpers.links.un_crpd'), un_crpd_path)  %></li>
                   <li role="menuitem"><%= link_to(t('helpers.links.methodology'), methodology_path)  %></li>
                   <li role="menuitem"><%= link_to(t('helpers.links.partners'), partners_path)  %></li>
+                  <li class="divider"></li>
+                  <li role="menuitem"><%= link_to(t('helpers.links.contact'), contact_path)  %></li>
 			          </ul>
               </li>
 		          <% if user_signed_in? %>
@@ -187,7 +190,13 @@
     <footer id="footer" class="clear hidden-print">
 			<div id="left">&copy; <%= Time.now.year %></div>
 		  <div id="middle">
-			</div>
+        <ul>
+          <li role="menuitem"><%= link_to(t('helpers.links.about'), about_path)  %></li>
+          <li role="menuitem"><%= link_to(t('helpers.links.what_is_accessibility'), what_is_accessibility_path)  %></li>
+          <li role="menuitem"><%= link_to(t('helpers.links.training_videos'), video_guides_path)  %></li>
+          <li role="menuitem"><%= link_to(t('helpers.links.contact'), contact_path)  %></li>
+        </ul>	 
+  		</div>
 			<div id="right" class="clear">
 				<%= link_to(image_tag("jumpstart-logo.png"), "http://www.jumpstart.ge", :target => "_blank",
 						:title => t(".js_link_title")	) %>
