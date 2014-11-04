@@ -153,6 +153,7 @@ en:
       partners: Project Partners
       what_is_accessibility: What is Accessibility?
       training_videos: Video Guides
+      stats: Evaluation Statistics
     titles:
       new: "New %{model}"
       edit: "Edit %{model}"
@@ -371,6 +372,8 @@ en:
       title: Contact
     about:
       title: About
+    stats:
+      title: Evaluation Statistics
     find_evaluations:
       title: Find Evaluations
       header_search: Search

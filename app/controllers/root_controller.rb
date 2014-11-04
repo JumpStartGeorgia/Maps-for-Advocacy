@@ -68,6 +68,26 @@ class RootController < ApplicationController
   end
 
 
+  def about
+    respond_to do |format|
+      format.html # index.html.erb
+    end
+  end
+
+  def contact
+    respond_to do |format|
+      format.html # index.html.erb
+    end
+  end
+
+  def stats
+
+    respond_to do |format|
+      format.html # index.html.erb
+      format.json { render json: @training_videos }
+    end
+  end
+
   def video_guides
     @training_videos = TrainingVideo.sorted
 

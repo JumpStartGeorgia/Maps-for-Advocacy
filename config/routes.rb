@@ -89,6 +89,7 @@ BootstrapStarter::Application.routes.draw do
     match '/video_guides', :to => 'root#video_guides', :as => :video_guides, :via => :get
     match '/video_guides/:id', :to => 'root#video_guide', :as => :video_guide, :via => :get
     match '/video_guides/:id/record_video_guide_progress', :to => 'root#record_video_guide_progress', :as => :record_video_guide_progress, :via => :post, :defaults => {:format => :js}
+    match '/stats', :to => 'root#stats', :as => :stats, :via => :get
 
 		root :to => 'root#index'
 	  match "*path", :to => redirect("/#{I18n.default_locale}") # handles /en/fake/path/whatever

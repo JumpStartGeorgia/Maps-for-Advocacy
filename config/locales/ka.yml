@@ -153,6 +153,7 @@ ka:
       partners: პროექტის პარტნიორები
       what_is_accessibility: რა არის ხელმისაწვდომობა?
       training_videos: Video Guides
+      stats: Evaluation Statistics
     titles:
       new: "ახალი %{model}"
       edit: "შეცვლა %{model}"
@@ -371,6 +372,8 @@ ka:
       title: Contact
     about:
       title: About
+    stats:
+      title: Evaluation Statistics
     find_evaluations:
       title: Find Evaluations
       header_search: ძიება
