@@ -4,7 +4,7 @@ class TrainingVideoTranslation < ActiveRecord::Base
   attr_accessible :training_video_id, :locale, :title, :description, 
       :survey_question, :survey_wrong_answer_description, :video_url, :video_embed, :survey_image_description
 
-  validates :title, :survey_question, :video_url, :video_embed, :presence => true
+  validates :title, :survey_question, :video_url, :presence => true
   validates :video_url, :format => {:with => URI::regexp(['http','https'])}
 
   def required_data_provided?

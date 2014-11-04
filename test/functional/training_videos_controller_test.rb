@@ -21,7 +21,7 @@ class TrainingVideosControllerTest < ActionController::TestCase
       post :create, training_video: @training_video.attributes
     end
 
-    assert_redirected_to training_video_path(assigns(:training_video))
+    assert_redirected_to video_guide_path(assigns(:training_video))
   end
 
   test "should show training_video" do
@@ -36,7 +36,7 @@ class TrainingVideosControllerTest < ActionController::TestCase
 
   test "should update training_video" do
     put :update, id: @training_video.to_param, training_video: @training_video.attributes
-    assert_redirected_to training_video_path(assigns(:training_video))
+    assert_redirected_to video_guide_path(assigns(:training_video))
   end
 
   test "should destroy training_video" do

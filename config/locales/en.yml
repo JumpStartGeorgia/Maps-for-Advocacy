@@ -15,7 +15,7 @@ en:
       convention_category: Convetion Category
       right: Rights
       organization: Organization
-      training_video: Training Video
+      training_video: Video Guide
     attributes:
       user:
         email: Email Address
@@ -152,7 +152,7 @@ en:
       georgian_legislation: Georgian Legislation
       partners: Project Partners
       what_is_accessibility: What is Accessibility?
-      training_videos: Training Videos
+      training_videos: Video Guides
     titles:
       new: "New %{model}"
       edit: "Edit %{model}"
@@ -303,7 +303,7 @@ en:
       convention_categories: Convetion Categories
       rights: Rights
       organizations: Organizations
-      training_videos: Training Videos
+      training_videos: Video Guides
     users:
       edit:
         title: Editing User
@@ -392,15 +392,15 @@ en:
     why_monitor:
       title: Why Monitor Accessibility in Georgia?
       skip_movie: Skip the movie (jump)
-    training_videos:
-      title: Training Videos
+    video_guides:
+      title: Video Guides
       watched: You have watched this video
       watch_video: Watch the Video
-      no_videos: There are no training videos on file at this time.
-    training_video:
-      title: "Training Video: '%{name}'"
+      no_videos: There are no videos on file at this time.
+    video_guide:
+      title: "Video: '%{name}'"
       continue: Continue
-      watch_more: Watch More Training Videos
+      watch_more: Watch More Videos
   places:
     show:
       district_link_title: "View all places that are in '%{name}'"
@@ -434,7 +434,7 @@ en:
       details_link_title: View the details of this evaluation
       disability_other: 'Other Type: %{name}'
     evaluation2:
-      watch_videos: Watch Training Videos
+      watch_videos: Watch Video Guides
     form:
       header_location: Where is this place located?
       map_instructions: Click on the map to add a marker of where the place is located.  
@@ -494,8 +494,8 @@ en:
       no_questions: There are no evaluation questions on file for your selection.
       disability_other_header: Other Explanation
       disability_other_label: "Please explain the 'Other'"
-      watch_videos_header: Watch the Training Videos!
-      watch_videos_explanation: 'Before you start your evaluation, please watch our training videos....'
+      watch_videos_header: Watch the Video Guides!
+      watch_videos_explanation: 'Before you start your evaluation, please watch our video guides....'
       watch_videos_button: Watch the Videos
       watch_videos_close: Contine with Evaluation
     upload_photos:

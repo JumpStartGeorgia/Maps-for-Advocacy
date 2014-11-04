@@ -68,7 +68,7 @@ class RootController < ApplicationController
   end
 
 
-  def training_videos
+  def video_guides
     @training_videos = TrainingVideo.sorted
 
     @watched_videos = TrainingVideoResult.watched_videos(current_user.id) if user_signed_in?
@@ -79,10 +79,10 @@ class RootController < ApplicationController
     end
   end
 
-  def training_video
+  def video_guide
     @training_video = TrainingVideo.find(params[:id])
 
-    gon.record_progress_path = record_training_video_progress_path
+    gon.record_progress_path = record_video_guide_progress_path
 
     respond_to do |format|
       format.html # index.html.erb

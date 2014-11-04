@@ -6,7 +6,7 @@
       Before watching the video, please look at the image and answer the following question.
     </p>
     <p class="survey-image">
-      <%= image_tag(@training_video.survey_image.url(:medium), :alt => strip_tags(@training_video.survey_image_description)) %>
+      <%= image_tag(@training_video.survey_image.url(:survey), :alt => strip_tags(@training_video.survey_image_description)) %>
     </p>
     <p class="survey-question">
       <%= @training_video.survey_question %>
@@ -43,7 +43,7 @@
       Now that you have watched the video, please look at the image and answer the following question.
     </p>
     <p class="survey-image">
-      <%= image_tag(@training_video.survey_image.url(:medium), :alt => strip_tags(@training_video.survey_image_description)) %>
+      <%= image_tag(@training_video.survey_image.url(:survey), :alt => strip_tags(@training_video.survey_image_description)) %>
     </p>
     <p class="survey-question">
       <%= @training_video.survey_question %>
@@ -84,7 +84,7 @@
     </div>
 
     <div id="watch-more">
-      <%= link_to t('.watch_more'), training_videos_path, :class => 'btn btn-small' %>
+      <%= link_to t('.watch_more'), video_guides_path, :class => 'btn btn-small' %>
       <%= link_to t('helpers.links.evaluate_place'), new_place_path, :class => 'btn btn-small' %>
     </div>
 

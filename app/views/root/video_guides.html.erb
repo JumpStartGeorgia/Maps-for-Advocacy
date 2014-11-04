@@ -5,12 +5,13 @@
     <% if index%3 == 0%>
       <% if index > 0 %>
         </div>
+        <hr />
       <% end %>
-      <div class="row-fluid">
+      <div class="row-fluid training-video-items">
     <% end %>
     <div class="training-video-item span4">
       <div class="training-video-image">
-        <%= link_to(image_tag(video.survey_image.url(:medium), :alt => strip_tags(video.survey_image_description)), training_video_path(video)) %>
+        <%= link_to(image_tag(video.survey_image.url(:medium), :alt => strip_tags(video.survey_image_description)), video_guide_path(video)) %>
         <% if @watched_videos.present? && @watched_videos.map{|x| x.training_video_id}.index(video.id).present? %>
           <div class="training-video-watched">
             <%= t('.watched') %>
@@ -21,7 +22,7 @@
         <h3><%= video.title %></h3>
         <%= simple_format_no_tags(video.description, {}, {sanitize: false}) %>
         <div class="training-video-watch">
-          <%= link_to t('.watch_video'), training_video_path(video), :class => 'btn' %>
+          <%= link_to t('.watch_video'), video_guide_path(video), :class => 'btn' %>
         </div>
       </div>
     </div>

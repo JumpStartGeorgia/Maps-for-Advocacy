@@ -15,7 +15,7 @@ ka:
       convention_category: კონვენციის კატეგორია
       right: უფლებები
       organization: ორგანიზაცია
-      training_video: Training Video
+      training_video: Video Guide
     attributes:
       user:
         email: ელ.ფოსტა
@@ -152,7 +152,7 @@ ka:
       georgian_legislation: საქართველოს კანონმდებლობა
       partners: პროექტის პარტნიორები
       what_is_accessibility: რა არის ხელმისაწვდომობა?
-      training_videos: Training Videos
+      training_videos: Video Guides
     titles:
       new: "ახალი %{model}"
       edit: "შეცვლა %{model}"
@@ -303,7 +303,7 @@ ka:
       convention_categories: კონვენციის კატეგორიები
       rights: უფლებები
       organizations: ორგანიზაციები
-      training_videos: Training Videos
+      training_videos: Video Guides
     users:
       edit:
         title: ცვლილებების შეტანა მომხმარებლის გვერდზე
@@ -392,15 +392,15 @@ ka:
     why_monitor:
       title: რატომ არის საჭირო ხელმისაწვდომობის მონიტორინგი საქართველოშო?
       skip_movie: გამოვტოვოთ ფილმი (გადახტომა)
-    training_videos:
-      title: Training Videos
+    video_guides:
+      title: Video Guides
       watched: You have watched this video
       watch_video: Watch the Video
-      no_videos: There are no training videos on file at this time.
-    training_video:
-      title: "Training Video: '%{name}'"
+      no_videos: There are no videos on file at this time.
+    video_guide:
+      title: "Video: '%{name}'"
       continue: Continue
-      watch_more: Watch More Training Videos
+      watch_more: Watch More Videos
   places:
     show:
       district_link_title: "'%{name}'-ის ყველა ადგილის ნახვა"
@@ -434,7 +434,7 @@ ka:
       details_link_title: იხილეთ ამ შეფასების დეტალები
       disability_other: 'სხვა ტიპი: %{name}'
     evaluation2:
-      watch_videos: Watch Training Videos
+      watch_videos: Watch Video Guides
     form:
       header_location: სად მდებარეობს ეს ადგილი?
       map_instructions: დააჭირეთ რუკას, რათა მონიშნოთ ამ ადგილის მდებარეობა.
@@ -494,8 +494,8 @@ ka:
       no_questions: თქვენი მოთხოვნის შესაბამისი კითხვები არ არის წარმოდგენილი შეფასების ფაილში.
       disability_other_header: სხვა ახსნა
       disability_other_label: "დააკონკრეტეთ 'სხვა'"
-      watch_videos_header: Watch the Training Videos!
-      watch_videos_explanation: 'Before you start your evaluation, please watch our training videos....'
+      watch_videos_header: Watch the Video Guides!
+      watch_videos_explanation: 'Before you start your evaluation, please watch our video guides....'
       watch_videos_button: Watch the Videos
       watch_videos_close: Contine with Evaluation
     upload_photos:

@@ -1,5 +1,5 @@
 <% title t('.title', :name => @place[:name]) %>
-<% title_right link_to(t('places.evaluation2.watch_videos'), training_videos_path, :class => 'view_more') %>
+<% title_right link_to(t('places.evaluation2.watch_videos'), video_guides_path, :class => 'view_more') %>
 
 <div id="evaluation_form">
   <% if @can_certify %>
@@ -170,7 +170,7 @@
       <p><%= t('.watch_videos_explanation') %></p>
     </div>
     <div class="modal-footer">
-      <button id="btn-training" class="btn" data-dismiss="modal" data-href="<%= training_videos_path%>"><%= t('.watch_videos_button') %></button>
+      <button id="btn-training" class="btn" data-dismiss="modal" data-href="<%= video_guides_path%>"><%= t('.watch_videos_button') %></button>
       <button id="btn-close" class="btn" data-dismiss="modal"><%= t('.watch_videos_close') %></button>
     </div>
   </div>

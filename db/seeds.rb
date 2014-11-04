@@ -9,6 +9,71 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 ##################################
+## Training Videos
+##################################
+puts "deleting all training video records"
+TrainingVideo.destroy_all
+
+puts "creating training video records"
+path = "#{Rails.root}/db/images"
+img = File.open("#{path}/crosswalk.png", 'r')
+tr = TrainingVideo.new(:id => 1, :survey_correct_answer => false, :survey_image => img)
+tr.training_video_translations.build(:locale => 'en', :title => 'Crosswalks', 
+  :description => 'As you walk around your neighborhood, keep in mind these examples of accessible crosswalks.', 
+  :survey_question => 'Is the overpass accessible?', 
+  :video_url => 'http://youtu.be/Z6K8F7uZYYE')
+tr.training_video_translations.build(:locale => 'ka', :title => 'Crosswalks', 
+  :description => 'As you walk around your neighborhood, keep in mind these examples of accessible crosswalks.', 
+  :survey_question => 'Is the overpass accessible?', 
+  :video_url => 'http://youtu.be/WZxDKxy-OTg')
+tr.save
+img = File.open("#{path}/parking.png", 'r')
+tr = TrainingVideo.new(:id => 2, :survey_correct_answer => true, :survey_image => img)
+tr.training_video_translations.build(:locale => 'en', :title => 'Parking',
+  :description => 'Is parking in your community accessible to people with disabilities?  Learn what kinds of things to watch out for.', 
+  :survey_question => 'Is the parking space accessible?',
+  :video_url => 'http://youtu.be/q2wMKBm5cBQ')
+tr.training_video_translations.build(:locale => 'ka', :title => 'Parking',
+  :description => 'Is parking in your community accessible to people with disabilities?  Learn what kinds of things to watch out for.', 
+  :survey_question => 'Is the parking space accessible?',
+  :video_url => 'http://youtu.be/fq5sJm3-o3s')
+tr.save
+img = File.open("#{path}/ramp.png", 'r')
+tr = TrainingVideo.new(:id => 3, :survey_correct_answer => false, :survey_image => img)
+tr.training_video_translations.build(:locale => 'en', :title => 'Ramps',
+  :description => 'Can people with disabilities actually use the ramps that you see around the city? Watch the videos and find out! ', 
+  :survey_question => 'Is the ramp accessible?',
+  :video_url => 'http://youtu.be/nqsJlt8quTY')
+tr.training_video_translations.build(:locale => 'ka', :title => 'Ramps',
+  :description => 'Can people with disabilities actually use the ramps that you see around the city? Watch the videos and find out! ', 
+  :survey_question => 'Is the ramp accessible?',
+  :video_url => 'http://youtu.be/jAqo154b5bY')
+tr.save
+img = File.open("#{path}/entrance.png", 'r')
+tr = TrainingVideo.new(:id => 4, :survey_correct_answer => true, :survey_image => img)
+tr.training_video_translations.build(:locale => 'en', :title => 'Entrances',
+  :description => 'Can a person with disabilities enter businesses and other places in your community independently?  See what makes entrances accessible to everyone.', 
+  :survey_question => 'Is the entrance accessible?',
+  :video_url => 'http://youtu.be/ajlLN_CG5n4')
+tr.training_video_translations.build(:locale => 'ka', :title => 'Entrances',
+  :description => 'Can a person with disabilities enter businesses and other places in your community independently?  See what makes entrances accessible to everyone.', 
+  :survey_question => 'Is the entrance accessible?',
+  :video_url => 'http://youtu.be/Xfq8gmqeJ6w')
+tr.save
+img = File.open("#{path}/atm.png", 'r')
+tr = TrainingVideo.new(:id => 5, :survey_correct_answer => false, :survey_image => img)
+tr.training_video_translations.build(:locale => 'en', :title => 'ATMs',
+  :description => 'Next time you visit your local ATM, consider whether a person with disabilities would be able to use it independently--without help from other people.', 
+  :survey_question => 'Is the ATM accessible?',
+  :video_url => 'http://youtu.be/gOpvwuYM2o0')
+tr.training_video_translations.build(:locale => 'ka', :title => 'ATMs',
+  :description => 'Next time you visit your local ATM, consider whether a person with disabilities would be able to use it independently--without help from other people.', 
+  :survey_question => 'Is the ATM accessible?',
+  :video_url => 'http://youtu.be/C1t1hDuY1Xs')
+tr.save
+
+
+##################################
 ## Disabilities
 ##################################
 puts "deleting all disability records"

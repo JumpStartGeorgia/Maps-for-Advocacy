@@ -10,13 +10,13 @@ class TrainingVideo < ActiveRecord::Base
   has_attached_file :survey_image, 
     :url => "/system/training_videos/:id/:style/:filename",
     :styles => {
-          :thumb => {:geometry => "50x50#"},
-          :medium => {:geometry => "450x450>"},
-          :large => {:geometry => "900x900>"}
+          :thumb => {:geometry => "100x42#"},
+          :medium => {:geometry => "400x225#"},
+          :survey => {:geometry => "500x500>"},
         }
 
   validates_attachment :survey_image, :presence => true,
-    :content_type => { :content_type => "image/jpeg" }
+    :content_type => { :content_type => ["image/jpeg", "image/png"] }
 
 
 
