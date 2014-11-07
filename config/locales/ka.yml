@@ -425,10 +425,16 @@ ka:
       evaluation: "შეფასება:"
       evaluation_certified: "ექსპერტის შეფასება"
       evaluation_public: "საზოგადოებრივი შეფასება"
+      website_button: ვებგვერდზე გადასვლა
+
+      filter_explanation: Use the filters below to select the summary results to view for this place.
+      header_filter_certified: Assessment Type
+      header_filter_type: Evaluation Type
+      filter_type_all: All
+
       disability: "ტიპი:"
       question: "კითხვები:"
       answer: "პასუხები:"
-      website_button: ვებგვერდზე გადასვლა
     show_type_results:
       certified_explanation: ექსპერტის შეფასება ავსებს ადამიანი, რომელიც დატრენინგებულია ადგილის ხელმისაწვდომობის შეფასებაში. თითოეული ტიპის შეფასებიდან მხოლოდ უკანასკნელი შეფასება გამოიყენება საერთო ხელმისაწვდომობის გამოსათვლელად.
       public_explanation: საზოგადოებრივი შეფასების შევსება შეუძლიან ნებისმიერ მსურველს.

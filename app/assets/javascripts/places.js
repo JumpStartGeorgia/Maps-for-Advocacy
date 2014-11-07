@@ -227,6 +227,69 @@ $(document).ready(function(){
     });  
   }
 
+
+  /*************************************************/
+  /* place show page */
+  $('#filter_certified').select2({width:'element'});
+  $('#filter_type').select2({width:'element'});
+
+  // turn off all blocks and show the appropriate one
+  function show_place_summary_block(){
+    // turn all off
+    $('#place-summary-container .summary-block').addClass('accessibly-hidden');
+
+    // get values of which to turn on
+    var cert = $('#filter_certified').val();
+    var type = $('#filter_type').val();
+
+    $('#place-summary-container .summary-block[data-certified="' + cert + '"][data-type="' + type + '"]').removeClass('accessibly-hidden');
+  }
+
+  // when the certified status changes, update the type filter and the view
+  $('#filter_certified').on('change', function(e){
+    var val = $(this).val();
+    var type_val = $('#filter_type').val();
+
+    // turn off all selections
+    $('#filter_type option').addClass('accessibly-hidden');
+
+    if (val == 'true'){
+      // certified
+      $('#filter_type option[data-certified="true"]').removeClass('accessibly-hidden');
+      // show the correct numbers
+      $('#filter_type option[data-certified="true"]').each(function(){
+        $(this).html($(this).data('name') + $(this).data('count-cert'));
+      });
+
+    }else{
+      // public
+      $('#filter_type option[data-public="true"]').removeClass('accessibly-hidden');
+      // show the correct numbers
+      $('#filter_type option[data-public="true"]').each(function(){
+        $(this).html($(this).data('name') + $(this).data('count-public'));
+      });
+    }
+
+    // if old type value is no longer visible, reset to all option
+    if ($('#filter_type option[value="' + type_val + '"]').hasClass('accessibly-hidden')){
+      // not visible, reset
+      $('#filter_type').val('0');
+    }
+
+    // trigger a change event so the select value has updated count
+    $('#filter_type').trigger('change');
+
+    // show the correct summary
+    show_place_summary_block();
+  });
+
+  // when the type status changes, update the the view
+  $('#filter_type').on('change', function(e){
+    // show the correct summary
+    show_place_summary_block();
+  });
+
+
   /*************************************************/
   /* when tabs change, update filters to match tabs */
   // update evaluation filter to match

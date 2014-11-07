@@ -4,9 +4,103 @@ class PlacesController < ApplicationController
     controller_instance.send(:valid_role?, User::ROLES[:site_admin])
   end
 
+
+  def show
+    @place = Place.with_translation(params[:id]).first
+    @data = {:certified => {:summary => [], :summary_questions => [], :disability_evaluations => []}, 
+             :public => {:summary => [], :summary_questions => [], :disability_evaluations => []}}
+    @disability_evaluations = []
+
+    gon.show_place_images = true
+    
+    if @place.present?
+      if @place.lat.present? && @place.lon.present?
+        @show_map = true
+        gon.show_place_map = true
+
+        gon.lat = @place.lat
+        gon.lon = @place.lon
+        gon.marker_popup = "<h3>#{@place[:place]}</h3><h4>#{@place[:venue]}</h4><p>#{@place[:address]}</p>"
+        
+      end    
+
+      # get imgaes
+      @place_images = PlaceImage.by_place(params[:id])
+      
+      certified_overall_question_categories = QuestionCategory.questions_categories_for_venue(question_category_id: @place.custom_question_category_id, is_certified: true, venue_id: @place.venue_id)
+#      public_overall_question_categories = QuestionCategory.questions_categories_for_venue(question_category_id: @place.custom_public_question_category_id, is_certified: false)
+      public_overall_question_categories = QuestionCategory.questions_for_venue(question_category_id: @place.custom_public_question_category_id, is_certified: false, venue_id: @place.venue_id)
+
+      # get overall summary
+      @data[:certified][:summary] = PlaceSummary.for_place_disablity(params[:id], is_certified: true)
+      @data[:certified][:summary_questions] = certified_overall_question_categories
+      @data[:public][:summary] = PlaceSummary.for_place_disablity(params[:id], is_certified: false)
+      @data[:public][:summary_questions] = public_overall_question_categories
+
+      # get the disabilities
+      @disabilities = Disability.sorted.is_active
+      disabilities_public = @disabilities.select{|x| x.active_public == true}
+      disabilities_certified = @disabilities.select{|x| x.active_certified == true}
+
+      # get certified evaluations
+      if disabilities_certified.present?
+        disabilities_certified.each do |disability|
+          qc_cert = QuestionCategory.questions_for_venue(question_category_id: @place.custom_question_category_id, disability_id: disability.id, is_certified: true, venue_id: @place.venue_id)
+
+          c = Hash.new
+          @data[:certified][:disability_evaluations] << c
+
+          # record the disability
+          c[:id] = disability.id
+          c[:code] = disability.code
+          c[:name] = disability.name
+
+          c[:evaluation_count] = PlaceEvaluation.with_answers(params[:id], disability_id: disability.id, is_certified: true).count
+
+          c[:question_categories] = qc_cert
+
+          # create summaries of evaluations
+          c[:summaries] = PlaceSummary.for_place_disablity(params[:id], disability_id: disability.id, is_certified: true)
+        end
+      end
+
+
+      # get public evaluations
+      if disabilities_public.present?
+        disabilities_public.each do |disability|
+          qc_public = QuestionCategory.questions_for_venue(question_category_id: @place.custom_public_question_category_id, disability_id: disability.id, is_certified: false, venue_id: @place.venue_id)
+
+          p = Hash.new
+          @data[:public][:disability_evaluations] << p
+          
+          # record the disability
+          p[:id] = disability.id
+          p[:code] = disability.code
+          p[:name] = disability.name
+
+          p[:evaluation_count] = PlaceEvaluation.with_answers(params[:id], disability_id: disability.id, is_certified: false).count
+
+          p[:question_categories] = qc_public
+
+          # create summaries of evaluations
+          p[:summaries] = PlaceSummary.for_place_disablity(params[:id], disability_id: disability.id, is_certified: false)
+        end
+      end
+
+      respond_to do |format|
+        format.html # show.html.erb
+        format.json { render json: @place }
+      end
+    else
+      flash[:info] =  t('app.msgs.does_not_exist')
+      redirect_to root_path(:locale => I18n.locale)
+      return
+    end
+  end
+
   # GET /places/1
   # GET /places/1.json
-  def show
+  def show2
     @place = Place.with_translation(params[:id]).first
     @data = {:certified => {:summary => [], :summary_questions => [], :disability_evaluations => []}, 
              :public => {:summary => [], :summary_questions => [], :disability_evaluations => []}}
