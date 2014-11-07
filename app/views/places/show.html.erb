@@ -54,11 +54,19 @@
             <%
               count_cert = @data[:certified][:disability_evaluations].map{|x| x[:evaluation_count]}.sum
               count_public = @data[:public][:disability_evaluations].map{|x| x[:evaluation_count]}.sum
+              cert_selected = "selected=selected"
+              public_selected = ""
+              default_count = count_cert
+              if count_cert == 0 
+                cert_selected = ""
+                public_selected = "selected=selected"
+                default_count = count_public
+              end
             %>
-              <option value="true" selected="selected">
+              <option value="true" <%= cert_selected %> >
                 <%= t('.ddl_certified', :count => count_cert) %>              
                 </option>
-              <option value="false">
+              <option value="false" <%= public_selected %>>
                 <%= t('.ddl_public', :count => count_public) %>
               </option>
             </select>
@@ -73,11 +81,9 @@
                 data-certified="true"
                 data-name="<%= t('.filter_type_all') %>"
                 data-count-cert="<%= " (#{count_cert})" %>"
-                data-count-public="<%= " (#{count_public})" %>"><%= "#{t('.filter_type_all')} (#{count_cert})" %></option>
+                data-count-public="<%= " (#{count_public})" %>"><%= "#{t('.filter_type_all')} (#{default_count})" %></option>
               <% @disabilities.each do |disability| %>
                 <% 
-                  cls = ''
-                  cls = disability.active_certified? ? '' : "class=accessibly-hidden"
                   count_cert = 0
                   count_public = 0
                   index_cert = @data[:certified][:disability_evaluations].index{|x| x[:id] == disability.id}
@@ -85,12 +91,22 @@
 
                   index_public = @data[:public][:disability_evaluations].index{|x| x[:id] == disability.id}
                   count_public = @data[:public][:disability_evaluations][index_public][:evaluation_count] if index_public.present?
+
+                  cls = 'class=accessibly-hidden'
+                  default_count = 0
+                  if disability.active_certified? && cert_selected.present?
+                    cls = ''
+                    default_count = count_cert
+                  elsif disability.active_public? && public_selected.present?
+                    cls = ''
+                    default_count = count_public
+                  end
                 %>
                 <option value="<%= disability.id %>" data-public="<%= disability.active_public %>" <%= cls %>
                   data-certified="<%= disability.active_certified %>"
                   data-name="<%= disability.name %>"
                   data-count-cert="<%= " (#{count_cert})" %>"
-                  data-count-public="<%= " (#{count_public})" %>"><%= "#{disability.name} (#{count_cert})" %></option>
+                  data-count-public="<%= " (#{count_public})" %>"><%= "#{disability.name} (#{default_count})" %></option>
               <% end %>
             </select>
           </div>
@@ -99,8 +115,12 @@
     </div>    
     
     <div id="place-summary-container">
-      <%= render :partial => 'show_place_summary', :locals => {:data => @data[:certified], :is_certified => true} %>
-      <%= render :partial => 'show_place_summary', :locals => {:data => @data[:public], :is_certified => false} %>
+      <%= render :partial => 'show_place_summary', :locals => {
+          :data => @data[:certified], :is_certified => true, :show_overall => cert_selected.present?
+        } %>
+      <%= render :partial => 'show_place_summary', :locals => {
+          :data => @data[:public], :is_certified => false, :show_overall => public_selected.present?
+        } %>
     </div>
 
     

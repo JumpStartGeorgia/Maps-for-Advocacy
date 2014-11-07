@@ -360,9 +360,19 @@ form.place{
     }
   }
 
-  ul.evaluation_summary li{
-    display: inline-block;
-    width: 24%;
+  .summary-block{
+    .overall-summary{
+      margin-top: 15px;
+      margin-bottom: 15px;
+      & > div:first-of-type{
+        font-size: 16px;
+      }  
+    }
+    ul.evaluation_summary li{
+      padding-top: 5px;
+      padding-bottom: 5px;
+      border-top: solid 1px #aaa;
+    }
   }
 }  
 .summary_result_number{

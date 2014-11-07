@@ -1,9 +1,10 @@
 <%
   is_certified ||= false
+  show_overall ||= false
   summary_key = 'categories'
   summary_key = 'questions' if !is_certified
   cls_show_cert = ''
-  cls_show_cert = 'accessibly-hidden' if !is_certified
+  cls_show_cert = 'accessibly-hidden' if !show_overall
 %>
 
         <div class="summary-block <%= cls_show_cert %>" data-certified="<%= is_certified %>" data-type="0">
@@ -16,9 +17,15 @@
             <% end %>
             </p></div>
 
-            <p><strong><%= t('.summary_result') %>:</strong>
-              <%= format_summary_result(data[:summary]['overall']['overall'], is_summary: true, is_certified: is_certified) %>
-            </p>
+            <div class="overall-summary row-fluid">
+              <div class="span6">
+                <strong><%= t('.summary_result') %></strong>
+              </div>
+              <div class="span6">
+                <%= format_summary_result(data[:summary]['overall']['overall'], is_summary: true, is_certified: is_certified) %>
+              </div>
+            </div>
+
             <ul class="evaluation_summary">
               <% 
                 questions = nil
@@ -29,9 +36,13 @@
                 end
               %>
               <% questions.each do |question| %>
-                <li>
-                  <strong><%= question[1] %></strong><br />
-                  <%= format_summary_result(data[:summary]['overall'][summary_key][question[0].to_s], is_summary: true, is_certified: is_certified) %>
+                <li class="row-fluid">
+                  <div class="span6">
+                    <strong><%= question[1] %></strong>
+                  </div>
+                  <div class="span6">
+                    <%= format_summary_result(data[:summary]['overall'][summary_key][question[0].to_s], is_summary: true, is_certified: is_certified) %>
+                  </div>
                 </li>          
               <% end %>
             </ul>
@@ -83,14 +94,25 @@
                       end
                     %>
                     <% if questions.present? %>
-                      <p><strong><%= t('.summary_result') %></strong>
-                        <%= format_summary_result(disability[:summaries]['overall']['overall'], is_summary: true, is_certified: is_certified) %>
-                      </p>
+
+                      <div class="overall-summary row-fluid">
+                        <div class="span6">
+                          <strong><%= t('.summary_result') %></strong>
+                        </div>
+                        <div class="span6">
+                          <%= format_summary_result(disability[:summaries]['overall']['overall'], is_summary: true, is_certified: is_certified) %>
+                        </div>
+                      </div>
+
                       <ul class="evaluation_summary">
                       <% questions.each do |question| %>
-                        <li>
-                          <strong><%= question[1] %>:</strong><br />
-                          <%= format_summary_result(disability[:summaries]['overall'][summary_key][question[0].to_s], is_summary: true, is_certified: is_certified) %>
+                        <li class="row-fluid">
+                          <div class="span6">
+                            <strong><%= question[1] %></strong>
+                          </div>
+                          <div class="span6">
+                            <%= format_summary_result(disability[:summaries]['overall'][summary_key][question[0].to_s], is_summary: true, is_certified: is_certified) %>
+                          </div>
                         </li>          
                       <% end %>
                       </ul>
