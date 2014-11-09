@@ -65,11 +65,11 @@ tr = TrainingVideo.new(:id => 5, :survey_correct_answer => false, :survey_image 
 tr.training_video_translations.build(:locale => 'en', :title => 'ATMs',
   :description => 'Next time you visit your local ATM, consider whether a person with disabilities would be able to use it independently--without help from other people.', 
   :survey_question => 'Is the ATM accessible?',
-  :video_url => 'http://youtu.be/gOpvwuYM2o0')
+  :video_url => 'http://youtu.be/C1t1hDuY1Xs')
 tr.training_video_translations.build(:locale => 'ka', :title => 'ATMs',
   :description => 'Next time you visit your local ATM, consider whether a person with disabilities would be able to use it independently--without help from other people.', 
   :survey_question => 'Is the ATM accessible?',
-  :video_url => 'http://youtu.be/C1t1hDuY1Xs')
+  :video_url => 'http://youtu.be/gOpvwuYM2o0')
 tr.save
 
 
