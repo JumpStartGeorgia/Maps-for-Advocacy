@@ -8,14 +8,15 @@
 %>
 
         <div class="summary-block <%= cls_show_cert %>" data-certified="<%= is_certified %>" data-type="0">
+          <div><p>
+          <% if is_certified %>
+            <%= t('.certified_explanation') %>
+          <% else %>
+            <%= t('.public_explanation') %>
+          <% end %>
+          </p></div>
+
           <% if data[:summary].present? && data[:summary].has_key?('overall') && data[:summary]['overall'].present? && data[:summary_questions].present?%>
-            <div><p>
-            <% if is_certified %>
-              <%= t('.certified_explanation') %>
-            <% else %>
-              <%= t('.public_explanation') %>
-            <% end %>
-            </p></div>
 
             <div class="overall-summary row-fluid">
               <div class="span6">
@@ -47,7 +48,15 @@
               <% end %>
             </ul>
           <% else %>
-            TODO - add something for no data for overall
+            <p>
+              <%= t('.no_evaluations', :cert => cert_text) %>
+            </p>
+            <% if is_certified == false || (is_certified == true && user_signed_in? && current_user.role?(User::ROLES[:certification])) %>
+              <p>
+                <%= link_to t('app.common.add_evaluation'), evaluation_place_path(:id => @place.id), 
+                  :class => 'add_evaluation', :title => t('app.common.add_evaluation_title', :place => @place[:name]) %>
+              </p>
+            <% end %>
           <% end %>
         </div>
 
@@ -62,19 +71,18 @@
               div_class = "active" if i == active_index
             %>
               <div class="summary-block accessibly-hidden" data-certified="<%= is_certified %>" data-type="<%= disability[:id] %>">
-                <h2 class="clear">
-                  <%= disability[:name] %>
-                  <% if is_certified == false || (is_certified == true && user_signed_in? && current_user.role?(User::ROLES[:certification])) %>
-                    <span>
-                      <%= link_to t('app.common.add_evaluation'), evaluation_place_path(:id => @place.id, :eval_type_id => disability[:id]), 
-                        :class => 'add_evaluation', :title => t('app.common.add_evaluation_title2', :place => @place[:name], :disability => disability[:name]) %>
-                    </span>
-                  <% end %>
-                </h2>
+
+                <div><p>
+                <% if is_certified %>
+                  <%= t('.certified_explanation') %>
+                <% else %>
+                  <%= t('.public_explanation') %>
+                <% end %>
+                </p></div>
 
                 <% if disability[:evaluation_count] == 0 %>
                   <p>
-                    <%= t('.no_evaluations', :name => disability[:name]) %>
+                    <%= t('.no_type_evaluations', :cert => cert_text, :type => disability[:name]) %>
                   </p>
                   <% if is_certified == false || (is_certified == true && user_signed_in? && current_user.role?(User::ROLES[:certification])) %>
                     <p>

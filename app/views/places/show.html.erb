@@ -43,6 +43,7 @@
     </div>
     
     <div id="place-filter">
+      <h2><%= t('.header_evaluations') %></h2>
       <p>
         <%= t('.filter_explanation') %>
       </p>
@@ -57,16 +58,18 @@
               cert_selected = "selected=selected"
               public_selected = ""
               default_count = count_cert
-              if count_cert == 0 
+              selection_header_cert = t('.evaluations_certified')
+              if count_cert == 0 && count_public > 0
                 cert_selected = ""
                 public_selected = "selected=selected"
                 default_count = count_public
+                selection_header_cert = t('.evaluations_public')
               end
             %>
-              <option value="true" <%= cert_selected %> >
+              <option value="true" <%= cert_selected %> data-name="<%= t('.evaluations_certified') %>">
                 <%= t('.ddl_certified', :count => count_cert) %>              
                 </option>
-              <option value="false" <%= public_selected %>>
+              <option value="false" <%= public_selected %> data-name="<%= t('.evaluations_public') %>">
                 <%= t('.ddl_public', :count => count_public) %>
               </option>
             </select>
@@ -114,12 +117,17 @@
       </div>    
     </div>    
     
-    <div id="place-summary-container">
+    <div id="place-summary-container" aria-live="polite" aria-relevant="additions">
+      <h3><%= "#{selection_header_cert}: #{t('.filter_type_all')}" %></h3>
       <%= render :partial => 'show_place_summary', :locals => {
-          :data => @data[:certified], :is_certified => true, :show_overall => cert_selected.present?
+          :data => @data[:certified], :is_certified => true, 
+          :cert_text => t('app.common.certified'),
+          :show_overall => cert_selected.present?
         } %>
       <%= render :partial => 'show_place_summary', :locals => {
-          :data => @data[:public], :is_certified => false, :show_overall => public_selected.present?
+          :data => @data[:public], :is_certified => false, 
+          :cert_text => t('app.common.public'),
+          :show_overall => public_selected.present?
         } %>
     </div>
 
@@ -137,18 +145,17 @@
       <% if @place_images.present? %>
         <div id="place-image-filter" class="row-fluid">
           <div class="span4">
-            <% options = [[t('.evaluation_certified'), 1], [t('.evaluation_public'), 0]] %>
+            <% options = [[t('.evaluations_certified'), true], [t('.evaluations_public'), false]] %>
             <%= label_tag :filter_image_evaluation, t('.evaluation') %>
             <%= select_tag(:filter_image_evaluation, 
-                options_for_select(options),
+                options_for_select(options, cert_selected.present?),
                 :include_blank => true,
                 :'data-placeholder' => t('.filter_all'), 
                 :style => 'width: 100%') %>
           </div>
           <div class="span4">
             <% 
-              disabilities = [@disabilities_public, @disabilities_certified].flatten(1)
-              options = disabilities.uniq.map{|x| [x.name, x.id]}.sort_by{|x| x[0]}
+              options = @disabilities.uniq.map{|x| [x.name, x.id]}.sort_by{|x| x[0]}
             %>
             <%= label_tag :filter_image_type, t('.disability') %>
             <%= select_tag(:filter_image_type, 
@@ -175,12 +182,12 @@
               <% answer = t("app.common.answers.#{PlaceEvaluation.answer_key_name(img['answer'])}") %>
               <% eval = img['is_certified'] == 1 ? t('.evaluation_certified') : t('.evaluation_public') %>
               <%= link_to img.image.url(:large), :class => 'place-image-link active place-image-fancybox', 
-                  :'data-certified' => img['is_certified'],
+                  :'data-certified' => img['is_certified'].to_s.to_bool,
                   :'data-type' => img['disability_id'],
                   :'data-question' => img['question_id'],
                   :title => "#{img['disability']} #{eval} - #{img['question']} - #{answer}", 
                   :'formatted-title' => "<span>#{img['disability']} #{eval} </span><span>#{img['question']} </span><span>#{answer}</span>",
-                  :rel => 'gallery' do %><%= image_tag(img.image.url(:thumb), :alt => "#{img['disability']} #{eval} - #{img['question']} - #{answer}") %><% end %>
+                  :rel => 'gallery' do %><%= image_tag(img.image.url(:small), :alt => "#{img['disability']} #{eval} - #{img['question']} - #{answer}") %><% end %>
               <div class="caption-text">
                 <ul class="eval-info">
                   <li>

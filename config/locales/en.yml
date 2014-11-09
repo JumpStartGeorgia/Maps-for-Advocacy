@@ -422,24 +422,28 @@ en:
       taken_at: "Photo taken on:"
       uploaded_at: "Uploaded on:"
       uploaded_by: "Uploaded by:"
-      evaluation: "Evaluation:"
+      evaluation: "Assessment Type:"
       evaluation_certified: "Expert Evaluation"
       evaluation_public: "Public Evaluation"
+      evaluations_certified: "Expert Evaluations"
+      evaluations_public: "Public Evaluations"
       website_button: Go to Website
 
-      filter_explanation: Use the filters below to select the summary results to view for this place.
+      header_evaluations: Evaluation Results
+      filter_explanation: Use the filters below to select the which evaluation results to view.
       header_filter_certified: Assessment Type
       header_filter_type: Evaluation Type
       filter_type_all: All
 
-      disability: "Type:"
+      disability: "Evaluation Type:"
       question: "Question:"
       answer: "Answer:"
     show_place_summary:
       certified_explanation: Expert Evaluations are completed by people that are trained in how to evaluate a place for accessibility. Only the latest evaluation from each evaluation type is used to compute the overall accessibility score.
       public_explanation: Public Evaluations can be completed by anyone that wishes to submit an evaluation.  Every evaluation is used to compute the overall accessibility score.
       header_summary: Overall Summary
-      no_evaluations: "At this time no '%{name}' evaluations have been submitted."
+      no_evaluations: "At this time no '%{cert}' evaluations have been submitted."
+      no_type_evaluations: "At this time no '%{cert}: %{type}' evaluations have been submitted."
       summary_result: Overall Result
       header_overall_results: Evaluation Results
       header_user_summary: Summary

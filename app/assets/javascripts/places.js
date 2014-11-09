@@ -188,9 +188,15 @@ $(document).ready(function(){
   if (gon.show_place_images){
     /*************************************************/
     /* filters for the place images */
-    $('#place-image-grid #place-image-filter #filter_image_evaluation').select2({width:'element', allowClear:true});
-    $('#place-image-grid #place-image-filter #filter_image_type').select2({width:'element', allowClear:true});
-    $('#place-image-grid #place-image-filter #filter_image_question').select2({width:'element', allowClear:true});
+    function resize_place_image_filters(){
+      $('#place-image-grid #place-image-filter #filter_image_evaluation').select2({width:'element', allowClear:true});
+      $('#place-image-grid #place-image-filter #filter_image_type').select2({width:'element', allowClear:true});
+      $('#place-image-grid #place-image-filter #filter_image_question').select2({width:'element', allowClear:true});
+    }
+
+    $(window).bind('resize', resize_place_image_filters);
+    resize_place_image_filters();
+
     /* when filters change, update images to show matches */
     function process_place_image_filter(){
       // first turn off all images and no image message
@@ -230,8 +236,13 @@ $(document).ready(function(){
 
   /*************************************************/
   /* place show page */
-  $('#filter_certified').select2({width:'element'});
-  $('#filter_type').select2({width:'element'});
+  function resize_place_eval_filters(){
+    $('#filter_certified').select2({width:'element'});
+    $('#filter_type').select2({width:'element'});
+  }
+
+  $(window).bind('resize', resize_place_eval_filters);
+  resize_place_eval_filters();
 
   // turn off all blocks and show the appropriate one
   function show_place_summary_block(){
@@ -239,10 +250,16 @@ $(document).ready(function(){
     $('#place-summary-container .summary-block').addClass('accessibly-hidden');
 
     // get values of which to turn on
-    var cert = $('#filter_certified').val();
-    var type = $('#filter_type').val();
+    var cert_value = $('#filter_certified').val();
+    var type_value = $('#filter_type').val();
+    // get names for selected items
+    var cert_name = $('#filter_certified option:selected').data('name');
+    var type_name = $('#filter_type option:selected').data('name');
 
-    $('#place-summary-container .summary-block[data-certified="' + cert + '"][data-type="' + type + '"]').removeClass('accessibly-hidden');
+    // show the correct header
+    $('#place-summary-container > h3').html(cert_name + ': ' + type_name);
+    // show the correct block
+    $('#place-summary-container .summary-block[data-certified="' + cert_value + '"][data-type="' + type_value + '"]').removeClass('accessibly-hidden');
   }
 
   // when the certified status changes, update the type filter and the view
@@ -281,14 +298,47 @@ $(document).ready(function(){
 
     // show the correct summary
     show_place_summary_block();
+
+    // update the place image filters
+    $('#place-image-grid #place-image-filter #filter_image_evaluation option[value="' + val + '"]').prop('selected', true).trigger("change");
+    // turn off type filter
+    $('#place-image-grid #place-image-filter #filter_image_type').val('').trigger("change");
+
   });
 
   // when the type status changes, update the the view
   $('#filter_type').on('change', function(e){
     // show the correct summary
     show_place_summary_block();
+
+    // update the place image filters
+    // - if eval filter is not selected, select the correct one
+    if ($('#place-image-grid #place-image-filter #filter_image_evaluation').val() == ''){
+      $('#place-image-grid #place-image-filter #filter_image_evaluation option[value="' + $('#filter_certified').val() + '"]').prop('selected', true).trigger("change");
+    }
+    
+    $('#place-image-grid #place-image-filter #filter_image_type option[value="' + $(this).val() + '"]').prop('selected', true).trigger("change");
   });
 
+
+  /*************************************************/
+  /* when tabs change, update filters to match tabs */
+  // update evaluation filter to match
+  $('#evaluation-certified-tabs li a').click(function(){
+    $('#place-image-grid #place-image-filter #filter_image_evaluation option[value="' + $(this).data('filter') + '"]').prop('selected', true).trigger("change");
+    // turn off type filter
+    $('#place-image-grid #place-image-filter #filter_image_type').val('').trigger("change");
+  });
+  // update type filter to match
+  $('.evaluation-disability-tabs li a').click(function(){
+    // - if eval filter is not selected, select the correct one
+    if ($('#place-image-grid #place-image-filter #filter_image_evaluation').val() == ''){
+      var eval_tab = $('#evaluation-certified-tabs li.active a');
+      $('#place-image-grid #place-image-filter #filter_image_evaluation option[value="' + $(eval_tab).data('filter') + '"]').prop('selected', true).trigger("change");
+    }
+    
+    $('#place-image-grid #place-image-filter #filter_image_type option[value="' + $(this).data('filter') + '"]').prop('selected', true).trigger("change");
+  });
 
   /*************************************************/
   /* when tabs change, update filters to match tabs */

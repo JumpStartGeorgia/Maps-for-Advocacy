@@ -422,24 +422,28 @@ ka:
       taken_at: "გადახებულია:"
       uploaded_at: "ატვირთულია:"
       uploaded_by: "ატვირთა:"
-      evaluation: "შეფასება:"
+      evaluation: "Assessment Type:"
       evaluation_certified: "ექსპერტის შეფასება"
       evaluation_public: "საზოგადოებრივი შეფასება"
+      evaluations_certified: "Expert Evaluations"
+      evaluations_public: "Public Evaluations"
       website_button: ვებგვერდზე გადასვლა
 
-      filter_explanation: Use the filters below to select the summary results to view for this place.
+      header_evaluations: Evaluation Results
+      filter_explanation: Use the filters below to select the which evaluation results to view.
       header_filter_certified: Assessment Type
       header_filter_type: Evaluation Type
       filter_type_all: All
 
-      disability: "ტიპი:"
+      disability: "Evaluation Type:"
       question: "კითხვები:"
       answer: "პასუხები:"
     show_type_results:
       certified_explanation: ექსპერტის შეფასება ავსებს ადამიანი, რომელიც დატრენინგებულია ადგილის ხელმისაწვდომობის შეფასებაში. თითოეული ტიპის შეფასებიდან მხოლოდ უკანასკნელი შეფასება გამოიყენება საერთო ხელმისაწვდომობის გამოსათვლელად.
       public_explanation: საზოგადოებრივი შეფასების შევსება შეუძლიან ნებისმიერ მსურველს.
       header_summary: საერთო შეჯამება
-      no_evaluations: "ამ დრომდე '%{name}'-ის შეფასებები არ არის წარმოდგენილი"
+      no_evaluations: "At this time no '%{cert}' evaluations have been submitted."
+      no_type_evaluations: "At this time no '%{cert}: %{type}' evaluations have been submitted."
       summary_result: საერთო შედეგები
       header_overall_results: შეფასების შედეგები
       header_user_summary: შეჯამება
