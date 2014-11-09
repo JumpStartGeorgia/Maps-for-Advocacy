@@ -75,8 +75,16 @@ class RootController < ApplicationController
   end
 
   def contact
-    respond_to do |format|
-      format.html # index.html.erb
+    @page = Page.by_name('contact')
+  
+    if @page.present?
+      respond_to do |format|
+        format.html 
+      end
+    else
+      flash[:info] =  t('app.msgs.does_not_exist')
+      redirect_to root_path(:locale => I18n.locale)
+      return
     end
   end
 
