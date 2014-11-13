@@ -1,0 +1,122 @@
+<% 
+  title t('.title', name: @place[:name]) 
+  
+  if @is_certified
+    summary_key = 'categories'
+    selection_header_cert = t('.evaluations_certified')
+  else
+    summary_key = 'questions'
+    selection_header_cert = t('.evaluations_public')
+  end
+
+  type_name = t('.filter_type_all')
+  if params[:type].present? && @data[:evaluations].present?
+    type_name = @data[:evaluations][0][:name]
+  end
+%>
+
+<div id="venue_evalautions">
+
+  <% if @data.present? %>
+    <h2><%= "#{selection_header_cert}: #{type_name}" %></h2>
+    <% 
+      questions = nil
+      if @is_certified
+        questions = @data[:summary_questions].map{|x| [x[:id], x.name]}.uniq 
+      else
+        questions = @data[:summary_questions].map{|x| x[:questions]}.flatten.map{|x| [x[:question_id], x[:question]]}.uniq 
+      end
+    %>
+    <% @data[:evaluations].each do |disability_evals| %>
+      <% if disability_evals[:question_categories].present? && disability_evals[:evaluations].present? && disability_evals[:users].present? %>
+
+        <div class="summary-block">
+          <% disability_evals[:evaluations].each do |evaluation| %>
+            <% 
+              user = disability_evals[:users].select{|x| x.id == evaluation.user_id}.first
+              summary = disability_evals[:summaries]['evaluations'].select{|x| x['id'] == evaluation.id}.first
+            %>
+
+            <h3 class="clear">
+              <span class="evaluation_date">
+                <%= l evaluation.created_at, :format => :no_time %>
+              </span>
+              <% if user_signed_in? && 
+                  (current_user.role?(User::ROLES[:site_admin]) || current_user.id == evaluation.user_id) %>
+                
+                <%= link_to t('app.common.delete_evaluation'),
+                            delete_place_evaluation_path(:id => @place, :evaluation_id => evaluation.id),
+                            :method => :delete,
+                            :class => 'delete_evaluation',
+                            :confirm => t('app.buttons.confirm'),
+                            :title => t('app.common.delete_evaluation_title', :place => @place[:name]) %>
+
+              <% end %>
+              <% if user.present? %>
+                <span class="user_name">      
+                  <%= user.nickname %>
+                  <% if user.avatar.present? %>
+                    <%#= image_tag user.avatar, :title => user.nickname %>
+                  <% end %>
+                </span>
+              <% end %>
+              <% if evaluation.disability_id == Disability::OTHER_ID && evaluation.disability_other_text.present? %>
+                <span class="disability_other">
+                 <%= t('.disability_other', :name => evaluation.disability_other_text) %>
+                </span>
+              <% end %>
+            </h3>
+<% logger.debug "##### question present #{questions.present?}, sum present = #{summary.present?}" %>
+            <% if questions.present? && summary.present? %>
+              <div class="overall-summary row-fluid">
+                <div class="span6">
+                  <strong><%= t('.summary_result') %></strong>
+                </div>
+                <div class="span6">
+                  <%= format_summary_result(summary['overall'], is_certified: @is_certified, is_summary: !@is_certified) %>
+                </div>
+              </div>
+              <ul class="evaluation_summary">
+              <% questions.each do |question| %>
+                <li class="row-fluid">
+                  <div class="span6">
+                    <strong><%= question[1] %></strong>
+                  </div>
+                  <div class="span6">
+                    <%= format_summary_result(summary[summary_key][question[0].to_s], is_certified: @is_certified) %>
+                  </div>
+                </li>          
+              <% end %>
+              </ul>
+            <% end %>
+
+            <% if @is_certified %>
+              <div class="accordion" id="<%= "accordion_#{evaluation.id}" %>">
+                <div class="accordion-group">
+                  <div class="accordion-heading">
+                    <div class="panel-title">
+                      <a class="accordion-toggle" data-toggle="collapse" data-parent="<%= "#accordion_#{evaluation.id}" %>" 
+                        href="<%= "#collapse_#{evaluation.id}" %>" title="<%= t('.details_link_title') %>">
+                        <%= t('.header_user_details') %>
+                      </a>
+                    </div>
+                  </div>
+                  <div id="<%= "collapse_#{evaluation.id}" %>" class="accordion-body collapse">
+                    <div class="accordion-inner">
+
+                      <% disability_evals[:question_categories].each do |cat| %>
+                        <%= render :partial => 'show_answers', :locals => {:evaluation => evaluation, :cat => cat, :is_sub_category => false, :show_heading => @is_certified} %>
+                      <% end %>
+
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  <% end %>
+
+</div>

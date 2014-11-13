@@ -27,8 +27,8 @@
 
                     <% cat[:questions].each_with_index do |question, qidx| %>
                       <% if question[:exists_parent_id].nil? || show_exists_ids.include?(question[:exists_parent_id]) %>
-                        <li>
-                          <div>
+                        <li class='row-fluid'>
+                          <div class="span6">
                             <%= question[:question] %>
                             <% if question[:validation_equation].present? %>
                               (<%= question[:validation_equation] %>)
@@ -41,7 +41,7 @@
 
                             if answer.present?
                           %>
-                            <div class="<%= "selected-answer #{PlaceEvaluation.answer_key_name(answer)}"%>">
+                            <div class="span6 <%= "selected-answer #{PlaceEvaluation.answer_key_name(answer)}"%>">
                               <%= t("app.common.answers.#{PlaceEvaluation.answer_key_name(answer)}") %>
                               <% if q.first.evidence1.present? %>
                                 <%= " (#{q.first.evidence1})" %>
@@ -50,11 +50,13 @@
                               <% end %>
                             </div>
                             
+<!--
                             <% if question[:required_for_accessibility] == 1 && answer == PlaceEvaluation::ANSWERS['needs'] %>
                               <div class="cause_not_accessible">
                                 <%= t('app.msgs.cause_not_accessible') %>
                               </div>
                             <% end %>
+-->                            
                           <% end %>
                         </li>
                       <% end %>

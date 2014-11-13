@@ -448,15 +448,27 @@ en:
       header_overall_results: Evaluation Results
       header_user_summary: Summary
       header_user_details: Details
+      view_details_link_title: View Evaluation Details
       details_link_title: View the details of this evaluation
       disability_other: 'Other Type: %{name}'
     show_type_results:
       certified_explanation: Expert Evaluations are completed by people that are trained in how to evaluate a place for accessibility. Only the latest evaluation from each evaluation type is used to compute the overall accessibility score.
       public_explanation: Public Evaluations can be completed by anyone that wishes to submit an evaluation.  Every evaluation is used to compute the overall accessibility score.
       header_summary: Overall Summary
-      no_evaluations: "At this time no '%{name}' evaluations have been submitted."
+      no_evaluations: "At this time no '%{cert}' evaluations have been submitted."
+      no_type_evaluations: "At this time no '%{cert}: %{type}' evaluations have been submitted."
       summary_result: Overall Result
       header_overall_results: Evaluation Results
+      header_user_summary: Summary
+      header_user_details: Details
+      details_link_title: View the details of this evaluation
+      disability_other: 'Other Type: %{name}'
+    evaluation_details:
+      title: "'%{name}' Evaluation Details"
+      evaluations_certified: "Expert Evaluations"
+      evaluations_public: "Public Evaluations"
+      filter_type_all: All
+      summary_result: Overall Result
       header_user_summary: Summary
       header_user_details: Details
       details_link_title: View the details of this evaluation

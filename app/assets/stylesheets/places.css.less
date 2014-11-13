@@ -330,11 +330,11 @@ form.place{
     & > div{
       vertical-align: top;
       padding: 10px;
-      display: inline-block;
+/*      display: inline-block;
       width: 25%;
-      &.cause_not_accessible{
-        width: 40%;
-        background-color: #fff;
+*/      &.cause_not_accessible{
+/*        width: 40%;
+*/        background-color: #fff;
         color: #f00;
       }
     }
@@ -360,18 +360,47 @@ form.place{
     }
   }
 
+  #place-summary-container{
+    position: relative;
+    #place-summary-loading{
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0);
+      -webkit-transition: background-color 0.5s ease;
+      -moz-transition: background-color 0.5s ease;
+      -o-transition: background-color 0.5s ease;
+      transition: background-color 0.5s ease;
+      &.place-summary-loading-visible{
+        background-color: rgba(0,0,0,0.5);
+      }
+    }
+  }
+
   .summary-block{
     .overall-summary{
-      margin-top: 15px;
-      margin-bottom: 15px;
+      margin-top: 30px;
+      margin-bottom: 30px;
       & > div:first-of-type{
         font-size: 16px;
       }  
+      & > div.span6{
+        min-height: inherit;
+      }
     }
     ul.evaluation_summary li{
-      padding-top: 5px;
-      padding-bottom: 5px;
+      padding-top: 10px;
+      padding-bottom: 10px;
       border-top: solid 1px #aaa;
+      & > div.span6{
+        min-height: inherit;
+      }
+    }
+    .eval-details-link-container{
+      margin: 25px 0 15px;
+      text-align: center;
     }
   }
 }  
@@ -411,7 +440,7 @@ form.place{
 
 .public_summary_container{
   text-align: center; 
-  margin-bottom: 10px;
+  /*margin-bottom: 10px;*/
   .yes_votes, .no_votes{
     display: inline-block; 
     width: 15%; 

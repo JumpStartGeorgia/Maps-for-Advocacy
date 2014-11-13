@@ -1,5 +1,5 @@
 class PlacesController < ApplicationController
-  before_filter :authenticate_user!, :except => :show
+  before_filter :authenticate_user!, :except => [:show, :evaluation_details]
   before_filter :only => [:edit, :update, :delete] do |controller_instance|
     controller_instance.send(:valid_role?, User::ROLES[:site_admin])
   end
@@ -9,7 +9,6 @@ class PlacesController < ApplicationController
     @place = Place.with_translation(params[:id]).first
     @data = {:certified => {:summary => [], :summary_questions => [], :disability_evaluations => []}, 
              :public => {:summary => [], :summary_questions => [], :disability_evaluations => []}}
-    @disability_evaluations = []
 
     gon.show_place_images = true
     
@@ -98,13 +97,83 @@ class PlacesController < ApplicationController
     end
   end
 
+  # show evaluation results for a place
+  # - params: is_certified, type
+  def evaluation_details
+    @place = Place.with_translation(params[:id]).first
+    @data = {:summary_questions => [], :evaluations => []}
+
+    @is_certified = params[:is_certified].to_bool
+    disabilities = nil
+    if params[:type].present?
+      if @is_certified == true
+        disabilities = [Disability.is_active_certified.find_by_id(params[:type])]
+      else
+        disabilities = [Disability.is_active_public.find_by_id(params[:type])]
+      end
+    else
+      if @is_certified == true
+        disabilities = Disability.is_active_certified
+      else
+        disabilities = Disability.is_active_public
+      end
+    end
+
+    if @place.present? && disabilities.present?
+      # get summary questions
+      if @is_certified
+        @data[:summary_questions] = QuestionCategory.questions_categories_for_venue(question_category_id: @place.custom_question_category_id, is_certified: true, venue_id: @place.venue_id)
+      else
+        @data[:summary_questions] = QuestionCategory.questions_for_venue(question_category_id: @place.custom_public_question_category_id, is_certified: false, venue_id: @place.venue_id)
+      end
+      
+      disabilities.each do |disability|
+        # get evaluation results
+        evals = PlaceEvaluation.with_answers(params[:id], disability_id: disability.id, is_certified: @is_certified).sorted
+        
+        # only record info if this disability has evaluations        
+        if evals.present?
+          qc = QuestionCategory.questions_for_venue(question_category_id: @place.custom_question_category_id, disability_id: disability.id, is_certified: @is_certified, venue_id: @place.venue_id)
+
+          eval = Hash.new
+          @data[:evaluations] << eval
+
+          # record the disability
+          eval[:id] = disability.id
+          eval[:code] = disability.code
+          eval[:name] = disability.name
+
+          eval[:question_categories] = qc
+
+          # get evaluation results
+          eval[:evaluations] = evals
+          eval[:evaluation_count] = 0
+          
+          if eval[:evaluations].present?
+            eval[:evaluation_count] = eval[:evaluations].length
+
+            # create summaries of evaluations
+            eval[:summaries] = PlaceSummary.for_place_disablity(params[:id], disability_id: disability.id, is_certified: @is_certified)
+            
+            # get user info that submitted evaluations
+            eval[:users] = User.for_evaluations(eval[:evaluations].map{|x| x.user_id}.uniq)
+          end        
+        end
+      end
+    end
+
+    respond_to do |format|
+      format.html { render layout: 'fancybox'}
+      format.json { render json: @data }
+    end
+  end
+
   # GET /places/1
   # GET /places/1.json
   def show2
     @place = Place.with_translation(params[:id]).first
     @data = {:certified => {:summary => [], :summary_questions => [], :disability_evaluations => []}, 
              :public => {:summary => [], :summary_questions => [], :disability_evaluations => []}}
-    @disability_evaluations = []
 
     gon.show_place_images = true
     

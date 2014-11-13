@@ -47,6 +47,10 @@
                 </li>          
               <% end %>
             </ul>
+
+            <div class="eval-details-link-container">
+              <%= link_to t('.view_details_link_title'), place_evaluation_details_path(is_certified: is_certified.to_s), class: 'eval-details eval-details-fancybox' %>
+            </div>
           <% else %>
             <p>
               <%= t('.no_evaluations', :cert => cert_text) %>
@@ -124,6 +128,10 @@
                         </li>          
                       <% end %>
                       </ul>
+
+                      <div class="eval-details-link-container">
+                        <%= link_to t('.view_details_link_title'), place_evaluation_details_path(is_certified: is_certified.to_s, type: disability[:id].to_s), class: 'eval-details eval-details-fancybox' %>
+                      </div>
                     <% end %>
                   <% end %>
                 <% end %>

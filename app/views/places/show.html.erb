@@ -119,6 +119,7 @@
     
     <div id="place-summary-container" aria-live="polite" aria-relevant="additions">
       <h3><%= "#{selection_header_cert}: #{t('.filter_type_all')}" %></h3>
+      <div id="place-summary-loading"></div>      
       <%= render :partial => 'show_place_summary', :locals => {
           :data => @data[:certified], :is_certified => true, 
           :cert_text => t('app.common.certified'),

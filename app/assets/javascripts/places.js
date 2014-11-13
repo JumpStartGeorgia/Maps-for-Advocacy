@@ -246,20 +246,29 @@ $(document).ready(function(){
 
   // turn off all blocks and show the appropriate one
   function show_place_summary_block(){
-    // turn all off
-    $('#place-summary-container .summary-block').addClass('accessibly-hidden');
+    // turn on transition loader
+    $('#place-summary-container #place-summary-loading').addClass('place-summary-loading-visible');
 
-    // get values of which to turn on
-    var cert_value = $('#filter_certified').val();
-    var type_value = $('#filter_type').val();
-    // get names for selected items
-    var cert_name = $('#filter_certified option:selected').data('name');
-    var type_name = $('#filter_type option:selected').data('name');
+    setTimeout(function(){
+      // turn all off
+      $('#place-summary-container .summary-block').addClass('accessibly-hidden');
 
-    // show the correct header
-    $('#place-summary-container > h3').html(cert_name + ': ' + type_name);
-    // show the correct block
-    $('#place-summary-container .summary-block[data-certified="' + cert_value + '"][data-type="' + type_value + '"]').removeClass('accessibly-hidden');
+      // get values of which to turn on
+      var cert_value = $('#filter_certified').val();
+      var type_value = $('#filter_type').val();
+      // get names for selected items
+      var cert_name = $('#filter_certified option:selected').data('name');
+      var type_name = $('#filter_type option:selected').data('name');
+
+      // show the correct header
+      $('#place-summary-container > h3').html(cert_name + ': ' + type_name);
+      // show the correct block
+      $('#place-summary-container .summary-block[data-certified="' + cert_value + '"][data-type="' + type_value + '"]').removeClass('accessibly-hidden');
+
+      // turn off transition loader
+      $('#place-summary-container #place-summary-loading').removeClass('place-summary-loading-visible');
+      }, 500
+    );
   }
 
   // when the certified status changes, update the type filter and the view
@@ -373,7 +382,14 @@ $(document).ready(function(){
   });
 
   /*************************************************/
-  /* turn on fancybox for image slideshow on places page */
+  /* turn on fancybox for show evaluation details */
+  $(".eval-details-fancybox").fancybox({
+    type: 'iframe',
+    autoSize : true
+  });
+
+  /*************************************************/
+  /* turn on tipsy for image slideshow on places page */
   $('#place-image-grid .place-image-grid-item a').tipsy({gravity: 's', fade: true, opacity: 0.9, html: true, title: 'formatted-title'});
 
 
