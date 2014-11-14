@@ -188,9 +188,15 @@ $(document).ready(function(){
   if (gon.show_place_images){
     /*************************************************/
     /* filters for the place images */
-    $('#place-image-grid #place-image-filter #filter_image_evaluation').select2({width:'element', allowClear:true});
-    $('#place-image-grid #place-image-filter #filter_image_type').select2({width:'element', allowClear:true});
-    $('#place-image-grid #place-image-filter #filter_image_question').select2({width:'element', allowClear:true});
+    function resize_place_image_filters(){
+      $('#place-image-grid #place-image-filter #filter_image_evaluation').select2({width:'element', allowClear:true});
+      $('#place-image-grid #place-image-filter #filter_image_type').select2({width:'element', allowClear:true});
+      $('#place-image-grid #place-image-filter #filter_image_question').select2({width:'element', allowClear:true});
+    }
+
+    $(window).bind('resize', resize_place_image_filters);
+    resize_place_image_filters();
+
     /* when filters change, update images to show matches */
     function process_place_image_filter(){
       // first turn off all images and no image message
@@ -227,6 +233,122 @@ $(document).ready(function(){
     });  
   }
 
+
+  /*************************************************/
+  /* place show page */
+  function resize_place_eval_filters(){
+    $('#filter_certified').select2({width:'element'});
+    $('#filter_type').select2({width:'element'});
+  }
+
+  $(window).bind('resize', resize_place_eval_filters);
+  resize_place_eval_filters();
+
+  // turn off all blocks and show the appropriate one
+  function show_place_summary_block(){
+    // turn on transition loader
+    $('#place-summary-container #place-summary-loading').addClass('place-summary-loading-visible');
+
+    setTimeout(function(){
+      // turn all off
+      $('#place-summary-container .summary-block').addClass('accessibly-hidden');
+
+      // get values of which to turn on
+      var cert_value = $('#filter_certified').val();
+      var type_value = $('#filter_type').val();
+      // get names for selected items
+      var cert_name = $('#filter_certified option:selected').data('name');
+      var type_name = $('#filter_type option:selected').data('name');
+
+      // show the correct header
+      $('#place-summary-container > h3').html(cert_name + ': ' + type_name);
+      // show the correct block
+      $('#place-summary-container .summary-block[data-certified="' + cert_value + '"][data-type="' + type_value + '"]').removeClass('accessibly-hidden');
+
+      // turn off transition loader
+      $('#place-summary-container #place-summary-loading').removeClass('place-summary-loading-visible');
+      }, 500
+    );
+  }
+
+  // when the certified status changes, update the type filter and the view
+  $('#filter_certified').on('change', function(e){
+    var val = $(this).val();
+    var type_val = $('#filter_type').val();
+
+    // turn off all selections
+    $('#filter_type option').addClass('accessibly-hidden');
+
+    if (val == 'true'){
+      // certified
+      $('#filter_type option[data-certified="true"]').removeClass('accessibly-hidden');
+      // show the correct numbers
+      $('#filter_type option[data-certified="true"]').each(function(){
+        $(this).html($(this).data('name') + $(this).data('count-cert'));
+      });
+
+    }else{
+      // public
+      $('#filter_type option[data-public="true"]').removeClass('accessibly-hidden');
+      // show the correct numbers
+      $('#filter_type option[data-public="true"]').each(function(){
+        $(this).html($(this).data('name') + $(this).data('count-public'));
+      });
+    }
+
+    // if old type value is no longer visible, reset to all option
+    if ($('#filter_type option[value="' + type_val + '"]').hasClass('accessibly-hidden')){
+      // not visible, reset
+      $('#filter_type').val('0');
+    }
+
+    // trigger a change event so the select value has updated count
+    $('#filter_type').trigger('change');
+
+    // show the correct summary
+    show_place_summary_block();
+
+    // update the place image filters
+    $('#place-image-grid #place-image-filter #filter_image_evaluation option[value="' + val + '"]').prop('selected', true).trigger("change");
+    // turn off type filter
+    $('#place-image-grid #place-image-filter #filter_image_type').val('').trigger("change");
+
+  });
+
+  // when the type status changes, update the the view
+  $('#filter_type').on('change', function(e){
+    // show the correct summary
+    show_place_summary_block();
+
+    // update the place image filters
+    // - if eval filter is not selected, select the correct one
+    if ($('#place-image-grid #place-image-filter #filter_image_evaluation').val() == ''){
+      $('#place-image-grid #place-image-filter #filter_image_evaluation option[value="' + $('#filter_certified').val() + '"]').prop('selected', true).trigger("change");
+    }
+    
+    $('#place-image-grid #place-image-filter #filter_image_type option[value="' + $(this).val() + '"]').prop('selected', true).trigger("change");
+  });
+
+
+  /*************************************************/
+  /* when tabs change, update filters to match tabs */
+  // update evaluation filter to match
+  $('#evaluation-certified-tabs li a').click(function(){
+    $('#place-image-grid #place-image-filter #filter_image_evaluation option[value="' + $(this).data('filter') + '"]').prop('selected', true).trigger("change");
+    // turn off type filter
+    $('#place-image-grid #place-image-filter #filter_image_type').val('').trigger("change");
+  });
+  // update type filter to match
+  $('.evaluation-disability-tabs li a').click(function(){
+    // - if eval filter is not selected, select the correct one
+    if ($('#place-image-grid #place-image-filter #filter_image_evaluation').val() == ''){
+      var eval_tab = $('#evaluation-certified-tabs li.active a');
+      $('#place-image-grid #place-image-filter #filter_image_evaluation option[value="' + $(eval_tab).data('filter') + '"]').prop('selected', true).trigger("change");
+    }
+    
+    $('#place-image-grid #place-image-filter #filter_image_type option[value="' + $(this).data('filter') + '"]').prop('selected', true).trigger("change");
+  });
+
   /*************************************************/
   /* when tabs change, update filters to match tabs */
   // update evaluation filter to match
@@ -260,7 +382,14 @@ $(document).ready(function(){
   });
 
   /*************************************************/
-  /* turn on fancybox for image slideshow on places page */
+  /* turn on fancybox for show evaluation details */
+  $(".eval-details-fancybox").fancybox({
+    type: 'iframe',
+    autoSize : true
+  });
+
+  /*************************************************/
+  /* turn on tipsy for image slideshow on places page */
   $('#place-image-grid .place-image-grid-item a').tipsy({gravity: 's', fade: true, opacity: 0.9, html: true, title: 'formatted-title'});
 
 

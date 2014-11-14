@@ -1,0 +1,140 @@
+<%
+  is_certified ||= false
+  show_overall ||= false
+  summary_key = 'categories'
+  summary_key = 'questions' if !is_certified
+  cls_show_cert = ''
+  cls_show_cert = 'accessibly-hidden' if !show_overall
+%>
+
+        <div class="summary-block <%= cls_show_cert %>" data-certified="<%= is_certified %>" data-type="0">
+          <div><p>
+          <% if is_certified %>
+            <%= t('.certified_explanation') %>
+          <% else %>
+            <%= t('.public_explanation') %>
+          <% end %>
+          </p></div>
+
+          <% if data[:summary].present? && data[:summary].has_key?('overall') && data[:summary]['overall'].present? && data[:summary_questions].present?%>
+
+            <div class="overall-summary row-fluid">
+              <div class="span6">
+                <strong><%= t('.summary_result') %></strong>
+              </div>
+              <div class="span6">
+                <%= format_summary_result(data[:summary]['overall']['overall'], is_summary: true, is_certified: is_certified) %>
+              </div>
+            </div>
+
+            <ul class="evaluation_summary">
+              <% 
+                questions = nil
+                if is_certified
+                  questions = data[:summary_questions].map{|x| [x[:id], x.name]}.uniq 
+                else
+                  questions = data[:summary_questions].map{|x| x[:questions]}.flatten.map{|x| [x[:question_id], x[:question]]}.uniq 
+                end
+              %>
+              <% questions.each do |question| %>
+                <li class="row-fluid">
+                  <div class="span6">
+                    <strong><%= question[1] %></strong>
+                  </div>
+                  <div class="span6">
+                    <%= format_summary_result(data[:summary]['overall'][summary_key][question[0].to_s], is_summary: true, is_certified: is_certified) %>
+                  </div>
+                </li>          
+              <% end %>
+            </ul>
+
+            <div class="eval-details-link-container">
+              <%= link_to t('.view_details_link_title'), place_evaluation_details_path(is_certified: is_certified.to_s), class: 'eval-details eval-details-fancybox' %>
+            </div>
+          <% else %>
+            <p>
+              <%= t('.no_evaluations', :cert => cert_text) %>
+            </p>
+            <% if is_certified == false || (is_certified == true && user_signed_in? && current_user.role?(User::ROLES[:certification])) %>
+              <p>
+                <%= link_to t('app.common.add_evaluation'), evaluation_place_path(:id => @place.id), 
+                  :class => 'add_evaluation', :title => t('app.common.add_evaluation_title', :place => @place[:name]) %>
+              </p>
+            <% end %>
+          <% end %>
+        </div>
+
+        <% if data[:disability_evaluations].present? %>
+          <% 
+            active_index = data[:disability_evaluations].index{|x| x[:evaluation_count].present? && x[:evaluation_count] > 0}
+            active_index = 0 if active_index.nil?
+          %>
+          <% data[:disability_evaluations].each_with_index do |disability,i| %>
+            <% 
+              div_class = ''
+              div_class = "active" if i == active_index
+            %>
+              <div class="summary-block accessibly-hidden" data-certified="<%= is_certified %>" data-type="<%= disability[:id] %>">
+
+                <div><p>
+                <% if is_certified %>
+                  <%= t('.certified_explanation') %>
+                <% else %>
+                  <%= t('.public_explanation') %>
+                <% end %>
+                </p></div>
+
+                <% if disability[:evaluation_count] == 0 %>
+                  <p>
+                    <%= t('.no_type_evaluations', :cert => cert_text, :type => disability[:name]) %>
+                  </p>
+                  <% if is_certified == false || (is_certified == true && user_signed_in? && current_user.role?(User::ROLES[:certification])) %>
+                    <p>
+                      <%= link_to t('app.common.add_evaluation'), evaluation_place_path(:id => @place.id, :eval_type_id => disability[:id]), 
+                        :class => 'add_evaluation', :title => t('app.common.add_evaluation_title', :place => @place[:name]) %>
+
+                    </p>
+                  <% end %>
+                <% else %>
+                  <% if disability[:question_categories].present? && disability[:summaries].present? && disability[:summaries].has_key?('overall') && disability[:summaries]['overall'].present?%>
+                    <% 
+                      questions = nil
+                      if is_certified
+                        questions = disability[:question_categories].map{|x| [x[:id], x.name]}.uniq
+                      else
+                        questions = disability[:question_categories].map{|x| x[:questions]}.flatten.map{|x| [x[:question_id], x[:question]]}.uniq 
+                      end
+                    %>
+                    <% if questions.present? %>
+
+                      <div class="overall-summary row-fluid">
+                        <div class="span6">
+                          <strong><%= t('.summary_result') %></strong>
+                        </div>
+                        <div class="span6">
+                          <%= format_summary_result(disability[:summaries]['overall']['overall'], is_summary: true, is_certified: is_certified) %>
+                        </div>
+                      </div>
+
+                      <ul class="evaluation_summary">
+                      <% questions.each do |question| %>
+                        <li class="row-fluid">
+                          <div class="span6">
+                            <strong><%= question[1] %></strong>
+                          </div>
+                          <div class="span6">
+                            <%= format_summary_result(disability[:summaries]['overall'][summary_key][question[0].to_s], is_summary: true, is_certified: is_certified) %>
+                          </div>
+                        </li>          
+                      <% end %>
+                      </ul>
+
+                      <div class="eval-details-link-container">
+                        <%= link_to t('.view_details_link_title'), place_evaluation_details_path(is_certified: is_certified.to_s, type: disability[:id].to_s), class: 'eval-details eval-details-fancybox' %>
+                      </div>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              </div>
+            <% end %>
+        <% end %>

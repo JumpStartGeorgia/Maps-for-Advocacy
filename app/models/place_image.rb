@@ -13,6 +13,7 @@ class PlaceImage < ActiveRecord::Base
     :url => "/system/places/:place_id/images/:id_:style.:extension",
 		:styles => {
 					:thumb => {:geometry => "50x50#"},
+          :small => {:geometry => "150x150#"},
 					:medium => {:geometry => "450x450>"},
 					:large => {:geometry => "900x900>"}
 				}

@@ -56,6 +56,7 @@ BootstrapStarter::Application.routes.draw do
       end
     end
     match '/places/:id/delete_evaluation/:evaluation_id', :to => 'places#delete_evaluation', :as => :delete_place_evaluation, :via => :delete
+    match '/places/:id/evaluation_details/:is_certified(/:type)', :to => 'places#evaluation_details', :as => :place_evaluation_details, :via => :get
 
 
     # user settings
