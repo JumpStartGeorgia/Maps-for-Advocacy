@@ -328,6 +328,9 @@ p.page_translations.create(:locale => 'ka', :title => 'Contact', :content => "<p
 <p>New Media Advocacy Project:&nbsp;<br />Elizabeth Summers &nbsp; &nbsp; &nbsp;<br /><a href='mailto:elizabeth@newmediaadvocacy.org'>elizabeth@newmediaadvocacy.org</a></p>
 <p>&nbsp;</p>
 <p>JumpStart Georgia:&nbsp;<br />Eric Barrett &nbsp; &nbsp; &nbsp;<br /><a href='mailto:eric@jumpstart.ge'>eric@jumpstart.ge</a></p>")
+p = Page.create(:id => 9, :name => 'about')
+p.page_translations.create(:locale => 'en', :title => 'About')
+p.page_translations.create(:locale => 'ka', :title => 'About')
 
 
 ##################################
