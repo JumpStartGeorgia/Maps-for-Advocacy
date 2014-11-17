@@ -136,10 +136,10 @@ class PlaceEvaluation < ActiveRecord::Base
     return results.sort_by{|x| -x[:total_count]}
   end
 
-  # get overall stats by eval type
+  # get overall stats by certification type
   # returns hash:
   # - {public_count, ceritifed_count, total_count}
-  def self.stats_by_type
+  def self.stats_by_cert
     results = {}
     stats = group('is_certified').count
 
@@ -150,6 +150,32 @@ class PlaceEvaluation < ActiveRecord::Base
       results[:public_count] = stats[false] if stats[false].present?
       results[:certified_count] = stats[true] if stats[true].present?
       results[:total_count] = results[:public_count] + results[:certified_count]
+    end
+
+    return results
+  end
+
+  # get overall stats by disability type
+  # returns hash:
+  # - {public_count, ceritifed_count, total_count}
+  def self.stats_by_type
+    results = []
+    stats = group(['disability_id', 'is_certified']).count    
+    disabilities = Disability.is_active.sorted
+
+    if stats.present?
+      # get disability into
+      disabilities = Disability.is_active.sorted.where(:id => stats.keys.map{|x| x[0]}.uniq)
+
+      disabilities.each do |disability|
+        # stats in format of: {true => count, false => count}
+        # reformat to: {public_count, certified_count, total_count }
+        h = {name: disability.name, public_count: 0, certified_count: 0, total_count: 0}
+        h[:public_count] = stats[[disability.id, false]] if stats[[disability.id, false]].present?
+        h[:certified_count] = stats[[disability.id, true]] if stats[[disability.id, true]].present?
+        h[:total_count] = h[:public_count] + h[:certified_count]
+        results << h
+      end
     end
 
     return results

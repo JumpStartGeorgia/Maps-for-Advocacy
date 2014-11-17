@@ -101,7 +101,8 @@ class RootController < ApplicationController
     @user_latest = PlaceEvaluation.stats_by_user(30)
     @org_all = PlaceEvaluation.stats_by_org
     @org_latest = PlaceEvaluation.stats_by_org(30)
-    @type = PlaceEvaluation.stats_by_type
+    @cert = PlaceEvaluation.stats_by_cert
+    @types = PlaceEvaluation.stats_by_type
     @images = PlaceEvaluation.stats_with_images
 
     respond_to do |format|
