@@ -33,7 +33,6 @@ $(document).ready(function(){
   $('.tooltipster_right').tooltipster({position:'right'});		
 });
 
-
 var default_leaflet_icon_options = {
     iconUrl:     '/assets/marker-icon.png', 
     shadowUrl:   '/assets/marker-shadow.png',
