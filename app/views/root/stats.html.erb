@@ -1,14 +1,86 @@
 <% title t('.title') %>
 
-<div class="row-fluid">
+<div id="stats" class="row-fluid">
   <div class="span6">
-    <h2>Submission Statistics</h2>
+    <h2><%= t('.headers.eval_results') %></h2>
+    <% if @eval_results_public.present? || @eval_results_certified.present? %>
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th class="text-center">
+              <%= t('.table.public') %>
+            </th>
+            <th class="text-center">
+              <%= t('.table.certified') %>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <%= format_summary_result(@eval_results_public, is_summary: true, is_certified: false) %>
+            </td>
+            <td>
+              <%= format_summary_result(@eval_results_certified, is_summary: true, is_certified: true) %>
+            </td>
+          </tr> 
+        </tbody>
+      </table>
+    <% else %>
+      <p>
+        <%= t('.no_data.no_evals') %>
+      </p>
+    <% end %>
+
+    <h2><%= t('.headers.eval_results_type') %></h2>
+    <% if @eval_results_types.present? %>
+      <table class="table table-striped table-hover">
+        <thead>
+          <tr>
+            <th>
+              <%= t('.table.eval_type') %>
+            </th>
+            <th class="text-center">
+              <%= t('.table.public') %>
+            </th>
+            <th class="text-center">
+              <%= t('.table.certified') %>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @eval_results_types.each do |type| %>
+            <tr>
+              <td>
+                <%= type['name'] %>
+              </td>
+              <td>
+                <%= format_summary_result(type['public'], is_summary: true, is_certified: false) %>
+              </td>
+              <td>
+                <%= format_summary_result(type['certified'], is_summary: true, is_certified: true) %>
+              </td>
+            </tr> 
+          <% end %>
+        </tbody>
+      </table>
+
+    <% else %>
+      <p>
+        <%= t('.no_data.no_evals') %>
+      </p>
+    <% end %>
+
+
+  </div>
+  <div class="span6">
+    <h2><%= t('.headers.submission') %></h2>
 
     <div class="accordion" id="stats-submissions">
       <div class="accordion-group">
         <div class="accordion-heading">
           <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#submissions-overall">
-            <h3>Evaluations Submitted</h3>
+            <h3><%= t('.headers.evals') %></h3>
           </a>
         </div>
         <div id="submissions-overall" class="accordion-body collapse">
@@ -18,13 +90,13 @@
                 <thead>
                   <tr>
                     <th>
-                      Public Evaluations
+                      <%= t('.table.public') %>
                     </th>
                     <th>
-                      Expert Evaluations
+                      <%= t('.table.certified') %>
                     </th>
                     <th>
-                      Total Evaluations
+                      <%= t('.table.total') %>
                     </th>
                   </tr>
                 </thead>
@@ -44,7 +116,7 @@
               </table>
             <% else %>
               <p>
-                No evaluations have been submitted.
+                <%= t('.no_data.no_evals') %>
               </p>
             <% end %>
           </div>
@@ -55,7 +127,7 @@
       <div class="accordion-group">
         <div class="accordion-heading">
           <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#submissions-type">
-            <h3>Evaluations Submitted by Type</h3>
+            <h3><%= t('.headers.evals_type') %></h3>
           </a>
         </div>
         <div id="submissions-type" class="accordion-body collapse">
@@ -65,16 +137,16 @@
                 <thead>
                   <tr>
                     <th>
-                      Evaluation Type
+                      <%= t('.table.eval_type') %>
                     </th>
                     <th>
-                      Public Evaluations
+                      <%= t('.table.public') %>
                     </th>
                     <th>
-                      Expert Evaluations
+                      <%= t('.table.certified') %>
                     </th>
                     <th>
-                      Total Evaluations
+                      <%= t('.table.total') %>
                     </th>
                   </tr>
                 </thead>
@@ -100,7 +172,7 @@
 
             <% else %>
               <p>
-                No evaluations with have been submitted.
+                <%= t('.no_data.no_evals') %>
               </p>
             <% end %>
           </div>
@@ -111,7 +183,7 @@
       <div class="accordion-group">
         <div class="accordion-heading">
           <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#submissions-visual">
-            <h3>Evaluations with Visual Evidence</h3>
+            <h3><%= t('.headers.evals_visual') %></h3>
           </a>
         </div>
         <div id="submissions-visual" class="accordion-body collapse">
@@ -121,13 +193,13 @@
                 <thead>
                   <tr>
                     <th>
-                      Public Evaluations
+                      <%= t('.table.public') %>
                     </th>
                     <th>
-                      Expert Evaluations
+                      <%= t('.table.certified') %>
                     </th>
                     <th>
-                      Total Evaluations
+                      <%= t('.table.total') %>
                     </th>
                   </tr>
                 </thead>
@@ -147,7 +219,7 @@
               </table>
             <% else %>
               <p>
-                No evaluations with visual evidence have been submitted.
+                <%= t('.no_data.no_visual') %>
               </p>
             <% end %>
 
@@ -160,7 +232,7 @@
       <div class="accordion-group">
         <div class="accordion-heading">
           <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#submissions-active-users">
-            <h3>Most Active Users in the Last 30 Days</h3>
+            <h3><%= t('.headers.user_active') %></h3>
           </a>
         </div>
         <div id="submissions-active-users" class="accordion-body collapse">
@@ -170,16 +242,16 @@
                 <thead>
                   <tr>
                     <th>
-                      User
+                      <%= t('.table.user') %>
                     </th>
                     <th>
-                      Public Evaluations
+                      <%= t('.table.public') %>
                     </th>
                     <th>
-                      Expert Evaluations
+                      <%= t('.table.certified') %>
                     </th>
                     <th>
-                      Total Evaluations
+                      <%= t('.table.total') %>
                     </th>
                   </tr>
                 </thead>
@@ -205,7 +277,7 @@
 
             <% else %>
               <p>
-                No evaluations with have been submitted.
+                <%= t('.no_data.no_evals') %>
               </p>
             <% end %>
           </div>
@@ -216,7 +288,7 @@
       <div class="accordion-group">
         <div class="accordion-heading">
           <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#submissions-user">
-            <h3>User History</h3>
+            <h3><%= t('.headers.user') %></h3>
           </a>
         </div>
         <div id="submissions-user" class="accordion-body collapse">
@@ -227,16 +299,16 @@
                 <thead>
                   <tr>
                     <th>
-                      User
+                      <%= t('.table.user') %>
                     </th>
                     <th>
-                      Public Evaluations
+                      <%= t('.table.public') %>
                     </th>
                     <th>
-                      Expert Evaluations
+                      <%= t('.table.certified') %>
                     </th>
                     <th>
-                      Total Evaluations
+                      <%= t('.table.total') %>
                     </th>
                   </tr>
                 </thead>
@@ -262,7 +334,7 @@
 
             <% else %>
               <p>
-                No evaluations with have been submitted.
+                <%= t('.no_data.no_evals') %>
               </p>
             <% end %>
           </div>
@@ -273,7 +345,7 @@
       <div class="accordion-group">
         <div class="accordion-heading">
           <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#submissions-active-org">
-            <h3>Most Active Organizations in the Last 30 Days</h3>
+            <h3><%= t('.headers.org_active') %></h3>
           </a>
         </div>
         <div id="submissions-active-org" class="accordion-body collapse">
@@ -284,16 +356,16 @@
                 <thead>
                   <tr>
                     <th>
-                      Organization
+                      <%= t('.table.org') %>
                     </th>
                     <th>
-                      Public Evaluations
+                      <%= t('.table.public') %>
                     </th>
                     <th>
-                      Expert Evaluations
+                      <%= t('.table.certified') %>
                     </th>
                     <th>
-                      Total Evaluations
+                      <%= t('.table.total') %>
                     </th>
                   </tr>
                 </thead>
@@ -319,7 +391,7 @@
 
             <% else %>
               <p>
-                No evaluations with have been submitted.
+                <%= t('.no_data.no_evals') %>
               </p>
             <% end %>
 
@@ -331,7 +403,7 @@
       <div class="accordion-group">
         <div class="accordion-heading">
           <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#submissions-org">
-            <h3>Organization History</h3>
+            <h3><%= t('.headers.org') %></h3>
           </a>
         </div>
         <div id="submissions-org" class="accordion-body collapse">
@@ -342,16 +414,16 @@
                 <thead>
                   <tr>
                     <th>
-                      Organization
+                      <%= t('.table.org') %>
                     </th>
                     <th>
-                      Public Evaluations
+                      <%= t('.table.public') %>
                     </th>
                     <th>
-                      Expert Evaluations
+                      <%= t('.table.certified') %>
                     </th>
                     <th>
-                      Total Evaluations
+                      <%= t('.table.total') %>
                     </th>
                   </tr>
                 </thead>
@@ -377,7 +449,7 @@
 
             <% else %>
               <p>
-                No evaluations with have been submitted.
+                <%= t('.no_data.no_evals') %>
               </p>
             <% end %>
           </div>

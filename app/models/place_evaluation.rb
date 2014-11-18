@@ -204,4 +204,5 @@ class PlaceEvaluation < ActiveRecord::Base
 
     return results
   end
+
 end

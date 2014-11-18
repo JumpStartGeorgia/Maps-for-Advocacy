@@ -113,6 +113,7 @@ class PlaceSummary < ActiveRecord::Base
   end
 
   # overall public eval results
+  # - take sum of all public instance evals
   def self.overall_public_results
     counts = {'count' => 0, 'num_yes' => 0, 'num_no' => 0}
     x = find_by_sql(['select count(*) as c, sum(num_yes) as y, sum(num_no) as n from place_summaries where is_certified = 0 and summary_type = ? and data_type = ?', SUMMARY_TYPES['instance'], DATA_TYPES['overall']])
@@ -126,6 +127,7 @@ class PlaceSummary < ActiveRecord::Base
   end
   
   # overall certified eval results
+  # - only take sum of disability summaries so that only the last cert eval of each place is used
   def self.overall_certified_results
     counts = {'count' => 0, 'num_yes' => 0, 'num_no' => 0}
     x = find_by_sql(['select count(*) as c, sum(num_yes) as y, sum(num_no) as n from place_summaries where is_certified = 1 and summary_type = ? and data_type = ?', SUMMARY_TYPES['disability'], DATA_TYPES['overall']])
@@ -138,12 +140,67 @@ class PlaceSummary < ActiveRecord::Base
     return counts
   end
 
+  # get the overall results by type
+  def self.overall_results_by_type
+    results = []
+    public_counts = find_by_sql(['select disability_id, count(*) as c, sum(num_yes) as y, sum(num_no) as n from place_summaries where is_certified = 0 and is_certified = 0 and summary_type = ? and data_type = ? group by disability_id', SUMMARY_TYPES['instance'], DATA_TYPES['overall']])
+    cert_counts =   find_by_sql(['select disability_id, count(*) as c, sum(num_yes) as y, sum(num_no) as n from place_summaries where is_certified = 1 and is_certified = 1 and summary_type = ? and data_type = ? group by disability_id', SUMMARY_TYPES['disability'], DATA_TYPES['overall']])
+
+    if public_counts.present? || cert_counts.present?
+      # get disability into
+      dis_ids = []
+      dis_ids << public_counts.map{|x| x['disability_id']}.uniq
+      dis_ids << cert_counts.map{|x| x['disability_id']}.uniq
+      disabilities = Disability.is_active.sorted.where(:id => dis_ids.flatten.uniq)
+
+      count = {'count' => 0, 'num_yes' => 0, 'num_no' => 0}
+      disabilities.each do |disability|
+        # reformat to: {public_count, certified_count, total_count }
+        h = {'name' => disability.name, 'public' => count.dup, 'certified' => count.dup}
+        # get public counts
+        match = public_counts.select{|x| x['disability_id'] == disability.id}.first
+        if match.present?
+          h['public']['count'] = match['c']
+          h['public']['num_yes'] = match['y'].to_i
+          h['public']['num_no'] = match['n'].to_i
+        end        
+
+        # get certified counts
+        match = cert_counts.select{|x| x['disability_id'] == disability.id}.first
+        if match.present?
+          h['certified']['count'] = match['c']
+          h['certified']['num_yes'] = match['y'].to_i
+          h['certified']['num_no'] = match['n'].to_i
+        end        
+        results << h
+      end
+    end
+
+    return results
+  end
 
   ########################### 
   ## update stats
   ###########################
 
-  # for the given place id, update the summary data
+
+  # reset the summaries for all places that are evaluated
+  def self.reset_all_place_summaries  
+    PlaceSummary.transaction do 
+      # remove all existing summaries
+      destroy_all
+
+      # for each place that has an evaluation, build the summaries
+      PlaceEvaluation.select('distinct place_id').map{|x| x.place_id}.each do |place_id|
+        puts "place_id = #{place_id}"
+        update_summaries(place_id)
+        update_certified_summaries(place_id)
+      end
+    end
+  end
+
+
+  # for the given place id, update the public summary data
   # place_id: id of place to summarize evaluations for
   # place_evaluation_id: id of evaluation to focus summary's on
   # - if place_evaluation_id not provided, then compute instance summary for every evaluation

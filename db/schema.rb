@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141114074404) do
+ActiveRecord::Schema.define(:version => 20141118063124) do
 
   create_table "convention_categories", :force => true do |t|
     t.datetime "created_at"

@@ -97,6 +97,12 @@ class RootController < ApplicationController
   end
 
   def stats
+    # eval results
+    @eval_results_public = PlaceSummary.overall_public_results
+    @eval_results_certified = PlaceSummary.overall_certified_results
+    @eval_results_types = PlaceSummary.overall_results_by_type
+
+    #submissions
     @user_all = PlaceEvaluation.stats_by_user
     @user_latest = PlaceEvaluation.stats_by_user(30)
     @org_all = PlaceEvaluation.stats_by_org
