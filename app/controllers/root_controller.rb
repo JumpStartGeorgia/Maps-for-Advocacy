@@ -3,8 +3,6 @@ class RootController < ApplicationController
   def index    
     @venue_categories = VenueCategory.sorted
 
-    @landing_page = Page.by_name('landing_page')
-
     @how_report = Page.by_name('how_report')
 
     @stats = {}

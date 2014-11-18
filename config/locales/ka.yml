@@ -154,6 +154,7 @@ ka:
       what_is_accessibility: რა არის ხელმისაწვდომობა?
       training_videos: Video Guides
       stats: Evaluation Statistics
+      about: About
     titles:
       new: "ახალი %{model}"
       edit: "შეცვლა %{model}"
@@ -374,6 +375,27 @@ ka:
       title: About
     stats:
       title: Evaluation Statistics
+      headers:
+        eval_results: Evaluation Results
+        eval_results_type: Evaluation Results by Type
+        submission: Submission Statistics
+        evals: Evaluations Submitted
+        evals_type: Evaluations Submitted by Type
+        evals_visual: Evaluations with Visual Evidence
+        user_active: Most Active Users in the Last 30 Days
+        user: User History
+        org_active: Most Active Organizations in the Last 30 Days
+        org: Organization History
+      table:
+        public: Public Evaluations
+        certified: Expert Evaluations
+        total: Total Evaluations
+        eval_type: Evaluation Type
+        user: User
+        org: Organization
+      no_data:
+        no_evals: No evaluations have been submitted.
+        no_visual: No evaluations with visual evidence have been submitted.
     find_evaluations:
       title: Find Evaluations
       header_search: ძიება
@@ -410,6 +432,10 @@ ka:
       watch_more: Watch More Videos
   places:
     show:
+      description:
+        place: "%{name} is a %{org} located at %{address}. "
+        public: "It has %{num} Public Evaluations with %{yes} accessible votes and %{no} not accessible votes. "
+        cert: "It has %{num} Expert Evaluations with %{yes} accessible votes and %{no} not accessible votes. "
       district_link_title: "'%{name}'-ის ყველა ადგილის ნახვა"
       venue_link_title: "'%{name}'-ის ყველა ადგილის ნახვა"
       tab_certified: "ექსპერტის შეფასება (%{count})"

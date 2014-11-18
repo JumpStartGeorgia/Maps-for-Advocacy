@@ -72,3 +72,43 @@ html, body {
 .navbar-fixed-top .navbar-inner .container .brand, .navbar-fixed-top .navbar-inner .container-fluid .brand {
   font-size: 19px;
 }
+
+li.social_links_header {
+  span {
+    padding: 10px 5px 10px;
+    display: inline-block;
+    width: 22px;
+    height: 21px;
+    a {
+      display: block;
+      width: 22px;
+      height: 21px;
+      background-image: url(/assets/social.png);
+    }
+
+    &.f a {
+      background-position: 0px 21px;
+
+      &:hover {
+        background-position: 0px 0px;
+      }
+    }
+
+    &.t a {
+      background-position: -24px 21px;
+
+      &:hover {
+        background-position: -24px 0px;
+      }
+    }
+
+    &.g a {
+      background-position: -48px 21px;
+
+      &:hover {
+        background-position: -48px 0px;
+      }
+    }
+  }
+}
+

@@ -9,10 +9,18 @@
     <%= csrf_meta_tags %>
 	  <%= include_gon %>
 
-	  <meta property="og:title" content="<%= content_for?(:title) ? ("#{yield(:title)} | #{t('app.common.app_name')}").html_safe :
-			  t('app.common.app_name').html_safe %>" />
-    <!--meta name="description" content=""-->
-		<!--meta property="og:description" content="" /-->
+	  <meta property="og:title" content="<%= content_for?(:title) ? "#{yield(:title)} | #{t('app.common.app_name')}" :
+        "#{t('app.common.app_name')} - #{t('app.common.slogan')}".html_safe %>" />
+    <% description = nil 
+       if content_for?(:description)
+        description = yield(:description)
+       elsif @landing_page.present? && @landing_page.content.present? 
+        description = strip_tags(@landing_page.content).html_safe
+       end %>
+    <% if description.present? %>
+      <meta name="description" content="<%= description %>">
+  		<meta property="og:description" content="<%= description %>">
+    <% end %>
 	  <meta property="og:type" content="non_profit" />
 	  <meta property="og:url" content="<%= current_url %>" />
     <!--meta property="og:image" content="" /-->
@@ -82,6 +90,19 @@
 
           <div class="container-fluid nav-collapse">
 	          <ul class="nav pull-right" role="menu">
+              <li role="menuitem" class="social_links_header">
+                <span class="f">
+                  <a href="<%= "http://www.facebook.com/share.php?u=#{request.protocol}#{request.host_with_port}" %>" 
+                      target="_blank" title="facebook"
+                      class="facebook_link" data-url="<%= "http://www.facebook.com/share.php?u=#{request.protocol}#{request.host_with_port}" %>"></a>
+                </span>
+              </li>
+              <li role="menuitem" class="social_links_header">
+                <span class="t">
+                  <a href="https://twitter.com/share" target="_blank" title="twitter"></a>
+                </span>
+              </li>
+              <li role="menuitem"><%= link_to(t('helpers.links.about'), about_path)  %></li>
 			        <li id="header_menu" class="dropdown" role="menuitem" aria-haspopup="true">
 			          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <i class="icon-list"></i>

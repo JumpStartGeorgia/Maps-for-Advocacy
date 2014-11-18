@@ -154,6 +154,7 @@ en:
       what_is_accessibility: What is Accessibility?
       training_videos: Video Guides
       stats: Evaluation Statistics
+      about: About
     titles:
       new: "New %{model}"
       edit: "Edit %{model}"
@@ -431,6 +432,10 @@ en:
       watch_more: Watch More Videos
   places:
     show:
+      description:
+        place: "%{name} is a %{org} located at %{address}. "
+        public: "It has %{num} Public Evaluations with %{yes} accessible votes and %{no} not accessible votes. "
+        cert: "It has %{num} Expert Evaluations with %{yes} accessible votes and %{no} not accessible votes. "
       district_link_title: "View all places that are in '%{name}'"
       venue_link_title: "View all places that are '%{name}'"
       ddl_certified: "Expert Evaluations (%{count})"

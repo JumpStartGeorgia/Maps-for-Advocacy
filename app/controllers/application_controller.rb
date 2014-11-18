@@ -71,6 +71,9 @@ logger.debug "////////////////////////// BROWSER = #{user_agent}"
       @lon = current_user.lon
       @district_id = current_user.district_id
     end
+
+    # this is used for description meta tags
+    @landing_page = Page.by_name('landing_page')
   end
 
 	def initialize_gon

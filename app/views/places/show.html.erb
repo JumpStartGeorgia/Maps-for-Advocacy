@@ -1,6 +1,32 @@
 <%- model_class = Place -%>
 <%- model_class_trans = PlaceTranslation -%>
 <% title @place[:name] %>
+<%
+  desc = t('.description.place', name: @place[:name], org: @place[:venue], address: @place[:address])
+
+  if @data[:public][:summary].present? && @data[:public][:summary].has_key?('overall') && 
+      @data[:public][:summary]['overall'].present?
+
+      
+      desc << t('.description.public', 
+          num: @data[:public][:summary]['overall']['overall']['num_evaluations'], 
+          yes: @data[:public][:summary]['overall']['overall']['num_yes'], 
+          no: @data[:public][:summary]['overall']['overall']['num_no'])
+
+  end
+
+  if @data[:certified][:summary].present? && @data[:certified][:summary].has_key?('overall') && 
+      @data[:certified][:summary]['overall'].present?
+
+      desc << t('.description.cert', 
+          num: @data[:certified][:summary]['overall']['overall']['num_evaluations'], 
+          yes: @data[:certified][:summary]['overall']['overall']['num_yes'], 
+          no: @data[:certified][:summary]['overall']['overall']['num_no'])
+
+  end
+
+  description desc
+%>
 
 <div class="row-fluid">
   <div class="span6" id="venue_evalautions">
@@ -26,6 +52,14 @@
         </p>
       </div>
       <div class="span3">
+        <%= link_to(image_tag("fb_share.jpg", :height => "20"),
+              "http://www.facebook.com/share.php?u=#{request.protocol}#{request.host_with_port}#{request.fullpath}",
+              :title => "facebook", :target => "_blank", :class => 'place-share') %>
+
+        <%= link_to(image_tag("twitter.jpg", :height => "20"),
+              "https://twitter.com/share", :title => "twitter",
+              :target => "_blank", :class => 'place-share') %>
+
         <%= link_to t('app.common.add_evaluation'), evaluation_place_path(@place), 
           :class => 'add_evaluation', :title => t('app.common.add_evaluation_title', :place => @place[:name]) %>
         <% if @place.id.present? && user_signed_in? && current_user.role?(User::ROLES[:site_admin]) %>
