@@ -9,6 +9,9 @@
           <strong><%= t('.header_venue') %>:</strong>
         </legend>
         <ul id="venues">
+          <li>
+            <%= link_to t('.all_venues'), '#', :'data-id' => '0' %>
+          </li>
           <%
             categories = @venue_categories.map{|x| [x.id, x.venue_category]}.uniq
             categories.each do |category|
@@ -33,48 +36,67 @@
         </ul>
       </div>
       <div>
+        <div id="question_categories">
+          <legend>
+            <strong><%= t('.header_question_categories') %>:</strong>
+          </legend>
+          <ul>
+            <% @questions[:common].each do |cat| %>
+              <li>
+                <label for="question_category_<%= cat.id %>">
+                  <input type="checkbox" name="question_category" id="question_category_<%= cat.id %>" value="<%= cat.id %>" checked="checked"/>
+                  <%= cat.name %>
+                </label>
+              </li>
+            <% end %>          
+          </ul>
+        </div>
+
         <div data-evaluation-type-ids="<%= @disabilities.map{|x| x.id} %>" id="evaluation_types">
           <legend>
             <strong><%= t('.header_evaluation_type') %>:</strong>
           </legend>
-          <% @disabilities.each do |dis| %>
-            <label class="checkbox">
-              <input type="checkbox" name="evaluation_type" id="evaluation_type_<%= dis.id %>" value="<%= dis.id %>" checked="checked">
-              <%= dis.name %>
-            </label>
-          <% end %>
+          <ul>
+            <% @disabilities.each do |dis| %>
+              <li>
+                <label class="checkbox">
+                  <input type="checkbox" name="evaluation_type" id="evaluation_type_<%= dis.id %>" value="<%= dis.id %>" checked="checked">
+                  <%= dis.name %>
+                </label>
+              </li>
+            <% end %>
+          </ul>
         </div>
         <div>
           <legend>
             <strong><%= t('.header_layout') %>:</strong>
           </legend>
-          <label class="radio">
-            <input type="radio" name="layout" id="layout_portrait" value="portrait" checked="checked">
-            <%= t('.portrait') %>
-          </label>
-          <label class="radio">
-            <input type="radio" name="layout" id="layout_landscape" value="landscape">
-            <%= t('.landscape') %>
-          </label>
+          <ul>
+            <li>
+              <label class="radio">
+                <input type="radio" name="layout" id="layout_portrait" value="portrait" checked="checked">
+                <%= t('.portrait') %>
+              </label>
+            </li>
+            <li>
+              <label class="radio">
+                <input type="radio" name="layout" id="layout_landscape" value="landscape">
+                <%= t('.landscape') %>
+              </label>
+            </li>
+          </ul>
         </div>
-        <div style="display: none;">
-          <legend>
-            <strong><%= t('.header_help') %>:</strong>
-          </legend>
-          <label class="radio">
-            <input type="radio" name="help" id="help_yes" value="yes">
-            <%= t('app.common.answers.yes') %>
-          </label>
-          <label class="radio">
-            <input type="radio" name="help" id="help_no" value="no" checked="checked">
-            <%= t('app.common.answers.no') %>
-          </label>
-        </div>
+      </div>
+    </div>
+    <div id="row2" class="clear">
+      <div>
         <div>
           <p>
             <%= t('.print_instructions') %>
           </p>
         </div>
+      </div>
+      <div>
         <div>
           <%= link_to "#", :id => 'btn_print' do %>
             <i class="icon-print icon-white "></i>
@@ -86,27 +108,38 @@
   </form>
 </div>
 
+
 <div id="print_area">
   <div id="print_heading">
     <div id="row1" class="clear">
-      <div id="venue_name">
-        <%= t('.all_venues') %>:
-        <span></span>
-      </div>
-      <div>
-        <% @disabilities.each do |dis| %>
-          <div class="evaluation_type" data-id="<%= dis.id %>">
-            <%= dis.name %>
-          </div>
-        <% end %>
-      </div>
-    </div>
-    <div id="row2" class="clear">
       <div>
         <%= t('.header_place') %>:
       </div>
       <div>
         <%= t('.header_address') %>:
+      </div>
+    </div>
+    <div id="row2">
+      <div id="evaluation_type_header">
+        <%= t('.header_evaluation_types') %>:
+      </div>      
+      <% @disabilities.each do |dis| %>
+        <div class="evaluation_type" data-id="<%= dis.id %>">
+          <%= dis.name %>
+        </div>
+      <% end %>
+    </div>
+    <div id="row3">
+      <div id="venue_name">
+        <%= t('.header_venue') %>:
+        <span></span>
+        <div id="venue_name_selection">
+          <% categories.each do |category| %>
+            <div>
+              <%= category[1] %>
+            </div>
+          <% end %>
+        </div>
       </div>
     </div>
   </div>
@@ -115,7 +148,7 @@
 
 
     <% @questions[:common].each do |cat| %>
-      <%= render :partial => 'show_questions', :locals => {:cat => cat, :is_sub_category => false} %>
+      <%= render :partial => 'show_questions', :locals => {:cat => cat, :is_sub_category => false, :is_common => true} %>
     <% end %>
 
 

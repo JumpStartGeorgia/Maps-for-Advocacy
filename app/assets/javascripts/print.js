@@ -6,19 +6,57 @@ $(document).ready(function(){
   $('form#print_options ul#venues a').click(function(e){
     e.preventDefault();
 
-    // hide all venue questions
-    $('#print_questions .venue_questions').hide();
 
-    // update name
-    $('#venue_name span').html($(this).html());
+    if ($(this).data('id') == '0'){
+      // selected 'all' option
+      // - show all categories
+      $('#venue_name #venue_name_selection').show();
 
-    // if this venue has questions, show them    
-    if ($(this).data('id') != undefined){
-      // show the correct venue questions
-      $('#print_questions .venue_questions[data-id="' + $(this).data('id').toString() + '"]').show();
-    }
-    
+      // hide span
+      $('#venue_name span').empty();
+
+      // show all venue questions
+      $('#print_questions .venue_questions').show();
+
+    }else{
+      // show selected category
+
+      // hide all of the categories
+      $('#venue_name #venue_name_selection').hide();
+
+      // update name
+      $('#venue_name span').html($(this).html());
+
+      // hide all venue questions
+      $('#print_questions .venue_questions').hide();
+
+      // if this venue has questions, show them    
+      if ($(this).data('id') != undefined){
+        // show the correct venue questions
+        $('#print_questions .venue_questions[data-id="' + $(this).data('id').toString() + '"]').show();
+      }
+    }    
   });
+
+  // when user selects question category, update that category visibility
+  $('form#print_options input[name="question_category"]').change(function(){
+    var checked = 'form#print_options input[name="question_category"]:checked';
+
+    // reset and hide all question categories
+    $('#print_area #print_questions .question-categories[data-common="true"]').hide();
+
+    if ($(checked).length > 0){
+
+      // for each selected, show it
+      $(checked).each(function(){
+        $('#print_area #print_questions .question-categories[data-common="true"][data-id="' + $(this).val() + '"').show();
+      });
+    }else{
+      // nothing selected so show all
+      $('#print_area #print_questions .question-categories').show();
+    }
+  });
+
 
   // when user selects evaluation type, update questions and heading selection
   $('form#print_options input[name="evaluation_type"]').change(function(){

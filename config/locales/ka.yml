@@ -616,6 +616,8 @@ ka:
     index:
       title: ექსპერტის შეფასების ამობეჭდვა      
       header_venue: კატეგორია
+      all_venues: All Categories
+      header_question_categories: Question Categories
       header_evaluation_type: შეფასების ტიპი
       header_layout: ფურცლის  მიმართულება
       header_help: შევიყვანოთ დამხმარე ინფორმაცია
@@ -623,7 +625,8 @@ ka:
       landscape: ჰორიზონტალური
       print: შეფასების ამობეჭდვა
       print_instructions: ხაზის ქვემოთ წარმოდგენილია ის ნაწილი, რომელიც ამოივეჭდება.
-      all_venues: კატეგორია
+      header_venue: კატეგორია
+      header_evaluation_types: Evaluation Types
       header_place: ადგილის სახელწოდება
       header_address: მისამართი
   manage_users:

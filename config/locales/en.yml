@@ -619,6 +619,8 @@ en:
     index:
       title: Print Out Expert Evaluation      
       header_venue: Category
+      all_venues: All Categories
+      header_question_categories: Question Categories
       header_evaluation_type: Evaluation Type
       header_layout: Paper Orientation
       header_help: Include Help Information
@@ -626,7 +628,8 @@ en:
       landscape: Landscape
       print: Print the Evaluation
       print_instructions: Everything below the line is what will be printed out.
-      all_venues: Category
+      header_venue: Category
+      header_evaluation_types: Evaluation Types
       header_place: Place Name
       header_address: Address
   manage_users:
