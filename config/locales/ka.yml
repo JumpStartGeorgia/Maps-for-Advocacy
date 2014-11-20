@@ -614,7 +614,10 @@ ka:
       title: მეთოდოლოგიური - გამოთვლები    
   print:
     index:
-      title: ექსპერტის შეფასების ამობეჭდვა      
+      title: Print Out Evaluation      
+      header_type: Assessment Type
+      evaluation_certified: "Expert Evaluation"
+      evaluation_public: "Public Evaluation"
       header_venue: კატეგორია
       all_venues: All Categories
       header_question_categories: Question Categories

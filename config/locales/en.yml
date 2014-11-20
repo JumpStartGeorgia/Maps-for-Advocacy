@@ -617,7 +617,10 @@ en:
       title: Methodology - Calculations
   print:
     index:
-      title: Print Out Expert Evaluation      
+      title: Print Out Evaluation      
+      header_type: Assessment Type
+      evaluation_certified: "Expert Evaluation"
+      evaluation_public: "Public Evaluation"
       header_venue: Category
       all_venues: All Categories
       header_question_categories: Question Categories

@@ -2,6 +2,46 @@ $(document).ready(function(){
   // turn venue list into menu
   $('form#print_options ul#venues').menu();
   
+  // update form when certified value is set
+  $('form#print_options input[name="assessment_type"]').change(function(){
+
+
+    if ($(this).val() == 'true'){
+      // certified
+
+      // show question categories
+      $('form#print_options #question_categories').removeClass('accessibly-hidden');
+
+      // evaluation types
+      // hide all first and then turn on certified
+      $('form#print_options #evaluation_types ul li').addClass('accessibly-hidden');
+      $('form#print_options #evaluation_types ul li[data-certified="true"]').removeClass('accessibly-hidden');
+
+      // questions
+      $('#print_area #print_questions #public-questions').addClass('accessibly-hidden');
+      $('#print_area #print_questions #certified-questions').removeClass('accessibly-hidden');
+
+    }else{
+      // public
+
+      // hide question categories
+      $('form#print_options #question_categories').addClass('accessibly-hidden');
+
+      // evaluation types
+      // hide all first and then turn on public
+      $('form#print_options #evaluation_types ul li').addClass('accessibly-hidden');
+      $('form#print_options #evaluation_types ul li[data-public="true"]').removeClass('accessibly-hidden');
+
+      // questions
+      $('#print_area #print_questions #public-questions').removeClass('accessibly-hidden');
+      $('#print_area #print_questions #certified-questions').addClass('accessibly-hidden');      
+    }
+
+    // show all venue questions
+    $('#print_questions .venue_questions').show();
+
+  });
+
   // when select venue, show venue in form and show correct questions
   $('form#print_options ul#venues a').click(function(e){
     e.preventDefault();
@@ -30,10 +70,20 @@ $(document).ready(function(){
       // hide all venue questions
       $('#print_questions .venue_questions').hide();
 
+      var id;
+      if ($('form#print_options input[name="assessment_type"]').length > 0 && 
+          $('form#print_options input[name="assessment_type"]:checked').val() == 'true' &&
+          $(this).data('cert-id') != undefined){
+
+        id = $(this).data('cert-id').toString();          
+      }else if ($(this).data('public-id') != undefined){
+        id = $(this).data('public-id').toString();
+      }
+
       // if this venue has questions, show them    
-      if ($(this).data('id') != undefined){
+      if (id != undefined){
         // show the correct venue questions
-        $('#print_questions .venue_questions[data-id="' + $(this).data('id').toString() + '"]').show();
+        $('#print_questions .venue_questions[data-id="' + id + '"]').show();
       }
     }    
   });

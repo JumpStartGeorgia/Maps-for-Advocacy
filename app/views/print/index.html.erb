@@ -4,6 +4,29 @@
 <div id="filter_options" class="hidden-print">
   <form class="form-horizontal" id="print_options">
     <div id="row1" class="clear">
+      <legend>
+        <strong><%= t('.header_type') %>:</strong>
+      </legend>
+      <% if @show_certified %>
+        <ul>
+          <li>
+            <label class="radio">
+              <input type="radio" name="assessment_type" id="assessment_type_public" value="false" checked="true">
+              <%= t('.evaluation_public') %>
+            </label>
+          </li>
+          <li>
+            <label class="radio">
+              <input type="radio" name="assessment_type" id="assessment_type_certified" value="true">
+              <%= t('.evaluation_certified') %>
+            </label>
+          </li>
+        </ul>
+      <% else %>
+        <%= t('.evaluation_public') %>
+      <% end %>
+    </div>
+    <div id="row2" class="clear">
       <div>
         <legend>
           <strong><%= t('.header_venue') %>:</strong>
@@ -25,7 +48,9 @@
                   <ul>
                     <% venues.each do |venue| %>
                       <li>          
-                        <%= link_to venue[:venue], '#', :'data-id' => venue[:custom_question_category_id] %>
+                        <%= link_to venue[:venue], '#', 
+                          :'data-cert-id' => venue[:custom_question_category_id],
+                          :'data-public-id' => venue[:custom_public_question_category_id] %>
                       </li>
                     <% end %>
                   </ul>
@@ -36,21 +61,23 @@
         </ul>
       </div>
       <div>
-        <div id="question_categories">
-          <legend>
-            <strong><%= t('.header_question_categories') %>:</strong>
-          </legend>
-          <ul>
-            <% @questions[:common].each do |cat| %>
-              <li>
-                <label for="question_category_<%= cat.id %>">
-                  <input type="checkbox" name="question_category" id="question_category_<%= cat.id %>" value="<%= cat.id %>" checked="checked"/>
-                  <%= cat.name %>
-                </label>
-              </li>
-            <% end %>          
-          </ul>
-        </div>
+        <% if @show_certified %>
+          <div id="question_categories" class="accessibly-hidden">
+            <legend>
+              <strong><%= t('.header_question_categories') %>:</strong>
+            </legend>
+            <ul>
+              <% @cert_questions[:common].each do |cat| %>
+                <li>
+                  <label for="question_category_<%= cat.id %>">
+                    <input type="checkbox" name="question_category" id="question_category_<%= cat.id %>" value="<%= cat.id %>" checked="checked"/>
+                    <%= cat.name %>
+                  </label>
+                </li>
+              <% end %>          
+            </ul>
+          </div>
+        <% end %>
 
         <div data-evaluation-type-ids="<%= @disabilities.map{|x| x.id} %>" id="evaluation_types">
           <legend>
@@ -58,7 +85,8 @@
           </legend>
           <ul>
             <% @disabilities.each do |dis| %>
-              <li>
+              <li class="<%= "accessibly-hidden" if dis.active_public == false %>" 
+                  data-certified="<%= dis.active_certified %>" data-public="<%= dis.active_public %>">
                 <label class="checkbox">
                   <input type="checkbox" name="evaluation_type" id="evaluation_type_<%= dis.id %>" value="<%= dis.id %>" checked="checked">
                   <%= dis.name %>
@@ -112,26 +140,30 @@
 <div id="print_area">
   <div id="print_heading">
     <div id="row1" class="clear">
-      <div>
+      <div class="bold-header">
         <%= t('.header_place') %>:
       </div>
-      <div>
+      <div class="bold-header">
         <%= t('.header_address') %>:
       </div>
     </div>
     <div id="row2">
-      <div id="evaluation_type_header">
+      <div id="evaluation_type_header" class="bold-header">
         <%= t('.header_evaluation_types') %>:
       </div>      
       <% @disabilities.each do |dis| %>
-        <div class="evaluation_type" data-id="<%= dis.id %>">
+        <div class="evaluation_type <%= "accessibly-hidden" if dis.active_public == false %>" 
+            data-id="<%= dis.id %>" data-certified="<%= dis.active_certified %>" 
+            data-public="<%= dis.active_public %>">
           <%= dis.name %>
         </div>
       <% end %>
     </div>
     <div id="row3">
       <div id="venue_name">
-        <%= t('.header_venue') %>:
+        <div class="bold-header">
+          <%= t('.header_venue') %>:
+        </div>
         <span></span>
         <div id="venue_name_selection">
           <% categories.each do |category| %>
@@ -146,35 +178,68 @@
 
   <div id="print_questions">
 
-
-    <% @questions[:common].each do |cat| %>
-      <%= render :partial => 'show_questions', :locals => {:cat => cat, :is_sub_category => false, :is_common => true} %>
-    <% end %>
-
-
-    <% 
-      current_venue_category = '' 
-      skip_venue_cat = false
-    %>
-    <% @questions[:venue].each do |venue| %>
-      <% if venue[:venue_category] != current_venue_category %>
-        <% current_venue_category = venue[:venue_category] %>
-        <% 
-          # check if venue category has at least one venue with questions
-          x = @questions[:venue].select{|x| x[:venue_category] == current_venue_category}
-          x = x.map{|x| x[:questions]}.flatten!.map{|x| x[:questions]}.flatten! if x.present?
-          skip_venue_cat = x.blank?
-        %>
+    <div id="public-questions">
+      <% @public_questions[:common].each do |cat| %>
+        <%= render :partial => 'show_questions', :locals => {:cat => cat, :is_sub_category => false, :is_common => true, :is_certified => false} %>
       <% end %>
 
-      <% if !skip_venue_cat %>
-        <% venue[:questions].each do |cat| %>
-          <div class="venue_questions" data-id="<%= cat[:questions].map{|x| x[:question_category_id].to_s}.uniq.first %>">
-            <%= render :partial => 'show_questions', :locals => {:cat => cat, :is_sub_category => false} %>
-          </div>
+      <% 
+        current_venue_category = '' 
+        skip_venue_cat = false
+      %>
+      <% @public_questions[:venue].each do |venue| %>
+        <% if venue[:venue_category] != current_venue_category %>
+          <% current_venue_category = venue[:venue_category] %>
+          <% 
+            # check if venue category has at least one venue with questions
+            x = @public_questions[:venue].select{|x| x[:venue_category] == current_venue_category}
+            x = x.map{|x| x[:questions]}.flatten!.map{|x| x[:questions]}.flatten! if x.present?
+            skip_venue_cat = x.blank?
+          %>
+        <% end %>
+
+        <% if !skip_venue_cat %>
+          <% venue[:questions].each do |cat| %>
+            <div class="venue_questions" data-id="<%= cat[:questions].map{|x| x[:question_category_id].to_s}.uniq.first %>">
+              <%= render :partial => 'show_questions', :locals => {:cat => cat, :is_sub_category => false} %>
+            </div>
+          <% end %>
         <% end %>
       <% end %>
+    </div>
+
+    <% if @show_certified %>
+      <div id="certified-questions" class="accessibly-hidden">
+        <% @cert_questions[:common].each do |cat| %>
+          <%= render :partial => 'show_questions', :locals => {:cat => cat, :is_sub_category => false, :is_common => true, :is_certified => true} %>
+        <% end %>
+
+        <% 
+          current_venue_category = '' 
+          skip_venue_cat = false
+        %>
+        <% @cert_questions[:venue].each do |venue| %>
+          <% if venue[:venue_category] != current_venue_category %>
+            <% current_venue_category = venue[:venue_category] %>
+            <% 
+              # check if venue category has at least one venue with questions
+              x = @cert_questions[:venue].select{|x| x[:venue_category] == current_venue_category}
+              x = x.map{|x| x[:questions]}.flatten!.map{|x| x[:questions]}.flatten! if x.present?
+              skip_venue_cat = x.blank?
+            %>
+          <% end %>
+
+          <% if !skip_venue_cat %>
+            <% venue[:questions].each do |cat| %>
+              <div class="venue_questions" data-id="<%= cat[:questions].map{|x| x[:question_category_id].to_s}.uniq.first %>">
+                <%= render :partial => 'show_questions', :locals => {:cat => cat, :is_sub_category => false} %>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
     <% end %>
+
     
   </div>
 </div>
