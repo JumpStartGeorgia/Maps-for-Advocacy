@@ -17,6 +17,10 @@ $(document).ready(function(){
       $('form#print_options #evaluation_types ul li').addClass('accessibly-hidden');
       $('form#print_options #evaluation_types ul li[data-certified="true"]').removeClass('accessibly-hidden');
 
+      // eval types in print area
+      $('#print_area #print_heading .evaluation_type').addClass('accessibly-hidden');
+      $('#print_area #print_heading .evaluation_type[data-certified="true"]').removeClass('accessibly-hidden');
+
       // questions
       $('#print_area #print_questions #public-questions').addClass('accessibly-hidden');
       $('#print_area #print_questions #certified-questions').removeClass('accessibly-hidden');
@@ -31,6 +35,10 @@ $(document).ready(function(){
       // hide all first and then turn on public
       $('form#print_options #evaluation_types ul li').addClass('accessibly-hidden');
       $('form#print_options #evaluation_types ul li[data-public="true"]').removeClass('accessibly-hidden');
+
+      // eval types in print area
+      $('#print_area #print_heading .evaluation_type').addClass('accessibly-hidden');
+      $('#print_area #print_heading .evaluation_type[data-public="true"]').removeClass('accessibly-hidden');
 
       // questions
       $('#print_area #print_questions #public-questions').removeClass('accessibly-hidden');
