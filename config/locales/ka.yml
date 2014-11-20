@@ -153,8 +153,13 @@ ka:
       partners: პროექტის პარტნიორები
       what_is_accessibility: რა არის ხელმისაწვდომობა?
       training_videos: Video Guides
-      stats: Evaluation Statistics
+      stats: Statistics
+      about: About Ability.ge
+      print: Print Evaluation
+    menu:
       about: About
+      learn: Learn
+      legal: Legal Standards
     titles:
       new: "ახალი %{model}"
       edit: "შეცვლა %{model}"
@@ -257,7 +262,6 @@ ka:
       menu: მენიუ
       settings: პარამეტრები
       admin: ადმინისტრატო
-      print: ექსპერტის შეფასების ამობეჭდვა
       manage_users: ორგანიზაციის წევრთა ანგარიშების მართვა
       sign_out: გასვლა
       js_link_title: ჯამპსტარტ ჯორჯიას - ჩვენ გაწვდით ინფორმაციას უკეთ!

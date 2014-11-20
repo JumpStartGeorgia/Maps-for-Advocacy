@@ -153,8 +153,13 @@ en:
       partners: Project Partners
       what_is_accessibility: What is Accessibility?
       training_videos: Video Guides
-      stats: Evaluation Statistics
+      stats: Statistics
+      about: About Ability.ge
+      print: Print Evaluation
+    menu:
       about: About
+      learn: Learn
+      legal: Legal Standards
     titles:
       new: "New %{model}"
       edit: "Edit %{model}"
@@ -257,7 +262,6 @@ en:
       menu: Menu
       settings: Settings
       admin: Admin
-      print: Print Expert Evaluation
       manage_users: Manage Organization Users
       sign_out: Sign Out
       js_link_title: JumpStart Georgia - We communicate data better!

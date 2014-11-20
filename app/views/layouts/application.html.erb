@@ -90,47 +90,43 @@
 
           <div class="container-fluid nav-collapse">
 	          <ul class="nav pull-right" role="menu">
-              <li role="menuitem" class="social_links_header">
-                <span class="f">
-                  <a href="<%= "http://www.facebook.com/share.php?u=#{request.protocol}#{request.host_with_port}" %>" 
-                      target="_blank" title="facebook"
-                      class="facebook_link" data-url="<%= "http://www.facebook.com/share.php?u=#{request.protocol}#{request.host_with_port}" %>"></a>
-                </span>
-              </li>
-              <li role="menuitem" class="social_links_header">
-                <span class="t">
-                  <a href="https://twitter.com/share" target="_blank" title="twitter"></a>
-                </span>
-              </li>
-              <li role="menuitem"><%= link_to(t('helpers.links.about'), about_path)  %></li>
-			        <li id="header_menu" class="dropdown" role="menuitem" aria-haspopup="true">
-			          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                  <i class="icon-list"></i>
-	                <%= t('.menu') %>
-	                <b class="caret"></b>
-			          </a>
-			          <ul class="dropdown-menu" role="menu">
+              <li class="dropdown" role="menuitem" aria-haspopup="true">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <%= t('helpers.menu.about') %>
+                  <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu" role="menu">
                   <li role="menuitem"><%= link_to(t('helpers.links.about'), about_path)  %></li>
+                  <li role="menuitem"><%= link_to(t('helpers.links.methodology'), methodology_path)  %></li>
+                  <li role="menuitem"><%= link_to(t('helpers.links.stats'), stats_path)  %></li>
+                  <li role="menuitem"><%= link_to t('helpers.links.print'), print_path %></li>
+                  <li role="menuitem"><%= link_to(t('helpers.links.contact'), contact_path)  %></li>
+                </ul>
+              </li>
+              <li class="dropdown" role="menuitem" aria-haspopup="true">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <%= t('helpers.menu.learn') %>
+                  <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu" role="menu">
                   <li role="menuitem"><%= link_to(t('helpers.links.what_is_accessibility'), what_is_accessibility_path)  %></li>
                   <li role="menuitem"><%= link_to(t('helpers.links.why_monitor'), why_monitor_path)  %></li>
                   <li role="menuitem"><%= link_to(t('helpers.links.training_videos'), video_guides_path)  %></li>
-                  <li class="divider"></li>
-                  <li role="menuitem"><%= link_to(t('helpers.links.evaluate_place'), new_place_path)  %></li>
-                  <li role="menuitem"><%= link_to(t('helpers.links.find_evaluations'), find_evaluations_path)  %></li>
-                  <li role="menuitem"><%= link_to(t('helpers.links.stats'), stats_path)  %></li>
-                  <li class="divider"></li>
-                  <li role="menuitem"><%= link_to(t('helpers.links.georgian_legislation'), georgian_legislation_path)  %></li>
+                </ul>
+              </li>
+              <li class="dropdown" role="menuitem" aria-haspopup="true">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <%= t('helpers.menu.legal') %>
+                  <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu" role="menu">
                   <li role="menuitem"><%= link_to(t('helpers.links.un_crpd'), un_crpd_path)  %></li>
-                  <li role="menuitem"><%= link_to(t('helpers.links.methodology'), methodology_path)  %></li>
-                  <li role="menuitem"><%= link_to(t('helpers.links.partners'), partners_path)  %></li>
-                  <li class="divider"></li>
-                  <li role="menuitem"><%= link_to(t('helpers.links.contact'), contact_path)  %></li>
-			          </ul>
+                  <li role="menuitem"><%= link_to(t('helpers.links.georgian_legislation'), georgian_legislation_path)  %></li>
+                </ul>
               </li>
 		          <% if user_signed_in? %>
 				        <li id="admin_menu" class="dropdown" role="menuitem" aria-haspopup="true">
 				          <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    <i class="icon-user"></i>
  		                <%= current_user.nickname %>
 		                <b class="caret"></b>
 				          </a>
@@ -143,11 +139,6 @@
                     <% if current_user.role?(User::ROLES[:organization_admin]) && current_user.organizations.present? %>
 						          <li role="menuitem">
 				   		         <%= link_to t('.manage_users'), manage_users_path %>
-										  </li>
-                    <% end %>
-                    <% if current_user.role?(User::ROLES[:certification]) %>
-						          <li role="menuitem">
-				   		         <%= link_to t('.print'), print_path %>
 										  </li>
                     <% end %>
 						        <li role="menuitem">
@@ -166,6 +157,18 @@
 									<li id="language_switcher" role="menuitem"><%= link_to t("app.language.#{locale}"), params.merge(:locale => locale) %></li>
 								<% end %>
 							<% end %>
+              <li role="menuitem" class="social_links_header">
+                <span class="f">
+                  <a href="<%= "http://www.facebook.com/share.php?u=#{request.protocol}#{request.host_with_port}" %>" 
+                      target="_blank" title="facebook"
+                      class="facebook_link" data-url="<%= "http://www.facebook.com/share.php?u=#{request.protocol}#{request.host_with_port}" %>"></a>
+                </span>
+              </li>
+              <li role="menuitem" class="social_links_header">
+                <span class="t">
+                  <a href="https://twitter.com/share" target="_blank" title="twitter"></a>
+                </span>
+              </li>
 	          </ul>
           </div><!--/.nav-collapse -->
         </div>
