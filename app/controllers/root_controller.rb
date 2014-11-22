@@ -29,7 +29,7 @@ class RootController < ApplicationController
     params[:district_id] = @district_id if params[:district_id].blank?
     options[:district_id] = params[:district_id].present? && params[:district_id] != '0' ? params[:district_id] : nil
     options[:with_numbers_only] = true
-    params[:places_with_evaluation] = params[:places_with_evaluation].present? ? params[:places_with_evaluation].to_bool : true
+    params[:places_with_evaluation] = params[:places_with_evaluation].present? ? params[:places_with_evaluation].to_bool : false
     options[:places_with_evaluation] = params[:places_with_evaluation]
     
     @venue_categories = VenueCategory.names_with_count(options)

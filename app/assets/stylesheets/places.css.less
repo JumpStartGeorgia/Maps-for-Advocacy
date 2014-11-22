@@ -182,6 +182,13 @@ form.place{
       font-size: 13px;
       font-weight: normal;
     }
+    .add_evaluation{
+      display: inline-block;
+      float: right;
+      font-weight: normal;
+      font-size: 14px;
+      margin-top: -7px;
+    }
   }
   h3{
     margin-top: 10px;
@@ -218,11 +225,11 @@ form.place{
     font-style: italic;
     border-bottom: solid 1px #555;
   }
-  .top > div:last-of-type{
-    text-align: right;
-  }
 
   #place-filter{
+    h2{
+      margin-top: 0;
+    }
     h3{
       border-bottom: none;
     }
@@ -477,9 +484,22 @@ form.place{
   }
 }
 
+#place_show_info{
+  li{
+    vertical-align: top;
+    margin-bottom: 10px;
+  }
+}
 
+#place-url{
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  border-bottom: solid 1px #ccc;
+
+}
 .place-share{
   opacity: 0.8;
+  margin-right: 5px;
   &:hover{
     opacity: 1;
   }

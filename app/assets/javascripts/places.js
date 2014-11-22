@@ -256,12 +256,13 @@ $(document).ready(function(){
       // get values of which to turn on
       var cert_value = $('#filter_certified').val();
       var type_value = $('#filter_type').val();
+      var cert_title = $('#filter_certified option:selected').attr('title');
       // get names for selected items
       var cert_name = $('#filter_certified option:selected').data('name');
       var type_name = $('#filter_type option:selected').data('name');
 
       // show the correct header
-      $('#place-summary-container > h3').html(cert_name + ': ' + type_name);
+      $('#place-summary-container > h3').html(cert_name + ': ' + type_name).attr('title', cert_title);
       // show the correct block
       $('#place-summary-container .summary-block[data-certified="' + cert_value + '"][data-type="' + type_value + '"]').removeClass('accessibly-hidden');
 

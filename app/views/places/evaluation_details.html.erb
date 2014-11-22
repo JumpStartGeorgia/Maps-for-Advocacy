@@ -4,9 +4,11 @@
   if @is_certified
     summary_key = 'categories'
     selection_header_cert = t('.evaluations_certified')
+    selection_header_title = t('app.common.certified_explanation')
   else
     summary_key = 'questions'
     selection_header_cert = t('.evaluations_public')
+    selection_header_title = t('app.common.public_explanation')
   end
 
   type_name = t('.filter_type_all')
@@ -18,7 +20,7 @@
 <div id="venue_evalautions">
 
   <% if @data.present? %>
-    <h2><%= "#{selection_header_cert}: #{type_name}" %></h2>
+    <h2 title="<%= selection_header_title %>"><%= "#{selection_header_cert}: #{type_name}" %></h2>
     <% 
       questions = nil
       if @is_certified

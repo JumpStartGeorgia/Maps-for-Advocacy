@@ -26,152 +26,71 @@
   end
 
   description desc
+
+  social_links = link_to(image_tag("fb_share.jpg", :height => "20"),
+                "http://www.facebook.com/share.php?u=#{request.protocol}#{request.host_with_port}#{request.fullpath}",
+                :title => "facebook", :target => "_blank", :class => 'place-share')
+  social_links << link_to(image_tag("twitter.jpg", :height => "20"),
+                "https://twitter.com/share", :title => "twitter",
+                :target => "_blank", :class => 'place-share')
+  title_right  social_links
+
+  count_cert = @data[:certified][:disability_evaluations].map{|x| x[:evaluation_count]}.sum
+  count_public = @data[:public][:disability_evaluations].map{|x| x[:evaluation_count]}.sum
+  cert_selected = "selected=selected"
+  public_selected = ""
+  default_count = count_cert
+  selection_header_cert = t('.evaluations_certified')
+  selection_header_title = t('app.common.certified_explanation')
+  if count_cert == 0 && count_public > 0
+    cert_selected = ""
+    public_selected = "selected=selected"
+    default_count = count_public
+    selection_header_cert = t('.evaluations_public')
+    selection_header_title = t('app.common.public_explanation')
+  end
+
 %>
 
 <div class="row-fluid">
-  <div class="span6" id="venue_evalautions">
-    <div class="row-fluid top">
-      <div class="span9">
-        <p>
-          <strong><%= model_class_trans.human_attribute_name(:address) %>:</strong>
-          <%= @place[:address] %>
-        </p>
-        <p>
-          <strong><%= model_class.human_attribute_name(:url) %>:</strong>
-          <%= link_to t('.website_button'), @place[:url], :target => '_blank', :class => 'btn_website' if @place[:url].present? %>
-        </p>
-        <p>
-          <strong><%= model_class.human_attribute_name(:district_id) %>:</strong>
-          <%= link_to @place[:district], root_path(:district_id => @place[:district_id]),
-            :title => t('.district_link_title', :name => @place[:district]) %>
-        </p>
-        <p>
-          <strong><%= model_class.human_attribute_name(:venue_id) %>:</strong>
-          <%= link_to @place[:venue], root_path(:venue_category_id => @place[:venue_category_id]),
-            :title => t('.venue_link_title', :name => @place[:venue]) %>
-        </p>
-      </div>
-      <div class="span3">
-        <%= link_to(image_tag("fb_share.jpg", :height => "20"),
-              "http://www.facebook.com/share.php?u=#{request.protocol}#{request.host_with_port}#{request.fullpath}",
-              :title => "facebook", :target => "_blank", :class => 'place-share') %>
-
-        <%= link_to(image_tag("twitter.jpg", :height => "20"),
-              "https://twitter.com/share", :title => "twitter",
-              :target => "_blank", :class => 'place-share') %>
-
-        <%= link_to t('app.common.add_evaluation'), evaluation_place_path(@place), 
-          :class => 'add_evaluation', :title => t('app.common.add_evaluation_title', :place => @place[:name]) %>
-        <% if @place.id.present? && user_signed_in? && current_user.role?(User::ROLES[:site_admin]) %>
-          <%= link_to t('app.common.edit_place'), edit_place_path(@place), 
-            :class => 'edit_place', :title => t('app.common.edit_place_title', :place => @place[:name]) %>
-          <%= link_to t('app.common.delete_place'),
-                      place_path(@place),
-                      :method => :delete,
-                      :class => 'delete_place',
-                      :confirm => t('app.buttons.confirm'),
-                      :title => t('app.common.delete_place_title', :place => @place[:name]) %>
-
-        <% end %>
-      </div>
-    </div>
-    
-    <div id="place-filter">
-      <h2><%= t('.header_evaluations') %></h2>
-      <p>
-        <%= t('.filter_explanation') %>
-      </p>
-      <div class="row-fluid">
-        <div class="span6">
-          <div class="filter_box">
-            <h3><%= label_tag :filter_certified, t('.header_filter_certified') %></h3>
-            <select id="filter_certified" name="filter_certified" style="width: 100%">
-            <%
-              count_cert = @data[:certified][:disability_evaluations].map{|x| x[:evaluation_count]}.sum
-              count_public = @data[:public][:disability_evaluations].map{|x| x[:evaluation_count]}.sum
-              cert_selected = "selected=selected"
-              public_selected = ""
-              default_count = count_cert
-              selection_header_cert = t('.evaluations_certified')
-              if count_cert == 0 && count_public > 0
-                cert_selected = ""
-                public_selected = "selected=selected"
-                default_count = count_public
-                selection_header_cert = t('.evaluations_public')
-              end
-            %>
-              <option value="true" <%= cert_selected %> data-name="<%= t('.evaluations_certified') %>">
-                <%= t('.ddl_certified', :count => count_cert) %>              
-                </option>
-              <option value="false" <%= public_selected %> data-name="<%= t('.evaluations_public') %>">
-                <%= t('.ddl_public', :count => count_public) %>
-              </option>
-            </select>
-          </div>
-        </div>
-        <div class="span6">    
-          <div class="filter_box">
-            <h3><%= label_tag :filter_type, t('.header_filter_type') %></h3>
-            <select id="filter_type" name="filter_type" style="width: 100%">
-              <option value="0" selected="selected" id="filter-type-all"
-                data-public="true" 
-                data-certified="true"
-                data-name="<%= t('.filter_type_all') %>"
-                data-count-cert="<%= " (#{count_cert})" %>"
-                data-count-public="<%= " (#{count_public})" %>"><%= "#{t('.filter_type_all')} (#{default_count})" %></option>
-              <% @disabilities.each do |disability| %>
-                <% 
-                  count_cert = 0
-                  count_public = 0
-                  index_cert = @data[:certified][:disability_evaluations].index{|x| x[:id] == disability.id}
-                  count_cert = @data[:certified][:disability_evaluations][index_cert][:evaluation_count] if index_cert.present?
-
-                  index_public = @data[:public][:disability_evaluations].index{|x| x[:id] == disability.id}
-                  count_public = @data[:public][:disability_evaluations][index_public][:evaluation_count] if index_public.present?
-
-                  cls = 'class=accessibly-hidden'
-                  default_count = 0
-                  if disability.active_certified? && cert_selected.present?
-                    cls = ''
-                    default_count = count_cert
-                  elsif disability.active_public? && public_selected.present?
-                    cls = ''
-                    default_count = count_public
-                  end
-                %>
-                <option value="<%= disability.id %>" data-public="<%= disability.active_public %>" <%= cls %>
-                  data-certified="<%= disability.active_certified %>"
-                  data-name="<%= disability.name %>"
-                  data-count-cert="<%= " (#{count_cert})" %>"
-                  data-count-public="<%= " (#{count_public})" %>"><%= "#{disability.name} (#{default_count})" %></option>
-              <% end %>
-            </select>
-          </div>
-        </div>
-      </div>    
-    </div>    
-    
-    <div id="place-summary-container" aria-live="polite" aria-relevant="additions">
-      <h3><%= "#{selection_header_cert}: #{t('.filter_type_all')}" %></h3>
-      <div id="place-summary-loading"></div>      
-      <%= render :partial => 'show_place_summary', :locals => {
-          :data => @data[:certified], :is_certified => true, 
-          :cert_text => t('app.common.certified'),
-          :show_overall => cert_selected.present?
-        } %>
-      <%= render :partial => 'show_place_summary', :locals => {
-          :data => @data[:public], :is_certified => false, 
-          :cert_text => t('app.common.public'),
-          :show_overall => public_selected.present?
-        } %>
-    </div>
-
-    
-
-
-
-  </div>
   <div class="span6">
+    <% if @place.id.present? && user_signed_in? && current_user.role?(User::ROLES[:site_admin]) %>
+    <p>
+        <%= link_to t('app.common.edit_place'), edit_place_path(@place), 
+          :class => 'edit_place', :title => t('app.common.edit_place_title', :place => @place[:name]) %>
+        <%= link_to t('app.common.delete_place'),
+                  place_path(@place),
+                  :method => :delete,
+                  :class => 'delete_place',
+                  :confirm => t('app.buttons.confirm'),
+                  :title => t('app.common.delete_place_title', :place => @place[:name]) %>
+
+      </p>
+    <% end %>
+    <ul id="place_show_info" class="row-fluid">
+      <li class="address span6">
+        <strong><%= model_class_trans.human_attribute_name(:address) %>:</strong><br />
+        <%= @place[:address] %>
+      </li>
+      <li class="span2">
+        <strong><%= model_class.human_attribute_name(:district_id) %>:</strong><br />
+        <%= link_to @place[:district], root_path(:district_id => @place[:district_id]),
+          :title => t('.district_link_title', :name => @place[:district]) %>
+      </li>
+      <li class="span4">
+        <strong><%= model_class.human_attribute_name(:venue_id) %>:</strong><br />
+        <%= link_to @place[:venue], root_path(:venue_category_id => @place[:venue_category_id]),
+          :title => t('.venue_link_title', :name => @place[:venue]) %>
+      </li>
+    </ul>
+    <ul class="row-fluid" id="place-url">
+      <% if @place[:url].present? %>
+        <li class="span6">
+          <%= link_to t('.website_button'), @place[:url], :target => '_blank', :class => 'btn_website'  %>
+        </li>
+      <% end %>
+    </ul>
+
     <a href="#footer" class="accessibly-hidden"><%= t('.skip_map') %></a>
     <div id="map"></div>
     
@@ -273,6 +192,97 @@
         </p>
       <% end %>
     </div>
+    
+
+
+
+  </div>
+  <div class="span6"  id="venue_evalautions">
+    <div id="place-filter">
+      <h2 class="clear">
+        <%= t('.header_evaluations') %>
+        <%= link_to t('app.common.add_evaluation'), evaluation_place_path(@place), 
+          :class => 'add_evaluation pull-right', 
+          :title => t('app.common.add_evaluation_title', :place => @place[:name]) %>
+      </h2>
+      <p>
+        <%= t('.filter_explanation') %>
+      </p>
+      <div class="row-fluid">
+        <div class="span6">
+          <div class="filter_box">
+            <h3><%= label_tag :filter_certified, t('.header_filter_certified') %></h3>
+            <select id="filter_certified" name="filter_certified" style="width: 100%">
+              <option value="true" <%= cert_selected %> data-name="<%= t('.evaluations_certified') %>"
+                title="<%= t('app.common.certified_explanation') %>">
+                <%= t('.ddl_certified', :count => count_cert) %>              
+                </option>
+              <option value="false" <%= public_selected %> data-name="<%= t('.evaluations_public') %>"
+                title="<%= t('app.common.public_explanation') %>">
+                <%= t('.ddl_public', :count => count_public) %>
+              </option>
+            </select>
+          </div>
+        </div>
+        <div class="span6">    
+          <div class="filter_box">
+            <h3><%= label_tag :filter_type, t('.header_filter_type') %></h3>
+            <select id="filter_type" name="filter_type" style="width: 100%">
+              <option value="0" selected="selected" id="filter-type-all"
+                data-public="true" 
+                data-certified="true"
+                data-name="<%= t('.filter_type_all') %>"
+                data-count-cert="<%= " (#{count_cert})" %>"
+                data-count-public="<%= " (#{count_public})" %>"><%= "#{t('.filter_type_all')} (#{default_count})" %></option>
+              <% @disabilities.each do |disability| %>
+                <% 
+                  count_cert = 0
+                  count_public = 0
+                  index_cert = @data[:certified][:disability_evaluations].index{|x| x[:id] == disability.id}
+                  count_cert = @data[:certified][:disability_evaluations][index_cert][:evaluation_count] if index_cert.present?
+
+                  index_public = @data[:public][:disability_evaluations].index{|x| x[:id] == disability.id}
+                  count_public = @data[:public][:disability_evaluations][index_public][:evaluation_count] if index_public.present?
+
+                  cls = 'class=accessibly-hidden'
+                  default_count = 0
+                  if disability.active_certified? && cert_selected.present?
+                    cls = ''
+                    default_count = count_cert
+                  elsif disability.active_public? && public_selected.present?
+                    cls = ''
+                    default_count = count_public
+                  end
+                %>
+                <option value="<%= disability.id %>" data-public="<%= disability.active_public %>" <%= cls %>
+                  data-certified="<%= disability.active_certified %>"
+                  data-name="<%= disability.name %>"
+                  data-count-cert="<%= " (#{count_cert})" %>"
+                  data-count-public="<%= " (#{count_public})" %>"><%= "#{disability.name} (#{default_count})" %></option>
+              <% end %>
+            </select>
+          </div>
+        </div>
+      </div>    
+    </div>    
+    
+    <div id="place-summary-container" aria-live="polite" aria-relevant="additions">
+      <h3 title="<%= selection_header_title %>">
+        <%= "#{selection_header_cert}: #{t('.filter_type_all')}" %>
+      </h3>
+      <div id="place-summary-loading"></div>      
+      <%= render :partial => 'show_place_summary', :locals => {
+          :data => @data[:certified], :is_certified => true, 
+          :cert_text => t('app.common.certified'),
+          :show_overall => cert_selected.present?
+        } %>
+      <%= render :partial => 'show_place_summary', :locals => {
+          :data => @data[:public], :is_certified => false, 
+          :cert_text => t('app.common.public'),
+          :show_overall => public_selected.present?
+        } %>
+    </div>
+
   </div>
 </div>
 

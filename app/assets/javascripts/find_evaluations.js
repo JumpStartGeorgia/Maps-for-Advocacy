@@ -28,6 +28,7 @@ $(document).ready(function(){
 
     $('#filter_evaluations').on('change', function(e){
       $('#disability_filter').slideToggle();
+      $('#filter_disability').select2({width:'element', allowClear:true});
     });
 
 /*    

@@ -218,7 +218,7 @@ en:
         not_relevant: Not Relevant
       add_photos: Add Photos
       add_photos_title: "Add Photos for '%{place}'"
-      add_evaluation: Add an Evaluation
+      add_evaluation: Evaluate This Place
       add_evaluation_title: "Add an Evaluation for '%{place}'"
       add_evaluation_title2: "Add a %{disability} Evaluation for '%{place}'"
       edit_place: Edit Place
@@ -403,8 +403,9 @@ en:
         no_visual: No evaluations with visual evidence have been submitted.
     find_places:
       title: Find Accessible Places
+      explanation: 'You can search by place name, address, category, district, or evaluation type.'
       header_search: Search
-      header_filter_place_search: Place
+      header_filter_place_search: Place Name
       placeholder_place_search: All Places
       header_filter_address_search: Address
       placeholder_address_search: All Addresses
@@ -470,8 +471,8 @@ en:
       question: "Question:"
       answer: "Answer:"
     show_place_summary:
-      certified_explanation: Expert Evaluations are completed by people that are trained in how to evaluate a place for accessibility. Only the latest evaluation from each evaluation type is used to compute the overall accessibility score.
-      public_explanation: Public Evaluations can be completed by anyone that wishes to submit an evaluation.  Every evaluation is used to compute the overall accessibility score.
+#      certified_explanation: Expert Evaluations are completed by people that are trained in how to evaluate a place for accessibility. Only the latest evaluation from each evaluation type is used to compute the overall accessibility score.
+#      public_explanation: Public Evaluations can be completed by anyone that wishes to submit an evaluation.  Every evaluation is used to compute the overall accessibility score.
       header_summary: Overall Summary
       no_evaluations: "At this time no '%{cert}' evaluations have been submitted."
       no_type_evaluations: "At this time no '%{cert}: %{type}' evaluations have been submitted."

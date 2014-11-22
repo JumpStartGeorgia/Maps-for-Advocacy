@@ -218,7 +218,7 @@ ka:
         not_relevant: არ არის შესაბამისი
       add_photos: სურათის დამატება 
       add_photos_title: "'%{place}'-ის სურათის დამატება"
-      add_evaluation: შეფასების დამატება
+      add_evaluation: Evaluate This Place
       add_evaluation_title: "'%{place}'-ის შეფასების დამატება"
       add_evaluation_title2: "დაამატეთ '%{place}'-ის %{disability} შეფასება"
       edit_place: ადგილის შესახებ ინფორმაციის ჩასწორება
@@ -403,8 +403,9 @@ ka:
         no_visual: No evaluations with visual evidence have been submitted.
     find_places:
       title: Find Accessible Places
+      explanation: 'You can search by place name, address, category, district, or evaluation type.'
       header_search: ძიება
-      header_filter_place_search: მდებარეობა
+      header_filter_place_search: Place Name
       placeholder_place_search: ყველა მდებარეობა
       header_filter_address_search: მისამართი
       placeholder_address_search: ყველა მისამართი
@@ -470,8 +471,8 @@ ka:
       question: "კითხვები:"
       answer: "პასუხები:"
     show_place_summary:
-      certified_explanation: Expert Evaluations are completed by people that are trained in how to evaluate a place for accessibility. Only the latest evaluation from each evaluation type is used to compute the overall accessibility score.
-      public_explanation: Public Evaluations can be completed by anyone that wishes to submit an evaluation.  Every evaluation is used to compute the overall accessibility score.
+#      certified_explanation: Expert Evaluations are completed by people that are trained in how to evaluate a place for accessibility. Only the latest evaluation from each evaluation type is used to compute the overall accessibility score.
+#      public_explanation: Public Evaluations can be completed by anyone that wishes to submit an evaluation.  Every evaluation is used to compute the overall accessibility score.
       header_summary: Overall Summary
       no_evaluations: "At this time no '%{cert}' evaluations have been submitted."
       no_type_evaluations: "At this time no '%{cert}: %{type}' evaluations have been submitted."
@@ -496,6 +497,9 @@ ka:
       disability_other: 'სხვა ტიპი: %{name}'
     evaluation_details:
       title: "'%{name}' Evaluation Details"
+      evaluations_certified: "Expert Evaluations"
+      evaluations_public: "Public Evaluations"
+      filter_type_all: All
       summary_result: საერთო შედეგები
       header_user_summary: შეჯამება
       header_user_details: დეტალები

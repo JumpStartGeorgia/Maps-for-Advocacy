@@ -8,13 +8,13 @@
 %>
 
         <div class="summary-block <%= cls_show_cert %>" data-certified="<%= is_certified %>" data-type="0">
-          <div><p>
+          <!--div><p>
           <% if is_certified %>
             <%= t('.certified_explanation') %>
           <% else %>
             <%= t('.public_explanation') %>
           <% end %>
-          </p></div>
+          </p></div-->
 
           <% if data[:summary].present? && data[:summary].has_key?('overall') && data[:summary]['overall'].present? && data[:summary_questions].present?%>
 
@@ -76,13 +76,13 @@
             %>
               <div class="summary-block accessibly-hidden" data-certified="<%= is_certified %>" data-type="<%= disability[:id] %>">
 
-                <div><p>
+                <!--div><p>
                 <% if is_certified %>
                   <%= t('.certified_explanation') %>
                 <% else %>
                   <%= t('.public_explanation') %>
                 <% end %>
-                </p></div>
+                </p></div-->
 
                 <% if disability[:evaluation_count] == 0 %>
                   <p>
