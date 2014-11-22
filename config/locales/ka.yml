@@ -144,8 +144,8 @@ ka:
       sign_in_local_or_provider: ან შეიყვანეთ თქვენი ელ. ფოსტა და პაროლი
       reset_or_sign_in: შედით facebook-ით ან შეცვალეთ პაროლი
       evaluate_place: Evaluate a Place
-      find_evaluations: Find Evaluations
-      statistics: View More Statistics
+      find_places: Find Accessible Places
+      statistics: View Statistics
       methodology: მეთოდოლოგია
       why_monitor: რატომ მონიტორინგი?
       un_crpd: UN CRPD
@@ -156,6 +156,7 @@ ka:
       stats: Statistics
       about: About Ability.ge
       print: Print Evaluation
+      contact: Contact
     menu:
       about: About
       learn: Learn
@@ -370,7 +371,7 @@ ka:
   root:
     index:
       stats_text: "To date, %{num} Places have been evaluated with the following results:"
-      venue_label: 'Find Evaluations by Category:'
+      venue_label: 'Find Accessible Places by Category:'
       venue_all: ყველა კატეგორია
       skip_movie: გამოვტოვოთ ფილმი (გადახტომა)
     contact:
@@ -400,8 +401,8 @@ ka:
       no_data:
         no_evals: No evaluations have been submitted.
         no_visual: No evaluations with visual evidence have been submitted.
-    find_evaluations:
-      title: Find Evaluations
+    find_places:
+      title: Find Accessible Places
       header_search: ძიება
       header_filter_place_search: მდებარეობა
       placeholder_place_search: ყველა მდებარეობა

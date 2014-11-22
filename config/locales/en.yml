@@ -144,8 +144,8 @@ en:
       sign_in_local_or_provider: or log in with your email and password
       reset_or_sign_in: sign in with facebook or reset your password
       evaluate_place: Evaluate a Place
-      find_evaluations: Find Evaluations
-      statistics: View More Statistics
+      find_places: Find Accessible Places
+      statistics: View Statistics
       methodology: Methodology
       why_monitor: Why Monitor?
       un_crpd: UN CRPD
@@ -156,6 +156,7 @@ en:
       stats: Statistics
       about: About Ability.ge
       print: Print Evaluation
+      contact: Contact
     menu:
       about: About
       learn: Learn
@@ -370,7 +371,7 @@ en:
   root:
     index:
       stats_text: "To date, %{num} Places have been evaluated with the following results:"
-      venue_label: 'Find Evaluations by Category:'
+      venue_label: 'Find Accessible Places by Category:'
       venue_all: All Categories
       skip_movie: Skip the movie (jump)
     contact:
@@ -400,8 +401,8 @@ en:
       no_data:
         no_evals: No evaluations have been submitted.
         no_visual: No evaluations with visual evidence have been submitted.
-    find_evaluations:
-      title: Find Evaluations
+    find_places:
+      title: Find Accessible Places
       header_search: Search
       header_filter_place_search: Place
       placeholder_place_search: All Places

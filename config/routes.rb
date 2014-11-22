@@ -79,7 +79,7 @@ BootstrapStarter::Application.routes.draw do
     # root pages
     match '/about', :to => 'root#about', :as => :about, :via => :get
     match '/contact', :to => 'root#contact', :as => :contact, :via => :get
-    match '/find_evaluations', :to => 'root#find_evaluations', :as => :find_evaluations, :via => :get
+    match '/find_places', :to => 'root#find_places', :as => :find_places, :via => :get
 		match '/un_crpd', :to => 'root#un_crpd', :as => :un_crpd, :via => :get
 		match '/georgian_legislation', :to => 'root#georgian_legislation', :as => :georgian_legislation, :via => :get
 		match '/why_monitor', :to => 'root#why_monitor', :as => :why_monitor, :via => :get

@@ -1,7 +1,7 @@
 class RootController < ApplicationController
 
   def index    
-    @venue_categories = VenueCategory.sorted
+#    @venue_categories = VenueCategory.sorted
 
     @how_report = Page.by_name('how_report')
 
@@ -11,7 +11,7 @@ class RootController < ApplicationController
     @stats[:certified_results] = PlaceSummary.overall_certified_results
 
     gon.front_page = true
-    gon.find_evaluations_path = find_evaluations_path(:district_id => 0)
+    gon.find_evaluations_path = find_places_path(:district_id => 0)
 
     respond_to do |format|
       format.html # index.html.erb
@@ -20,7 +20,7 @@ class RootController < ApplicationController
   end
 
   
-  def find_evaluations
+  def find_places
     options = {}
     options[:place_search] = params[:place_search].present? && params[:place_search].strip.present? ? prepare_search_text(params[:place_search]) : nil
     options[:address_search] = params[:address_search].present? && params[:address_search].strip.present? ? prepare_search_text(params[:address_search]) : nil

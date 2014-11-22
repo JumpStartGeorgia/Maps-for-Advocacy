@@ -35,13 +35,14 @@
   #text-links{
     margin-top: 10px;
     li{
-      display: inline-block;
-      width: 45%;
       text-align: center;
       vertical-align: top;
+      margin: 7px 0;
+      display: inline-block;
+      width: 48%;
       a{
-        font-size: 18px;
-        line-height: 25px;        
+        font-size: 16px;
+        line-height: 23px;        
         padding: 5px 10px !important;
       }
     }
@@ -65,21 +66,63 @@
   }  
 }
 
-@media (max-width: 1540px) {
+@media (max-width: 1330px) {
   #front-page{
     #text-links{
       li{
-        a{
-          height: 50px;
-          font-size: 18px;
-          line-height: 25px;        
-          padding: 5px 10px !important;
+        display: block;
+        width: 100%;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  #front-page{
+    div#front-page-container{
+      position: relative; 
+      height: auto !important;
+      & > div:nth-child(1){
+        position: inherit;
+        left: inherit;
+        top: inherit;
+        transform: inherit;
+        -webkit-transform: inherit;
+        right: inherit;
+        &.offset1{
+          margin-left: 0;
         }
-        &:last-of-type a{
-          padding: 15px 10px 0px !important;
-          height: 45px;
+      }
+      & > div:nth-child(2){
+        margin-top: 40px;
+        position: inherit;
+        right: inherit;
+        top: inherit;
+        transform: inherit;
+        -webkit-transform: inherit;
+        left: inherit;
+        & > p:nth-child(1), & > p:nth-child(2){
+          margin-bottom: 20px;
+        }
+      }
+      #text-links{
+        li{
+          display: inline-block;
+          width: 48%;
         }
       }
     }
   }
 }
+
+@media (max-width: 600px) {
+  #front-page{
+    #text-links{
+      li{
+        display: block !important;
+        width: 100% !important;
+      }
+    }
+  }
+}
+

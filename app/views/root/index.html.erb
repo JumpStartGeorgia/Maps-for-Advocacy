@@ -11,9 +11,26 @@
       <ul id="text-links" role="menu">
         <li role="menuitem"><%= link_to(t('helpers.links.what_is_accessibility'), what_is_accessibility_path)  %></li>
         <li role="menuitem"><%= link_to(t('helpers.links.why_monitor'), why_monitor_path)  %></li>
+        <li role="menuitem"><%= link_to(t('helpers.links.find_places'), find_places_path)  %></li>
+        <li role="menuitem"><%= link_to(t('helpers.links.statistics'), stats_path)  %></li>
       </ul>
 
-      <% if @stats.present? %>
+    </div>
+
+    <div class="span4 offset2">
+    
+      <% if @how_report.present? %>
+        <h2><%= @how_report.title %></h2>
+        <div class="tinymce_format">
+          <%= simple_format_no_tags(@how_report.content) %>
+        </div>
+      <% end %>
+
+      <p id="eval-place" class="text-center">
+        <%= link_to t('helpers.links.evaluate_place'), new_place_path, :class => 'add_evaluation' %>
+      </p>
+
+      <% if !@stats.present? %>
         <div id="stats">
           <p>
             <%= t('.stats_text', num: @stats[:places_with_evals]) %>
@@ -41,21 +58,8 @@
           </p>
         </div>
       <% end %>
-    </div>
-
-    <div class="span4 offset2">
-    
-      <% if @how_report.present? %>
-        <h2><%= @how_report.title %></h2>
-        <div class="tinymce_format">
-          <%= simple_format_no_tags(@how_report.content) %>
-        </div>
-      <% end %>
-
-      <p id="eval-place" class="text-center">
-        <%= link_to t('helpers.links.evaluate_place'), new_place_path, :class => 'add_evaluation' %>
-      </p>
-
+<%
+=begin %>
       <p id="find-eval">
         <%= label_tag :filter_venue, t('.venue_label') %>
         <%
@@ -67,6 +71,8 @@
             :include_blank => true,
             :style => 'width: 100%') %>
       </p>
+<%
+=end %>   
     </div>
   </div>
 </div>

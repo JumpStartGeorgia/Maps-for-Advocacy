@@ -204,7 +204,7 @@ footer #middle ul {
 }
 
 footer #middle ul li {
-	display: inline;
+	display: inline-block;
 	font-family: Arial;
 }
 footer #middle ul li.spacer {
@@ -234,6 +234,26 @@ footer div#right #js_logo img {
 
 footer, footer ul li, footer div#right ul li {
   color: #4f4f4f;
+}
+
+@media (max-width: 1175px) {
+  footer #middle {
+    margin-top: -4px;
+    ul li {
+      display: inline-block;
+      width: 48%;
+    }
+  }
+}
+
+@media (max-width: 890px) {
+  footer #middle {
+    margin-top: -4px;
+    ul li {
+      display: block;
+      width: 100%;
+    }
+  }
 }
 
 
