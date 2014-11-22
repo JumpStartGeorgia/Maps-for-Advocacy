@@ -1,461 +1,277 @@
 <% title t('.title') %>
 
-<div id="stats" class="row-fluid">
-  <div class="span6">
-    <h2><%= t('.headers.eval_results') %></h2>
-    <% if @eval_results_public.present? || @eval_results_certified.present? %>
-      <table class="table table-striped table-hover">
-        <thead>
-          <tr>
-            <th class="text-center">
-              <%= t('.table.public') %>
-            </th>
-            <th class="text-center">
-              <%= t('.table.certified') %>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
+<div id="stats">
+  <h2><%= t('.headers.eval_results') %></h2>
+  <% if @eval_results_types.present? && @cert.present? && @types.present? &&
+          (@eval_results_public.present? || @eval_results_certified.present?)  %>
+    <table id="table-eval-stats" class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th></th>
+          <th title="<%= t('app.common.public_explanation') %>" colspan="2">
+            <%= t('.table.public') %>
+          </th>
+          <th title="<%= t('app.common.certified_explanation') %>" colspan="2">
+            <%= t('.table.certified') %>
+          </th>
+          <th>
+            <%= t('.table.total') %>
+          </th>
+        </tr>
+        <tr>
+          <th><%= t('.table.eval_type') %></th>
+          <th><%= t('.table.results') %></th>
+          <th><%= t('.table.submit') %></th>
+          <th><%= t('.table.results') %></th>
+          <th><%= t('.table.submit') %></th>
+          <th><%= t('.table.submit') %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <%= t('.table.overall') %>
+          </td>
+          <td>
+            <%= format_summary_result(@eval_results_public, is_summary: true, is_certified: false) %>
+          </td>
+          <td>
+            <%= number_with_delimiter(@cert[:public_count]) %>
+          </td>
+          <td>
+            <%= format_summary_result(@eval_results_certified, is_summary: true, is_certified: true) %>
+          </td>
+          <td>
+            <%= number_with_delimiter(@cert[:certified_count]) %>
+          </td>
+          <td>
+            <%= number_with_delimiter(@cert[:total_count]) %>
+          </td>
+        </tr> 
+        <% (0..@eval_results_types.length-1).each do |index| %>
           <tr>
             <td>
-              <%= format_summary_result(@eval_results_public, is_summary: true, is_certified: false) %>
+              <%= @eval_results_types[index]['name'] if @eval_results_types[index].present? %>
             </td>
             <td>
-              <%= format_summary_result(@eval_results_certified, is_summary: true, is_certified: true) %>
+              <%= format_summary_result(@eval_results_types[index]['public'], is_summary: true, is_certified: false) if @eval_results_types[index].present? %>
+            </td>
+            <td>
+              <%= number_with_delimiter(@types[index][:public_count]) if @types[index].present? %>
+            </td>
+            <td>
+              <%= format_summary_result(@eval_results_types[index]['certified'], is_summary: true, is_certified: true) if @eval_results_types[index].present? %>
+            </td>
+            <td>
+              <%= number_with_delimiter(@types[index][:certified_count]) if @types[index].present? %>
+            </td>
+            <td>
+              <%= number_with_delimiter(@types[index][:total_count]) if @types[index].present? %>
             </td>
           </tr> 
-        </tbody>
-      </table>
-    <% else %>
-      <p>
-        <%= t('.no_data.no_evals') %>
-      </p>
-    <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  <% else %>
+    <p>
+      <%= t('.no_data.no_evals') %>
+    </p>
+  <% end %>
 
-    <h2><%= t('.headers.eval_results_type') %></h2>
-    <% if @eval_results_types.present? %>
-      <table class="table table-striped table-hover">
-        <thead>
-          <tr>
-            <th>
-              <%= t('.table.eval_type') %>
-            </th>
-            <th class="text-center">
-              <%= t('.table.public') %>
-            </th>
-            <th class="text-center">
-              <%= t('.table.certified') %>
-            </th>
-          </tr>
-        </thead>
-        <tbody>
-          <% @eval_results_types.each do |type| %>
+  <hr />
+
+  <div class="row-fluid">
+    <div class="span6">
+      <h2><%= t('.headers.user_active') %></h2>
+      <% if @user_latest.present? %>
+        <table class="table table-striped table-hover">
+          <thead>
             <tr>
-              <td>
-                <%= type['name'] %>
-              </td>
-              <td>
-                <%= format_summary_result(type['public'], is_summary: true, is_certified: false) %>
-              </td>
-              <td>
-                <%= format_summary_result(type['certified'], is_summary: true, is_certified: true) %>
-              </td>
-            </tr> 
-          <% end %>
-        </tbody>
-      </table>
+              <th>
+                <%= t('.table.user') %>
+              </th>
+              <th title="<%= t('app.common.public_explanation') %>">
+                <%= t('.table.public') %>
+              </th>
+              <th title="<%= t('app.common.certified_explanation') %>">
+                <%= t('.table.certified') %>
+              </th>
+              <th>
+                <%= t('.table.total') %>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @user_latest.each do |user| %>
+              <tr>
+                <td>
+                  <%= user[:name] %>
+                </td>
+                <td>
+                  <%= number_with_delimiter(user[:public_count]) %>
+                </td>
+                <td>
+                  <%= number_with_delimiter(user[:certified_count]) %>
+                </td>
+                <td>
+                  <%= number_with_delimiter(user[:total_count]) %>
+                </td>
+              </tr> 
+            <% end %>
+          </tbody>
+        </table>
 
-    <% else %>
-      <p>
-        <%= t('.no_data.no_evals') %>
-      </p>
-    <% end %>
+      <% else %>
+        <p>
+          <%= t('.no_data.no_evals') %>
+        </p>
+      <% end %>
+    </div>
+    <div class="span6">
+      <h2><%= t('.headers.org_active') %></h2>
+      <% if @org_latest.present? %>
 
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>
+                <%= t('.table.org') %>
+              </th>
+              <th title="<%= t('app.common.public_explanation') %>">
+                <%= t('.table.public') %>
+              </th>
+              <th title="<%= t('app.common.certified_explanation') %>">
+                <%= t('.table.certified') %>
+              </th>
+              <th>
+                <%= t('.table.total') %>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @org_latest.each do |org| %>
+              <tr>
+                <td>
+                  <%= org[:name] %>
+                </td>
+                <td>
+                  <%= number_with_delimiter(org[:public_count]) %>
+                </td>
+                <td>
+                  <%= number_with_delimiter(org[:certified_count]) %>
+                </td>
+                <td>
+                  <%= number_with_delimiter(org[:total_count]) %>
+                </td>
+              </tr> 
+            <% end %>
+          </tbody>
+        </table>
 
+      <% else %>
+        <p>
+          <%= t('.no_data.no_evals') %>
+        </p>
+      <% end %>
+    </div>
   </div>
-  <div class="span6">
-    <h2><%= t('.headers.submission') %></h2>
 
-    <div class="accordion" id="stats-submissions">
-      <div class="accordion-group">
-        <div class="accordion-heading">
-          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#submissions-overall">
-            <h3><%= t('.headers.evals') %></h3>
-          </a>
-        </div>
-        <div id="submissions-overall" class="accordion-body collapse">
-          <div class="accordion-inner">
-            <% if @cert.present? %>
-              <table class="table table-striped table-hover">
-                <thead>
-                  <tr>
-                    <th>
-                      <%= t('.table.public') %>
-                    </th>
-                    <th>
-                      <%= t('.table.certified') %>
-                    </th>
-                    <th>
-                      <%= t('.table.total') %>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>
-                      <%= number_with_delimiter(@cert[:public_count]) %>
-                    </td>
-                    <td>
-                      <%= number_with_delimiter(@cert[:certified_count]) %>
-                    </td>
-                    <td>
-                      <%= number_with_delimiter(@cert[:total_count]) %>
-                    </td>
-                  </tr> 
-                </tbody>
-              </table>
-            <% else %>
-              <p>
-                <%= t('.no_data.no_evals') %>
-              </p>
+  <hr />
+
+  <div class="row-fluid">
+    <div class="span6">
+      <h2><%= t('.headers.user') %></h2>
+      <% if @user_all.present? %>
+
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>
+                <%= t('.table.user') %>
+              </th>
+              <th title="<%= t('app.common.public_explanation') %>">
+                <%= t('.table.public') %>
+              </th>
+              <th title="<%= t('app.common.certified_explanation') %>">
+                <%= t('.table.certified') %>
+              </th>
+              <th>
+                <%= t('.table.total') %>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @user_all.each do |user| %>
+              <tr>
+                <td>
+                  <%= user[:name] %>
+                </td>
+                <td>
+                  <%= number_with_delimiter(user[:public_count]) %>
+                </td>
+                <td>
+                  <%= number_with_delimiter(user[:certified_count]) %>
+                </td>
+                <td>
+                  <%= number_with_delimiter(user[:total_count]) %>
+                </td>
+              </tr> 
             <% end %>
-          </div>
-        </div>
-      </div>
+          </tbody>
+        </table>
 
+      <% else %>
+        <p>
+          <%= t('.no_data.no_evals') %>
+        </p>
+      <% end %>
+    </div>
+    <div class="span6">
+      <h2><%= t('.headers.org') %></h2>
+      <% if @org_all.present? %>
 
-      <div class="accordion-group">
-        <div class="accordion-heading">
-          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#submissions-type">
-            <h3><%= t('.headers.evals_type') %></h3>
-          </a>
-        </div>
-        <div id="submissions-type" class="accordion-body collapse">
-          <div class="accordion-inner">
-            <% if @types.present? %>
-              <table class="table table-striped table-hover">
-                <thead>
-                  <tr>
-                    <th>
-                      <%= t('.table.eval_type') %>
-                    </th>
-                    <th>
-                      <%= t('.table.public') %>
-                    </th>
-                    <th>
-                      <%= t('.table.certified') %>
-                    </th>
-                    <th>
-                      <%= t('.table.total') %>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <% @types.each do |type| %>
-                    <tr>
-                      <td>
-                        <%= type[:name] %>
-                      </td>
-                      <td>
-                        <%= number_with_delimiter(type[:public_count]) %>
-                      </td>
-                      <td>
-                        <%= number_with_delimiter(type[:certified_count]) %>
-                      </td>
-                      <td>
-                        <%= number_with_delimiter(type[:total_count]) %>
-                      </td>
-                    </tr> 
-                  <% end %>
-                </tbody>
-              </table>
-
-            <% else %>
-              <p>
-                <%= t('.no_data.no_evals') %>
-              </p>
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>
+                <%= t('.table.org') %>
+              </th>
+              <th title="<%= t('app.common.public_explanation') %>">
+                <%= t('.table.public') %>
+              </th>
+              <th title="<%= t('app.common.certified_explanation') %>">
+                <%= t('.table.certified') %>
+              </th>
+              <th>
+                <%= t('.table.total') %>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @org_all.each do |org| %>
+              <tr>
+                <td>
+                  <%= org[:name] %>
+                </td>
+                <td>
+                  <%= number_with_delimiter(org[:public_count]) %>
+                </td>
+                <td>
+                  <%= number_with_delimiter(org[:certified_count]) %>
+                </td>
+                <td>
+                  <%= number_with_delimiter(org[:total_count]) %>
+                </td>
+              </tr> 
             <% end %>
-          </div>
-        </div>
-      </div>
+          </tbody>
+        </table>
 
-
-      <div class="accordion-group">
-        <div class="accordion-heading">
-          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#submissions-visual">
-            <h3><%= t('.headers.evals_visual') %></h3>
-          </a>
-        </div>
-        <div id="submissions-visual" class="accordion-body collapse">
-          <div class="accordion-inner">
-            <% if @images.present? %>
-              <table class="table table-striped table-hover">
-                <thead>
-                  <tr>
-                    <th>
-                      <%= t('.table.public') %>
-                    </th>
-                    <th>
-                      <%= t('.table.certified') %>
-                    </th>
-                    <th>
-                      <%= t('.table.total') %>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>
-                      <%= number_with_delimiter(@images[:public_count]) %>
-                    </td>
-                    <td>
-                      <%= number_with_delimiter(@images[:certified_count]) %>
-                    </td>
-                    <td>
-                      <%= number_with_delimiter(@images[:total_count]) %>
-                    </td>
-                  </tr> 
-                </tbody>
-              </table>
-            <% else %>
-              <p>
-                <%= t('.no_data.no_visual') %>
-              </p>
-            <% end %>
-
-          </div>
-        </div>
-      </div>
-
-
-
-      <div class="accordion-group">
-        <div class="accordion-heading">
-          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#submissions-active-users">
-            <h3><%= t('.headers.user_active') %></h3>
-          </a>
-        </div>
-        <div id="submissions-active-users" class="accordion-body collapse">
-          <div class="accordion-inner">
-            <% if @user_latest.present? %>
-              <table class="table table-striped table-hover">
-                <thead>
-                  <tr>
-                    <th>
-                      <%= t('.table.user') %>
-                    </th>
-                    <th>
-                      <%= t('.table.public') %>
-                    </th>
-                    <th>
-                      <%= t('.table.certified') %>
-                    </th>
-                    <th>
-                      <%= t('.table.total') %>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <% @user_latest.each do |user| %>
-                    <tr>
-                      <td>
-                        <%= user[:name] %>
-                      </td>
-                      <td>
-                        <%= number_with_delimiter(user[:public_count]) %>
-                      </td>
-                      <td>
-                        <%= number_with_delimiter(user[:certified_count]) %>
-                      </td>
-                      <td>
-                        <%= number_with_delimiter(user[:total_count]) %>
-                      </td>
-                    </tr> 
-                  <% end %>
-                </tbody>
-              </table>
-
-            <% else %>
-              <p>
-                <%= t('.no_data.no_evals') %>
-              </p>
-            <% end %>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="accordion-group">
-        <div class="accordion-heading">
-          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#submissions-user">
-            <h3><%= t('.headers.user') %></h3>
-          </a>
-        </div>
-        <div id="submissions-user" class="accordion-body collapse">
-          <div class="accordion-inner">
-            <% if @user_all.present? %>
-
-              <table class="table table-striped table-hover">
-                <thead>
-                  <tr>
-                    <th>
-                      <%= t('.table.user') %>
-                    </th>
-                    <th>
-                      <%= t('.table.public') %>
-                    </th>
-                    <th>
-                      <%= t('.table.certified') %>
-                    </th>
-                    <th>
-                      <%= t('.table.total') %>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <% @user_all.each do |user| %>
-                    <tr>
-                      <td>
-                        <%= user[:name] %>
-                      </td>
-                      <td>
-                        <%= number_with_delimiter(user[:public_count]) %>
-                      </td>
-                      <td>
-                        <%= number_with_delimiter(user[:certified_count]) %>
-                      </td>
-                      <td>
-                        <%= number_with_delimiter(user[:total_count]) %>
-                      </td>
-                    </tr> 
-                  <% end %>
-                </tbody>
-              </table>
-
-            <% else %>
-              <p>
-                <%= t('.no_data.no_evals') %>
-              </p>
-            <% end %>
-          </div>
-        </div>
-      </div>
-
-
-      <div class="accordion-group">
-        <div class="accordion-heading">
-          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#submissions-active-org">
-            <h3><%= t('.headers.org_active') %></h3>
-          </a>
-        </div>
-        <div id="submissions-active-org" class="accordion-body collapse">
-          <div class="accordion-inner">
-            <% if @org_latest.present? %>
-
-              <table class="table table-striped table-hover">
-                <thead>
-                  <tr>
-                    <th>
-                      <%= t('.table.org') %>
-                    </th>
-                    <th>
-                      <%= t('.table.public') %>
-                    </th>
-                    <th>
-                      <%= t('.table.certified') %>
-                    </th>
-                    <th>
-                      <%= t('.table.total') %>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <% @org_latest.each do |org| %>
-                    <tr>
-                      <td>
-                        <%= org[:name] %>
-                      </td>
-                      <td>
-                        <%= number_with_delimiter(org[:public_count]) %>
-                      </td>
-                      <td>
-                        <%= number_with_delimiter(org[:certified_count]) %>
-                      </td>
-                      <td>
-                        <%= number_with_delimiter(org[:total_count]) %>
-                      </td>
-                    </tr> 
-                  <% end %>
-                </tbody>
-              </table>
-
-            <% else %>
-              <p>
-                <%= t('.no_data.no_evals') %>
-              </p>
-            <% end %>
-
-          </div>
-        </div>
-      </div>
-
-
-      <div class="accordion-group">
-        <div class="accordion-heading">
-          <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#submissions-org">
-            <h3><%= t('.headers.org') %></h3>
-          </a>
-        </div>
-        <div id="submissions-org" class="accordion-body collapse">
-          <div class="accordion-inner">
-            <% if @org_all.present? %>
-
-              <table class="table table-striped table-hover">
-                <thead>
-                  <tr>
-                    <th>
-                      <%= t('.table.org') %>
-                    </th>
-                    <th>
-                      <%= t('.table.public') %>
-                    </th>
-                    <th>
-                      <%= t('.table.certified') %>
-                    </th>
-                    <th>
-                      <%= t('.table.total') %>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <% @org_all.each do |org| %>
-                    <tr>
-                      <td>
-                        <%= org[:name] %>
-                      </td>
-                      <td>
-                        <%= number_with_delimiter(org[:public_count]) %>
-                      </td>
-                      <td>
-                        <%= number_with_delimiter(org[:certified_count]) %>
-                      </td>
-                      <td>
-                        <%= number_with_delimiter(org[:total_count]) %>
-                      </td>
-                    </tr> 
-                  <% end %>
-                </tbody>
-              </table>
-
-            <% else %>
-              <p>
-                <%= t('.no_data.no_evals') %>
-              </p>
-            <% end %>
-          </div>
-        </div>
-      </div>
-
+      <% else %>
+        <p>
+          <%= t('.no_data.no_evals') %>
+        </p>
+      <% end %>
     </div>
   </div>
 </div>

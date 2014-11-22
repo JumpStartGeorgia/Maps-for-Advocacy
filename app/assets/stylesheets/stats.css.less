@@ -1,5 +1,23 @@
+
 #stats{
-  th.text-center{
-    text-align: center;
+  table{
+    th, td{
+      text-align: center;
+    }
+  }
+  table#table-eval-stats{
+    thead tr:last-of-type th{
+      border-top: none;
+    }
+    thead tr th:nth-child(2),
+    thead tr:first-of-type th:nth-child(3),
+    thead tr:first-of-type th:nth-child(4),
+    thead tr:last-of-type th:nth-child(4),
+    thead tr:last-of-type th:nth-child(6),
+    tbody tr td:nth-child(2),
+    tbody tr td:nth-child(4),
+    tbody tr td:nth-child(6){
+      border-left: solid 1px #ddd;
+    }
   }
 }

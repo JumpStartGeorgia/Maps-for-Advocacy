@@ -379,10 +379,10 @@ en:
     about:
       title: About
     stats:
-      title: Evaluation Statistics
+      title: Statistics
       headers:
-        eval_results: Evaluation Results
-        eval_results_type: Evaluation Results by Type
+        eval_results: Accessibility Results
+        eval_results_type: Accessibility Results by Type
         submission: Submission Statistics
         evals: Evaluations Submitted
         evals_type: Evaluations Submitted by Type
@@ -396,6 +396,9 @@ en:
         certified: Expert Evaluations
         total: Total Evaluations
         eval_type: Evaluation Type
+        results: Results
+        submit: Submitted
+        overall: Overall
         user: User
         org: Organization
       no_data:
