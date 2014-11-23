@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20141118063124) do
+ActiveRecord::Schema.define(:version => 20141123193239) do
 
   create_table "convention_categories", :force => true do |t|
     t.datetime "created_at"
@@ -300,6 +300,27 @@ ActiveRecord::Schema.define(:version => 20141118063124) do
 
   add_index "question_pairing_convention_categories", ["convention_category_id"], :name => "idx_qpcc_cc_id"
   add_index "question_pairing_convention_categories", ["question_pairing_id"], :name => "idx_qpcc_qp_id"
+
+  create_table "question_pairing_disabilities", :force => true do |t|
+    t.integer  "question_pairing_id"
+    t.integer  "disability_id"
+    t.boolean  "has_content",         :default => false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "question_pairing_disabilities", ["question_pairing_id", "disability_id", "has_content"], :name => "idx_qpd_content"
+
+  create_table "question_pairing_disability_translations", :force => true do |t|
+    t.integer  "question_pairing_disability_id"
+    t.string   "locale"
+    t.text     "content"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "question_pairing_disability_translations", ["locale"], :name => "index_question_pairing_disability_translations_on_locale"
+  add_index "question_pairing_disability_translations", ["question_pairing_disability_id"], :name => "index_95a26f463f1617a62153a2d21e9f0f1c3ef60b96"
 
   create_table "question_pairing_translations", :force => true do |t|
     t.integer  "question_pairing_id"

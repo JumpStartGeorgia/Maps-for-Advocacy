@@ -214,6 +214,7 @@ footer #middle ul li.spacer {
 footer #middle ul li a {
 	padding: 0 10px;
 }
+
 footer div#right {
 	margin: 0 !important;
 	float: right;
@@ -257,6 +258,23 @@ footer, footer ul li, footer div#right ul li {
   }
 }
 
+footer #middle:lang(ka) {
+  margin-top: -4px;
+  ul li {
+    display: inline-block;
+    width: 48%;
+  }
+}
+
+@media (max-width: 1150px) {
+  footer #middle:lang(ka) {
+    margin-top: -4px;
+    ul li {
+      display: block;
+      width: 100%;
+    }
+  }
+}
 
 /* nested form styles */
 #nested_form_container {

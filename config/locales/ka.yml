@@ -143,24 +143,24 @@ ka:
       sign_up_provider: "დარეგისტრირდით  %{provider}-ით"
       sign_in_local_or_provider: ან შეიყვანეთ თქვენი ელ. ფოსტა და პაროლი
       reset_or_sign_in: შედით facebook-ით ან შეცვალეთ პაროლი
-      evaluate_place: Evaluate a Place
-      find_places: Find Accessible Places
-      statistics: View Statistics
+      evaluate_place: შეაფასე ადგილი
+      find_places: იპოვე ხელმისაწვდომი ადგილი
+      statistics: სტატისტიკის ნახვა
       methodology: მეთოდოლოგია
       why_monitor: რატომ მონიტორინგი?
-      un_crpd: UN CRPD
+      un_crpd: გაეროს კონვენცია
       georgian_legislation: საქართველოს კანონმდებლობა
       partners: პროექტის პარტნიორები
-      what_is_accessibility: რა არის ხელმისაწვდომობა?
-      training_videos: Video Guides
-      stats: Statistics
-      about: About Ability.ge
-      print: Print Evaluation
-      contact: Contact
+      what_is_accessibility: რა არის ხელმისაწვდომობა? #რას ნიშნავს ხელმისაწვდომი გარემო?
+      training_videos: ვიდეო გზამკვლევი
+      stats: სტატისტიკა
+      about: Ability.ge-ის შესახებ
+      print: შეფასების ამობეჭდვა
+      contact: კონტაქტი
     menu:
-      about: About
-      learn: Learn
-      legal: Legal Standards
+      about: შესახებ
+      learn: გაიგეთ
+      legal: საკანონმდებლო სტანდარტები
     titles:
       new: "ახალი %{model}"
       edit: "შეცვლა %{model}"
@@ -187,7 +187,7 @@ ka:
       add: დამატება
     common:
       app_name: Ability.ge
-      slogan: Register. Evaluate. Engage.
+      slogan: დარეგისტრირდი. შეაფასე. ჩაერთე.
       slogan_old: შეზღუდული შესაძლებლობის მქონე პირთა უფლებების კონვენციისმონიტორინგი საქართველოში
       added_on: "დამატებულია: %{date}" 
       venue_has_questions: მორგებული კითხვები
@@ -405,7 +405,7 @@ ka:
         no_evals: No evaluations have been submitted.
         no_visual: No evaluations with visual evidence have been submitted.
     find_places:
-      title: Find Accessible Places
+      title: იპოვე ხელმისაწვდომი ადგილი
       explanation: 'You can search by place name, address, category, district, or evaluation type.'
       header_search: ძიება
       header_filter_place_search: Place Name
