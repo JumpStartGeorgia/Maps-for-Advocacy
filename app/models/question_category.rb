@@ -217,15 +217,14 @@ class QuestionCategory < ActiveRecord::Base
         QuestionTranslation.delete_all
         QuestionPairing.delete_all
         QuestionPairingTranslation.delete_all
+        QuestionPairingDisability.delete_all
+        QuestionPairingDisabilityTranslation.delete_all
         PlaceEvaluation.delete_all
         PlaceEvaluationAnswer.delete_all
         PlaceEvaluationOrganization.delete_all
         PlaceImage.delete_all
         PlaceEvaluationImage.delete_all
         PlaceSummary.delete_all
-
-        connection = ActiveRecord::Base.connection
-        ActiveRecord::Base.connection.execute("truncate disabilities_question_pairings;")        
         
 		  end
 		
@@ -559,23 +558,84 @@ class QuestionCategory < ActiveRecord::Base
 	          raise ActiveRecord::Rollback
       		  return msg
           else
-            # remove existing types if not needed anymore
-            qp.disabilities.each do |dis|
-              puts "******** - checking if existing question pairing of disability type: #{dis.code} is still needed"
-              if types.index(dis.code).nil?
-                puts "******** --> disability type is no longer needed, deleting"
-                qp.disabilities.delete(dis)
-              end
-            end
+            # get records for these types
+            disability_records = disabilities.select{|x| types.index(x.code).present?}
 
-            # add new types
-            types.each do |type|
-            	puts "******** - checking question pairing for disability type: #{type}"
-              # find match and then add if not already assigned to question pairing
-              dis_index = disabilities.index{|x| x.code == type}
-              if dis_index.present? && qp.disabilities.index{|x| disabilities[dis_index].id == x.id}.nil?
-              	puts "******** --> adding"
-                qp.disabilities << disabilities[dis_index]
+            if disability_records.present?
+              # remove existing types if not needed anymore
+              qp.question_pairing_disabilities.each do |record|
+                puts "******** - checking if existing question pairing of disability id: #{record.disability_id} is still needed"
+                if disability_records.index{|x| x.id == record.disability_id}.nil?
+                  puts "******** --> disability type is no longer needed, deleting"
+                  record.destroy
+                end
+              end
+
+              # add or update types
+              disability_records.each do |dis|
+              	puts "******** - checking question pairing for disability type: #{dis.code}"
+                # see if already exists
+                dis_index = qp.question_pairing_disabilities.index{|x| x.disability_id == dis.id}
+                if dis_index.nil?
+                  # not exist yet, so add it
+                  qpd = qp.question_pairing_disabilities.build(:disability_id => dis.id)
+                  # add translations
+                  I18n.available_locales.each do |locale|
+                    help = row[idx_help_text].present? ? row[idx_help_text].strip : nil
+                    help_ka = row[idx_help_text_ka].present? ? row[idx_help_text_ka].strip : nil
+                    
+                    # if the locale is georgian and georgian text exists, use it
+                    help = help_ka if locale == :ka && help_ka.present?
+
+                    # only create if help text is present
+                    if help.present?                                  
+                      qpd.question_pairing_disability_translations.build(:locale => locale, :content => help) 
+                    end
+
+                    if !qpd.save
+                      msg = "Row #{n}: Could not create question pairing disability record due to this error: #{qpd.errors.full_messages.join(', ')}"
+                      raise ActiveRecord::Rollback
+                      return msg
+                    end
+                  end
+
+                else
+                  # alread exists, so update content
+                  qpd = qp.question_pairing_disabilities[dis_index]
+                  # check translations
+                  I18n.available_locales.each do |locale|
+                    help = row[idx_help_text].present? ? row[idx_help_text].strip : nil
+                    help_ka = row[idx_help_text_ka].present? ? row[idx_help_text_ka].strip : nil
+                    
+                    # if the locale is georgian and georgian text exists, use it
+                    help = help_ka if locale == :ka && help_ka.present?
+
+                    # if text present, update record
+                    # else, delete record if exists
+                    trans = qpd.question_pairing_disability_translations.select{|x| x.locale == locale.to_s}.first
+                    if help.present? && trans.present?
+                      # update existing
+                      trans.content = help
+                    elsif help.present? 
+                      # add record
+                      qpd.question_pairing_disability_translations.build(:locale => locale, :content => help) 
+                    elsif trans.present?
+                      # delete record
+                      trans.destroy
+                    end
+
+                    if !qpd.save
+                      msg = "Row #{n}: Could not update question pairing disability record due to this error: #{qpd.errors.full_messages.join(', ')}"
+                      raise ActiveRecord::Rollback
+                      return msg
+                    end
+                  end
+
+                end
+                if dis_index.present? && qp.disabilities.index{|x| disabilities[dis_index].id == x.id}.nil?
+                	puts "******** --> adding"
+                  qp.disabilities << disabilities[dis_index]
+                end
               end
             end
           end

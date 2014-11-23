@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  question_pairing_id: 1
+  disability_id: 1
+  has_content: false
+  content: MyText
+
+two:
+  question_pairing_id: 1
+  disability_id: 1
+  has_content: false
+  content: MyText

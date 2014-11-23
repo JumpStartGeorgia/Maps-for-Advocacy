@@ -3,7 +3,8 @@ class Disability < ActiveRecord::Base
 
 	has_many :disability_translations, :dependent => :destroy
 	has_many :place_evalations
-  has_and_belongs_to_many :question_pairings
+  has_many :question_pairing_disabilities
+#  has_and_belongs_to_many :question_pairings
   accepts_nested_attributes_for :disability_translations
   attr_accessible :id, :code, :disability_translations_attributes, :active_public, :active_certified, :sort_order
   

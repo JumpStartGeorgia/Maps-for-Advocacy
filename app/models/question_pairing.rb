@@ -7,7 +7,9 @@ class QuestionPairing < ActiveRecord::Base
 	has_many :question_pairing_translations, :dependent => :destroy
 	has_many :place_evaluation_answers, :dependent => :destroy
 	has_many :place_evaluation_images, :dependent => :destroy
-  has_and_belongs_to_many :disabilities
+#  has_and_belongs_to_many :disabilities
+  has_many :question_pairing_disabilities, :dependent => :destroy
+  has_many :disabilities, :through => :question_pairing_disabilities
   has_many :question_pairing_convention_categories, :dependent => :destroy
   has_many :convention_categories, :through => :question_pairing_convetion_categories
   accepts_nested_attributes_for :question_pairing_translations

@@ -1,0 +1,27 @@
+<%= tinymce_assets %>
+<%= tinymce %>
+
+<%= semantic_form_for([:admin, @question_pairing_disability], :html => { :class => 'form-horizontal' }) do |f| %>
+  <%= f.error_messages %>
+
+  show question and question_pairing_disability headings here
+
+  <% create_sorted_translation_objects(@question_pairing_disability.question_pairing_disability_translations).each do |trans| %>
+    <%= f.fields_for :question_pairing_disability_translations, trans do |translation| %>
+
+      <div id="form-<%= trans.locale %>" class="multilanguage_nested">
+        <h3><%= t("app.language.#{trans.locale}") %></h3>
+
+        <%= translation.input :content, :as => :text, rows: 10, :input_html => { class: 'tinymce' } %>
+        <%= translation.hidden_field :locale , :value => trans.locale %>
+      </div>
+
+    <% end %>
+  <% end %>
+
+  <div class="form-actions">
+    <%= f.submit nil, :class => 'btn btn-primary' %>
+    <%= f.submit nil, :class => 'btn btn-warning', :type => :reset, :value => t('app.buttons.reset'), :name => :reset %>
+    <%= link_to t('app.buttons.cancel'), admin_question_pairing_disabilities_path, :class => 'btn btn-mini btn-warning' %>
+  </div>
+<% end %>
