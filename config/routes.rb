@@ -83,7 +83,7 @@ BootstrapStarter::Application.routes.draw do
 		match '/un_crpd', :to => 'root#un_crpd', :as => :un_crpd, :via => :get
 		match '/georgian_legislation', :to => 'root#georgian_legislation', :as => :georgian_legislation, :via => :get
 		match '/why_monitor', :to => 'root#why_monitor', :as => :why_monitor, :via => :get
-		match '/partners', :to => 'root#partners', :as => :partners, :via => :get
+#		match '/partners', :to => 'root#partners', :as => :partners, :via => :get
 		match '/what_is_accessibility', :to => 'root#what_is_accessibility', :as => :what_is_accessibility, :via => :get
     match '/video_guides', :to => 'root#video_guides', :as => :video_guides, :via => :get
     match '/video_guides/:id', :to => 'root#video_guide', :as => :video_guide, :via => :get
