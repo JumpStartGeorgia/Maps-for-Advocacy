@@ -644,6 +644,7 @@ ka:
       header_evaluation_types: Evaluation Types
       header_place: ადგილის სახელწოდება
       header_address: მისამართი
+      header_legend: Legend
   manage_users:
     index:
       title: ორგანიზაციის წევრთა ანგარიშების მართვა

@@ -644,6 +644,7 @@ en:
       header_evaluation_types: Evaluation Types
       header_place: Place Name
       header_address: Address
+      header_legend: Legend
   manage_users:
     index:
       title: Manage Organization Users

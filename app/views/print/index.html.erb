@@ -159,8 +159,8 @@
         </div>
       <% end %>
     </div>
-    <div id="row3">
-      <div id="venue_name">
+    <div id="row3" class="row-fluid">
+      <div id="venue_name" class="span9">
         <div class="bold-header">
           <%= t('.header_venue') %>:
         </div>
@@ -172,6 +172,25 @@
             </div>
           <% end %>
         </div>
+      </div>
+      <div id="row4" class="span3">
+        <div class="bold-header">
+          <%= t('.header_legend') %>:
+        </div>
+        <ul>
+          <li>
+            <%= t('app.common.answers.yes') %> -
+            <i class="icon-thumbs-up icon-white "></i>
+          </li>
+          <li>
+            <%= t('app.common.answers.no') %> - 
+            <i class="icon-thumbs-down icon-white"></i>
+          </li>
+          <li>
+            <%= t('app.common.answers.not_relevant') %> -
+            <i class="icon-remove icon-white"></i>
+          </li>
+        </ul>
       </div>
     </div>
   </div>
