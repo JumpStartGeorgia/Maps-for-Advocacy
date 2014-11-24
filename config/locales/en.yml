@@ -449,7 +449,6 @@ en:
       venue_link_title: "View all places that are '%{name}'"
       ddl_certified: "Expert Evaluations (%{count})"
       ddl_public: "Public Evaluations (%{count})"
-      skip_map: Skip the map and go to the photo slideshow (jump)
       header_images: Visual Evidence
       no_images: No images have been submitted yet.
       no_filter_images: Your selection found no matching images.
@@ -473,6 +472,11 @@ en:
       disability: "Evaluation Type:"
       question: "Question:"
       answer: "Answer:"
+      jump_to_place_info: Jump to general information about this place
+      jump_to_map: Jump to the map
+      jump_to_images: Jump to the visual evidence
+      jump_to_results: Jump to the evaluation results
+      skip_map: Skip the map and go to the photo slideshow (jump)
     show_place_summary:
 #      certified_explanation: Expert Evaluations are completed by people that are trained in how to evaluate a place for accessibility. Only the latest evaluation from each evaluation type is used to compute the overall accessibility score.
 #      public_explanation: Public Evaluations can be completed by anyone that wishes to submit an evaluation.  Every evaluation is used to compute the overall accessibility score.
