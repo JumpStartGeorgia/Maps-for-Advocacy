@@ -200,10 +200,10 @@ en:
         no_answer: No answer
         'yes': 'Yes'
         'no': 'No'
-      yes_vote: "Accessible Vote"
-      no_vote: "Not Accessible Vote"
-      yes_votes: "%{votes} Accessible Votes"
-      no_votes: "%{votes} Not Accessible Votes"
+      yes_vote: "Accessible Area"
+      no_vote: "Not Accessible Area"
+      yes_votes: "%{votes} Accessible Areas"
+      no_votes: "%{votes} Not Accessible Areas"
       eval_question_image:
         button: Upload Images
         button_uploaded_1: Uploaded 1 Image
@@ -449,8 +449,8 @@ en:
     show:
       description:
         place: "%{name} is a %{org} located at %{address}. "
-        public: "It has %{num} Public Evaluations with %{yes} accessible votes and %{no} not accessible votes. "
-        cert: "It has %{num} Expert Evaluations with %{yes} accessible votes and %{no} not accessible votes. "
+        public: "It has %{num} Public Evaluations with %{yes} accessible areas and %{no} not accessible areas. "
+        cert: "It has %{num} Expert Evaluations with %{yes} accessible areas and %{no} not accessible areas. "
       district_link_title: "View all places that are in '%{name}'"
       venue_link_title: "View all places that are '%{name}'"
       ddl_certified: "Expert Evaluations (%{count})"
