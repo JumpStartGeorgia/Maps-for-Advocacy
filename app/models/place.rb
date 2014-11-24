@@ -16,7 +16,7 @@ class Place < ActiveRecord::Base
   accepts_nested_attributes_for :place_translations
   accepts_nested_attributes_for :place_evaluations
   attr_accessible :venue_id, :district_id, :lat, :lon, :place_translations_attributes, :place_evaluations_attributes, :url
-  
+  attr_accessor :name, :address
   validates :venue_id, :lat, :lon, :presence => true
 	validates :url, :format => {:with => URI::regexp(['http','https'])}, allow_blank: true
 

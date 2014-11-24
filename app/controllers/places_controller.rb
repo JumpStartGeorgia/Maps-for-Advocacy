@@ -327,14 +327,20 @@ class PlacesController < ApplicationController
 
     add_missing_translation_content(@place.place_translations)
 
+logger.debug "=================== #{@place.inspect}"
     respond_to do |format|
       if @place.save
         format.html { redirect_to place_path(@place), notice: t('app.msgs.success_created', :obj => t('activerecord.models.place')) }
         format.json { render json: @place, status: :created, location: @place }
       else
+        @place.name = params[:place][:name]
+        @place.address = @place.place_translations.first.address
         @venue_categories = VenueCategory.with_venues
         @show_map = true
+
         gon.show_place_form = true
+        gon.edit_place_form = true
+        gon.default_address_selection_index = params[:address]
         gon.address_search_path = address_search_places_path
         gon.near_venue_id = @place.venue_id
         if @place.lat.present? && @place.lon.present?
@@ -365,6 +371,8 @@ class PlacesController < ApplicationController
         @venue_categories = VenueCategory.with_venues
         @show_map = true
         gon.show_place_form = true
+        gon.edit_place_form = true
+        gon.default_address_selection_index = params[:address]
         gon.address_search_path = address_search_places_path
         gon.near_venue_id = @place.venue_id
         if @place.lat.present? && @place.lon.present?

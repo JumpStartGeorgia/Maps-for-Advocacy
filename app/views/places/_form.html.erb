@@ -12,7 +12,8 @@
         <% create_sorted_translation_objects(@place.place_translations).each do |trans| %>
           <%= f.fields_for :place_translations, trans do |translation| %>
             <% lang = t("app.language.#{trans.locale}") %>
-            <%= translation.input :name, :label => "#{lang} - #{trans.class.human_attribute_name(:name)}" %>
+            <%= translation.input :name, :label => "#{lang} - #{trans.class.human_attribute_name(:name)}", 
+                :input_html => { :value => trans.name } %>
           <% end %>
         <% end %>
       <% else %>
@@ -88,7 +89,7 @@
           <div class="building_number">
             <p>
               <%= label_tag 'building_number1', t('.building_number') %>
-              <%= text_field_tag 'building_number1', nil, :class => "span3 builder_number" %>
+              <%= text_field_tag 'building_number1', params[:building_number1], :class => "span3 builder_number" %>
             </p>
           </div>
         </div>
@@ -101,7 +102,7 @@
           <div class="building_number">
             <p>
               <%= label_tag 'building_number2', t('.building_number') %>
-              <%= text_field_tag 'building_number2', nil, :class => "span3 builder_number" %>
+              <%= text_field_tag 'building_number2', params[:building_number2], :class => "span3 builder_number" %>
             </p>
           </div>
         </div>

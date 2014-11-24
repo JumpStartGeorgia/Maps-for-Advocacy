@@ -239,7 +239,7 @@ var map, marker, map_type, near_markers;
 
         html += '<li><input type="radio" name="address" value="' + i + '" id="address_' + i + '" ';
         // select the first one by default
-        if (i == 0){
+        if ((i == 0 && gon.default_address_selection_index == undefined) || (i.toString() == gon.default_address_selection_index)){
           html += 'checked="checked"';
         }
         html += 'data-lat="' + lat + '" data-lon="' + lon + '" data-address="' + address + '"><label for="address_' + i + '">' + address + '</label></li>';
