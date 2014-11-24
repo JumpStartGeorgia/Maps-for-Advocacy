@@ -90,7 +90,7 @@
 
           <div class="container-fluid nav-collapse">
 	          <ul class="nav pull-right" role="menu">
-              <li class="dropdown" role="menuitem" aria-haspopup="true">
+              <li class="dropdown menu-horizontal" role="menuitem" aria-haspopup="true">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <%= t('helpers.menu.about') %>
                   <b class="caret"></b>
@@ -103,7 +103,7 @@
                   <li role="menuitem"><%= link_to(t('helpers.links.contact'), contact_path)  %></li>
                 </ul>
               </li>
-              <li class="dropdown" role="menuitem" aria-haspopup="true">
+              <li class="dropdown menu-horizontal" role="menuitem" aria-haspopup="true">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <%= t('helpers.menu.learn') %>
                   <b class="caret"></b>
@@ -114,12 +114,33 @@
                   <li role="menuitem"><%= link_to(t('helpers.links.training_videos'), video_guides_path)  %></li>
                 </ul>
               </li>
-              <li class="dropdown" role="menuitem" aria-haspopup="true">
+              <li class="dropdown menu-horizontal" role="menuitem" aria-haspopup="true">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
                   <%= t('helpers.menu.legal') %>
                   <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu" role="menu">
+                  <li role="menuitem"><%= link_to(t('helpers.links.un_crpd'), un_crpd_path)  %></li>
+                  <li role="menuitem"><%= link_to(t('helpers.links.georgian_legislation'), georgian_legislation_path)  %></li>
+                </ul>
+              </li>
+              <li class="dropdown menu-vertical" role="menuitem" aria-haspopup="true">
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                  <%= t('.menu') %>
+                  <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                  <li class="dropdown-heading"><%= t('helpers.menu.about') %></li>
+                  <li role="menuitem"><%= link_to(t('helpers.links.about'), about_path)  %></li>
+                  <li role="menuitem"><%= link_to(t('helpers.links.methodology'), methodology_path)  %></li>
+                  <li role="menuitem"><%= link_to(t('helpers.links.stats'), stats_path)  %></li>
+                  <li role="menuitem"><%= link_to t('helpers.links.print'), print_path %></li>
+                  <li role="menuitem"><%= link_to(t('helpers.links.contact'), contact_path)  %></li>
+                  <li class="dropdown-heading"><%= t('helpers.menu.learn') %></li>
+                  <li role="menuitem"><%= link_to(t('helpers.links.what_is_accessibility'), what_is_accessibility_path)  %></li>
+                  <li role="menuitem"><%= link_to(t('helpers.links.why_monitor'), why_monitor_path)  %></li>
+                  <li role="menuitem"><%= link_to(t('helpers.links.training_videos'), video_guides_path)  %></li>
+                  <li class="dropdown-heading"><%= t('helpers.menu.legal') %></li>
                   <li role="menuitem"><%= link_to(t('helpers.links.un_crpd'), un_crpd_path)  %></li>
                   <li role="menuitem"><%= link_to(t('helpers.links.georgian_legislation'), georgian_legislation_path)  %></li>
                 </ul>
