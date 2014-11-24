@@ -407,6 +407,9 @@ form.place{
       border-top: solid 1px #aaa;
       & > div.span6{
         min-height: inherit;
+        .selected-answer{
+          padding: 10px;
+        }
       }
     }
     .eval-details-link-container{
@@ -452,27 +455,27 @@ form.place{
 .public_summary_container{
   text-align: center; 
   /*margin-bottom: 10px;*/
-  .yes_votes, .no_votes{
-    display: inline-block; 
-    width: 20%; 
-    text-align: right;
+  .yes_votes{
+    float: left;
+    width: 48%; 
+    text-align: left;
     i{
       padding-left: 3px;
     }
   }
   .no_votes{
-    text-align: left;
+    float: right;
+    width: 48%; 
+    text-align: right;
     i{
-      padding-right: 3px;
+      padding-left: 3px;
     }
   }
   .progress{
-    width: 55%; 
-    display: inline-block; 
-    height: 10px; 
+    float: none;
+    clear: both;
+    height: 10px;
     margin-bottom: 0;
-    margin-left: 1.5%; 
-    margin-right: 1.5%;
     .bar-success{
       background-color: #a8d2b8;
       background-image: linear-gradient(to bottom, #a8d2b8, #a8d2b8);
@@ -483,6 +486,7 @@ form.place{
     }
   }
 }
+
 
 #place_show_info{
   li{

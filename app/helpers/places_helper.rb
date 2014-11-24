@@ -37,6 +37,22 @@ private
           x << "&nbsp;"        
         end
         x << "</div>"
+        x << "<div class='no_votes' title='"
+        if options[:is_summary] == true
+          x << I18n.t('app.common.no_votes', :votes => hash['num_no'])
+        else
+          x << I18n.t('app.common.no_vote')
+        end
+        x << "'>"
+        if options[:is_summary] == true || options[:is_certified] == true
+          x << hash['num_no'].to_s
+          x << "<i class='icon-white icon-thumbs-down'></i>"
+        elsif hash['num_no'] != 0
+          x << "<i class='icon-white icon-thumbs-down'></i>"
+        else
+          x << "&nbsp;"        
+        end
+        x << "</div>"
         x << "<div class='progress' title='"
         if options[:is_summary] == true
           x << I18n.t('app.common.yes_votes', :votes => hash['num_yes'])
@@ -53,22 +69,7 @@ private
         x << "%;'></div><div class='bar bar-danger' style='width: "
         x << (100*hash['num_no']/sum.to_f).to_s
         x << "%;'></div></div>"
-        x << "<div class='no_votes' title='"
-        if options[:is_summary] == true
-          x << I18n.t('app.common.no_votes', :votes => hash['num_no'])
-        else
-          x << I18n.t('app.common.no_vote')
-        end
-        x << "'>"
-        if options[:is_summary] == true || options[:is_certified] == true
-          x << "<i class='icon-white icon-thumbs-down'></i>"
-          x << hash['num_no'].to_s
-        elsif hash['num_no'] != 0
-          x << "<i class='icon-white icon-thumbs-down'></i>"
-        else
-          x << "&nbsp;"        
-        end
-        x << "</div></div>"
+        x << "</div>"        
       elsif hash.has_key?('special_flag') && hash['special_flag'].present?
         key = PlaceEvaluation.summary_answer_key_name(hash['special_flag'])
         x << "<div class='summary_result_text #{key} public_summary'>"

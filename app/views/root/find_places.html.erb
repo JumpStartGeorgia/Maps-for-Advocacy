@@ -96,16 +96,24 @@
                 <% if @place_summaries.present? 
                     summary_index = @place_summaries.index{|x| x.place_id == place.id && x.is_certified == true}
                     if summary_index.present? %>
-                      <div>
-                        <span title="<%= t('app.common.certified_explanation') %>"><%= "#{t('app.common.certified')}:" %></span>
-                        <%= format_summary_result(@place_summaries[summary_index].to_summary_hash, is_summary: true, is_certified: true) %>
+                      <div class="row-fluid">
+                        <div class="span2">
+                          <span title="<%= t('app.common.certified_explanation') %>"><%= "#{t('app.common.certified')}:" %></span>
+                        </div>
+                        <div class="span10">
+                          <%= format_summary_result(@place_summaries[summary_index].to_summary_hash, is_summary: true, is_certified: true) %>
+                        </div>
                       </div>
                  <% end 
                     summary_index = @place_summaries.index{|x| x.place_id == place.id && x.is_certified == false}
                     if summary_index.present? %>
-                      <div>
-                        <span title="<%= t('app.common.public_explanation') %>"><%= "#{t('app.common.public')}:" %></span>
-                        <%= format_summary_result(@place_summaries[summary_index].to_summary_hash, is_summary: true, is_certified: false) %>
+                      <div class="row-fluid">
+                        <div class="span2">
+                          <span title="<%= t('app.common.public_explanation') %>"><%= "#{t('app.common.public')}:" %></span>
+                        </div>
+                        <div class="span10">
+                          <%= format_summary_result(@place_summaries[summary_index].to_summary_hash, is_summary: true, is_certified: false) %>
+                        </div>
                       </div>
                     <% end %>
                  <% end %>

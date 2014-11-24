@@ -68,7 +68,7 @@
                 </span>
               <% end %>
             </h3>
-<% logger.debug "##### question present #{questions.present?}, sum present = #{summary.present?}" %>
+
             <% if questions.present? && summary.present? %>
               <div class="overall-summary row-fluid">
                 <div class="span6">
@@ -85,7 +85,14 @@
                     <strong><%= question[1] %></strong>
                   </div>
                   <div class="span6">
-                    <%= format_summary_result(summary[summary_key][question[0].to_s], is_certified: @is_certified) %>
+                    <% if @is_certified %>
+                      <%= format_summary_result(summary[summary_key][question[0].to_s], is_certified: @is_certified) %>
+                    <% else %>
+                      <% answer = summary[summary_key][question[0].to_s]['num_yes'] > 0 ? PlaceEvaluation.answer_key_name(7) : PlaceEvaluation.answer_key_name(6) %>
+                      <div class="<%= "selected-answer #{answer}"%>">
+                        <%= t("app.common.answers.#{answer}") %>
+                      </div>
+                    <% end %>
                   </div>
                 </li>          
               <% end %>
