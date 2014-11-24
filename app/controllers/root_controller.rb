@@ -120,6 +120,8 @@ class RootController < ApplicationController
 
     @watched_videos = TrainingVideoResult.watched_videos(current_user.id) if user_signed_in?
 
+    session[:goto_url] = params[:goto] if params[:goto].present?
+
     respond_to do |format|
       format.html # index.html.erb
       format.json { render json: @training_videos }

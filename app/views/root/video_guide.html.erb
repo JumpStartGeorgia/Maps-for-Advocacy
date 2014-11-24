@@ -1,9 +1,10 @@
 <% title t('.title', :name => @training_video.title) %>
+<% title_right link_to(t('.eval_place'), session[:goto_url], :class => 'view_more') if session[:goto_url].present? %>
 
 <div id="training-video-survey" role="region" aria-live="polite">
   <div id="pre-survey">
     <p>
-      Before watching the video, please look at the image and answer the following question.
+      <%= t('.pre_survey') %>
     </p>
     <p class="survey-image">
       <%= image_tag(@training_video.survey_image.url(:survey), :alt => strip_tags(@training_video.survey_image_description)) %>
@@ -40,7 +41,7 @@
 
   <div id="post-survey" aria-hidden="true">
     <p>
-      Now that you have watched the video, please look at the image and answer the following question.
+      <%= t('.post_survey') %>
     </p>
     <p class="survey-image">
       <%= image_tag(@training_video.survey_image.url(:survey), :alt => strip_tags(@training_video.survey_image_description)) %>
@@ -71,13 +72,13 @@
   <div id="results" data-correct="<%= @training_video.survey_correct_answer.to_s %>" aria-hidden="true">
     <div id="correct-answer" aria-hidden="true">
       <p>
-        Correct!
+        <%= t('.correct') %>
       </p>
     </div>
 
     <div id="wrong-answer" aria-hidden="true">
       <p>
-        Sorry, your answer is incorrect.
+        <%= t('.wrong') %>
       </p>
 
       <%= simple_format_no_tags(@training_video.survey_wrong_answer_description, {}, {sanitize: false}) %>
@@ -86,6 +87,7 @@
     <div id="watch-more">
       <%= link_to t('.watch_more'), video_guides_path, :class => 'btn btn-small' %>
       <%= link_to t('helpers.links.evaluate_place'), new_place_path, :class => 'btn btn-small' %>
+      <%= link_to(t('.eval_place'), session[:goto_url], :class => 'btn btn-small') if session[:goto_url].present? %>
     </div>
 
   </div>

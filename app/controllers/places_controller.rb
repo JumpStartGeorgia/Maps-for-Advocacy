@@ -500,6 +500,9 @@ logger.debug "=================== #{@place.inspect}"
   def evaluation
     @place = Place.with_translation(params[:id]).first
 
+    # if session goto exists, remove it
+    session[:goto_url] = nil if session[:goto_url].present?
+
     # record wether or not user has seen training video popup yet
     gon.show_training_popup = current_user.show_popup_training
     gon.saw_popup_path = saw_popup_path

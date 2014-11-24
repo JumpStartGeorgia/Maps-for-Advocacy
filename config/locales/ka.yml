@@ -435,10 +435,16 @@ ka:
       watched: You have watched this video
       watch_video: Watch the Video
       no_videos: There are no videos on file at this time.
+      eval_place: Continue with Evaluation
     video_guide:
       title: "Video: '%{name}'"
+      pre_survey: Before watching the video, please look at the image and answer the following question.
+      post_survey: Now that you have watched the video, please look at the image and answer the following question.
+      correct: Correct!
+      wrong: Sorry, your answer is incorrect.
       continue: Continue
       watch_more: Watch More Videos
+      eval_place: Continue with Evaluation
   places:
     show:
       description:

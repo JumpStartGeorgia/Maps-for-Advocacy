@@ -1,4 +1,5 @@
 <% title t('.title') %>
+<% title_right link_to(t('.eval_place'), session[:goto_url], :class => 'view_more') if session[:goto_url].present? %>
 
 <% if @training_videos.present? %>
   <% @training_videos.each_with_index do |video, index| %>
