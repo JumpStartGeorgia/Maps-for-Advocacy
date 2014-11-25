@@ -1,6 +1,10 @@
 <% title t('.title') %>
 <% body_id 'print' %>
 
+<p>
+  <%= t('.explanation') %>
+</p>
+
 <div id="filter_options" class="hidden-print">
   <form class="form-horizontal" id="print_options">
     <div id="row1" class="clear">
@@ -31,6 +35,9 @@
         <legend>
           <strong><%= t('.header_venue') %>:</strong>
         </legend>
+        <p>
+          <%= t('.venue_explanation') %>
+        </p>
         <ul id="venues">
           <li>
             <%= link_to t('.all_venues'), '#', :'data-id' => '0' %>

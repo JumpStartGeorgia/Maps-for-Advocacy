@@ -636,11 +636,13 @@ en:
       title: Methodology - Calculations
   print:
     index:
-      title: Print Out Evaluation      
+      title: Print Evaluation Forms      
+      explanation: Print out evaluation forms to document accessibility violations on paper.  Take the forms with you as you visit places in your community.
       header_type: Assessment Type
       evaluation_certified: "Expert Evaluation"
       evaluation_public: "Public Evaluation"
       header_venue: Category
+      venue_explanation: Select the category or categories of places that you and your group would like to evaluate.
       all_venues: All Categories
       header_question_categories: Question Categories
       header_evaluation_type: Evaluation Type
