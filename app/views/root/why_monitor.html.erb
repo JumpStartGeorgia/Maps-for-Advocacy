@@ -4,7 +4,7 @@
   <div id="why_monitor_movie">
     <%
       video_id = 'a83lGFxQSJU'
-      vimeo_id = 'XtW383d_brY' if I18n.locale != :ka
+      video_id = 'XtW383d_brY' if I18n.locale == :ka
     %>
     <%= link_to t('.skip_movie'), '#why_monitor_text', :class => 'accessibly-hidden' %>
     <iframe width="560" height="315" src="//www.youtube.com/embed/<%= video_id %>?list=PLJWG4Q8x5D7-Uoi1vdXWVFjX_CgtnRvot" frameborder="0" allowfullscreen></iframe>
