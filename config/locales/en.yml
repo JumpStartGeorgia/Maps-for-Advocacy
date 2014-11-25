@@ -387,7 +387,7 @@ en:
         submission: Submission Statistics
         evals: Evaluations Submitted
         evals_type: Evaluations Submitted by Type
-        evals_visual: Evaluations with Visual Evidence
+        evals_visual: Evaluations with Images
         user_active: Most Active Users in the Last 30 Days
         user: User History
         org_active: Most Active Organizations in the Last 30 Days
@@ -404,7 +404,7 @@ en:
         org: Organization
       no_data:
         no_evals: No evaluations have been submitted.
-        no_visual: No evaluations with visual evidence have been submitted.
+        no_visual: No evaluations with images have been submitted.
     find_places:
       title: Find Accessible Places
       explanation: 'You can search by place name, address, category, district, or type of disability.'
@@ -456,7 +456,7 @@ en:
       venue_link_title: "View all places that are '%{name}'"
       ddl_certified: "Expert Evaluations (%{count})"
       ddl_public: "Public Evaluations (%{count})"
-      header_images: Visual Evidence
+      header_images: Images
       no_images: No images have been submitted yet.
       no_filter_images: Your selection found no matching images.
       filter_all: All
@@ -481,7 +481,7 @@ en:
       answer: "Answer:"
       jump_to_place_info: Jump to general information about this place
       jump_to_map: Jump to the map
-      jump_to_images: Jump to the visual evidence
+      jump_to_images: Jump to the images
       jump_to_results: Jump to the evaluation results
       skip_map: Skip the map and go to the photo slideshow (jump)
     show_place_summary:

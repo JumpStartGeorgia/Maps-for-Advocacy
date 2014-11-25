@@ -387,7 +387,7 @@ ka:
         submission: Submission Statistics
         evals: Evaluations Submitted
         evals_type: Evaluations Submitted by Type
-        evals_visual: Evaluations with Visual Evidence
+        evals_visual: Evaluations with Images
         user_active: Most Active Users in the Last 30 Days
         user: User History
         org_active: Most Active Organizations in the Last 30 Days
@@ -404,7 +404,7 @@ ka:
         org: Organization
       no_data:
         no_evals: No evaluations have been submitted.
-        no_visual: No evaluations with visual evidence have been submitted.
+        no_visual: No evaluations with images have been submitted.
     find_places:
       title: იპოვე ხელმისაწვდომი ადგილი
       explanation: 'You can search by place name, address, category, district, or type of disability.'
@@ -456,7 +456,7 @@ ka:
       venue_link_title: "'%{name}'-ის ყველა ადგილის ნახვა"
       tab_certified: "ექსპერტის შეფასება (%{count})"
       tab_public: "საჯარო შეფასება (%{count})"
-      header_images: Visual Evidence
+      header_images: Images
       no_images: ფოტო ჯერ არ  არის მოწოდებული.
       no_filter_images: თქვენს არჩევას არ შეესაბამება სურათი.
       filter_all: ყველა
@@ -481,7 +481,7 @@ ka:
       answer: "პასუხები:"
       jump_to_place_info: Jump to general information about this place
       jump_to_map: Jump to the map
-      jump_to_images: Jump to the visual evidence
+      jump_to_images: Jump to the images
       jump_to_results: Jump to the evaluation results
       skip_map: გამოტოვეთ რუკა და გადადით ფოტო სლაიდშოუზე (გადასვლა)
     show_place_summary:
