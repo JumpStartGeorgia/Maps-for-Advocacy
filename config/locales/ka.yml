@@ -58,6 +58,7 @@ ka:
         lat: განედი
         lon: გრძედი
         url: Website
+        name: Place Name
       place_translation:
         name: სახელი
         address: მისამართი
@@ -521,6 +522,7 @@ ka:
     evaluation2:
       watch_videos: Watch Video Guides
     form:
+      explanation: Please add the place to the database before you evaluate it. You must enter the place name, its category, and its address.
       header_location: სად მდებარეობს ეს ადგილი?
       map_instructions: დააჭირეთ რუკას, რათა მონიშნოთ ამ ადგილის მდებარეობა.
       map_blue_marker: ლურჯი მარკერი (%{img}) აღნიშნავს თქვენი ადგილის ლოკაციას.

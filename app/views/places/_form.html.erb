@@ -6,6 +6,10 @@
 <%= semantic_form_for(@place, :html => { :class => 'form-horizontal' }) do |f| %>
 	<%= f.error_messages %>
 
+  <p>
+    <%= t('.explanation') %>
+  </p>
+
   <div class="row-fluid">
     <div class="span4">
       <% if is_editable %>
