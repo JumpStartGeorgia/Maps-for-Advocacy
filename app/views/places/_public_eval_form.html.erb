@@ -36,35 +36,35 @@
                 <div class="span4">
                   <legend><%= question[:question] %></legend>
                 </div>
-                <div class="span8">
+                <div class="span8 venue_evaluation_question_answers">
                   <div class="row-fluid">
                     <div class="span2">
                       <input id="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['yes']}" %>" 
                             name="<%= input_name %>" type="radio" value="<%= PlaceEvaluation::ANSWERS['yes'] %>">
                       <label class="yes" for="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['yes']}" %>">
-                        <i class="icon-white icon-thumbs-up"></i>
-                        <%= t('app.common.answers.yes') %>
+                        <i class="icon-white icon-thumbs-up" title="<%= t('app.common.answers.yes') %>"></i>
+                        <span><%= t('app.common.answers.yes') %></span>
                       </label>
                     </div>
                     <div class="span2">
                       <input id="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['no']}" %>" 
                             name="<%= input_name %>" type="radio" value="<%= PlaceEvaluation::ANSWERS['no'] %>">
                       <label class="no" for="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['no']}" %>">
-                        <i class="icon-thumbs-down icon-white"></i>
-                        <%= t('app.common.answers.no') %>
+                        <i class="icon-thumbs-down icon-white" title="<%= t('app.common.answers.no') %>"></i>
+                        <span><%= t('app.common.answers.no') %></span>
                       </label>
                     </div>
                     <div class="span3 not-relevant">
                       <input id="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['not_relevant']}" %>" 
                             name="<%= input_name %>" type="radio" value="<%= PlaceEvaluation::ANSWERS['not_relevant'] %>">
                       <label class="not_relevant" for="<%= "#{input_id}#{PlaceEvaluation::ANSWERS['not_relevant']}" %>">
-                        <i class="icon-remove icon-white"></i>
-                        <%= t('app.common.answers.not_relevant') %>
+                        <i class="icon-remove icon-white" title="<%= t('app.common.answers.not_relevant') %>"></i>
+                        <span><%= t('app.common.answers.not_relevant') %></span>
                       </label>
                     </div>
                     <div class="span3">
                       <a class="eval-question-image" href="<%= "#image-modal-#{question_index}"%>" role="button" data-toggle="modal">
-                        <i class="icon-camera icon-white"></i>
+                        <i class="icon-camera icon-white" title="<%= t('app.common.eval_question_image.button') %>"></i>
                         <span data-upload="<%= t('app.common.eval_question_image.button') %>" 
                             data-uploaded-1="<%= t('app.common.eval_question_image.button_uploaded_1') %>" 
                             data-uploaded-many="<%= t('app.common.eval_question_image.button_uploaded_many') %>"><%= t('app.common.eval_question_image.button') %></span>

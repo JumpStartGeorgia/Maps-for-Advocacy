@@ -14,12 +14,12 @@
   form.evaluation_public, form.evaluation_certified{
     display: none;
   }
-  
+
   #evaluation_types, #certification{
     margin-bottom: 20px;
     li{
       display: inline-block;
-      margin: 0 5px;
+      margin: 5px;
       input[type=checkbox], input[type=radio]{
         display: none;
         & + label{
@@ -198,6 +198,35 @@
     ul.evaluation_summary li{
       display: inline-block;
       width: 24%;
+    }
+  }  
+}
+
+@media (max-width: 768px) {
+  #evaluation_form{
+    .venue_evaluation_question .venue_evaluation_question_answers > div > div{
+      display: inline-block;
+      margin-right: 5px;
+      &.evidence{
+        display: block;
+        text-align: left !important;
+        .control-group{
+          margin-bottom: 0;
+          input{
+            margin-bottom: 5px;
+          }
+        }
+        .evidence-message-container{
+          display: inline-block;
+        }
+        a.process_evidence{
+          margin-bottom: 5px;
+        }
+      }
+      label span,
+      a span{
+        display: none;
+      }
     }
   }  
 }
