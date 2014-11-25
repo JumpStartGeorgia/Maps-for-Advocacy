@@ -1,4 +1,5 @@
 $(document).ready(function(){
+
   // show question evidence validation message and reset fields if necesary
   function show_question_evidence_message(message, alert_type, obj_parent, obj_evidence, reset_values){
     if (reset_values == undefined || reset_values == null){
@@ -163,6 +164,9 @@ $(document).ready(function(){
       $('#evaluation_form #complete_form form.evaluation_public').hide();
 
       if ($(this).val() == 'y'){
+        // set eval type header
+        $('#evaluation_form #complete_form #evaluation_types h2').html($('#evaluation_form #complete_form #evaluation_types h2').data('cert'));
+
         // show certified 
         $('#evaluation_form #complete_form #evaluation_types #evaluation_types_certified').show();
         $('#evaluation_form #complete_form #evaluation_types #evaluation_types_public').hide();
@@ -181,6 +185,9 @@ $(document).ready(function(){
           change_evaluation_type(this);
         });
       }else{
+        // set eval type header
+        $('#evaluation_form #complete_form #evaluation_types h2').html($('#evaluation_form #complete_form #evaluation_types h2').data('public'));
+
         // show public
         $('#evaluation_form #complete_form #evaluation_types #evaluation_types_certified').hide();
         $('#evaluation_form #complete_form #evaluation_types #evaluation_types_public').show();
@@ -204,7 +211,20 @@ $(document).ready(function(){
 
     //////////////////////////////////////////////////////////////////////////
     // when evaluation type is changed, update the hidden form field and show the correct questions
+    // if this is a public eval, only allow one eval type at a time
     $('#evaluation_form #evaluation_types input[name="evaluation_type"]').change(function(){
+
+      if ($('#evaluation_form #complete_form #certification input[name="certification_form"]:checked').val() != 'y'){
+        var ths = this;
+        // deslect all eval types but the current item
+        $('#evaluation_form #evaluation_types input.evaluation_type_public[name="evaluation_type"]:checked').each(function(){
+          if ($(this).attr('value') != $(ths).attr('value')){
+            $(this).prop('checked', false);
+          }
+        });
+      }
+
+      // now update the form
       change_evaluation_type(this);
     });
     

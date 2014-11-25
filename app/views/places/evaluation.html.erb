@@ -24,7 +24,9 @@
       </div>
       
       <div id="evaluation_types" data-ids="" role="region" aria-live="polite">
-        <h2><%= t('.header_evaluation_types') %></h2>
+        <h2 data-cert="<%= t('.header_evaluation_types_cert') %>" data-public="<%= t('.header_evaluation_types_public')%>" >
+          <%= t('.header_evaluation_types_cert') %>
+        </h2>
         <div id="evaluation_types_public" data-type="public" data-ids="<%= @evaluation_types_public.map{|x| x.id} %>">
           <% if @evaluation_types_public.present? %>
             <ul>
@@ -40,6 +42,7 @@
                   %>
                   <input id="<%= "evaluation_type_public_#{evaluation_type.id}" %>" 
                     <%= params[:eval_type_id].present? && params[:eval_type_id].to_s == evaluation_type.id.to_s && params[:eval_type_id].to_s != Disability::OTHER_ID.to_s ? 'checked=checked' : '' %>
+                    class="evaluation_type_public"
                     name="evaluation_type" type="checkbox" value="<%= evaluation_type.id %>"
                     aria-controls="venue_evaluations_public" <%= other_input_class %>>
                   <label for="<%= "evaluation_type_public_#{evaluation_type.id}" %>" <%= other_modal %>>
@@ -73,6 +76,7 @@
                 <li>
                   <input id="<%= "evaluation_type_certified_#{evaluation_type.id}" %>"  
                     <%= params[:eval_type_id].present? && params[:eval_type_id].to_s == evaluation_type.id.to_s ? 'checked=checked' : '' %>
+                    class="evaluation_type_certified"
                     name="evaluation_type" type="checkbox" value="<%= evaluation_type.id %>"
                     aria-controls="venue_evaluations_certified">
                   <label for="<%= "evaluation_type_certified_#{evaluation_type.id}" %>">

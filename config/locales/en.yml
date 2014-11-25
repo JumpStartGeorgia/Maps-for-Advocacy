@@ -396,7 +396,7 @@ en:
         public: Public Evaluations
         certified: Expert Evaluations
         total: Total Evaluations
-        eval_type: Evaluation Type
+        eval_type: Type of Disability
         results: Results
         submit: Submitted
         overall: Overall
@@ -407,7 +407,7 @@ en:
         no_visual: No evaluations with visual evidence have been submitted.
     find_places:
       title: Find Accessible Places
-      explanation: 'You can search by place name, address, category, district, or evaluation type.'
+      explanation: 'You can search by place name, address, category, district, or type of disability.'
       header_search: Search
       header_filter_place_search: Place Name
       placeholder_place_search: All Places
@@ -419,7 +419,7 @@ en:
       placeholder_district: All Districts
       header_filter_evaluations: With Evaluations
       placeholder_evaluations: Places With Evaluations Only?
-      header_filter_disability: Evaluation Type
+      header_filter_disability: Type of Disability
       placeholder_disability: All Evalution Types
       clear_filter: Remove Filter
       clear_filters: Remove All Filters
@@ -473,10 +473,10 @@ en:
       header_evaluations: Evaluation Results
       filter_explanation: Use the filters below to select the which evaluation results to view.
       header_filter_certified: Assessment Type
-      header_filter_type: Evaluation Type
+      header_filter_type: Type of Disability
       filter_type_all: All
 
-      disability: "Evaluation Type:"
+      disability: "Type of Disability:"
       question: "Question:"
       answer: "Answer:"
       jump_to_place_info: Jump to general information about this place
@@ -498,7 +498,7 @@ en:
       details_link_title: View the details of this evaluation
       disability_other: 'Other Type: %{name}'
     show_type_results:
-      certified_explanation: Expert Evaluations are completed by people that are trained in how to evaluate a place for accessibility. Only the latest evaluation from each evaluation type is used to compute the overall accessibility score.
+      certified_explanation: Expert Evaluations are completed by people that are trained in how to evaluate a place for accessibility. Only the latest evaluation from each type of disability is used to compute the overall accessibility score.
       public_explanation: Public Evaluations can be completed by anyone that wishes to submit an evaluation.  Every evaluation is used to compute the overall accessibility score.
       header_summary: Overall Summary
       no_evaluations: "At this time no '%{cert}' evaluations have been submitted."
@@ -570,7 +570,8 @@ en:
     evaluation:
       title: "Evaluation of '%{name}'"
       header_certification: Which evaluation do you want to fill out?
-      header_evaluation_types: Which types do you want to evaluate (select all that apply)?
+      header_evaluation_types_cert: Evaluate the accessibility of this place for which type of disability (select all that apply)?
+      header_evaluation_types_public: Evaluate the accessibility of this place for which type of disability?
       header_form: Evaluation Form
       certification_yes_link_text: "Expert Evaluation"
       certification_yes_link_title: "Fill out a Expert Evaluation"
@@ -617,7 +618,7 @@ en:
       title: Methodology - Questions
       no_questions: Sorry, but at this time there are no evaluation questions on file.
       explanation1: The evaluation questions are split into two areas. The first area are questions that are common to all categories.  The second area is for special questions that are needed for specific categories.
-      explanation2: "Each evaluation question can then be assigned to the following evaluation types:"
+      explanation2: "Each evaluation question can then be assigned to the following types of disability:"
       header_public: Public Evaluation Questions
       header_certified: Expert Evaluation Questions
     question_type:
@@ -647,7 +648,7 @@ en:
       venue_explanation: Select the category or categories of places that you and your group would like to evaluate.
       all_venues: All Categories
       header_question_categories: Question Categories
-      header_evaluation_type: Evaluation Type
+      header_evaluation_type: Type of Disability
       header_layout: Paper Orientation
       header_help: Include Help Information
       portrait: Portrait
@@ -655,7 +656,7 @@ en:
       print: Print the Evaluation
       print_instructions: Everything below the line is what will be printed out.
       header_venue: Category
-      header_evaluation_types: Evaluation Types
+      header_evaluation_types: Type of Disability
       header_place: Place Name
       header_address: Address
       header_legend: Legend

@@ -396,7 +396,7 @@ ka:
         public: Public Evaluations
         certified: Expert Evaluations
         total: Total Evaluations
-        eval_type: Evaluation Type
+        eval_type: Type of Disability
         results: Results
         submit: Submitted
         overall: Overall
@@ -407,7 +407,7 @@ ka:
         no_visual: No evaluations with visual evidence have been submitted.
     find_places:
       title: იპოვე ხელმისაწვდომი ადგილი
-      explanation: 'You can search by place name, address, category, district, or evaluation type.'
+      explanation: 'You can search by place name, address, category, district, or type of disability.'
       header_search: ძიება
       header_filter_place_search: Place Name
       placeholder_place_search: ყველა მდებარეობა
@@ -419,7 +419,7 @@ ka:
       placeholder_district: ყველა რაიონი
       header_filter_evaluations: შეფასებით
       placeholder_evaluations: გსურთ აირჩიოთ მხოლოდ შეფასებული ადგილები?
-      header_filter_disability: შეფასების ტიპი
+      header_filter_disability: Type of Disability
       placeholder_disability: ყველა შეფასების ტიპი
       clear_filter: ფილტრის მოშორება
       clear_filters: ყველა ფილტრის მოშორება
@@ -473,10 +473,10 @@ ka:
       header_evaluations: Evaluation Results
       filter_explanation: Use the filters below to select the which evaluation results to view.
       header_filter_certified: Assessment Type
-      header_filter_type: Evaluation Type
+      header_filter_type: Type of Disability
       filter_type_all: All
 
-      disability: "Evaluation Type:"
+      disability: "Type of Disability:"
       question: "კითხვები:"
       answer: "პასუხები:"
       jump_to_place_info: Jump to general information about this place
@@ -498,7 +498,7 @@ ka:
       details_link_title: View the details of this evaluation
       disability_other: 'Other Type: %{name}'
     show_type_results:
-      certified_explanation: ექსპერტის შეფასება ავსებს ადამიანი, რომელიც დატრენინგებულია ადგილის ხელმისაწვდომობის შეფასებაში. თითოეული ტიპის შეფასებიდან მხოლოდ უკანასკნელი შეფასება გამოიყენება საერთო ხელმისაწვდომობის გამოსათვლელად.
+      certified_explanation: Expert Evaluations are completed by people that are trained in how to evaluate a place for accessibility. Only the latest evaluation from each type of disability is used to compute the overall accessibility score.
       public_explanation: საზოგადოებრივი შეფასების შევსება შეუძლიან ნებისმიერ მსურველს.
       header_summary: საერთო შეჯამება
       no_evaluations: "At this time no '%{cert}' evaluations have been submitted."
@@ -570,7 +570,8 @@ ka:
     evaluation:
       title: "'%{name}'-ის შეფასება"
       header_certification: რომელი შეფასების შევსება გსურთ?
-      header_evaluation_types: როგორი ტიპის შეფახება გსურთ (მონიშნეთ ყველა)? 
+      header_evaluation_types_cert: Evaluate the accessibility of this place for which type of disability (select all that apply)?
+      header_evaluation_types_public: Evaluate the accessibility of this place for which type of disability?
       header_form: შეფასების ფორმა
       certification_yes_link_text: "ექსპერტის შეფასება"
       certification_yes_link_title: "ექსპერტის შეფასების შევსება"
@@ -617,7 +618,7 @@ ka:
       title: მეთოდოლოგიური - კითხვები
       no_questions: სამწუხაროდ ამ დროისთვის  ფაილში არ არსებობს შეფასების კითხვები.
       explanation1: შეფასების კითხვები იყოფა ორ ნაწილად. პირველ ნაწილში წარმოდგენილია კითხვები, რომლებიც საერთოა ყველა კატეგორიისთვის. მეორე ნაწილში კი წარმოდგენილია სპეციფიკური კითხვები, რომლებიც საჭიროა კონკრეტული კატეგორიებისთვის.
-      explanation2: "თითოეულ შეფასების კითხვას შესაძლებელია მიესადაგოს შემდეგი შეფასების ტიპი:"
+      explanation2: "Each evaluation question can then be assigned to the following types of disability:"
       header_public: საზოგადოებრივი შეფასების კითხვები
       header_certified: ექსპერტის შეფასების კითხვები
     question_type:
@@ -647,7 +648,7 @@ ka:
       venue_explanation: Select the category or categories of places that you and your group would like to evaluate.
       all_venues: All Categories
       header_question_categories: Question Categories
-      header_evaluation_type: შეფასების ტიპი
+      header_evaluation_type: Type of Disability
       header_layout: ფურცლის  მიმართულება
       header_help: შევიყვანოთ დამხმარე ინფორმაცია
       portrait: ვერტიკალური
@@ -655,7 +656,7 @@ ka:
       print: შეფასების ამობეჭდვა
       print_instructions: ხაზის ქვემოთ წარმოდგენილია ის ნაწილი, რომელიც ამოივეჭდება.
       header_venue: კატეგორია
-      header_evaluation_types: Evaluation Types
+      header_evaluation_types: Type of Disability
       header_place: ადგილის სახელწოდება
       header_address: მისამართი
       header_legend: Legend
