@@ -399,7 +399,7 @@ ka:
         eval_type: Type of Disability
         results: Results
         submit: Submitted
-        overall: Overall
+        overall: All Disabilities
         user: User
         org: Organization
       no_data:
@@ -420,7 +420,7 @@ ka:
       header_filter_evaluations: შეფასებით
       placeholder_evaluations: გსურთ აირჩიოთ მხოლოდ შეფასებული ადგილები?
       header_filter_disability: Type of Disability
-      placeholder_disability: ყველა შეფასების ტიპი
+      placeholder_disability: All Types of Disability
       clear_filter: ფილტრის მოშორება
       clear_filters: ყველა ფილტრის მოშორება
       header_selections: მიმდინარე ფილტრები
