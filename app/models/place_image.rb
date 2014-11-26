@@ -19,18 +19,23 @@ class PlaceImage < ActiveRecord::Base
 				}
   
 
-  validates_attachment_content_type :image, :content_type => "image/jpeg"
+  validates_attachment_content_type :image, :content_type => ["image/jpeg", "image/png"]
 
   after_post_process :get_meta_data
 
   # get the meta data from the image
   def get_meta_data
-    if self.image.present? && self.image.url.present?
-      x = EXIFR::JPEG.new(self.image.queued_for_write[:original].path)
-      if x.present?
-        self.taken_at = x.date_time
-      end
-    end    
+    begin
+      if self.image.present? && self.image.url.present?
+        x = EXIFR::JPEG.new(self.image.queued_for_write[:original].path)
+        if x.present?
+          self.taken_at = x.date_time
+        end
+      end    
+    rescue EXIFR::MalformedJPEG
+      # do nothing - just catch error so processing does not stop
+    end
+    return true
   end
 
   # get all images in a place

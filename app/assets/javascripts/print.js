@@ -109,9 +109,9 @@ $(document).ready(function(){
       $(checked).each(function(){
         $('#print_area #print_questions .question-categories[data-common="true"][data-id="' + $(this).val() + '"').show();
       });
-    }else{
-      // nothing selected so show all
-      $('#print_area #print_questions .question-categories').show();
+    // }else{
+    //   // nothing selected so show all
+    //   $('#print_area #print_questions .question-categories').show();
     }
   });
 

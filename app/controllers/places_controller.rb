@@ -646,16 +646,28 @@ logger.debug "=================== #{@place.inspect}"
                 # pull images that exist and create record for each one (multiple can exist for one qp_id)
                 # - unique images were already saved above, so for this we need to find a match and save the id
                 if saved_images.present?
+                  logger.debug "4444444444444444444 #{saved_images.length} saved images present"
+                  logger.debug "4444444444444444444 #{saved_images}"
                   records_with_images = params[:place]['place_evaluations_attributes']['0']['place_evaluation_images_attributes']
                             .select{|k,v| qp_ids.include?(v['question_pairing_id']) && v['images'].present?}
                   if records_with_images.present?
+                    logger.debug "4444444444444444444 #{records_with_images.length} records with images present"
                     place_params['place_evaluations_attributes'][idx_disability.to_s]['place_evaluation_images_attributes'] = {}
                     idx_image = 0
                     records_with_images.each do |key, record_with_image|
+                      logger.debug "-- 4444444444444444444 #{record_with_image}"
+
                       record_with_image['images'].each do |image|
+                        logger.debug "---- 4444444444444444444 #{image}"
+                        logger.debug "---- 4444444444444444444 img.orig_file = #{image.original_filename}"
+                        logger.debug "---- 4444444444444444444 saved images file names = #{saved_images.map{|x| x.image_file_name}}"
+
                         # look for this image in the saved_images array
                         # - if found, use the id of image
-                        image_index = saved_images.index{|x| x.image_file_name == image.original_filename}
+                        # since the images are already saved, the file name was cleaned up by paperclip
+                        # so apply same clean up procedure to do proper testing
+                        image_index = saved_images.index{|x| x.image_file_name == image.original_filename.gsub(/[&$+,\/:;=?@<>\[\]\{\}\|\\\^~%# ]/, '_')}
+                        logger.debug "---- 4444444444444444444 img index = #{image_index}"
                         if image_index.present?
                           place_params['place_evaluations_attributes'][idx_disability.to_s]['place_evaluation_images_attributes'][idx_image.to_s] = {}
                           place_params['place_evaluations_attributes'][idx_disability.to_s]['place_evaluation_images_attributes'][idx_image.to_s]['question_pairing_id'] = record_with_image['question_pairing_id']
