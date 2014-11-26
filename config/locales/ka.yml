@@ -523,6 +523,7 @@ ka:
       watch_videos: Watch Video Guides
     form:
       explanation: Please add the place to the database before you evaluate it. You must enter the place name, its category, and its address.
+      url_hint: "Please include http:// or https://"
       header_location: სად მდებარეობს ეს ადგილი?
       map_instructions: დააჭირეთ რუკას, რათა მონიშნოთ ამ ადგილის მდებარეობა.
       map_blue_marker: ლურჯი მარკერი (%{img}) აღნიშნავს თქვენი ადგილის ლოკაციას.
