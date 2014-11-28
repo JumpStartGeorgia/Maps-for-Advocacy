@@ -43,6 +43,7 @@ BootstrapStarter::Application.routes.draw do
 
     # add/view places
     match '/places/saw_popup', :to => 'places#saw_popup', :as => :saw_popup, :via => :post, :defaults => {:format => :js}
+    match '/places/help_text/:question_pairing_id(/:disability_ids)', :to => 'places#help_text', :as => :help_text, :via => :get
     resources :places do
       member do 
         get 'evaluation'

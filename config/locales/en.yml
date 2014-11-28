@@ -16,7 +16,7 @@ en:
       right: Rights
       organization: Organization
       training_video: Video Guide
-      QuestionPairingDisability: Help Text
+      question_pairing_disability: Help Text
     attributes:
       user:
         email: Email Address
@@ -570,6 +570,7 @@ en:
       skip_to_eval_type: Skip to the type of evaluation selection (jump)
       skip_to_submit_button: Skip to the submit button (jump)
     certified_eval_form_questions:
+      tip_help_text: Click here to view the help text for this question
       tip_exists: Answering yes to this question will show more questions
       tip_evidence: Mesaurements are needed for this question
       tip_validation: Your measurement input will determine the answer for this question

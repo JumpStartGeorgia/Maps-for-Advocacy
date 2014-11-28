@@ -31,7 +31,14 @@ $(document).ready(function(){
 		
   $('.tooltipster').tooltipster();		
   $('.tooltipster_right').tooltipster({position:'right'});		
-  
+
+  /*************************************************/
+  /* turn on fancybox to show help text */
+  $(".help-text-fancybox").fancybox({
+    type: 'iframe',
+    autoSize : true
+  });
+
 });
 
 var default_leaflet_icon_options = {

@@ -1,5 +1,5 @@
 class PlacesController < ApplicationController
-  before_filter :authenticate_user!, :except => [:show, :evaluation_details]
+  before_filter :authenticate_user!, :except => [:show, :evaluation_details, :help_text]
   before_filter :only => [:edit, :update, :delete] do |controller_instance|
     controller_instance.send(:valid_role?, User::ROLES[:site_admin])
   end
@@ -168,9 +168,10 @@ class PlacesController < ApplicationController
     end
   end
 
+=begin old
   # GET /places/1
   # GET /places/1.json
-  def show2
+  def show
     @place = Place.with_translation(params[:id]).first
     @data = {:certified => {:summary => [], :summary_questions => [], :disability_evaluations => []}, 
              :public => {:summary => [], :summary_questions => [], :disability_evaluations => []}}
@@ -279,6 +280,7 @@ class PlacesController < ApplicationController
 			return
     end
   end
+=end
 
   # GET /places/new
   # GET /places/new.json
@@ -726,7 +728,21 @@ logger.debug "-------> error: #{@place.errors.full_messages}"
     end
   end
 
-  
+  # get the help text for the provided question pairing id
+  def help_text
+    options = {question_pairing_id: params[:question_pairing_id]}
+    options[:disability_ids] = params[:disability_ids].split(',') if params[:disability_ids].present?
+
+    @help_text = QuestionPairingDisability.with_names(options)
+
+    respond_to do |format|
+      format.html { render layout: 'fancybox'}
+      format.json { render json: @data }
+    end
+
+  end
+
+
   private
   
   

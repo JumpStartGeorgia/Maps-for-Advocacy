@@ -25,6 +25,37 @@ class Question < ActiveRecord::Base
     if question_category_id.present?
 
       sql = "SELECT qp.sort_order as question_sort_order, qp.is_exists, qp.exists_id, qp.exists_parent_id, qp.required_for_accessibility, q.id as question_id, qt.name as question, "
+      sql << "qpt.validation_equation, qpt.validation_equation_units, qpt.validation_equation_wout_units, qp.is_evidence_angle, qpt.evidence1, qpt.evidence2, qpt.evidence3, qp.id as question_pairing_id, qp.question_category_id "
+      if options[:disability_id].present?
+        sql << ", qpd.disability_id, if(qpd.has_content = 1, qpd.disability_id, null) as disability_id_with_help_text "
+      elsif options[:disability_ids].present?
+        sql << ", group_concat(qpd.disability_id) as disability_ids, group_concat(if(qpd.has_content = 1, qpd.disability_id, null)) as disability_ids_with_help_text "
+      end
+      sql << "FROM question_pairings as qp "
+      if options[:disability_ids].present?
+        sql << "inner JOIN question_pairing_disabilities as qpd ON qpd.question_pairing_id = qp.id and qpd.disability_id in (:disability_ids) "
+      elsif options[:disability_id].present?
+        sql << "inner JOIN question_pairing_disabilities as qpd ON qpd.question_pairing_id = qp.id and qpd.disability_id = :disability_id "
+      end
+      sql << "inner JOIN question_pairing_translations as qpt ON qpt.question_pairing_id = qp.id  and qpt.locale = :locale "
+      sql << "inner JOIN questions as q ON q.id = qp.question_id " 
+      sql << "inner JOIN question_translations as qt ON qt.question_id = q.id and qt.locale = :locale "
+      sql << "where qp.question_category_id = :question_category_id "
+      if options[:disability_ids].present?
+        sql << "group by qp.sort_order, qp.is_exists, qp.exists_id, qp.exists_parent_id, qp.required_for_accessibility, q.id, qt.name, qpt.validation_equation, qpt.validation_equation_units, qpt.validation_equation_wout_units, qp.is_evidence_angle, qpt.evidence1, qpt.evidence2, qpt.evidence3, qp.id, qp.question_category_id "
+      end
+      sql << "order by qp.sort_order asc, qt.name asc "
+      find_by_sql([sql, :locale => I18n.locale, :question_category_id => question_category_id, 
+          :disability_id => options[:disability_id], :disability_ids => options[:disability_ids]])
+
+    end
+  end
+  
+=begin  old
+  def self.in_category(question_category_id, options={})
+    if question_category_id.present?
+
+      sql = "SELECT qp.sort_order as question_sort_order, qp.is_exists, qp.exists_id, qp.exists_parent_id, qp.required_for_accessibility, q.id as question_id, qt.name as question, "
       sql << "qpt.validation_equation, qpt.validation_equation_units, qpt.validation_equation_wout_units, qp.is_evidence_angle, qpt.evidence1, qpt.evidence2, qpt.evidence3, qp.id as question_pairing_id, qp.question_category_id, qpt.help_text "
       if options[:disability_id].present?
         sql << ", dqp.disability_id "
@@ -50,7 +81,7 @@ class Question < ActiveRecord::Base
 
     end
   end
-  
+=end  
   def self.all_questions_not_in_category(question_category_id)
     if question_category_id.present?
       sql = "select q.id, qt.name as question from questions as q "

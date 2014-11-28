@@ -29,6 +29,27 @@ class QuestionPairing < ActiveRecord::Base
     sql = "select qp.id, qp.question_category_id, qp.is_exists, qp.required_for_accessibility, qp.question_id, if(qc.ancestry is null, qc.id, convert(qc.ancestry, unsigned)) as root_question_category_id, "
     sql << "group_concat('"
     sql << DISABILITY_ID_SEPARATOR
+    sql << "', qpd.disability_id, '"
+    sql << DISABILITY_ID_SEPARATOR
+    sql << "') as disability_ids "
+    sql << "from question_pairings as qp inner join question_pairing_disabilities as qpd on qpd.question_pairing_id = qp.id "
+    sql << "inner join question_categories as qc on qp.question_category_id = qc.id "
+    sql << "where qc.category_type in ("
+    sql << types.join(',')
+    sql << ") "
+    sql << "group by qp.id, qp.question_category_id, qp.is_exists, qp.required_for_accessibility, root_question_category_id "
+    find_by_sql(sql)
+  end
+
+=begin old
+  # get the questions in format that is used for computing summaries
+  def self.questions_for_summary(is_certified = true)
+    types = [QuestionCategory::TYPES['common'], QuestionCategory::TYPES['custom']]
+    types = [QuestionCategory::TYPES['public'], QuestionCategory::TYPES['public_custom']] if !is_certified
+    
+    sql = "select qp.id, qp.question_category_id, qp.is_exists, qp.required_for_accessibility, qp.question_id, if(qc.ancestry is null, qc.id, convert(qc.ancestry, unsigned)) as root_question_category_id, "
+    sql << "group_concat('"
+    sql << DISABILITY_ID_SEPARATOR
     sql << "', dqp.disability_id, '"
     sql << DISABILITY_ID_SEPARATOR
     sql << "') as disability_ids "
@@ -40,7 +61,7 @@ class QuestionPairing < ActiveRecord::Base
     sql << "group by qp.id, qp.question_category_id, qp.is_exists, qp.required_for_accessibility, root_question_category_id "
     find_by_sql(sql)
   end
-
+=end
 
   # take in hash of {id => sort order} for original and new values and
   # if differences are found, update the sort order for that id

@@ -7,7 +7,7 @@ class Admin::QuestionPairingDisabilitiesController < ApplicationController
   # GET /help_text
   # GET /help_text.json
   def index
-    @question_pairing_disabilities = QuestionPairingDisability.sorted_with_names(100)
+    @question_pairing_disabilities = QuestionPairingDisability.with_names(limit: 100)
 
     respond_to do |format|
       format.html # index.html.erb

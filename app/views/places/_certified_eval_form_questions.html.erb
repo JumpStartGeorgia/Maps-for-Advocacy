@@ -31,6 +31,18 @@
                     disability_ids.flatten!.map!{|x| x.to_i}.sort!
                   end
                   
+                  # get the disability ids for this question that have help text
+                  disability_ids_with_help_text = []
+                  if question[:disability_id_with_help_text].present?
+                    disability_ids_with_help_text << question[:disability_id_with_help_text]
+                  end
+                  if question[:disability_ids_with_help_text].present?
+                    disability_ids_with_help_text << question[:disability_ids_with_help_text].split(',')
+                  end
+                  if disability_ids_with_help_text.present?
+                    disability_ids_with_help_text.flatten!.map!{|x| x.to_i}.sort!
+                  end
+                  
                                     
                   # if this question has validation disable the radio buttons
                   if question[:validation_equation].present? 
@@ -84,8 +96,13 @@
                             (<%= question[:validation_equation] %>)
                           <% end %>
 
-                          <% if question[:help_text].present? %>
-                            <i class="icon-info-sign tooltipster" title="<%= question[:help_text] %>"></i>
+                          <% if disability_ids_with_help_text.present? %>
+                            <%= link_to help_text_path(question_pairing_id: question[:question_pairing_id]),
+                                  :'data-disability-ids' => disability_ids_with_help_text.to_s, 
+                                  :'data-url' => help_text_path(question_pairing_id: question[:question_pairing_id]),
+                                  :class => 'help-text-link help-text-fancybox' do %>
+                              <i class="icon-info-sign tooltipster" title="<%= t('.tip_help_text') %>"></i>
+                            <% end %>
                           <% end %>
                           <% if question[:exists_id].present? %>
                             <i class="icon-plus tooltipster" title="<%= t('.tip_exists') %>"></i>

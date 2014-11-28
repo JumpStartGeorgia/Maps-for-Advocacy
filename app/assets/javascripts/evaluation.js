@@ -44,6 +44,7 @@ $(document).ready(function(){
       // reset and show all questions and headers
       $(form_path).show();
       $(form_path + ' .venue_evaluation_question').show();
+      $(form_path + ' .venue_evaluation_question a.help-text-link').show();
       $('#evaluation_form .question_category').show();
       $('#evaluation_form .question_category h4, #evaluation_form .question_category h5').show();
       $('#evaluation_form .question_categories li').show();
@@ -67,10 +68,12 @@ $(document).ready(function(){
         // create all possible combinations of these ids
         var combination_hide_ids = combinations(hide_ids);
         // hide questions that only have ids in hide_ids
+        // hide help text links that only have ids in hide_ids
         for(var i=0;i<combination_hide_ids.length;i++){
           var nums = combination_hide_ids[i].split(';').sort();
           if (nums.length > 0){
             $(form_path + ' .venue_evaluation_question[data-disability-ids="[' + nums.join(', ') + ']"]').hide();  
+            $(form_path + ' .venue_evaluation_question a.help-text-link[data-disability-ids="[' + nums.join(', ') + ']"]').hide();  
           }
         }
         
@@ -208,6 +211,27 @@ $(document).ready(function(){
       }
     });    
 
+    //////////////////////////////////////////////////////////////////////////
+    // when help text link is click, add the visible types to the url
+    $('.venue_evaluation_question a.help-text-link').click(function(){
+      var ids = [];
+      if ($('#evaluation_form #complete_form #certification input[name="certification_form"]').val() == 'y'){
+        // certified
+        $('#evaluation_form #complete_form #evaluation_types #evaluation_types_certified input[name="evaluation_type"]').filter(':checked').each(function(){
+          ids.push($(this).attr('value'));
+        });
+      }else{
+        // public
+        $('#evaluation_form #complete_form #evaluation_types #evaluation_types_public input[name="evaluation_type"]').filter(':checked').each(function(){
+          ids.push($(this).attr('value'));
+        });
+      }
+      if (ids.length > 0){
+        $(this).attr('href', $(this).data('url') + '/' + ids.join(','));
+      }else{
+        $(this).attr('href', $(this).data('url'));
+      }
+    });
 
     //////////////////////////////////////////////////////////////////////////
     // when evaluation type is changed, update the hidden form field and show the correct questions
