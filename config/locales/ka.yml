@@ -581,6 +581,7 @@ ka:
       skip_to_next_question: შემდეგ კითხვაზე გადასვლა (გადახტომა)
     public_eval_form:
       not_know: თუ არ გაქვთ პასუხი, დატოვეთ ცარიელი. 
+      tip_help_text: Click here to view the help text for this question
     evaluation:
       title: "'%{name}'-ის შეფასება"
       header_certification: რომელი შეფასების შევსება გსურთ?
@@ -606,6 +607,8 @@ ka:
       start_upload: სურათის ატვირთვა
       cancel_upload: ატვირთვის გაუქმება
       return_place: "'%{name}'-ზე დაბრუნება"
+    help_text:
+      title: "Additonal Information About:"
   settings:
     index:
       title: "'%{name}'-ის პარამეტრები"

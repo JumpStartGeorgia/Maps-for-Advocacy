@@ -30,11 +30,34 @@
               <% 
                 input_id = "place_place_evaluations_attributes_0_place_evaluation_answers_attributes_#{question_index}_answer_" 
                 input_name = "place[place_evaluations_attributes][0][place_evaluation_answers_attributes][#{question_index}][answer]" 
+
+                # get the disability ids for this question that have help text
+                disability_ids_with_help_text = []
+                if question[:disability_id_with_help_text].present?
+                  disability_ids_with_help_text << question[:disability_id_with_help_text]
+                end
+                if question[:disability_ids_with_help_text].present?
+                  disability_ids_with_help_text << question[:disability_ids_with_help_text].split(',')
+                end
+                if disability_ids_with_help_text.present?
+                  disability_ids_with_help_text.flatten!.map!{|x| x.to_i}.sort!
+                end
+                
               %>
 
               <fieldset>
                 <div class="span4">
-                  <legend><%= question[:question] %></legend>
+                  <legend>
+                    <%= question[:question] %>
+                    <% if disability_ids_with_help_text.present? %>
+                      <%= link_to help_text_path(question_pairing_id: question[:question_pairing_id]),
+                            :'data-disability-ids' => disability_ids_with_help_text.to_s, 
+                            :'data-url' => help_text_path(question_pairing_id: question[:question_pairing_id]),
+                            :class => 'help-text-link help-text-fancybox' do %>
+                        <i class="icon-info-sign tooltipster" title="<%= t('.tip_help_text') %>"></i>
+                      <% end %>
+                    <% end %>
+                  </legend>
                 </div>
                 <div class="span8 venue_evaluation_question_answers">
                   <div class="row-fluid">

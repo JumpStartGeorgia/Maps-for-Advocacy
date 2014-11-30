@@ -1,4 +1,7 @@
-<% title @help_text.first.question %>
+<% 
+  title t('.title')
+  title_sec_row  @help_text.first.question 
+%>
 
 <% @help_text.each do |help| %>
   <h2><%= help.disability_name %></h2>

@@ -8,6 +8,9 @@ module ApplicationHelper
   def title_right(title)
     content_for(:title_right) { title.html_safe }
   end
+  def title_sec_row(title)
+    content_for(:title_sec_row) { title.html_safe }
+  end
   def body_id(id)
     content_for(:body_id) { "id='#{id}'".html_safe }
   end

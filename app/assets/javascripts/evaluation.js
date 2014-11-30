@@ -215,7 +215,7 @@ $(document).ready(function(){
     // when help text link is click, add the visible types to the url
     $('.venue_evaluation_question a.help-text-link').click(function(){
       var ids = [];
-      if ($('#evaluation_form #complete_form #certification input[name="certification_form"]').val() == 'y'){
+      if ($('#evaluation_form #complete_form #certification input[name="certification_form"]').filter(':checked').attr('value') == 'y'){
         // certified
         $('#evaluation_form #complete_form #evaluation_types #evaluation_types_certified input[name="evaluation_type"]').filter(':checked').each(function(){
           ids.push($(this).attr('value'));
