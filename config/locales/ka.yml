@@ -381,6 +381,14 @@ ka:
       form:
         video_embed_success: View the embeded video
         video_embed_fail: The video URL could not be processed
+    question_pairing_disabilities:
+      index:
+        header_filter_certified: Assessment Type
+        header_filter_type: Evaluation Type
+        header_filter_category: Category
+        filter_all: All
+        evaluations_certified: "Expert Evaluations"
+        evaluations_public: "Public Evaluations"        
   root:
     index:
       stats_text: "To date, %{num} Places have been evaluated with the following results:"

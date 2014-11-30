@@ -68,6 +68,9 @@ logger.debug "$$$$$$$$$$4444 - has content = #{self.has_content}"
   # - sort_dir - direction to sort by
   # - limit - number of records to get
   # - offset - offset for pagination
+  # - is_certified - boolean flag indicating to show public or certified records
+  # - type - what disability type
+  # - category - what category records have to belong to
   def self.with_names(options={})
     question_pairing_id = options[:question_pairing_id].present? ? options[:question_pairing_id] : nil
     disability_ids = options[:disability_ids].present? ? options[:disability_ids] : nil
@@ -76,6 +79,10 @@ logger.debug "$$$$$$$$$$4444 - has content = #{self.has_content}"
     sort_dir = options[:sort_dir].present? ? options[:sort_dir] : nil
     limit = options[:limit].present? ? options[:limit] : nil
     offset = options[:offset].present? ? options[:offset] : nil
+    is_certified = options[:is_certified].present? ? options[:is_certified].to_s.to_bool : nil
+    type = options[:type].present? ? options[:type] : nil
+    category = options[:category].present? ? options[:category] : nil
+
     sql = "SELECT qpd.id, qpd.question_pairing_id, qpd.disability_id, qpd.has_content, "
     sql << "if (qc_child.category_type = :common or qc_child.category_type = :custom, 1, 0) as is_certified,"
     sql << "if (qc_child.ancestry is null, qct_child.name, qct_parent.name) as question_category_parent, "
@@ -97,10 +104,39 @@ logger.debug "$$$$$$$$$$4444 - has content = #{self.has_content}"
       if disability_ids.present?
         sql << "and qpd.disability_id in (:disability_ids) "
       end
-    elsif search.present?
-      sql << "where (qct_child.name like :search or qct_parent.name like :search || qt.name like :search || dt.name like :search ) "
-      if disability_ids.present?
-        sql << "and qpd.disability_id in (:disability_ids) "
+    elsif search.present? || is_certified.to_s.present? || type.present? || category.present?
+      sql << "where "
+      has_content = false
+
+      if search.present?
+        sql << "(qct_child.name like :search or qct_parent.name like :search || qt.name like :search || dt.name like :search ) "
+        has_content = true
+      end
+      
+      if is_certified.to_s.present?
+        if has_content
+          sql << "and "
+        end
+        if !is_certified
+          sql << "!"
+        end
+        sql << "(qc_child.category_type = :common or qc_child.category_type = :custom) "
+        has_content = true
+      end
+
+      if type.present? && type != "0"
+        if has_content
+          sql << "and "
+        end
+        sql << "qpd.disability_id = :type "
+        has_content = true
+      end
+
+      if category.present? && category != '0'
+        if has_content
+          sql << "and "
+        end
+        sql << "(qc_child.id = :category || qc_parent.id = :category) "
       end
     end
     if question_pairing_id.blank?
@@ -125,7 +161,8 @@ logger.debug "$$$$$$$$$$4444 - has content = #{self.has_content}"
                 :custom => QuestionCategory::TYPES['custom'],
                 :locale => I18n.locale, :question_pairing_id => question_pairing_id,
                 :disability_ids => disability_ids, :search => "%#{search}%",
-                :sort_col => sort_col, :sort_dir => sort_dir],
+                :sort_col => sort_col, :sort_dir => sort_dir,
+                :type => type, :category => category],
                 :page => offset, :per_page => limit)
 
     # find_by_sql([sql, :common => QuestionCategory::TYPES['common'], 

@@ -1,15 +1,21 @@
 class QuestionPairingDisabilitiesDatatable
   include Rails.application.routes.url_helpers
   delegate :params, :h, :link_to, :number_to_currency, :number_with_delimiter, :image_tag, to: :@view
+  delegate :is_certified, to: :@is_certified
+  delegate :type, to: :@type
+  delegate :category, to: :@category
 
-  def initialize(view)
+  def initialize(view, is_certified=nil, type=nil, category=nil)
     @view = view
+    @is_certified = is_certified
+    @type = type
+    @category = category
   end
 
   def as_json(options = {})
     {
       sEcho: params[:sEcho].to_i,
-      iTotalRecords: QuestionPairingDisability.with_names_count,
+      iTotalRecords: QuestionPairingDisability.with_names_count(default_options),
       iTotalDisplayRecords: items.total_entries,
       aaData: data
     }
@@ -17,14 +23,18 @@ class QuestionPairingDisabilitiesDatatable
 
 private
 
+  def default_options
+    {is_certified: @is_certified, type: @type, category: @category}
+  end
+
   def data
     items.map do |item|
       [
         item.certified_text,
+        item.disability_name,
         item.question_category,
         item.question_subcategory,
         item.question,
-        item.disability_name,
         view_link(item),
         action_links(item)
       ]
@@ -53,10 +63,10 @@ private
     return x.html_safe
   end
 
-  def fetch_items
-    QuestionPairingDisability.with_names(search: params[:sSearch], 
+  def fetch_items    
+    QuestionPairingDisability.with_names(default_options.merge({search: params[:sSearch], 
       sort_col: sort_column, sort_dir: sort_direction,
-      offset: page, limit: per_page)
+      offset: page, limit: per_page}))
   end
 
   def page
@@ -68,7 +78,7 @@ private
   end
 
   def sort_column
-    columns = %w[is_certified question_category_parent question_category_child question disability_name has_content]
+    columns = %w[is_certified disability_name question_category_parent question_category_child question has_content]
     columns[params[:iSortCol_0].to_i]
   end
 

@@ -2,15 +2,74 @@
 <%- model_class_trans = QuestionPairingDisabilityTranslation -%>
 <% title t '.title', :default => model_class.model_name.human.pluralize %>
 
+<%
+  cert_selected = "selected=selected"
+  public_selected = ""
+%>
+
+<div id="help-text-admin" class='row-fluid'>
+  <div class='span4'>
+    <h3><%= label_tag :help_text_filter_certified, t('.header_filter_certified') %></h3>
+    <select id="help_text_filter_certified" name="help_text_filter_certified" style="width: 100%">
+      <option value="true" <%= cert_selected %> data-name="<%= t('.evaluations_certified') %>"
+        title="<%= t('app.common.certified_explanation') %>">
+        <%= t('.evaluations_certified') %>              
+        </option>
+      <option value="false" <%= public_selected %> data-name="<%= t('.evaluations_public') %>"
+        title="<%= t('app.common.public_explanation') %>">
+        <%= t('.evaluations_public') %>
+      </option>
+    </select>
+  </div>
+  <div class='span4'>
+    <h3><%= label_tag :help_text_filter_type, t('.header_filter_type') %></h3>
+    <select id="help_text_filter_type" name="help_text_filter_type" style="width: 100%">
+      <option value="0" selected="selected" id="filter-type-all"
+        data-public="true" 
+        data-certified="true"><%= t('.filter_all') %></option>
+      <% @disabilities.each do |disability| %>
+        <% 
+          cls = 'class=accessibly-hidden'
+          if disability.active_certified?
+            cls = ''
+          end
+        %>
+        <option value="<%= disability.id %>" data-public="<%= disability.active_public %>" <%= cls %>
+          data-certified="<%= disability.active_certified %>"><%= disability.name %></option>
+      <% end %>
+    </select>
+  </div>
+  <div class='span4'>
+    <h3><%= label_tag :help_text_filter_category, t('.header_filter_category') %></h3>
+    <select id="help_text_filter_category" name="help_text_filter_category" style="width: 100%">
+      <option value="0" selected="selected" id="filter-category-all"
+        data-public="true" 
+        data-certified="true"><%= t('.filter_all') %></option>
+      <% @categories.each do |category| %>
+        <% 
+          cls = 'class=accessibly-hidden'
+          if category.is_certified?
+            cls = ''
+          end
+        %>
+        <option value="<%= category.id %>" data-public="<%= !category.is_certified? %>" <%= cls %>
+          data-certified="<%= category.is_certified? %>"><%= category.name %></option>
+      <% end %>
+    </select>
+  </div>
+</div>
+
+
+
 <table id="help-text-datatable" class="table table-striped display" 
         data-source="<%= admin_question_pairing_disabilities_url(:format => :json) %>">
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:certified_text) %></th>
+      <th><%= model_class.human_attribute_name(:disability_name) %></th>
       <th><%= model_class.human_attribute_name(:question_category) %></th>
       <th><%= model_class.human_attribute_name(:question_subcategory) %></th>
       <th><%= model_class.human_attribute_name(:question) %></th>
-      <th><%= model_class.human_attribute_name(:disability_name) %></th>
       <th><%= model_class.human_attribute_name(:has_content) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>

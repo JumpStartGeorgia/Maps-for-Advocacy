@@ -1,4 +1,3 @@
-
 $(document).ready(function(){
   $.extend( $.fn.dataTableExt.oStdClasses, {
       "sWrapper": "dataTables_wrapper form-inline"
@@ -41,7 +40,7 @@ $(document).ready(function(){
   /*************************************************/
   /* question pairing disability (help text) */
 
-  $('#help-text-datatable').dataTable({
+  help_text_dt = $('#help-text-datatable').dataTable({
     "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",    
     "sPaginationType": "bootstrap",
     "bJQueryUI": true,
@@ -58,7 +57,23 @@ $(document).ready(function(){
         "bSortable": false,
         "aTargets": [ 6 ]
       }
-    ]
+    ],
+    "fnServerParams": function ( aoData ) {
+      aoData.push( { name: "is_certified", value: $('#help-text-admin #help_text_filter_certified').val()} ),
+      aoData.push( { name: "type", value: $('#help-text-admin #help_text_filter_type').val()} ),
+      aoData.push( { name: "category", value: $('#help-text-admin #help_text_filter_category').val()} )
+    }
+  });
+
+  // when options change, update datatable
+  $('#help-text-admin #help_text_filter_certified').change(function(){
+    help_text_dt.fnDraw();
+  });
+  $('#help-text-admin #help_text_filter_type').change(function(){
+    help_text_dt.fnDraw();
+  });
+  $('#help-text-admin #help_text_filter_category').change(function(){
+    help_text_dt.fnDraw();
   });
 
 

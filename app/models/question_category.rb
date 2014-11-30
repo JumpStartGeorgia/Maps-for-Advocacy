@@ -22,6 +22,10 @@ class QuestionCategory < ActiveRecord::Base
     self.sort_order = DEFAULT_SORT_ORDER if read_attribute(:sort_order).blank?
   end
 
+  def is_certified?
+    self.category_type == TYPES['common'] || self.category_type == TYPES['custom']
+  end
+
 
   # possible options: category_type, child_of, question_category_id, disability_id
   def self.with_questions(options = {})
@@ -120,6 +124,13 @@ class QuestionCategory < ActiveRecord::Base
     questions.flatten!
 
     return questions
+  end
+
+
+  # get all categories with no ancestor
+  def self.all_main
+    with_translations(I18n.locale).where(:ancestry => nil)
+    .order('question_categories.sort_order, question_categories.category_type, question_category_translations.name')
   end
   
 
