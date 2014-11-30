@@ -2,7 +2,8 @@
 <%- model_class_trans = QuestionPairingDisabilityTranslation -%>
 <% title t '.title', :default => model_class.model_name.human.pluralize %>
 
-<table id="help-text-datatable" class="table table-striped display">
+<table id="help-text-datatable" class="table table-striped display" 
+        data-source="<%= admin_question_pairing_disabilities_url(:format => :json) %>">
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:certified_text) %></th>
@@ -15,31 +16,6 @@
     </tr>
   </thead>
   <tbody>
-    <% @question_pairing_disabilities.each do |qpd| %>
-      <tr>
-        <td><%= qpd.certified_text %></td>
-        <td><%= qpd.question_category %></td>
-        <td><%= qpd.question_subcategory %></td>
-        <td><%= qpd.question %></td>
-        <td><%= qpd.disability_name %></td>
-        <td data-order="<%= qpd.has_content? %>">
-          <% if qpd.has_content? %>
-            <%= link_to t('helpers.links.view'), 
-                help_text_path(question_pairing_id: qpd.question_pairing_id, :disability_ids => [qpd.disability_id]), 
-                :class => 'btn help-text-fancybox' %>
-          <% end %>
-        </td>
-        <td>
-          <%= link_to t('app.buttons.edit'),
-                      edit_admin_question_pairing_disability_path(qpd), :class => 'btn btn-mini' %>
-          <%#= link_to t('app.buttons.delete'),
-                      admin_question_pairing_disability_path(qpd),
-                      :method => :delete,
-                      :confirm => t('app.buttons.confirm'),
-                      :class => 'btn btn-mini btn-danger' %>
-        </td>
-      </tr>
-    <% end %>
   </tbody>
 </table>
 

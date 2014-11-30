@@ -63,11 +63,19 @@ logger.debug "$$$$$$$$$$4444 - has content = #{self.has_content}"
   # options:
   # - question_pairing_id - gets records that have this id
   # - disability_ids - array of disability_ids to get records for
+  # - search - phrase to search for
+  # - sort_col - col to sort by
+  # - sort_dir - direction to sort by
   # - limit - number of records to get
+  # - offset - offset for pagination
   def self.with_names(options={})
     question_pairing_id = options[:question_pairing_id].present? ? options[:question_pairing_id] : nil
     disability_ids = options[:disability_ids].present? ? options[:disability_ids] : nil
+    search = options[:search].present? ? options[:search] : nil
+    sort_col = options[:sort_col].present? ? options[:sort_col] : nil
+    sort_dir = options[:sort_dir].present? ? options[:sort_dir] : nil
     limit = options[:limit].present? ? options[:limit] : nil
+    offset = options[:offset].present? ? options[:offset] : nil
     sql = "SELECT qpd.id, qpd.question_pairing_id, qpd.disability_id, qpd.has_content, "
     sql << "if (qc_child.category_type = :common or qc_child.category_type = :custom, 1, 0) as is_certified,"
     sql << "if (qc_child.ancestry is null, qct_child.name, qct_parent.name) as question_category_parent, "
@@ -89,19 +97,79 @@ logger.debug "$$$$$$$$$$4444 - has content = #{self.has_content}"
       if disability_ids.present?
         sql << "and qpd.disability_id in (:disability_ids) "
       end
+    elsif search.present?
+      sql << "where (qct_child.name like :search or qct_parent.name like :search || qt.name like :search || dt.name like :search ) "
+      if disability_ids.present?
+        sql << "and qpd.disability_id in (:disability_ids) "
+      end
     end
     if question_pairing_id.blank?
-      sql << "order by qc_parent.sort_order, qc_child.sort_order, qp.sort_order "
-      if limit.present? && limit > 0
+      if sort_col.present?
+        # have to add the sort cols/dirn here instead of in the list of args below 
+        # so that the '' are not included around the text items and so the order by works
+        sql << "order by #{sort_col} #{sort_dir} "
+      else
+        sql << "order by qc_parent.sort_order, qc_child.sort_order, qp.sort_order "
+      end
+=begin      
+      if limit.present?
         sql << "limit :limit "
+      end
+      if offset.present?
+        sql << "offset :offset "
+      end      
+=end      
+    end
+
+    paginate_by_sql([sql, :common => QuestionCategory::TYPES['common'], 
+                :custom => QuestionCategory::TYPES['custom'],
+                :locale => I18n.locale, :question_pairing_id => question_pairing_id,
+                :disability_ids => disability_ids, :search => "%#{search}%",
+                :sort_col => sort_col, :sort_dir => sort_dir],
+                :page => offset, :per_page => limit)
+
+    # find_by_sql([sql, :common => QuestionCategory::TYPES['common'], 
+    #             :custom => QuestionCategory::TYPES['custom'],
+    #             :locale => I18n.locale, :question_pairing_id => question_pairing_id,
+    #             :disability_ids => disability_ids, :search => search,
+    #             :sort_col => sort_col, :sort_dir => sort_dir,
+    #             :limit => limit, :offset => offset])
+
+  end
+
+  # get count of all records including ties to question category, question and disability tables
+  # - if no options are provided, gets all questions pairing disablity records
+  # options:
+  # - question_pairing_id - gets records that have this id
+  # - disability_ids - array of disability_ids to get records for
+  def self.with_names_count(options={})
+    question_pairing_id = options[:question_pairing_id].present? ? options[:question_pairing_id] : nil
+    disability_ids = options[:disability_ids].present? ? options[:disability_ids] : nil
+    sql = "SELECT count(*) as count "
+    sql << "from question_pairing_disabilities as qpd "
+    sql << "left join question_pairing_disability_translations as qpdt ON qpdt.question_pairing_disability_id = qpd.id and qpdt.locale = :locale "
+    sql << "inner join disabilities as d ON d.id = qpd.disability_id "
+    sql << "inner join disability_translations as dt ON dt.disability_id = d.id and dt.locale = :locale "
+    sql << "inner join question_pairings as qp ON qp.id = qpd.question_pairing_id "
+    sql << "inner join questions as q ON q.id = qp.question_id "
+    sql << "inner join question_translations as qt ON qt.question_id = q.id  and qt.locale = :locale "
+    sql << "inner join question_categories as qc_child ON qc_child.id = qp.question_category_id "
+    sql << "inner join question_category_translations as qct_child ON qct_child.question_category_id = qc_child.id  and qct_child.locale = :locale "
+    sql << "left join question_categories as qc_parent ON qc_parent.id = qc_child.ancestry "
+    sql << "left join question_category_translations as qct_parent ON qct_parent.question_category_id = qc_parent.id and qct_parent.locale = :locale "
+    if question_pairing_id.present?
+      sql << "where qpd.question_pairing_id = :question_pairing_id "
+      if disability_ids.present?
+        sql << "and qpd.disability_id in (:disability_ids) "
       end
     end
 
-    find_by_sql([sql, :common => QuestionCategory::TYPES['common'], 
+    x = find_by_sql([sql, :common => QuestionCategory::TYPES['common'], 
                 :custom => QuestionCategory::TYPES['custom'],
-                :locale => I18n.locale, :limit => limit, :question_pairing_id => question_pairing_id,
+                :locale => I18n.locale, :question_pairing_id => question_pairing_id,
                 :disability_ids => disability_ids])
 
+    return x.first['count']
   end
 
   # if quesiton category type - 1/2 -> certified

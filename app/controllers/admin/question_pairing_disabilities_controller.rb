@@ -7,11 +7,12 @@ class Admin::QuestionPairingDisabilitiesController < ApplicationController
   # GET /help_text
   # GET /help_text.json
   def index
-    @question_pairing_disabilities = QuestionPairingDisability.with_names(limit: 100)
+#    @question_pairing_disabilities = QuestionPairingDisability.with_names(limit: 100)
 
     respond_to do |format|
       format.html # index.html.erb
-      format.json { render json: @question_pairing_disabilities }
+      format.json { render json: QuestionPairingDisabilitiesDatatable.new(view_context) }
+#      format.json { render json: @question_pairing_disabilities }
     end
   end
 
