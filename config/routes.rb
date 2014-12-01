@@ -11,7 +11,7 @@ BootstrapStarter::Application.routes.draw do
 											 :controllers => {:omniauth_callbacks => "omniauth_callbacks"}
 
 		namespace :admin do
-      resources :question_pairing_disabilities, :path => "help_text"
+      resources :question_pairing_disabilities, :path => "help_text", :only => [:index, :show, :edit, :update]
       resources :training_videos
       resources :organizations
       resources :rights

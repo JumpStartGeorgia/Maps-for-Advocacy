@@ -27,22 +27,22 @@ class Admin::QuestionPairingDisabilitiesController < ApplicationController
     end
   end
 
-  # GET /help_text/new
-  # GET /help_text/new.json
-  def new
-    @question_pairing_disability = QuestionPairingDisability.new
+  # # GET /help_text/new
+  # # GET /help_text/new.json
+  # def new
+  #   @question_pairing_disability = QuestionPairingDisability.new
 
-    # create the translation object for however many locales there are
-    # so the form will properly create all of the nested form fields
-    I18n.available_locales.each do |locale|
-      @question_pairing_disability.question_pairing_disability_translations.build(:locale => locale.to_s)
-    end
+  #   # create the translation object for however many locales there are
+  #   # so the form will properly create all of the nested form fields
+  #   I18n.available_locales.each do |locale|
+  #     @question_pairing_disability.question_pairing_disability_translations.build(:locale => locale.to_s)
+  #   end
 
-    respond_to do |format|
-      format.html # new.html.erb
-      format.json { render json: @question_pairing_disability }
-    end
-  end
+  #   respond_to do |format|
+  #     format.html # new.html.erb
+  #     format.json { render json: @question_pairing_disability }
+  #   end
+  # end
 
   # GET /help_text/1/edit
   def edit
@@ -58,32 +58,36 @@ class Admin::QuestionPairingDisabilitiesController < ApplicationController
 
   end
 
-  # POST /help_text
-  # POST /help_text.json
-  def create
-    @question_pairing_disability = QuestionPairingDisability.new(params[:question_pairing_disability])
+  # # POST /help_text
+  # # POST /help_text.json
+  # def create
+  #   @question_pairing_disability = QuestionPairingDisability.new(params[:question_pairing_disability])
 
-    add_missing_translation_content(@question_pairing_disability.question_pairing_disability_translations)
+  #   add_missing_translation_content(@question_pairing_disability.question_pairing_disability_translations)
 
-    respond_to do |format|
-      if @question_pairing_disability.save
-        format.html { redirect_to admin_question_pairing_disability_path(@question_pairing_disability), notice: t('app.msgs.success_created', :obj => t('activerecord.models.question_pairing_disability')) }
-        format.json { render json: @question_pairing_disability, status: :created, location: @question_pairing_disability }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @question_pairing_disability.errors, status: :unprocessable_entity }
-      end
-    end
-  end
+  #   respond_to do |format|
+  #     if @question_pairing_disability.save
+  #       format.html { redirect_to admin_question_pairing_disability_path(@question_pairing_disability), notice: t('app.msgs.success_created', :obj => t('activerecord.models.question_pairing_disability')) }
+  #       format.json { render json: @question_pairing_disability, status: :created, location: @question_pairing_disability }
+  #     else
+  #       format.html { render action: "new" }
+  #       format.json { render json: @question_pairing_disability.errors, status: :unprocessable_entity }
+  #     end
+  #   end
+  # end
 
   # PUT /help_text/1
   # PUT /help_text/1.json
   def update
     @question_pairing_disability = QuestionPairingDisability.find(params[:id])
 
+logger.debug "!!!!!!!!!!!!!!! trans count = #{@question_pairing_disability.question_pairing_disability_translations.length}"
+
     @question_pairing_disability.assign_attributes(params[:question_pairing_disability])
 
     add_missing_translation_content(@question_pairing_disability.question_pairing_disability_translations)
+
+logger.debug "!!!!!!!!!!!!!!! trans count after missing content = #{@question_pairing_disability.question_pairing_disability_translations.length}"
 
     respond_to do |format|
       if @question_pairing_disability.save
@@ -96,15 +100,15 @@ class Admin::QuestionPairingDisabilitiesController < ApplicationController
     end
   end
 
-  # DELETE /help_text/1
-  # DELETE /help_text/1.json
-  def destroy
-    @question_pairing_disability = QuestionPairingDisability.find(params[:id])
-    @question_pairing_disability.destroy
+  # # DELETE /help_text/1
+  # # DELETE /help_text/1.json
+  # def destroy
+  #   @question_pairing_disability = QuestionPairingDisability.find(params[:id])
+  #   @question_pairing_disability.destroy
 
-    respond_to do |format|
-      format.html { redirect_to admin_question_pairing_disabilities_url }
-      format.json { head :ok }
-    end
-  end
+  #   respond_to do |format|
+  #     format.html { redirect_to admin_question_pairing_disabilities_url }
+  #     format.json { head :ok }
+  #   end
+  # end
 end
