@@ -39,7 +39,6 @@ $(document).ready(function(){
 
   /*************************************************/
   /* question pairing disability (help text) */
-
   help_text_dt = $('#help-text-datatable').dataTable({
     "sDom": "<'row-fluid'<'span6'l><'span6'f>r>t<'row-fluid'<'span6'i><'span6'p>>",    
     "sPaginationType": "bootstrap",

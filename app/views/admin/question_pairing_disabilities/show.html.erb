@@ -8,22 +8,43 @@
               admin_question_pairing_disabilities_path, :class => 'btn'  %>
   <%= link_to t('.edit', :default => t("helpers.links.edit")),
               edit_admin_question_pairing_disability_path(@question_pairing_disability), :class => 'btn' %>
-  <%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              admin_question_pairing_disability_path(@question_pairing_disability),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm")) },
-              :class => 'btn btn-danger' %>
   <%= link_to t('helpers.links.admin'), admin_path, :class => 'btn' %>
 </div>
 
-<p><strong><%= model_class.human_attribute_name(:question_pairing_id) %>:</strong>
-<%= @question_pairing_disability.question %></p>
-
-<p><strong><%= model_class.human_attribute_name(:disability_id) %>:</strong>
-<%= @question_pairing_disability.disability_name %></p>
-
-<p><strong><%= model_class.human_attribute_name(:has_content) %>:</strong>
-<%= @question_pairing_disability.has_content %></p>
+<ul id="qpd-names">
+  <li>
+    <strong>
+      <%= model_class.human_attribute_name(:certified_text) %>:
+    </strong>
+    <%= @question_pairing_disability.certified_text %>
+  </li>
+  <li>
+    <strong>
+      <%= model_class.human_attribute_name(:disability_name) %>:
+    </strong>
+    <%= @question_pairing_disability.disability_name %>
+  </li>
+  <li>
+    <strong>
+      <%= model_class.human_attribute_name(:question_category) %>:
+    </strong>
+    <%= @question_pairing_disability.question_category %>
+  </li>
+  <% if @question_pairing_disability.question_subcategory.present? %>
+    <li>
+      <strong>
+        <%= model_class.human_attribute_name(:question_subcategory) %>:
+      </strong>
+      <%= @question_pairing_disability.question_subcategory %>
+    </li>
+  <% end %>
+  <li>
+    <strong>
+      <%= model_class.human_attribute_name(:question) %>:
+    </strong>
+    <%= @question_pairing_disability.question %>
+  </li>
+</ul>
 
 <p><strong><%= model_class_trans.human_attribute_name(:content) %>:</strong></p>
 <div class="tinymce_format">

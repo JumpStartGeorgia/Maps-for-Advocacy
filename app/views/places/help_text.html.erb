@@ -4,7 +4,7 @@
 %>
 
 <% @help_text.each do |help| %>
-  <h2><%= help.disability_name %></h2>
+  <h2><%= t('.header_type', name: help.disability_name) %></h2>
 
   <%= simple_format_no_tags(help.content, {}, {sanitize: false}) %>  
   

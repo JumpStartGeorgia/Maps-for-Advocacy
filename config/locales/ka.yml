@@ -110,12 +110,12 @@ ka:
         survey_image_description: Description of Image (for visually impaired)
       question_pairing_disability:
         question_pairing_id: Question
-        disability_id: Evaluation Type
+        disability_id: Type of Disability
         certified_text: Assessment Type
         question_category: Question Category
         question_subcategory: Question Sub-category
         question: Question
-        disability_name: Evaluation Type
+        disability_name: Type of Disability
         has_content: Has Content?
       question_pairing_disability_translation:
         content: Content
@@ -324,6 +324,7 @@ ka:
       rights: უფლებები
       organizations: ორგანიზაციები
       training_videos: Video Guides
+      help_text: Help Text
     users:
       edit:
         title: ცვლილებების შეტანა მომხმარებლის გვერდზე
@@ -384,7 +385,7 @@ ka:
     question_pairing_disabilities:
       index:
         header_filter_certified: Assessment Type
-        header_filter_type: Evaluation Type
+        header_filter_type: Type of Disability
         header_filter_category: Category
         filter_all: All
         evaluations_certified: "Expert Evaluations"

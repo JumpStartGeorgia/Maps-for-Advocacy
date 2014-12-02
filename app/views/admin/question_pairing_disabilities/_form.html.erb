@@ -1,10 +1,46 @@
+<%- model_class = QuestionPairingDisability -%>
 <%= tinymce_assets %>
 <%= tinymce %>
 
 <%= semantic_form_for([:admin, @question_pairing_disability], :html => { :class => 'form-horizontal' }) do |f| %>
   <%= f.error_messages %>
 
-  show question and question_pairing_disability headings here
+
+    <ul id="qpd-names">
+      <li>
+        <strong>
+          <%= model_class.human_attribute_name(:certified_text) %>:
+        </strong>
+        <%= @qpd_with_names.certified_text %>
+      </li>
+      <li>
+        <strong>
+          <%= model_class.human_attribute_name(:disability_name) %>:
+        </strong>
+        <%= @qpd_with_names.disability_name %>
+      </li>
+      <li>
+        <strong>
+          <%= model_class.human_attribute_name(:question_category) %>:
+        </strong>
+        <%= @qpd_with_names.question_category %>
+      </li>
+      <% if @qpd_with_names.question_subcategory.present? %>
+        <li>
+          <strong>
+            <%= model_class.human_attribute_name(:question_subcategory) %>:
+          </strong>
+          <%= @qpd_with_names.question_subcategory %>
+        </li>
+      <% end %>
+      <li>
+        <strong>
+          <%= model_class.human_attribute_name(:question) %>:
+        </strong>
+        <%= @qpd_with_names.question %>
+      </li>
+    </ul>
+
 
   <% create_sorted_translation_objects(@question_pairing_disability.question_pairing_disability_translations).each do |trans| %>
     <%= f.fields_for :question_pairing_disability_translations, trans do |translation| %>

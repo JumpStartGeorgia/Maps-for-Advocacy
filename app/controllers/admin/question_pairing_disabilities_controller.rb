@@ -19,7 +19,7 @@ class Admin::QuestionPairingDisabilitiesController < ApplicationController
   # GET /help_text/1
   # GET /help_text/1.json
   def show
-    @question_pairing_disability = QuestionPairingDisability.find(params[:id])
+    @question_pairing_disability = QuestionPairingDisability.with_names({id: params[:id], paginate: false})
 
     respond_to do |format|
       format.html # show.html.erb
@@ -46,6 +46,9 @@ class Admin::QuestionPairingDisabilitiesController < ApplicationController
 
   # GET /help_text/1/edit
   def edit
+    @qpd_with_names = QuestionPairingDisability.with_names({id: params[:id], paginate: false})
+
+
     @question_pairing_disability = QuestionPairingDisability.find(params[:id])
 
     # create the translation object for whichever locales do not exist yet

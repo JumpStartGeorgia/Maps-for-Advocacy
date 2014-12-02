@@ -446,7 +446,6 @@ class QuestionCategory < ActiveRecord::Base
                   trans.validation_equation_units = val_eq_units_ka
                   trans.validation_equation_wout_units = val_eq_wout_units_ka
                   trans.reference = row[idx_reference_ka].present? ? row[idx_reference_ka].strip : row[idx_reference].present? ? row[idx_reference].strip : nil
-                  trans.help_text = row[idx_help_text_ka].present? ? row[idx_help_text_ka].strip : row[idx_help_text].present? ? row[idx_help_text].strip : nil
               elsif trans.locale = 'en'
                   trans.evidence1 = ev1
                   trans.evidence1_units = ev1_units
@@ -458,7 +457,6 @@ class QuestionCategory < ActiveRecord::Base
                   trans.validation_equation_units = val_eq_units 
                   trans.validation_equation_wout_units = val_eq_wout_units 
                   trans.reference = row[idx_reference].present? ? row[idx_reference].strip : nil
-                  trans.help_text = row[idx_help_text].present? ? row[idx_help_text].strip : nil
               end
             end
 
@@ -598,10 +596,8 @@ class QuestionCategory < ActiveRecord::Base
                     # if the locale is georgian and georgian text exists, use it
                     help = help_ka if locale == :ka && help_ka.present?
 
-                    # only create if help text is present
-                    if help.present?                                  
-                      qpd.question_pairing_disability_translations.build(:locale => locale, :content => help) 
-                    end
+                    # create translations even if help text is not present
+                    qpd.question_pairing_disability_translations.build(:locale => locale, :content => help) 
 
                     if !qpd.save
                       msg = "Row #{n}: Could not create question pairing disability record due to this error: #{qpd.errors.full_messages.join(', ')}"

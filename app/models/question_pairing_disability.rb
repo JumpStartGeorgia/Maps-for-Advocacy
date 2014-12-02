@@ -12,49 +12,11 @@ class QuestionPairingDisability < ActiveRecord::Base
   validates :question_pairing_id, :disability_id, :presence => true
 
 
-  before_validation :bf
-  after_validation :af
   before_save :set_has_content
-  after_save :testing
-  before_create :bc
-  after_create :ac
-
-  def bf
-    logger.debug "@@@@@@@@@ before validate qpd"
-  end
-  def af
-    logger.debug "@@@@@@@@@ after validate qpd"
-  end
-  def bc
-    logger.debug "@@@@@@@@@ before create qpd"
-  end
-  def ac
-    logger.debug "@@@@@@@@@ after create qpd"
-  end
-  def testing
-    logger.debug "@@@@@@@@@ after save qpd"
-  end
-
-  def save
-    logger.debug "@@@@@@@@@ save qpd"
-
-    logger.debug "@@@@@@@@@ - trans records = #{self.question_pairing_disability_translations.map{|x| x.locale}}"
-
-    super
-
-    logger.debug "@@@@@@@@@ - trans records after save = #{self.question_pairing_disability_translations.map{|x| x.locale}}"
-
-  end
 
   # if the translation object exists and has content, set to true
   def set_has_content
-logger.debug "$$$$$$$$$$4444 set has content"
-logger.debug "$$$$$$$$$$4444 trans records = #{self.question_pairing_disability_translations.length}"
-    
     self.has_content = self.question_pairing_disability_translations.index{|x| x.content.present?}.present?
-    
-logger.debug "$$$$$$$$$$4444 - has content = #{self.has_content}"
-
     return true
   end
 
@@ -72,6 +34,7 @@ logger.debug "$$$$$$$$$$4444 - has content = #{self.has_content}"
   # - type - what disability type
   # - category - what category records have to belong to
   def self.with_names(options={})
+    id = options[:id].present? ? options[:id] : nil
     question_pairing_id = options[:question_pairing_id].present? ? options[:question_pairing_id] : nil
     disability_ids = options[:disability_ids].present? ? options[:disability_ids] : nil
     search = options[:search].present? ? options[:search] : nil
@@ -82,6 +45,7 @@ logger.debug "$$$$$$$$$$4444 - has content = #{self.has_content}"
     is_certified = options[:is_certified].present? ? options[:is_certified].to_s.to_bool : nil
     type = options[:type].present? ? options[:type] : nil
     category = options[:category].present? ? options[:category] : nil
+    paginate = !options[:paginate].nil? ? options[:paginate].to_s.to_bool : true
 
     sql = "SELECT qpd.id, qpd.question_pairing_id, qpd.disability_id, qpd.has_content, "
     sql << "if (qc_child.category_type = :common or qc_child.category_type = :custom, 1, 0) as is_certified,"
@@ -99,7 +63,12 @@ logger.debug "$$$$$$$$$$4444 - has content = #{self.has_content}"
     sql << "inner join question_category_translations as qct_child ON qct_child.question_category_id = qc_child.id  and qct_child.locale = :locale "
     sql << "left join question_categories as qc_parent ON qc_parent.id = qc_child.ancestry "
     sql << "left join question_category_translations as qct_parent ON qct_parent.question_category_id = qc_parent.id and qct_parent.locale = :locale "
-    if question_pairing_id.present?
+    if id.present?
+      sql << "where qpd.id = :id "
+      if disability_ids.present?
+        sql << "and qpd.disability_id in (:disability_ids) "
+      end
+    elsif question_pairing_id.present?
       sql << "where qpd.question_pairing_id = :question_pairing_id "
       if disability_ids.present?
         sql << "and qpd.disability_id in (:disability_ids) "
@@ -147,31 +116,29 @@ logger.debug "$$$$$$$$$$4444 - has content = #{self.has_content}"
       else
         sql << "order by qc_parent.sort_order, qc_child.sort_order, qp.sort_order "
       end
-=begin      
-      if limit.present?
-        sql << "limit :limit "
-      end
-      if offset.present?
-        sql << "offset :offset "
-      end      
-=end      
     end
 
-    paginate_by_sql([sql, :common => QuestionCategory::TYPES['common'], 
-                :custom => QuestionCategory::TYPES['custom'],
-                :locale => I18n.locale, :question_pairing_id => question_pairing_id,
-                :disability_ids => disability_ids, :search => "%#{search}%",
-                :sort_col => sort_col, :sort_dir => sort_dir,
-                :type => type, :category => category],
-                :page => offset, :per_page => limit)
+    records = nil
+    if paginate
 
-    # find_by_sql([sql, :common => QuestionCategory::TYPES['common'], 
-    #             :custom => QuestionCategory::TYPES['custom'],
-    #             :locale => I18n.locale, :question_pairing_id => question_pairing_id,
-    #             :disability_ids => disability_ids, :search => search,
-    #             :sort_col => sort_col, :sort_dir => sort_dir,
-    #             :limit => limit, :offset => offset])
+      records = paginate_by_sql([sql, :common => QuestionCategory::TYPES['common'], 
+                  :custom => QuestionCategory::TYPES['custom'], :id => id,
+                  :locale => I18n.locale, :question_pairing_id => question_pairing_id,
+                  :disability_ids => disability_ids, :search => "%#{search}%",
+                  :sort_col => sort_col, :sort_dir => sort_dir,
+                  :type => type, :category => category],
+                  :page => offset, :per_page => limit)
+    else
 
+      records = find_by_sql([sql, :common => QuestionCategory::TYPES['common'], 
+                  :custom => QuestionCategory::TYPES['custom'], :id => id,
+                  :locale => I18n.locale, :question_pairing_id => question_pairing_id,
+                  :disability_ids => disability_ids, :search => search,
+                  :sort_col => sort_col, :sort_dir => sort_dir,
+                  :limit => limit, :offset => offset])
+    end
+
+    return id.present? ? records.first : records
   end
 
   # get count of all records including ties to question category, question and disability tables

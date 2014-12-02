@@ -52,6 +52,11 @@ class MoveQpDisRecords < ActiveRecord::Migration
               end
             end
 
+          else
+            # create blank translation records
+            I18n.available_locales.each do |locale|
+              qpd.question_pairing_disability_translations.build(:locale => locale) 
+            end
           end
 
           qpd.save

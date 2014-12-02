@@ -110,12 +110,12 @@ en:
         survey_image_description: Description of Image (for visually impaired)
       question_pairing_disability:
         question_pairing_id: Question
-        disability_id: Evaluation Type
+        disability_id: Type of Disability
         certified_text: Assessment Type
         question_category: Question Category
         question_subcategory: Question Sub-category
         question: Question
-        disability_name: Evaluation Type
+        disability_name: Type of Disability
         has_content: Has Content?
       question_pairing_disability_translation:
         content: Content
@@ -324,6 +324,7 @@ en:
       rights: Rights
       organizations: Organizations
       training_videos: Video Guides
+      help_text: Help Text
     users:
       edit:
         title: Editing User
@@ -384,7 +385,7 @@ en:
     question_pairing_disabilities:
       index:
         header_filter_certified: Assessment Type
-        header_filter_type: Evaluation Type
+        header_filter_type: Type of Disability
         header_filter_category: Category
         filter_all: All
         evaluations_certified: "Expert Evaluations"
@@ -578,7 +579,7 @@ en:
       skip_to_eval_type: Skip to the type of evaluation selection (jump)
       skip_to_submit_button: Skip to the submit button (jump)
     certified_eval_form_questions:
-      tip_help_text: Click here to view the help text for this question
+      tip_help_text: Click here to view additional information for this question
       tip_exists: Answering yes to this question will show more questions
       tip_evidence: Mesaurements are needed for this question
       tip_validation: Your measurement input will determine the answer for this question
@@ -589,7 +590,7 @@ en:
       skip_to_next_question: Skip to the next question (jump)
     public_eval_form:
       not_know: If you do not know the answer, please leave it blank.
-      tip_help_text: Click here to view the help text for this question
+      tip_help_text: Click here to view additional information for this question
     evaluation:
       title: "Evaluation of '%{name}'"
       header_certification: Which evaluation do you want to fill out?
@@ -617,6 +618,7 @@ en:
       return_place: "Return to '%{name}'"
     help_text:
       title: "Additonal Information About:"
+      header_type: "Type of Disability: %{name}"
   settings:
     index:
       title: "Settings for '%{name}'"
