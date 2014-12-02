@@ -431,21 +431,21 @@ ka:
     why_monitor:
       title: რატომ არის საჭირო ხელმისაწვდომობის მონიტორინგი საქართველოშო?
       skip_movie: გამოვტოვოთ ფილმი (გადახტომა)
-    video_guides:
-      title:  ვიდეო გზამკვლევი
-      watched: You have watched this video
-      watch_video: Watch the Video
-      no_videos: There are no videos on file at this time.
-      eval_place: Continue with Evaluation
+    video_ugides:
+      title: ვიდეო გზამკვლევები
+      watched: თქვენ ნანახი გაქვთ ეს ვიდეო
+      watch_video: ვიდეოს ნახვა
+      no_videos: ამ დროისთვის ვიდეო არ არის.
+      eval_place: გაგრძელება და შეფასება
     video_guide:
-      title: "Video: '%{name}'"
-      pre_survey: Before watching the video, please look at the image and answer the following question.
-      post_survey: Now that you have watched the video, please look at the image and answer the following question.
-      correct: Correct!
-      wrong: Sorry, your answer is incorrect.
-      continue: Continue
-      watch_more: Watch More Videos
-      eval_place: Continue with Evaluation
+      title: "ვიდეო: '%{name}'"
+      pre_survey: ვიდეოს ნახვამდე, გთხოვთ, შეხედოთ სურათებს და უპასუხოთ კითხვებს.
+      post_survey: ახლა, როცა ვიდეოს უკვე უყურეთ, გთხოვთ, შეხედოთ სურათებს და უპასუხოთ კითხვებს.
+      correct: სწორია!
+      wrong: თქვენი პასუხი არასწორია.
+      continue: გაგრძელება
+      watch_more: სხვა ვიდეოების ნახვა
+      eval_place: გაგრძელება და შეფასება
   places:
     show:
       description:
