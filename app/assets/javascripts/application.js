@@ -31,6 +31,7 @@ $(document).ready(function(){
 		
   $('.tooltipster').tooltipster();		
   $('.tooltipster_right').tooltipster({position:'right'});		
+  
 });
 
 var default_leaflet_icon_options = {
