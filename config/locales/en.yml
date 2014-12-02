@@ -703,3 +703,7 @@ en:
         link_title: Change my password
         p2: "If you didn't request this, please ignore this email."
         p3: "Your password won't change until you access the link above and create a new one."                
+  imageuploader:
+    missing: "An error occurred while processing your image. Please try again."
+    invalid_type: "Invalid file type. Only .jpg or .png is allowed."
+    size_limit: "Image file size is limited to 5MB"    

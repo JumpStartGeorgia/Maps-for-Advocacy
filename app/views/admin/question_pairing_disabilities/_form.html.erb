@@ -1,6 +1,6 @@
 <%- model_class = QuestionPairingDisability -%>
 <%= tinymce_assets %>
-<%= tinymce %>
+<%= tinymce :alternate, uploadimage_form_url: admin_image_uploader_path(id: @question_pairing_disability.id), uploadimage_default_img_class: "image" %>
 
 <%= semantic_form_for([:admin, @question_pairing_disability], :html => { :class => 'form-horizontal' }) do |f| %>
   <%= f.error_messages %>

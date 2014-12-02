@@ -37,6 +37,8 @@ gem "georuby" # manage geo spatial data with ruby
 gem "exifr" # get image meta data
 gem "unidecoder", "~> 1.1.2" #convert utf8 to ascii for permalinks
 gem 'geokit-rails' # to be able to do activerecord queries to get places within a distance
+gem "subexec", "~> 0.2.3" # run command line commands
+
 
 # Gems used only for assets and not required
 # in production environments by default.
