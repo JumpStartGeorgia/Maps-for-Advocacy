@@ -205,4 +205,170 @@ class QuestionPairingDisability < ActiveRecord::Base
   def disability_name
     self[:disability_name]
   end
+
+
+
+  #######################################
+  ## load all question categories, quetsions and pairings from the main spreadsheet
+  #######################################
+  def self.update_csv_upload()
+    file_path = "#{Rails.root}/db/spreadsheets/help_text_images.csv"
+    images_path = "#{Rails.root}/db/images/help_text"
+    process_csv_upload(File.open(file_path, 'r'), images_path)
+  end  
+  
+  #######################################
+  ## load help text/images from csv file
+  #######################################
+  def self.process_csv_upload(file, img_folder_path)
+    require 'image_processing'
+
+    start = Time.now
+    infile = file.read
+    n, msg = 0, ""
+    idx_unique_id = 0
+    idx_types = 1
+    idx_img_name = 2
+    idx_text_en = 3
+    idx_text_ka = 4
+
+    original_locale = I18n.locale
+    I18n.locale = :en
+
+    QuestionPairingDisability.transaction do
+    
+      CSV.parse(infile) do |row|
+        question = nil
+        startRow = Time.now
+        n += 1
+        puts "@@@@@@@@@@@@@@@@@@ processing row #{n}"
+
+        if n > 1
+          unique_id = row[idx_unique_id].strip
+          types = row[idx_types].strip.split(',')
+
+
+          if !(unique_id.present? && types.present?)
+            msg = "Row #{n}: Could not find Unique Question ID or Disability Type"
+            raise ActiveRecord::Rollback
+            return msg
+          end
+
+          puts "---- unique id = #{unique_id}"
+
+          # for each type, find matching qpd record
+          types.each do |type|
+            puts "---- disability code = #{type}"
+            qpd = QuestionPairingDisability.includes(:question_pairing_disability_translations, :question_pairing, :disability)
+                    .where(['question_pairings.unique_id = ? and disabilities.code = ?', unique_id, type]).first
+
+            if qpd.blank?
+              msg = "Row #{n}: Could not find the Question Pairing Disability record that matches this Unique Question ID and Disability Type"
+              raise ActiveRecord::Rollback
+              return msg
+            end
+
+            puts "---- qpd id = #{qpd.id}"
+
+            # get reference to trans objects
+            trans_en = qpd.question_pairing_disability_translations.select{|x| x.locale == 'en'}.first
+            trans_ka = qpd.question_pairing_disability_translations.select{|x| x.locale == 'ka'}.first
+            trans_en.content = '' if trans_en.content.nil?
+            trans_ka.content = '' if trans_ka.content.nil?
+
+            # if text is present, add it
+            if (row[idx_text_en].present? && row[idx_text_en].strip.present?) || 
+               (row[idx_text_ka].present? && row[idx_text_ka].strip.present?)
+
+              puts "---- found text, adding it"
+
+              if (row[idx_text_en].present? && row[idx_text_en].strip.present?) &&
+               (row[idx_text_ka].present? && row[idx_text_ka].strip.present?)
+                trans_en.content << "<p>#{row[idx_text_en].strip}</p>"
+                trans_ka.content << "<p>#{row[idx_text_ka].strip}</p>"
+
+              elsif (row[idx_text_en].present? && row[idx_text_en].strip.present?) &&
+               (row[idx_text_ka].blank? || row[idx_text_ka].strip.blank?)
+                trans_en.content << "<p>#{row[idx_text_en].strip}</p>"
+                trans_ka.content << "<p>#{row[idx_text_en].strip}</p>"
+
+              elsif (row[idx_text_ka].present? && row[idx_text_ka].strip.present?) &&
+               (row[idx_text_en].blank? || row[idx_text_en].strip.blank?)
+                trans_en.content << "<p>#{row[idx_text_ka].strip}</p>"
+                trans_ka.content << "<p>#{row[idx_text_ka].strip}</p>"
+              end
+
+              # if text has a url, convert it to a link
+              URI::extract(trans_en.content).each do |url|
+                if url.start_with?('http://', 'https://')
+                  trans_en.content.gsub(url, "<a href='#{url}' target='_blank'>#{url}</a> ")
+                end
+              end
+              URI::extract(trans_ka.content).each do |url|
+                if url.start_with?('http://', 'https://')
+                  trans_ka.content.gsub(url, "<a href='#{url}' target='_blank'>#{url}</a> ")
+                end
+              end
+            end
+
+            # if image is present, process it and add to text
+            if row[idx_img_name].present?
+              puts "---- found img, adding it"
+
+              # see if image exists
+              # image name does not include extension, so have to try both png and jpg
+              img_name = row[idx_img_name].strip.dup
+              path = "#{img_folder_path}/#{unique_id}"
+
+              if File.exists?("#{path}/#{img_name}.png")
+                img_name << ".png"
+              elsif File.exists?("#{path}/#{img_name}.jpg")
+                img_name << ".jpg"
+              else
+                msg = "Row #{n}: Could not find the image #{img_name} in #{path}"
+                raise ActiveRecord::Rollback
+                return msg
+              end
+
+              # save the image
+              url, img_msg = ImageProcessing.save(File.open("#{path}/#{img_name}", 'r'), img_name, qpd.id)
+
+              if url.blank?
+                msg = "Row #{n}: Could not process the image #{img_name} in #{path}: #{img_msg}"
+                raise ActiveRecord::Rollback
+                return msg
+              end
+
+              # convert img name into a heading
+              # - remove all but alpha from name
+              help_text = "<p><strong>#{row[idx_img_name].gsub(/[^[:alpha:]\s]/, '').strip}</strong></p>"
+              help_text << "<p><img src='#{url}' alt='#{row[idx_img_name].strip}' class='image' /></p>"
+
+              trans_en.content << help_text
+              trans_ka.content << help_text
+
+            end
+
+            if !qpd.save
+              msg = "Row #{n}: Error while adding the help text: #{qpd.errors.full_messages.join(', ')}"
+              raise ActiveRecord::Rollback
+              return msg
+            end
+          end
+
+          puts "******** time to process row: #{Time.now-startRow} seconds"
+          puts "************************ total time so far : #{Time.now-start} seconds"
+        end
+      end  
+  
+    end
+
+    # reset the locale
+    I18n.locale = original_locale
+
+    puts "****************** time to build help text from csv: #{Time.now-start} seconds for #{n} rows"
+
+    return msg
+  end
+
 end

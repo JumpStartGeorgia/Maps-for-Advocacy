@@ -84,13 +84,9 @@ class Admin::QuestionPairingDisabilitiesController < ApplicationController
   def update
     @question_pairing_disability = QuestionPairingDisability.find(params[:id])
 
-logger.debug "!!!!!!!!!!!!!!! trans count = #{@question_pairing_disability.question_pairing_disability_translations.length}"
-
     @question_pairing_disability.assign_attributes(params[:question_pairing_disability])
 
     add_missing_translation_content(@question_pairing_disability.question_pairing_disability_translations)
-
-logger.debug "!!!!!!!!!!!!!!! trans count after missing content = #{@question_pairing_disability.question_pairing_disability_translations.length}"
 
     respond_to do |format|
       if @question_pairing_disability.save
