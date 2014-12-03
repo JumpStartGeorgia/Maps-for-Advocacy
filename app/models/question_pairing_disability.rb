@@ -276,41 +276,6 @@ class QuestionPairingDisability < ActiveRecord::Base
             trans_en.content = '' if trans_en.content.nil?
             trans_ka.content = '' if trans_ka.content.nil?
 
-            # if text is present, add it
-            if (row[idx_text_en].present? && row[idx_text_en].strip.present?) || 
-               (row[idx_text_ka].present? && row[idx_text_ka].strip.present?)
-
-              puts "---- found text, adding it"
-
-              if (row[idx_text_en].present? && row[idx_text_en].strip.present?) &&
-               (row[idx_text_ka].present? && row[idx_text_ka].strip.present?)
-                trans_en.content << "<p>#{row[idx_text_en].strip}</p>"
-                trans_ka.content << "<p>#{row[idx_text_ka].strip}</p>"
-
-              elsif (row[idx_text_en].present? && row[idx_text_en].strip.present?) &&
-               (row[idx_text_ka].blank? || row[idx_text_ka].strip.blank?)
-                trans_en.content << "<p>#{row[idx_text_en].strip}</p>"
-                trans_ka.content << "<p>#{row[idx_text_en].strip}</p>"
-
-              elsif (row[idx_text_ka].present? && row[idx_text_ka].strip.present?) &&
-               (row[idx_text_en].blank? || row[idx_text_en].strip.blank?)
-                trans_en.content << "<p>#{row[idx_text_ka].strip}</p>"
-                trans_ka.content << "<p>#{row[idx_text_ka].strip}</p>"
-              end
-
-              # if text has a url, convert it to a link
-              URI::extract(trans_en.content).each do |url|
-                if url.start_with?('http://', 'https://')
-                  trans_en.content.gsub(url, "<a href='#{url}' target='_blank'>#{url}</a> ")
-                end
-              end
-              URI::extract(trans_ka.content).each do |url|
-                if url.start_with?('http://', 'https://')
-                  trans_ka.content.gsub(url, "<a href='#{url}' target='_blank'>#{url}</a> ")
-                end
-              end
-            end
-
             # if image is present, process it and add to text
             if row[idx_img_name].present?
               puts "---- found img, adding it"
@@ -347,6 +312,41 @@ class QuestionPairingDisability < ActiveRecord::Base
               trans_en.content << help_text
               trans_ka.content << help_text
 
+            end
+
+            # if text is present, add it
+            if (row[idx_text_en].present? && row[idx_text_en].strip.present?) || 
+               (row[idx_text_ka].present? && row[idx_text_ka].strip.present?)
+
+              puts "---- found text, adding it"
+
+              if (row[idx_text_en].present? && row[idx_text_en].strip.present?) &&
+               (row[idx_text_ka].present? && row[idx_text_ka].strip.present?)
+                trans_en.content << "<p>#{row[idx_text_en].strip}</p>"
+                trans_ka.content << "<p>#{row[idx_text_ka].strip}</p>"
+
+              elsif (row[idx_text_en].present? && row[idx_text_en].strip.present?) &&
+               (row[idx_text_ka].blank? || row[idx_text_ka].strip.blank?)
+                trans_en.content << "<p>#{row[idx_text_en].strip}</p>"
+                trans_ka.content << "<p>#{row[idx_text_en].strip}</p>"
+
+              elsif (row[idx_text_ka].present? && row[idx_text_ka].strip.present?) &&
+               (row[idx_text_en].blank? || row[idx_text_en].strip.blank?)
+                trans_en.content << "<p>#{row[idx_text_ka].strip}</p>"
+                trans_ka.content << "<p>#{row[idx_text_ka].strip}</p>"
+              end
+
+              # if text has a url, convert it to a link
+              URI::extract(trans_en.content).each do |url|
+                if url.start_with?('http://', 'https://')
+                  trans_en.content.gsub(url, "<a href='#{url}' target='_blank'>#{url}</a> ")
+                end
+              end
+              URI::extract(trans_ka.content).each do |url|
+                if url.start_with?('http://', 'https://')
+                  trans_ka.content.gsub(url, "<a href='#{url}' target='_blank'>#{url}</a> ")
+                end
+              end
             end
 
             if !qpd.save
