@@ -9,17 +9,17 @@ ka:
       venue_category: ადგილმდებარეობის კატეგორია
       place: ადგილი
       evaluation: შეფასება
-      disability: შეზღუდული შესაძლებლობება
+      disability: შეზღუდული შესაძლებლობა
       district: რაიონი
       page: ტექსტი გვერდებისთვის
       convention_category: კონვენციის კატეგორია
       right: უფლებები
       organization: ორგანიზაცია
-      training_video: Video Guide
+      training_video: ვიდეო გზამკვლევი
       question_pairing_disability: Help Text
     attributes:
       user:
-        email: ელ.ფოსტა
+        email: ელ. ფოსტა
         password: პაროლი
         password_confirmation: გაიმეორეთ პაროლი
         role: როლი
@@ -58,16 +58,16 @@ ka:
         venue_id: კატეგორია
         lat: განედი
         lon: გრძედი
-        url: Website
-        name: Place Name
+        url: ვებსაიტი
+        name: ადგილის დასახელება
       place_translation:
         name: სახელი
         address: მისამართი
       disability:
-        code: ერთ-ასოიანი კოდი
-        active_public: აქტიურია საზოგადოებრივი შეფასებისთვის
+        code: ერთასოიანი კოდი
+        active_public: აქტიურია საჯარო შეფასებებისთვის
         active_certified: აქტიურია ექსპერტის შეფასებებისთვის
-        sort_order: დახარისხების ბრძანება
+        sort_order: თანმიმდევრობის დახარისხება
       disability_translation:
         name: შეზღუდული შესაძლებლობები
       district:
@@ -76,9 +76,9 @@ ka:
       district_translation:
         name: რაიონი
       page:
-        name: შინაარსის უნიკალური სახელი (არ შეცვალოთ!)
+        name: კონტენტის უნიკალური სახელი (არ შეცვალოთ!)
       page_translation:
-        title: სათაური, რომელიც გამოჩნდება შინაარსის ზემოთ
+        title: კონტენტის ზემოთ გამოსაჩენი სათაური
         content: შინაარსი
       convention_category:
         right_to_accessibility: ხელმისაწვდომობის უფლების ნაწილი
@@ -93,21 +93,21 @@ ka:
         avatar: ლოგო
       organization_translation:
         name: სახელი
-        description: აღწერილობა
+        description: აღწერა
       organization_user:
         user_id: მომხმარებელი
         organization_id: ორგანიზაცია
       training_video:
-        survey_correct_answer: Correct Answer to Question
-        survey_image: Survey Image
+        survey_correct_answer: სწორი პასუხი კითხვაზე
+        survey_image: შეკითხვის გამოსახულება
       training_video_translation:
-        video_url: URL to Video
-        video_embed: Video
-        title: Video Title
-        description: Video Description
-        survey_question: Survey Question
-        survey_wrong_answer_description: Text to Show For Wrong Answer
-        survey_image_description: Description of Image (for visually impaired)
+        video_url: ვიდეოს ბმული
+        video_embed: ვიდეო
+        title: ვიდეოს სახელი 
+        description: ვიდეოს აღწერა
+        survey_question: შეკითხვა
+        survey_wrong_answer_description: ტექსტი არასწორი პასუხისთვის 
+        survey_image_description: გამოსახულების აღწერა (მხედველობა დაქვეითებულთათვის)
       question_pairing_disability:
         question_pairing_id: Question
         disability_id: Type of Disability
@@ -150,14 +150,14 @@ ka:
       sign_up2: რეგისტრაცია
       sign_up_question: "არ გაქვთ ანგარიში?"
       sign_up: დარეგისტრირდით
-      sign_up_title: შემოგვიერთდი “%{app_name}”
+      sign_up_title: შემოგვიერთდი %{app_name}-ზე
       sign_out: გასვლა
       sign_in_provider: "შესვლა %{provider}-ით"
       sign_up_provider: "დარეგისტრირდით  %{provider}-ით"
       sign_in_local_or_provider: ან შეიყვანეთ თქვენი ელ. ფოსტა და პაროლი
       reset_or_sign_in: შედით facebook-ით ან შეცვალეთ პაროლი
-      evaluate_place: შეაფასე ადგილი
-      find_places: იპოვე ხელმისაწვდომი ადგილი
+      evaluate_place: შეაფასეთ ადგილი
+      find_places: იპოვეთ ხელმისაწვდომი ადგილი
       statistics: სტატისტიკის ნახვა
       methodology: მეთოდოლოგია
       why_monitor: რატომ მონიტორინგი?
@@ -165,7 +165,7 @@ ka:
       georgian_legislation: საქართველოს კანონმდებლობა
       partners: პროექტის პარტნიორები
       what_is_accessibility: რა არის ხელმისაწვდომობა? #რას ნიშნავს ხელმისაწვდომი გარემო?
-      training_videos: ვიდეო გზამკვლევი
+      training_videos: ვიდეო გზამკვლევები
       stats: სტატისტიკა
       about: Ability.ge-ის შესახებ
       print: შეფასების ამობეჭდვა
@@ -176,7 +176,7 @@ ka:
       legal: საკანონმდებლო სტანდარტები
     titles:
       new: "ახალი %{model}"
-      edit: "შეცვლა %{model}"
+      edit: "%{model}-ის შეცვლა"
   app:
     language:
       en: English
@@ -201,7 +201,7 @@ ka:
     common:
       app_name: Ability.ge
       slogan: დარეგისტრირდი. შეაფასე. ჩაერთე.
-      slogan_old: შეზღუდული შესაძლებლობის მქონე პირთა უფლებების კონვენციისმონიტორინგი საქართველოში
+      slogan_old: შეზღუდული შესაძლებლობის მქონე პირთა უფლებების კონვენციის მონიტორინგი საქართველოში
       added_on: "დამატებულია: %{date}" 
       venue_has_questions: მორგებული კითხვები
       answers:
@@ -213,10 +213,10 @@ ka:
         no_answer: არ არის პასუხი
         'yes': 'დიახ'
         'no': 'არა'
-      yes_vote: "Accessible Area"
-      no_vote: "Not Accessible Area"
-      yes_votes: "%{votes} Accessible Areas"
-      no_votes: "%{votes} Not Accessible Areas"
+      yes_vote: "ხელმისაწვდომი გარემო"
+      no_vote: "არახელმისაწვდომი გარემო"
+      yes_votes: "%{votes} ხელმისაწვდომი გარემო"
+      no_votes: "%{votes} არახელმისაწვდომი გარემო"
       eval_question_image:
         button: ფოტოს ატვირთვა
         button_uploaded_1: ატვირთულია ერთი ფოტო
@@ -231,54 +231,54 @@ ka:
         not_relevant: არ არის შესაბამისი
       add_photos: სურათის დამატება 
       add_photos_title: "'%{place}'-ის სურათის დამატება"
-      add_evaluation: Evaluate This Place
+      add_evaluation: ამ ადგილის შეფასება
       add_evaluation_title: "'%{place}'-ის შეფასების დამატება"
-      add_evaluation_title2: "დაამატეთ '%{place}'-ის %{disability} შეფასება"
+      add_evaluation_title2: "დაამატეთ '%{place}'-ის შეფასება %{disability}-ისთვის"
       edit_place: ადგილის შესახებ ინფორმაციის ჩასწორება
       edit_place_title: "'%{place}'-ის შესახებ ინფორმაციის შესწორება"
       delete_place: Delete Place
-      delete_place_title: "Delete '%{place}' and all of it's evaluations"
-      delete_evaluation: Delete Evaluation
-      delete_evaluation_title: "Delete this evaluation from '%{place}'"
+      delete_place_title: "'%{place}'-ისა და მისი შეფასებების წაშლა"
+      delete_evaluation: შეფასების წაშლა
+      delete_evaluation_title: "'%{place}'-იდან ამ შეფასების წაშლა"
       view_place: ვრცლად
       view_place_title: "'%{place}'-ის დეტალების ნახვა"
       certified: ექსპერტი
-      certified_explanation: 'ექსპერტის შეფასებას ავსებს ადამიანი, რომელიც დატრენინგებულია შეზღუდული შესაძლებლობის პირთა უფლებების მონიტორინგში.'
-      public: საზოგადოებრივი
-      public_explanation: საზოგადოებრივი შეფასება ასახავს ადგილის შეფასებას არა პროფესიონალთა მიერ. მისი შევსება შეუძლია ნებისმიერ ადამიანს.
+      certified_explanation: 'ექსპერტის შეფასებას ავსებს ადამიანი, რომელმაც გაიარა ტრენინგი შეზღუდული შესაძლებლობის პირთა უფლებების მონიტორინგში.'
+      public: საჯარო
+      public_explanation: საჯარო შეფასება არის ადგილის შეფასება არაპროფესიონალთა მიერ. მისი შევსება შეუძლია ნებისმიერ ადამიანს.
       certified_overall: '%{num} ექსპერტის შეფასება'
-      public_overall: '%{num} საზოგადოებრივი შეფასება'
+      public_overall: '%{num} საჯარო შეფასება'
       num_places_overall: '%{num} შეფასებული ადგილი'
     msgs:
-      does_not_exist: თქვენ ცდილობთ იხილოთ გვერდი, რომელიც არ არსებობს.
-      not_authorized: თქვენ არ გაქვთ უფლება იხილოთ ეს გვერდი.
+      does_not_exist: თქვენ ცდილობთ გვერდის ნახვას, რომელიც არ არსებობს.
+      not_authorized: თქვენ არ გაქვთ ამ გვერდის ნახვის უფლება.
       success_created: "%{obj} შექმნილია."
       success_updated: "%{obj} განახლებულია."
       updated_sort_order: თანმიმდევრობის დახარისხება განახლებულია
-      added_existing_question: არსებული კითხვა დაემატა  კითხვის ამ კატეგორიას
-      added_new_question: ახალი კითხვა დაემატა კითხვის ამ კატეგორიას
+      added_existing_question: არსებული კითხვა დაემატა  კითხვათა ამ კატეგორიას
+      added_new_question: ახალი კითხვა დაემატა კითხვათა ამ კატეგორიას
       added_new_venue: ახალი ადგილმდებარეობა დაემატა ადგილმდებარეობის ამ კატეგორიას
       missing_required: გთხოვთ მოგვაწოდეთ ყველა საჭირო ინფორმაცია
-      cause_not_accessible: "გაცემული პასუხი საერთო შეფასების შედეგს 'მიუწვდომელს' ხდის."
-      success_remove_user: "მომხმარებელი '%{nickname}' ამოშლილია '%{org}დან'"
-      success_add_user: "მომხმარებელი  '%{nickname}' დამატებულია '%{org}ში'"
+      cause_not_accessible: "გაცემული პასუხი საერთო შეფასების შედეგს 'არახელმისაწვდომს' ხდის."
+      success_remove_user: "მომხმარებელი '%{nickname}' ამოშლილია '%{org}-დან'"
+      success_add_user: "მომხმარებელი  '%{nickname}' დამატებულია '%{org}-ში'"
       evidence_validation:  
         no_evidence_entered: გთხოვთ შეიყვანოთ პარამეტრები
-        no_evidence_entered_angle: 'შეიყვანეთ ერთ ერთის პარამეტრები: სიმაღლე და სიგანე; დახრილობა'
+        no_evidence_entered_angle: 'შეიყვანეთ ერთერთის პარამეტრები: სიმაღლე და სიგანე; ან დახრილობა'
         no_units_entered: შეიცავდეს პარამეტრებიან ერთეულებს
         units_not_match: "პარამეტრები უნდა იყოს '[unit]'"
         units_not_match_angle: სიმაღლისა და სიღრმის პარამეტრები ერთნაირი უნდა იყოს
         validation_passed: აკმაყოფილებს მოთხოვნებს!
         validation_failed: არ აკმაყოფილებს მოთხოვნებს!
-      print_landscape: "'ჰორიზონტალური' ბეჭდვის ფუნქციის შერჩევისას შინაარსი დაფორმატდება ჰორიზონტალურად. ჰორიზონტალურად ბეჭდვისთვის საჭიროა შესაბამისი ღილაკის მონიშვნა ბეჭდვის ფუნქციების განყოფილებაში."
+      print_landscape: "'ჰორიზონტალური' ბეჭდვის ფუნქციის შერჩევისას კონტენტი დაფორმატდება ჰორიზონტალურად. ჰორიზონტალურად ბეჭდვისთვის საჭიროა შესაბამისი ღილაკის მონიშვნა ბეჭდვის ფუნქციების განყოფილებაში."
   layouts:
     application:
       menu: მენიუ
       settings: პარამეტრები
-      admin: ადმინისტრატო
+      admin: ადმინისტრატორი
       manage_users: ორგანიზაციის წევრთა ანგარიშების მართვა
       sign_out: გასვლა
-      js_link_title: ჯამპსტარტ ჯორჯიას - ჩვენ გაწვდით ინფორმაციას უკეთ!
+      js_link_title: ჯამპსტარტ ჯორჯია - ჩვენ გაწვდით ინფორმაციას უკეთ!
       js_link_text: აგებულია
       jump:
         main: ძირითადი შემადგენლობა (გადახტომა)
@@ -291,21 +291,21 @@ ka:
         search_results: შედეგების ძიება (გადახტომა)
     unsupported_browser:
       title: არასათანადო ბრაუზერი
-      p1: სამწუხაროდ თქვენი ინტერნეტ ბრაუზერის მოხმარების ვადა გასულია და ვერ მოხდება ვებ-გვერდთან სრულად დაკავშირება.
-      p2: არსებობს რამდენიმე უფასო ბრაუზერი რომელის გადმოწერის შემდეგ შეძლებთ ვებ-გვერდით სარგებლობას.
+      p1: სამწუხაროდ თქვენი ინტერნეტ ბრაუზერის მოხმარების ვადა გასულია და ვერ მოხდება ვებგვერდთან სრულად დაკავშირება.
+      p2: არსებობს რამდენიმე უფასო ბრაუზერი, რომლის გადმოწერის შემდეგ შეძლებთ ვებგვერდით სარგებლობას.
       chrome: Chrome
       firefox: Firefox
       ie: Internet Explorer (მხოლოდ Windows-ზე)
       opera: Opera
       Safari: Safari
-      admin: ადმინისტრატო
+      admin: ადმინისტრატორი
       sign_out: გასვლა
-      js_link_title: ჯამპსტარტ ჯორჯიას - ჩვენ გაწვდით ინფორმაციას უკეთ!
+      js_link_title: ჯამპსტარტ ჯორჯია - ჩვენ გაწვდით ინფორმაციას უკეთ!
       js_link_text: აგებულია
       jump:
         main: ძირითადი შემადგენლობა (გადახტომა)
         menu: ძირითადი ნავიგაცია (გადახტომა)
-        admin_menu: მომხმარების მენიუა (გადახტომა)
+        admin_menu: მომხმარების მენიუ (გადახტომა)
         language: ენის გადამრთავი (გადახტომა)
         footer: საკონტაქტო ინფორმაცია (გადახტომა)
   admin:
@@ -323,7 +323,7 @@ ka:
       convention_categories: კონვენციის კატეგორიები
       rights: უფლებები
       organizations: ორგანიზაციები
-      training_videos: Video Guides
+      training_videos: ვიდეო გზამკვლევები
       help_text: Help Text
     users:
       edit:
@@ -340,11 +340,11 @@ ka:
         delete_question_category: კითხვის კატეგორიის წაშლა
         edit_questions: კითხვების მართვა
       questions: 
-        title: "'%{category}' კითხვები"
+        title: "კითხვები კატეგორიიდან '%{category}'"
         submit_sort_order: თანმიმდევრობის დახარისხების განახლება
         add_existing_question: არსებული კითხვის დამატება
         add_new_question: ახალი კითხვის დამატება
-        no_existing_questions: ბოდიშს გიხდით, არ მოიძებნება კითხვები, რომლებიც უკვე არ არის დაკავშირებული კითხვის ამ კატეგორიასთან
+        no_existing_questions: ბოდიშს გიხდით, არ მოიძებნება კითხვები, რომლებიც უკვე არ არის დაკავშირებული კითხვათა ამ კატეგორიასთან
         submit_existing_question: არსებული კითხვის დამატება
         submit_new_question: ახალი კითხვის დამატება              
     venue_categories:
@@ -357,7 +357,7 @@ ka:
         submit_sort_order: თანმიმდევრობის დახარისხების განახლება
         add_existing_venue: არსებული ადგილმდებარეობის დამატება
         add_new_venue: ახალი ადგილმდებარეობის დამატება
-        no_existing_venue: ბოდიშს გიხდით, არ მოიძებნა ადგილმდებარეობა, რომელიც უკვე არ არის დაკავსირებული ადგილმდებარეობის ამ კატეგორიასთან
+        no_existing_venue: ბოდიშს გიხდით, არ მოიძებნა ადგილმდებარეობა, რომელიც უკვე არ არის დაკავშირებული ადგილმდებარეობის ამ კატეგორიასთან
         submit_existing_venue: არსებული ადგილმდებარეობის დამატება
         submit_new_venue: ახალი ადგილმდებარეობის დამატება
     places:
@@ -366,22 +366,22 @@ ka:
         header_location: "სად მდებარეობს '%{name}'?"
         map_instructions: დააკლიკეთ რუკაზე, რათა მონიშნოთ სად მდებარეობს '%{name}'.
         skip_map: რუკის გამოტოვება და მისამართის ფორმაში გადასვლა (გადახტომა)
-        address_instructions: შეგიძლიათ მოიძიოთ მისამართი თუ არ გსურთ რუკის გამოყენება
+        address_instructions: შეგიძლიათ მოიძიოთ მისამართი, თუ არ გსურთ რუკის გამოყენება.
         address_instructions2: გთხოვთ შეიყვანეთ მისამართი და ქალაქი, სადაც მდებარეობს '%{name}'.
         submit_address_search: მისამართის მოძებნა
-        address_search_success: მისამართის ძიებამ იპოვა შემდეგი წყვილები. გთხოვთ დაადასტუროთ, რომ შედეგები სწორია.
-        address_search_multiple_success: მისამართის ძიებამ იპოვა შემდეგი წყვილები. გთხოვთ შეარჩიოთ სწორი შედეგი.
+        address_search_success: მისამართის ძიების შედეგად ნაპოვნია შემდეგი შედეგი. გთხოვთ, დაადასტუროთ სისწორე. 
+        address_search_multiple_success: მისამართის ძიების შედეგად ნაპოვნია შემდეგი შედეგები. გთხოვთ,  აირჩიოთ სწორი ვარიანტი. 
         address_search_fail: არ მოიძებნა. კიდევ სცადეთ.
-        header_place: "'%{name}' ინფორმაცია"
+        header_place: "ინფორმაცია '%{name}-ისთვის"
         header_evaluation: "'%{name}'-ის შეფასება"
         evaluation_instructions: თუ არ გაქვთ პასუხი, დატოვეთ ცარიელი.
         next: შემდეგი        
-        venue_link_title: "შეარჩიეთ %{category} - %{venue}"
-        map_link_title: შეარჩიეთ ეს მდებარეობა
+        venue_link_title: "აირჩიეთ %{category} - %{venue}"
+        map_link_title: აირჩიეთ ეს მდებარეობა
     training_videos:
       form:
-        video_embed_success: View the embeded video
-        video_embed_fail: The video URL could not be processed
+        video_embed_success: ნახეთ ვიდეო 
+        video_embed_fail: ვიდეოს ბმულის დამუშავება ვერ მოხერხდა
     question_pairing_disabilities:
       index:
         header_filter_certified: Assessment Type
@@ -392,66 +392,66 @@ ka:
         evaluations_public: "Public Evaluations"        
   root:
     index:
-      stats_text: "To date, %{num} Places have been evaluated with the following results:"
-      venue_label: 'Find Accessible Places by Category:'
+      stats_text: "დღეისათვის შეფასებულია %{num} ადგილი შემდეგი შედეგებით:"
+      venue_label: 'იპოვეთ ხელმისაწვდომი ადგილები კატეგორიის მიხედვით:'
       venue_all: ყველა კატეგორია
-      skip_movie: გამოვტოვოთ ფილმი (გადახტომა)
+      skip_movie: ფილმის გამოტოვება (გადახტომა)
     contact:
-      title: Contact
+      title: კონტაქტი
     about:
-      title: About
+      title: შესახებ
     stats:
-      title: Statistics
+      title: სტატისტიკა
       headers:
-        eval_results: Accessibility Results
-        eval_results_type: Accessibility Results by Type
-        submission: Submission Statistics
-        evals: Evaluations Submitted
-        evals_type: Evaluations Submitted by Type
-        evals_visual: Evaluations with Images
-        user_active: Most Active Users in the Last 30 Days
-        user: User History
-        org_active: Most Active Organizations in the Last 30 Days
-        org: Organization History
+        eval_results: ხელმისაწვდომობის შედეგები
+        eval_results_type: ხელმისაწვდომობის შედეგები ტიპის მიხედვით
+        submission: შეფასებების სტატისტიკა
+        evals: შევსებული შეფასებები
+        evals_type: შევსებული შეფასებები ტიპის მიხედვით
+        evals_visual: შეფასებები ფოტოებით
+        user_active: ბოლო 30 დღის განმავლობაში ყველაზე აქტიური მომხმარებლები
+        user: მომხმარებლის ისტორია
+        org_active: ბოლო 30 დღის განმავლობაში ყველაზე აქტიური ორგანიზაციები
+        org: ორგანიზაციის ისტორია
       table:
-        public: Public Evaluations
-        certified: Expert Evaluations
-        total: Total Evaluations
-        eval_type: Type of Disability
-        results: Results
-        submit: Submitted
-        overall: All Disabilities
-        user: User
-        org: Organization
+        public: საჯარო შეფასებები
+        certified: ექსპერტთა შეფასებები
+        total: ყველა შეფასება
+        eval_type: შეზღუდული შესაძლებლობის ტიპი
+        results: შედეგები
+        submit: შევსებულია
+        overall: ყველა შეზღუდული შესაძლებლობა
+        user: მომხმარებელი 
+        org:  ორგანიზაცია
       no_data:
-        no_evals: No evaluations have been submitted.
-        no_visual: No evaluations with images have been submitted.
+        no_evals: არცერთი შეფასება არაა შევსებული. 
+        no_visual: არცერთი შეფასება არაა შევსებული ფოტოთი.
     find_places:
       title: იპოვე ხელმისაწვდომი ადგილი
-      explanation: 'You can search by place name, address, category, district, or type of disability.'
+      explanation: 'თქვენ შეგიძლიათ იპოვოთ ადგილი ახელის, მისამართის, კატეგორიის, რაიონის ან შეზღუდული შესაძლებლობის ტიპის მიხედვით.'
       header_search: ძიება
-      header_filter_place_search: Place Name
-      placeholder_place_search: ყველა მდებარეობა
+      header_filter_place_search: ადგილის დასახელება
+      placeholder_place_search: ყველა ადგილი
       header_filter_address_search: მისამართი
       placeholder_address_search: ყველა მისამართი
       header_filter_venue: კატეგორია
       placeholder_venue: ყველა კატეგორია
       header_filter_district: რაიონი
       placeholder_district: ყველა რაიონი
-      header_filter_evaluations: შეფასებით
-      placeholder_evaluations: გსურთ აირჩიოთ მხოლოდ შეფასებული ადგილები?
-      header_filter_disability: Type of Disability
-      placeholder_disability: All Types of Disability
+      header_filter_evaluations: შეფასებული
+      placeholder_evaluations: გსურთ, აირჩიოთ მხოლოდ შეფასებული ადგილები?
+      header_filter_disability: შეზღუდული შესაძლებლობის ტიპი
+      placeholder_disability: ყველა ტიპის შეზღუდული შესაძლებლობა
       clear_filter: ფილტრის მოშორება
       clear_filters: ყველა ფილტრის მოშორება
-      header_selections: მიმდინარე ფილტრები
+      header_selections: მოქმედი ფილტრები
       select_all: ყველა არჩეული ადგილი
       search: ძებნა
       header_results: ძიების შედეგი
       no_places: არ მოიძებნა თქვენი ძიების შესაბამისი ადგილი.    
     why_monitor:
       title: რატომ არის საჭირო ხელმისაწვდომობის მონიტორინგი საქართველოშო?
-      skip_movie: გამოვტოვოთ ფილმი (გადახტომა)
+      skip_movie: ფილმის გამოტოვება (გადახტომა)
     video_guides:
       title: ვიდეო გზამკვლევები
       watched: თქვენ ნანახი გაქვთ ეს ვიდეო
@@ -461,7 +461,7 @@ ka:
     video_guide:
       title: "ვიდეო: '%{name}'"
       pre_survey: ვიდეოს ნახვამდე, გთხოვთ, შეხედოთ სურათებს და უპასუხოთ კითხვებს.
-      post_survey: ახლა, როცა ვიდეოს უკვე უყურეთ, გთხოვთ, შეხედოთ სურათებს და უპასუხოთ კითხვებს.
+      post_survey: ვიდეოს ნახვის შემდეგ, გთხოვთ, შეხედოთ სურათებს და უპასუხოთ კითხვებს.
       correct: სწორია!
       wrong: თქვენი პასუხი არასწორია.
       continue: გაგრძელება
@@ -470,60 +470,56 @@ ka:
   places:
     show:
       description:
-        place: "%{name} is a %{org} located at %{address}. "
-        public: "It has %{num} Public Evaluations with %{yes} accessible areas and %{no} not accessible areas. "
-        cert: "It has %{num} Expert Evaluations with %{yes} accessible areas and %{no} not accessible areas. "
+        place: "%{name} არის %{org}, რომელიც მდებარეობს შემდეგ მისამართზე: %{address}. "
+        public: "მას აქვს %{num} საჯარო შეფასება, რომელთაგან %{yes}-ის მიხედვით, ის არის ხელმისწავდომი ადგილი, ხოლო %{no}-ის მიხედვით, არ არის ხელმისაწვდომი."
+        cert: "მას აქვს ექსპერტის %{num} შეფასება, რომელთაგან %{yes}-ის მიხედვით, ის არის ხელმისწავდომი ადგილი, ხოლო %{no}-ის მიხედვით, არ არის ხელმისაწვდომი."
       district_link_title: "'%{name}'-ის ყველა ადგილის ნახვა"
       venue_link_title: "'%{name}'-ის ყველა ადგილის ნახვა"
       tab_certified: "ექსპერტის შეფასება (%{count})"
       tab_public: "საჯარო შეფასება (%{count})"
-      header_images: Images
-      no_images: ფოტო ჯერ არ  არის მოწოდებული.
-      no_filter_images: თქვენს არჩევას არ შეესაბამება სურათი.
+      header_images: ფოტოები
+      no_images: ფოტო ჯერ არ არის მოწოდებული.
+      no_filter_images: შესაბამისი ფოტოს მოძებნა ვერ მოხერხდა.
       filter_all: ყველა
-      taken_at: "გადახებულია:"
+      taken_at: "გადაღებულია:"
       uploaded_at: "ატვირთულია:"
       uploaded_by: "ატვირთა:"
-      evaluation: "Assessment Type:"
+      evaluation: "შეფასების ტიპი:"
       evaluation_certified: "ექსპერტის შეფასება"
-      evaluation_public: "საზოგადოებრივი შეფასება"
-      evaluations_certified: "Expert Evaluations"
-      evaluations_public: "Public Evaluations"
-      website_button: ვებგვერდზე გადასვლა
-
-      header_evaluations: Evaluation Results
-      filter_explanation: Use the filters below to select the which evaluation results to view.
-      header_filter_certified: Assessment Type
-      header_filter_type: Type of Disability
-      filter_type_all: All
-
-      disability: "Type of Disability:"
+      evaluation_public: "საჯარო შეფასება"
+      evaluations_certified: "ექსპერტთა შეფასებები"
+      evaluations_public: "საჯარო შეფასებები"
+      website_button: ვებსაიტზე გადასვლა
+      header_evaluations: შეფასებების შედეგები
+      filter_explanation: გამოიყენეთ ფილტი იმის შესარჩევად, თუ შეფასებების რომელი შედეგები ნახვა გსურს. 
+      header_filter_certified: შეფასების ტიპი
+      header_filter_type: შეზღუდული შესაძლებლობის ტიპი
+      filter_type_all: ყველა
+      disability: "შეზღუდული შესაძლებლობის ტიპი:"
       question: "კითხვები:"
       answer: "პასუხები:"
-      jump_to_place_info: Jump to general information about this place
-      jump_to_map: Jump to the map
-      jump_to_images: Jump to the images
-      jump_to_results: Jump to the evaluation results
+      jump_to_place_info: გადადით ზოგად ინფორმაციაზე ამ ადგილის შესახებ 
+      jump_to_map: გადადით რუკაზე
+      jump_to_images: გადადით ფოტოებზე
+      jump_to_results: გადადით შეფასებების შედეგებზე
       skip_map: გამოტოვეთ რუკა და გადადით ფოტო სლაიდშოუზე (გადასვლა)
     show_place_summary:
-#      certified_explanation: Expert Evaluations are completed by people that are trained in how to evaluate a place for accessibility. Only the latest evaluation from each evaluation type is used to compute the overall accessibility score.
-#      public_explanation: Public Evaluations can be completed by anyone that wishes to submit an evaluation.  Every evaluation is used to compute the overall accessibility score.
-      header_summary: Overall Summary
-      no_evaluations: "At this time no '%{cert}' evaluations have been submitted."
-      no_type_evaluations: "At this time no '%{cert}: %{type}' evaluations have been submitted."
-      summary_result: Overall Result
-      header_overall_results: Evaluation Results
-      header_user_summary: Summary
-      header_user_details: Details
-      view_details_link_title: View Evaluation Details
-      details_link_title: View the details of this evaluation
-      disability_other: 'Other Type: %{name}'
+      header_summary: ზოგადი შეჯამება
+      no_evaluations: "ამ დროისთვის შევსებულია '%{cert}' შეფასება."
+      no_type_evaluations: "ამ დროისთვის შევსებულია '%{cert} %{type}'-ის შეფასება."
+      summary_result: ზოგადი შედეგი
+      header_overall_results: შეფასების შედეგები
+      header_user_summary: შეჯამება
+      header_user_details: დეტალები
+      view_details_link_title: შეფასების დეტალების ნახვა
+      details_link_title: ამ შეფასების დეტალების ნახვა
+      disability_other: 'სხვა ტიპი: %{name}'
     show_type_results:
       certified_explanation: Expert Evaluations are completed by people that are trained in how to evaluate a place for accessibility. Only the latest evaluation from each type of disability is used to compute the overall accessibility score.
       public_explanation: საზოგადოებრივი შეფასების შევსება შეუძლიან ნებისმიერ მსურველს.
       header_summary: საერთო შეჯამება
-      no_evaluations: "At this time no '%{cert}' evaluations have been submitted."
-      no_type_evaluations: "At this time no '%{cert}: %{type}' evaluations have been submitted."
+      no_evaluations: "ამ დროისთვის შევსებულია '%{cert}' შეფასება."
+      no_type_evaluations: "ამ დროისთვის შევსებულია  '%{cert}: %{type}'-ის შეფასება."
       summary_result: საერთო შედეგები
       header_overall_results: შეფასების შედეგები
       header_user_summary: შეჯამება
@@ -531,61 +527,61 @@ ka:
       details_link_title: იხილეთ ამ შეფასების დეტალები
       disability_other: 'სხვა ტიპი: %{name}'
     evaluation_details:
-      title: "'%{name}' Evaluation Details"
-      evaluations_certified: "Expert Evaluations"
-      evaluations_public: "Public Evaluations"
-      filter_type_all: All
+      title: "'%{name}'-ის შეფასების დეტალები"
+      evaluations_certified: "ექსპერტთა შეფასებები"
+      evaluations_public: "საჯარო შეფასებები"
+      filter_type_all: ყველა
       summary_result: საერთო შედეგები
       header_user_summary: შეჯამება
       header_user_details: დეტალები
       details_link_title: იხილეთ ამ შეფასების დეტალები
       disability_other: 'სხვა ტიპი: %{name}'
     evaluation2:
-      watch_videos: Watch Video Guides
+      watch_videos: უყურეთ ვიდეო გზამკვლევებს
     form:
-      explanation: Please add the place to the database before you evaluate it. You must enter the place name, its category, and its address.
-      url_hint: "Please include http:// or https://"
+      explanation: გთხოვთ, ადგილის შეფასებამდე, დაამატოთ იგი ბაზას. თქვენ უნდა მიუთითოთ ადგილის დასახელება, კატეგორია და მისი მისამართი.
+      url_hint: "გთხოვთ, გამოიყენოთ http:// ან https://"
       header_location: სად მდებარეობს ეს ადგილი?
       map_instructions: დააჭირეთ რუკას, რათა მონიშნოთ ამ ადგილის მდებარეობა.
-      map_blue_marker: ლურჯი მარკერი (%{img}) აღნიშნავს თქვენი ადგილის ლოკაციას.
-      map_red_marker: "წითელი მარკერი (%{img}) გამოჩნდება თუ ერთნაირი ადგილები არის გვერდიგვერდ განლაგებული. თუ თქვენთვის სასურველი ადგილი მონიშნულია წითელი ფერით, დააჭირეთ მას და გადადით ამ ადგილის გვერძე."
+      map_blue_marker: ლურჯი მარკერი (%{img}) აღნიშნავს თქვენი ადგილის მდებარეობას.
+      map_red_marker: "წითელი მარკერი (%{img}) გამოჩნდება, თუ ერთნაირი ადგილები არის გვერდიგვერდ განლაგებული. თუ თქვენთვის სასურველი ადგილი მონიშნულია წითელი ფერით, დააჭირეთ მას და გადადით ამ ადგილის გვერდძე."
       address_search_results: მისამართის ძიების შედეგი
-      address_instructions: თქვენ შეგიძლიათ მიუთითოთ ადგილის მდებარეობა მისამართის საძიებო სისტემაში მითითებით ან რუკაზე დაჭერით მონიშნეთ ადგილი.
-      address_instructions2: გთხოვთ, შეიყვანეთ მისამართი და ქალაქი სადაც მდებარეობს ეს ადგილი.  
+      address_instructions: თქვენ შეგიძლიათ მიუთითოთ ადგილის მდებარეობა მისამართის საძიებო სისტემაში მითითებით ან რუკაზე დაჭერით მონიშნოთ ადგილი.
+      address_instructions2: გთხოვთ, შეიყვანეთ მისამართი და ქალაქი, სადაც მდებარეობს ეს ადგილი.  
       submit_address_search: მისამართის მოძებნა
-      address_search_success: მისამართის ძიებამ იპოვა შემდეგი წყვილები. გთხოვთ დაადასტუროთ, რომ შედეგები სწორია.
-      address_search_multiple_success: მისამართის ძიებამ იპოვა შემდეგი წყვილები. გთხოვთ შეარჩიოთ სწორი შედეგი.
+      address_search_success: მისამართის ძიების შედეგად ნაპოვნია შემდეგი შედეგი. გთხოვთ, დაადასტუროთ სისწორე. 
+      address_search_multiple_success: მისამართის ძიების შედეგად ნაპოვნია შემდეგი შედეგები. გთხოვთ, აირჩიოთ სწორი ვარიანტი.
       address_search_fail: არ მოიძებნა. კიდევ სცადეთ.
       header_address_edit: მისამართი, რომელიც იქნება შენახული
-      address_edit_explanation: ქვემოთ წარმოდგენილია მისამართები, რომლებიც შეინახება მონაცემთა ბაზაში.
+      address_edit_explanation: ქვემოთ ნაჩვენებია მისამართები, რომლებიც შეინახება მონაცემთა ბაზაში.
       submit: ადგილის შენახვა
       building_number: შენობის ნომერი (თუ ზემოთ არ არის მითითებული)
       header_address_search: ძიება მისამართით
       header_map_search: ალდილმდებარეობა რუკაზე
       header_places_nearby: მსგავსი ადგილი ამავე ტერიტორიაზე
-      places_nearby_explanation: "მას შემდეგ, რაც მოიძიებთ მისამართს ან რუკაზე მონიშნავთ ადგილს, ეს სექცია გიჩვენებთ ამ ტერიტორიაზე განლაგებულ მსგავსი ადგილების სიას. თუ თქვენი ადგილი ამ სიაშია წარმოდგენილი, დააჭირეთ და გადადით მის პირად გვერძე." 
-      places_nearby_none: არ მოიძია ამ ტერიოტორიაზე მსგავსი ადგილები.
+      places_nearby_explanation: "მას შემდეგ, რაც მოიძიებთ მისამართს ან რუკაზე მონიშნავთ ადგილს, ეს სექცია გიჩვენებთ ამ ტერიტორიაზე არსებული მსგავსი ადგილების ჩამონათვალს. თუ თქვენი ადგილი ამ სიაშია, დააჭირეთ და გადადით მის პირად გვერდზე." 
+      places_nearby_none: ამ ტერიოტორიაზე მსგავსი ადგილები არ იქნა ნაპოვნი.
       skip_to_address_search: მისამართის საძიებო ფორმაზე გადასვლა (გადახტომა)
       skip_to_map: რუკაზე გადასვლა (გადახტომა)
       skip_to_places_nearby: გადასვლა მსგავსი ადგილების ჩამონათვალზე (გადახტომა)
       skip_to_submit: გადასვლა ფორმის გაგზავნის ღილაკზე (გადახტომა)
     certified_eval_form:
-      evaluation_instructions: Select a category and answer the questions.
+      evaluation_instructions: აირჩიეთ კატეგორია და უპასუხეთ შეკითხვებს. 
       question_category_link_title: "იხილეთ კითხვები '%{name}'"
       question_instructions: თუ არ გაქვთ პასუხი, დატოვეთ ცარიელი. 
       skip_to_next_quest_cat: შემდეგ კატეგორიაზე ან კითხვაზე გადასვლა (გადახტომა)
       skip_to_previous_quest_cat: წინა კატეგორიაზე ან კითხვაზე გადასვლა (გადახტომა
-      skip_to_certification: საზოგადოებრივ ან ექსპერტის შეფასებაზე გადასვლა (გადახტომა)
+      skip_to_certification: საჯარო ან ექსპერტის შეფასებაზე გადასვლა (გადახტომა)
       skip_to_eval_type: შეფასების ტიპის არჩევაზე გადასვლა (გადახტომა)
       skip_to_submit_button: შეჯამების ღილაკზე გადასვლა (გადახტომა)
     certified_eval_form_questions:
       tip_help_text: Click here to view the help text for this question
       tip_exists: კითხვაზე დადებითი პასუხის გაცემისას გამოჩნდება დამატებითი კითხვები
       tip_evidence: ამ კითხვისთვის საჭიროა პარამეტრების ცოდნა
-      tip_validation: თქვენს მიერ შეყვანილი პარამეტრები განსაზღვრავს ამ კითხვაზე პასუხს
-      tip_angle: "ეს არის პანდუსის პარამეტრი. გთხოვთ შეიყვანოთ შემდეგი მონაცემები: პანდუსის სიმაღლე და სიღრმე ან პანდუსის დახრილობის კუთხე."
+      tip_validation: თქვენ მიერ შეყვანილი პარამეტრები განსაზღვრავს ამ კითხვაზე პასუხს
+      tip_angle: "ეს არის პანდუსის პარამეტრი. გთხოვთ, შეიყვანოთ შემდეგი მონაცემები: პანდუსის სიმაღლე და სიღრმე ან პანდუსის დახრილობის კუთხე."
       validate: დამტკიცება
-      tip_validate: "შეადარეთ თქვნეს მიერ წარმოდგენილი  '%{val_eq}'-ის პარამეტრები სტანდარტებს და განსაზღვრეთ კითხვაზე პასუხი"
+      tip_validate: "შეადარეთ თქვენ მიერ წარმოდგენილი  '%{val_eq}'-ის პარამეტრები სტანდარტებს და განსაზღვრეთ კითხვაზე პასუხი"
       skip_to_evidence_input: პარამეტრების შეყვანის ფორმაზე გადასვლა (გადახტომა)
       skip_to_next_question: შემდეგ კითხვაზე გადასვლა (გადახტომა)
     public_eval_form:
@@ -594,22 +590,22 @@ ka:
     evaluation:
       title: "'%{name}'-ის შეფასება"
       header_certification: რომელი შეფასების შევსება გსურთ?
-      header_evaluation_types_cert: Evaluate the accessibility of this place for which type of disability (select all that apply)?
-      header_evaluation_types_public: Evaluate the accessibility of this place for which type of disability?
+      header_evaluation_types_cert: რომელი ტიპის შეზღუდული შესაძლებლობისთვის აფასებთ ამ ადგილის ხელმისაწვდომობას (აირჩიეთ ყველა შესაბამისი)?
+      header_evaluation_types_public: რომელი ტიპის შეზღუდული შესაძლებლობისთვის აფასებთ ამ ადგილის ხელმისაწვდომობას? 
       header_form: შეფასების ფორმა
       certification_yes_link_text: "ექსპერტის შეფასება"
       certification_yes_link_title: "ექსპერტის შეფასების შევსება"
-      certification_no_link_text: "საზოგადოებრივი შეფასება"
-      certification_no_link_title: "საზოგადოებრივი შეფასების შვსება"
+      certification_no_link_text: "საჯარო შეფასება"
+      certification_no_link_title: "საჯარო შეფასების შვსება"
       submit: შეფასების შევსება
       cancel_eval: შეფასების გაუქმება
       no_questions: თქვენი მოთხოვნის შესაბამისი კითხვები არ არის წარმოდგენილი შეფასების ფაილში.
-      disability_other_header: სხვა ახსნა
+      disability_other_header: სხვა განმარტება
       disability_other_label: "დააკონკრეტეთ 'სხვა'"
-      watch_videos_header: Watch the Video Guides!
-      watch_videos_explanation: 'Before you complete an evaluation, watch the video guides to see examples of places that are accessible and are not accessible.'
-      watch_videos_button: Watch the Videos
-      watch_videos_close: Contine with Evaluation
+      watch_videos_header: უყურეთ ვიდეო გზამკვლევებს!
+      watch_videos_explanation: 'შეფასების შევსებამდე, უყურეთ ვიდეო გზამკვლევებს ხელმისაწვდომი და არახელმისაწვდომი ადგილების მაგალითების სანახავად.'
+      watch_videos_button: ვიდეოს ნახვა
+      watch_videos_close: გაგრძელება და შეფასება
     upload_photos:
       title: "'%{name}'-ის სურათის დამატება"
       add_files: სურათის დამატება...
@@ -623,18 +619,18 @@ ka:
     index:
       title: "'%{name}'-ის პარამეტრები"
       header_location: ავტომატური ადგილმდებარეობა
-      map_instructions: "დააკლიკეთ რუკაზე, რათა განათავსოთ მარკერი იმ ადგილას, რომელიც გსურთ რომ გაჩნდეს გვერდის ჩატვირთვისას, ან ახალი ადგილის დამატებისას. შემდეგ დააჭირეთ 'მდებარეობის შენახვა'-ის ღილაკს, რათა შეინახოთ ცვლილებები."
+      map_instructions: "დააკლიკეთ რუკაზე, რათა განათავსოთ მარკერი იმ ადგილას, რომელიც გსურთ, რომ გაჩნდეს გვერდის ჩატვირთვისას, ან ახალი ადგილის დამატებისას. შემდეგ, ცვლილებების შესანახად, დააჭირეთ ღილაკს 'მდებარეობის შენახვა'."
       skip_map: რუკის გამოტოვება და მისამართის ფორმაში გადასვლა (გადახტომა)
-      address_instructions: შეგიძლიათ მოიძიოთ მისამართი თუ არ გსურთ რუკის გამოყენება.
-      address_instructions2: გთხოვთ შეიყვანეთ მისამართი და ქალაქი, საიდანაც გსურთ რომ დაიწყოს რუკა როდესაც ამატებთ ადგილებს.
+      address_instructions: შეგიძლიათ მოიძიოთ მისამართი, თუ არ გსურთ რუკის გამოყენება.
+      address_instructions2: გთხოვთ, შეიყვანოთ მისამართი და ქალაქი, საიდანაც ადგილის დამატებისას დაიწყება რუკა.
       submit_address_search: მისამართის მოძებნა
-      address_search_success: მისამართის ძიებამ იპოვა შემდეგი წყვილები. გთხოვთ დაადასტუროთ, რომ შედეგები სწორია.
-      address_search_multiple_success: მისამართის ძიებამ იპოვა შემდეგი წყვილები. გთხოვთ შეარჩიოთ სწორი შედეგი.
+      address_search_success: მისამართის ძიების შედეგად ნაპოვნია შემდეგი შედეგი. გთხოვთ, დაადასტუროთ სისწორე. 
+      address_search_multiple_success: მისამართის ძიების შედეგად ნაპოვნია შემდეგი შედეგები. გთხოვთ, აირჩიოთ სწორი ვარიანტი.
       address_search_fail: არ მოიძებნა. კიდევ სცადეთ.
       next: ადგილმდებარეობის შენახვა
       remove: ადგილის ამოშლა
-      success: თქვენი რუკის ავტომატური ადგილმდებარეობა შენახულია
-      removed: თქვენი ლოკაცია რუკიდან წაშლილია.
+      success: თქვენი რუკის ავტომატური ადგილმდებარეობა შენახულია.
+      removed: თქვენი რუკის ავტომატური ადგილმდებარეობა წაშლილია.
   methodology:
     index:
       title: მეთოდოლოგია
@@ -642,64 +638,64 @@ ka:
       venues: კატეგორიები
       calculations: გამოთვლები
     questions:
-      title: მეთოდოლოგიური - კითხვები
-      no_questions: სამწუხაროდ ამ დროისთვის  ფაილში არ არსებობს შეფასების კითხვები.
-      explanation1: შეფასების კითხვები იყოფა ორ ნაწილად. პირველ ნაწილში წარმოდგენილია კითხვები, რომლებიც საერთოა ყველა კატეგორიისთვის. მეორე ნაწილში კი წარმოდგენილია სპეციფიკური კითხვები, რომლებიც საჭიროა კონკრეტული კატეგორიებისთვის.
-      explanation2: "Each evaluation question can then be assigned to the following types of disability:"
-      header_public: საზოგადოებრივი შეფასების კითხვები
+      title: მეთოდოლოგია - კითხვები
+      no_questions: ამ დროისთვის არ მოიძებნება შეფასების კითხვები.
+      explanation1: შეფასების კითხვები ორ ნაწილად იყოფა. პირველ ნაწილში ყველა კატეგორიისთვის საერთო კითხვები შედის, მეორეში კი ისეთი კონკრეტული კითხვები, რომლებიც კონკრეტული კატეგორიებისთვისაა საჭირო. 
+      explanation2: "შეფასების თითოეული კითხვა შეიძლება მიესადაგოს შეზღუდული შესაძლებლობის შემდეგ ტიპებს:"
+      header_public: საჯარო შეფასების კითხვები
       header_certified: ექსპერტის შეფასების კითხვები
     question_type:
       header_common: ყველა კატეგორიისთვის საერთო კითხვები
-      header_venues: სპეციფიკური კითხვები კატეგორიების მიხედვით
+      header_venues: კონკრეტული კითხვები კატეგორიების მიხედვით
     show_questions:
       assigned_to: "მისადაგებული შემდები ტიპისთვის:"      
-      required_for_accessiblity: "იმ შემთხვევაში, თუ პასუხია 'არ აქვს და ესაჭიროება' მაშინ ადგილი არ არის ხელმისაწვდომი"
+      required_for_accessiblity: "იმ შემთხვევაში, თუ პასუხია 'არ აქვს და ესაჭიროება', მაშინ ადგილი არ არის ხელმისაწვდომი"
     venues:
       title: მეთოდოლოგია - ადგილმდებარეობა
-      no_venues: სამწუხაროდ, ფაილზე არ მოიძებნა ადგილმდებარეობები.
-      explanation1: ადგილმდებარეობები გულისხმობს ადგილებს, გზებს და ობიექტებს, რომლებსაც გააჩნიათ გეოგრაფიული მდებარეობა და შესაძლებელია მათი ხელმისაწვდომობის შეფასება.
+      no_venues: ამ დროისთვის არ მოიძებნება ადგილმდებარეობები.
+      explanation1: ადგილმდებარეობები გულისხმობს ადგილებს, გზებს და ობიექტებს, რომლებსაც აქვთ გეოგრაფიული მდებარეობა და შესაძლებელია მათი ხელმისაწვდომობის შეფასება.
     categories:
       title: მეთოდოლოგია - კატეგორიები
-      no_venues: სამწუხაროდ, ამ დროისთვის ფაილში არ არის წარმოდგენილი კატეგორიები.
+      no_venues: ამ დროისთვის არ მოიძებნება კატეგორიები.
       explanation1: კატეგორიები გულისხმობს ადგილებს, გზებს და ობიექტებს, რომლებსაც გააჩნიათ გეოგრაფიული მდებარეობა და შესაძლებელია მათი ხელმისაწვდომობის შეფასება.
     calculations:
-      title: მეთოდოლოგიური - გამოთვლები    
+      title: მეთოდოლოგია - გამოთვლები    
   print:
     index:
-      title: Print Evaluation Forms
-      explanation: Print out evaluation forms to document accessibility violations on paper.  Take the forms with you as you visit places in your community.
-      header_type: Assessment Type
-      evaluation_certified: "Expert Evaluation"
-      evaluation_public: "Public Evaluation"
+      title:  შეფასების ფორმების ამობეჭდვა
+      explanation: ხელმისაწვდომობის დარღვევის ქაღალდზე დოკუმენტირებისთვის ამობეჭდეთ შეფასების ფორმები და იქონიეთ თან სხვადასხვა ადგილას ვიზიტისას.
+      header_type: შეფასების ტიპი
+      evaluation_certified: "ექსპერტის შეფასება"
+      evaluation_public: "საჯარო შეფასება"
       header_venue: კატეგორია
-      venue_explanation: Select the category or categories of places that you and your group would like to evaluate.
-      all_venues: All Categories
-      header_question_categories: Question Categories
-      header_evaluation_type: Type of Disability
-      header_layout: ფურცლის  მიმართულება
-      header_help: შევიყვანოთ დამხმარე ინფორმაცია
+      venue_explanation: აირჩიეთ ადგილის კატეგორია ან კატეგორიები, რომელთა შეფასებასაც გსურთ თქვენ და თქვენს გუნდს.  
+      all_venues: ყველა კატეგორია
+      header_question_categories: შეკითხვების კატეგორია
+      header_evaluation_type: შეზღუდული შესაძლებლობის ტიპი
+      header_layout: ფურცლის მიმართულება
+      header_help: დამხმარე ინფორმაციის დართვა
       portrait: ვერტიკალური
       landscape: ჰორიზონტალური
       print: შეფასების ამობეჭდვა
-      print_instructions: ხაზის ქვემოთ წარმოდგენილია ის ნაწილი, რომელიც ამოივეჭდება.
+      print_instructions: ყველაფერი, რაც ხაზს ქვემოთაა, ამოიბეჭდება. 
       header_venue: კატეგორია
-      header_evaluation_types: Type of Disability
-      header_place: ადგილის სახელწოდება
+      header_evaluation_types: შეზღუდული შესაძლებლობის ტიპი
+      header_place: ადგილის დასახელება
       header_address: მისამართი
-      header_legend: Legend
+      header_legend: ლეგენდა
   manage_users:
     index:
       title: ორგანიზაციის წევრთა ანგარიშების მართვა
       add_user: დაამატეთ მომხმარებელი ორგანიზაციას
     add:
-      title: დაამატეთ მომხმარებელი  %{org}ში
-      no_users: ვერ მოიძებნა მომხმარებელი %{org}ში დასამატებლად.
-      back: ორგანიზაციის წევრთა ანგარიშების მართვის გვერძე დაბრუნება
+      title: დაამატეთ მომხმარებელი  %{org}-ში
+      no_users: ვერ მოიძებნა მომხმარებელი %{org}-ში დასამატებლად.
+      back: ორგანიზაციის წევრთა ანგარიშების მართვის გვერდზე დაბრუნება
   devise:
     mailer:
       reset_password_instructions:
         title: 'მოგესალმებით, %{nickname}!'
-        p1: 'მივიღეთ მოთხოვნა "%{app_name}" თქვენი პაროლის შეცვლის შესახებ. პაროლის შესაცვლელად, მიჰყევით შემდეგ ბმულს.'
+        p1: 'მივიღეთ მოთხოვნა "%{app_name}"-ზე თქვენი პაროლის შეცვლის შესახებ. პაროლის შესაცვლელად, მიჰყევით შემდეგ ბმულს.'
         link_title: პაროლის შეცვლა
         p2: "თუ თქვენ არ მოგითხოვიათ პაროლის შეცვლა, გთხოვთ, არ მიაქციოთ ყურადღება ამ შეტყობინებას."
         p3: "თქვენი პაროლი იგივე დარჩება, სანამ არ გადახვალთ ზემოთ მითითებულ ბმულზე და შექმნით ახალ პაროლს."    
