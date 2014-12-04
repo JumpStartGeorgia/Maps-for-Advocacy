@@ -19,7 +19,7 @@ class ManageUsersController < ApplicationController
     @org = Organization.find_by_id(params[:organization_id]) 
     if @org.present?
       org_user_ids = @org.users.map{|x| x.id}
-      @users = User.in_role(User::ROLES[:certification]).not_in_list(org_user_ids)
+      @users = User.in_role(User::ROLES[:user]).not_in_list(org_user_ids)
 
       respond_to do |format|
         format.html # index.html.erb
