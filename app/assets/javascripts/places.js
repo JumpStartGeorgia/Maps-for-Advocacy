@@ -393,5 +393,9 @@ $(document).ready(function(){
   /* turn on tipsy for image slideshow on places page */
   $('#place-image-grid .place-image-grid-item a').tipsy({gravity: 's', fade: true, opacity: 0.9, html: true, title: 'formatted-title'});
 
+  /*************************************************/
+  /* turn on tipsy for evaluation user detauls */
+  $('.summary-block .evaluation-user-details').tipsy({gravity: 's', fade: true, opacity: 0.9, html: true, title: 'formatted-title'});
+
 
 });

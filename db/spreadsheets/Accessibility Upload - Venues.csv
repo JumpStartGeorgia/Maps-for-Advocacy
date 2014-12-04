@@ -5,12 +5,12 @@ Unique Category ID,Category Name,Georgian Category Name,Category Sort,Unique Ven
 1,Food and Drink,საკვები და სასმელი,1,4,Market,ბაზარი,4,Right to live independently and be included in the community
 1,Food and Drink,საკვები და სასმელი,1,5,Grocery store,სურსათის მაღაზია,5,Right to live independently and be included in the community
 1,Food and Drink,საკვები და სასმელი,1,6,Other food and drink,სხვა საკვები და სასმელი,6,Right to live independently and be included in the community
-2,Financial Institutions and Services,ფინანსური დაწესებულებები  და სერვისები,2,7,Bank,ბანკი,1,"Right to control one's own financial affairs; Right to have equal access to bank loans, mortgages and other forms of financial credit"
-2,Financial Institutions and Services,ფინანსური დაწესებულებები  და სერვისები,2,8,ATM / pay box,ბანკომატი და სწრაფი ჩარიცხვის აპარატი,2,"Right to control one's own financial affairs; Right to have equal access to bank loans, mortgages and other forms of financial credit"
-2,Financial Institutions and Services,ფინანსური დაწესებულებები  და სერვისები,2,9,Currency exchange,სავალუტო ჯიხურები,3,"Right to control one's own financial affairs; Right to have equal access to bank loans, mortgages and other forms of financial credit"
-2,Financial Institutions and Services,ფინანსური დაწესებულებები  და სერვისები,2,10,Other financial institutions and services,სხვა ფინანსური დაწესებულებები და სერვისები,4,"Right to control one's own financial affairs; Right to have equal access to bank loans, mortgages and other forms of financial credit"
+2,Financial Institutions and Services,ფინანსური დაწესებულებები და სერვისები,2,7,Bank,ბანკი,1,"Right to control one's own financial affairs; Right to have equal access to bank loans, mortgages and other forms of financial credit"
+2,Financial Institutions and Services,ფინანსური დაწესებულებები და სერვისები,2,8,ATM / pay box,ბანკომატი და სწრაფი ჩარიცხვის აპარატი,2,"Right to control one's own financial affairs; Right to have equal access to bank loans, mortgages and other forms of financial credit"
+2,Financial Institutions and Services,ფინანსური დაწესებულებები და სერვისები,2,9,Currency exchange,სავალუტო ჯიხურები,3,"Right to control one's own financial affairs; Right to have equal access to bank loans, mortgages and other forms of financial credit"
+2,Financial Institutions and Services,ფინანსური დაწესებულებები და სერვისები,2,10,Other financial institutions and services,სხვა ფინანსური დაწესებულებები და სერვისები,4,"Right to control one's own financial affairs; Right to have equal access to bank loans, mortgages and other forms of financial credit"
 3,Stores and Services,მაღაზიები და სერვისები,3,11,Store,მაღაზია,1,Right to live independently and be included in the community
-3,Stores and Services,მაღაზიები და სერვისები,3,12,Service,მომსახურების ობიექი,2,Right to live independently and be included in the community
+3,Stores and Services,მაღაზიები და სერვისები,3,12,Service,მომსახურების ობიექტი,2,Right to live independently and be included in the community
 3,Stores and Services,მაღაზიები და სერვისები,3,13,Other stores and services,სხვა მაღაზიები და მომსახურების ობიექტები,3,Right to live independently and be included in the community
 4,Healthcare,ჯანდაცვა,4,14,Dentist,სტომატოლოგი,1,Right to health
 4,Healthcare,ჯანდაცვა,4,15,Hospital,საავადმყოფო,2,Right to health
@@ -35,12 +35,12 @@ Unique Category ID,Category Name,Georgian Category Name,Category Sort,Unique Ven
 7,Organizations,ორგანიზაციები,7,34,Non-governmental organization,არასამთავრობო ორგანიზაცია,1,Right to participate in political and public life
 7,Organizations,ორგანიზაციები,7,35,International organization,საერთაშორისო ორგანიზაცია,2,Right to participate in political and public life
 7,Organizations,ორგანიზაციები,7,36,Other organizations,სხვა ორგანიზაციები,3,Right to participate in political and public life
-8,Places of Worship,ღვთისმსახურების ადგილების,8,37,Georgian Orthodox church,ქართული მართმადიდებულური ტაძარი,1,Right to live independently and be included in the community
-8,Places of Worship,ღვთისმსახურების ადგილების,8,38,Mosque,მეჩეთი,2,Right to live independently and be included in the community
-8,Places of Worship,ღვთისმსახურების ადგილების,8,39,Armenian Apostolic church,სომხური სამოციქულო ეკლესია,3,Right to live independently and be included in the community
-8,Places of Worship,ღვთისმსახურების ადგილების,8,40,Roman Catholic church,კათოლიკური ეკლესია,4,Right to live independently and be included in the community
-8,Places of Worship,ღვთისმსახურების ადგილების,8,41,Synagogue,სინაგოგა,5,Right to live independently and be included in the community
-8,Places of Worship,ღვთისმსახურების ადგილების,8,42,Other places of worship,სხვა ღვთისმსახურების ადგილები,6,Right to live independently and be included in the community
+8,Places of Worship,ღვთისმსახურების ადგილები,8,37,Georgian Orthodox church,ქართული მართლმადიდებლური ეკლესია,1,Right to live independently and be included in the community
+8,Places of Worship,ღვთისმსახურების ადგილები,8,38,Mosque,მეჩეთი,2,Right to live independently and be included in the community
+8,Places of Worship,ღვთისმსახურების ადგილები,8,39,Armenian Apostolic church,სომხური სამოციქულო ეკლესია,3,Right to live independently and be included in the community
+8,Places of Worship,ღვთისმსახურების ადგილები,8,40,Roman Catholic church,კათოლიკური ეკლესია,4,Right to live independently and be included in the community
+8,Places of Worship,ღვთისმსახურების ადგილები,8,41,Synagogue,სინაგოგა,5,Right to live independently and be included in the community
+8,Places of Worship,ღვთისმსახურების ადგილები,8,42,Other places of worship,სხვა ღვთისმსახურების ადგილები,6,Right to live independently and be included in the community
 9,Lodging,საცხოვრებელი,9,43,Hotel,სასტუმრო,1,"Right to participate in cultural life, recreation, leisure and sport"
 9,Lodging,საცხოვრებელი,9,44,Hostel,ჰოსტელები,2,"Right to participate in cultural life, recreation, leisure and sport"
 9,Lodging,საცხოვრებელი,9,45,Other lodging,სხვა საცხოვრებლები,3,"Right to participate in cultural life, recreation, leisure and sport"
@@ -68,10 +68,10 @@ Unique Category ID,Category Name,Georgian Category Name,Category Sort,Unique Ven
 12,Transportation,ტრანსპორტი,12,67,Train,მატარებელი,3,Right to live independently and be included in the community
 12,Transportation,ტრანსპორტი,12,68,Airport,აეროპორტი,4,Right to live independently and be included in the community
 12,Transportation,ტრანსპორტი,12,69,Other transportation,სხვა ტრანსპორტი,5,Right to live independently and be included in the community
-13,Pathways,ბილიკი ,13,70,Crosswalk,გზაჯვარედინი,1,Right to live independently and be included in the community
-13,Pathways,ბილიკი,13,71,Overpass,ესტაკადა,2,Right to live independently and be included in the community
-13,Pathways,ბილიკი,13,72,Underpass,მიწისქვეშა გადასასვლელი,3,Right to live independently and be included in the community
-13,Pathways,ბილიკი,13,73,Sidewalk,ტროტუარი,4,Right to live independently and be included in the community
-13,Pathways,ბილიკი,13,74,Other pathways,სხვა ბილიკი,5,Right to live independently and be included in the community
+13,Pathways,გზები,13,70,Crosswalk,საცალფეხო გადასასვლელი,1,Right to live independently and be included in the community
+13,Pathways,გზები,13,71,Overpass,მიწისზედა გადასასვლელი,2,Right to live independently and be included in the community
+13,Pathways,გზები,13,72,Underpass,მიწისქვეშა გადასასვლელი,3,Right to live independently and be included in the community
+13,Pathways,გზები,13,73,Sidewalk,ტროტუარი,4,Right to live independently and be included in the community
+13,Pathways,გზები,13,74,Other pathways,სხვა გზები,5,Right to live independently and be included in the community
 14,Habilitation and Rehabilitation Services,რეაბილიტაციური ცენტრი,14,75,Day Care Center,ბაგაბაღი,1,Right to habilitation and rehabilitation
 14,Habilitation and Rehabilitation Services,რეაბილიტაციური ცენტრი,14,76,Other habilitation and rehabilitation services,სხვა რეაბილიტაციური ცენტრი,2,Right to habilitation and rehabilitation

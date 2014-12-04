@@ -42,6 +42,19 @@
             <h3 class="clear">
               <span class="evaluation_date">
                 <%= l evaluation.created_at, :format => :no_time %>
+
+                <% if user.present? %>
+                  <%
+                    popup = "<span>#{l evaluation.created_at, :format => :no_time}</span><span>#{user.nickname}</span>"
+                    org_eval = PlaceEvaluationOrganization.where(:place_evaluation_id => evaluation.id).first
+                    if org_eval.present?
+                      org = org_eval.organization.name 
+                      popup << "<span>#{org}</span>" 
+                    end
+                  %>
+                  <i class="icon-info-sign evaluation-user-details" 
+                    formatted-title="<%= popup %>"></i>
+                <% end %>
               </span>
               <% if user_signed_in? && 
                   (current_user.role?(User::ROLES[:site_admin]) || current_user.id == evaluation.user_id) %>
@@ -53,14 +66,6 @@
                             :confirm => t('app.buttons.confirm'),
                             :title => t('app.common.delete_evaluation_title', :place => @place[:name]) %>
 
-              <% end %>
-              <% if user.present? %>
-                <span class="user_name">      
-                  <%= user.nickname %>
-                  <% if user.avatar.present? %>
-                    <%#= image_tag user.avatar, :title => user.nickname %>
-                  <% end %>
-                </span>
               <% end %>
               <% if evaluation.disability_id == Disability::OTHER_ID && evaluation.disability_other_text.present? %>
                 <span class="disability_other">
