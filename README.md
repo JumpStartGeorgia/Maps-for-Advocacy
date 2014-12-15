@@ -22,7 +22,7 @@ These summaries are updated automatically whenever a new evaluation is saved.
 NOTE: For expert evaluations, the Disability summary only shows the latest evaluation summary - not a summary of all existing evaluations. This is because it was decided that a new expert evaluation should replace one that is already on file.
 
 
-## Current Versions
+## Current GEM Versions
 Look at the Gemfile for a complete list.
 * Ruby 1.9.2-p290
 * Rails 3.1.10
