@@ -613,7 +613,7 @@ ka:
       cancel_upload: ატვირთვის გაუქმება
       return_place: "'%{name}'-ზე დაბრუნება"
     help_text:
-      title: "Additonal Information About:"
+      title: "Additonal Information About: %{cat}"
       header_type: "Type of Disability: %{name}"
   settings:
     index:

@@ -1,11 +1,18 @@
 <% 
-  title t('.title')
-  title_sec_row  @help_text.first.question 
+  title t('.title', cat: @help_text.first.question_category_parent)
 %>
 
-<% @help_text.each do |help| %>
-  <h2><%= t('.header_type', name: help.disability_name) %></h2>
+<div id="help_text">
+  <h2>
+    <%= QuestionPairingDisability.human_attribute_name(:question_pairing_id) %>:
+    <span><%= @help_text.first.question %></span>
+  </h2>
 
-  <%= simple_format_no_tags(help.content, {}, {sanitize: false}) %>  
-  
-<% end %>
+  <% @help_text.each do |help| %>
+    <div class="help-item">
+      <h3><%= help.disability_name %></h3>
+
+      <%= simple_format_no_tags(help.content, {}, {sanitize: false}) %>  
+    </div>    
+  <% end %>
+</div>
