@@ -586,6 +586,7 @@ class QuestionCategory < ActiveRecord::Base
                 # see if already exists
                 dis_index = qp.question_pairing_disabilities.index{|x| x.disability_id == dis.id}
                 if dis_index.nil?
+                  puts "******** -> does not have disability type, adding"
                   # not exist yet, so add it
                   qpd = qp.question_pairing_disabilities.build(:disability_id => dis.id)
                   # add translations
@@ -607,8 +608,12 @@ class QuestionCategory < ActiveRecord::Base
                   end
 
                 else
+                  puts "******** -> already has disability type, so update content"
+
                   # alread exists, so update content
                   qpd = qp.question_pairing_disabilities[dis_index]
+                  puts "******** -> existing record = #{qpd.inspect}"
+
                   # check translations
                   I18n.available_locales.each do |locale|
                     help = row[idx_help_text].present? ? row[idx_help_text].strip : nil
@@ -618,17 +623,19 @@ class QuestionCategory < ActiveRecord::Base
                     help = help_ka if locale == :ka && help_ka.present?
 
                     # if text present, update record
-                    # else, delete record if exists
+                    # else, reset record if it already exists
                     trans = qpd.question_pairing_disability_translations.select{|x| x.locale == locale.to_s}.first
                     if help.present? && trans.present?
+                      puts "******** --> updating existing help content"
                       # update existing
                       trans.content = help
                     elsif help.present? 
+                      puts "******** --> creating help content"
                       # add record
                       qpd.question_pairing_disability_translations.build(:locale => locale, :content => help) 
                     elsif trans.present?
-                      # delete record
-                      trans.destroy
+                      puts "******** --> help text no longer exists, reseting to nil"
+                      trans.content = nil
                     end
 
                     if !qpd.save
