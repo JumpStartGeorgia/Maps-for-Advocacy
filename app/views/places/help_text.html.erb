@@ -1,5 +1,9 @@
 <% 
-  title t('.title', cat: @help_text.first.question_category_parent)
+  if @help_text.first.is_certified == 1
+    title t('.title_certified', cat: @help_text.first.question_category_parent)
+  else
+    title t('.title_public')
+  end
 %>
 
 <div id="help_text">

@@ -613,8 +613,8 @@ en:
       cancel_upload: Cancel Upload
       return_place: "Return to '%{name}'"
     help_text:
-      title: "Additonal Information About: %{cat}"
-      header_type: "Type of Disability: %{name}"
+      title_public: "Additonal Information"
+      title_certified: "Additonal Information About: %{cat}"
   settings:
     index:
       title: "Settings for '%{name}'"
