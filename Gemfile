@@ -1,8 +1,8 @@
 source 'https://rubygems.org'
 
-gem 'bundler', '~> 1.6.0'
 gem "rails", "3.1.10"
 gem "mysql2", "~> 0.3.11" # this gem works better with utf-8
+gem "figaro"
 
 gem "json"
 gem "jquery-rails", "~> 1.0.19"
@@ -58,6 +58,7 @@ group :development do
 #	gem "wkhtmltopdf-binary", "~> 0.9.5.3" # web kit that takes html and converts to pdf
   gem 'rb-inotify', '~> 0.8.8' # rails dev boost needs this
   gem 'rails-dev-boost', :git => 'git://github.com/thedarkone/rails-dev-boost.git' # speed up loading page in dev mode
+  gem 'thin'
 end
 
 group :staging, :production do
