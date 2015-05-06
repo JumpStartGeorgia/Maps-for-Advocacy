@@ -430,24 +430,26 @@ en:
       title: Find Accessible Places
       explanation: 'You can search by place name, address, category, district, or type of disability.'
       header_search: Search
+      targeted_search: TARGETED SEARCH
+      filtered_search: FILTERED SEARCH
       header_filter_place_search: Place Name
       placeholder_place_search: All Places
       header_filter_address_search: Address
       placeholder_address_search: All Addresses
-      header_filter_venue: Category
+      header_filter_venue: Location Category
       placeholder_venue: All Categories
       header_filter_district: District
       placeholder_district: All Districts
       header_filter_evaluations: With Evaluations
       placeholder_evaluations: Places With Evaluations Only?
       header_filter_disability: Type of Disability
-      placeholder_disability: All Types of Disability
+      placeholder_disability: All Disabilities
       clear_filter: Remove Filter
-      clear_filters: Remove All Filters
+      clear_filters: Clear All Filters
       header_selections: Current Filters
       select_all: All places selected
       search: Search
-      header_results: Search Results
+      header_results: Results
       no_places: There are no places with evaluations on record that match your search request.
     why_monitor:
       title: Why Monitor Accessibility in Georgia?

@@ -4,16 +4,24 @@ $(document).ready(function(){
 
   /* use the select2 library on the frontpage */
   if (gon.find_evaluations_filters){
-    $('#filter_disability').select2({width:'element', allowClear:true});
-    $('#filter_venue').select2({width:'element', allowClear:true});
-    $('#filter_district').select2({width:'element', allowClear:true});
+    $('#filter_disability').select2({width:'100%', allowClear:true});
+    $('#filter_venue').select2({width:'100%', allowClear:true});
+    $('#filter_district').select2({width:'100%', allowClear:true});
 
-    $('#btn_search').on('click', function(e){
+    $('#btn_targeted_search').on('click', function(e){
       e.preventDefault();
     
       var url = window.location.href;
       url = UpdateQueryString(url, 'place_search', $('#filter_place_search').val());
       url = UpdateQueryString(url, 'address_search', $('#filter_address_search').val());
+
+      document.location = url;
+    });
+
+    $('#btn_filtered_search').on('click', function(e){
+      e.preventDefault();
+
+      var url = window.location.href;
       url = UpdateQueryString(url, 'venue_category_id', $('#filter_venue').val());
       // if no district selected then default to '0' for all
       var val = $('#filter_district').val();
@@ -26,12 +34,7 @@ $(document).ready(function(){
       document.location = url;
     });
 
-    $('#filter_evaluations').on('change', function(e){
-      $('#disability_filter').slideToggle();
-      $('#filter_disability').select2({width:'element', allowClear:true});
-    });
-
-/*    
+/*
     $('#filter_place_search').on('change', function(e){
       document.location = UpdateQueryString(null, 'place_search', $(this).val());
     });
