@@ -1,107 +1,165 @@
-
-#front-page{
-  div#front-page-container{
-    position: relative; 
+#front-page {
+  #front-page-container {
+    position: relative;
     height: 500px;
-    & > div:nth-child(1){
+    & > div:nth-child(1) {
       position: absolute;
       left: 50px;
       top: 50%;
-      transform: translate(-50px,-50%);
-      -webkit-transform: translate(-50px,-50%);
+      transform: translate(-50px, -50%);
+      -webkit-transform: translate(-50px, -50%);
       right: auto;
     }
-    & > div:nth-child(2){
+    & > div:nth-child(2) {
       position: absolute;
       right: 50px;
       top: 50%;
-      transform: translate(-50px,-50%);
-      -webkit-transform: translate(-50px,-50%);
+      transform: translate(-50px, -50%);
+      -webkit-transform: translate(-50px, -50%);
       left: auto;
-      & > p:nth-child(1), & > p:nth-child(2){
+      & > p:nth-child(1), & > p:nth-child(2) {
         margin-bottom: 20px;
       }
     }
   }
 
-  .text-center{
+  #stats {
+    margin-top: 40px;
+  }
+
+  p, ol, ul, td {
+    font-family: verdana, arial, helvetica, sans-serif;
+  }
+
+  .panel-button {
+    display: block;
+
+    font-family: "Times New Roman", Times, serif;
+    font-style: italic;
+    font-weight: bold;
+    font-size: 22px;
+    line-height: 22px;
+    padding-top: 22px;
+    padding-bottom: 22px;
+
+    color: #fff;
+    text-decoration: none;
     text-align: center;
   }
 
-  h2{
-    line-height: 26px;
-  }
-
-  #text-links{
-    margin-top: 10px;
-    li{
-      text-align: center;
-      vertical-align: top;
-      margin: 7px 0;
-      display: inline-block;
-      width: 48%;
-      a{
-        font-size: 16px;
-        line-height: 23px;        
-        padding: 5px 10px !important;
-        &:lang(ka){
-          height: 46px;
-        }
-      }
-      &:lang(ka):nth-child{
-        a {
-
-        }
-      }
-    }
-  }
-  #stats{
-    margin-top: 40px;
-  }
-  
-  #eval-place{
-    margin-top: 20px;
-    .add_evaluation{
-      font-size: 25px;
-      line-height: 31px;
-    }
-  }
-  #find-eval{
-    margin-top: 20px;
-    label{
+  /* Find Accessible Places */
+  .find-panel {
+    h1 {
+      color: #3c86c9;
+      font-size: 36px;
       font-weight: bold;
+      line-height: 40px;
     }
-  }  
-}
 
-@media (max-width: 1330px) {
-  #front-page{
-    #text-links{
-      li{
-        display: block;
-        width: 100%;
+    .tinymce_format {
+      margin-top: 20px;
+
+      p, ol, ul, td {
+        font-size: 23px;
+        line-height: 30px;
+      }
+    }
+
+    .text-links {
+      padding-left: 0;
+      margin-top: 20px;
+      margin-bottom: 20px;
+      li {
+        list-style-type: none;
+        padding-bottom: 10px;
+      }
+
+      a {
+        font-size: 16px;
+        color: #3187cc;
+      }
+    }
+
+    .find-places-wrap {
+      margin-left: 0;
+    }
+
+    .find-places {
+      background: #3c86c9;
+
+      &:hover {
+        background: #3569a5;
+      }
+    }
+  }
+
+  /* Evaluate a Place */
+  .eval-panel {
+    color: #f59334;
+    margin-bottom: 50px;
+
+    h2 {
+      color: #f59334;
+      font-size: 26px;
+      font-weight: bold;
+      line-height: 40px;
+      margin-top: -8px;
+    }
+
+    img {
+      margin-right: 30px;
+    }
+
+    .tinymce_format {
+      margin-top: 20px;
+      margin-bottom: 20px;
+
+      p, ol, ul, td {
+        font-size: 16px;
+        line-height: 21px;
+      }
+
+      a {
+        //text-decoration: none;
+        color: #f59334;
+      }
+    }
+
+    .eval-place {
+      background: #f59334;
+
+      &:hover {
+        background: #e18034;
       }
     }
   }
 }
 
-@media (max-width: 768px) {
-  #front-page{
-    div#front-page-container{
-      position: relative; 
+@media (max-width: 1024px) {
+  [class*="span"],
+  .row-fluid [class*="span"] {
+    float: none;
+    display: block;
+    width: auto;
+    margin-left: 0;
+  }
+
+  #front-page {
+    #front-page-container {
+      position: relative;
       height: auto !important;
-      & > div:nth-child(1){
+      & > div:nth-child(1) {
         position: inherit;
         left: inherit;
         top: inherit;
         transform: inherit;
         -webkit-transform: inherit;
         right: inherit;
-        &.offset1{
+        &.offset1 {
           margin-left: 0;
         }
       }
-      & > div:nth-child(2){
+      & > div:nth-child(2) {
         margin-top: 40px;
         position: inherit;
         right: inherit;
@@ -109,28 +167,10 @@
         transform: inherit;
         -webkit-transform: inherit;
         left: inherit;
-        & > p:nth-child(1), & > p:nth-child(2){
+        & > p:nth-child(1), & > p:nth-child(2) {
           margin-bottom: 20px;
         }
       }
-      #text-links{
-        li{
-          display: inline-block;
-          width: 48%;
-        }
-      }
     }
   }
 }
-
-@media (max-width: 600px) {
-  #front-page{
-    #text-links{
-      li{
-        display: block !important;
-        width: 100% !important;
-      }
-    }
-  }
-}
-
