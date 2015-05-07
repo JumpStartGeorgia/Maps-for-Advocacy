@@ -131,7 +131,7 @@
                     <% end %>
                   <% end %>
                   <div class="links">
-                    <%= link_to t('app.common.view_place'), place_path(place), :class => 'view_more',
+                    <%= link_to t('app.common.view_place'), place_path(place), :class => 'view_more', :remote => true,
                                 :title => t('app.common.view_place_title', :place => place[:place]) %>
                     <%= link_to t('app.common.add_evaluation'), evaluation_place_path(place), :class => 'add_evaluation',
                                 :title => t('app.common.add_evaluation_title', :place => place[:place]) %>
@@ -152,7 +152,7 @@
           </div>
         </div>
       </div>
-      <div class="span8">
+      <div class="span8" id="evaluation_details">
         <a href="#search_results" class="accessibly-hidden"><%= t('.jump.skip_map') %></a>
 
         <div id="map"></div>

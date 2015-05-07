@@ -38,8 +38,9 @@ class RootController < ApplicationController
     
     @places = Place.filtered(options)
 
-    gon.show_find_evaluations_map = true
+    # gon.show_find_evaluations_map = true
     gon.find_evaluations_filters = true
+    gon.show_place_images = true
     @show_map = true
   
     # if places found, then save info to gon so can show markers/popups

@@ -86,8 +86,13 @@ class PlacesController < ApplicationController
         end
       end
 
+
       respond_to do |format|
-        format.html # show.html.erb
+        format.html {
+          if request.xhr?
+            render layout: false
+          end
+        }
         format.json { render json: @place }
       end
     else

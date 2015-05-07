@@ -169,20 +169,24 @@ $(document).ready(function(){
   
   /*************************************************/
   /* show map for place show */
+  window.show_place_map = function () {
+    map = L.map(gon.map_id).setView([gon.lat, gon.lon], gon.zoom);
+    L.tileLayer(gon.tile_url, {maxZoom: gon.max_zoom}).addTo(map);
+    map.attributionControl = false;
+    map.zoomControl = true;
+
+    marker = L.marker([gon.lat, gon.lon], {icon: L.icon(default_leaflet_icon_options)}).addTo(map);
+
+    // show popup
+    if (gon.marker_popup) {
+      marker.bindPopup(gon.marker_popup).openPopup();
+    }
+
+    $('#place_carousel').carousel();
+  }
+
   if (gon.show_place_map){
-      map = L.map(gon.map_id).setView([gon.lat, gon.lon], gon.zoom);
-      L.tileLayer(gon.tile_url, {maxZoom: gon.max_zoom}).addTo(map);
-		  map.attributionControl = false;
-		  map.zoomControl = true;
-		
-      marker = L.marker([gon.lat, gon.lon], {icon: L.icon(default_leaflet_icon_options)}).addTo(map);
-
-      // show popup
-      if (gon.marker_popup){
-        marker.bindPopup(gon.marker_popup).openPopup();
-      }
-
-      $('#place_carousel').carousel();
+    show_place_map();
   }
   
   if (gon.show_place_images){
@@ -218,25 +222,29 @@ $(document).ready(function(){
       if (filter_question != ''){
         filter += '[data-question="' + filter_question + '"]';
       }
-      
+
       // turn on appropriate images
       $('#place-image-grid .place-image-grid-item a.place-image-link' + filter).addClass('active').attr('rel', 'gallery');
-    
+
       // if no images are showing, show no match message
-      if ($('#place-image-grid .place-image-grid-item a.place-image-link[rel="gallery"]').length == 0){
+      if ($('#place-image-grid .place-image-grid-item a.place-image-link[rel="gallery"]').length == 0) {
         $('#place-image-grid #place-image-grid-no-match').fadeIn();
       }
     }
+
     // when filter changes, update the images
-    $('#place-image-grid #place-image-filter #filter_image_evaluation, #place-image-grid #place-image-filter #filter_image_type, #place-image-grid #place-image-filter #filter_image_question').change(function(){
-      process_place_image_filter();
-    });  
+    $(document).on('change',
+      '#place-image-grid #place-image-filter #filter_image_evaluation, ' +
+      '#place-image-grid #place-image-filter #filter_image_type, ' +
+      '#place-image-grid #place-image-filter #filter_image_question', function () {
+        process_place_image_filter();
+      });
   }
 
 
   /*************************************************/
   /* place show page */
-  function resize_place_eval_filters(){
+  window.resize_place_eval_filters = function(){
     $('#filter_certified').select2({width:'element'});
     $('#filter_type').select2({width:'element'});
   }

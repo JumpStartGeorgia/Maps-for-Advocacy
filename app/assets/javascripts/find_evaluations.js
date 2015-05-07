@@ -34,6 +34,33 @@ $(document).ready(function(){
       document.location = url;
     });
 
+    // Remote requests
+    $('.view_more').on('ajax:before', function (ev, res) {
+      console.log('ajax:before');
+
+      if ($(this).parents('.place-item').hasClass('active')) {
+        return false;
+      }
+
+      $('.place-item').removeClass('active');
+      $(this).parents('.place-item').addClass('active');
+
+      $('#evaluation_details').empty('');
+
+    }).on('ajax:success', function (ev, res) {
+      console.log('ajax:success', res.length);
+
+      if ($(this).parents('.place-item').hasClass('active')) {
+        $('#evaluation_details').html(res);
+
+        window.show_place_map();
+        window.resize_place_eval_filters()
+      }
+    }).on('ajax:error', function (ev, res) {
+      console.log('ajax:error', res);
+    });
+
+
 /*
     $('#filter_place_search').on('change', function(e){
       document.location = UpdateQueryString(null, 'place_search', $(this).val());
