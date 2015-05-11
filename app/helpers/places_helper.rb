@@ -1,6 +1,24 @@
 module PlacesHelper
 
   # hash = {score, percentage, special_flag, num_answers, num_evaluations, num_yes, num_no}
+  def format_overall_evaluation(hash)
+    if hash.is_a? Hash
+      hash['num_yes'] ||= 0
+      hash['num_no'] ||= 0
+
+      if hash['num_yes'] < hash['num_no']
+        content_tag :div, :class => 'overall-evaluation-fail' do
+          t('app.common.overall_evaluation') + ': ' + t('app.common.evaluation_fail')
+        end
+      else
+        content_tag :div, :class => 'overall-evaluation-pass' do
+          t('app.common.overall_evaluation') + ': ' + t('app.common.evaluation_pass')
+        end
+      end
+    end
+  end
+
+  # hash = {score, percentage, special_flag, num_answers, num_evaluations, num_yes, num_no}
   def format_summary_result(hash, options={})
     options[:is_summary] = false if options[:is_summary].nil?
     options[:is_certified] = true if options[:is_certified].nil?

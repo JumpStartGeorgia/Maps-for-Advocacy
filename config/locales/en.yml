@@ -249,6 +249,9 @@ en:
       certified_overall: '%{num} Overall Expert Evaluation Result(s)'
       public_overall: '%{num} Overall Public Evaluation Result(s)'
       num_places_overall: '%{num} Place(s) with Evaluations'
+      overall_evaluation: Overall Evaluation
+      evaluation_fail: FAIL
+      evaluation_pass: PASS
     msgs:
       does_not_exist: You tried to access a page that does not exist.
       not_authorized: You are not authorized to view that page.
@@ -427,7 +430,7 @@ en:
         no_evals: No evaluations have been submitted.
         no_visual: No evaluations with images have been submitted.
     find_places:
-      title: Find Accessible Places
+      title: Evaluation Results
       explanation: 'You can search by place name, address, category, district, or type of disability.'
       header_search: Search
       targeted_search: TARGETED SEARCH
@@ -450,6 +453,7 @@ en:
       select_all: All places selected
       search: Search
       header_results: Results
+      evaluation_overview: Evaluation Overview
       no_places: There are no places with evaluations on record that match your search request.
     why_monitor:
       title: Why Monitor Accessibility in Georgia?
@@ -470,7 +474,7 @@ en:
       watch_more: Watch More Videos
       eval_place: Continue with Evaluation
   places:
-    show:
+    show: &places_show
       description:
         place: "%{name} is a %{org} located at %{address}. "
         public: "It has %{num} Public Evaluations with %{yes} accessible areas and %{no} not accessible areas. "
@@ -505,7 +509,17 @@ en:
       jump_to_images: Jump to the images
       jump_to_results: Jump to the evaluation results
       skip_map: Skip the map and go to the photo slideshow (jump)
-    show_place_summary:
+    show_embedded:
+      <<: *places_show
+      header_details: Evaluation Details
+      share: Share
+      location_category: Location Category
+      location_type: Location Type
+      header_evaluations: Evaluation Overview
+      place_location: Location
+      breakdown: Breakdown
+      number_evaluations: Number of evaluations
+    show_place_summary: &places_show_place_summary
       header_summary: Overall Summary
       no_evaluations: "At this time no %{cert} evaluations have been submitted."
       no_type_evaluations: "At this time no %{cert}: %{type} evaluations have been submitted."
@@ -516,6 +530,8 @@ en:
       view_details_link_title: View Evaluation Details
       details_link_title: View the details of this evaluation
       disability_other: 'Other Type: %{name}'
+    show_place_summary_embedded:
+      <<: *places_show_place_summary
     show_type_results:
       certified_explanation: Expert Evaluations are completed by people that are trained in how to evaluate a place for accessibility. Only the latest evaluation from each type of disability is used to compute the overall accessibility score.
       public_explanation: Public Evaluations can be completed by anyone that wishes to submit an evaluation.  Every evaluation is used to compute the overall accessibility score.

@@ -11,7 +11,7 @@ $(document).ready(function(){
     $('#btn_targeted_search').on('click', function(e){
       e.preventDefault();
     
-      var url = window.location.href;
+      var url = window.location.href.split('?')[0]; // reset
       url = UpdateQueryString(url, 'place_search', $('#filter_place_search').val());
       url = UpdateQueryString(url, 'address_search', $('#filter_address_search').val());
 
@@ -21,7 +21,7 @@ $(document).ready(function(){
     $('#btn_filtered_search').on('click', function(e){
       e.preventDefault();
 
-      var url = window.location.href;
+      var url = window.location.href.split('?')[0]; // reset
       url = UpdateQueryString(url, 'venue_category_id', $('#filter_venue').val());
       // if no district selected then default to '0' for all
       var val = $('#filter_district').val();
@@ -54,7 +54,6 @@ $(document).ready(function(){
         $('#evaluation_details').html(res);
 
         window.show_place_map();
-        window.resize_place_eval_filters()
       }
     }).on('ajax:error', function (ev, res) {
       console.log('ajax:error', res);
