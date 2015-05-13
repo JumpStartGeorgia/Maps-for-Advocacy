@@ -49,9 +49,18 @@
             </div>
             <div class="span3">
               <div class="filter_box">
-                <h3><%= label_tag :filter_venue, t('.header_filter_venue') %></h3>
-                <%= select_tag(:filter_venue,
+                <h3><%= label_tag :filter_venue_category, t('.header_filter_venue_category') %></h3>
+                <%= select_tag(:filter_venue_category,
                                options_for_select(@venue_categories.map { |x| ["#{x[:venue_category]} (#{x[:count]})", x.id] }, params[:venue_category_id]),
+                               :include_blank => true,
+                               :'data-placeholder' => t('.placeholder_venue_category'),
+                               :style => 'width: 100%') %>
+              </div>
+            </div>
+            <div class="span3">
+              <div class="filter_box">
+                <h3><%= label_tag :filter_venue, t('.header_filter_venue') %></h3>
+                <%= select_tag(:filter_venue, @venues ? options_from_collection_for_select(@venues, :id, :name, params[:venue_id]) : '',
                                :include_blank => true,
                                :'data-placeholder' => t('.placeholder_venue'),
                                :style => 'width: 100%') %>
@@ -67,7 +76,6 @@
                                :style => 'width: 100%') %>
               </div>
             </div>
-            <!--<div class="span3"></div>-->
           </div>
 
           <div class="filter_buttons">

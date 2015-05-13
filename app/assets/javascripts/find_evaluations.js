@@ -5,8 +5,26 @@ $(document).ready(function(){
   /* use the select2 library on the frontpage */
   if (gon.find_evaluations_filters){
     $('#filter_disability').select2({width:'100%', allowClear:true});
+    $('#filter_venue_category').select2({width:'100%', allowClear:true});
     $('#filter_venue').select2({width:'100%', allowClear:true});
     $('#filter_district').select2({width:'100%', allowClear:true});
+
+    // show venues of selected category
+    $('#filter_venue_category').on('change', function(e){
+      var venue_category_id = $(this).val();
+      var venue_category = _.find(gon.venue_categories, function(cat){ return cat.id == venue_category_id; });
+      //console.log(venue_category_id, venue_category);
+
+      $('#filter_venue').select2('destroy');
+
+      $('#filter_venue').empty();
+      $('#filter_venue').append("<option value=\"\"></option>");
+      _.each(venue_category.venues, function(venue) {
+        $('#filter_venue').append("<option value=\"" + venue.id + "\">" + venue.name + "</option>");
+      });
+
+      $('#filter_venue').select2({width:'100%', allowClear:true});
+    });
 
     $('#btn_targeted_search').on('click', function(e){
       e.preventDefault();
@@ -22,7 +40,8 @@ $(document).ready(function(){
       e.preventDefault();
 
       var url = window.location.href.split('?')[0]; // reset
-      url = UpdateQueryString(url, 'venue_category_id', $('#filter_venue').val());
+      url = UpdateQueryString(url, 'venue_category_id', $('#filter_venue_category').val());
+      url = UpdateQueryString(url, 'venue_id', $('#filter_venue').val());
       // if no district selected then default to '0' for all
       var val = $('#filter_district').val();
       url = UpdateQueryString(url, 'district_id', val == '' ? '0' : val);

@@ -439,8 +439,10 @@ en:
       placeholder_place_search: All Places
       header_filter_address_search: Address
       placeholder_address_search: All Addresses
-      header_filter_venue: Location Category
-      placeholder_venue: All Categories
+      header_filter_venue_category: Location Category
+      placeholder_venue_category: All Categories
+      header_filter_venue: Location Type
+      placeholder_venue: All Types
       header_filter_district: District
       placeholder_district: All Districts
       header_filter_evaluations: With Evaluations

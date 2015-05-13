@@ -25,13 +25,20 @@ class RootController < ApplicationController
     options[:place_search] = params[:place_search].present? && params[:place_search].strip.present? ? prepare_search_text(params[:place_search]) : nil
     options[:address_search] = params[:address_search].present? && params[:address_search].strip.present? ? prepare_search_text(params[:address_search]) : nil
     options[:venue_category_id] = params[:venue_category_id] if params[:venue_category_id].present? && params[:venue_category_id] != '0'
+    options[:venue_id] = params[:venue_id] if params[:venue_id].present? && params[:venue_id] != '0'
     options[:disability_id] = params[:eval_type_id] if params[:eval_type_id].present?
     params[:district_id] = @district_id if params[:district_id].blank?
     options[:district_id] = params[:district_id].present? && params[:district_id] != '0' ? params[:district_id] : nil
     options[:with_numbers_only] = true
     params[:places_with_evaluation] = params[:places_with_evaluation].present? ? params[:places_with_evaluation].to_bool : false
     options[:places_with_evaluation] = params[:places_with_evaluation]
-    
+
+    venue_category = VenueCategory.find_by_id(params[:venue_category_id])
+    if venue_category
+      @venues = venue_category.venues
+    end
+    gon.venue_categories = VenueCategory.all.as_json(:include => :venues)
+
     @venue_categories = VenueCategory.names_with_count(options)
     @disabilities = Disability.names_with_count(options)
     @districts = District.names_with_count(options)
