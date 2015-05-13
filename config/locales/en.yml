@@ -534,6 +534,9 @@ en:
       disability_other: 'Other Type: %{name}'
     show_place_summary_embedded:
       <<: *places_show_place_summary
+      evaluation_item: Evaluation<br>ITEM
+      evaluation_result: Evaluation<br>RESULT
+      evaluation_overview: Evaluation<br>OVERVIEW
     show_type_results:
       certified_explanation: Expert Evaluations are completed by people that are trained in how to evaluate a place for accessibility. Only the latest evaluation from each type of disability is used to compute the overall accessibility score.
       public_explanation: Public Evaluations can be completed by anyone that wishes to submit an evaluation.  Every evaluation is used to compute the overall accessibility score.

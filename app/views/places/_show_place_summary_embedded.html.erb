@@ -1,0 +1,66 @@
+<%
+   is_certified ||= false
+   show_overall ||= false
+   summary_key = 'categories'
+   summary_key = 'questions' if !is_certified
+   cls_show_cert = ''
+   cls_show_cert = 'accessibly-hidden' if !show_overall
+%>
+
+<div class="summary-block <%= cls_show_cert %>" data-certified="<%= is_certified %>" data-type="0">
+  <% if data[:summary].present? && data[:summary]['overall'].present? && data[:summary_questions].present? %>
+
+    <div class="evaluation-header">
+      <div class="row-fluid">
+        <div class="span5">
+          <%= raw t('.evaluation_item') %>
+        </div>
+        <div class="span2">
+          <%= raw t('.evaluation_result') %>
+        </div>
+        <div class="span4">
+          <%= raw t('.evaluation_overview') %>
+        </div>
+      </div>
+    </div>
+
+    <ul class="evaluation_summary">
+      <%
+         questions = if is_certified
+                       data[:summary_questions].map { |x| [x[:id], x.name] }.uniq
+                     else
+                       data[:summary_questions].map { |x| x[:questions] }.flatten.map { |x| [x[:question_id], x[:question]] }.uniq
+                     end
+      %>
+      <% questions.each do |question| %>
+        <% overall = data[:summary]['overall'][summary_key][question[0].to_s] %>
+
+        <li class="row-fluid">
+          <div class="span5">
+            <strong><%= question[1] %></strong>
+          </div>
+          <div class="span2">
+            <% if overall['num_yes'] > 0 || overall['num_no'] > 0 %>
+              <% if overall['num_yes'] < overall['num_no'] %>
+                <span class="evaluation-result-no"><%= t('.no') %></span>
+              <% else %>
+                <span class="evaluation-result-yes"><%= t('.yes') %></span>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="span4">
+            <%= format_summary_result(overall, is_summary: true, is_certified: is_certified) %>
+          </div>
+          <div class="span1">
+            <!--<a href="#" class="view-photos"><%= t('.view_photos') %></a>-->
+          </div>
+        </li>
+      <% end %>
+    </ul>
+
+  <% else %>
+    <p class="no_evaluations">
+      <%= t('.no_evaluations', :cert => cert_text) %>
+    </p>
+  <% end %>
+</div>

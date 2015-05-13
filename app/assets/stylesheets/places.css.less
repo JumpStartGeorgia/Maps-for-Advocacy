@@ -1,40 +1,40 @@
 /*************************************/
 /*** styles for place show page ***/
 /*************************************/
-#map { 
-  height: 300px; 
-}  
+#map {
+  height: 300px;
+}
 
 #place-image-grid {
   margin-top: 15px;
-  h3{
+  h3 {
     margin-bottom: 5px;
   }
-  #place-image-filter{
+  #place-image-filter {
     margin-bottom: 5px;
   }
-  #place-image-grid-no-match{
+  #place-image-grid-no-match {
     display: none;
   }
-  .place-image-grid-item{
+  .place-image-grid-item {
     display: inline-block;
-    a{
-      display: none;    
-      &.active{
+    a {
+      display: none;
+      &.active {
         display: inline-block;
       }
     }
-    .caption-text{
+    .caption-text {
       display: none;
     }
   }
-} 
+}
 
-.tipsy .tipsy-inner span{
+.tipsy .tipsy-inner span {
   font-size: 12px;
   display: block;
   border-bottom: dashed 1px #999;
-  &:last-of-type{
+  &:last-of-type {
     border-bottom: none;
   }
 }
@@ -44,74 +44,76 @@
   border-top-right-radius: 4px !important;
   border-bottom-right-radius: 0 !important;
   border-bottom-left-radius: 0 !important;
-  }
-.fancybox-title-outside-wrap{
+}
+
+.fancybox-title-outside-wrap {
   margin-top: -10px !important;
   color: #000 !important;
   background-color: #fff !important;
   padding: 2px 5px !important;
-  li{
+  li {
     display: inline-block;
     margin-right: 10px;
-    span{
+    span {
       font-weight: bold;
     }
-    &:last-of-type{
+    &:last-of-type {
       margin-right: 0;
     }
   }
 }
 
-
 /*************************************/
 /*** styles for place form page ***/
 /*************************************/
-form.place{
-  & > p:first-of-type{
+form.place {
+  & > p:first-of-type {
     margin-bottom: 20px;
   }
 
-  h2{
+  h2 {
     margin-top: 25px;
   }
-  
-  ul#venues{
+
+  ul#venues {
     width: 350px;
   }
-  ul#venue_categories, ul.question_categories{
-    li{
+  ul#venue_categories, ul.question_categories {
+    li {
       display: inline-block;
       margin: 5px;
       border: 1px solid #555;
-      a{
+      a {
         display: block;
         padding: 5px;
-        &:hover, &.active{
+        &:hover, &.active {
           background-color: #555;
           color: #fff;
         }
-        
+
       }
     }
   }
 
-  #disabilities, #certification{
-      width: 350px;
-      ul li{
+  #disabilities, #certification {
+    width: 350px;
+    ul li {
       padding: 5px 0;
-      &:nth-child(even) {background: #ddd}
-      &:nth-child(odd) {background: #FFF}
+      &:nth-child(even) {
+        background: #ddd
+      }
+      &:nth-child(odd) {
+        background: #FFF
+      }
     }
   }
-  
 
-  
-  #btn-container{
+  #btn-container {
     margin: 25px 0;
     text-align: right;
-    #submit-button{
+    #submit-button {
       display: inline-block;
-      input{
+      input {
         border: none;
       }
     }
@@ -119,73 +121,74 @@ form.place{
 
 }
 
-  a#place_map_next[aria-hidden="false"]{
-    display: inline;
-  }
-  
-  #place-form-address-search-instructions{
-    margin-bottom: 20px;
-  }
+a#place_map_next[aria-hidden="false"] {
+  display: inline;
+}
 
-  #place-form-address-search {
-    #address-search-container {
-      p:nth-child(1), div.placeholder{
-        margin-bottom: 20px;
-      }
-      #address-search-1-match, #address-search-multiple-match, #address-search-fail{
-        margin-top: 20px;
-        &[aria-hidden="false"]{
-          display: block;
-        }
-        label, input[type="radio"]{
-          display: inline;
-        }
-      }
-      #address-edit{
-        margin-top: 20px;
-      }
-    }
-    #map_marker_explanation img{
-      width: 12px;
-    }
-  }
-  
-  #places_nearby_container{
-    #places_nearby_explanation{
+#place-form-address-search-instructions {
+  margin-bottom: 20px;
+}
+
+#place-form-address-search {
+  #address-search-container {
+    p:nth-child(1), div.placeholder {
       margin-bottom: 20px;
     }
-    #places_nearby_matches li{
-      margin-bottom: 10px;
-      padding-bottom: 10px;
-      border-bottom: solid 1px #ccc;
-      &:last-of-type{
-        margin-bottom: 0;
-        border-bottom: none;
+    #address-search-1-match, #address-search-multiple-match, #address-search-fail {
+      margin-top: 20px;
+      &[aria-hidden="false"] {
+        display: block;
+      }
+      label, input[type="radio"] {
+        display: inline;
       }
     }
+    #address-edit {
+      margin-top: 20px;
+    }
   }
+  #map_marker_explanation img {
+    width: 12px;
+  }
+}
+
+#places_nearby_container {
+  #places_nearby_explanation {
+    margin-bottom: 20px;
+  }
+  #places_nearby_matches li {
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: solid 1px #ccc;
+    &:last-of-type {
+      margin-bottom: 0;
+      border-bottom: none;
+    }
+  }
+}
 
 /*************************************/
 /*** styles for place evaluation page ***/
 /*************************************/
 .form-horizontal #venue_evalautions {
-  .control-group{
+  .control-group {
     margin-bottom: 0;
   }
   .controls {
     margin-left: 0;
   }
 }
-#venue_evalautions{
-  h2{
+
+#venue_evalautions {
+  h2 {
     margin: 20px 0;
-    span{
+    span {
       display: inline-block;
       float: right;
       font-size: 13px;
       font-weight: normal;
     }
-    .add_evaluation{
+    .add_evaluation {
       display: inline-block;
       float: right;
       font-weight: normal;
@@ -193,323 +196,481 @@ form.place{
       margin-top: -7px;
     }
   }
-  h3{
+  h3 {
     margin-top: 10px;
     border-bottom: solid 2px #555;
-    .user_name{
+    .user_name {
       float: right;
       display: inline-block;
-      img{
+      img {
         vertical-align: middle;
       }
     }
-    .delete_evaluation{
+    .delete_evaluation {
       float: right;
       font-size: 12px;
       margin-left: 5px;
     }
-    .evaluation_date{
+    .evaluation_date {
       float: left;
       display: inline-block;
       vertical-align: middle;
     }
-    .disability_other{
+    .disability_other {
       display: block;
       text-align: center;
     }
   }
-  h4{
+  h4 {
     margin-top: 10px;
     font-size: 14px;
-    font-weight: bold;    
+    font-weight: bold;
   }
-  h5{
+  h5 {
     margin-top: 10px;
     font-style: italic;
     border-bottom: solid 1px #555;
   }
 
-  #place-filter{
-    h2{
+  #place-filter {
+    h2 {
       margin-top: 0;
     }
-    h3{
+    h3 {
       border-bottom: none;
     }
-    .filter_box{
+    .filter_box {
       margin: 5px 10px;
     }
   }
 
-
   table.venue_evaluation {
-    thead tr th:nth-child(1){
+    thead tr th:nth-child(1) {
       width: 35%;
     }
-    tr td{
-      label, input[type="radio"]{
+    tr td {
+      label, input[type="radio"] {
         display: inline;
       }
     }
     tr.question-with-evidence td {
-      .radio .choices{
+      .radio .choices {
         margin-left: 0;
       }
-      input.question-evidence{
+      input.question-evidence {
         display: none;
       }
     }
   }
+
   .not_know_instructions {
     margin-bottom: 15px;
     font-size: 15px;
-    span{
+    span {
       padding: 7px;
       background-color: #EEDEA0;
       color: #000;
     }
   }
 
-  div.question_category{
+  div.question_category {
     &:focus {
       outline: none;
     }
     div.venue_evaluation {
       & > .row-fluid {
         padding: 5px 0 5px 5px;
-        &:nth-child(even) {background: #ddd}
-        &:nth-child(odd) {background: #FFF}
-        [class*="span"]{
+        &:nth-child(even) {
+          background: #ddd
+        }
+        &:nth-child(odd) {
+          background: #FFF
+        }
+        [class*="span"] {
           min-height: 25px;
         }
       }
-      legend i{
+      legend i {
         cursor: help;
       }
-      .evidence{
+      .evidence {
         text-align: center;
-        .evidence-message-container{
+        .evidence-message-container {
           margin-bottom: 0;
           padding: 4px;
         }
       }
-      .question-evidence{
+      .question-evidence {
         margin-top: 5px;
       }
-      label, input[type="radio"]{
+      label, input[type="radio"] {
         display: inline;
       }
       input[type=radio] {
-          display:none; 
-          margin:10px;
-      }      
-      input[type=radio] + label {
-          display:inline-block;
-          margin:-2px;
-          padding: 4px 12px;
-          background-color: #e7e7e7;
-          border-color: #ddd;
-          cursor: pointer;
-          &.yes, &.has_good, &.has{
-            background-color: #a8d2b8;
-          }
-          &.has_bad{
-            background-color: #eedea0;
-          }
-          &.no, &.needs{
-            background-color: #e1919f;
-          }
-          &.not_relevant{
-            background-color: #555;
-            color: #fff;
-          }
-          &.disabled{
-            cursor: default;
-          }
+        display: none;
+        margin: 10px;
       }
-      input[type=radio]:checked + label { 
-         background-image: none;
-          background-color:#3287CC;
+      input[type=radio] + label {
+        display: inline-block;
+        margin: -2px;
+        padding: 4px 12px;
+        background-color: #e7e7e7;
+        border-color: #ddd;
+        cursor: pointer;
+        &.yes, &.has_good, &.has {
+          background-color: #a8d2b8;
+        }
+        &.has_bad {
+          background-color: #eedea0;
+        }
+        &.no, &.needs {
+          background-color: #e1919f;
+        }
+        &.not_relevant {
+          background-color: #555;
           color: #fff;
+        }
+        &.disabled {
+          cursor: default;
+        }
+      }
+      input[type=radio]:checked + label {
+        background-image: none;
+        background-color: #3287CC;
+        color: #fff;
       }
     }
   }
+
   ul.question-results li {
     border-bottom: solid 1px #ccc;
     /*padding: 10px 0;*/
-    & > div{
+    & > div {
       vertical-align: top;
       padding: 10px;
-/*      display: inline-block;
-      width: 25%;
-*/      &.cause_not_accessible{
-/*        width: 40%;
-*/        background-color: #fff;
+      /*      display: inline-block;
+            width: 25%;
+      */
+      &.cause_not_accessible {
+        /*        width: 40%;
+        */
+        background-color: #fff;
         color: #f00;
       }
     }
-    &:last-of-type{
+    &:last-of-type {
       border-bottom: none;
     }
   }
-  div.selected-answer{
+
+  div.selected-answer {
     background-color: #ccc;
     color: #000;
-    &.has_good, &.has, &.yes{
+    &.has_good, &.has, &.yes {
       background-color: #a8d2b8;
     }
-    &.has_bad{
+    &.has_bad {
       background-color: #eedea0;
     }
-    &.needs, &.no{
+    &.needs, &.no {
       background-color: #e1919f;
     }
-    &.not_relevant{
+    &.not_relevant {
       background-color: #555;
       color: #fff;
     }
   }
 
-  #place-summary-container{
+  #place-summary-container {
     position: relative;
-    #place-summary-loading{
+    #place-summary-loading {
       display: none;
       position: absolute;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background-color: rgba(0,0,0,0);
+      background-color: rgba(0, 0, 0, 0);
       z-index: 1;
       -webkit-transition: all 0.5s ease;
       -moz-transition: all 0.5s ease;
       -o-transition: all 0.5s ease;
       transition: all 0.5s ease;
-      &.place-summary-loading-visible{
-        background-color: rgba(0,0,0,0.5);
+      &.place-summary-loading-visible {
+        background-color: rgba(0, 0, 0, 0.5);
         z-index: 1000;
         display: block;
       }
     }
   }
 
-  .summary-block{
-    .overall-summary{
+  .summary-block {
+    .overall-summary {
       margin-top: 30px;
       margin-bottom: 30px;
-      & > div:first-of-type{
+      & > div:first-of-type {
         font-size: 16px;
-      }  
-      & > div.span6{
+      }
+      & > div.span6 {
         min-height: inherit;
       }
     }
-    ul.evaluation_summary li{
+    ul.evaluation_summary li {
       padding-top: 10px;
       padding-bottom: 10px;
       border-top: solid 1px #aaa;
-      & > div.span6{
+      & > div.span6 {
         min-height: inherit;
-        .selected-answer{
+        .selected-answer {
           padding: 10px;
         }
       }
     }
-    .eval-details-link-container{
+    .eval-details-link-container {
       margin: 25px 0 15px;
       text-align: center;
     }
   }
-}  
-.summary_result_number{
+
+}
+
+.summary_result_number {
   display: inline-text;
   padding: 2px 5px;
-  &.good{
+  &.good {
     background-color: #a8d2b8;
   }
-  &.middle{
+  &.middle {
     background-color: #eedea0;
   }
-  &.bad{
+  &.bad {
     background-color: #e1919f;
     color: #fff;
   }
 }
-.summary_result_text{
+
+.summary_result_text {
   display: inline-text;
   padding: 2px 5px;
-  &.not_accessible{
+  &.not_accessible {
     background-color: #e1919f;
   }
-  &.no_answer{
+  &.no_answer {
     background-color: #ccc;
     color: #000;
   }
-  &.not_relevant{
+  &.not_relevant {
     background-color: #555;
     color: #fff;
   }
-  &.public_summary{
-    text-align: center; 
+  &.public_summary {
+    text-align: center;
     margin-bottom: 10px;
   }
 }
 
-.public_summary_container{
-  text-align: center; 
+.public_summary_container {
+  text-align: center;
   /*margin-bottom: 10px;*/
-  .yes_votes{
+  .yes_votes {
     float: left;
-    width: 48%; 
+    width: 48%;
     text-align: left;
-    i{
+    i {
       padding-left: 3px;
     }
   }
-  .no_votes{
+  .no_votes {
     float: right;
-    width: 48%; 
+    width: 48%;
     text-align: right;
-    i{
+    i {
       padding-left: 3px;
     }
   }
-  .progress{
+  .progress {
     float: none;
     clear: both;
     height: 10px;
     margin-bottom: 0;
-    .bar-success{
+    .bar-success {
       background-color: #a8d2b8;
       background-image: linear-gradient(to bottom, #a8d2b8, #a8d2b8);
     }
-    .bar-danger{
+    .bar-danger {
       background-color: #e1919f;
       background-image: linear-gradient(to bottom, #e1919f, #e1919f);
     }
   }
 }
 
-
-#place_show_info{
-  li{
+#place_show_info {
+  li {
     vertical-align: top;
     margin-bottom: 10px;
   }
 }
 
-#place-url{
+#place-url {
   padding-bottom: 10px;
   margin-bottom: 10px;
   border-bottom: solid 1px #ccc;
 
 }
-.place-share{
+
+.place-share {
   opacity: 0.8;
   margin-right: 5px;
-  &:hover{
+  &:hover {
     opacity: 1;
   }
 }
 
+/*************************************/
+/*** styles for evaluation details ***/
+/*************************************/
 
+#evaluation_details {
+  //margin-bottom: -99999px;
+  //padding-bottom: 99999px;
+
+  h1, h2 {
+    color: #3187cc;
+    font-size: 24px;
+  }
+
+  .header-block {
+    margin-bottom: 22px;
+    h1 {
+      display: inline-block;
+    }
+  }
+
+  .info-block {
+    margin-bottom: 50px;
+  }
+
+  .map-block {
+    margin-bottom: 35px;
+
+    h2 {
+      margin-bottom: 20px;
+    }
+  }
+
+  .share {
+    font-weight: bold;
+  }
+
+  #place-filter {
+    h2 {
+      margin-top: 0;
+      text-align: center;
+    }
+    h3 {
+      border-bottom: none;
+    }
+
+    .thumbs {
+      font-size: 43px;
+      font-weight: 700;
+      //margin: 0 18px;
+      text-align: center;
+
+      .thumbs-block {
+        display: inline-block;
+      }
+
+      .thumbs-yes {
+        color: #a8d3b9;
+        display: inline-block;
+      }
+
+      .thumbs-no {
+        display: inline-block;
+        color: #e0909f;
+      }
+
+      img {
+        display: inline-block;
+      }
+    }
+    .filter_box {
+      margin: 5px 10px;
+    }
+
+    .add_evaluation {
+      margin-top: 10px;
+      //padding: 0;
+      display: block;
+      background-color: #f59334;
+      height: 37px;
+      line-height: 37px;
+      font-size: 15px;
+      font-style: italic;
+      font-weight: bold;
+
+      &:hover {
+        background-color: #e18033;
+      }
+
+    }
+    background-color: #ffffff;
+    .place-overview {
+      h3 {
+        padding-bottom: 16px;
+        font-size: 16px;
+        text-align: center;
+      }
+
+      background-color: #ebebeb;
+      padding: 15px;
+    }
+  }
+
+  h2.place {
+    font-size: 24px;
+    font-style: italic;
+    line-height: 1.0;
+    color: #555555;
+    margin: 0;
+  }
+
+  #place_show_info {
+    margin: 0;
+    margin-bottom: 30px;
+
+    ul {
+      color: #555555;
+    }
+
+    li {
+      margin: 0;
+      vertical-align: top;
+
+      a {
+        text-decoration: none;
+      }
+    }
+  }
+
+  .evaluation-header {
+    margin-bottom: 15px;
+    font-size: 14px;
+    font-weight: bold;
+  }
+
+  .no_evaluations {
+    margin-bottom: 15px;
+  }
+
+  .evaluation-result-no {
+    color: red;
+    font-weight: bold;
+  }
+
+  .evaluation-result-yes {
+    color: green;
+    font-weight: bold;
+  }
+}

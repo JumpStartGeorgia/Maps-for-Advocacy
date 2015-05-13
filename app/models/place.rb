@@ -13,6 +13,7 @@ class Place < ActiveRecord::Base
 	has_many :place_evaluations, :dependent => :destroy
 	has_many :place_images, :dependent => :destroy
 	has_many :place_summaries, :dependent => :destroy
+  has_many :disabilities, :through => :place_evaluations, :uniq => true
   accepts_nested_attributes_for :place_translations
   accepts_nested_attributes_for :place_evaluations
   attr_accessible :venue_id, :district_id, :lat, :lon, :place_translations_attributes, :place_evaluations_attributes, :url

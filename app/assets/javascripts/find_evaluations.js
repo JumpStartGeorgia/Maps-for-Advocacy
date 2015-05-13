@@ -15,15 +15,15 @@ $(document).ready(function(){
       var venue_category = _.find(gon.venue_categories, function(cat){ return cat.id == venue_category_id; });
       //console.log(venue_category_id, venue_category);
 
-      $('#filter_venue').select2('destroy');
+      var filter = $('#filter_venue').select2('destroy').empty();
+      filter.append("<option value=\"\"></option>");
+      if (venue_category) {
+        _.each(venue_category.venues, function(venue) {
+          filter.append("<option value=\"" + venue.id + "\">" + venue.name + "</option>");
+        });
+      }
 
-      $('#filter_venue').empty();
-      $('#filter_venue').append("<option value=\"\"></option>");
-      _.each(venue_category.venues, function(venue) {
-        $('#filter_venue').append("<option value=\"" + venue.id + "\">" + venue.name + "</option>");
-      });
-
-      $('#filter_venue').select2({width:'100%', allowClear:true});
+      filter.select2({width:'100%', allowClear:true});
     });
 
     $('#btn_targeted_search').on('click', function(e){

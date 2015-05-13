@@ -86,11 +86,22 @@ class PlacesController < ApplicationController
         end
       end
 
-
       respond_to do |format|
         format.html {
-          if request.xhr?
-            render layout: false
+          certified_overall = @data[:certified][:summary]['overall']['overall'] rescue {}
+          public_overall = @data[:public][:summary]['overall']['overall'] rescue {}
+
+          @data[:total] = {
+            num_evaluations: certified_overall['num_evaluations'].to_i + public_overall['num_evaluations'].to_i,
+            num_yes: certified_overall['num_yes'].to_i + public_overall['num_yes'].to_i,
+            num_no: certified_overall['num_no'].to_i + public_overall['num_no'].to_i,
+          }
+          # pp certified_overall, public_overall, @data[:total]
+
+          if request.xhr?# || params[:embedded].present?
+            render 'show_embedded', layout: false
+          # else
+          #   render 'show_embedded'
           end
         }
         format.json { render json: @place }

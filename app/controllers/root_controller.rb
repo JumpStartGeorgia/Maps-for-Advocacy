@@ -24,8 +24,17 @@ class RootController < ApplicationController
     options = {}
     options[:place_search] = params[:place_search].present? && params[:place_search].strip.present? ? prepare_search_text(params[:place_search]) : nil
     options[:address_search] = params[:address_search].present? && params[:address_search].strip.present? ? prepare_search_text(params[:address_search]) : nil
+
+    if params[:venue_id].present? && params[:venue_id] != '0'
+      options[:venue_id] = params[:venue_id]
+
+      venue = Venue.find_by_id(params[:venue_id])
+      if venue
+        params[:venue_category_id] = venue.venue_category.id
+      end
+    end
     options[:venue_category_id] = params[:venue_category_id] if params[:venue_category_id].present? && params[:venue_category_id] != '0'
-    options[:venue_id] = params[:venue_id] if params[:venue_id].present? && params[:venue_id] != '0'
+
     options[:disability_id] = params[:eval_type_id] if params[:eval_type_id].present?
     params[:district_id] = @district_id if params[:district_id].blank?
     options[:district_id] = params[:district_id].present? && params[:district_id] != '0' ? params[:district_id] : nil
