@@ -4,8 +4,10 @@ class PlaceImage < ActiveRecord::Base
  
   belongs_to :place
   belongs_to :user
-  has_many :place_evaulation_images#, :dependent => :destroy
-  
+  has_many :place_evaluation_images#, :dependent => :destroy
+  has_many :question_pairings, :through => :place_evaluation_images
+  has_many :questions, :through => :question_pairings, uniq: true
+
   attr_accessible :image, :place_id, :user_id, :taken_at
   attr_accessor :nickname, :is_certified, :disability_id, :disability, :question_id, :question, :answer
   

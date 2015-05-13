@@ -98,10 +98,8 @@ class PlacesController < ApplicationController
           }
           # pp certified_overall, public_overall, @data[:total]
 
-          if request.xhr?# || params[:embedded].present?
+          if request.xhr? && params[:embedded].present?
             render 'show_embedded', layout: false
-          # else
-          #   render 'show_embedded'
           end
         }
         format.json { render json: @place }
