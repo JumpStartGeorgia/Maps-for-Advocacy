@@ -1,0 +1,146 @@
+<%= include_gon %>
+
+<%- model_class = Place -%>
+<%- model_class_trans = PlaceTranslation -%>
+
+<div class="header-block">
+  <h1><%= t('.header_details') %></h1>
+
+  <div class="pull-right">
+    <span class="share"><%= t('.share') %>:</span>
+    <%= link_to(image_tag("twitter.jpg", :height => "20"),
+                "https://twitter.com/share?url=#{u place_url(@place)}", :title => "twitter",
+                :target => "_blank", :class => 'place-share') %>
+  </div>
+</div>
+
+<div class="info-block row-fluid">
+  <div class="span7" id="place_info">
+    <% if @place.id.present? && user_signed_in? && current_user.role?(User::ROLES[:site_admin]) %>
+      <p>
+        <%= link_to t('app.common.edit_place'), edit_place_path(@place),
+                    :class => 'edit_place', :title => t('app.common.edit_place_title', :place => @place[:name]) %>
+        <%= link_to t('app.common.delete_place'),
+                    place_path(@place),
+                    :method => :delete,
+                    :class => 'delete_place',
+                    :confirm => t('app.buttons.confirm'),
+                    :title => t('app.common.delete_place_title', :place => @place[:name]) %>
+
+      </p>
+    <% end %>
+
+    <h2 class="place"><%= @place[:name] %></h2>
+    <ul id="place_show_info" class="row-fluid">
+      <li>
+        <strong><%= t('.location_category') %>:</strong>
+        <%= link_to @place.venue.venue_category.name, find_places_path(:venue_category_id => @place[:venue_category_id]),
+                    :title => t('.venue_link_title', :name => @place.venue.venue_category.name) %>
+      </li>
+      <li>
+        <strong><%= t('.location_type') %>:</strong>
+        <%= link_to @place[:venue], find_places_path(:venue_category_id => @place[:venue_category_id], :venue_id => @place[:venue_id]),
+                    :title => t('.venue_link_title', :name => @place[:venue]) %>
+      </li>
+      <li>
+        <strong><%= model_class.human_attribute_name(:district_id) %>:</strong>
+        <%= link_to @place[:district], find_places_path(:district_id => @place[:district_id]),
+                    :title => t('.district_link_title', :name => @place[:district]) %>
+      </li>
+      <li class="address">
+        <strong><%= model_class_trans.human_attribute_name(:address) %>:</strong>
+        <%= @place[:address] %>
+      </li>
+    </ul>
+
+    <ul class="row-fluid">
+      <li>
+        <strong><%= t('.disability') %></strong>
+        <%= @place.disabilities.map do |disability| %>
+          <% disability.name %>
+        <% end.join(', ') %>
+      </li>
+      <li>
+        <strong><%= t('app.common.overall_evaluation') %>:</strong>
+        <% if @data[:total][:num_yes] > 0 || @data[:total][:num_no] > 0 %>
+          <% if @data[:total][:num_yes] < @data[:total][:num_no] %>
+            <%= t('app.common.evaluation_fail') %>
+          <% else %>
+            <%= t('app.common.evaluation_pass') %>
+          <% end %>
+        <% end %>
+      </li>
+
+      <li>
+        <strong><%= t('.number_evaluations') %>:</strong>
+        <%= @data[:total][:num_evaluations] %>
+      </li>
+    </ul>
+
+    <% if @place[:url].present? %>
+      <%= link_to t('.website_button'), @place[:url], :target => '_blank', :class => 'btn_website' %>
+    <% end %>
+  </div>
+
+  <div class="span5" id="place-filter">
+    <div class="place-overview">
+      <h3><%= t('.header_evaluations') %></h3>
+
+      <div class="thumbs">
+        <div class="thumbs-block">
+          <div class="thumbs-yes">
+            <h4><%= @data[:total][:num_yes] %></h4>
+          </div>
+          <%= image_tag 'eval-thumb-up.png' %>
+
+          <div class="thumbs-no">
+            <h4><%= @data[:total][:num_no] %></h4>
+          </div>
+          <%= image_tag 'eval-thumb-down.png' %>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <%= link_to t('app.common.add_evaluation'), evaluation_place_path(@place),
+                  :class => 'add_evaluation',
+                  :title => t('app.common.add_evaluation_title', :place => @place[:name]) %>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="map-block">
+  <h2><%= t('.place_location') %></h2>
+
+  <div id="map"></div>
+</div>
+
+<div id="venue_evalautions">
+
+  <div id="place-summary-container" aria-live="polite" aria-relevant="additions">
+    <h2><%= t('.breakdown') %></h2>
+
+    <%= render :partial => 'show_place_summary_embedded',
+               :locals => {
+                 :data => @data[:certified], :is_certified => true,
+                 :cert_text => t('app.common.certified'),
+                 :show_overall => true
+               } %>
+    <%= render :partial => 'show_place_summary_embedded',
+               :locals => {
+                 :data => @data[:public], :is_certified => false,
+                 :cert_text => t('app.common.public'),
+                 :show_overall => true
+               } %>
+  </div>
+
+</div>
+
+<div class="pull-right">
+  <span class="share"><%= t('.share') %>:</span>
+  <%= link_to(image_tag("twitter.jpg", :height => "20"),
+              "https://twitter.com/share?url=#{u place_url(@place)}", :title => "twitter",
+              :target => "_blank", :class => 'place-share') %>
+</div>

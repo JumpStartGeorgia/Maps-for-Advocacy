@@ -18,6 +18,14 @@
 //= require vendor
 //= require_tree .
 
+if (typeof window.console === 'undefined') {
+  window.console = {
+    log: function() {}
+  };
+} else if (typeof window.console.log === 'undefined') {
+  window.console.log = function() {};
+}
+
 $(document).ready(function(){
 	// set focus to first text box on page
 	if (gon.highlight_first_form_field){

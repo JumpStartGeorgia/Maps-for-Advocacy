@@ -1,0 +1,16 @@
+defaults: &defaults
+  ACCESSIBILITY_FACEBOOK_APP_ID: ""
+  ACCESSIBILITY_FACEBOOK_APP_SECRET: ""
+  APPLICATION_FROM_EMAIL: ""
+  APPLICATION_ERROR_TO_EMAIL: ""
+  APPLICATION_FEEDBACK_FROM_EMAIL: ""
+  APPLICATION_FEEDBACK_FROM_PWD: ""
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults

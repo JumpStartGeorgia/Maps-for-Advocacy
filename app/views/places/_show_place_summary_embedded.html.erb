@@ -1,0 +1,130 @@
+<%
+   is_certified ||= false
+   show_overall ||= false
+   summary_key = 'categories'
+   summary_key = 'questions' if !is_certified
+   cls_show_cert = ''
+   cls_show_cert = 'accessibly-hidden' if !show_overall
+%>
+
+<div class="summary-block <%= cls_show_cert %>" data-certified="<%= is_certified %>" data-type="0">
+  <% if data[:summary].present? && data[:summary]['overall'].present? && data[:summary_questions].present? %>
+
+    <div class="evaluation-header">
+      <div class="row-fluid">
+        <div class="span5">
+          <%= raw t('.evaluation_item') %>
+        </div>
+        <div class="span2">
+          <%= raw t('.evaluation_result') %>
+        </div>
+        <div class="span4">
+          <%= raw t('.evaluation_overview') %>
+        </div>
+      </div>
+    </div>
+
+    <ul class="evaluation_summary">
+      <%
+         questions = if is_certified
+                       data[:summary_questions].map { |x| [x[:id], x.name] }.uniq
+                     else
+                       data[:summary_questions].map { |x| x[:questions] }.flatten.map { |x| [x[:question_id], x[:question]] }.uniq
+                     end
+
+         question_images = {}
+         @place_images.each do |img|
+           img.questions.each do |question|
+             question_images[question.id] ||= []
+             question_images[question.id] << img unless question_images[question.id].include?(img)
+           end
+         end
+      %>
+      <% questions.each do |question| %>
+        <% question_id = question[0] %>
+        <% overall = data[:summary]['overall'][summary_key][question_id.to_s] %>
+
+        <li class="row-fluid">
+          <div class="span5">
+            <strong><%= question[1] %></strong>
+          </div>
+          <div class="span2">
+            <% if overall['num_yes'] > 0 || overall['num_no'] > 0 %>
+              <% if overall['num_yes'] < overall['num_no'] %>
+                <span class="evaluation-result-no"><%= t('.no') %></span>
+              <% else %>
+                <span class="evaluation-result-yes"><%= t('.yes') %></span>
+              <% end %>
+            <% end %>
+          </div>
+          <div class="span4">
+            <%= format_summary_result(overall, is_summary: true, is_certified: is_certified) %>
+          </div>
+          <div class="span1">
+            <% if question_images[question_id].present? %>
+              <div class="embedded-photos">
+                <% question_images[question_id].each.with_index do |img, i| %>
+
+                  <% answer = t("app.common.answers.#{PlaceEvaluation.answer_key_name(img['answer'])}") %>
+                  <% eval = img['is_certified'] == 1 ? t('.evaluation_certified') : t('.evaluation_public') %>
+
+                  <%= link_to img.image.url(:large), :class => " place-image-fancybox #{ 'photo-link-hidden' if i != 0 }",
+                              'data-certified' => img['is_certified'].to_s.to_bool,
+                              'data-type' => img['disability_id'],
+                              'data-question' => img['question_id'],
+                              'formatted-title' => "<span>#{img['disability']} #{eval} </span><span>#{img['question']} </span><span>#{answer}</span>",
+                              'data-fancybox-group' => "gallery-#{question_id}" do %>
+                    <%= t('.view_photos') %>
+                  <% end %>
+
+                  <div class="caption-text">
+                    <ul class="eval-info">
+                      <li>
+                        <span><%= t('.evaluation') %></span>
+                        <%= eval %>
+                      </li>
+                      <li>
+                        <span><%= t('.disability') %></span>
+                        <%= img['disability'] %>
+                      </li>
+                    </ul>
+                    <ul class="quesiton-answer">
+                      <li>
+                        <span><%= t('.question') %></span>
+                        <%= img['question'] %>
+                      </li>
+                      <li>
+                        <span><%= t('.answer') %></span>
+                        <%= answer %>
+                      </li>
+                    </ul>
+                    <ul class="image-dates">
+                      <li>
+                        <span><%= t('.taken_at') %></span>
+                        <%= l(img.taken_at, :format => :no_time) if img.taken_at.present? %>
+                      </li>
+                      <li>
+                        <span><%= t('.uploaded_at') %></span>
+                        <%= l(img.created_at, :format => :no_time) if img.created_at.present? %>
+                      </li>
+                      <li>
+                        <span><%= t('.uploaded_by') %></span>
+                        <%= img['nickname'] %>
+                      </li>
+                    </ul>
+                  </div>
+
+                <% end %>
+              </div>
+            <% end %>
+          </div>
+        </li>
+      <% end %>
+    </ul>
+
+  <% else %>
+    <p class="no_evaluations">
+      <%= t('.no_evaluations', :cert => cert_text) %>
+    </p>
+  <% end %>
+</div>

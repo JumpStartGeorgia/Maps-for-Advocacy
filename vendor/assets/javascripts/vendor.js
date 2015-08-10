@@ -3,3 +3,4 @@
 //= require jquery.fancybox.js
 //= require jquery.tipsy.js
 //= require olly.js
+//= require underscore-min.js

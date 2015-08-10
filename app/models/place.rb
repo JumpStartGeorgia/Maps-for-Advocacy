@@ -13,6 +13,7 @@ class Place < ActiveRecord::Base
 	has_many :place_evaluations, :dependent => :destroy
 	has_many :place_images, :dependent => :destroy
 	has_many :place_summaries, :dependent => :destroy
+  has_many :disabilities, :through => :place_evaluations, :uniq => true
   accepts_nested_attributes_for :place_translations
   accepts_nested_attributes_for :place_evaluations
   attr_accessible :venue_id, :district_id, :lat, :lon, :place_translations_attributes, :place_evaluations_attributes, :url
@@ -60,9 +61,13 @@ class Place < ActiveRecord::Base
     if options[:address_search].present?
       sql << "and pt.search_address like :address_search "
     end
-    if options[:venue_category_id].present?
+
+    if options[:venue_id].present?
+      sql << "and p.venue_id = :venue_id "
+    elsif options[:venue_category_id].present?
       sql << "and v.venue_category_id = :venue_category_id "
     end
+
     if options[:district_id].present?
       # if this is tbilisi, use all districts in tbilisi
       if options[:district_id].to_s == District::TBILISI_ID.to_s
@@ -73,7 +78,7 @@ class Place < ActiveRecord::Base
     end
     sql << "order by pt.name  "
     
-    find_by_sql([sql, :locale => I18n.locale, :venue_category_id => options[:venue_category_id], 
+    find_by_sql([sql, :locale => I18n.locale, :venue_category_id => options[:venue_category_id], :venue_id => options[:venue_id],
       :disability_id => options[:disability_id], :district_id => options[:district_id], 
       :place_search => "%#{options[:place_search]}%", :address_search => "%#{options[:address_search]}%"])
     

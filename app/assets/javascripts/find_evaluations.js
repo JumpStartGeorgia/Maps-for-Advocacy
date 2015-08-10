@@ -4,17 +4,44 @@ $(document).ready(function(){
 
   /* use the select2 library on the frontpage */
   if (gon.find_evaluations_filters){
-    $('#filter_disability').select2({width:'element', allowClear:true});
-    $('#filter_venue').select2({width:'element', allowClear:true});
-    $('#filter_district').select2({width:'element', allowClear:true});
+    $('#filter_disability').select2({width:'100%', allowClear:true});
+    $('#filter_venue_category').select2({width:'100%', allowClear:true});
+    $('#filter_venue').select2({width:'100%', allowClear:true});
+    $('#filter_district').select2({width:'100%', allowClear:true});
 
-    $('#btn_search').on('click', function(e){
+    // show venues of selected category
+    $('#filter_venue_category').on('change', function(e){
+      var venue_category_id = $(this).val();
+      var venue_category = _.find(gon.venue_categories, function(cat){ return cat.id == venue_category_id; });
+      //console.log(venue_category_id, venue_category);
+
+      var filter = $('#filter_venue').select2('destroy').empty();
+      filter.append("<option value=\"\"></option>");
+      if (venue_category) {
+        _.each(venue_category.venues, function(venue) {
+          filter.append("<option value=\"" + venue.id + "\">" + venue.name + "</option>");
+        });
+      }
+
+      filter.select2({width:'100%', allowClear:true});
+    });
+
+    $('#btn_targeted_search').on('click', function(e){
       e.preventDefault();
     
-      var url = window.location.href;
+      var url = window.location.href.split('?')[0]; // reset
       url = UpdateQueryString(url, 'place_search', $('#filter_place_search').val());
       url = UpdateQueryString(url, 'address_search', $('#filter_address_search').val());
-      url = UpdateQueryString(url, 'venue_category_id', $('#filter_venue').val());
+
+      document.location = url;
+    });
+
+    $('#btn_filtered_search').on('click', function(e){
+      e.preventDefault();
+
+      var url = window.location.href.split('?')[0]; // reset
+      url = UpdateQueryString(url, 'venue_category_id', $('#filter_venue_category').val());
+      url = UpdateQueryString(url, 'venue_id', $('#filter_venue').val());
       // if no district selected then default to '0' for all
       var val = $('#filter_district').val();
       url = UpdateQueryString(url, 'district_id', val == '' ? '0' : val);
@@ -26,12 +53,33 @@ $(document).ready(function(){
       document.location = url;
     });
 
-    $('#filter_evaluations').on('change', function(e){
-      $('#disability_filter').slideToggle();
-      $('#filter_disability').select2({width:'element', allowClear:true});
+    // Remote requests
+    $('.view_more').on('ajax:before', function (ev, res) {
+      console.log('ajax:before');
+
+      if ($(this).parents('.place-item').hasClass('active')) {
+        return false;
+      }
+
+      $('.place-item').removeClass('active');
+      $(this).parents('.place-item').addClass('active');
+
+      $('#evaluation_details').empty('');
+
+    }).on('ajax:success', function (ev, res) {
+      console.log('ajax:success', res.length);
+
+      if ($(this).parents('.place-item').hasClass('active')) {
+        $('#evaluation_details').html(res);
+
+        window.show_place_map();
+      }
+    }).on('ajax:error', function (ev, res) {
+      console.log('ajax:error', res);
     });
 
-/*    
+
+/*
     $('#filter_place_search').on('change', function(e){
       document.location = UpdateQueryString(null, 'place_search', $(this).val());
     });
