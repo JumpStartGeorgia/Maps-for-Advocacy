@@ -119,12 +119,16 @@ class PlacesController < ApplicationController
 
     @is_certified = params[:is_certified].to_bool
     disabilities = nil
-    if params[:type].present?
+    type_id = 0
+    type_id = params[:type].to_i if params[:type].present?
+    if type_id > 0
+      disability = nil
       if @is_certified == true
-        disabilities = [Disability.is_active_certified.find_by_id(params[:type])]
+        disability = Disability.is_active_certified.find_by_id(type_id)
       else
-        disabilities = [Disability.is_active_public.find_by_id(params[:type])]
+        disability = Disability.is_active_public.find_by_id(type_id)
       end
+      disabilities = [disability] if disability.present?
     else
       if @is_certified == true
         disabilities = Disability.is_active_certified
